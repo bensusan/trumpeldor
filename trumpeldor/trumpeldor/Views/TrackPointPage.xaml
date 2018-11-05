@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="trumpeldor.Views.TrackPointPage">
+    <ContentPage.Content>
+        <StackLayout>
+            <Label x:Name = "scoreLabel" />
+            <Label x:Name = "trackPointName"/>
+            <Image x:Name = "trackPointImage"/>
+            <Button x:Name = "informationButton" Text="information" Clicked="Information_Button_Clicked" Style="{StaticResource buttonStyle}"/>
+            <Button x:Name = "missionButton" Text="mission" Clicked="Mission_Button_Clicked" Style="{StaticResource buttonStyle}"/>
+            <Button x:Name = "questionButton" Text="question" Clicked="Question_Button_Clicked" Style="{StaticResource buttonStyle}"/>
+            <Button x:Name = "watchAgainButton" Text="watch again" Clicked="Watch_Again_Button_Clicked" Style="{StaticResource buttonStyle}"/>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
