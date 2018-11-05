@@ -4,5 +4,26 @@
              x:Class="trumpeldor.App">
     <Application.Resources>
 
+        <ResourceDictionary>
+            <Style x:Key="buttonStyle" TargetType="Button">
+                <Setter Property="HorizontalOptions" Value="Center" />
+                <Setter Property="VerticalOptions" Value="CenterAndExpand" />
+                <Setter Property="BorderColor" Value="Lime" />
+                <Setter Property="BorderRadius" Value="5" />
+                <Setter Property="BorderWidth" Value="5" />
+                <Setter Property="WidthRequest" Value="200" />
+                <Setter Property="TextColor" Value="Teal" />
+            </Style>
+            
+            <Style x:Key="lableStyle" TargetType="Label">
+                <!--TODO-->
+            </Style>
+            
+            <Style x:Key="entryStyle" TargetType="Entry">
+                <!--TODO-->
+            </Style>
+            
+            
+        </ResourceDictionary>
     </Application.Resources>
 </Application>

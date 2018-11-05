@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using trumpeldor.Views;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -7,11 +9,14 @@ namespace trumpeldor
 {
     public partial class App : Application
     {
+        
+        private GameController gameController;
+
         public App()
         {
             InitializeComponent();
-
-            MainPage = new MainPage();
+            gameController = new GameController();
+            MainPage = new Views.firsPagexaml();
         }
 
         protected override void OnStart()
@@ -28,5 +33,12 @@ namespace trumpeldor
         {
             // Handle when your app resumes
         }
+
+        public GameController getGameController()
+        {
+            return gameController;
+        }
+
+        
     }
 }

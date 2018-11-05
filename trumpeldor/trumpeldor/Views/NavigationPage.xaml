@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="trumpeldor.Views.NavigationPage">
+    <ContentPage.Content>
+        <StackLayout>
+            
+            <Label x:Name="scoreLabel" />
+            <StackLayout x:Name="cluesLayout">
+                <Label Text="clues"/>
+            </StackLayout>
+            <Button Text="add clue" Clicked="Get_Clue_Button_Clicked" Style="{StaticResource buttonStyle}" />
+            <Button Text="You've Reached Your Destionation" Clicked="Next_Destination_Button_Clicked" Style="{StaticResource buttonStyle}" />
+            <Label Text="map:"/>
+            <Image x:Name="mapImage"/>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

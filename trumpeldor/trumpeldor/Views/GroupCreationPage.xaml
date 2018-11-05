@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="trumpeldor.Views.groupCreationPage">
+    <ContentPage.Content>
+        <StackLayout>
+            <Label Text="group name:" Style="{StaticResource lableStyle}"/>
+            <Entry Placeholder="group name" x:Name="groupNameEntry" Style="{StaticResource entryStyle}"/>
+            <Label Text="path length:" Style="{StaticResource lableStyle}"/>
+            <StackLayout x:Name="lengthButtonGroup" Orientation="Horizontal">
+                <Button Text="short" CommandParameter="1" Clicked="Select_Short_Path_Button_Clicked" />
+                <Button Text="medium" CommandParameter="2" Clicked="Select_Medium_Path_Button_Clicked"/>
+                <Button Text="long" CommandParameter="3" Clicked="Select_Long_Path_Button_Clicked" />
+            </StackLayout>
+
+            <Grid x:Name="agesGrid" VerticalOptions="CenterAndExpand">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Label Text="player" Grid.Column="0" Grid.Row="0"/>
+                <Label Text="age" Grid.Column="1" Grid.Row="0"/>
+                <Label Text="1)" Grid.Column="0" Grid.Row="1"/>
+                <Entry Keyboard="Numeric" Grid.Column="1" Grid.Row="1"/>
+            </Grid>
+
+            <Button Text="add player" Clicked="Add_Player_Button_Clicked" Style="{StaticResource buttonStyle}"/>
+            <Button Text="start game" Clicked="Start_Game_Button_Clicked" x:Name="StartGameButton" Style="{StaticResource buttonStyle}"/>
+            
+            
+            
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

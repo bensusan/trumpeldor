@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="trumpeldor.Views.MultipleChoiceQuestionPage">
+    <ContentPage.Content>
+        <StackLayout>
+            <Label x:Name = "scoreLabel" />
+            <Label x:Name = "trackPointQuestion"/>
+            <Image x:Name="trackPointQuestionImage"/>
+            <StackLayout x:Name="answersLayout">
+            </StackLayout>
+            <Button x:Name="returnButton" Text="information" Clicked="returnButton_Clicked" Style="{StaticResource buttonStyle}"/>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
