@@ -3,16 +3,16 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="trumpeldor.Views.NavigationPage">
     <ContentPage.Content>
-        <StackLayout>
-            
-            <Label x:Name="scoreLabel" />
-            <StackLayout x:Name="cluesLayout">
-                <Label Text="clues"/>
+        <StackLayout Style="{DynamicResource mainStackLayout}">
+
+            <Label x:Name="scoreLabel" Style="{DynamicResource lableStyle}"/>
+            <StackLayout x:Name="cluesLayout" Style="{DynamicResource mainorStackLayout}">
+                <Label Text="clues" Style="{DynamicResource lableStyle}"/>
             </StackLayout>
-            <Button Text="add clue" Clicked="Get_Clue_Button_Clicked" Style="{StaticResource buttonStyle}" />
-            <Button Text="You've Reached Your Destionation" Clicked="Next_Destination_Button_Clicked" Style="{StaticResource buttonStyle}" />
-            <Label Text="map:"/>
-            <Image x:Name="mapImage"/>
+            <Button Text="add clue" Clicked="Get_Clue_Button_Clicked" Style="{StaticResource largeButtonStyle}" />
+            <Button Text="You've Reached Your Destionation" Clicked="Next_Destination_Button_Clicked" Style="{StaticResource largeButtonStyle}" />
+            <Label Text="map:" Style="{DynamicResource lableStyle}"/>
+            <Image x:Name="mapImage" Style="{DynamicResource smallImageStyle}"/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

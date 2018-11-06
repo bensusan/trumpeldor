@@ -4,13 +4,13 @@
              x:Class="trumpeldor.Views.TrackPointPage">
     <ContentPage.Content>
         <StackLayout>
-            <Label x:Name = "scoreLabel" />
-            <Label x:Name = "trackPointName"/>
-            <Image x:Name = "trackPointImage"/>
-            <Button x:Name = "informationButton" Text="information" Clicked="Information_Button_Clicked" Style="{StaticResource buttonStyle}"/>
-            <Button x:Name = "missionButton" Text="mission" Clicked="Mission_Button_Clicked" Style="{StaticResource buttonStyle}"/>
-            <Button x:Name = "questionButton" Text="question" Clicked="Question_Button_Clicked" Style="{StaticResource buttonStyle}"/>
-            <Button x:Name = "watchAgainButton" Text="watch again" Clicked="Watch_Again_Button_Clicked" Style="{StaticResource buttonStyle}"/>
+            <Label x:Name = "scoreLabel" Style="{DynamicResource lableStyle}"/>
+            <Label x:Name = "trackPointName" Style="{DynamicResource lableStyle}"/>
+            <Image x:Name = "trackPointImage" Style="{DynamicResource largeImageStyle}"/>
+            <Button x:Name = "informationButton" Text="information" Clicked="Information_Button_Clicked" Style="{StaticResource largeButtonStyle}"/>
+            <Button x:Name = "missionButton" Text="mission" Clicked="Mission_Button_Clicked" Style="{StaticResource largeButtonStyle}"/>
+            <Button x:Name = "questionButton" Text="question" Clicked="Question_Button_Clicked" Style="{StaticResource largeButtonStyle}"/>
+            <Button x:Name = "watchAgainButton" Text="watch again" Clicked="Watch_Again_Button_Clicked" Style="{StaticResource largeButtonStyle}"/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

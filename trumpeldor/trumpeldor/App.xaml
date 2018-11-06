@@ -5,7 +5,10 @@
     <Application.Resources>
 
         <ResourceDictionary>
-            <Style x:Key="buttonStyle" TargetType="Button">
+            <Style x:Key="baseViewStyle" TargetType="View">
+                <!--TODO -->
+            </Style>
+            <Style x:Key="baseButtonStyle" TargetType="Button" BasedOn="{StaticResource baseViewStyle}">
                 <Setter Property="HorizontalOptions" Value="Center" />
                 <Setter Property="VerticalOptions" Value="CenterAndExpand" />
                 <Setter Property="BorderColor" Value="Lime" />
@@ -14,16 +17,48 @@
                 <Setter Property="WidthRequest" Value="200" />
                 <Setter Property="TextColor" Value="Teal" />
             </Style>
-            
-            <Style x:Key="lableStyle" TargetType="Label">
+            <Style x:Key="smallButtonStyle" TargetType="Button" BasedOn="{StaticResource baseButtonStyle}">
+                <!--TODO -->
+            </Style>
+            <Style x:Key="largeButtonStyle" TargetType="Button" BasedOn="{StaticResource baseButtonStyle}">
+                <!--TODO -->
+            </Style>
+
+            <Style x:Key="lableStyle" TargetType="Label" BasedOn="{StaticResource baseViewStyle}">
                 <!--TODO-->
             </Style>
             
-            <Style x:Key="entryStyle" TargetType="Entry">
+            <Style x:Key="entryStyle" TargetType="Entry" BasedOn="{StaticResource baseViewStyle}">
+                <!--TODO-->
+            </Style>
+            <Style x:Key="baseStackLayout" TargetType="StackLayout" BasedOn="{StaticResource baseViewStyle}">
+                <!--TODO-->
+            </Style>
+            <Style x:Key="mainStackLayout" TargetType="StackLayout" BasedOn="{StaticResource baseStackLayout}">
+                <!--TODO-->
+            </Style>
+            <Style x:Key="mainorStackLayout" TargetType="StackLayout" BasedOn="{StaticResource baseStackLayout}">
                 <!--TODO-->
             </Style>
             
+            <Style x:Key="gridStyle" TargetType="Grid" BasedOn="{StaticResource baseViewStyle}">
+                <!--TODO-->
+            </Style>
             
+            <Style x:Key="baseImageStyle" TargetType="Image" BasedOn="{StaticResource baseViewStyle}">
+                <!--TODO-->
+            </Style>
+            <Style x:Key="largeImageStyle" TargetType="Image" BasedOn="{StaticResource baseImageStyle}">
+                <!--TODO-->
+            </Style>
+            <Style x:Key="smallImageStyle" TargetType="Image" BasedOn="{StaticResource baseImageStyle}">
+                <!--TODO-->
+            </Style>
+
+            
+
+
+
         </ResourceDictionary>
     </Application.Resources>
 </Application>

@@ -36,7 +36,7 @@ namespace trumpeldor.Views
             {
                 Button answerButton = new Button();
                 answerButton.Text = answers.ElementAt(i);
-                answerButton.Style = (Style)Application.Current.Resources["buttonStyle"];
+                answerButton.Style = (Style)Application.Current.Resources["largeButtonStyle"];
                 if (i == correctAnswer)
                 {
                     answerButton.Clicked += Correct_Answer_Button_Clicked;

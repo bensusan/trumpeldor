@@ -3,17 +3,17 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="trumpeldor.Views.groupCreationPage">
     <ContentPage.Content>
-        <StackLayout>
+        <StackLayout Style="{DynamicResource mainStackLayout}">
             <Label Text="group name:" Style="{StaticResource lableStyle}"/>
             <Entry Placeholder="group name" x:Name="groupNameEntry" Style="{StaticResource entryStyle}"/>
             <Label Text="path length:" Style="{StaticResource lableStyle}"/>
-            <StackLayout x:Name="lengthButtonGroup" Orientation="Horizontal">
-                <Button Text="short" CommandParameter="1" Clicked="Select_Short_Path_Button_Clicked" />
-                <Button Text="medium" CommandParameter="2" Clicked="Select_Medium_Path_Button_Clicked"/>
-                <Button Text="long" CommandParameter="3" Clicked="Select_Long_Path_Button_Clicked" />
+            <StackLayout x:Name="lengthButtonGroup" Orientation="Horizontal" Style="{DynamicResource mainorStackLayout}">
+                <Button Text="short" CommandParameter="1" Clicked="Select_Short_Path_Button_Clicked" Style="{DynamicResource smallButtonStyle}"/>
+                <Button Text="medium" CommandParameter="2" Clicked="Select_Medium_Path_Button_Clicked" Style="{DynamicResource smallButtonStyle}"/>
+                <Button Text="long" CommandParameter="3" Clicked="Select_Long_Path_Button_Clicked" Style="{DynamicResource smallButtonStyle}"/>
             </StackLayout>
 
-            <Grid x:Name="agesGrid" VerticalOptions="CenterAndExpand">
+            <Grid x:Name="agesGrid" VerticalOptions="CenterAndExpand" Style="{DynamicResource gridStyle}">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"></RowDefinition>
                     <RowDefinition Height="*"></RowDefinition>
@@ -22,14 +22,14 @@
                     <ColumnDefinition Width="*"></ColumnDefinition>
                     <ColumnDefinition Width="*"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
-                <Label Text="player" Grid.Column="0" Grid.Row="0"/>
-                <Label Text="age" Grid.Column="1" Grid.Row="0"/>
-                <Label Text="1)" Grid.Column="0" Grid.Row="1"/>
-                <Entry Keyboard="Numeric" Grid.Column="1" Grid.Row="1"/>
+                <Label Text="player" Grid.Column="0" Grid.Row="0" Style="{DynamicResource lableStyle}"/>
+                <Label Text="age" Grid.Column="1" Grid.Row="0" Style="{DynamicResource lableStyle}"/>
+                <Label Text="1)" Grid.Column="0" Grid.Row="1" Style="{DynamicResource lableStyle}"/>
+                <Entry Keyboard="Numeric" Grid.Column="1" Grid.Row="1" Style="{DynamicResource entryStyle}"/>
             </Grid>
 
-            <Button Text="add player" Clicked="Add_Player_Button_Clicked" Style="{StaticResource buttonStyle}"/>
-            <Button Text="start game" Clicked="Start_Game_Button_Clicked" x:Name="StartGameButton" Style="{StaticResource buttonStyle}"/>
+            <Button Text="add player" Clicked="Add_Player_Button_Clicked" Style="{StaticResource largeButtonStyle}"/>
+            <Button Text="start game" Clicked="Start_Game_Button_Clicked" x:Name="StartGameButton" Style="{StaticResource largeButtonStyle}"/>
             
             
             

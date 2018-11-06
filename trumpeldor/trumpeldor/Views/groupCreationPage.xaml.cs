@@ -55,8 +55,12 @@ namespace trumpeldor.Views
             
             int nextRow = agesGrid.RowDefinitions.Count;
             agesGrid.RowDefinitions.Add(new RowDefinition { Height = GridLength.Star });
-            agesGrid.Children.Add(new Label { Text = nextRow + ")" }, 0, nextRow);
-            agesGrid.Children.Add(new Entry { Keyboard=Keyboard.Numeric }, 1, nextRow);
+            Label lbl = new Label { Text = nextRow + ")"};
+            lbl.SetDynamicResource(VisualElement.StyleProperty, "lableStyle");
+            agesGrid.Children.Add(lbl, 0, nextRow);
+            Entry entry = new Entry { Keyboard = Keyboard.Numeric };
+            entry.SetDynamicResource(VisualElement.StyleProperty, "entryStyle");
+            agesGrid.Children.Add(entry, 1, nextRow);
 
         }
         private void Start_Game_Button_Clicked(object sender, EventArgs e)
