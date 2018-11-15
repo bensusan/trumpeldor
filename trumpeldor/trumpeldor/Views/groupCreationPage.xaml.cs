@@ -14,7 +14,7 @@ namespace trumpeldor.Views
     public partial class groupCreationPage : ContentPage
     {
         
-        private GameController.pathLength selectedPathLength;
+        private GameController.PathLength selectedPathLength;
 
         public groupCreationPage()
         {
@@ -24,17 +24,17 @@ namespace trumpeldor.Views
         private void Select_Short_Path_Button_Clicked(object sender, EventArgs e)
         {
             Select_Path_Button_Clicked(sender, e);
-            selectedPathLength = GameController.pathLength.shortPath;
+            selectedPathLength = GameController.PathLength.shortPath;
         }
         private void Select_Medium_Path_Button_Clicked(object sender, EventArgs e)
         {
             Select_Path_Button_Clicked(sender, e);
-            selectedPathLength = GameController.pathLength.mediumPath;
+            selectedPathLength = GameController.PathLength.mediumPath;
         }
         private void Select_Long_Path_Button_Clicked(object sender, EventArgs e)
         {
             Select_Path_Button_Clicked(sender, e);
-            selectedPathLength = GameController.pathLength.longPath;
+            selectedPathLength = GameController.PathLength.longPath;
         }
 
         private void Select_Path_Button_Clicked(object sender, EventArgs e)
@@ -75,11 +75,12 @@ namespace trumpeldor.Views
             }
             String groupName=groupNameEntry.Text;
 
-            ((App)(Application.Current)).getGameController().createGroup(groupName,agesList);
-            ((App)(Application.Current)).getGameController().selectPath(selectedPathLength);
-            ((App)(Application.Current)).getGameController().selectNextTrackPoint();
+            ((App)(Application.Current)).getGameController().CreateGroup(groupName,agesList);
+            ((App)(Application.Current)).getGameController().SelectPath(selectedPathLength);
+            ((App)(Application.Current)).getGameController().SelectNextTrackPoint();
 
             Application.Current.MainPage = new NavigationPage();
         }
+        
     }
 }

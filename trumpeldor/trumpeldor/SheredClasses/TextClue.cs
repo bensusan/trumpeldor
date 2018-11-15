@@ -17,5 +17,9 @@ namespace trumpeldor.SheredClasses
             label.Text = "new clue";
             layout.Children.Add(label);
         }
+
+       
+
+
     }
 }

@@ -15,17 +15,17 @@ namespace trumpeldor.Views
 		public TrackPointPage ()
 		{
 			InitializeComponent ();
-            scoreLabel.Text = "score: " + ((App)Application.Current).getGameController().getScore();
-            trackPointName.Text = ((App)Application.Current).getGameController().getCurrentTrackPointName();
-            if (((App)(Application.Current)).getGameController().isCurrentTrackPointHasImage()){
+            scoreLabel.Text = "score: " + ((App)Application.Current).getGameController().GetScore();
+            trackPointName.Text = ((App)Application.Current).getGameController().GetCurrentTrackPointName();
+            if (((App)(Application.Current)).getGameController().IsCurrentTrackPointHasImage()){
                 trackPointImage.IsVisible = true;
-                trackPointImage.Source = ((App)Application.Current).getGameController().getCurrentTrackPointImage();
+                trackPointImage.Source = ((App)Application.Current).getGameController().GetCurrentTrackPointImage();
             }
             else{
                 trackPointImage.IsVisible = false;
             }
 
-            if (((App)(Application.Current)).getGameController().isCurrentTrackPointHasAR()){
+            if (((App)(Application.Current)).getGameController().IsCurrentTrackPointHasAR()){
                 watchAgainButton.IsVisible = true;
             }
             else{

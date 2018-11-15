@@ -12,7 +12,8 @@
             <Button Text="add clue" Clicked="Get_Clue_Button_Clicked" Style="{StaticResource largeButtonStyle}" />
             <Button Text="You've Reached Your Destionation" Clicked="Next_Destination_Button_Clicked" Style="{StaticResource largeButtonStyle}" />
             <Label Text="map:" Style="{DynamicResource lableStyle}"/>
-            <Image x:Name="mapImage" Style="{DynamicResource smallImageStyle}"/>
+            <Button x:Name="mapImage" Clicked="mapImage_Clicked"/>
+            <!--<Image x:Name="mapImage" Style="{DynamicResource smallImageStyle}"/>-->
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

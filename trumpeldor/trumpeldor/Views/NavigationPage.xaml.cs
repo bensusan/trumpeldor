@@ -15,21 +15,27 @@ namespace trumpeldor.Views
 		public NavigationPage ()
 		{
 			InitializeComponent ();
-            scoreLabel.Text = "score: " + ((App)(Application.Current)).getGameController().getScore();
-            mapImage.Source = ImageSource.FromResource("trumpeldor.Resources.MapIcon.png");
+            scoreLabel.Text = "score: " + ((App)(Application.Current)).getGameController().GetScore();
+            //mapImage.Source = ImageSource.FromResource("trumpeldor.Resources.MapIcon.png");
+            mapImage.Text = "map";
 		}
 
         private void Get_Clue_Button_Clicked(object sender, EventArgs e)
         {
-            SheredClasses.Clue nextClue=((App)(Application.Current)).getGameController().getClue();
+            SheredClasses.Clue nextClue=((App)(Application.Current)).getGameController().GetClue();
             nextClue.addToLayout(cluesLayout);
-            scoreLabel.Text = "score: " + ((App)(Application.Current)).getGameController().getScore();
+            scoreLabel.Text = "score: " + ((App)(Application.Current)).getGameController().GetScore();
         }
 
         private void Next_Destination_Button_Clicked(object sender, EventArgs e)
         {
             DisplayAlert("success", "You've Reached Your Destionation", "OK");
             Application.Current.MainPage = new TrackPointPage();
+        }
+
+        private void mapImage_Clicked(object sender, EventArgs e)
+        {
+            Application.Current.MainPage = new MapPage();
         }
     }
 }

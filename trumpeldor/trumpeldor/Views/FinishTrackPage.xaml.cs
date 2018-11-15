@@ -15,8 +15,8 @@ namespace trumpeldor.Views
 		public FinishTrackPage ()
 		{
 			InitializeComponent ();
-            titleLabel.Text = "congratulation you finish the track with " + ((App)Application.Current).getGameController().getScore() + " points";
-            if (!((App)Application.Current).getGameController().canContinueToLongerTrack())
+            titleLabel.Text = "congratulation you finish the track with " + ((App)Application.Current).getGameController().GetScore() + " points";
+            if (!((App)Application.Current).getGameController().CanContinueToLongerTrack())
             {
                 continueButton.IsVisible = false;
             }
@@ -26,7 +26,7 @@ namespace trumpeldor.Views
         private void Continiue_Button_Clicked(object sender, EventArgs e)
         {
             ((App)Application.Current).getGameController().ContinueToLongerTrack();
-            ((App)Application.Current).getGameController().selectNextTrackPoint();
+            ((App)Application.Current).getGameController().SelectNextTrackPoint();
             Application.Current.MainPage = new NavigationPage();
         }
         private void Share_Button_Clicked(object sender, EventArgs e)

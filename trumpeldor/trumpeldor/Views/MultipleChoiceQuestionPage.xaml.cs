@@ -15,12 +15,12 @@ namespace trumpeldor.Views
 		public MultipleChoiceQuestionPage ()
 		{
 			InitializeComponent ();
-            scoreLabel.Text = "score: " + ((App)Application.Current).getGameController().getScore();
-            trackPointQuestion.Text = ((App)Application.Current).getGameController().getCurrentTrackPointQuestion();
-            if (((App)(Application.Current)).getGameController().isCurrentTrackPointHasQuestionImage())
+            scoreLabel.Text = "score: " + ((App)Application.Current).getGameController().GetScore();
+            trackPointQuestion.Text = ((App)Application.Current).getGameController().GetCurrentTrackPointQuestion();
+            if (((App)(Application.Current)).getGameController().IsCurrentTrackPointHasQuestionImage())
             {
                 trackPointQuestionImage.IsVisible = true;
-                trackPointQuestionImage.Source = ((App)Application.Current).getGameController().getCurrentTrackPointQuestionImage();
+                trackPointQuestionImage.Source = ((App)Application.Current).getGameController().GetCurrentTrackPointQuestionImage();
             }
             else
             {
@@ -30,8 +30,8 @@ namespace trumpeldor.Views
         }
         private void answersInitialize()
         {
-            List<String> answers = ((App)(Application.Current)).getGameController().getCurrentTrackPointQuestionAnswers();
-            int correctAnswer = ((App)(Application.Current)).getGameController().getCurrentTrackPointCurrectAnswersToQuestion();
+            List<String> answers = ((App)(Application.Current)).getGameController().GetCurrentTrackPointQuestionAnswers();
+            int correctAnswer = ((App)(Application.Current)).getGameController().GetCurrentTrackPointCurrectAnswersToQuestion();
             for (int i = 0; i < answers.Count; i++)
             {
                 Button answerButton = new Button();
@@ -56,14 +56,15 @@ namespace trumpeldor.Views
                 answer.BackgroundColor = Color.Default;
                 answer.Style = (Style)Application.Current.Resources["buttonStyle"];
             }
+
             ((Button)sender).BackgroundColor = Color.Green;
-            if(((App)Application.Current).getGameController().isFinishTrack())
+            if(((App)Application.Current).getGameController().GetIsFinishTrack())
             {
                 Application.Current.MainPage = new FinishTrackPage();
             }
             else
             {
-                ((App)Application.Current).getGameController().selectNextTrackPoint();
+                ((App)Application.Current).getGameController().SelectNextTrackPoint();
                 Application.Current.MainPage = new NavigationPage();
             }
 
@@ -77,6 +78,7 @@ namespace trumpeldor.Views
             }
             ((Button)sender).BackgroundColor = Color.Red;
         }
+
 
         private void returnButton_Clicked(object sender, EventArgs e)
         {

@@ -9,12 +9,12 @@ using Xamarin.Forms.Xaml;
 
 namespace trumpeldor.Views
 {
-	[XamlCompilation(XamlCompilationOptions.Compile)]
-	public partial class firsPagexaml : ContentPage
-	{
-		public firsPagexaml ()
+    [XamlCompilation(XamlCompilationOptions.Compile)]
+    public partial class FirstPage : ContentPage
+    {
+		public FirstPage ()
 		{
-			InitializeComponent ();
+			InitializeComponent();
 		}
 
         private void Play_Button_Clicked(object sender, EventArgs e)

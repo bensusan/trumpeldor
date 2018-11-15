@@ -16,7 +16,7 @@ namespace trumpeldor
         {
             InitializeComponent();
             gameController = new GameController();
-            MainPage = new Views.firsPagexaml();
+            MainPage = new Views.FirstPage();
         }
 
         protected override void OnStart()
