@@ -29,7 +29,7 @@ class Track(models.Model):
     trackNumber = models.AutoField(primary_key=True)
     subTrack = models.ForeignKey('Track', on_delete=models.CASCADE, blank=True, null=True)
     points = models.ManyToManyField(Attraction)
-    difficulty = models.IntegerField()
+    length = models.IntegerField()
 
 
 class Trip(models.Model):
@@ -70,7 +70,8 @@ class SlidingPuzzle(Entertainment):
 
 class Feedback(models.Model):
     questionNumber = models.AutoField(primary_key=True)
-    trip = models.OneToOneField(Trip, on_delete=models.CASCADE) # null=True for migrations. need to think about it
+    trip = models.ForeignKey(Trip, on_delete=models.CASCADE) # null=True for migrations. need to think about it
+    question = models.TextField()
 
     class Meta:
         abstract = True
