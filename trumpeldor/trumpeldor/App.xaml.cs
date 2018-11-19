@@ -10,7 +10,7 @@ namespace trumpeldor
     public partial class App : Application
     {
         
-        private GameController gameController;
+        private GameController gameController;//here we wirte global vars
 
         public App()
         {
