@@ -27,7 +27,7 @@ namespace trumpeldor.Views
         {
             ((App)Application.Current).getGameController().ContinueToLongerTrack();
             ((App)Application.Current).getGameController().SelectNextTrackPoint();
-            Application.Current.MainPage = new NavigationPage();
+            Application.Current.MainPage = new NavigationPage(); 
         }
         private void Share_Button_Clicked(object sender, EventArgs e)
         {

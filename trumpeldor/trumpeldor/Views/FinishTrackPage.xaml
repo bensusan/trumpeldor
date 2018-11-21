@@ -5,7 +5,7 @@
     <ContentPage.Content>
         <StackLayout Style="{DynamicResource mainStackLayout}">
             <Label x:Name="titleLabel" Text="congrdulation you finish the track with " Style="{DynamicResource lableStyle}"/>
-            <Button x:Name = "continueButton" Text="continue to longer track" Clicked="Continiue_Button_Clicked" Style="{StaticResource largeButtonStyle}"/>
+            <Button x:Name = "continueButton" Text="continue to longer track" Clicked="Continiue_Button_Clicked" Style="{StaticResource largeButtonStyle}"/> 
             <Button x:Name = "shareButton" Text="share" Clicked="Share_Button_Clicked" Style="{StaticResource largeButtonStyle}"/>
             <Button x:Name = "leadingTableButton" Text="Leading Table" Clicked="Leading_Table_Button_Clicked" Style="{StaticResource largeButtonStyle}"/>
             <Button x:Name = "feedbackButton" Text="feedback" Clicked="feedback_Button_Clicked" Style="{StaticResource largeButtonStyle}"/>
