@@ -22,11 +22,11 @@ namespace trumpeldor.Views
             nextClue.addToLayout(hintsLayout);
         }
 
-        private void Get_Clue_Button_Clicked(object sender, EventArgs e)
+        private void Get_Hint_Button_Clicked(object sender, EventArgs e)
         {
-            SheredClasses.Clue nextClue=((App)(Application.Current)).getGameController().GetHint();
-            nextClue.addToLayout(hintsLayout);
-            scoreLabel.Text = "score: " + ((App)(Application.Current)).getGameController().GetScore();
+            SheredClasses.Clue nextHint=((App)(Application.Current)).getGameController().GetHint();
+            nextHint.addToLayout(hintsLayout);
+            scoreLabel.Text = "score: " + ((App)(Application.Current)).getGameController().GetScore(); 
         }
 
         private void Next_Destination_Button_Clicked(object sender, EventArgs e)
