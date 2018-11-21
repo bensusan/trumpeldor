@@ -18,11 +18,13 @@ namespace trumpeldor.Views
             scoreLabel.Text = "score: " + ((App)(Application.Current)).getGameController().GetScore();
             //mapImage.Source = ImageSource.FromResource("trumpeldor.Resources.MapIcon.png");
             mapImage.Text = "map";
-		}
+            SheredClasses.Clue nextClue = ((App)(Application.Current)).getGameController().GetFisrtHint();
+            nextClue.addToLayout(hintsLayout);
+        }
 
         private void Get_Clue_Button_Clicked(object sender, EventArgs e)
         {
-            SheredClasses.Clue nextClue=((App)(Application.Current)).getGameController().GetClue();
+            SheredClasses.Clue nextClue=((App)(Application.Current)).getGameController().GetHint();
             nextClue.addToLayout(hintsLayout);
             scoreLabel.Text = "score: " + ((App)(Application.Current)).getGameController().GetScore();
         }

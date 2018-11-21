@@ -91,8 +91,12 @@ namespace trumpeldor
                 this.destinations[closestTrackPoint] = true;
             }
         }
-
-        public Clue GetClue()
+        public Clue GetFisrtHint()
+        {
+            //TODO
+            return new TextClue();
+        }
+        public Clue GetHint()
         {
             //TODO
             return new TextClue();
