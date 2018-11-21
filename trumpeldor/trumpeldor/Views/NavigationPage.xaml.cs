@@ -23,7 +23,7 @@ namespace trumpeldor.Views
         private void Get_Clue_Button_Clicked(object sender, EventArgs e)
         {
             SheredClasses.Clue nextClue=((App)(Application.Current)).getGameController().GetClue();
-            nextClue.addToLayout(cluesLayout);
+            nextClue.addToLayout(hintsLayout);
             scoreLabel.Text = "score: " + ((App)(Application.Current)).getGameController().GetScore();
         }
 
