@@ -18,24 +18,31 @@ namespace trumpeldor.Views
             scoreLabel.Text = "score: " + ((App)(Application.Current)).getGameController().GetScore();
             //mapImage.Source = ImageSource.FromResource("trumpeldor.Resources.MapIcon.png");
             mapImage.Text = "map";
-		}
+            SheredClasses.Clue nextClue = ((App)(Application.Current)).getGameController().GetFisrtHint();
+            nextClue.addToLayout(hintsLayout);
+        }
 
-        private void Get_Clue_Button_Clicked(object sender, EventArgs e)
+        private void Get_Hint_Button_Clicked(object sender, EventArgs e)
         {
-            SheredClasses.Clue nextClue=((App)(Application.Current)).getGameController().GetClue();
-            nextClue.addToLayout(cluesLayout);
-            scoreLabel.Text = "score: " + ((App)(Application.Current)).getGameController().GetScore();
+            SheredClasses.Clue nextHint=((App)(Application.Current)).getGameController().GetHint();
+            nextHint.addToLayout(hintsLayout);
+            scoreLabel.Text = "score: " + ((App)(Application.Current)).getGameController().GetScore(); 
         }
 
         private void Next_Destination_Button_Clicked(object sender, EventArgs e)
         {
             DisplayAlert("success", "You've Reached Your Destionation", "OK");
+            var existingPages = Navigation.NavigationStack.ToList();
+            foreach (var page in existingPages)
+            {
+                Navigation.RemovePage(page);
+            }
             Application.Current.MainPage = new TrackPointPage();
         }
 
-        private void mapImage_Clicked(object sender, EventArgs e)
+        private async void mapImage_Clicked(object sender, EventArgs e)
         {
-            Application.Current.MainPage = new MapPage();
+            await Navigation.PushModalAsync(new MapPage());
         }
     }
 }

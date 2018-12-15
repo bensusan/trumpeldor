@@ -42,7 +42,7 @@ namespace trumpeldor.Views
              Content = map;
         }
 
-        private async void AddCurrlocationToMap(Map map)
+        private async void AddCurrlocationToMap (Map map)
         {
             var locator = CrossGeolocator.Current;
             Plugin.Geolocator.Abstractions.Position position =await locator.GetPositionAsync(TimeSpan.FromSeconds(10));
@@ -52,7 +52,7 @@ namespace trumpeldor.Views
                 Position = new Position(position.Latitude, position.Longitude),
                 Label = "current location"
             };
-            map.Pins.Add(currLocationPin);
+            map.Pins.Add(currLocationPin); 
         }
     }
 }

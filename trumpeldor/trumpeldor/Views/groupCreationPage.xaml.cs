@@ -79,6 +79,11 @@ namespace trumpeldor.Views
             ((App)(Application.Current)).getGameController().SelectPath(selectedPathLength);
             ((App)(Application.Current)).getGameController().SelectNextTrackPoint();
 
+            var existingPages = Navigation.NavigationStack.ToList();
+            foreach (var page in existingPages)
+            {
+                Navigation.RemovePage(page);
+            }
             Application.Current.MainPage = new NavigationPage();
         }
         

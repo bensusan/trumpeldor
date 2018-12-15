@@ -54,11 +54,16 @@ namespace trumpeldor.Views
             foreach (Button answer in answersLayout.Children)
             {
                 answer.BackgroundColor = Color.Default;
-                answer.Style = (Style)Application.Current.Resources["buttonStyle"];
+                answer.Style = (Style)Application.Current.Resources["largeButtonStyle"];
             }
 
             ((Button)sender).BackgroundColor = Color.Green;
-            if(((App)Application.Current).getGameController().GetIsFinishTrack())
+            var existingPages = Navigation.NavigationStack.ToList();
+            foreach (var page in existingPages)
+            {
+                Navigation.RemovePage(page);
+            }
+            if (((App)Application.Current).getGameController().GetIsFinishTrack())
             {
                 Application.Current.MainPage = new FinishTrackPage();
             }
@@ -74,7 +79,7 @@ namespace trumpeldor.Views
             foreach (Button answer in answersLayout.Children)
             {
                 answer.BackgroundColor = Color.Default;
-                answer.Style = (Style)Application.Current.Resources["buttonStyle"];
+                answer.Style = (Style)Application.Current.Resources["largeButtonStyle"];
             }
             ((Button)sender).BackgroundColor = Color.Red;
         }
@@ -82,6 +87,11 @@ namespace trumpeldor.Views
 
         private void returnButton_Clicked(object sender, EventArgs e)
         {
+            var existingPages = Navigation.NavigationStack.ToList();
+            foreach (var page in existingPages)
+            {
+                Navigation.RemovePage(page);
+            }
             Application.Current.MainPage = new TrackPointPage();
         }
     }

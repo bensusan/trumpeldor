@@ -6,10 +6,10 @@
         <StackLayout Style="{DynamicResource mainStackLayout}">
 
             <Label x:Name="scoreLabel" Style="{DynamicResource lableStyle}"/>
-            <StackLayout x:Name="cluesLayout" Style="{DynamicResource mainorStackLayout}">
-                <Label Text="clues" Style="{DynamicResource lableStyle}"/>
+            <StackLayout x:Name="hintsLayout" Style="{DynamicResource mainorStackLayout}"> 
+                <Label Text="hints" Style="{DynamicResource lableStyle}"/>
             </StackLayout>
-            <Button Text="add clue" Clicked="Get_Clue_Button_Clicked" Style="{StaticResource largeButtonStyle}" />
+            <Button Text="add hint" Clicked="Get_Hint_Button_Clicked" Style="{StaticResource largeButtonStyle}" /> 
             <Button Text="You've Reached Your Destionation" Clicked="Next_Destination_Button_Clicked" Style="{StaticResource largeButtonStyle}" />
             <Label Text="map:" Style="{DynamicResource lableStyle}"/>
             <Button x:Name="mapImage" Clicked="mapImage_Clicked"/>

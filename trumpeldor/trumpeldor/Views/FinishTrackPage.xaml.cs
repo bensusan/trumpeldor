@@ -15,7 +15,7 @@ namespace trumpeldor.Views
 		public FinishTrackPage ()
 		{
 			InitializeComponent ();
-            titleLabel.Text = "congratulation you finish the track with " + ((App)Application.Current).getGameController().GetScore() + " points";
+            titleLabel.Text = "congratulation you finish the track with " + ((App)Application.Current).getGameController().GetScore() + " points.";
             if (!((App)Application.Current).getGameController().CanContinueToLongerTrack())
             {
                 continueButton.IsVisible = false;
@@ -27,7 +27,13 @@ namespace trumpeldor.Views
         {
             ((App)Application.Current).getGameController().ContinueToLongerTrack();
             ((App)Application.Current).getGameController().SelectNextTrackPoint();
-            Application.Current.MainPage = new NavigationPage();
+
+            var existingPages = Navigation.NavigationStack.ToList();
+            foreach (var page in existingPages)
+            {
+                Navigation.RemovePage(page);
+            }
+            Application.Current.MainPage = new NavigationPage(); 
         }
         private void Share_Button_Clicked(object sender, EventArgs e)
         {
@@ -37,13 +43,13 @@ namespace trumpeldor.Views
         {
 
         }
-        private void feedback_Button_Clicked(object sender, EventArgs e)
+        private async void feedback_Button_Clicked(object sender, EventArgs e)
         {
-            Application.Current.MainPage = new FeedbackPage();
+            await Navigation.PushModalAsync(new FeedbackPage());
         }
-        private void information_Button_Clicked(object sender, EventArgs e)
+        private async void information_Button_Clicked(object sender, EventArgs e)
         {
-            Application.Current.MainPage = new informationPage();
+            await Navigation.PushModalAsync(new informationPage());
         }
     }
 }

@@ -16,17 +16,7 @@ namespace trumpeldor
 
         }
 
-        public List<TrackPoint> SelectPath(GameController.PathLength selectedPathLength)
-        {
-            //track point contain only id,Latitude,Longitude,name
-            return new List<TrackPoint>()
-            {
-                new TrackPoint(31.262485, 34.803953),
-                new TrackPoint(31.261930, 34.804132)
-                
-            };
-            //TODO
-        }
+        
         public TrackPoint GetTrackPointById(string id)
         {
             //track point with all information
