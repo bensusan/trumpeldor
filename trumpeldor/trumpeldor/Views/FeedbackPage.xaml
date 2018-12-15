@@ -4,7 +4,8 @@
              x:Class="trumpeldor.Views.FeedbackPage">
     <ContentPage.Content>
         <StackLayout Style="{DynamicResource mainStackLayout}">
-            <Label Text="feedbackpage"/>
+            <Label Text="feedbackpage" TextColor="Black" HorizontalOptions="Center" />
+                
             
         </StackLayout>
     </ContentPage.Content>

@@ -6,22 +6,25 @@
 
         <ResourceDictionary>
             <Style x:Key="baseViewStyle" TargetType="View">
-                <!--TODO -->
+                
             </Style>
             <Style x:Key="baseButtonStyle" TargetType="Button" BasedOn="{StaticResource baseViewStyle}">
                 <Setter Property="HorizontalOptions" Value="Center" />
                 <Setter Property="VerticalOptions" Value="CenterAndExpand" />
-                <Setter Property="BorderColor" Value="Lime" />
+                <Setter Property="BorderColor" Value="White" />
+                <Setter Property="BackgroundColor" Value="#FFBB33"/><!--orange-->
                 <Setter Property="BorderRadius" Value="5" />
                 <Setter Property="BorderWidth" Value="5" />
-                <Setter Property="WidthRequest" Value="200" />
-                <Setter Property="TextColor" Value="Teal" />
+                <Setter Property="TextColor" Value="White" />
+                <Setter Property="CornerRadius" Value="20"/>
             </Style>
             <Style x:Key="smallButtonStyle" TargetType="Button" BasedOn="{StaticResource baseButtonStyle}">
-                <!--TODO -->
+                <Setter Property="WidthRequest" Value="150" />
+                <Setter Property="HeightRequest" Value="37.5"/>
             </Style>
             <Style x:Key="largeButtonStyle" TargetType="Button" BasedOn="{StaticResource baseButtonStyle}">
-                <!--TODO -->
+                <Setter Property="WidthRequest" Value="200" />
+                <Setter Property="HeightRequest" Value="50"/>
             </Style>
 
             <Style x:Key="lableStyle" TargetType="Label" BasedOn="{StaticResource baseViewStyle}">
@@ -35,7 +38,9 @@
                 <!--TODO-->
             </Style>
             <Style x:Key="mainStackLayout" TargetType="StackLayout" BasedOn="{StaticResource baseStackLayout}">
-                <!--TODO-->
+                <Setter Property="BackgroundColor" Value="Lavender"/>
+                
+                
             </Style>
             <Style x:Key="mainorStackLayout" TargetType="StackLayout" BasedOn="{StaticResource baseStackLayout}">
                 <!--TODO-->
