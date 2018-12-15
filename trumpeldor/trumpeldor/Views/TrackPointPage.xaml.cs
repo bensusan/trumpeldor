@@ -33,17 +33,17 @@ namespace trumpeldor.Views
             }
         }
 
-        private void Information_Button_Clicked(object sender, EventArgs e)
+        private async void Information_Button_Clicked(object sender, EventArgs e)
         {
-            Application.Current.MainPage = new TrackPointInformationPage();
+            await Navigation.PushModalAsync(new TrackPointInformationPage());
         }
-        private void Mission_Button_Clicked(object sender, EventArgs e)
+        private async void Mission_Button_Clicked(object sender, EventArgs e)
         {
-            Application.Current.MainPage = new MissionPage();
+            await Navigation.PushModalAsync(new MissionPage());
         }
-        private void Question_Button_Clicked(object sender, EventArgs e)
+        private async void Question_Button_Clicked(object sender, EventArgs e)
         {
-            Application.Current.MainPage = new MultipleChoiceQuestionPage();
+            await Navigation.PushModalAsync(new MultipleChoiceQuestionPage());
         }
         private void Watch_Again_Button_Clicked(object sender, EventArgs e)
         {

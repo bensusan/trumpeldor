@@ -32,12 +32,17 @@ namespace trumpeldor.Views
         private void Next_Destination_Button_Clicked(object sender, EventArgs e)
         {
             DisplayAlert("success", "You've Reached Your Destionation", "OK");
+            var existingPages = Navigation.NavigationStack.ToList();
+            foreach (var page in existingPages)
+            {
+                Navigation.RemovePage(page);
+            }
             Application.Current.MainPage = new TrackPointPage();
         }
 
-        private void mapImage_Clicked(object sender, EventArgs e)
+        private async void mapImage_Clicked(object sender, EventArgs e)
         {
-            Application.Current.MainPage = new MapPage();
+            await Navigation.PushModalAsync(new MapPage());
         }
     }
 }
