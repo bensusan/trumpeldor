@@ -14,10 +14,12 @@ class Attraction(models.Model):
 
 class User(models.Model):
     name = models.TextField()
+    socialNetwork = models.TextField()
     playersAges = JSONField()
-    email = models.EmailField(primary_key=True)
-#     class Meta:
-#         abstract = True
+    email = models.EmailField(blank=True)
+    lastSeen = models.DateField()
+    class Meta:
+        unique_together = (("name", "socialNetwork"),)
 #
 #
 # class RegisteredUser(User):
