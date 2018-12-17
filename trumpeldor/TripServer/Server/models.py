@@ -14,12 +14,17 @@ class Attraction(models.Model):
 
 class User(models.Model):
     name = models.TextField()
-    socialNetwork = models.TextField()
     playersAges = JSONField()
+<<<<<<< HEAD
     lastSeen = models.DateField()
     email = models.EmailField(blank=True) # To send user notifications in the mail
     class Meta:
         unique_together = (("name", "socialNetwork"),)
+=======
+    email = models.EmailField(primary_key=True)
+#     class Meta:
+#         abstract = True
+>>>>>>> parent of dab7f35... fix settings
 #
 #
 # class RegisteredUser(User):

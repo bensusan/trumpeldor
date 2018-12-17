@@ -31,15 +31,13 @@ ALLOWED_HOSTS = ['*']
 # Application definition
 
 INSTALLED_APPS = [
-    'Server',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    # 'django.contrib.TripServer'
-    # 'Server.apps.ServerConfig',
+    'Server.apps.ServerConfig',
 
     'rest_framework',
 ]
@@ -82,7 +80,7 @@ WSGI_APPLICATION = 'TripServer.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'trumpeldor',
+        'NAME': 'example',
         'USER': 'postgres',
         'PASSWORD': 'trumpeldor',
         'HOST': '',
