@@ -1,6 +1,6 @@
 from django.urls import path
 from rest_framework.urlpatterns import format_suffix_patterns
-from Server.UserSystem import views
+from . import views
 
 urlpatterns = [
     path('feedback/', views.FeedbackQuestionsList.as_view()),
