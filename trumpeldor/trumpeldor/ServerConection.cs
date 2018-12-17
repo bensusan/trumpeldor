@@ -10,7 +10,7 @@ namespace trumpeldor
 {
     class ServerConection
     {
-        private readonly String urlPrefix = "http://192.168.1.9:12345/";
+        private readonly String urlPrefix = "http://192.168.43.194:12345/usersystem/";
         public ServerConection()
         {
 
@@ -57,16 +57,17 @@ namespace trumpeldor
             var posts = JsonConvert.DeserializeObject<List<FeedBack>>(await result);
         }
 
-        public async Task signUp(String userEmail, List<String> playersAges, String name)
+        public async Task signUp(String name, String socialNetwork, List<String> playersAges, String userEmail)
         {
             using (var client = new HttpClient())
             {
                 // Create a new post  
                 var newUser = new User
                 {
-                    Email = userEmail,
+                    Name = name,
+                    socialNetwork = socialNetwork,
                     PlayersAges = playersAges,
-                    Name = name
+                    Email = userEmail
                 };
 
 
