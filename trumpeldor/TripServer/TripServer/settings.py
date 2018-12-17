@@ -41,7 +41,7 @@ INSTALLED_APPS = [
     # 'django.contrib.TripServer'
     # 'Server.apps.ServerConfig',
 
-    # 'rest_framework',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [
