@@ -18,13 +18,7 @@ class User(models.Model):
     playersAges = JSONField(blank=True)
     lastSeen = models.DateField(blank=True)
     email = models.EmailField(blank=True) # To send user notifications in the mail
-    class Meta:
-        unique_together = (("name", "socialNetwork"),)
-#
-#
-# class RegisteredUser(User):
-#     email = models.EmailField(primary_key=True)
-#     # facebook = ??????
+
 
 
 class Track(models.Model):
