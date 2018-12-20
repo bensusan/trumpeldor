@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,11 +20,21 @@ namespace trumpeldor.Views
 
         private async void Play_Button_Clicked(object sender, EventArgs e)
         {
-            await Navigation.PushModalAsync(new groupCreationPage());
+             await Navigation.PushModalAsync(new groupCreationPage());
         }
 
         private async void HowToPlay_Button_Clicked(object sender, EventArgs e)
         {
+            //Task<byte[]> ans = ((App)(Application.Current)).getGameController().getFile();
+            //byte[] fileBytes = await ans;
+            ////Image image = new Image();
+            //Stream stream = new MemoryStream(fileBytes);
+
+            
+            //tryImg.IsVisible = true;
+            //tryImg.Source = ImageSource.FromStream(() => new MemoryStream(fileBytes));
+
+
             await Navigation.PushModalAsync(new instructionsPage());
         }
 

@@ -11,5 +11,5 @@ def getAllAttractions(track):
 
 
 # return null or 0 or false  if not exists
-def getUser(name, socialNetwork):
-    return User.objects.filter(name=name, socialNetwork=socialNetwork)
+def getUser(Name, SocialNetwork):
+    return User.objects.filter(name=Name, socialNetwork=SocialNetwork).first()

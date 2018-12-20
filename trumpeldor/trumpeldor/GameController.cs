@@ -4,6 +4,7 @@ using System.Text;
 using trumpeldor.SheredClasses;
 using Plugin.Geolocator;
 using Xamarin.Forms.Maps;
+using System.Threading.Tasks;
 
 namespace trumpeldor
 {
@@ -237,5 +238,16 @@ namespace trumpeldor
             }
         }*/
 
+
+
+        public async Task<User> SignUp(string name, string socialNetwork)
+        { 
+            return await conn.SignUp(name, socialNetwork); ;
+        }
+
+        public async Task<byte[]> getFile()
+        {
+            return await conn.getFile();
+        }
     }
 }

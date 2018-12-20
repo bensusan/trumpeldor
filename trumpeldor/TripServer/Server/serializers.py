@@ -10,7 +10,7 @@ class AttractionSerializer(serializers.ModelSerializer):
 
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
-        fields = ('name', 'socialNetwork', 'playersAges', 'email',)
+        fields = ('name', 'socialNetwork', 'playersAges', 'lastSeen', 'email',)
         model = models.User
 
 

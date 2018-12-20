@@ -1,3 +1,5 @@
+import null
+
 from Server import DAL
 
 
@@ -60,5 +62,8 @@ def sendTrack(location, length):
     return chosenTrack
 
 
-def checkIfExists(user):
-    return DAL.getUser(user.name, user.socialNetwork)
+# return user if exists or false otherwise
+def getUser(user):
+    return DAL.getUser(user['name'], user['socialNetwork'])
+
+# def getFile(path):

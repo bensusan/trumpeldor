@@ -1,10 +1,11 @@
-﻿using System;
+﻿using Newtonsoft.Json.Linq;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using trumpeldor.SheredClasses;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -15,7 +16,7 @@ namespace trumpeldor.Views
     {
         
         private GameController.PathLength selectedPathLength;
-
+        private User user = null;
         public groupCreationPage()
         {
             InitializeComponent();
@@ -86,6 +87,18 @@ namespace trumpeldor.Views
             }
             Application.Current.MainPage = new NavigationPage();
         }
-        
+
+        private async void SignUpAsync(object sender, EventArgs e)
+        {
+            //TODO
+            string userName = "Amit";
+            string socialNetwork = "Facebook";
+            user = await ((App)(Application.Current)).getGameController().SignUp(userName, socialNetwork);
+            //user = await ansAsync;
+            string welcome = "Welcome";
+            if (user.lastSeen != null && user.lastSeen != "")
+                welcome += " Back";
+            await DisplayAlert("Signed in!", user.name + welcome, "Close");
+        }
     }
 }

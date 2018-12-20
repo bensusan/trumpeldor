@@ -57,32 +57,56 @@ namespace trumpeldor
             var posts = JsonConvert.DeserializeObject<List<FeedBack>>(await result);
         }
 
-        public async Task signUp(String name, String socialNetwork, List<String> playersAges, String userEmail)
+        public async Task<User> SignUp(String name, String socialNetwork)
         {
             using (var client = new HttpClient())
             {
                 // Create a new post  
                 var newUser = new User
                 {
-                    Name = name,
+                    name = name,
                     socialNetwork = socialNetwork,
-                    PlayersAges = playersAges,
-                    Email = userEmail
+                    //playersAges = playersAges,
+                    //lastSeen = lastSeen,
+                    //email = userEmail
                 };
 
 
-                var content = contentPost(newUser);
+                //var content = contentPost(newUser);
 
-                //  send a POST request  
-                var uri = urlPrefix + "signUp/";
-                var result = await client.PostAsync(uri, content);
+                ////  send a POST request  
+                //var uri = urlPrefix + "signUp/";
+                //var response = await client.PostAsync(uri, content);
 
-                // on error throw a exception  
-                result.EnsureSuccessStatusCode();
+                //// on error throw a exception  
+                //response.EnsureSuccessStatusCode();
+                //string responseBody = await response.Content.ReadAsStringAsync();
 
+                string jsonResponse = await SendToServer(client, newUser, "signUp/");
+                return JsonConvert.DeserializeObject<User>(jsonResponse);
                 // handling an answer maybe in the future  
 
             }
+        }
+
+        public async Task<byte[]> getFile()
+        {
+            //HttpClient client = new HttpClient();
+            //var byteArray = Encoding.ASCII.GetBytes("username:password");
+            //client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", Convert.ToBase64String(byteArray));
+            using (var client = new HttpClient())
+            {
+                var uri = urlPrefix + "getFile/";
+                HttpResponseMessage response = await client.GetAsync(uri);
+                byte[] myBytes = await response.Content.ReadAsByteArrayAsync();
+
+
+                return myBytes;
+            }
+
+            // string convertedFromString = Convert.ToBase64String(myBytes);
+
+            // return "data:image/png;base64," + convertedFromString;
         }
 
 
@@ -99,6 +123,19 @@ namespace trumpeldor
             var json = JsonConvert.SerializeObject(obj);
             var content = new StringContent(json, Encoding.UTF8, "application/json");
             return content;
+        }
+
+        private async Task<string> SendToServer(HttpClient client, Object toSend, string endOfUri)
+        {
+            var content = contentPost(toSend);
+
+            //  send a POST request  
+            var uri = urlPrefix + endOfUri;
+            var response = await client.PostAsync(uri, content);
+
+            // on error throw a exception  
+            response.EnsureSuccessStatusCode();
+            return await response.Content.ReadAsStringAsync();
         }
     }
 }
