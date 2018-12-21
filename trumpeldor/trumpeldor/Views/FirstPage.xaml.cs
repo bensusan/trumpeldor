@@ -19,7 +19,8 @@ namespace trumpeldor.Views
 
         private void Play_Button_Clicked(object sender, EventArgs e)
         {
-            Application.Current.MainPage = new groupCreationPage();
+            //Application.Current.MainPage = new groupCreationPage();
+            Application.Current.MainPage = new LoginsPage();
         }
 
         private void HowToPlay_Button_Clicked(object sender, EventArgs e)
