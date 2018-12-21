@@ -1,23 +1,27 @@
 from django.db import models
-from django.contrib.postgres.fields import JSONField
+#from django.contrib.postgres.fields import JSONField
 
 
 # Create your models here.
 class Attraction(models.Model):
     pointNumber = models.AutoField(primary_key=True)
-    x = models.FloatField(blank=True)
-    y = models.FloatField(blank=True)
-    description = models.TextField(blank=True)
-    picturesPaths = JSONField(blank=True)
-    videosPaths = JSONField(blank=True)
+    x = models.FloatField()
+    y = models.FloatField()
+    description = models.TextField()
+    # picturesPaths = JSONField()
+    # videosPaths = JSONField()
 
 
 class User(models.Model):
     name = models.TextField()
     socialNetwork = models.TextField()
-    playersAges = JSONField(blank=True)
+    #playersAges = JSONField(blank=True)
+    playerAges = models.TextField()
     lastSeen = models.DateField(blank=True)
     email = models.EmailField(blank=True) # To send user notifications in the mail
+    class Meta:
+        unique_together = (("name", "socialNetwork"),)
+
     class Meta:
         unique_together = (("name", "socialNetwork"),)
 
@@ -40,7 +44,8 @@ class Trip(models.Model):
 class AmericanQuestion(models.Model):
     americanQuestionNumber = models.AutoField(primary_key=True)
     question = models.TextField()
-    answers = JSONField()  # Should be list of String
+    #answers = JSONField()  # Should be list of String
+    answers = models.TextField()
     indexOfCorrectAnswer = models.IntegerField()
     myAttraction = models.OneToOneField(Attraction, on_delete=models.CASCADE)  # null=True for migrations. need to think about it
 
@@ -55,31 +60,36 @@ class Entertainment(models.Model):
 
 class FindTheDifferences(Entertainment):
     picturePath = models.TextField()
-    differences = JSONField()  # Should be list of x's and y's (Location of each difference)
-
+    #differences = JSONField()  # Should be list of x's and y's (Location of each difference)
+    differences = models.TextField()
 
 class Puzzle(Entertainment):
     puzzlePicturePath = models.TextField()
 
 
 class SlidingPuzzle(Entertainment):
-    piecesPaths = JSONField()  # Should be list of paths
-
+    #piecesPaths = JSONField()  # Should be list of paths
+    piecesPaths = models.TextField()
 
 class Feedback(models.Model):
     questionNumber = models.AutoField(primary_key=True)
-    trip = models.ForeignKey(Trip, on_delete=models.CASCADE) # null=True for migrations. need to think about it
     question = models.TextField()
+
+
+class FeedbackInstance(models.Model):
+    questionNumber = models.ForeignKey(Feedback, on_delete=models.CASCADE)
+    trip = models.ForeignKey(Trip, on_delete=models.CASCADE) # null=True for migrations. need to think about it
 
     class Meta:
         abstract = True
+        unique_together = (("questionNumber", "trip"),)
 
 
-class FeedbackRating(Feedback):
+class FeedbackRating(FeedbackInstance):
     rating = models.IntegerField()
 
 
-class FeedbackText(Feedback):
+class FeedbackText(FeedbackInstance):
     answer = models.TextField()
 
 
