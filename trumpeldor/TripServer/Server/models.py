@@ -18,6 +18,8 @@ class User(models.Model):
     playersAges = JSONField(blank=True)
     lastSeen = models.DateField(blank=True)
     email = models.EmailField(blank=True) # To send user notifications in the mail
+    class Meta:
+        unique_together = (("name", "socialNetwork"),)
 
 
 
@@ -103,3 +105,13 @@ class HintVideo(Hint):
 
 class HintMap(Hint):
     mapPicturePath = models.TextField()
+
+
+# class File(models.Model):
+#     file = models.FileField(blank=False, null=False)
+#   # remark = models.CharField(max_length=20)
+#   # timestamp = models.DateTimeField(auto_now_add=True)
+#
+#
+class FilePath(models.Model):
+    filename = models.TextField()

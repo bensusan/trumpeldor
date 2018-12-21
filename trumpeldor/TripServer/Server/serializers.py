@@ -1,105 +1,116 @@
 from rest_framework import serializers
-from . import models
+from .models import *
 
 
 class AttractionSerializer(serializers.ModelSerializer):
     class Meta:
         fields = ('pointNumber', 'x', 'y', 'description', 'picturesPaths', 'videosPaths',)
-        model = models.Attraction
+        model = Attraction
 
 
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         fields = ('name', 'socialNetwork', 'playersAges', 'lastSeen', 'email',)
-        model = models.User
+        model = User
 
 
 class TrackSerializer(serializers.ModelSerializer):
     class Meta:
         fields = ('points',)
-        model = models.Track
+        model = Track
 
 
 class TripSerializer(serializers.ModelSerializer):
     class Meta:
         fields = ('tripNumber', 'user', 'score', 'track',)
-        model = models.Trip
+        model = Trip
 
 
 class AmericanQuestionSerializer(serializers.ModelSerializer):
     class Meta:
         fields = ('email', 'americanQuestionNumber', 'question', 'answers', 'indexOfCorrectAnswer', 'myAttraction',)
-        model = models.AmericanQuestion
+        model = AmericanQuestion
 
 
 class EntertainmentSerializer(serializers.ModelSerializer):
     class Meta:
         fields = ('entertainmentNumber', 'myAttraction',)
-        model = models.Entertainment
+        model = Entertainment
 
 
 class FindTheDifferencesSerializer(serializers.ModelSerializer):
     class Meta:
         fields = ('picturePath', 'picturePath',)
-        model = models.FindTheDifferences
+        model = FindTheDifferences
 
 
 class PuzzleSerializer(serializers.ModelSerializer):
     class Meta:
         fields = ('puzzlePicturePath',)
-        model = models.Puzzle
+        model = Puzzle
 
 
 class SlidingPuzzleSerializer(serializers.ModelSerializer):
     class Meta:
         fields = ('piecesPaths',)
-        model = models.SlidingPuzzle
+        model = SlidingPuzzle
 
 
 class FeedbackSerializer(serializers.ModelSerializer):
     class Meta:
         fields = ('questionNumber', 'trip', 'question',)
-        model = models.Feedback
+        model = Feedback
 
 
 class FeedbackRatingSerializer(serializers.ModelSerializer):
     class Meta:
         fields = ('rating',)
-        model = models.FeedbackRating
+        model = FeedbackRating
 
 
 class FeedbackTextSerializer(serializers.ModelSerializer):
     class Meta:
         fields = ('answer',)
-        model = models.FeedbackText
+        model = FeedbackText
 
 
 class HintSerializer(serializers.ModelSerializer):
     class Meta:
         fields = ('hintNumber', 'myAttraction',)
-        model = models.Hint
+        model = Hint
 
 
 class HintPictureSerializer(serializers.ModelSerializer):
     class Meta:
         fields = ('picturePath',)
-        model = models.HintPicture
+        model = HintPicture
 
 
 class HintTextSerializer(serializers.ModelSerializer):
     class Meta:
         fields = ('text',)
-        model = models.HintText
+        model = HintText
 
 
 class HintVideoSerializer(serializers.ModelSerializer):
     class Meta:
         fields = ('videoPath',)
-        model = models.HintVideo
+        model = HintVideo
 
 
 class HintMapSerializer(serializers.ModelSerializer):
     class Meta:
         fields = ('mapPicturePath',)
-        model = models.HintMap
+        model = HintMap
 
+
+# class FileSerializer(serializers.ModelSerializer):
+#     class Meta():
+#         fields = ('file',)
+#         model = File
+#
+#
+class FileNameSerializer(serializers.ModelSerializer):
+    class Meta():
+        fields = ('filename',)
+        model = FilePath

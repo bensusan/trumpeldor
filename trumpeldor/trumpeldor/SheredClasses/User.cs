@@ -4,7 +4,7 @@ using System.Text;
 
 namespace trumpeldor.SheredClasses
 {
-    class User
+    public class User
     {
         public String name { get; set; }
         public String socialNetwork { get; set; }

@@ -8,7 +8,7 @@ using Newtonsoft.Json;
 
 namespace trumpeldor.SheredClasses
 {
-    class FeedBack
+    public class FeedBack
     {
         [JsonProperty("questions")]
         public String Question { get; set; }

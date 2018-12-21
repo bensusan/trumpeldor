@@ -1,10 +1,12 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using trumpeldor.SheredClasses;
+using File = trumpeldor.SheredClasses.File;
 
 namespace trumpeldor
 {
@@ -89,25 +91,25 @@ namespace trumpeldor
             }
         }
 
-        public async Task<byte[]> getFile()
-        {
-            //HttpClient client = new HttpClient();
-            //var byteArray = Encoding.ASCII.GetBytes("username:password");
-            //client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", Convert.ToBase64String(byteArray));
-            using (var client = new HttpClient())
-            {
-                var uri = urlPrefix + "getFile/";
-                HttpResponseMessage response = await client.GetAsync(uri);
-                byte[] myBytes = await response.Content.ReadAsByteArrayAsync();
+        //public async Task<byte[]> getFile()
+        //{
+        //    //HttpClient client = new HttpClient();
+        //    //var byteArray = Encoding.ASCII.GetBytes("username:password");
+        //    //client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", Convert.ToBase64String(byteArray));
+        //    using (var client = new HttpClient())
+        //    {
+        //        var uri = urlPrefix + "getFile/";
+        //        HttpResponseMessage response = await client.GetAsync(uri);
+        //        byte[] myBytes = await response.Content.ReadAsByteArrayAsync();
 
 
-                return myBytes;
-            }
+        //        return myBytes;
+        //    }
 
-            // string convertedFromString = Convert.ToBase64String(myBytes);
+        //    // string convertedFromString = Convert.ToBase64String(myBytes);
 
-            // return "data:image/png;base64," + convertedFromString;
-        }
+        //    // return "data:image/png;base64," + convertedFromString;
+        //}
 
 
         public async Task<String> resultGetAsync(String uri)
@@ -137,5 +139,49 @@ namespace trumpeldor
             response.EnsureSuccessStatusCode();
             return await response.Content.ReadAsStringAsync();
         }
+
+        public static async void DownloadAsync(Uri requestUri, string filename)
+        {
+            if (filename == null)
+                throw new ArgumentNullException("filename");
+
+            using (var httpClient = new HttpClient())
+            {
+                using (var request = new HttpRequestMessage(HttpMethod.Get, requestUri))
+                {
+                    using (
+                        Stream contentStream = await (await httpClient.SendAsync(request)).Content.ReadAsStreamAsync(),
+                        stream = new FileStream(filename, FileMode.Create, FileAccess.Write, FileShare.None, unchecked((int)contentStream.Length), true))
+                    {
+                        await contentStream.CopyToAsync(stream);
+                    }
+                }
+            }
+        }
+
+        public async Task<Stream> GetFile(String fname)
+        {
+            Stream stream;
+            using (var client = new HttpClient())
+            {
+                var file = new File
+                {
+                    filename = fname,
+                };
+
+                stream = await client.PostAsync(urlPrefix + "getFile/", contentPost(file)).ContinueWith(res =>
+                {
+                    var result = res.Result;
+                    var readData = result.Content.ReadAsStreamAsync();
+                    readData.Wait();
+                    return readData.Result;
+                });
+            }
+
+            return stream;
+        }
+
+
+
     }
 }

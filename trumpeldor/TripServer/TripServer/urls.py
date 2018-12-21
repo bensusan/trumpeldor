@@ -16,9 +16,12 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 
-
+from django.views.static import serve
+from django.conf import settings
+from django.conf.urls import url
 urlpatterns = [
     # path('', include('Server.urls'))
     # path('managementsystem/', include('Server.ManageSystem.urls')),
     path('usersystem/', include('Server.UserSystem.urls')),
+    url(r'^media/(?P<path>.*)$', serve, {'document_root': settings.MEDIA_ROOT,}),
 ]
