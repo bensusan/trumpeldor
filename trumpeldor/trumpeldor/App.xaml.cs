@@ -12,11 +12,15 @@ namespace trumpeldor
         
         private GameController gameController;//here we wirte global vars
 
+        static Xamarin.Forms.NavigationPage _NavPage;
+
         public App()
         {
             InitializeComponent();
             gameController = new GameController();
-            MainPage = new Views.FirstPage();
+            //MainPage = new Views.FirstPage();
+            MainPage = new Xamarin.Forms.NavigationPage(new FirstPage());
+            //MainPage = new Xamarin.Forms.NavigationPage(new FirstPage());
         }
 
         protected override void OnStart()

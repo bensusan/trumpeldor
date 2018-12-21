@@ -17,22 +17,25 @@ namespace trumpeldor.Views
 			InitializeComponent();
 		}
 
-        private async void Play_Button_Clicked(object sender, EventArgs e)
+        private void Play_Button_Clicked(object sender, EventArgs e)
         {
-            await Navigation.PushModalAsync(new groupCreationPage());
+            //Application.Current.MainPage = new groupCreationPage();
+            Application.Current.MainPage = new LoginsPage();
         }
 
-        private async void HowToPlay_Button_Clicked(object sender, EventArgs e)
+        private void HowToPlay_Button_Clicked(object sender, EventArgs e)
         {
-            await Navigation.PushModalAsync(new instructionsPage());
+            Application.Current.MainPage = new instructionsPage();
         }
 
-        private async void Info_Button_Clicked(object sender, EventArgs e)
+        private void Info_Button_Clicked(object sender, EventArgs e)
         {
-            await Navigation.PushModalAsync(new informationPage());
-            
-            //without back click
-            //Application.Current.MainPage = new informationPage();
+            /*
+                * with back click 
+                * async
+                * await Navigation.PushModalAsync(new NavigationPage(new informationPage()));
+            */
+            Application.Current.MainPage = new informationPage();
         }
 
         
