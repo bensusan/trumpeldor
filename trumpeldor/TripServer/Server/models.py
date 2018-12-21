@@ -5,24 +5,22 @@ from django.contrib.postgres.fields import JSONField
 # Create your models here.
 class Attraction(models.Model):
     pointNumber = models.AutoField(primary_key=True)
-    x = models.FloatField(blank=True)
-    y = models.FloatField(blank=True)
-    description = models.TextField(blank=True)
-    picturesPaths = JSONField(blank=True)
-    videosPaths = JSONField(blank=True)
+    x = models.FloatField()
+    y = models.FloatField()
+    description = models.TextField()
+    picturesPaths = JSONField()
+    videosPaths = JSONField()
 
 
 class User(models.Model):
     name = models.TextField()
-    playersAges = JSONField()
-    email = models.EmailField(primary_key=True)
-#     class Meta:
-#         abstract = True
-#
-#
-# class RegisteredUser(User):
-#     email = models.EmailField(primary_key=True)
-#     # facebook = ??????
+    socialNetwork = models.TextField()
+    playersAges = JSONField(blank=True)
+    lastSeen = models.DateField(blank=True)
+    email = models.EmailField(blank=True) # To send user notifications in the mail
+
+    class Meta:
+        unique_together = (("name", "socialNetwork"),)
 
 
 class Track(models.Model):
@@ -70,18 +68,23 @@ class SlidingPuzzle(Entertainment):
 
 class Feedback(models.Model):
     questionNumber = models.AutoField(primary_key=True)
-    trip = models.ForeignKey(Trip, on_delete=models.CASCADE) # null=True for migrations. need to think about it
     question = models.TextField()
+
+
+class FeedbackInstance(models.Model):
+    questionNumber = models.ForeignKey(Feedback, on_delete=models.CASCADE)
+    trip = models.ForeignKey(Trip, on_delete=models.CASCADE) # null=True for migrations. need to think about it
 
     class Meta:
         abstract = True
+        unique_together = (("questionNumber", "trip"),)
 
 
-class FeedbackRating(Feedback):
+class FeedbackRating(FeedbackInstance):
     rating = models.IntegerField()
 
 
-class FeedbackText(Feedback):
+class FeedbackText(FeedbackInstance):
     answer = models.TextField()
 
 
@@ -107,3 +110,13 @@ class HintVideo(Hint):
 
 class HintMap(Hint):
     mapPicturePath = models.TextField()
+
+
+# class File(models.Model):
+#     file = models.FileField(blank=False, null=False)
+#   # remark = models.CharField(max_length=20)
+#   # timestamp = models.DateTimeField(auto_now_add=True)
+#
+#
+class FilePath(models.Model):
+    filename = models.TextField()

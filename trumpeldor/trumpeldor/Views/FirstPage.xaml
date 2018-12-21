@@ -9,6 +9,7 @@
             <Button Text="play" Clicked="Play_Button_Clicked" Style="{StaticResource largeButtonStyle}"/>
             <Button Text="how to play" Clicked="HowToPlay_Button_Clicked" Style="{StaticResource largeButtonStyle}" />
             <Button Text="information" Clicked="Info_Button_Clicked" Style="{StaticResource largeButtonStyle}"/>
+            <Image x:Name="tryImg" Style="{DynamicResource largeImageStyle}"/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

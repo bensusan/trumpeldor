@@ -1,4 +1,6 @@
-from polls import DAL
+import null
+
+from Server import DAL
 
 
 # /////////////////////////////////////////////////////////
@@ -58,3 +60,10 @@ def sendTrack(location, length):
     tracks = DAL.getAllTracksWithLength(length)
     chosenTrack = _searchForTheShortestTrack(location, tracks)
     return chosenTrack
+
+
+# return user if exists or false otherwise
+def getUser(user):
+    return DAL.getUser(user['name'], user['socialNetwork'])
+
+# def getFile(path):
