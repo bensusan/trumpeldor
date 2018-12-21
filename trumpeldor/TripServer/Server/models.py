@@ -1,5 +1,5 @@
 from django.db import models
-#from django.contrib.postgres.fields import JSONField
+from django.contrib.postgres.fields import JSONField
 
 
 # Create your models here.
@@ -8,23 +8,19 @@ class Attraction(models.Model):
     x = models.FloatField()
     y = models.FloatField()
     description = models.TextField()
-    # picturesPaths = JSONField()
-    # videosPaths = JSONField()
+    picturesPaths = JSONField()
+    videosPaths = JSONField()
 
 
 class User(models.Model):
     name = models.TextField()
     socialNetwork = models.TextField()
-    #playersAges = JSONField(blank=True)
-    playerAges = models.TextField()
+    playersAges = JSONField(blank=True)
     lastSeen = models.DateField(blank=True)
     email = models.EmailField(blank=True) # To send user notifications in the mail
-    class Meta:
-        unique_together = (("name", "socialNetwork"),)
 
     class Meta:
         unique_together = (("name", "socialNetwork"),)
-
 
 
 class Track(models.Model):
@@ -44,8 +40,7 @@ class Trip(models.Model):
 class AmericanQuestion(models.Model):
     americanQuestionNumber = models.AutoField(primary_key=True)
     question = models.TextField()
-    #answers = JSONField()  # Should be list of String
-    answers = models.TextField()
+    answers = JSONField()  # Should be list of String
     indexOfCorrectAnswer = models.IntegerField()
     myAttraction = models.OneToOneField(Attraction, on_delete=models.CASCADE)  # null=True for migrations. need to think about it
 
@@ -60,16 +55,16 @@ class Entertainment(models.Model):
 
 class FindTheDifferences(Entertainment):
     picturePath = models.TextField()
-    #differences = JSONField()  # Should be list of x's and y's (Location of each difference)
-    differences = models.TextField()
+    differences = JSONField()  # Should be list of x's and y's (Location of each difference)
+
 
 class Puzzle(Entertainment):
     puzzlePicturePath = models.TextField()
 
 
 class SlidingPuzzle(Entertainment):
-    #piecesPaths = JSONField()  # Should be list of paths
-    piecesPaths = models.TextField()
+    piecesPaths = JSONField()  # Should be list of paths
+
 
 class Feedback(models.Model):
     questionNumber = models.AutoField(primary_key=True)
