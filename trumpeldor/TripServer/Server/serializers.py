@@ -4,13 +4,13 @@ from . import models
 
 class AttractionSerializer(serializers.ModelSerializer):
     class Meta:
-        fields = ('pointNumber', 'x', 'y', 'description', 'picturesPaths', 'videosPaths',)
+        fields = ('pointNumber', 'x', 'y', 'description',)# 'picturesPaths', 'videosPaths',)
         model = models.Attraction
 
 
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
-        fields = ('name', 'socialNetwork', 'playersAges', 'lastSeen', 'email',)
+        fields = ('name', 'socialNetwork', 'lastSeen', 'email',)    #'playersAges',
         model = models.User
 
 
@@ -28,7 +28,7 @@ class TripSerializer(serializers.ModelSerializer):
 
 class AmericanQuestionSerializer(serializers.ModelSerializer):
     class Meta:
-        fields = ('email', 'americanQuestionNumber', 'question', 'answers', 'indexOfCorrectAnswer', 'myAttraction',)
+        fields = ('americanQuestionNumber', 'question', 'indexOfCorrectAnswer', 'myAttraction',) # 'answers',
         model = models.AmericanQuestion
 
 
@@ -50,10 +50,10 @@ class PuzzleSerializer(serializers.ModelSerializer):
         model = models.Puzzle
 
 
-class SlidingPuzzleSerializer(serializers.ModelSerializer):
-    class Meta:
-        fields = ('piecesPaths',)
-        model = models.SlidingPuzzle
+# class SlidingPuzzleSerializer(serializers.ModelSerializer):
+#     class Meta:
+#         fields = ('piecesPaths',)
+#         model = models.SlidingPuzzle
 
 
 class FeedbackSerializer(serializers.ModelSerializer):
