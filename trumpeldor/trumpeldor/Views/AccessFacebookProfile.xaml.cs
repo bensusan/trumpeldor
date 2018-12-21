@@ -5,7 +5,7 @@ using System.Linq;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
-
+using trumpeldor.SheredClasses;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -110,10 +110,14 @@ namespace trumpeldor.Views
                 JObject json = JObject.Parse(userJson);
                 string username = (string)json["name"];
                 string id = (string)json["id"];
-                //((App)(Application.Current)).getGameController().SignUp(id, "facebook");
+                //User user = await ((App)(Application.Current)).getGameController().SignUp(id, "facebook");
+                //string welcome = "Welcome";
+                //if (user.lastSeen != null && user.lastSeen != "")
+                //    welcome += " Back";
+                //await DisplayAlert("Signed in!", user.name + welcome, "Close");
                 Application.Current.MainPage = new groupCreationPage();
-
-               // Content= groupCreationPage.xaml;
+                
+                // Content= groupCreationPage.xaml;
 
 
             }

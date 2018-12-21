@@ -58,7 +58,8 @@ class SignUp(generics.CreateAPIView):
                 user = BL.getUser(request.data)
             else:
                 print("Bug in SignUp method")
-        return HttpResponse(serializers.serialize('json', user), content_type='application/json')
+            return JsonResponse(seri.data)
+        return JsonResponse("OK")
 
 
 # class FileView(APIView):

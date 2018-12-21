@@ -15,9 +15,9 @@ class Attraction(models.Model):
 class User(models.Model):
     name = models.TextField()
     socialNetwork = models.TextField()
-    playersAges = JSONField(blank=True)
-    lastSeen = models.DateField(blank=True)
-    email = models.EmailField(blank=True) # To send user notifications in the mail
+    playersAges = JSONField(null=True)
+    lastSeen = models.DateField(blank=True, null=True)
+    email = models.EmailField(blank=True, null=True) # To send user notifications in the mail
 
     class Meta:
         unique_together = (("name", "socialNetwork"),)
