@@ -12,7 +12,7 @@ namespace trumpeldor
 {
     class ServerConection
     {
-        private readonly String urlPrefix = "http://132.72.234.59:12345/usersystem/";
+        private readonly String urlPrefix = "http://132.72.23.64:12345/usersystem/";
         public ServerConection()
         {
 

@@ -110,14 +110,13 @@ namespace trumpeldor.Views
                 JObject json = JObject.Parse(userJson);
                 string username = (string)json["name"];
                 string id = (string)json["id"];
-                //User user = await ((App)(Application.Current)).getGameController().SignUp(id, "facebook");
-                //string welcome = "Welcome";
-                //if (user.lastSeen != null && user.lastSeen != "")
-                //    welcome += " Back";
-                //await DisplayAlert("Signed in!", user.name + welcome, "Close");
+                User user = await ((App)(Application.Current)).getGameController().SignUp(id, "facebook");
+                string welcome = " Welcome";
+                if (user.lastSeen != null && user.lastSeen != "")
+                    welcome += " Back";
+                await DisplayAlert("Signed in!", user.name + welcome, "Close");
                 Application.Current.MainPage = new groupCreationPage();
                 
-                // Content= groupCreationPage.xaml;
 
 
             }
