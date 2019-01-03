@@ -16,8 +16,8 @@ namespace trumpeldor.Views
 		public instructionsPage ()
 		{
             InitializeComponent ();
-            //w.Source = "http://132.72.234.59:12345/media/y.png";
-            w.Source = "https://www.xamarin.com/content/images/pages/forms/example-app.png";
+            w.Source = "http://132.72.23.64:12345/media/y.png";
+            //w.Source = "https://www.xamarin.com/content/images/pages/forms/example-app.png";
         }
 
         public async void GetFile(object sender, EventArgs e)
