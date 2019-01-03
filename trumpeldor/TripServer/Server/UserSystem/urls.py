@@ -11,6 +11,7 @@ urlpatterns = [
     # path('hint/<int:pk>/', views.Hint.as_view()),
     path('signUp/', SignUp.as_view()),
     path('getFile/', GetFile.as_view()),
+    path('GetClass/', GetClass.as_view()),
     # path('x/', X.as_view()),
     # url(r'^getFile/$', FileView.as_view(), name='file-upload'),
 ]

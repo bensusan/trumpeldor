@@ -45,21 +45,30 @@ class Hint(generics.RetrieveAPIView):
         serializer = HintSerializer(hint)
         return HttpResponse(serializer.data)
 
+class GetClass(generics.ListAPIView):
+    def get(self, request, *args, **kwargs):
+        return Response(status=status.HTTP_200_OK)
 
-class SignUp(generics.CreateAPIView):
+class SignUp(generics.GenericAPIView):
     serializer_class = UserSerializer
 
-    def create(self, request, *args, **kwargs):
+    def post(self, request, *args, **kwargs):
         user = BL.getUser(request.data)
         if user is None:
             seri = UserSerializer(data=request.data)
             if seri.is_valid():
                 seri.save()
                 user = BL.getUser(request.data)
-            else:
-                print("Bug in SignUp method")
-            return JsonResponse(seri.data)
-        return JsonResponse("OK")
+                seri2 = UserSerializer(user)
+                return Response(seri2.data)
+            print("Bug in SignUp method")
+            return JsonResponse({'ok': 'False'})
+            # return JsonResponse(seri.data)
+        seri = UserSerializer(user)
+        return Response(seri.data)
+
+    def get(self, request, *args, **kwargs):
+        return Response(status=status.HTTP_200_OK)
 
 
 # class FileView(APIView):
