@@ -19,6 +19,7 @@ namespace trumpeldor.Droid
 
             base.OnCreate(savedInstanceState);
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
+            Xamarin.FormsMaps.Init(this, savedInstanceState);//for maps init
             LoadApplication(new App());
         }
 

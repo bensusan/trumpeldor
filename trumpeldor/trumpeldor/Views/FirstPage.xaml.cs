@@ -16,7 +16,8 @@ namespace trumpeldor.Views
 		public FirstPage ()
 		{
 			InitializeComponent();
-		}
+           
+        }
 
         private void Play_Button_Clicked(object sender, EventArgs e)
         {
@@ -26,13 +27,20 @@ namespace trumpeldor.Views
 
         private void HowToPlay_Button_Clicked(object sender, EventArgs e)
         {
-            Application.Current.MainPage = new instructionsPage();
+            //Application.Current.MainPage = new instructionsPage();
+
+
+
+            //await Navigation.PushModalAsync(new MapPage());
+            Application.Current.MainPage = new NavigationPage();
+
+
             //Task<byte[]> ans = ((App)(Application.Current)).getGameController().getFile();
             //byte[] fileBytes = await ans;
             ////Image image = new Image();
             //Stream stream = new MemoryStream(fileBytes);
 
-            
+
             //tryImg.IsVisible = true;
             //tryImg.Source = ImageSource.FromStream(() => new MemoryStream(fileBytes));
 

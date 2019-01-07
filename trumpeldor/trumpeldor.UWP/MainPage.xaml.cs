@@ -20,7 +20,7 @@ namespace trumpeldor.UWP
         public MainPage()
         {
             this.InitializeComponent();
-
+            //Xamarin.FormsMaps.Init("INSERT_AUTHENTICATION_TOKEN_HERE");//for map init
             LoadApplication(new trumpeldor.App());
         }
     }
