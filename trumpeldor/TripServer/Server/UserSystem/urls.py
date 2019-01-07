@@ -7,7 +7,7 @@ from django.conf import settings
 
 urlpatterns = [
     # path('feedback/', views.FeedbackQuestionsList.as_view()),
-    path('americanQuestion/<int:pk>/', AmericanQuestion.as_view()),
+    # path('americanQuestion/<int:pk>/', AmericanQuestion.as_view()),
     # path('hint/<int:pk>/', views.Hint.as_view()),
     path('signUp/', SignUp.as_view()),
     path('previousTrip/', PreviousTrip.as_view()),
