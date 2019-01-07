@@ -22,18 +22,16 @@ namespace trumpeldor.Views
             InitializeComponent();
         }
 
-        public async Task<ContentPage> ShowPastDetailsAsync()
+        public ContentPage ShowPastDetailsAsync()
         {
             if (gc.IsUserConnectedRecently())
             {
-                var answer = await DisplayAlert("Hey, " + gc.currentUser.name + "!", "Do you want to continue last trip?", "Yes", "No");
-                if (answer.Equals("Yes"))
-                {
-                    await gc.ContinuePreviousTrip();
-                    return new NavigationPage();
-                }
+                bool dialogAnswer = DisplayAlert("Hey, " + gc.currentUser.name + "!", "Do you want to continue last trip?", "Yes", "No").Result;
+                if (dialogAnswer)
+                    return gc.ContinuePreviousTrip().ContinueWith((trip) => new NavigationPage()).Result;
+                    
             }
-            KeyValuePair<string, List<int>> ans = await gc.LoadRelevantInformationFromLastTrip();
+            KeyValuePair<string, List<int>> ans = gc.LoadRelevantInformationFromLastTrip().Result;
             //ans is in the form of <groupName, playerAges>
             groupNameEntry.Text = ans.Key;
             if (ans.Value != null)

@@ -39,7 +39,8 @@ namespace trumpeldor
         {
             if (currentUser.lastSeen == null)
                 return false;
-            var hours = (DateTime.Now - (DateTime)currentUser.lastSeen).TotalHours;
+            //var hours = (DateTime.Now - (DateTime)currentUser.lastSeen).TotalHours;
+            var hours = 50;
             return hours <= LOGIN_RECENETLY_DIFFERENCE_HOURS;
         }
 
@@ -48,9 +49,10 @@ namespace trumpeldor
             return await conn.LoadRelevantInformationFromLastTrip(currentUser);
         }
 
-        internal async Task ContinuePreviousTrip()
+        internal async Task<Trip> ContinuePreviousTrip()
         {
-            currentTrip = await conn.GetPreviousTrip(currentUser);
+            return await conn.GetPreviousTrip(currentUser)
+                .ContinueWith((trip) => this.currentTrip = trip.Result);
         }
 
         public GameController()
@@ -59,10 +61,9 @@ namespace trumpeldor
             destinations = new Dictionary<Attraction, bool>();
         }
 
-        public async void CreateTrip(string groupName, List<int> playersAges, int trackLength)
+        public void CreateTrip(string groupName, List<int> playersAges, int trackLength)
         {
-            currentTrip = await conn.CreateTripAsync(currentUser, groupName, playersAges, trackLength, GetUserX(), GetUserY());
-
+            currentTrip = conn.CreateTripAsync(currentUser, groupName, playersAges, trackLength, GetUserX(), GetUserY()).Result;
         }
 
         private float GetUserY()
@@ -226,9 +227,9 @@ namespace trumpeldor
             }
         }*/
         
-        public async Task SignUp(string name, string socialNetwork)
-        { 
-            currentUser = await conn.SignUp(name, socialNetwork);
+        public void SignUp(string name, string socialNetwork)
+        {
+            this.currentUser = conn.SignUp(name, socialNetwork).Result;
         }
     }
 }

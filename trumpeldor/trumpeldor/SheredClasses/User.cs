@@ -10,8 +10,8 @@ namespace trumpeldor.SheredClasses
         internal string name { get; set; }
         internal string socialNetwork { get; set; }
         //internal List<string> playersAges { get; set; }
-        internal DateTime? lastSeen { get; set; }
-        internal string email { get; set; }
+        internal String lastSeen { get; set; }
+        internal String email { get; set; }
         //Maybe to get also if the user is connected recently because different customers will want different settings for that.
 
         //THIS CONSTRUCTOR IS FOR THE CONNECTION IMPORTANT!!!!!!!!!!!!!!!
@@ -19,7 +19,7 @@ namespace trumpeldor.SheredClasses
         {
         }
 
-        public User(string name, string socialNetwork, DateTime? lastSeen, string email)
+        public User(string name, string socialNetwork, String lastSeen, string email)
         {
             this.name = name;
             this.socialNetwork = socialNetwork;

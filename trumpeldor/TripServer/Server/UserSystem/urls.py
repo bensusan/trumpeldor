@@ -12,6 +12,7 @@ urlpatterns = [
     path('signUp/', SignUp.as_view()),
     path('previousTrip/', PreviousTrip.as_view()),
     path('getRelevantPreviousTripInformation/', GetRelevantPreviousTripInformation.as_view()),
+    path('createTrip/', CreateTrip.as_view()),
 ]
 
 urlpatterns = format_suffix_patterns(urlpatterns)

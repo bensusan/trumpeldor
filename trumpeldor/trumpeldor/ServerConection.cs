@@ -13,7 +13,7 @@ namespace trumpeldor
     class ServerConection
     {
         //private const string IP = "132.72.23.64";
-        public readonly static string IP = "192.168.1.11";
+        public readonly static string IP = "132.72.213.116";
         public readonly static string PORT = "12345";
         private readonly String urlPrefix = "http://" + IP +":" + PORT + "/usersystem/";
         public ServerConection()

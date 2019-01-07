@@ -36,6 +36,12 @@ class BL_Abstract(object):
     def createUser(self, data):
         raise NotImplementedError("Should have implemented this")
 
+    def signUp(self, data):
+        user = self.getUser(data)
+        if user is None:
+            user = self.createUser(data)
+        return user
+
 
 class BLProxy(BL_Abstract):
     Implementation = None

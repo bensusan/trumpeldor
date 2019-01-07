@@ -13,48 +13,76 @@ BL_Impl.setDAL(DAL_Impl)
 BL = BLProxy()
 BL.setImplementation(BL_Impl)
 
+DEBUG = True
+
+
+# General post for all the posts here
+# blFunction must include only 1 argument (request.data)
+def generalPost(request, className, blFunction, classSerializer):
+    if DEBUG:
+        print(className + ":", "Got Message data:", request.data, sep="\n")
+    ans = blFunction(request.data)
+    serializer = classSerializer(ans)
+    if DEBUG:
+        print("Sent Message data:", serializer.data, sep="\n")
+    return Response(serializer.data)
+
 
 class SignUp(generics.GenericAPIView):
     serializer_class = SignUpSerializer
 
     def post(self, request, *args, **kwargs):
-        print("SignUp:", "Got Message data:", request.data, sep="\n")
-        user = BL.getUser(request.data)
-        if user is None:
-            user = BL.createUser(request.data)
-        serializer = UserSerializer(user)
-        print("Sent Message data:", serializer.data, sep="\n")
-        return Response(serializer.data)
+        return generalPost(request, "SignUp", BL.signUp, UserSerializer)
+        # print("SignUp:", "Got Message data:", request.data, sep="\n")
+        # user = BL.signUp(request.data)
+        # serializer = UserSerializer(user)
+        # print("Sent Message data:", serializer.data, sep="\n")
+        # return Response(serializer.data)
 
 
 class PreviousTrip(generics.GenericAPIView):
     serializer_class = UserSerializer
 
     def post(self, request, *args, **kwargs):
-        print("PreviousTrip:", "Got Message data:", request.data, sep="\n")
-        trip = BL.getPreviousUserTrip(request.data)
-        serializer = TripSerializer(trip)
-        print("Sent Message data:", serializer.data, sep="\n")
-        return Response(serializer.data)
+        return generalPost(
+            request,
+            "PreviousTrip",
+            BL.getPreviousUserTrip,
+            TripSerializer)
+        # print("PreviousTrip:", "Got Message data:", request.data, sep="\n")
+        # trip = BL.getPreviousUserTrip(request.data)
+        # serializer = TripSerializer(trip)
+        # print("Sent Message data:", serializer.data, sep="\n")
+        # return Response(serializer.data)
 
 
 class GetRelevantPreviousTripInformation(generics.GenericAPIView):
     serializer_class = UserSerializer
 
     def post(self, request, *args, **kwargs):
-        print("GetRelevantPreviousTripInformation:", "Got Message data:", request.data, sep="\n")
-        relevantDataTrip = BL.getRelevantPreviousTripInformation(request.data)
-        serializer = GetRelevantPreviousTripInformationSerializer(relevantDataTrip)
-        print("Sent Message data:", serializer.data, sep="\n")
-        return Response(serializer.data)
+        return generalPost(
+            request,
+            "GetRelevantPreviousTripInformation",
+            BL.getRelevantPreviousTripInformation,
+            GetRelevantPreviousTripInformationSerializer)
+        # print("GetRelevantPreviousTripInformation:", "Got Message data:", request.data, sep="\n")
+        # relevantDataTrip = BL.getRelevantPreviousTripInformation(request.data)
+        # serializer = GetRelevantPreviousTripInformationSerializer(relevantDataTrip)
+        # print("Sent Message data:", serializer.data, sep="\n")
+        # return Response(serializer.data)
 
 
 class CreateTrip(generics.GenericAPIView):
     serializer_class = CreateTripSerializer
 
     def post(self, request, *args, **kwargs):
-        print("CreateTrip:", "Got Message data:", request.data, sep="\n")
-        trip = BL.createTrip(request.data)
-        serializer = TripSerializer(trip)
-        print("Sent Message data:", serializer.data, sep="\n")
-        return Response(serializer.data)
+        return generalPost(
+            request,
+            "CreateTrip",
+            BL.createTrip,
+            TripSerializer)
+        # print("CreateTrip:", "Got Message data:", request.data, sep="\n")
+        # trip = BL.createTrip(request.data)
+        # serializer = TripSerializer(trip)
+        # print("Sent Message data:", serializer.data, sep="\n")
+        # return Response(serializer.data)
