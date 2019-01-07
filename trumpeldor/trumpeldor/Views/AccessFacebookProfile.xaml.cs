@@ -16,7 +16,7 @@ namespace trumpeldor.Views
     {
 
         private string ClientId = "722384804784862";
-
+        GameController gc = ((App)(Application.Current)).getGameController();
         public AccessFacebookProfile()
         {
             try
@@ -110,15 +110,12 @@ namespace trumpeldor.Views
                 JObject json = JObject.Parse(userJson);
                 string username = (string)json["name"];
                 string id = (string)json["id"];
-                User user = await ((App)(Application.Current)).getGameController().SignUp(id, "facebook");
-                string welcome = " Welcome";
-                if (user.lastSeen != null && user.lastSeen != "")
-                    welcome += " Back";
-                await DisplayAlert("Signed in!", user.name + welcome, "Close");
-                Application.Current.MainPage = new groupCreationPage();
-                
-
-
+                await ((App)(Application.Current)).getGameController().SignUp(id, "facebook");
+                //TODO remove next line - just for debug
+                await DisplayAlert("Hey, " + gc.currentUser.name + "!", "", "ok");
+                ContentPage nextPage = new groupCreationPage();
+                nextPage = await ((groupCreationPage)nextPage).ShowPastDetailsAsync();
+                Application.Current.MainPage = nextPage;
             }
             catch (Exception e)
             {

@@ -4,19 +4,20 @@ from django.contrib.postgres.fields import JSONField
 
 # Create your models here.
 class Attraction(models.Model):
-    pointNumber = models.AutoField(primary_key=True)
+    # pointNumber = models.AutoField(primary_key=True)
+    name = models.TextField(default='fake')
     x = models.FloatField()
     y = models.FloatField()
     description = models.TextField()
-    picturesPaths = JSONField()
-    videosPaths = JSONField()
+    picturesURLS = JSONField()
+    videosURLS = JSONField()
 
 
 class User(models.Model):
     name = models.TextField()
     socialNetwork = models.TextField()
-    playersAges = JSONField(null=True)
-    lastSeen = models.DateField(blank=True, null=True)
+    # playersAges = JSONField(null=True)
+    lastSeen = models.DateTimeField(blank=True, null=True)
     email = models.EmailField(blank=True, null=True) # To send user notifications in the mail
 
     class Meta:
@@ -24,21 +25,25 @@ class User(models.Model):
 
 
 class Track(models.Model):
-    trackNumber = models.AutoField(primary_key=True)
+    # trackNumber = models.AutoField(primary_key=True)
     subTrack = models.ForeignKey('Track', on_delete=models.CASCADE, blank=True, null=True)
     points = models.ManyToManyField(Attraction)
     length = models.IntegerField()
 
 
 class Trip(models.Model):
-    TripNumber = models.AutoField(primary_key=True)
+    # TripNumber = models.AutoField(primary_key=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    score = models.IntegerField()
+    groupName = models.TextField(default='fake')
+    playersAges = JSONField(null=True)
+    score = models.IntegerField(default=0)
     track = models.ForeignKey(Track, on_delete=models.CASCADE)
+    # nextAttraction = models.ForeignKey(Attraction, on_delete=models.CASCADE, blank=True, null=True)
+    attractionsDone = models.ManyToManyField(Attraction)    # First Attraction is the current attraction!!!!
 
 
 class AmericanQuestion(models.Model):
-    americanQuestionNumber = models.AutoField(primary_key=True)
+    # americanQuestionNumber = models.AutoField(primary_key=True)
     question = models.TextField()
     answers = JSONField()  # Should be list of String
     indexOfCorrectAnswer = models.IntegerField()
@@ -51,19 +56,20 @@ class Entertainment(models.Model):
 
     class Meta:
         abstract = True
+        unique_together = (("entertainmentNumber", "myAttraction"),)
 
 
 class FindTheDifferences(Entertainment):
-    picturePath = models.TextField()
+    pictureURL = models.TextField()
     differences = JSONField()  # Should be list of x's and y's (Location of each difference)
 
 
 class Puzzle(Entertainment):
-    puzzlePicturePath = models.TextField()
+    pictureURL = models.TextField()
 
 
 class SlidingPuzzle(Entertainment):
-    piecesPaths = JSONField()  # Should be list of paths
+    piecesURLS = JSONField()  # Should be list of paths
 
 
 class Feedback(models.Model):
@@ -92,31 +98,43 @@ class Hint(models.Model):
     hintNumber = models.AutoField(primary_key=True)
     myAttraction = models.ForeignKey(Attraction, on_delete=models.CASCADE)
 
+    HINT_TEXT = 'HT'
+    HINT_PICTURE = 'HP'
+    HINT_VIDEO = 'HV'
+    HINT_MAP = 'HM'
+    HINT_KIND = (
+        (HINT_TEXT, 'HintText'),
+        (HINT_PICTURE, 'HintPicture'),
+        (HINT_VIDEO, 'HintVideo'),
+        (HINT_MAP, 'HintMap'),
+    )
+    kind = models.CharField(
+        max_length=2,
+        choices=HINT_KIND,
+        default=HINT_TEXT,
+    )
+
+    data = models.TextField()
+
     class Meta:
-        abstract = True
+        unique_together = (("hintNumber", "myAttraction"),)
+        # abstract = True
 
 
-class HintPicture(Hint):
-    picturePath = models.TextField()
-
-
-class HintText(Hint):
-    text = models.TextField()
-
-
-class HintVideo(Hint):
-    videoPath = models.TextField()
-
-
-class HintMap(Hint):
-    mapPicturePath = models.TextField()
-
-
-# class File(models.Model):
-#     file = models.FileField(blank=False, null=False)
-#   # remark = models.CharField(max_length=20)
-#   # timestamp = models.DateTimeField(auto_now_add=True)
+# class HintPicture(Hint):
+#     pass
+#     picturePath = models.TextField()
 #
 #
-class FilePath(models.Model):
-    filename = models.TextField()
+# class HintText(Hint):
+#     pass
+#     text = models.TextField()
+#
+#
+# class HintVideo(Hint):
+#     pass
+#     videoPath = models.TextField()
+#
+#
+# class HintMap(Hint):
+#     mapPicturePath = models.TextField()

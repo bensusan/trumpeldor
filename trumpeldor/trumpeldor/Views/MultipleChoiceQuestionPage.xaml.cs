@@ -12,26 +12,28 @@ namespace trumpeldor.Views
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class MultipleChoiceQuestionPage : ContentPage
 	{
-		public MultipleChoiceQuestionPage ()
+        GameController gc = ((App)Application.Current).getGameController();
+
+        public MultipleChoiceQuestionPage ()
 		{
 			InitializeComponent ();
-            scoreLabel.Text = "score: " + ((App)Application.Current).getGameController().GetScore();
-            trackPointQuestion.Text = ((App)Application.Current).getGameController().GetCurrentTrackPointQuestion();
-            if (((App)(Application.Current)).getGameController().IsCurrentTrackPointHasQuestionImage())
+            scoreLabel.Text = "score: " + gc.GetScore();
+            attractionQuestion.Text = gc.GetCurrentAttractionQuestion();
+            if (gc.IsCurrentAttractionHasQuestionImage())
             {
-                trackPointQuestionImage.IsVisible = true;
-                trackPointQuestionImage.Source = ((App)Application.Current).getGameController().GetCurrentTrackPointQuestionImage();
+                attractionQuestionImage.IsVisible = true;
+                attractionQuestionImage.Source = gc.GetCurrentAttractionQuestionImage();
             }
             else
             {
-                trackPointQuestionImage.IsVisible = false;
+                attractionQuestionImage.IsVisible = false;
             }
             answersInitialize();
         }
         private void answersInitialize()
         {
-            List<String> answers = ((App)(Application.Current)).getGameController().GetCurrentTrackPointQuestionAnswers();
-            int correctAnswer = ((App)(Application.Current)).getGameController().GetCurrentTrackPointCurrectAnswersToQuestion();
+            List<String> answers = gc.GetCurrentAttractionQuestionAnswers();
+            int correctAnswer = gc.GetCurrentAttractionCurrectAnswersToQuestion();
             for (int i = 0; i < answers.Count; i++)
             {
                 Button answerButton = new Button();
@@ -63,13 +65,13 @@ namespace trumpeldor.Views
             {
                 Navigation.RemovePage(page);
             }
-            if (((App)Application.Current).getGameController().GetIsFinishTrack())
+            if (gc.isFinishTrip)
             {
                 Application.Current.MainPage = new FinishTrackPage();
             }
             else
             {
-                ((App)Application.Current).getGameController().SelectNextTrackPoint();
+                ((App)Application.Current).getGameController().SelectNextAttraction();
                 Application.Current.MainPage = new NavigationPage();
             }
 
@@ -92,7 +94,7 @@ namespace trumpeldor.Views
             {
                 Navigation.RemovePage(page);
             }
-            Application.Current.MainPage = new TrackPointPage();
+            Application.Current.MainPage = new AttractionPage();
         }
     }
 }

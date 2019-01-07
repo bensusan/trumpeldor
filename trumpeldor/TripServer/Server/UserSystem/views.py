@@ -1,121 +1,60 @@
 from rest_framework.response import Response
-from rest_framework.views import APIView
-import random
-from django.http import JsonResponse, HttpResponse, Http404
+from django.http import Http404
 
 from rest_framework import generics
 from ..serializers import *
-from .. import BL
-from django.core import serializers
-from rest_framework.parsers import MultiPartParser, FormParser
-from rest_framework import status
+from Server.BL.BL import BLProxy
+from Server.BL.BL_Implementation import BL_Implementation
+from Server.DAL.DAL_Implementation import DAL_Implementation
 
+DAL_Impl = DAL_Implementation()
+BL_Impl = BL_Implementation()
+BL_Impl.setDAL(DAL_Impl)
+BL = BLProxy()
+BL.setImplementation(BL_Impl)
 
-class AmericanQuestion(generics.RetrieveAPIView):
-    serializer_class = AmericanQuestionSerializer
-
-    def get_object(self, pointId):
-
-        try:
-            questions = AmericanQuestion.objects.filter(myAttraction=pointId)
-            numOfQuestions = questions.count()
-            pk = random.randint(0, numOfQuestions)
-            return questions[pk]
-        except AmericanQuestion.DoesNotExist:
-            raise Http404
-
-    def get(self, request, pk, **kwargs):
-        question = self.get_object(pk)
-        serializer = AmericanQuestionSerializer(question)
-        return HttpResponse(serializer.data)
-
-
-class Hint(generics.RetrieveAPIView):
-    serializer_class = UserSerializer
-
-    def get_object(self, pk):
-
-        try:
-            return Hint.objects.get(pk=pk)
-        except Hint.DoesNotExist:
-            raise Http404
-
-    def get(self, request, pk, **kwargs):
-        hint = self.get_object(pk)
-        serializer = HintSerializer(hint)
-        return HttpResponse(serializer.data)
-
-class GetClass(generics.ListAPIView):
-    def get(self, request, *args, **kwargs):
-        return Response(status=status.HTTP_200_OK)
 
 class SignUp(generics.GenericAPIView):
+    serializer_class = SignUpSerializer
+
+    def post(self, request, *args, **kwargs):
+        print("SignUp:", "Got Message data:", request.data, sep="\n")
+        user = BL.getUser(request.data)
+        if user is None:
+            user = BL.createUser(request.data)
+        serializer = UserSerializer(user)
+        print("Sent Message data:", serializer.data, sep="\n")
+        return Response(serializer.data)
+
+
+class PreviousTrip(generics.GenericAPIView):
     serializer_class = UserSerializer
 
     def post(self, request, *args, **kwargs):
-        user = BL.getUser(request.data)
-        if user is None:
-            seri = UserSerializer(data=request.data)
-            if seri.is_valid():
-                seri.save()
-                user = BL.getUser(request.data)
-                seri2 = UserSerializer(user)
-                return Response(seri2.data)
-            print("Bug in SignUp method")
-            return JsonResponse({'ok': 'False'})
-            # return JsonResponse(seri.data)
-        seri = UserSerializer(user)
-        return Response(seri.data)
-
-    def get(self, request, *args, **kwargs):
-        return Response(status=status.HTTP_200_OK)
+        print("PreviousTrip:", "Got Message data:", request.data, sep="\n")
+        trip = BL.getPreviousUserTrip(request.data)
+        serializer = TripSerializer(trip)
+        print("Sent Message data:", serializer.data, sep="\n")
+        return Response(serializer.data)
 
 
-# class FileView(APIView):
-#     parser_classes = (MultiPartParser, FormParser)
-#
-#     def post(self, request, *args, **kwargs):
-#         file_serializer = FileSerializer(data=request.data)
-#         if file_serializer.is_valid():
-#             file_serializer.save()
-#             return Response(file_serializer.data, status=status.HTTP_201_CREATED)
-#         else:
-#             return Response(file_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+class GetRelevantPreviousTripInformation(generics.GenericAPIView):
+    serializer_class = UserSerializer
 
-class GetTrack(generics.RetrieveAPIView):
-    serializer_class = TrackSerializer
-
-    def get_object(self, pk):
-
-        try:
-            tracks = Track.objects.filter(len=pk)
-            numOftracks = tracks.count()
-            pk = random.randint(0, numOftracks)
-            return tracks.objects.get(pk=pk)
-        except Track.DoesNotExist:
-            raise Http404
+    def post(self, request, *args, **kwargs):
+        print("GetRelevantPreviousTripInformation:", "Got Message data:", request.data, sep="\n")
+        relevantDataTrip = BL.getRelevantPreviousTripInformation(request.data)
+        serializer = GetRelevantPreviousTripInformationSerializer(relevantDataTrip)
+        print("Sent Message data:", serializer.data, sep="\n")
+        return Response(serializer.data)
 
 
-class GetFile(generics.CreateAPIView):
-    serializer_class = FileNameSerializer
+class CreateTrip(generics.GenericAPIView):
+    serializer_class = CreateTripSerializer
 
-    def create(self, request, **kwargs):
-        filename = request.data['filename']
-        print(filename)
-        # filename = 'x.jpg'
-        file = open(filename, 'rb')
-        response = HttpResponse(file, content_type='application/force-download')
-        response['Content-Disposition'] = 'attachment; filename="%s"' % filename
-        return response
-#
-# class X(APIView):
-#     serializer_class = FileNameSerializer
-#
-#     def get(self, request, **kwargs):
-#         # filename = request.data['filename']
-#         # print(filename)
-#         filename = 'x.jpg'
-#         file = open(filename, 'rb')
-#         response = HttpResponse(file, content_type='application/force-download')
-#         response['Content-Disposition'] = 'attachment; filename="%s"' % filename
-#         return response
+    def post(self, request, *args, **kwargs):
+        print("CreateTrip:", "Got Message data:", request.data, sep="\n")
+        trip = BL.createTrip(request.data)
+        serializer = TripSerializer(trip)
+        print("Sent Message data:", serializer.data, sep="\n")
+        return Response(serializer.data)

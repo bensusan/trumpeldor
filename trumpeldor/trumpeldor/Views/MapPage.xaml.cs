@@ -25,14 +25,14 @@ namespace trumpeldor.Views
                 VerticalOptions = LayoutOptions.FillAndExpand
             };
             map.MoveToRegion(MapSpan.FromCenterAndRadius(new Position(31.262820, 34.802352), Distance.FromKilometers(3)).WithZoom(10));
-            List<SheredClasses.TrackPoint> visitedTrackPoints = ((App)(Application.Current)).getGameController().GetVisitedTrackPoints();
-            foreach (SheredClasses.TrackPoint trackPoint in visitedTrackPoints)
+            List<SheredClasses.Attraction> visitedTrackPoints = ((App)(Application.Current)).getGameController().GetVisitedAttractions();
+            foreach (SheredClasses.Attraction attraction in visitedTrackPoints)
             {
                 Pin pin = new Pin
                 {
                     Type = PinType.Place,
-                    Position = new Position(trackPoint.GetLatitude(), trackPoint.GetLongitude()),
-                    Label = trackPoint.GetName(),
+                    Position = new Position(attraction.x, attraction.y),
+                    Label = attraction.name,
                     Address="35"
                 };
                 map.Pins.Add(pin);

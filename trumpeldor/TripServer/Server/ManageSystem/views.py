@@ -1,17 +1,8 @@
-import null
-import random
-
-from rest_framework.utils import json
-
-from ..models import *
-from django.http import JsonResponse, HttpResponse, Http404
+from django.http import JsonResponse, Http404
 
 from rest_framework import generics
 from ..serializers import *
 from rest_framework.views import APIView
-
-from .. import BL
-from django.core import serializers
 
 
 class AmericanQuestion(generics.ListCreateAPIView):     #need to change to Create without list
@@ -32,7 +23,8 @@ class Attraction(APIView):
     def get(self, request, pk, format=None):
         attr = self.get_object(pk)
         serializer = AttractionSerializer(attr)
-        return JsonResponse(serializer.data)
+        return
+
 
     def put(self, request, pk, format=None):
         attr = self.get_object(pk)

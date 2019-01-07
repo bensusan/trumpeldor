@@ -8,7 +8,6 @@
                 VerticalOptions="CenterAndExpand" 
                 HorizontalOptions="CenterAndExpand" />
             <WebView x:Name="w" WidthRequest="1000" HeightRequest="1000"/>
-            <Button Text="short" CommandParameter="1" Clicked="GetFile" Style="{DynamicResource smallButtonStyle}"/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

@@ -29,7 +29,7 @@
             </Grid>
 
             <Button Text="add player" Clicked="Add_Player_Button_Clicked" Style="{StaticResource largeButtonStyle}"/>
-            <Button Text="start game" Clicked="Start_Game_Button_Clicked" x:Name="StartGameButton" Style="{StaticResource largeButtonStyle}"/>
+            <Button Text="start trip" Clicked="Start_Trip_Button_Clicked" x:Name="StartTripButton" Style="{StaticResource largeButtonStyle}"/>
             
             
             

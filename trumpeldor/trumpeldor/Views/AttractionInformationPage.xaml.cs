@@ -10,9 +10,9 @@ using Xamarin.Forms.Xaml;
 namespace trumpeldor.Views
 {
 	[XamlCompilation(XamlCompilationOptions.Compile)]
-	public partial class TrackPointInformationPage : ContentPage
+	public partial class AttractionInformationPage : ContentPage
 	{
-		public TrackPointInformationPage ()
+		public AttractionInformationPage()
 		{
 			InitializeComponent ();
 		}
