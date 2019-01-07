@@ -16,7 +16,8 @@ namespace trumpeldor.Views
     public partial class MapPage : ContentPage
     {
         //fixed point
-        private const double DISTANCE = 30;
+        private GameController gc = ((App)(Application.Current)).getGameController();
+        private const double DESIRED_DISTANCE = 100;
         Point p = new Point(31.262566, 34.796832);
         Pin previous = new Pin();
         //current point
@@ -25,8 +26,8 @@ namespace trumpeldor.Views
         public MapPage()
         {
             InitializeComponent();
-            
 
+            //gc.currentTrip.GetCurrentAttraction().x
             Map map = new Map()
             {
                 HeightRequest = 100,
@@ -58,7 +59,7 @@ namespace trumpeldor.Views
                     OnLocationCheck(previous, map);
 
                     //!((_&&_)||(_&&_))-->!(_&&_) && !(_&&_)
-                    if (DistanceBetween(currLong, currLat, p.X, p.Y) > DISTANCE)
+                    if (DistanceBetween(currLong, currLat, p.X, p.Y) > 100)
                     {
 
                         return true;

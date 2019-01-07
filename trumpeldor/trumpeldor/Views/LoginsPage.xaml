@@ -5,6 +5,7 @@
     <ContentPage.Content>
         <StackLayout>
             <Button Text="login with facebook" Clicked="FacebookLogin_Clicked" Style="{StaticResource largeButtonStyle}"/>
+            <Button Text="anonymus login" Clicked="Anonymus_Clicked" Style="{StaticResource largeButtonStyle}"/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

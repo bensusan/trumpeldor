@@ -30,6 +30,7 @@ namespace trumpeldor
         private bool isFinishTrack;
         private PathLength currentPathLength;
         private TrackPoint currentTrackPointDestination = null;
+        private User currentUser = null;
 
 
         public GameController()
@@ -243,7 +244,8 @@ namespace trumpeldor
 
         public async Task<User> SignUp(string name, string socialNetwork)
         { 
-            return await conn.SignUp(name, socialNetwork); ;
+            currentUser = await conn.SignUp(name, socialNetwork);
+            return currentUser;
         }
 
         public async Task<Stream> GetFile(string filename)

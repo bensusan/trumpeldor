@@ -12,9 +12,11 @@ namespace trumpeldor.Views
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class NavigationPage : ContentPage
 	{
+
 		public NavigationPage ()
 		{
 			InitializeComponent ();
+            //((App)(Application.Current)).getGameController().currentTrip.GetCurrentAttraction()-for the hint
             scoreLabel.Text = "score: " + ((App)(Application.Current)).getGameController().GetScore();
             //mapImage.Source = ImageSource.FromResource("trumpeldor.Resources.MapIcon.png");
             mapImage.Text = "map";

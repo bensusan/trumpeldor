@@ -61,8 +61,7 @@ namespace trumpeldor
 
         public async Task<User> SignUp(String name, String socialNetwork)
         {
-            using (var client = new HttpClient())
-            {
+            
                 // Create a new post  
                 var newUser = new User
                 {
@@ -74,21 +73,19 @@ namespace trumpeldor
                 };
 
 
-                //var content = contentPost(newUser);
+            //var content = contentPost(newUser);
 
-                ////  send a POST request  
-                //var uri = urlPrefix + "signUp/";
-                //var response = await client.PostAsync(uri, content);
+            ////  send a POST request  
+            //var uri = urlPrefix + "signUp/";
+            //var response = await client.PostAsync(uri, content);
 
-                //// on error throw a exception  
-                //response.EnsureSuccessStatusCode();
-                //string responseBody = await response.Content.ReadAsStringAsync();
+            //// on error throw a exception  
+            //response.EnsureSuccessStatusCode();
+            //string responseBody = await response.Content.ReadAsStringAsync();
 
-                string jsonResponse = await SendToServer(client, newUser, "signUp/");
+                string jsonResponse = await SendToServer( newUser, "signUp/");
                 return JsonConvert.DeserializeObject<User>(jsonResponse);
                 // handling an answer maybe in the future  
-
-            }
         }
 
         //public async Task<byte[]> getFile()
@@ -127,17 +124,20 @@ namespace trumpeldor
             return content;
         }
 
-        private async Task<string> SendToServer(HttpClient client, Object toSend, string endOfUri)
+        private async Task<string> SendToServer( Object toSend, string endOfUri)
         {
-            var content = contentPost(toSend);
+            using (var client = new HttpClient())
+            {
+                var content = contentPost(toSend);
 
-            //  send a POST request  
-            var uri = urlPrefix + endOfUri;
-            var response = await client.PostAsync(uri, content);
+                //  send a POST request  
+                var uri = urlPrefix + endOfUri;
+                var response = await client.PostAsync(uri, content);
 
-            // on error throw a exception  
-            response.EnsureSuccessStatusCode();
-            return await response.Content.ReadAsStringAsync();
+                // on error throw a exception  
+                response.EnsureSuccessStatusCode();
+                return await response.Content.ReadAsStringAsync();
+            }
         }
 
         public static async void DownloadAsync(Uri requestUri, string filename)
