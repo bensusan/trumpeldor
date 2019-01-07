@@ -26,7 +26,7 @@ namespace trumpeldor.SheredClasses
 
         internal Attraction GetCurrentAttraction()
         {
-            return attractionsDone[0];
+            return attractionsDone[attractionsDone.Count - 1];
         }
     }
 }

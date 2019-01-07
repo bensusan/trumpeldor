@@ -110,7 +110,7 @@ namespace trumpeldor.Views
                 JObject json = JObject.Parse(userJson);
                 string username = (string)json["name"];
                 string id = (string)json["id"];
-                gc.SignUp(id, "facebook");
+                await gc.SignUp(id, "facebook");
                 //TODO remove next line - just for debug
                 await DisplayAlert("Hey, " + gc.currentUser.name + "!", "", "ok").ContinueWith((a) =>
                     Application.Current.MainPage = new groupCreationPage().ShowPastDetailsAsync());

@@ -12,8 +12,8 @@ namespace trumpeldor
 {
     class ServerConection
     {
-        //private const string IP = "132.72.23.64";
-        public readonly static string IP = "132.72.213.116";
+        public readonly static string IP = "132.72.23.64";
+        //public readonly static string IP = "192.168.43.194";
         public readonly static string PORT = "12345";
         private readonly String urlPrefix = "http://" + IP +":" + PORT + "/usersystem/";
         public ServerConection()
@@ -80,12 +80,6 @@ namespace trumpeldor
             var json = JsonConvert.SerializeObject(obj);
             var content = new StringContent(json, Encoding.UTF8, "application/json");
             return content;
-        }
-
-        internal async Task<Attraction> GetNextAttraction(int tripId)
-        {
-            string jsonResponse = await SendToServerAndGetResponseBack(new { id = tripId}, "getNextAttraction/");
-            return JsonConvert.DeserializeObject<Attraction>(jsonResponse);
         }
 
         private async Task<string> SendToServerAndGetResponseBack(Object toSend, string endOfUri)

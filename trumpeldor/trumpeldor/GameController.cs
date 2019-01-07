@@ -84,8 +84,9 @@ namespace trumpeldor
             var position = await locator.GetPositionAsync(TimeSpan.FromSeconds(10));
             double latitude = position.Latitude;
             double Longitude = position.Longitude;
-           
-            Attraction nextAttraction = await conn.GetNextAttraction(currentTrip.id);
+
+            //Attraction nextAttraction = GetNextAttraction();
+            Attraction nextAttraction = null;
             currentTrip.DoneMyAttraction(nextAttraction);
             if (nextAttraction == null)
                 isFinishTrip = true;
@@ -227,9 +228,10 @@ namespace trumpeldor
             }
         }*/
         
-        public void SignUp(string name, string socialNetwork)
+        public async Task<User> SignUp(string name, string socialNetwork)
         {
-            this.currentUser = conn.SignUp(name, socialNetwork).Result;
+            this.currentUser = await conn.SignUp(name, socialNetwork);
+            return this.currentUser;
         }
     }
 }

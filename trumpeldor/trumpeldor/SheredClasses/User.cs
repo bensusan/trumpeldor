@@ -7,24 +7,12 @@ namespace trumpeldor.SheredClasses
     public class User
     {
         //Has to be
-        internal string name { get; set; }
-        internal string socialNetwork { get; set; }
+        public string name { get; set; }
+        public string socialNetwork { get; set; }
         //internal List<string> playersAges { get; set; }
-        internal String lastSeen { get; set; }
-        internal String email { get; set; }
+        public String lastSeen { get; set; }
+        public String email { get; set; }
         //Maybe to get also if the user is connected recently because different customers will want different settings for that.
 
-        //THIS CONSTRUCTOR IS FOR THE CONNECTION IMPORTANT!!!!!!!!!!!!!!!
-        public User()
-        {
-        }
-
-        public User(string name, string socialNetwork, String lastSeen, string email)
-        {
-            this.name = name;
-            this.socialNetwork = socialNetwork;
-            this.lastSeen = lastSeen;
-            this.email = email;
-        }
     }
 }
