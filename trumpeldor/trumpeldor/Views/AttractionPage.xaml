@@ -1,12 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="trumpeldor.Views.TrackPointPage">
+             x:Class="trumpeldor.Views.AttractionPage">
     <ContentPage.Content>
         <StackLayout>
             <Label x:Name = "scoreLabel" Style="{DynamicResource lableStyle}"/>
-            <Label x:Name = "trackPointName" Style="{DynamicResource lableStyle}"/>
-            <Image x:Name = "trackPointImage" Style="{DynamicResource largeImageStyle}"/>
+            <Label x:Name = "attractionName" Style="{DynamicResource lableStyle}"/>
+            <Image x:Name = "attractionImage" Style="{DynamicResource largeImageStyle}"/>
             <Button x:Name = "informationButton" Text="information" Clicked="Information_Button_Clicked" Style="{StaticResource largeButtonStyle}"/>
             <Button x:Name = "missionButton" Text="mission" Clicked="Mission_Button_Clicked" Style="{StaticResource largeButtonStyle}"/>
             <Button x:Name = "questionButton" Text="question" Clicked="Question_Button_Clicked" Style="{StaticResource largeButtonStyle}"/>

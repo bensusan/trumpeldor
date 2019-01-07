@@ -26,7 +26,7 @@ namespace trumpeldor.Views
         private void Continiue_Button_Clicked(object sender, EventArgs e)
         {
             ((App)Application.Current).getGameController().ContinueToLongerTrack();
-            ((App)Application.Current).getGameController().SelectNextTrackPoint();
+            ((App)Application.Current).getGameController().SelectNextAttraction();
 
             var existingPages = Navigation.NavigationStack.ToList();
             foreach (var page in existingPages)

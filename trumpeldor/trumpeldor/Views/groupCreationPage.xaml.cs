@@ -14,33 +14,56 @@ namespace trumpeldor.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class groupCreationPage : ContentPage
     {
-        
-        private GameController.PathLength selectedPathLength;
-        private User user = null;
+        private GameController gc = ((App)(Application.Current)).getGameController();
+        //private GameController.PathLength selectedPathLength;
+        private int selectedPathLength;
         public groupCreationPage()
         {
             InitializeComponent();
         }
 
+        public ContentPage ShowPastDetailsAsync()
+        {
+            if (gc.IsUserConnectedRecently())
+            {
+                bool dialogAnswer = DisplayAlert("Hey, " + gc.currentUser.name + "!", "Do you want to continue last trip?", "Yes", "No").Result;
+                if (dialogAnswer)
+                    return gc.ContinuePreviousTrip().ContinueWith((trip) => new NavigationPage()).Result;
+                    
+            }
+            KeyValuePair<string, List<int>> ans = gc.LoadRelevantInformationFromLastTrip().Result;
+            //ans is in the form of <groupName, playerAges>
+            groupNameEntry.Text = ans.Key;
+            if (ans.Value != null)
+            {
+                for (int i = 0; i < ans.Value.Count; i++)
+                    AddRowToPlayersGrid(ans.Value[i].ToString());
+            }
+            return this;            
+        }
+
         private void Select_Short_Path_Button_Clicked(object sender, EventArgs e)
         {
             Select_Path_Button_Clicked(sender, e);
-            selectedPathLength = GameController.PathLength.shortPath;
+            //selectedPathLength = GameController.PathLength.shortPath;
+            selectedPathLength = 1;
         }
         private void Select_Medium_Path_Button_Clicked(object sender, EventArgs e)
         {
             Select_Path_Button_Clicked(sender, e);
-            selectedPathLength = GameController.PathLength.mediumPath;
+            //selectedPathLength = GameController.PathLength.mediumPath;
+            selectedPathLength = 2;
         }
         private void Select_Long_Path_Button_Clicked(object sender, EventArgs e)
         {
             Select_Path_Button_Clicked(sender, e);
-            selectedPathLength = GameController.PathLength.longPath;
+            //selectedPathLength = GameController.PathLength.longPath;
+            selectedPathLength = 3;
         }
 
         private void Select_Path_Button_Clicked(object sender, EventArgs e)
         {
-            StartGameButton.IsEnabled = true;
+            StartTripButton.IsEnabled = true;
             int count = lengthButtonGroup.Children.Count;
             View v = null;
             for (int i = 0; i < count; i++)
@@ -51,21 +74,29 @@ namespace trumpeldor.Views
             ((Button)sender).IsEnabled = false;
         }
         
-        private void Add_Player_Button_Clicked(object sender, EventArgs e)
+        private void AddRowToPlayersGrid(String playerAge)
         {
-            
             int nextRow = agesGrid.RowDefinitions.Count;
             agesGrid.RowDefinitions.Add(new RowDefinition { Height = GridLength.Star });
-            Label lbl = new Label { Text = nextRow + ")"};
+            Label lbl = new Label { Text = nextRow + ")" };
             lbl.SetDynamicResource(VisualElement.StyleProperty, "lableStyle");
             agesGrid.Children.Add(lbl, 0, nextRow);
             Entry entry = new Entry { Keyboard = Keyboard.Numeric };
+            if (playerAge != null)
+                entry.Text = playerAge;
             entry.SetDynamicResource(VisualElement.StyleProperty, "entryStyle");
             agesGrid.Children.Add(entry, 1, nextRow);
-
         }
-        private void Start_Game_Button_Clicked(object sender, EventArgs e)
+
+
+        private void Add_Player_Button_Clicked(object sender, EventArgs e)
         {
+            AddRowToPlayersGrid(null);
+        }
+
+        private void Start_Trip_Button_Clicked(object sender, EventArgs e)
+        {
+            String groupName = groupNameEntry.Text;
             List<int> agesList = new List<int>();
             foreach(View child in agesGrid.Children)
             {
@@ -74,31 +105,13 @@ namespace trumpeldor.Views
                     agesList.Add(Int32.Parse(((Entry)child).Text));
                 }
             }
-            String groupName=groupNameEntry.Text;
-
-            ((App)(Application.Current)).getGameController().CreateGroup(groupName,agesList);
-            ((App)(Application.Current)).getGameController().SelectPath(selectedPathLength);
-            ((App)(Application.Current)).getGameController().SelectNextTrackPoint();
-
             var existingPages = Navigation.NavigationStack.ToList();
             foreach (var page in existingPages)
             {
                 Navigation.RemovePage(page);
             }
+            gc.CreateTrip(groupName, agesList, selectedPathLength);
             Application.Current.MainPage = new NavigationPage();
-        }
-
-        private async void SignUpAsync(object sender, EventArgs e)
-        {
-            //TODO
-            string userName = "Amit";
-            string socialNetwork = "Facebook";
-            user = await ((App)(Application.Current)).getGameController().SignUp(userName, socialNetwork);
-            //user = await ansAsync;
-            string welcome = "Welcome";
-            if (user.lastSeen != null && user.lastSeen != "")
-                welcome += " Back";
-            await DisplayAlert("Signed in!", user.name + welcome, "Close");
         }
     }
 }

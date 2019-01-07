@@ -11,117 +11,115 @@ namespace trumpeldor
 {
     public class GameController
     {
-        public enum PathLength
-        {
-            shortPath = 1,
-            mediumPath = 2,
-            longPath = 3
-        }
-        private PathLength GetNextPathLength(PathLength pl)
-        {
-            //problem in longPath
-            return (PathLength)(((int)pl)+1);
-        }
-
+        //TODO MAKE TRIP INSTEAD OF SCORE, GROUPNAME, USER, TRACK
+        public Trip currentTrip = null;
+        public User currentUser = null; //Also will show in Trip object but necessary also.
+        //public enum PathLength { shortPath = 1, mediumPath = 2, longPath = 3 }
         private ServerConection conn;
-        private String groupName;
-        private int score;
-        private Dictionary<TrackPoint,Boolean> destinations;
-        private bool isFinishTrack;
-        private PathLength currentPathLength;
-        private TrackPoint currentTrackPointDestination = null;
-        private User currentUser = null;
+        //private String groupName;
+        //public int score;
+        private Dictionary<Attraction,Boolean> destinations;
+        public bool isFinishTrip;
+        //private PathLength currentPathLength;
+        //public Attraction currentAttractionDestination = null;
+        const int LOGIN_RECENETLY_DIFFERENCE_HOURS = 36; //TODO - Very specific for now
 
+
+        internal int GetScore()
+        {
+            return currentTrip.score;
+        }
+
+        private int GetNextPathLength(int pl)
+        {
+            return pl + 1;
+        }
+
+        public bool IsUserConnectedRecently()
+        {
+            if (currentUser.lastSeen == null)
+                return false;
+            //var hours = (DateTime.Now - (DateTime)currentUser.lastSeen).TotalHours;
+            var hours = 50;
+            return hours <= LOGIN_RECENETLY_DIFFERENCE_HOURS;
+        }
+
+        internal async Task<KeyValuePair<string, List<int>>> LoadRelevantInformationFromLastTrip()
+        {
+            return await conn.LoadRelevantInformationFromLastTrip(currentUser);
+        }
+
+        internal async Task<Trip> ContinuePreviousTrip()
+        {
+            return await conn.GetPreviousTrip(currentUser)
+                .ContinueWith((trip) => this.currentTrip = trip.Result);
+        }
 
         public GameController()
         {
             this.conn = new ServerConection();
-            this.score = 0;
-            destinations = new Dictionary<TrackPoint, bool>();
+            destinations = new Dictionary<Attraction, bool>();
         }
 
-        public void CreateGroup(string groupName, List<int> agesList)
+        public void CreateTrip(string groupName, List<int> playersAges, int trackLength)
         {
-            this.groupName = groupName;
+            currentTrip = conn.CreateTripAsync(currentUser, groupName, playersAges, trackLength, GetUserX(), GetUserY()).Result;
+        }
+
+        private float GetUserY()
+        {
             //TODO
+            throw new NotImplementedException();
         }
 
-        public int GetScore()
+        private float GetUserX()
         {
-            return this.score;
-        }
-
-        public void SelectPath(PathLength selectedPathLength)
-        {
-            List<TrackPoint>newDestinations= new List<TrackPoint>(){new TrackPoint(31.262485, 34.803953),new TrackPoint(31.261930, 34.804132)};
-
             //TODO
-            foreach (TrackPoint dest in newDestinations)
-            {
-                this.destinations.Add(dest,false);
-            }
-            this.isFinishTrack = false;
-            this.currentPathLength = selectedPathLength;
-
-
+            throw new NotImplementedException();
         }
-        public async void SelectNextTrackPoint()
+
+        public async void SelectNextAttraction()
         {
-            
             var locator = CrossGeolocator.Current;
             var position = await locator.GetPositionAsync(TimeSpan.FromSeconds(10));
             double latitude = position.Latitude;
             double Longitude = position.Longitude;
 
-            this.isFinishTrack = true;
-            if (this.currentTrackPointDestination != null)
-            {
-                destinations[this.currentTrackPointDestination] = true;
-            }
-            foreach (TrackPoint tp in destinations.Keys)
-            {
-                if (!destinations[tp]) {
-                    this.currentTrackPointDestination = tp;
-                    this.isFinishTrack = false;
-                    break;
-                }
-            }
-            
-            //SelectNextTrackPointHelper(latitude, Longitude);
-            //TODO 
+            //Attraction nextAttraction = GetNextAttraction();
+            Attraction nextAttraction = null;
+            currentTrip.DoneMyAttraction(nextAttraction);
+            if (nextAttraction == null)
+                isFinishTrip = true;
+
+            //TODO: Trip done - what now
         }
-
         
-
         public Clue GetFisrtHint()
         {
             //TODO
             return new TextClue();
         }
+
         public Clue GetHint()
         {
             //TODO
             return new TextClue();
         }
-        public bool IsCurrentTrackPointHasImage()
+
+        //get y.png for example return http://IP:PORT/media/y.png
+        public string GetImageURLFromName(string pictureName)
         {
-            //TODO
-            return false;
+            return "http://" + ServerConection.IP + ":" + ServerConection.PORT + "/media/" + pictureName;
         }
 
-        public String GetCurrentTrackPointName()
+        public string GetCurrentAttractionImage()
         {
-            return this.currentTrackPointDestination.GetName();
+            return GetImageURLFromName(currentTrip.GetCurrentAttraction().GetMainPictureUrl());
         }
 
-        public Xamarin.Forms.ImageSource GetCurrentTrackPointImage()
+        public bool IsCurrentAttractionHasAR()
         {
-            //TODO
-            return null;
-        }
-        public bool IsCurrentTrackPointHasAR()
-        {
-            //TODO
+            //TODO Iteration 2
             return false;
         }
 
@@ -130,68 +128,58 @@ namespace trumpeldor
             return "some general information";
         }
 
-        public String GetCurrentTrackPointQuestion()
+        public String GetCurrentAttractionQuestion()
         {
             //TODO
             return "choose 1";
         }
-        public bool IsCurrentTrackPointHasQuestionImage()
+
+        public bool IsCurrentAttractionHasQuestionImage()
         {
             //TODO
             return false;
         }
-        public Xamarin.Forms.ImageSource GetCurrentTrackPointQuestionImage()
+
+        public Xamarin.Forms.ImageSource GetCurrentAttractionQuestionImage()
         {
             //TODO
             return null;
         }
 
-        public List<String> GetCurrentTrackPointQuestionAnswers()
+        public List<String> GetCurrentAttractionQuestionAnswers()
         {
             //TODO
             List<string> ans = new List<string>();ans.Add("1"); ans.Add("2"); ans.Add("3"); ans.Add("4");
             return ans;
         }
 
-        public int GetCurrentTrackPointCurrectAnswersToQuestion()
+        public int GetCurrentAttractionCurrectAnswersToQuestion()
         {
             //TODO 
             return 0;
         }
 
-        public bool GetIsFinishTrack()
-        {
-            return this.isFinishTrack;
-        }
-
         public bool CanContinueToLongerTrack()
         {
-            return this.currentPathLength != PathLength.longPath;
+            return currentTrip.track.length != 3;
         }
 
         public void ContinueToLongerTrack()
         {
-            switch (this.currentPathLength)
-            {
-                case PathLength.shortPath:
-                    SelectPath(PathLength.mediumPath);
-                    break;
-                case PathLength.mediumPath:
-                    SelectPath(PathLength.longPath);
-                    break;
-            }
+           
         }
-        public List<TrackPoint> GetVisitedTrackPoints()
+
+        public List<Attraction> GetVisitedAttractions()
         {
-            List<TrackPoint> visitedTrackPoints = new List<TrackPoint>();
-            foreach (TrackPoint trackPoint in destinations.Keys)
+            List<Attraction> visitedAttractions = new List<Attraction>();
+            foreach (Attraction Attraction in destinations.Keys)
             {
-                if (destinations[trackPoint])
+                if (destinations[Attraction])
                 {
-                    visitedTrackPoints.Add(trackPoint);
+                    visitedAttractions.Add(Attraction);
                 }
             }
-            return visitedTrackPoints;
+            return visitedAttractions;
         }
 
 
@@ -213,13 +201,13 @@ namespace trumpeldor
         {
             return deg * (Math.PI / 180);
         }
-        private void SelectNextTrackPointHelper(double latitude, double longitude)
+        private void SelectNextAttractionHelper(double latitude, double longitude)
         {
             double ShortestDistance = double.MaxValue;
-            TrackPoint closestTrackPoint = null;
+            Attraction closestAttraction = null;
 
 
-            foreach (TrackPoint tp in destinations.Keys)
+            foreach (Attraction tp in destinations.Keys)
             {
                 if(!destinations[tp])//we dont visit at tp
                 {
@@ -228,29 +216,22 @@ namespace trumpeldor
                     if(ShortestDistance > distance)
                     {
                         ShortestDistance = distance;
-                        closestTrackPoint = tp;
+                        closestAttraction = tp;
                     }
                 }
             }
-            if (closestTrackPoint == null) { this.isFinishTrack = true; }
+            if (closestAttraction == null) { this.isFinishTrack = true; }
             else
             {
-                this.currentTrackPointDestination = closestTrackPoint;
-                this.destinations[closestTrackPoint] = true;
+                this.currentAttractionDestination = closestAttraction;
+                this.destinations[closestAttraction] = true;
             }
         }*/
-
-
-
+        
         public async Task<User> SignUp(string name, string socialNetwork)
         { 
             currentUser = await conn.SignUp(name, socialNetwork);
             return currentUser;
-        }
-
-        public async Task<Stream> GetFile(string filename)
-        {
-            return await conn.GetFile(filename);
         }
     }
 }
