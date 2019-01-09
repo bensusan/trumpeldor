@@ -7,7 +7,7 @@
             <Label Text="group name:" Style="{StaticResource lableStyle}"/>
             <Entry Placeholder="group name" x:Name="groupNameEntry" Style="{StaticResource entryStyle}"/>
             <Label Text="path length:" Style="{StaticResource lableStyle}"/>
-            <StackLayout x:Name="lengthButtonGroup" Orientation="Horizontal" Style="{DynamicResource mainorStackLayout}">
+            <StackLayout x:Name="lengthButtonGroup" Orientation="Vertical" Style="{DynamicResource mainorStackLayout}">
                 <Button Text="short" CommandParameter="1" Clicked="Select_Short_Path_Button_Clicked" Style="{DynamicResource smallButtonStyle}"/>
                 <Button Text="medium" CommandParameter="2" Clicked="Select_Medium_Path_Button_Clicked" Style="{DynamicResource smallButtonStyle}"/>
                 <Button Text="long" CommandParameter="3" Clicked="Select_Long_Path_Button_Clicked" Style="{DynamicResource smallButtonStyle}"/>

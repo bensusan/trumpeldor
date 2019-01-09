@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="trumpeldor.Views.MidPage">
+    <ContentPage.Content>
+        <StackLayout>
+            <StackLayout x:Name="hintsLayout" Style="{DynamicResource mainorStackLayout}">
+                <Label Text="hints" Style="{DynamicResource lableStyle}"/>
+            </StackLayout>
+            <Button Text="add hint" Clicked="Get_Hint_Button_Clicked" Style="{StaticResource largeButtonStyle}" />
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

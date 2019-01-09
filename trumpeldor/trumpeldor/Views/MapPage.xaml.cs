@@ -17,11 +17,28 @@ namespace trumpeldor.Views
     {
         //fixed point
         private GameController gc = ((App)(Application.Current)).getGameController();
-        private const double DESIRED_DISTANCE = 100;
+        private const double DESIRED_DISTANCE = 30;
+        private const double DESIRED_SECONDS = 10;
         Point p = new Point(31.262566, 34.796832);
-        Pin previous = new Pin();
+        Pin previous = null;
         //current point
         double currLat = 0, currLong = 0;
+
+        public MapPage(Point p)
+        {
+            InitializeComponent();
+            Map map = new Map()
+            {
+                HeightRequest = 100,
+                WidthRequest = 960,
+                VerticalOptions = LayoutOptions.FillAndExpand
+            };
+            map.MoveToRegion(MapSpan.FromCenterAndRadius(new Position(31.262820, 34.802352), Distance.FromKilometers(3)).WithZoom(10));
+            List<SheredClasses.Attraction> visitedTrackPoints = ((App)(Application.Current)).getGameController().GetVisitedAttractions();
+            AddCurrlocationToMap(map);
+            AddPointToMap(map, p);
+            Content = map;
+        }
 
         public MapPage()
         {
@@ -52,21 +69,21 @@ namespace trumpeldor.Views
              Content = map;
             
             //return FromLocA.GetDistanceTo(ToLocB);
-            Device.StartTimer(TimeSpan.FromSeconds(1), () =>
+            Device.StartTimer(TimeSpan.FromSeconds(DESIRED_SECONDS), () =>
             {
                 try
                 {
-                    OnLocationCheck(previous, map);
+                    OnLocationCheck(map);
 
                     //!((_&&_)||(_&&_))-->!(_&&_) && !(_&&_)
-                    if (DistanceBetween(currLong, currLat, p.X, p.Y) > 100)
+                    if (DistanceBetween(currLat, currLong, p.X, p.Y) > DESIRED_DISTANCE)
                     {
-
+                        DisplayAlert("not arrived", DistanceBetween(currLat, currLong, p.X, p.Y).ToString() , "Close");
                         return true;
                     }
                     else
                     {
-                        DisplayAlert("Signed in!", "arrived!", "Close");
+                        DisplayAlert("arrived", "arrived!  "+ DistanceBetween(currLat, currLong, p.X, p.Y).ToString(), "Close");
                         return false;
                     }
                     // True = Repeat again, False = Stop the timer
@@ -95,7 +112,20 @@ namespace trumpeldor.Views
             map.Pins.Add(currLocationPin); 
         }
 
-        private async void OnLocationCheck(Pin prev, Map map)
+
+        private void AddPointToMap(Map map, Point p)
+        {
+            Pin toAdd = new Pin
+            {
+                Type = PinType.Place,
+                Position = new Position(p.X, p.Y),
+                Label = "the attraction"
+            };
+            map.Pins.Add(toAdd);
+        }
+
+
+        private async void OnLocationCheck(Map map)
         {
             //remove from map the previous current location
             //draw on map the current location
@@ -104,19 +134,19 @@ namespace trumpeldor.Views
             //if no-continue check location
             var locator = CrossGeolocator.Current;
             Plugin.Geolocator.Abstractions.Position position = await locator.GetPositionAsync();
-            Pin currLocationPin = new Pin
+            Pin newCurrLocationPin = new Pin
             {
                 Type = PinType.Place,
                 Position = new Position(position.Latitude, position.Longitude),
-                Label = "current location"
+                Label = "current new location"
             };
             currLat = position.Latitude;
             currLong = position.Longitude;
-            previous = currLocationPin;
-            map.Pins.Remove(prev);
-            map.Pins.Add(currLocationPin);
+            map.Pins.Remove(previous);
+            map.Pins.Add(newCurrLocationPin);
+            previous = newCurrLocationPin;
         }
-        private double DistanceBetween(double lat1, double lon1, double lat2, double lon2)//distance in meters
+        public double DistanceBetween(double lat1, double lon1, double lat2, double lon2)//distance in meters
         {
             double R = 6371000; // Radius of the earth in meters
             double dLat = deg2rad(lat2 - lat1);  // deg2rad below
@@ -127,11 +157,11 @@ namespace trumpeldor.Views
               Math.Sin(dLon / 2) * Math.Sin(dLon / 2)
               ;
             double c = 2 * Math.Atan2(Math.Sqrt(a), Math.Sqrt(1 - a));
-            double d = R * c; // Distance in km
+            double d = R * c ; 
             return d;
         }
 
-        private double deg2rad(double deg)
+        public double deg2rad(double deg)
         {
             return deg * (Math.PI / 180);
         }

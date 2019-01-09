@@ -15,22 +15,22 @@ namespace trumpeldor.Views
 
         //((App)(Application.Current)).getGameController().currentTrip.GetCurrentAttraction()-for the hint
 
-        public GameController gc = ((App)Application.Current).getGameController();
+        //public GameController gc = ((App)Application.Current).getGameController();
         public NavigationPage ()
 		{
 			InitializeComponent ();
-            scoreLabel.Text = "score: " + gc.currentTrip.score;
+            scoreLabel.Text = "score: "/* + gc.currentTrip.score*/;
             //mapImage.Source = ImageSource.FromResource("trumpeldor.Resources.MapIcon.png");
             mapImage.Text = "map";
-            SheredClasses.Clue nextClue = gc.GetFisrtHint();
-            nextClue.addToLayout(hintsLayout);
+            //SheredClasses.Clue nextClue = gc.GetFisrtHint();
+            //nextClue.addToLayout(hintsLayout);
         }
 
         private void Get_Hint_Button_Clicked(object sender, EventArgs e)
         {
-            SheredClasses.Clue nextHint=((App)(Application.Current)).getGameController().GetHint();
-            nextHint.addToLayout(hintsLayout);
-            scoreLabel.Text = "score: " + gc.currentTrip.score; 
+            //SheredClasses.Clue nextHint=((App)(Application.Current)).getGameController().GetHint();
+            //nextHint.addToLayout(hintsLayout);
+            //scoreLabel.Text = "score: " + gc.currentTrip.score; 
         }
 
         private void Next_Destination_Button_Clicked(object sender, EventArgs e)

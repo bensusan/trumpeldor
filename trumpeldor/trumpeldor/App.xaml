@@ -28,11 +28,11 @@
             </Style>
 
             <Style x:Key="lableStyle" TargetType="Label" BasedOn="{StaticResource baseViewStyle}">
-                <!--TODO-->
+                <Setter Property="TextColor" Value="Black" />
             </Style>
             
             <Style x:Key="entryStyle" TargetType="Entry" BasedOn="{StaticResource baseViewStyle}">
-                <!--TODO-->
+                <Setter Property="TextColor" Value="Black" />
             </Style>
             <Style x:Key="baseStackLayout" TargetType="StackLayout" BasedOn="{StaticResource baseViewStyle}">
                 <!--TODO-->
