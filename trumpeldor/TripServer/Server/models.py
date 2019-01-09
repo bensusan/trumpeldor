@@ -46,10 +46,6 @@ class AmericanQuestion(models.Model):
 class Entertainment(models.Model):
     attraction = models.ForeignKey(Attraction, on_delete=models.CASCADE)
 
-    class Meta:
-        abstract = True
-        unique_together = (("entertainmentNumber", "myAttraction"),)
-
 
 class FindTheDifferences(Entertainment):
     pictureURL = models.TextField()
