@@ -85,7 +85,7 @@ class FeedbackInstanceSerializer(serializers.ModelSerializer):
     feedback = FeedbackSerializer()
 
     class Meta:
-        fields = ('id', 'feedback', 'answer')
+        fields = ('feedback', 'trip',)
         model = FeedbackInstance
 
 
@@ -112,44 +112,8 @@ class CreateTripSerializer(serializers.ModelSerializer):
     x = serializers.FloatField()
     y = serializers.FloatField()
 
-
 class TestSerializer(serializers.ModelSerializer):
 
     class Meta:
         fields = ('question',)
         model = Feedback
-
-# class FeedbackRatingSerializer(FeedbackInstanceSerializer):
-#     class Meta:
-#         fields = ('rating',)
-#         model = FeedbackRating
-#
-#
-# class FeedbackTextSerializer(FeedbackInstanceSerializer):
-#     class Meta:
-#         fields = ('answer',)
-#         model = FeedbackText
-
-
-# class HintPictureSerializer(serializers.ModelSerializer):
-#     class Meta:
-#         fields = ('picturePath',)
-#         model = HintPicture
-#
-#
-# class HintTextSerializer(serializers.ModelSerializer):
-#     class Meta:
-#         fields = ('text',)
-#         model = HintText
-#
-#
-# class HintVideoSerializer(serializers.ModelSerializer):
-#     class Meta:
-#         fields = ('videoPath',)
-#         model = HintVideo
-#
-#
-# class HintMapSerializer(serializers.ModelSerializer):
-#     class Meta:
-#         fields = ('mapPicturePath',)
-#         model = HintMap

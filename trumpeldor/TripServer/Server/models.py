@@ -7,8 +7,8 @@ class Attraction(models.Model):
     x = models.FloatField()
     y = models.FloatField()
     description = models.TextField()
-    picturesURLS = JSONField()
-    videosURLS = JSONField()
+    picturesURLS = JSONField(blank=True, null=True)
+    videosURLS = JSONField(blank=True, null=True)
 
 
 class User(models.Model):
@@ -48,6 +48,7 @@ class Entertainment(models.Model):
 
     class Meta:
         abstract = True
+        unique_together = (("entertainmentNumber", "myAttraction"),)
 
 
 class FindTheDifferences(Entertainment):
@@ -108,21 +109,3 @@ class Hint(models.Model):
     )
 
     data = models.TextField()
-
-# class HintPicture(Hint):
-#     pass
-#     picturePath = models.TextField()
-#
-#
-# class HintText(Hint):
-#     pass
-#     text = models.TextField()
-#
-#
-# class HintVideo(Hint):
-#     pass
-#     videoPath = models.TextField()
-#
-#
-# class HintMap(Hint):
-#     mapPicturePath = models.TextField()
