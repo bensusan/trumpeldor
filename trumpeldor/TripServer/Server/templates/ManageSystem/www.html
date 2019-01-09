@@ -1,0 +1,200 @@
+<html><head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>HTML5 local video file player example</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="googlebot" content="noindex, nofollow">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+  <script type="text/javascript" src="/js/lib/dummy.js"></script>
+    <link rel="stylesheet" type="text/css" href="/css/normalize.css">
+
+    <link rel="stylesheet" type="text/css" href="/css/result-light.css">
+
+
+  <style id="compiled-css" type="text/css">
+
+body{
+overflow: auto;
+}
+
+.mybackground {
+ background: url("reka.jpg") no-repeat center center fixed;
+  background-size: cover;
+  height: 100%;
+  overflow: hidden;
+}
+
+.info {
+    background-color: aqua;
+}
+
+.error {
+    background-color: red;
+    color: white;
+}
+
+.vid{
+	position:fixed;
+	top:60px;
+	left:400px;
+	width:200px;
+	height:200px;
+}
+
+.sidenav {
+    padding: 20px;
+    width: 200px;
+    position: fixed;
+    z-index: 1;
+    top: 25%;
+    left: 10px;
+
+    overflow-x: hidden;
+    padding-top: 20px;
+}
+
+/* The navigation menu links */
+.sidenav a {
+    padding: 6px 8px 6px 16px;
+    text-decoration: none;
+    border-style: solid;
+    border-width: medium;
+    border-color:#a3c2c2;
+    font-size: 20px;
+    color: #ffcc00;
+    display: block;
+}
+
+/* When you mouse over the navigation links, change their color */
+.sidenav a:hover {
+    background-color: #a3c2c2;
+}
+
+.logo {
+  width: 10px;
+  height: 10px;
+}
+
+.american{
+margin: 5px 5px 10px 15px;
+  position:fixed;
+    top:60px;
+    width:300px;
+	height:300px;
+
+}
+.qqq{
+margin: 5px 5px 10px 15px;
+left:10px;
+    float: right;
+	width:300px;
+	height:150px;
+}
+
+  </style>
+
+
+  <!-- TODO: Missing CoffeeScript 2 -->
+
+  <script type="text/javascript">
+
+
+    window.onload=function(){
+
+(function localFileVideoPlayer() {
+	'use strict'
+  var URL = window.URL || window.webkitURL
+  var displayMessage = function (message, isError) {
+    var element = document.querySelector('#message')
+    element.innerHTML = message
+    element.className = isError ? 'error' : 'info'
+  }
+  var playSelectedFile = function (event) {
+    var file = this.files[0]
+    var type = file.type
+    var videoNode = document.querySelector('video')
+    var canPlay = videoNode.canPlayType(type)
+    if (canPlay === '') canPlay = 'no'
+    var message = 'Can play type "' + type + '": ' + canPlay
+    var isError = canPlay === 'no'
+    displayMessage(message, isError)
+
+    if (isError) {
+      return
+    }
+
+    var fileURL = URL.createObjectURL(file)
+    videoNode.src = fileURL
+
+  }
+  var inputNode = document.querySelector('input')
+  inputNode.addEventListener('change', playSelectedFile, false)
+})()
+
+    }
+
+</script>
+
+</head>
+
+<body class="mybackground">
+
+<!--<select class="selc">-->
+  <!--<option value="222,333">Volvo</option>-->
+  <!--<option value="saab">Saab</option>-->
+  <!--<option value="opel">Opel</option>-->
+  <!--<option value="audi">Audi</option>-->
+<!--</select>-->
+
+
+<h1><u>Track Point Page</u></h1>
+<div class="vid">
+  <h4>Upload a video:</h4>
+  <div id="message"></div>
+<input type="file" accept="video/*">
+<video height="200px" width="350px" controls="" autoplay=""></video>
+</div>
+
+
+  <div class="sidenav">
+    <a href="wwww.html"><img class="logo" src="like.png"> <b>Add Video</b></a>
+      <a href="fff()"><img class="logo" src="like.png"> <b>Add Picture</b></a>
+      <a href="fff()"><img class="logo" src="like.png"> <b>Add Question</b></a>
+      <a href="maintrack.html"><img class="logo" src="like.png"> <b>Paths</b></a>
+    </div>
+    
+
+
+
+<!--<div class="american">-->
+  <!--<label for="qqq"><b>Question:</b></label><input class="qqq" type="text" id="qqq" name="FirstName" placeholder="Your Name.."><br><p></p>-->
+<!--<label for="an1">Ans1:</label><input class="ans" type="text" id="an1" name="LastName" placeholder="Your Name.."><br><p></p>-->
+<!--<label for="an2">Ans2:</label><input class="ans" type="text" id="an2" name="LastName" placeholder="Your Name.."><br><p></p>-->
+<!--<label for="an3">Ans3:</label><input class="ans" type="text" id="an3" name="LastName" placeholder="Your Name.."><br><p></p>-->
+<!--<label for="an4">Ans4:</label><input class="ans" type="text" id="an4" name="LastName" placeholder="Your Name.."><br>-->
+<!--<p></p><input class="ans" type="submit" value="Submit">-->
+  <!--<button onclick="fff()" class="button">tttt</button>-->
+
+<!--</div>-->
+
+
+  <script>
+    // tell the embed parent frame the height of the content
+    if (window.parent && window.parent.parent){
+      window.parent.parent.postMessage(["resultsFrame", {
+        height: 110,
+        slug: "cCCZ2"
+      }], "*")
+    }
+  </script>
+<script>
+function fff() {
+var x = localStorage.getItem("sss");
+        prompt(x);
+}
+</script>
+
+
+</body></html>

@@ -1,0 +1,69 @@
+<!doctype html>
+<html ng-app="exampleApp" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="utf-8">
+    <title>shimon</title>
+
+    <!-- Example for relative path -->
+    <link rel="stylesheet" type="text/css" href="css/example-style.css">
+    <!-- Example for absolute path -->
+    <link rel="stylesheet" type="text/css" href="/shared/css/scroll-to-top.css">
+    <link rel="stylesheet" type="text/css" href="css/header.css">
+
+</head>
+
+<style type="text/css">
+
+.mybackground {
+ background: url("../shared/images/backim.jpg") no-repeat center center fixed;
+  background-size: cover;
+  height: 100%;
+  overflow: hidden;
+
+}
+
+.submit{
+position:fixed;
+top:100px;
+left:500px;
+}
+
+</style>
+
+
+
+<body class="mybackground">  
+
+
+<!--<div class="submit">-->
+<!--<h4>First name:</h4><input type="text" id="fname" name="FirstName" value="Username"><br>-->
+ <!--<h4>Last name:</h4><input type="text" id="lname" name="LastName" value="Password"><br>-->
+   <!--<p> </p>  <button onclick="myFunction()">Submit</button>-->
+<!--</div>-->
+
+<div class="submit">
+<h4>First name:</h4><input type="text" id="fname" name="FirstName" placeholder="Your Name.."><br>
+ <h4>Last name:</h4><input type="text" id="lname" name="LastName" placeholder="Your Last Name.."><br>
+   <p> </p>  <button onclick="myFunction()">Submit</button>
+</div>
+
+<p id="demo"></p>
+<iframe width="100%" height="10" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/303123526&color=%23ff5500&auto_play=true&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true"></iframe>
+</div>
+
+<script>
+function myFunction() {
+    var fname=document.getElementById("fname").value;
+    var lname=document.getElementById("lname").value
+        if(fname=="admin"&& lname=="1234")
+            window.location = "map.html";
+        else
+           document.getElementById("demo").innerHTML = "wrong password or username!";
+}
+</script>
+
+</body>
+
+
+
+</html>

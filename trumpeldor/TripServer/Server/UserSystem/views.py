@@ -45,42 +45,31 @@ class Hint(generics.RetrieveAPIView):
         serializer = HintSerializer(hint)
         return HttpResponse(serializer.data)
 
+
 class GetClass(generics.ListAPIView):
     def get(self, request, *args, **kwargs):
         return Response(status=status.HTTP_200_OK)
+
 
 class SignUp(generics.GenericAPIView):
     serializer_class = UserSerializer
 
     def post(self, request, *args, **kwargs):
+        print("SignUp:", "Got Message data:", request.data, sep="\n")
         user = BL.getUser(request.data)
         if user is None:
-            seri = UserSerializer(data=request.data)
-            if seri.is_valid():
-                seri.save()
+            serializer = UserSerializer(data=request.data)
+            if serializer.is_valid():
+                serializer.save()
                 user = BL.getUser(request.data)
-                seri2 = UserSerializer(user)
-                return Response(seri2.data)
-            print("Bug in SignUp method")
-            return JsonResponse({'ok': 'False'})
-            # return JsonResponse(seri.data)
-        seri = UserSerializer(user)
-        return Response(seri.data)
+            else:
+                print("Bug in SignUp method")
+                raise Http404
 
-    def get(self, request, *args, **kwargs):
-        return Response(status=status.HTTP_200_OK)
+        serializer = UserSerializer(user)
+        print("SignUp:", "Sent Message data:", serializer.data, sep="\n")
+        return Response(serializer.data)
 
-
-# class FileView(APIView):
-#     parser_classes = (MultiPartParser, FormParser)
-#
-#     def post(self, request, *args, **kwargs):
-#         file_serializer = FileSerializer(data=request.data)
-#         if file_serializer.is_valid():
-#             file_serializer.save()
-#             return Response(file_serializer.data, status=status.HTTP_201_CREATED)
-#         else:
-#             return Response(file_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 class GetTrack(generics.RetrieveAPIView):
     serializer_class = TrackSerializer
@@ -96,26 +85,16 @@ class GetTrack(generics.RetrieveAPIView):
             raise Http404
 
 
-class GetFile(generics.CreateAPIView):
-    serializer_class = FileNameSerializer
+class PreviousTrip(generics.GenericAPIView):
+    serializer_class = UserSerializer
 
-    def create(self, request, **kwargs):
-        filename = request.data['filename']
-        print(filename)
-        # filename = 'x.jpg'
-        file = open(filename, 'rb')
-        response = HttpResponse(file, content_type='application/force-download')
-        response['Content-Disposition'] = 'attachment; filename="%s"' % filename
-        return response
-#
-# class X(APIView):
-#     serializer_class = FileNameSerializer
-#
-#     def get(self, request, **kwargs):
-#         # filename = request.data['filename']
-#         # print(filename)
-#         filename = 'x.jpg'
-#         file = open(filename, 'rb')
-#         response = HttpResponse(file, content_type='application/force-download')
-#         response['Content-Disposition'] = 'attachment; filename="%s"' % filename
-#         return response
+    def post(self, request, *args, **kwargs):
+        print("PreviousTrip:", "Got Message data:", request.data, sep="\n")
+        trip = BL.getPreviousUserTrip(request.data)
+        if trip is None:
+            print("Bug in PreviousTrip method (Trip does not exist)")
+            raise Http404
+
+        serializer = TripSerializer(trip)
+        print("PreviousTrip:", "Sent Message data:", serializer.data, sep="\n")
+        return Response(serializer.data)
