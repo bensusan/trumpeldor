@@ -6,18 +6,14 @@ namespace trumpeldor.SheredClasses
 {
     public class Trip
     {
-        internal int id { get; set; }
-        internal User user { get; set; }
-        internal string groupName { get; set; }
-        internal List<int> playersAges { get; set; }
-        internal int score { get; set; }
-        internal Track track { get; set; }  //TODO: need to think how we wont save so much information in the user's phone
-        //internal Attraction nextAttraction { get; set; }
-        internal List<Attraction> attractionsDone { get; set; } //TODO: need to think how we wont save so much information in the user's phone
-
-        public Trip()
-        {
-        }
+        public int id { get; set; }
+        public User user { get; set; }
+        public string groupName { get; set; }
+        public List<int> playersAges { get; set; }
+        public int score { get; set; }
+        public Track track { get; set; }
+        public List<Attraction> attractionsDone { get; set; }
+        public List<FeedbackInstance> feedbacks { get; set; }
 
         internal void DoneMyAttraction(Attraction nextAttraction)
         {

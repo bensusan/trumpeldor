@@ -24,4 +24,5 @@ urlpatterns = [
     path('managementsystem/', include('Server.ManageSystem.urls')),
     path('usersystem/', include('Server.UserSystem.urls')),
     url(r'^media/(?P<path>.*)$', serve, {'document_root': settings.MEDIA_ROOT,}),
+
 ]

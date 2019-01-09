@@ -112,8 +112,10 @@ namespace trumpeldor.Views
                 string id = (string)json["id"];
                 await gc.SignUp(id, "facebook");
                 //TODO remove next line - just for debug
-                await DisplayAlert("Hey, " + gc.currentUser.name + "!", "", "ok").ContinueWith((a) =>
-                    Application.Current.MainPage = new groupCreationPage().ShowPastDetailsAsync());
+                await DisplayAlert("Hey, " + gc.currentUser.name + "!", "", "ok");
+                ContentPage nextPage = new groupCreationPage();
+                nextPage = await ((groupCreationPage)nextPage).ShowPastDetailsAsync();
+                Application.Current.MainPage = nextPage;
             }
             catch (Exception e)
             {

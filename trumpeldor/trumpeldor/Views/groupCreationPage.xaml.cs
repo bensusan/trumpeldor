@@ -22,16 +22,17 @@ namespace trumpeldor.Views
             InitializeComponent();
         }
 
-        public ContentPage ShowPastDetailsAsync()
+        public async Task<ContentPage> ShowPastDetailsAsync()
         {
             if (gc.IsUserConnectedRecently())
             {
                 bool dialogAnswer = DisplayAlert("Hey, " + gc.currentUser.name + "!", "Do you want to continue last trip?", "Yes", "No").Result;
-                if (dialogAnswer)
-                    return gc.ContinuePreviousTrip().ContinueWith((trip) => new NavigationPage()).Result;
-                    
+                if (dialogAnswer) {
+                    await gc.ContinuePreviousTrip();
+                    return new NavigationPage();
+                }    
             }
-            KeyValuePair<string, List<int>> ans = gc.LoadRelevantInformationFromLastTrip().Result;
+            KeyValuePair<string, List<int>> ans = await gc.LoadRelevantInformationFromLastTrip();
             //ans is in the form of <groupName, playerAges>
             groupNameEntry.Text = ans.Key;
             if (ans.Value != null)
@@ -94,7 +95,7 @@ namespace trumpeldor.Views
             AddRowToPlayersGrid(null);
         }
 
-        private void Start_Trip_Button_Clicked(object sender, EventArgs e)
+        private async void Start_Trip_Button_Clicked(object sender, EventArgs e)
         {
             String groupName = groupNameEntry.Text;
             List<int> agesList = new List<int>();
@@ -110,7 +111,7 @@ namespace trumpeldor.Views
             {
                 Navigation.RemovePage(page);
             }
-            gc.CreateTrip(groupName, agesList, selectedPathLength);
+            await gc.CreateTrip(groupName, agesList, selectedPathLength);
             Application.Current.MainPage = new NavigationPage();
         }
     }

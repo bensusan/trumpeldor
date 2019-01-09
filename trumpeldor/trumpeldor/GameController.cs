@@ -49,10 +49,9 @@ namespace trumpeldor
             return await conn.LoadRelevantInformationFromLastTrip(currentUser);
         }
 
-        internal async Task<Trip> ContinuePreviousTrip()
+        internal async Task ContinuePreviousTrip()
         {
-            return await conn.GetPreviousTrip(currentUser)
-                .ContinueWith((trip) => this.currentTrip = trip.Result);
+            this.currentTrip = await conn.GetPreviousTrip(currentUser);
         }
 
         public GameController()
@@ -61,21 +60,21 @@ namespace trumpeldor
             destinations = new Dictionary<Attraction, bool>();
         }
 
-        public void CreateTrip(string groupName, List<int> playersAges, int trackLength)
+        public async Task CreateTrip(string groupName, List<int> playersAges, int trackLength)
         {
-            currentTrip = conn.CreateTripAsync(currentUser, groupName, playersAges, trackLength, GetUserX(), GetUserY()).Result;
+            currentTrip = await conn.CreateTripAsync(currentUser, groupName, playersAges, trackLength, GetUserX(), GetUserY());
         }
 
         private float GetUserY()
         {
             //TODO
-            throw new NotImplementedException();
+            return 0;
         }
 
         private float GetUserX()
         {
             //TODO
-            throw new NotImplementedException();
+            return 0;
         }
 
         public async void SelectNextAttraction()
@@ -228,10 +227,9 @@ namespace trumpeldor
             }
         }*/
         
-        public async Task<User> SignUp(string name, string socialNetwork)
-        { 
-            currentUser = await conn.SignUp(name, socialNetwork);
-            return currentUser;
+        public async Task SignUp(string name, string socialNetwork)
+        {
+            this.currentUser = await conn.SignUp(name, socialNetwork);
         }
     }
 }

@@ -1,18 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-
-
-using Newtonsoft.Json;
 
 namespace trumpeldor.SheredClasses
 {
-    public class FeedBack
+    public class Feedback
     {
-        [JsonProperty("questions")]
-        public String Question { get; set; }
+        public int id { get; set; }
+        public string question { get; set; }
+        public string kind { get; set; }
+        
     }
 }
-
-
