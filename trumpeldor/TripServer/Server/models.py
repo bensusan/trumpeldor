@@ -2,10 +2,8 @@ from django.db import models
 from django.contrib.postgres.fields import JSONField
 
 
-# Create your models here.
 class Attraction(models.Model):
-    # pointNumber = models.AutoField(primary_key=True)
-    name = models.TextField(default='fake')
+    name = models.TextField()
     x = models.FloatField()
     y = models.FloatField()
     description = models.TextField()
@@ -16,47 +14,40 @@ class Attraction(models.Model):
 class User(models.Model):
     name = models.TextField()
     socialNetwork = models.TextField()
-    # playersAges = JSONField(null=True)
     lastSeen = models.DateTimeField(blank=True, null=True)
-    email = models.EmailField(blank=True, null=True) # To send user notifications in the mail
+    email = models.TextField(blank=True, null=True) # To send user notifications in the mail
 
     class Meta:
         unique_together = (("name", "socialNetwork"),)
 
 
 class Track(models.Model):
-    # trackNumber = models.AutoField(primary_key=True)
     subTrack = models.ForeignKey('Track', on_delete=models.CASCADE, blank=True, null=True)
     points = models.ManyToManyField(Attraction)
     length = models.IntegerField()
 
 
 class Trip(models.Model):
-    # TripNumber = models.AutoField(primary_key=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    groupName = models.TextField(default='fake')
+    groupName = models.TextField()
     playersAges = JSONField(null=True)
     score = models.IntegerField(default=0)
     track = models.ForeignKey(Track, on_delete=models.CASCADE)
-    # nextAttraction = models.ForeignKey(Attraction, on_delete=models.CASCADE, blank=True, null=True)
     attractionsDone = models.ManyToManyField(Attraction)    # First Attraction is the current attraction!!!!
 
 
 class AmericanQuestion(models.Model):
-    # americanQuestionNumber = models.AutoField(primary_key=True)
     question = models.TextField()
     answers = JSONField()  # Should be list of String
     indexOfCorrectAnswer = models.IntegerField()
-    myAttraction = models.OneToOneField(Attraction, on_delete=models.CASCADE)  # null=True for migrations. need to think about it
+    attraction = models.ForeignKey(Attraction, on_delete=models.CASCADE)
 
 
 class Entertainment(models.Model):
-    entertainmentNumber = models.AutoField(primary_key=True)
-    myAttraction = models.OneToOneField(Attraction, on_delete=models.CASCADE) # null=True for migrations. need to think about it
+    attraction = models.ForeignKey(Attraction, on_delete=models.CASCADE)
 
     class Meta:
         abstract = True
-        unique_together = (("entertainmentNumber", "myAttraction"),)
 
 
 class FindTheDifferences(Entertainment):
@@ -73,30 +64,32 @@ class SlidingPuzzle(Entertainment):
 
 
 class Feedback(models.Model):
-    questionNumber = models.AutoField(primary_key=True)
     question = models.TextField()
+
+    FEEDBACK_TEXT = 'FT'
+    FEEDBACK_RATING = 'FR'
+    FEEDBACK_KIND = (
+        (FEEDBACK_TEXT, 'FeedbackText'),
+        (FEEDBACK_RATING, 'FeedbackRating'),
+    )
+    kind = models.CharField(
+        max_length=2,
+        choices=FEEDBACK_KIND,
+        default=FEEDBACK_TEXT,
+    )
 
 
 class FeedbackInstance(models.Model):
-    questionNumber = models.ForeignKey(Feedback, on_delete=models.CASCADE)
-    trip = models.ForeignKey(Trip, on_delete=models.CASCADE) # null=True for migrations. need to think about it
+    feedback = models.ForeignKey(Feedback, on_delete=models.CASCADE)
+    trip = models.ForeignKey(Trip, on_delete=models.CASCADE)
+    answer = models.TextField()
 
     class Meta:
-        abstract = True
-        unique_together = (("questionNumber", "trip"),)
-
-
-class FeedbackRating(FeedbackInstance):
-    rating = models.IntegerField()
-
-
-class FeedbackText(FeedbackInstance):
-    answer = models.TextField()
+        unique_together = (("feedback", "trip"),)
 
 
 class Hint(models.Model):
-    hintNumber = models.AutoField(primary_key=True)
-    myAttraction = models.ForeignKey(Attraction, on_delete=models.CASCADE)
+    attraction = models.ForeignKey(Attraction, on_delete=models.CASCADE)
 
     HINT_TEXT = 'HT'
     HINT_PICTURE = 'HP'
@@ -115,11 +108,6 @@ class Hint(models.Model):
     )
 
     data = models.TextField()
-
-    class Meta:
-        unique_together = (("hintNumber", "myAttraction"),)
-        # abstract = True
-
 
 # class HintPicture(Hint):
 #     pass

@@ -2,9 +2,21 @@ from rest_framework import serializers
 from .models import *
 
 
+class AmericanQuestionSerializer(serializers.ModelSerializer):
+    class Meta:
+        fields = ('id', 'question', 'answers', 'indexOfCorrectAnswer')
+        model = AmericanQuestion
+
+
+class HintSerializer(serializers.ModelSerializer):
+    class Meta:
+        fields = ('id', 'kind', 'data',)
+        model = Hint
+
+
 class AttractionSerializer(serializers.ModelSerializer):
     class Meta:
-        fields = ('name', 'x', 'y', 'description', 'picturesURLS', 'videosURLS',)
+        fields = ('id', 'name', 'x', 'y', 'description', 'picturesURLS', 'videosURLS',)
         model = Attraction
 
 
@@ -15,75 +27,108 @@ class UserSerializer(serializers.ModelSerializer):
 
 
 class TrackSerializer(serializers.ModelSerializer):
+    subTrack = serializers.SerializerMethodField()
+    points = AttractionSerializer(many=True)
+
     class Meta:
-        fields = ('subTrack', 'points', 'length',)
+        fields = ('id', 'subTrack', 'points', 'length',)
         model = Track
+
+    def get_subTrack(self, obj):
+        if obj.subTrack is not None:
+            return TrackSerializer(obj.subTrack).data
+        else:
+            return None
 
 
 class TripSerializer(serializers.ModelSerializer):
+    user = UserSerializer()
+    track = TrackSerializer()
+    attractionsDone = AttractionSerializer(many=True)
+
     class Meta:
-        fields = ('user', 'groupName', 'playersAges', 'score', 'track', 'attractionsDone')
+        fields = ('id', 'user', 'groupName', 'playersAges', 'score', 'track', 'attractionsDone')
         model = Trip
-
-
-class AmericanQuestionSerializer(serializers.ModelSerializer):
-    class Meta:
-        fields = ('question', 'answers', 'indexOfCorrectAnswer', 'myAttraction',)
-        model = AmericanQuestion
 
 
 class EntertainmentSerializer(serializers.ModelSerializer):
     class Meta:
-        fields = ('entertainmentNumber', 'myAttraction',)
+        fields = ('id', 'attraction',)
         model = Entertainment
 
 
 class FindTheDifferencesSerializer(EntertainmentSerializer):
     class Meta:
-        fields = ('pictureURL', 'differences',)
+        fields = ('id', 'pictureURL', 'differences',)
         model = FindTheDifferences
 
 
 class PuzzleSerializer(EntertainmentSerializer):
     class Meta:
-        fields = ('pictureURL',)
+        fields = ('id', 'pictureURL',)
         model = Puzzle
 
 
 class SlidingPuzzleSerializer(EntertainmentSerializer):
     class Meta:
-        fields = ('piecesURLS',)
+        fields = ('id', 'piecesURLS',)
         model = SlidingPuzzle
 
 
 class FeedbackSerializer(serializers.ModelSerializer):
     class Meta:
-        fields = ('questionNumber', 'question',)
+        fields = ('id', 'question', 'kind',)
         model = Feedback
 
 
 class FeedbackInstanceSerializer(serializers.ModelSerializer):
+    feedback = FeedbackSerializer()
+
     class Meta:
-        fields = ('questionNumber', 'trip',)
+        fields = ('id', 'feedback', 'answer')
+        model = FeedbackInstance
+
+
+class SignUpSerializer(serializers.ModelSerializer):
+    class Meta:
+        fields = ('name', 'socialNetwork',)
+        model = User
+
+
+class GetRelevantPreviousTripInformationSerializer(serializers.ModelSerializer):
+    class Meta:
+        fields = ('groupName', 'playersAges',)
+        model = Trip
+
+
+class CreateTripSerializer(serializers.ModelSerializer):
+    user = UserSerializer()
+
+    class Meta:
+        fields = ('groupName', 'playersAges')
+        model = Trip
+
+    trackLength = serializers.IntegerField()
+    x = serializers.FloatField()
+    y = serializers.FloatField()
+
+
+class TestSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        fields = ('question',)
         model = Feedback
 
-
-class FeedbackRatingSerializer(FeedbackInstanceSerializer):
-    class Meta:
-        fields = ('rating',)
-        model = FeedbackRating
-
-
-class FeedbackTextSerializer(FeedbackInstanceSerializer):
-    class Meta:
-        fields = ('answer',)
-        model = FeedbackText
-
-
-class HintSerializer(serializers.ModelSerializer):
-    class Meta:
-        fields = ('hintNumber', 'myAttraction', 'kind', 'data',)
-        model = Hint
+# class FeedbackRatingSerializer(FeedbackInstanceSerializer):
+#     class Meta:
+#         fields = ('rating',)
+#         model = FeedbackRating
+#
+#
+# class FeedbackTextSerializer(FeedbackInstanceSerializer):
+#     class Meta:
+#         fields = ('answer',)
+#         model = FeedbackText
 
 
 # class HintPictureSerializer(serializers.ModelSerializer):
@@ -108,25 +153,3 @@ class HintSerializer(serializers.ModelSerializer):
 #     class Meta:
 #         fields = ('mapPicturePath',)
 #         model = HintMap
-
-
-class SignUpSerializer(serializers.ModelSerializer):
-    class Meta:
-        fields = ('name', 'socialNetwork',)
-        model = User
-
-
-class GetRelevantPreviousTripInformationSerializer(serializers.ModelSerializer):
-    class Meta:
-        fields = ('groupName', 'playersAges',)
-        model = Trip
-
-
-class CreateTripSerializer(serializers.ModelSerializer):
-    class Meta:
-        fields = ('user', 'groupName', 'playersAges')
-        model = Trip
-
-    trackLength = models.IntegerField()
-    x = models.FloatField()
-    y = models.FloatField()

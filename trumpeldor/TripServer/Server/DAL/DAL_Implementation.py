@@ -11,10 +11,10 @@ class DAL_Implementation(DAL_Abstract):
         return Trip.objects.filter(user=self.getUser(name, socialNetwork)).last()
 
     def getTrackById(self, trackId):
-        return Track.objects.filter(id=trackId)
+        return Track.objects.filter(id=trackId).first()
 
     def getTracksWithSameLength(self, trackLength):
-        return Track.objects.filter(length=trackLength)
+        return Track.objects.filter(length=trackLength).all()
 
     def createTrip(self, user, groupName, playersAges, track, attraction):
         trip = Trip(user=user, groupName=groupName, playersAges=playersAges, track=track)
@@ -30,28 +30,17 @@ class DAL_Implementation(DAL_Abstract):
         user.save()
         return user
 
+    def getHints(self, attraction):
+        return Hint.objects.filter(attraction=attraction).all()
 
-# def getUser(name, socialNetwork):
-#     return User.objects.filter(name=name, socialNetwork=socialNetwork).first()
+    def getFeedbacks(self, trip):
+        return FeedbackInstance.objects.filter(trip=trip).all()
 
+    def getAmericanQuestion(self, attraction):
+        return AmericanQuestion.objects.filter(attraction=attraction).first()
 
-# def getPreviousTripByUser(name, socialNetwork):
-#     return Trip.objects.filter(user=getUser(name, socialNetwork)).last()
+    def getAttraction(self, attrId):
+        return Attraction.objects.filter(id=attrId).first()
 
-
-# def getAttractionById(attractionId):
-#     return Attraction.objects.filter(id=attractionId)
-
-
-# def getTrackById(trackId):
-#     return Track.objects.filter(id=trackId)
-
-
-# def getTracksWithSameLength(trackLength):
-#     return Track.objects.filter(length=trackLength)
-
-
-# def createTrip(user, groupName, playersAges, track, attraction):
-#     trip = Trip(user=user, groupName=groupName, playersAges=playersAges, track=track, nextAttraction=attraction)
-#     trip.save()
-#     return trip
+    def getTrip(self, tripId):
+        return Trip.objects.filter(id=tripId).first()

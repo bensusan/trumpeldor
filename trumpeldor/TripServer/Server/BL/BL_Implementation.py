@@ -1,6 +1,17 @@
-import math
+from math import *
 from .BL import BL_Abstract
 from Server.DAL.DAL import DALProxy
+from Server.serializers import *
+from Server.models import *
+
+
+def getDistance(lat1, lon1, lat2, lon2):
+    def haversin(x):
+        return sin(x /  2) ** 2
+
+    return 2 * asin(sqrt(
+        haversin(lat2 - lat1) +
+        cos(lat1) * cos(lat2) * haversin(lon2 - lon1)))
 
 
 class BL_Implementation(BL_Abstract):
@@ -27,15 +38,15 @@ class BL_Implementation(BL_Abstract):
 
     def getAllAttractionsFromTrack(self, track):
         if track.subTrack is None:
-            return track.points
-        return track.points + self.getAllAttractionsFromTrack(track.subTrack)
+            return track.points.all()
+        return track.points.all() + self.getAllAttractionsFromTrack(track.subTrack)
 
     def getClosestAttractionFromTrack(self, track, xUser, yUser):
         allAttractions = self.getAllAttractionsFromTrack(track)
 
-        minAttraction, minDist = None, math.inf()
+        minAttraction, minDist = None, inf
         for attraction in allAttractions:
-            dist = math.hypot(attraction['x'] - xUser, attraction['y'] - yUser)  # Calculate distance
+            dist = getDistance(attraction.x, attraction.y, xUser, yUser)  # Calculate distance
             if minDist > dist:
                 minDist = dist
                 minAttraction = attraction
@@ -45,7 +56,7 @@ class BL_Implementation(BL_Abstract):
     def getTrackAndNextAttractionByLengthAndUserLocation(self, trackLength, xUser, yUser):
         tracks = self.DAL.getTracksWithSameLength(trackLength)
 
-        minTrack, minAttraction, minDist = None, None, math.inf()
+        minTrack, minAttraction, minDist = None, None, inf
         for track in tracks:
             attraction, dist = self.getClosestAttractionFromTrack(track, xUser, yUser)
             if minDist > dist:
@@ -59,66 +70,26 @@ class BL_Implementation(BL_Abstract):
             raise RuntimeError("No tracks in system")
         if attraction is None:
             raise RuntimeError("Tracks are empty")
-        trip = self.DAL.createTrip(data['user'], data['groupName'], data['playersAges'], track, attraction)
-        return trip
+        user = self.getUser(data['user'])
+        return self.DAL.createTrip(user, data['groupName'], data['playersAges'], track, attraction)
 
     def createUser(self, data):
         return self.DAL.createUser(data['name'], data['socialNetwork'])
 
-# def getUser(user):
-#     return DAL.getUser(user['name'], user['socialNetwork'])
+    def getHints(self, attraction):
+        attr = self.getAttraction(attraction)
+        return self.DAL.getHints(attr)
 
+    def getFeedbacks(self, trip):
+        trip = self.getTrip(trip)
+        return self.DAL.getFeedbacks(trip)
 
-# def getPreviousUserTrip(user):
-#     return DAL.getPreviousTripByUser(user['name'], user['socialNetwork'])
+    def getAmericanQuestion(self, attraction):
+        attr = self.getAttraction(attraction)
+        return self.DAL.getAmericanQuestion(attr)
 
+    def getAttraction(self, attraction):
+        return self.DAL.getAttraction(attraction['id'])
 
-# def getRelevantPreviousTripInformation(user):
-#     trip = getPreviousUserTrip(user)
-#     if trip is not None:
-#         return {'groupName': trip.groupName, 'playersAges': trip.playersAges}
-#     return trip
-
-
-# def getAllAttractionsIdsFromTrack(track):
-#     attractionsIds = []
-#     while track is not None:
-#         attractionsIds += track['points']
-#         track = DAL.getTrackById(track['subTrack'])
-#     return attractionsIds
-
-
-# def getClosestAttractionIdFromTrack(track, xUser, yUser):
-#     allAttractionsIds = getAllAttractionsIdsFromTrack(track)
-#     minAttractionId, minDist = -1, math.inf()
-#
-#     for attractionId in allAttractionsIds:
-#         attraction = DAL.getAttractionById(attractionId)
-#         dist = math.hypot(attraction['x'] - xUser, attractionId['y'] - yUser)   # Calculate distance
-#         if minDist > dist:
-#             minDist = dist
-#             minAttractionId = attractionId
-#     return minAttractionId, minDist
-
-
-# def getTrackAndNextAttractionByLengthAndUserLocation(trackLength, xUser, yUser):
-#     tracks = DAL.getTracksWithSameLength(trackLength)
-#
-#     minTrack = None
-#     minAttractionId = None
-#     minDist = math.inf()
-#     for track in tracks:
-#         attractionId, dist = getClosestAttractionIdFromTrack(track, xUser, yUser)
-#         if minDist > dist:
-#             minDist = dist
-#             minAttractionId = attractionId
-#             minTrack = track
-#     if minAttractionId is None:
-#         raise RuntimeError
-#     return minTrack, minAttractionId
-
-
-# def createTrip(data):
-#     track, attractionId = getTrackAndNextAttractionByLengthAndUserLocation(data['trackLength'], data['x'], data['y'])
-#     attraction = DAL.getAttractionById(attractionId)
-#     return DAL.createTrip(data['user'], data['groupName'], data['playersAges'], track, attraction)
+    def getTrip(self, trip):
+        return self.DAL.getTrip(trip['id'])

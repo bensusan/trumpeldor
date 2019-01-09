@@ -4,9 +4,11 @@ using System.Text;
 
 namespace trumpeldor.SheredClasses
 {
-    class Hint
+    public class Hint
     {
-        public string hintNumber { get; set; }
+        public int id { get; set; }
+        public string kind { get; set; }
+        public string data { get; set; }
 
     }
 }

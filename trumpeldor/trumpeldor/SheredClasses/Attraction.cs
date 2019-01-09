@@ -6,17 +6,15 @@ namespace trumpeldor.SheredClasses
 {
     public class Attraction
     {
-        internal int id { get; set; }
-        internal string name { get; set; }
-        internal float x { get; set; }
-        internal float y { get; set; }
-        internal String description { get; set; }
-        internal List<string> picturesURLS { get; set; }
-        internal List<string> videosURLS { get; set; }
-
-        public Attraction()
-        {
-        }
+        public int id { get; set; }
+        public string name { get; set; }
+        public float x { get; set; }
+        public float y { get; set; }
+        public String description { get; set; }
+        public List<string> picturesURLS { get; set; }
+        public List<string> videosURLS { get; set; }
+        public List<Hint> hints { get; set; }
+        public AmericanQuestion americanQuestion { get; set; }
 
         internal string GetMainPictureUrl()
         {

@@ -6,13 +6,10 @@ namespace trumpeldor.SheredClasses
 {
     public class Track
     {
-        internal int id { get; set; }
-        internal Track subTrack { get; set; }
-        internal List<Attraction> pointsNumber { get; set; }
-        internal int length { get; set; }
+        public int id { get; set; }
+        public Track subTrack { get; set; }
+        public List<Attraction> points { get; set; }
+        public int length { get; set; }
 
-        public Track()
-        {
-        }
     }
 }
