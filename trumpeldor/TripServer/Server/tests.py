@@ -26,7 +26,7 @@ class SimpleTestForAttractions(unittest.TestCase):
         self.assertEqual(response.status_code, 200)
 
         # Issue a GET request.
-        response = self.client.post('/managementsystem/attractions/', {'name': 'de vinchi', 'x': '32.1111', 'y': '23.43433', 'description' :'need to work harder',
+        response = self.client.post('/managementsystem/attractions/', {'name': 'de vinchi', 'x': '32.1111', 'y': '23.43433', 'description':'bla bla',
                                                                        'picturesURLS': '{}', 'videosURLS': '{}'})
 
         # Check that the response is 200 OK.
@@ -79,7 +79,7 @@ class SimpleTestForAQ(unittest.TestCase):
 
         response = self.client.post('/managementsystem/attractions/',
                                     {'name': 'de vinchi', 'x': '32.1111', 'y': '23.43433',
-                                     'description': 'need to work harder',
+                                     'description': 'bla bla',
                                      'picturesURLS': '{}', 'videosURLS': '{}'})
         attr = Attraction(1)
         response = self.dal_prox.getAmericanQuestion(attr)
