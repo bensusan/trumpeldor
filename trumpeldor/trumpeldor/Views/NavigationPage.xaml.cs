@@ -6,19 +6,24 @@ using System.Threading.Tasks;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
-
+using trumpeldor.SheredClasses;
 namespace trumpeldor.Views
 {
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class NavigationPage : ContentPage
 	{
-
-        //((App)(Application.Current)).getGameController().currentTrip.GetCurrentAttraction()-for the hint
-
-        //public GameController gc = ((App)Application.Current).getGameController();
+        //        gc.currentTrip.GetCurrentAttraction();//-for the hint
+        public Attraction nextAttraction;
+        public static int hintsIndex = 0;
+        Point p = new Point();
+        public GameController gc = ((App)Application.Current).getGameController();
         public NavigationPage ()
 		{
 			InitializeComponent ();
+            nextAttraction = gc.currentTrip.GetCurrentAttraction();
+            p.X = nextAttraction.x;
+            p.Y = nextAttraction.y;
+            //nextAttraction = gc.currentTrip.GetCurrentAttraction();
             scoreLabel.Text = "score: "/* + gc.currentTrip.score*/;
             //mapImage.Source = ImageSource.FromResource("trumpeldor.Resources.MapIcon.png");
             mapImage.Text = "map";
@@ -26,11 +31,18 @@ namespace trumpeldor.Views
             //nextClue.addToLayout(hintsLayout);
         }
 
-        private void Get_Hint_Button_Clicked(object sender, EventArgs e)
+        private async void Get_Hint_Button_Clicked(object sender, EventArgs e)
         {
-            //SheredClasses.Clue nextHint=((App)(Application.Current)).getGameController().GetHint();
-            //nextHint.addToLayout(hintsLayout);
-            //scoreLabel.Text = "score: " + gc.currentTrip.score; 
+            if (nextAttraction != null)
+            {
+                await Navigation.PushModalAsync(new MapPage(p));
+                /* Hint nextHint;
+                 nextHint = nextAttraction.hints[hintsIndex];
+                 //nextHint.addToLayout(hintsLayout);
+                 //scoreLabel.Text = "score: " + gc.currentTrip.score;
+                 hintsIndex++;*/
+            }
+
         }
 
         private void Next_Destination_Button_Clicked(object sender, EventArgs e)

@@ -23,6 +23,10 @@ namespace trumpeldor
         //private PathLength currentPathLength;
         //public Attraction currentAttractionDestination = null;
         const int LOGIN_RECENETLY_DIFFERENCE_HOURS = 36; //TODO - Very specific for now
+        float latitude = 0;
+        float longtitude = 0;
+        
+        
 
 
         internal int GetScore()
@@ -67,14 +71,30 @@ namespace trumpeldor
 
         private float GetUserY()
         {
-            //TODO
-            return 0;
+            if(latitude==0 && longtitude==0)
+            {
+                GetLocation();
+                return longtitude;
+            }
+            return longtitude;
         }
 
         private float GetUserX()
         {
-            //TODO
-            return 0;
+            if(latitude==0 && longtitude==0)
+            {
+                GetLocation();
+                return longtitude;
+            }
+            return longtitude;
+        }
+
+        private async void GetLocation()
+        {
+            var locator = CrossGeolocator.Current;
+            var position = await locator.GetPositionAsync(TimeSpan.FromSeconds(10));
+            latitude = (float)position.Latitude;
+            longtitude = (float)position.Longitude;
         }
 
         public async void SelectNextAttraction()

@@ -112,6 +112,7 @@ namespace trumpeldor.Views
                 Navigation.RemovePage(page);
             }
             await gc.CreateTrip(groupName, agesList, selectedPathLength);
+            await DisplayAlert("", "GroupName " + gc.currentTrip.groupName + " PlayersAges" + gc.currentTrip.playersAges[0].ToString() + " First Attraction" + gc.currentTrip.GetCurrentAttraction().ToString(), "ok");
             Application.Current.MainPage = new NavigationPage();
         }
     }

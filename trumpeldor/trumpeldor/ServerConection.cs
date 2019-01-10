@@ -11,8 +11,8 @@ namespace trumpeldor
 {
     class ServerConection
     {
-        //public readonly static string IP = "132.72.23.64";
-        public readonly static string IP = "132.72.213.116";
+        public readonly static string IP = "132.72.23.64";
+        //public readonly static string IP = "132.72.213.116";
         public readonly static string PORT = "12345";
         private readonly String urlPrefix = "http://" + IP +":" + PORT + "/usersystem/";
         public ServerConection()
@@ -57,6 +57,8 @@ namespace trumpeldor
         internal async Task<AmericanQuestion> GetAmericanQuestionByAttraction(Attraction attraction)
         {
             string jsonResponse = await SendToServerAndGetResponseBack(new { id = attraction.id, }, "getAmericanQuestion/");
+            if (jsonResponse.Equals("{\"question\":\"\",\"answers\":null,\"indexOfCorrectAnswer\":null}"))
+                return null;
             return JsonConvert.DeserializeObject<AmericanQuestion>(jsonResponse);
         }
 
