@@ -27,15 +27,15 @@ namespace trumpeldor.Views
 
         private async void Information_Button_Clicked(object sender, EventArgs e)
         {
-            await Navigation.PushModalAsync(new AttractionInformationPage());
+            //await Navigation.PushModalAsync(new AttractionInformationPage());
         }
         private async void Mission_Button_Clicked(object sender, EventArgs e)
         {
-            await Navigation.PushModalAsync(new MissionPage());
+            //await Navigation.PushModalAsync(new MissionPage());
         }
         private async void Question_Button_Clicked(object sender, EventArgs e)
         {
-            await Navigation.PushModalAsync(new MultipleChoiceQuestionPage());
+            //await Navigation.PushModalAsync(new MultipleChoiceQuestionPage());
         }
         private void Watch_Again_Button_Clicked(object sender, EventArgs e)
         {

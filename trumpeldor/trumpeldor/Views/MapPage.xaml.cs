@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Timers;
 using System.Threading.Tasks;
+using trumpeldor.SheredClasses;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Maps;
@@ -15,18 +16,22 @@ namespace trumpeldor.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class MapPage : ContentPage
     {
-        //fixed point
-        private GameController gc = ((App)(Application.Current)).getGameController();
+        
         private const double DESIRED_DISTANCE = 30;
         private const double DESIRED_SECONDS = 10;
-        Point p = new Point(31.262566, 34.796832);
+        //Point p = new Point(31.262566, 34.796832);
+        Point p = new Point();
         Pin previous = null;
         //current point
         double currLat = 0, currLong = 0;
-
+        public GameController gc = ((App)Application.Current).getGameController();
+        public Attraction nextAttraction;
         public MapPage(Point p)
         {
             InitializeComponent();
+            nextAttraction = gc.currentTrip.GetCurrentAttraction();
+            p.X = nextAttraction.x;
+            p.Y = nextAttraction.y;
             Map map = new Map()
             {
                 HeightRequest = 100,
@@ -43,7 +48,9 @@ namespace trumpeldor.Views
         public MapPage()
         {
             InitializeComponent();
-
+            nextAttraction = gc.currentTrip.GetCurrentAttraction();
+            p.X = nextAttraction.x;
+            p.Y = nextAttraction.y;
             //gc.currentTrip.GetCurrentAttraction().x
             Map map = new Map()
             {
@@ -78,12 +85,13 @@ namespace trumpeldor.Views
                     //!((_&&_)||(_&&_))-->!(_&&_) && !(_&&_)
                     if (DistanceBetween(currLat, currLong, p.X, p.Y) > DESIRED_DISTANCE)
                     {
-                        DisplayAlert("not arrived", DistanceBetween(currLat, currLong, p.X, p.Y).ToString() , "Close");
+                        DisplayAlert("not arrived", DistanceBetween(currLat, currLong, p.X, p.Y).ToString()+"x: "+p.X + "y: " + p.Y+" point info: "+nextAttraction.name, "Close");
                         return true;
                     }
                     else
                     {
-                        DisplayAlert("arrived", "arrived!  "+ DistanceBetween(currLat, currLong, p.X, p.Y).ToString(), "Close");
+                        DisplayAlert("arrived", "arrived!  " + DistanceBetween(currLat, currLong, p.X, p.Y).ToString(), "Close");
+                        Application.Current.MainPage = new AttractionPage();
                         return false;
                     }
                     // True = Repeat again, False = Stop the timer
