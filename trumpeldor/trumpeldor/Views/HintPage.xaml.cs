@@ -48,7 +48,7 @@ namespace trumpeldor.Views
 
         private async void Alert(string s)
         {
-            await DisplayAlert("error", s, "ok");
+            await DisplayAlert(AppResources.error, s, AppResources.ok);
         }
         private async void CallToMapPage(string hintStr)
         {
@@ -62,13 +62,13 @@ namespace trumpeldor.Views
                     lat = Convert.ToDouble(coordinates[0]);
                     lon = Convert.ToDouble(coordinates[1]);
                     Point p = new Point(lat, lon);
-                    await DisplayAlert("final hint", "click ok to view the next point on the map", "ok");
+                    await DisplayAlert(AppResources.final_hint, AppResources.click_ok_to_view_the_next_point_on_the_map, AppResources.ok);
                         //.ContinueWith((a) =>
                    // Application.Current.MainPage = new MapPage(p));
                 }
                 catch (Exception e)
                 {
-                    await DisplayAlert("error", e.Message, "close");
+                    await DisplayAlert(AppResources.error, e.Message, AppResources.close);
                 }
             }
         }

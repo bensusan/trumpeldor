@@ -85,12 +85,12 @@ namespace trumpeldor.Views
                     //!((_&&_)||(_&&_))-->!(_&&_) && !(_&&_)
                     if (DistanceBetween(currLat, currLong, p.X, p.Y) > DESIRED_DISTANCE)
                     {
-                        DisplayAlert("not arrived", DistanceBetween(currLat, currLong, p.X, p.Y).ToString()+"x: "+p.X + "y: " + p.Y+" point info: "+nextAttraction.name, "Close");
+                        DisplayAlert(AppResources.not_arrived, DistanceBetween(currLat, currLong, p.X, p.Y).ToString()+"x: "+p.X + "y: " + p.Y+" point info: "+nextAttraction.name, AppResources.close);
                         return true;
                     }
                     else
                     {
-                        DisplayAlert("arrived", "arrived!  " + DistanceBetween(currLat, currLong, p.X, p.Y).ToString(), "Close");
+                        DisplayAlert(AppResources.arrived, AppResources.arrived+"!  " + DistanceBetween(currLat, currLong, p.X, p.Y).ToString(), AppResources.close);
                         Application.Current.MainPage = new AttractionPage();
                         return false;
                     }
@@ -98,7 +98,7 @@ namespace trumpeldor.Views
                 }
                 catch (Exception e)
                 {
-                    Console.WriteLine("ERROR: "+e.Message);
+                    Console.WriteLine(AppResources.error+": "+e.Message);
                     return false;
                 }
             });

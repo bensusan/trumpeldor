@@ -1,10 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="trumpeldor.Views.LoginsPage">
+             x:Class="trumpeldor.Views.LoginsPage"
+             xmlns:translator="clr-namespace:trumpeldor.Helpers">
     <ContentPage.Content>
         <StackLayout Style="{DynamicResource mainStackLayout}">
-            <Button Text="login with facebook" Clicked="FacebookLogin_Clicked" Style="{StaticResource largeButtonStyle}"/>
+            <Button Text="{translator:Translate login_with_facebook}" Clicked="FacebookLogin_Clicked" Style="{StaticResource largeButtonStyle}"/>
             <!--<Button Text="anonymus login" Clicked="Anonymus_Clicked" Style="{StaticResource largeButtonStyle}"/>-->
         </StackLayout>
     </ContentPage.Content>

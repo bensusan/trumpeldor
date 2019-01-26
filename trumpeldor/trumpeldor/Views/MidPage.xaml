@@ -1,13 +1,14 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="trumpeldor.Views.MidPage">
+             x:Class="trumpeldor.Views.MidPage"
+             xmlns:translator="clr-namespace:trumpeldor.Helpers">
     <ContentPage.Content>
         <StackLayout>
             <StackLayout x:Name="hintsLayout" Style="{DynamicResource mainorStackLayout}">
-                <Label Text="hints" Style="{DynamicResource lableStyle}"/>
+                <Label Text="{translator:Translate hints}" Style="{DynamicResource lableStyle}"/>
             </StackLayout>
-            <Button Text="add hint" Clicked="Get_Hint_Button_Clicked" Style="{StaticResource largeButtonStyle}" />
+            <Button Text="{translator:Translate add_hint}" Clicked="Get_Hint_Button_Clicked" Style="{StaticResource largeButtonStyle}" />
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
