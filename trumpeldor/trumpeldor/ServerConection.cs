@@ -6,17 +6,30 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using trumpeldor.SheredClasses;
+using System.Configuration;
+using System.Threading;
+using trumpeldor.Configuration;
 
 namespace trumpeldor
 {
     class ServerConection
     {
-        public readonly static string IP = "132.72.23.64";
-        //public readonly static string IP = "132.72.213.116";
-        public readonly static string PORT = "12345";
-        private readonly String urlPrefix = "http://" + IP +":" + PORT + "/usersystem/";
+        //public readonly static string IP = "132.72.23.64";
+        //public readonly static string IP = GetIP().Result;
+        //public readonly static string PORT = "12345";
+        //private readonly String urlPrefix = "http://" + IP +":" + PORT + "/usersystem/";
+        public static string IP;
+        public static string PORT;
+        private string urlPrefix;
         public ServerConection()
         {
+            using (var cts = new CancellationTokenSource())
+            {
+                var config = ConfigurationManager.Instance.GetAsync(cts.Token).Result;
+                IP = config.IP;
+                PORT = config.PORT;
+            }
+            urlPrefix = "http://" + IP + ":" + PORT + "/usersystem/";
         }
         
         public async Task<User> SignUp(String name, String socialNetwork)

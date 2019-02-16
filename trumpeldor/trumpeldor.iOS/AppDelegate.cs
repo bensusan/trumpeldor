@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 
 using Foundation;
+using trumpeldor.Configuration;
+using trumpeldor.iOS.Configuration;
 using UIKit;
 
 namespace trumpeldor.iOS
@@ -23,6 +25,7 @@ namespace trumpeldor.iOS
         public override bool FinishedLaunching(UIApplication app, NSDictionary options)
         {
             global::Xamarin.Forms.Forms.Init();
+            ConfigurationManager.Initialize(new IOSConfigurationStreamProviderFactory());
             Xamarin.FormsMaps.Init();//for maps init
             LoadApplication(new App());
 
