@@ -1,17 +1,10 @@
-import null
-from django.test import TestCase
-
-# Create your tests here.
-
-import unittest
-from django.test import Client
+from django.test import Client, TestCase
 
 from Server.DAL.DAL import *
 from Server.DAL.DAL_Implementation import *
 
 
-
-class SimpleTestForAttractions(unittest.TestCase):
+class SimpleTestForAttractions(TestCase):
     def setUp(self):
         # Every test needs a client.
         self.client = Client()
@@ -39,7 +32,7 @@ class SimpleTestForAttractions(unittest.TestCase):
         # # Check that the response is 200 OK.
         # self.assertEqual(response.status_code, 422)
 
-class SimpleTestForUsers(unittest.TestCase):
+class SimpleTestForUsers(TestCase):
     def setUp(self):
         # Every test needs a client.
         self.dal_abst = DAL_Abstract()
@@ -66,7 +59,7 @@ class SimpleTestForUsers(unittest.TestCase):
         self.assertEqual(response, user)
 
 
-class SimpleTestForAQ(unittest.TestCase):
+class SimpleTestForAQ(TestCase):
     def setUp(self):
         # Every test needs a client.
         self.dal_abst = DAL_Abstract()
