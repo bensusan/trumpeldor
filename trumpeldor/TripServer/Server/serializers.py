@@ -112,6 +112,7 @@ class CreateTripSerializer(serializers.ModelSerializer):
     x = serializers.FloatField()
     y = serializers.FloatField()
 
+
 class TestSerializer(serializers.ModelSerializer):
 
     class Meta:
