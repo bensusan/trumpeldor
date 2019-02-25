@@ -17,7 +17,7 @@ namespace trumpeldor.Views
         public MultipleChoiceQuestionPage ()
 		{
 			InitializeComponent ();
-            scoreLabel.Text = "score: " + gc.GetScore();
+            scoreLabel.Text = AppResources.score+": " + gc.GetScore();
             attractionQuestion.Text = gc.GetCurrentAttractionQuestion();
             if (gc.IsCurrentAttractionHasQuestionImage())
             {

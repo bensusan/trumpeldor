@@ -16,7 +16,7 @@ namespace trumpeldor.Views
         public AttractionPage()
 		{
 			InitializeComponent ();
-            scoreLabel.Text = "score: " + gc.currentTrip.score;
+            scoreLabel.Text = AppResources.score +": " + gc.currentTrip.score;
             attractionName.Text = gc.currentTrip.GetCurrentAttraction().name;
             string mainPictureUrl = gc.GetCurrentAttractionImage();
             attractionImage.Source = mainPictureUrl;

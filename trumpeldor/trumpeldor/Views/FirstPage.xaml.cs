@@ -1,5 +1,7 @@
-﻿using System;
+﻿using Plugin.Multilingual;
+using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -15,8 +17,7 @@ namespace trumpeldor.Views
     {
 		public FirstPage ()
 		{
-			InitializeComponent();
-           
+            InitializeComponent();
         }
 
         private void Play_Button_Clicked(object sender, EventArgs e)
@@ -63,8 +64,16 @@ namespace trumpeldor.Views
             //await Navigation.PushModalAsync(new MapPage(new Point(31.263440, 34.799115)));
         }
 
+        private void Button_Clicked(object sender, EventArgs e)
+        {
+            CrossMultilingual.Current.CurrentCultureInfo = new CultureInfo("en");
+            Application.Current.MainPage = new FirstPage();
+        }
 
-
-        
+        private void Button_Clicked_1(object sender, EventArgs e)
+        {
+            CrossMultilingual.Current.CurrentCultureInfo = new CultureInfo("he");
+            Application.Current.MainPage = new FirstPage();
+        }
     }
 }

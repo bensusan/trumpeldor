@@ -15,7 +15,7 @@ namespace trumpeldor.Views
 		public FinishTrackPage ()
 		{
 			InitializeComponent ();
-            titleLabel.Text = "congratulation you finish the track with " + ((App)Application.Current).getGameController().GetScore() + " points.";
+            titleLabel.Text = AppResources.congrdulation_you_finish_the_track_with+" " + ((App)Application.Current).getGameController().GetScore() + " "+AppResources.points+ " .";
             if (!((App)Application.Current).getGameController().CanContinueToLongerTrack())
             {
                 continueButton.IsVisible = false;

@@ -26,7 +26,7 @@ namespace trumpeldor.Views
         {
             if (gc.IsUserConnectedRecently())
             {
-                bool dialogAnswer = DisplayAlert("Hey, " + gc.currentUser.name + "!", "Do you want to continue last trip?", "Yes", "No").Result;
+                bool dialogAnswer = DisplayAlert(AppResources.Hey+", " + gc.currentUser.name + "!", AppResources.Do_you_want_to_continue_last_trip, AppResources.Yes, AppResources.No).Result;
                 if (dialogAnswer) {
                     await gc.ContinuePreviousTrip();
                     return new NavigationPage();
@@ -112,7 +112,7 @@ namespace trumpeldor.Views
                 Navigation.RemovePage(page);
             }
             await gc.CreateTrip(groupName, agesList, selectedPathLength);
-            await DisplayAlert("", "GroupName " + gc.currentTrip.groupName + " PlayersAges" + gc.currentTrip.playersAges[0].ToString() + " First Attraction" + gc.currentTrip.GetCurrentAttraction().ToString(), "ok");
+            await DisplayAlert("", AppResources.group_name +" " + gc.currentTrip.groupName + " " + AppResources.Players_Ages + gc.currentTrip.playersAges[0].ToString() + " "+ AppResources.First_Attraction + gc.currentTrip.GetCurrentAttraction().ToString(), AppResources.ok);
             Application.Current.MainPage = new NavigationPage();
         }
     }

@@ -24,9 +24,9 @@ namespace trumpeldor.Views
             p.X = nextAttraction.x;
             p.Y = nextAttraction.y;
             //nextAttraction = gc.currentTrip.GetCurrentAttraction();
-            scoreLabel.Text = "score: "/* + gc.currentTrip.score*/;
+            scoreLabel.Text = AppResources.score+": "/* + gc.currentTrip.score*/;
             //mapImage.Source = ImageSource.FromResource("trumpeldor.Resources.MapIcon.png");
-            mapImage.Text = "map";
+            mapImage.Text = AppResources.map;
             //SheredClasses.Clue nextClue = gc.GetFisrtHint();
             //nextClue.addToLayout(hintsLayout);
         }
@@ -59,7 +59,7 @@ namespace trumpeldor.Views
 
         private void Next_Destination_Button_Clicked(object sender, EventArgs e)
         {
-            DisplayAlert("success", "You've Reached Your Destionation", "OK");
+            DisplayAlert(AppResources.success, AppResources.You_have_Reached_Your_Destionation, AppResources.ok);
             var existingPages = Navigation.NavigationStack.ToList();
             foreach (var page in existingPages)
             {
