@@ -57,6 +57,26 @@ class BL_Abstract(object):
             user = self.createUser(data)
         return user
 
+    ####################Management System##########################
+
+    def add_attraction(self, attraction):
+        raise NotImplementedError("Should have implemented this")
+
+    def add_hint(self, attraction, hint):
+        raise NotImplementedError("Should have implemented this")
+
+    def add_american_question(self, attraction, a_question):
+        raise NotImplementedError("Should have implemented this")
+
+    def add_track(self, track):
+        raise NotImplementedError("Should have implemented this")
+
+    def add_feedback_question(self, question):
+        raise NotImplementedError("Should have implemented this")
+
+    def get_track(self, track_len):
+        raise NotImplementedError("Should have implemented this")
+
 
 class BLProxy(BL_Abstract):
     Implementation = None
@@ -128,3 +148,35 @@ class BLProxy(BL_Abstract):
         if self.Implementation is None:
             raise NotImplementedError("Should have implemented this")
         return self.Implementation.getTrip(trip)
+
+    ####################Management System##########################
+
+    def add_attraction(self, attraction):
+        if self.Implementation is None:
+            raise NotImplementedError("Should have implemented this")
+        return self.Implementation.getTrip(attraction)
+
+    def add_hint(self, attraction, hint):
+        if self.Implementation is None:
+            raise NotImplementedError("Should have implemented this")
+        return self.Implementation.getTrip(attraction, hint)
+
+    def add_american_question(self, attraction, a_question):
+        if self.Implementation is None:
+            raise NotImplementedError("Should have implemented this")
+        return self.Implementation.getTrip(attraction, a_question)
+
+    def add_track(self, track):
+        if self.Implementation is None:
+            raise NotImplementedError("Should have implemented this")
+        return self.Implementation.getTrip(track)
+
+    def add_feedback_question(self, question):
+        if self.Implementation is None:
+            raise NotImplementedError("Should have implemented this")
+        return self.Implementation.getTrip(question)
+
+    def get_track(self, track_len):
+        if self.Implementation is None:
+            raise NotImplementedError("Should have implemented this")
+        return self.Implementation.getTrip(track_len)
