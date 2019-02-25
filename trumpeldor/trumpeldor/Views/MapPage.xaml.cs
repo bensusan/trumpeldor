@@ -19,7 +19,7 @@ namespace trumpeldor.Views
         
         private const double DESIRED_DISTANCE = 30;
         private const double DESIRED_SECONDS = 10;
-        //Point p = new Point(31.262566, 34.796832);
+        //Point p = new Point(31.262566, 34.796832); (latitude -> x, longtitude -> y)
         Point p = new Point();
         Pin previous = null;
         //current point

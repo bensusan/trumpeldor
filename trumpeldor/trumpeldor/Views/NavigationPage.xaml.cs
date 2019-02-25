@@ -33,16 +33,28 @@ namespace trumpeldor.Views
 
         private async void Get_Hint_Button_Clicked(object sender, EventArgs e)
         {
-            if (nextAttraction != null)
+            if (nextAttraction != null && hintsIndex>=0 && hintsIndex<nextAttraction.hints.Count)
             {
-                await Navigation.PushModalAsync(new MapPage(p));
-                /* Hint nextHint;
-                 nextHint = nextAttraction.hints[hintsIndex];
-                 //nextHint.addToLayout(hintsLayout);
-                 //scoreLabel.Text = "score: " + gc.currentTrip.score;
-                 hintsIndex++;*/
-            }
+                
+                Hint nextHint;
+                nextHint = nextAttraction.hints[hintsIndex];
+                if (nextHint != null)
+                {
+                    if (nextHint.kind.Equals("HM"))//hint map
+                    {
+                        await Navigation.PushModalAsync(new MapPage(p));
+                    }
+                    else
+                    {
+                        await Navigation.PushModalAsync(new HintPage(nextHint));
+                    }
+                    //nextHint.addToLayout(hintsLayout);
+                    //scoreLabel.Text = "score: " + gc.currentTrip.score;
 
+                    hintsIndex++;
+                }
+            }
+            
         }
 
         private void Next_Destination_Button_Clicked(object sender, EventArgs e)
@@ -59,6 +71,14 @@ namespace trumpeldor.Views
         private async void mapImage_Clicked(object sender, EventArgs e)
         {
             await Navigation.PushModalAsync(new MapPage());
+        }
+
+        private void addToLayout(StackLayout layout)
+        {
+            Button btn = new Button();
+            string strIndex = (hintsIndex + 1).ToString();
+            btn.Text = "Hint " + strIndex;
+            layout.Children.Add(btn);
         }
     }
 }

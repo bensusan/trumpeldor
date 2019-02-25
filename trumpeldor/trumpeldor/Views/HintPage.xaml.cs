@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using trumpeldor.SheredClasses;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -13,37 +13,30 @@ namespace trumpeldor.Views
 	public partial class HintPage : ContentPage
 	{
         private double lat=0, lon=0;
-		public HintPage (string hintStr)
+		public HintPage (Hint hint)
 		{
 			InitializeComponent ();
-            
-            if (hintStr.Contains("http://132.72.23.64:12345/media/"))
+            string hintStr = hint.kind;
+            string urlPref = "http://132.72.23.64:12345/media/";
+            if (hintStr.Equals( "HP" ) || hintStr=="HV")//case picture or video
             {
+                webView.IsVisible = true;
+                string tmp = hint.data.Substring(2, hint.data.Length - 4);
                 try
                 {
-                    webView.Source = hintStr;
-                    /*WebView wv = new WebView();
-                    wv.WidthRequest = 1000;
-                    wv.HeightRequest = 1000;
-                    wv.Source = hintStr;*/
+                    webView.Source = urlPref + tmp/*hint.data*/;
                 }
                 catch(Exception e)
                 {
                     Alert(e.Message);
                 }
-                
-            }
-            else
-            {
-                generalInformation.Text = hintStr;
-            }
-            /*else if (hintStr.Contains(','))
-            {
-                CallToMapPage(hintStr);
-                
-            }*/
-
             
+            }
+            else //case text
+            {
+                webView.IsVisible = false;
+                textualHint.Text = hint.data;
+            }
 		}
 
         private async void Alert(string s)
