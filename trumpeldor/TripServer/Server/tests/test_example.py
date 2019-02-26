@@ -19,18 +19,19 @@ class SimpleTestForAttractions(TestCase):
         self.assertEqual(response.status_code, 200)
 
         # Issue a GET request.
-        response = self.client.post('/managementsystem/attractions/', {'name': 'de vinchi', 'x': '32.1111', 'y': '23.43433', 'description':'bla bla',
-                                                                       'picturesURLS': '{}', 'videosURLS': '{}'})
+        response = self.client.post('/managementsystem/attractions/',
+                                    {'name': 'de vinchi', 'x': '32.1111', 'y': '23.43433', 'description': 'bla bla',
+                                     'picturesURLS': '{}', 'videosURLS': '{}'})
 
         # Check that the response is 200 OK.
         self.assertEqual(response.status_code, 200)
-
 
         # response = self.client.post('/managementsystem/attractions/',
         #                             {})
         #
         # # Check that the response is 200 OK.
         # self.assertEqual(response.status_code, 422)
+
 
 class SimpleTestForUsers(TestCase):
     def setUp(self):
@@ -49,7 +50,8 @@ class SimpleTestForUsers(TestCase):
         self.assertEqual(response, None)
 
         response = self.client.post('/usersystem/signUp/',
-                                    {'name': 'Itzhak', 'socialNetwork': 'facebook', 'lastSeen': 'null', 'email': 'null'})
+                                    {'name': 'Itzhak', 'socialNetwork': 'facebook', 'lastSeen': 'null',
+                                     'email': 'null'})
 
         # Check that the response is 200 OK.
         self.assertEqual(response.status_code, 200)
@@ -69,7 +71,6 @@ class SimpleTestForAQ(TestCase):
         self.client = Client()
 
     def test_details(self):
-
         response = self.client.post('/managementsystem/attractions/',
                                     {'name': 'de vinchi', 'x': '32.1111', 'y': '23.43433',
                                      'description': 'bla bla',
@@ -79,12 +80,40 @@ class SimpleTestForAQ(TestCase):
         self.assertEqual(response, None)
 
         response = self.client.post('/usersystem/getAmericanQuestion/',
-                                    {'id': '1', 'question': 'stam?', 'answers': '{\'ans1\': \'ans1\'}', 'indexOfCorrectAnswer': 1})
+                                    {'id': '1', 'question': 'stam?', 'answers': '{\'ans1\': \'ans1\'}',
+                                     'indexOfCorrectAnswer': 1})
         aq = AmericanQuestion(1)
         response = self.dal_prox.getAmericanQuestion(attr)
         self.assertEqual(response, aq)
 
- 
+
+
+class SimpleTestForFeedback(TestCase):
+    def setUp(self):
+        # Every test needs a client.
+        self.dal_abst = DAL_Abstract()
+        self.dal_prox = DALProxy()
+        self.dal_impl = DAL_Implementation()
+        self.dal_prox.setImplementation(self.dal_impl)
+        self.client = Client()
+
+    def test_details(self):
+        response = self.client.post('/managementsystem/attractions/',
+                                    {'name': 'de vinchi', 'x': '32.1111', 'y': '23.43433',
+                                     'description': 'bla bla',
+                                     'picturesURLS': '{}', 'videosURLS': '{}'})
+        attr = Attraction(1)
+        response = self.dal_prox.getFeedbacks(attr)
+        self.assertEqual(response, None)
+
+        response = self.client.post('/usersystem/getFeedbacks/',
+                                    {'id':'1', 'question':'had fun?', 'kind':'text'})
+
+        feedb = Feedback(1)
+        response = self.dal_prox.getFeedbacks(attr)
+        self.assertEqual(response, feedb)
+
+
 class SimpleTestForTrack(TestCase):
     def setUp(self):
         # Every test needs a client.
@@ -100,14 +129,16 @@ class SimpleTestForTrack(TestCase):
                                      'description': 'bla bla',
                                      'picturesURLS': '{}', 'videosURLS': '{}'})
         attr = Attraction(1)
-        response = self.dal_prox.get_track(attr)
+        response = self.dal_prox.getAmericanQuestion(attr)
         self.assertEqual(response, None)
 
         response = self.client.post('/usersystem/getTrackAndNextAttractionByLengthAndUserLocation/',
-                                    {'id':'1', 'subTrack':'', 'points':'{(x:323,y:2314),(x:332,y:3333)}', 'length':'132'})
+                                    {'id': '1', 'subTrack': '', 'points': '{(x:323,y:2314),(x:332,y:3333)}',
+                                     'length': '132'})
         tr = Track(1)
         response = self.dal_prox.get_track(attr)
         self.assertEqual(response, tr)
+
 
 class SimpleTestForHint(TestCase):
     def setUp(self):
@@ -121,14 +152,14 @@ class SimpleTestForHint(TestCase):
     def test_details(self):
         response = self.client.post('/managementsystem/attractions/',
                                     {'name': 'de vinchi', 'x': '32.1111', 'y': '23.43433',
-                                        'description': 'bla bla',
-                                        'picturesURLS': '{}', 'videosURLS': '{}'})
+                                     'description': 'bla bla',
+                                     'picturesURLS': '{}', 'videosURLS': '{}'})
         attr = Attraction(1)
-        response = self.dal_prox.getHints(attr)
+        response = self.dal_prox.getAmericanQuestion(attr)
         self.assertEqual(response, None)
 
         response = self.client.post('/usersystem/getHints/',
-                                    {'id':'1', 'kind':'text', 'data':'this is a hint!'})
+                                    {'id': '1', 'kind': 'text', 'data': 'this is a hint!'})
         the_hint = Hint(1)
         response = self.dal_prox.getHints(attr)
         self.assertEqual(response, the_hint)
