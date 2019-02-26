@@ -13,18 +13,17 @@ class SimpleTestForAttractions(TestCase):
 
     def test_details(self):
         # Issue a GET request.
-        response = self.client.get('/managementsystem/attractions/')
+        response = self.client.get('/managementsystem/attraction/')
 
         # Check that the response is 200 OK.
         self.assertEqual(response.status_code, 200)
 
         # Issue a GET request.
-        response = self.client.post('/managementsystem/attractions/', {'name': 'de vinchi', 'x': '32.1111', 'y': '23.43433', 'description':'bla bla',
+        response = self.client.post('/managementsystem/attraction/', {'name': 'de vinchi', 'x': '32.1111', 'y': '23.43433', 'description':'bla bla',
                                                                        'picturesURLS': '{}', 'videosURLS': '{}'})
 
         # Check that the response is 200 OK.
         self.assertEqual(response.status_code, 200)
-
 
         # response = self.client.post('/managementsystem/attractions/',
         #                             {})
@@ -83,3 +82,54 @@ class SimpleTestForAQ(TestCase):
         aq = AmericanQuestion(1)
         response = self.dal_prox.getAmericanQuestion(attr)
         self.assertEqual(response, aq)
+
+
+
+class SimpleTestForTrack(TestCase):
+    def setUp(self):
+        # Every test needs a client.
+        self.dal_abst = DAL_Abstract()
+        self.dal_prox = DALProxy()
+        self.dal_impl = DAL_Implementation()
+        self.dal_prox.setImplementation(self.dal_impl)
+        self.client = Client()
+
+    def test_details(self):
+        response = self.client.post('/managementsystem/attractions/',
+                                    {'name': 'de vinchi', 'x': '32.1111', 'y': '23.43433',
+                                     'description': 'bla bla',
+                                     'picturesURLS': '{}', 'videosURLS': '{}'})
+        attr = Attraction(1)
+        response = self.dal_prox.getAmericanQuestion(attr)
+        self.assertEqual(response, None)
+
+        response = self.client.post('/usersystem/getAmericanQuestion/',
+                                    {'id':'1', 'subTrack':'', 'points':'{(x:323,y:2314),(x:332,y:3333)}', 'length':'132'})
+        tr = Track(1)
+        response = self.dal_prox.getAmericanQuestion(attr)
+        self.assertEqual(response, tr)
+
+        class SimpleTestForHint(TestCase):
+            def setUp(self):
+                # Every test needs a client.
+                self.dal_abst = DAL_Abstract()
+                self.dal_prox = DALProxy()
+                self.dal_impl = DAL_Implementation()
+                self.dal_prox.setImplementation(self.dal_impl)
+                self.client = Client()
+
+            def test_details(self):
+                response = self.client.post('/managementsystem/attractions/',
+                                            {'name': 'de vinchi', 'x': '32.1111', 'y': '23.43433',
+                                             'description': 'bla bla',
+                                             'picturesURLS': '{}', 'videosURLS': '{}'})
+                attr = Attraction(1)
+                response = self.dal_prox.getAmericanQuestion(attr)
+                self.assertEqual(response, None)
+
+                response = self.client.post('/usersystem/getAmericanQuestion/',
+                                            {'id': '1', 'subTrack': '', 'points': '{(x:323,y:2314),(x:332,y:3333)}',
+                                             'length': '132'})
+                tr = Track(1)
+                response = self.dal_prox.getAmericanQuestion(attr)
+                self.assertEqual(response, tr)
