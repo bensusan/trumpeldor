@@ -183,7 +183,7 @@ class SimpleTestForHint(TestCase):
         self.assertEqual(response, None)
 
         response = self.client.post('/usersystem/getHints/',
-                                    {'id': '1', 'kind': 'text', 'data': 'this is a hint!'})
+                                    {'id': '1', 'kind': 'text', 'data': 'this is a hint!'}) # check what to write 
         # Check that the response is 200 OK.
         self.assertEqual(response.status_code, 200)
 
