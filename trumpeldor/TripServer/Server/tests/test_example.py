@@ -118,7 +118,7 @@ class SimpleTestForFeedback(TestCase):
         self.assertEqual(response, None)
 
         response = self.client.post('/usersystem/getFeedbacks/',
-                                    {'id':'1', 'question':'had fun?', 'kind':'text'})
+                                    {'id':'1', 'question':'had fun?', 'kind':'text'}) # check what to write here
         # Check that the response is 200 OK.
         self.assertEqual(response.status_code, 200)
 
