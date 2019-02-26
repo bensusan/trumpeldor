@@ -103,7 +103,7 @@ class SimpleTestForTrack(TestCase):
         response = self.dal_prox.getAmericanQuestion(attr)
         self.assertEqual(response, None)
 
-        response = self.client.post('/usersystem/getAmericanQuestion/',
+        response = self.client.post('/usersystem/getTrackAndNextAttractionByLengthAndUserLocation/',
                                     {'id':'1', 'subTrack':'', 'points':'{(x:323,y:2314),(x:332,y:3333)}', 'length':'132'})
         tr = Track(1)
         response = self.dal_prox.getAmericanQuestion(attr)
@@ -127,9 +127,8 @@ class SimpleTestForHint(TestCase):
         response = self.dal_prox.getAmericanQuestion(attr)
         self.assertEqual(response, None)
 
-        response = self.client.post('/usersystem/getAmericanQuestion/',
-                                    {'id': '1', 'subTrack': '', 'points': '{(x:323,y:2314),(x:332,y:3333)}',
-                                        'length': '132'})
+        response = self.client.post('/usersystem/getHints/',
+                                    {'id':'1', 'kind':'text', 'data':'this is a hint!'})
         tr = Track(1)
         response = self.dal_prox.getAmericanQuestion(attr)
         self.assertEqual(response, tr)
