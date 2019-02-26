@@ -75,13 +75,21 @@ class SimpleTestForAQ(TestCase):
                                     {'name': 'de vinchi', 'x': '32.1111', 'y': '23.43433',
                                      'description': 'bla bla',
                                      'picturesURLS': '{}', 'videosURLS': '{}'})
+        # Check that the response is 200 OK.
+        self.assertEqual(response.status_code, 200)
+
         attr = Attraction(1)
         response = self.dal_prox.getAmericanQuestion(attr)
         self.assertEqual(response, None)
 
+
+
         response = self.client.post('/usersystem/getAmericanQuestion/',
                                     {'id': '1', 'question': 'stam?', 'answers': '{\'ans1\': \'ans1\'}',
                                      'indexOfCorrectAnswer': 1})
+        # Check that the response is 200 OK.
+        self.assertEqual(response.status_code, 200)
+
         aq = AmericanQuestion(1)
         response = self.dal_prox.getAmericanQuestion(attr)
         self.assertEqual(response, aq)
@@ -102,12 +110,17 @@ class SimpleTestForFeedback(TestCase):
                                     {'name': 'de vinchi', 'x': '32.1111', 'y': '23.43433',
                                      'description': 'bla bla',
                                      'picturesURLS': '{}', 'videosURLS': '{}'})
+        # Check that the response is 200 OK.
+        self.assertEqual(response.status_code, 200)
+
         attr = Attraction(1)
         response = self.dal_prox.getFeedbacks(attr)
         self.assertEqual(response, None)
 
         response = self.client.post('/usersystem/getFeedbacks/',
                                     {'id':'1', 'question':'had fun?', 'kind':'text'})
+        # Check that the response is 200 OK.
+        self.assertEqual(response.status_code, 200)
 
         feedb = Feedback(1)
         response = self.dal_prox.getFeedbacks(attr)
@@ -128,13 +141,21 @@ class SimpleTestForTrack(TestCase):
                                     {'name': 'de vinchi', 'x': '32.1111', 'y': '23.43433',
                                      'description': 'bla bla',
                                      'picturesURLS': '{}', 'videosURLS': '{}'})
+
+        # Check that the response is 200 OK.
+        self.assertEqual(response.status_code, 200)
+
         attr = Attraction(1)
-        response = self.dal_prox.getAmericanQuestion(attr)
+        response = self.dal_prox.getAmericanQuestion(attr) # need to be get_track
         self.assertEqual(response, None)
 
         response = self.client.post('/usersystem/getTrackAndNextAttractionByLengthAndUserLocation/',
                                     {'id': '1', 'subTrack': '', 'points': '{(x:323,y:2314),(x:332,y:3333)}',
                                      'length': '132'})
+
+        # Check that the response is 200 OK.
+        self.assertEqual(response.status_code, 200)
+
         tr = Track(1)
         response = self.dal_prox.get_track(attr)
         self.assertEqual(response, tr)
@@ -154,12 +175,18 @@ class SimpleTestForHint(TestCase):
                                     {'name': 'de vinchi', 'x': '32.1111', 'y': '23.43433',
                                      'description': 'bla bla',
                                      'picturesURLS': '{}', 'videosURLS': '{}'})
+        # Check that the response is 200 OK.
+        self.assertEqual(response.status_code, 200)
+
         attr = Attraction(1)
-        response = self.dal_prox.getAmericanQuestion(attr)
+        response = self.dal_prox.getHints(attr)
         self.assertEqual(response, None)
 
         response = self.client.post('/usersystem/getHints/',
                                     {'id': '1', 'kind': 'text', 'data': 'this is a hint!'})
+        # Check that the response is 200 OK.
+        self.assertEqual(response.status_code, 200)
+
         the_hint = Hint(1)
         response = self.dal_prox.getHints(attr)
         self.assertEqual(response, the_hint)
