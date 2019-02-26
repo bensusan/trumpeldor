@@ -99,6 +99,12 @@ class SimpleTestForAQ(TestCase):
         response = self.dal_prox.getAmericanQuestion(attr)
         self.assertEqual(response, aq)
 
+        response = self.client.post('/usersystem/getAmericanQuestion/',
+                                    {'id': '1', 'subTrack': '', 'points': '{(x:323,y:2314),(x:332,y:3333)}',
+                                     'length': '132'})
+        # for object that doesnt exist because of unmatching fields
+        self.assertEqual(response.status_code, 404)
+
 
 
 class SimpleTestForFeedback(TestCase):
