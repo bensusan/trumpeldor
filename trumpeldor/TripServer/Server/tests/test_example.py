@@ -12,6 +12,11 @@ class SimpleTestForAttractions(TestCase):
         # >> > response.status_code
 
     def test_details(self):
+        response = self.client.get('/managementsystem/attrctions/')
+
+        # Check that catches error
+        self.assertEqual(response.status_code, 404)
+
         # Issue a GET request.
         response = self.client.get('/managementsystem/attractions/')
 
