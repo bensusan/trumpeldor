@@ -131,6 +131,12 @@ class SimpleTestForFeedback(TestCase):
         # for object that doesnt exist
         self.assertEqual(response.status_code, 404)
 
+        response = self.client.post('/usersystem/getFeedbacks/',
+                                    {'name': 'de vinchi', 'x': '32.1111', 'y': '23.43433',
+                                     'description': 'bla bla',
+                                     'picturesURLS': '{}', 'videosURLS': '{}'})
+        # for object that doesnt exist
+        self.assertEqual(response.status_code, 404)
 
 class SimpleTestForTrack(TestCase):
     def setUp(self):
@@ -170,6 +176,12 @@ class SimpleTestForTrack(TestCase):
                                      'length': '132'})
 
         # for object that doesnt exist
+        self.assertEqual(response.status_code, 404)
+
+        response = self.client.post('/usersystem/getTrackAndNextAttractionByLengthAndUserLocation/',
+                                    {'id': '1', 'subTrack': '', 'points': '{(x:323,y:2314),(x:332,y:3333)}',
+                                     'length': '132'})
+        # for object that doesnt exist because of unmatching fields
         self.assertEqual(response.status_code, 404)
 
 
