@@ -58,6 +58,12 @@ class DAL_Abstract(object):
     def get_track(self, track_len):
         raise NotImplementedError("Should have implemented this")
 
+    def get_attraction(self, id):
+        raise NotImplementedError("Should have implemented this")
+
+    def get_attractions(self):
+        raise NotImplementedError("Should have implemented this")
+
 
 class DALProxy(DAL_Abstract):
     Implementation = None
@@ -157,3 +163,13 @@ class DALProxy(DAL_Abstract):
         if self.Implementation is None:
             raise NotImplementedError("Should have implemented this")
         return self.Implementation.get_track(track_len)
+
+    def get_attraction(self, id):
+        if self.Implementation is None:
+            raise NotImplementedError("Should have implemented this")
+        return self.Implementation.get_attraction(id)
+
+    def get_attractions(self):
+        if self.Implementation is None:
+            raise NotImplementedError("Should have implemented this")
+        return self.Implementation.get_attractions()

@@ -31,7 +31,7 @@ BL_Impl.setDAL(DAL_Impl)
 BL = BLProxy()
 BL.setImplementation(BL_Impl)
 
-DEBUG = True
+DEBUG = False
 
 
 # General post for all the posts here
@@ -123,21 +123,39 @@ class Track(generics.GenericAPIView):
             TrackSerializer)
 
 
+class AttractionsList(generics.GenericAPIView):
+    serializer_class = AttractionSerializer
+    queryset = ''
+
+    def get(self, request, *args, **kwargs):
+        ans = BL.get_attractions()
+        ans = AttractionSerializer(ans, many=True)
+        ans = json.loads(json.dumps(ans.data))
+        if DEBUG:
+            print("Sent:", ans, sep="\n")
+        return Response(ans)
+
+
 class Attraction(generics.GenericAPIView):
     serializer_class = AttractionSerializer
 
     def get(self, request, *args, **kwargs):
-        return general_post_or_get(
-            request,
-            "GetAttraction",
-            BL.getAttraction(),
-            AttractionSerializer)
+        ans =BL.get_attraction(self.kwargs['id'])
+        ans = AttractionSerializer(ans, many=False)
+        ans = json.loads(json.dumps(ans.data))
+        return Response(ans)
+        # print(self.kwargs['id'])
+        # return general_post_or_get(
+        #     self.kwargs['id'],
+        #     "GetAttraction",
+        #     BL.get_attraction,
+        #     AttractionSerializer)
 
     def post(self, request, *args, **kwargs):
         return general_post_or_get(
             request,
             "AddAttraction",
-            BL.add_attraction(),
+            BL.add_attraction,
             AttractionSerializer)
 
 

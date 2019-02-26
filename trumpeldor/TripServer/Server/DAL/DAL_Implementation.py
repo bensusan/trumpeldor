@@ -85,3 +85,9 @@ class DAL_Implementation(DAL_Abstract):
 
     def get_track(self, track_len):
         return Track.objects.filter(length=track_len).all()
+
+    def get_attraction(self, id):
+        return Attraction.objects.get(pk=id)
+
+    def get_attractions(self):
+        return Attraction.objects.all()
