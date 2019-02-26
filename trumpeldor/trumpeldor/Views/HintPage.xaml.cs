@@ -21,10 +21,12 @@ namespace trumpeldor.Views
             if (hintStr.Equals( "HP" ) || hintStr=="HV")//case picture or video
             {
                 webView.IsVisible = true;
-                string tmp = hint.data.Substring(2, hint.data.Length - 4);
+                string tmp = hint.data.Substring(1, hint.data.Length - 2);
+
                 try
                 {
-                    webView.Source = urlPref + tmp/*hint.data*/;
+                    string dt = hint.data;
+                    webView.Source = urlPref + dt;
                 }
                 catch(Exception e)
                 {
