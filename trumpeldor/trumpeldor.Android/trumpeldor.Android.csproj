@@ -74,11 +74,14 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Configuration\AndroidConfigurationStreamProvider.cs" />
+    <Compile Include="Configuration\AndroidConfigurationStreamProviderFactory.cs" />
     <Compile Include="MainActivity.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <AndroidAsset Include="Assets\config.json" />
     <None Include="Resources\AboutResources.txt" />
     <None Include="Assets\AboutAssets.txt" />
     <None Include="Properties\AndroidManifest.xml">

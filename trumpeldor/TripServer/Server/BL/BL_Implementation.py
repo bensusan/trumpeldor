@@ -93,3 +93,24 @@ class BL_Implementation(BL_Abstract):
 
     def getTrip(self, trip):
         return self.DAL.getTrip(trip['id'])
+
+
+    ####################Management System##########################
+
+    def add_attraction(self, attraction):
+        pass
+
+    def add_hint(self, attraction, hint):
+        pass
+
+    def add_american_question(self, attraction, a_question):
+        pass
+
+    def add_track(self, track):
+        pass
+
+    def add_feedback_question(self, question):
+        pass
+
+    def get_track(self, track_len):
+        pass

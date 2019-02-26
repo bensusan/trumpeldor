@@ -6,6 +6,8 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using Android.OS;
+using trumpeldor.Configuration;
+using trumpeldor.Droid.Configuration;
 
 namespace trumpeldor.Droid
 {
@@ -19,6 +21,7 @@ namespace trumpeldor.Droid
 
             base.OnCreate(savedInstanceState);
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
+            ConfigurationManager.Initialize(new AndroidConfigurationStreamProviderFactory(() => this));
             Xamarin.FormsMaps.Init(this, savedInstanceState);//for maps init
             LoadApplication(new App());
         }
