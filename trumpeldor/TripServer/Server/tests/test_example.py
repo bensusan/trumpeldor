@@ -118,13 +118,18 @@ class SimpleTestForFeedback(TestCase):
         self.assertEqual(response, None)
 
         response = self.client.post('/usersystem/getFeedbacks/',
-                                    {'id':'1', 'question':'had fun?', 'kind':'text'}) # check what to write here
+                                    {'id':'1', 'question':'had fun?', 'kind':'text'})
         # Check that the response is 200 OK.
         self.assertEqual(response.status_code, 200)
 
         feedb = Feedback(1)
         response = self.dal_prox.getFeedbacks(attr)
         self.assertEqual(response, feedb)
+
+        response = self.client.post('/usersystem/getFeedbacs/',
+                                    {'id': '1', 'question': 'had fun?', 'kind': 'text'})
+        # for object that doesnt exist
+        self.assertEqual(response.status_code, 404)
 
 
 class SimpleTestForTrack(TestCase):
@@ -151,7 +156,7 @@ class SimpleTestForTrack(TestCase):
 
         response = self.client.post('/usersystem/getTrackAndNextAttractionByLengthAndUserLocation/',
                                     {'id': '1', 'subTrack': '', 'points': '{(x:323,y:2314),(x:332,y:3333)}',
-                                     'length': '132'}) # need to know if points were added the way they should
+                                     'length': '132'})
 
         # Check that the response is 200 OK.
         self.assertEqual(response.status_code, 200)
@@ -159,6 +164,13 @@ class SimpleTestForTrack(TestCase):
         tr = Track(1)
         response = self.dal_prox.get_track(attr)
         self.assertEqual(response, tr)
+
+        response = self.client.post('/usersystem/notrealllll/',
+                                    {'id': '1', 'subTrack': '', 'points': '{(x:323,y:2314),(x:332,y:3333)}',
+                                     'length': '132'})
+
+        # for object that doesnt exist
+        self.assertEqual(response.status_code, 404)
 
 
 class SimpleTestForHint(TestCase):
@@ -183,10 +195,16 @@ class SimpleTestForHint(TestCase):
         self.assertEqual(response, None)
 
         response = self.client.post('/usersystem/getHints/',
-                                    {'id': '1', 'kind': 'text', 'data': 'this is a hint!'}) # check what to write 
+                                    {'id': '1', 'kind': 'text', 'data': 'this is a hint!'})
         # Check that the response is 200 OK.
         self.assertEqual(response.status_code, 200)
 
         the_hint = Hint(1)
         response = self.dal_prox.getHints(attr)
         self.assertEqual(response, the_hint)
+
+        response = self.client.post('/usersystem/getHints/',
+                                    {'id': '1', 'subTrack': '', 'points': '{(x:323,y:2314),(x:332,y:3333)}',
+                                     'length': '132'})
+        # for object that doesnt exist because of unmatching fields
+        self.assertEqual(response.status_code, 404)
