@@ -98,19 +98,27 @@ class BL_Implementation(BL_Abstract):
     ####################Management System##########################
 
     def add_attraction(self, attraction):
-        pass
+        return self.DAL.add_attraction(attraction['name'], attraction['x'], attraction['y'],
+                                       attraction['description'], attraction['picturesURLS'], attraction['videosURLS'])
 
     def add_hint(self, attraction, hint):
-        pass
+        return self.DAL.add_hint(attraction, hint['kind'], attraction['data'])
 
     def add_american_question(self, attraction, a_question):
-        pass
+        return self.DAL.add_american_question(a_question['question'], a_question['answers'],a_question['indexOfCorrectAnswer'],
+                                       a_question['question'], attraction)
 
     def add_track(self, track):
-        pass
+        return self.DAL.add_track(track['subTrack'], track['points'], track['length'])
 
-    def add_feedback_question(self, question):
-        pass
+    def add_feedback_question(self, question, kind):#question, kind
+        return self.DAL.add_feedback_question(question, kind)
 
     def get_track(self, track_len):
-        pass
+        return self.DAL.add_track(track_len)
+
+    def get_attraction(self, id):
+        return self.DAL.get_attraction(id)
+
+    def get_attractions(self):
+        return self.DAL.get_attractions()
