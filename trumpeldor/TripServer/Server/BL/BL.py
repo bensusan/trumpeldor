@@ -36,6 +36,9 @@ class BL_Abstract(object):
     def createUser(self, data):
         raise NotImplementedError("Should have implemented this")
 
+    def createHint(self, data):
+        raise NotImplementedError("Should have implemented this")
+
     def getHints(self, attraction):
         raise NotImplementedError("Should have implemented this")
 
@@ -103,6 +106,11 @@ class BLProxy(BL_Abstract):
         if self.Implementation is None:
             raise NotImplementedError("Should have implemented this")
         return self.Implementation.createUser(data)
+
+    def createHint(self, data):
+        if self.Implementation is None:
+            raise NotImplementedError("Should have implemented this")
+        return self.Implementation.createHint(data)
 
     def getHints(self, attraction):
         if self.Implementation is None:

@@ -23,6 +23,9 @@ class DAL_Abstract(object):
     def createUser(self, name, socialNetwork):
         raise NotImplementedError("Should have implemented this")
 
+    def createHint(self, attraction, kind, data):
+        raise NotImplementedError("Should have implemented this")
+
     def getHints(self, attraction):
         raise NotImplementedError("Should have implemented this")
 
@@ -79,6 +82,11 @@ class DALProxy(DAL_Abstract):
         if self.Implementation is None:
             raise NotImplementedError("Should have implemented this")
         return self.Implementation.createUser(name, socialNetwork)
+
+    def createHint(self, attraction, kind, data):
+        if self.Implementation is None:
+            raise NotImplementedError("Should have implemented this")
+        return self.Implementation.createHint(attraction, kind, data)
 
     def getHints(self, attraction):
         if self.Implementation is None:

@@ -28,7 +28,12 @@ class DAL_Implementation(DAL_Abstract):
     def createUser(self, name, socialNetwork):
         user = User(name=name, socialNetwork=socialNetwork)
         user.save()
-        return user
+        return
+
+    def createHint(self, attraction, kind, data):
+        hint = Hint(attraction=attraction, kind=kind, data=data)
+        hint.save()
+        return hint
 
     def getHints(self, attraction):
         return Hint.objects.filter(attraction=attraction).all()

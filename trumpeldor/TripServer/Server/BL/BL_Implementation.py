@@ -76,6 +76,10 @@ class BL_Implementation(BL_Abstract):
     def createUser(self, data):
         return self.DAL.createUser(data['name'], data['socialNetwork'])
 
+    def createHint(self, data):
+
+        return self.DAL.createHint(self.getAttraction(data), data['kind'], data['data'])
+
     def getHints(self, attraction):
         attr = self.getAttraction(attraction)
         return self.DAL.getHints(attr)

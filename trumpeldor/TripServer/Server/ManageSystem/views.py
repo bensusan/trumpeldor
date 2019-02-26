@@ -1,7 +1,7 @@
 from django.http import JsonResponse, Http404
 import null
 import random
-
+from rest_framework.response import Response
 from django.shortcuts import render
 from rest_framework.utils import json
 
@@ -55,22 +55,95 @@ class AmericanQuestion(generics.ListCreateAPIView):     #need to change to Creat
 #         attr = self.get_object(attrID)
 #         attr.delete()
 #         return JsonResponse()
+def generalPost(request, className, blFunction, classSerializer, many=False):
+    # if DEBUG:
+    #     print(className + ":", "Get:", request.data, sep="\n")
+    ans = blFunction(request.data)
+    ans = classSerializer(ans, many=many)
+    ans = json.loads(json.dumps(ans.data))
+    # if DEBUG:
+    #     print("Sent:", ans, sep="\n")
+    return Response(ans)
+
+def addAmericanQuestion(question, answers, indexOfCorrectAnswer, attraction):
+    aq = AmericanQuestion(question=question, answers=answers, indexOfCorrectAnswer=indexOfCorrectAnswer, attraction=attraction)
+    aq.save()
+    return aq
+
+def addTrack(subTrack, points, length):
+    track = None
+    if subTrack == null:
+        track = Track(length=length)
+    else:
+        track = Track(subTrack=subTrack, length=length)
+    track.save()
+    for p in points:
+        track.points.add(p)
+    return track
+
+def addAttraction(name, x, y, description, picturesURLS, videosURLS):
+    attraction = Attraction(name=name, x=x, y=y, description=description, picturesURLS=picturesURLS, videosURLS=videosURLS)
+    attraction.save()
+    return attraction
 
 
-class Attractions(APIView):
+def insertToDal(data):
+    a1 = addAttraction(data['name'], data['x'], data['y'], data['description'], [], [])
+    # aq1 = addAmericanQuestion("AQ1: Some question here ?", ["Correct answer",
+    #                                                         "Incorrect answer",
+    #                                                         "Incorrect answer",
+    #                                                         "Incorrect answer"], 1, a1)
+    track = addTrack(null, [a1], 1)
+    return a1
 
-    def get(self, request, format=None):
-        attractions = Attraction.objects.all()
-        serializer = AttractionSerializer(attractions, many=True)
-        return JsonResponse(serializer.data, safe=False)
 
-    def post(self, request, format=None):
-        print(request.data)
-        serializer = AttractionSerializer(data=request.data)
-        if serializer.is_valid():
-            serializer.save()
-            return JsonResponse(serializer.data, safe=False)
-        return JsonResponse(serializer.errors)
+class Attractions(generics.GenericAPIView):
+    serializer_class = AttractionSerializer
+
+    def post(self, request, *args, **kwargs):
+        return generalPost(
+            request,
+            "AttractionsManageSystem",
+            insertToDal,
+            AttractionSerializer)
+
+# class Attractions(generics.GenericAPIView):
+#     serializer_class = CreateTripSerializer
+#
+#     def post(self, request, *args, **kwargs):
+#         attraction = Attraction(request.data['name'], request.data['x'], request.data['y'], request.data['description'], [], [])
+#         attraction.save()
+#         fake = Track(None, [attraction], 1)
+#         fake.save()
+#         serializer = AttractionSerializer(attraction)
+#         return JsonResponse(serializer.data, safe=False)
+        # return generalPost(
+        #     request,
+        #     "CreateTrip",
+        #     BL.createTrip,
+        #     TripSerializer)
+
+# class Attractions(APIView):
+
+    # def get(self, request, format=None):
+    #     attractions = Attraction.objects.all()
+    #     serializer = AttractionSerializer(attractions, many=True)
+    #     return JsonResponse(serializer.data, safe=False)
+#
+#     def post(self, request, format=None):
+#         print(request.data)
+#         serializer = AttractionSerializer(data=request.data)
+#         if serializer.is_valid():
+#             serializer.data.picturesURLS = []
+#             serializer.data.videosURLS = []
+#             serializer.save()
+#             # attraction = Attraction(serializer['name'], serializer['x'], serializer['y'], serializer['description'], [], [])
+#             # attraction.save()
+#             fake = Track(None, [serializer.data], 1)
+#             fake.save()
+#             # serializer = Attraction(attraction)
+#             return JsonResponse(serializer.data, safe=False)
+#         return JsonResponse(serializer.errors)
 
 
 class SpecificAttraction(APIView):

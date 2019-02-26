@@ -31,6 +31,13 @@ def generalPost(request, className, blFunction, classSerializer, many=False):
     return Response(ans)
 
 
+class DEBUGHint(generics.GenericAPIView):
+    serializer_class = DEBUGHintSerializer
+
+    def post(self, request, *args, **kwargs):
+        return generalPost(request, "DEBUGHint", BL.createHint, HintSerializer)
+
+
 class SignUp(generics.GenericAPIView):
     serializer_class = SignUpSerializer
 

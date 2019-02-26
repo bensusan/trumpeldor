@@ -8,6 +8,14 @@ class AmericanQuestionSerializer(serializers.ModelSerializer):
         model = AmericanQuestion
 
 
+class DEBUGHintSerializer(serializers.ModelSerializer):
+    id = serializers.IntegerField()
+
+    class Meta:
+        fields = ("id", 'kind', 'data',)
+        model = Hint
+
+
 class HintSerializer(serializers.ModelSerializer):
     class Meta:
         fields = ('id', 'kind', 'data',)
