@@ -12,6 +12,11 @@ class SimpleTestForAttractions(TestCase):
         # >> > response.status_code
 
     def test_details(self):
+        response = self.client.get('/managementsystem/attrctions/')
+
+        # Check that catches error
+        self.assertEqual(response.status_code, 404)
+
         # Issue a GET request.
         response = self.client.get('/managementsystem/attractions/')
 
@@ -94,6 +99,12 @@ class SimpleTestForAQ(TestCase):
         response = self.dal_prox.getAmericanQuestion(attr)
         self.assertEqual(response, aq)
 
+        response = self.client.post('/usersystem/getAmericanQuestion/',
+                                    {'id': '1', 'subTrack': '', 'points': '{(x:323,y:2314),(x:332,y:3333)}',
+                                     'length': '132'})
+        # for object that doesnt exist because of unmatching fields
+        self.assertEqual(response.status_code, 404)
+
 
 
 class SimpleTestForFeedback(TestCase):
@@ -126,6 +137,17 @@ class SimpleTestForFeedback(TestCase):
         response = self.dal_prox.getFeedbacks(attr)
         self.assertEqual(response, feedb)
 
+        response = self.client.post('/usersystem/getFeedbacs/',
+                                    {'id': '1', 'question': 'had fun?', 'kind': 'text'})
+        # for object that doesnt exist
+        self.assertEqual(response.status_code, 404)
+
+        response = self.client.post('/usersystem/getFeedbacks/',
+                                    {'name': 'de vinchi', 'x': '32.1111', 'y': '23.43433',
+                                     'description': 'bla bla',
+                                     'picturesURLS': '{}', 'videosURLS': '{}'})
+        # for object that doesnt exist
+        self.assertEqual(response.status_code, 404)
 
 class SimpleTestForTrack(TestCase):
     def setUp(self):
@@ -160,6 +182,19 @@ class SimpleTestForTrack(TestCase):
         response = self.dal_prox.get_track(attr)
         self.assertEqual(response, tr)
 
+        response = self.client.post('/usersystem/notrealllll/',
+                                    {'id': '1', 'subTrack': '', 'points': '{(x:323,y:2314),(x:332,y:3333)}',
+                                     'length': '132'})
+
+        # for object that doesnt exist
+        self.assertEqual(response.status_code, 404)
+
+        response = self.client.post('/usersystem/getTrackAndNextAttractionByLengthAndUserLocation/',
+                                    {'id': '1', 'subTrack': '', 'points': '{(x:323,y:2314),(x:332,y:3333)}',
+                                     'length': '132'})
+        # for object that doesnt exist because of unmatching fields
+        self.assertEqual(response.status_code, 404)
+
 
 class SimpleTestForHint(TestCase):
     def setUp(self):
@@ -190,3 +225,9 @@ class SimpleTestForHint(TestCase):
         the_hint = Hint(1)
         response = self.dal_prox.getHints(attr)
         self.assertEqual(response, the_hint)
+
+        response = self.client.post('/usersystem/getHints/',
+                                    {'id': '1', 'subTrack': '', 'points': '{(x:323,y:2314),(x:332,y:3333)}',
+                                     'length': '132'})
+        # for object that doesnt exist because of unmatching fields
+        self.assertEqual(response.status_code, 404)
