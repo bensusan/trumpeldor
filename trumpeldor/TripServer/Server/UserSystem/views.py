@@ -2,7 +2,7 @@ import null
 from rest_framework.response import Response
 from django.http import Http404
 
-from rest_framework import generics
+from rest_framework import generics, views
 from ..serializers import *
 from Server.BL.BL import BLProxy
 from Server.BL.BL_Implementation import BL_Implementation
@@ -113,6 +113,27 @@ class GetAmericanQuestion(generics.GenericAPIView):
             AmericanQuestionSerializer)
 
 
+class GetExtendedTrack(generics.GenericAPIView):
+    serializer_class = GetExtendedTrackSerializer
+
+    def post(self, request, *args, **kwargs):
+        return generalPost(
+            request,
+            "GetExtendedTrack",
+            BL.getExtendedTrack,
+            TrackSerializer)
+
+
+class GetAttractionForDebug(views.APIView):
+
+    def get(self, request):
+        qs = Attraction.objects.first()
+        ans = AttractionSerializer(qs)
+        ans = json.loads(json.dumps(ans.data))
+        if DEBUG:
+            print("Sent:", ans, sep="\n")
+        return Response(ans)
+
 # class GetTrackById(generics.GenericAPIView):
 #     serializer_class = IdSerializer
 #
@@ -186,32 +207,49 @@ def addAttraction(name, x, y, description, picturesURLS, videosURLS):
 
 
 def insertToDal(data):
-    a1 = addAttraction("Attraction 1", "0.1", "0.1", "We Are in Attraction 1", ["x.jpg"], [])
-    a2 = addAttraction("Attraction 2", "0.2", "0.2", "We Are in Attraction 2", ["y.png"], [])
+    a1 = addAttraction("Meonot dalet", "31.263913", "34.796959", "We Are in Attraction 1", ["x.jpg"], [])
+    a2 = addAttraction("96 building", "31.264934", "34.802062", "We Are in Attraction 2", ["y.png"], [])
+    a3 = addAttraction("Shnizale", "31.265129", "34.801575", "We Are in Attraction 3", ["y.png"], ["x.mp4"])
     aq1 = addAmericanQuestion("AQ1: Some question here ?", ["Correct answer",
                                                             "Incorrect answer",
                                                             "Incorrect answer",
-                                                            "Incorrect answer"], 1, a1)
+                                                            "Incorrect answer"], 0, a1)
     aq2 = addAmericanQuestion("AQ2: Some question here ?", ["Incorrect answer",
                                                             "Correct answer",
                                                             "Incorrect answer",
+                                                            "Incorrect answer"], 1, a2)
+    aq2 = addAmericanQuestion("AQ3: Some question here ?", ["Incorrect answer",
+                                                            "Incorrect answer",
+                                                            "Correct answer",
                                                             "Incorrect answer"], 2, a2)
     h11 = addHint(a1, Hint.HINT_TEXT, "This is text hint for Attraction 1")
     h12 = addHint(a1, Hint.HINT_PICTURE, "x.jpg")
-    h13 = addHint(a1, Hint.HINT_MAP, "0.1,0.1")
+    h13 = addHint(a1, Hint.HINT_VIDEO, "x.mp4")
+    h14 = addHint(a1, Hint.HINT_MAP, "31.263913,34.796959")
 
-    h21 = addHint(a2, Hint.HINT_PICTURE, "y.png")
-    h22 = addHint(a2, Hint.HINT_TEXT, "This is text hint for Attraction 2")
-    h23 = addHint(a2, Hint.HINT_MAP, "0.2,0.2")
+    h21 = addHint(a2, Hint.HINT_TEXT, "This is text hint for Attraction 2")
+    h22 = addHint(a2, Hint.HINT_PICTURE, "y.png")
+    h23 = addHint(a2, Hint.HINT_VIDEO, "x.mp4")
+    h23 = addHint(a2, Hint.HINT_MAP, "31.264934,34.802062")
+
+    h31 = addHint(a3, Hint.HINT_TEXT, "This is text hint for Attraction 3")
+    h32 = addHint(a3, Hint.HINT_PICTURE, "reka.jpg")
+    h33 = addHint(a3, Hint.HINT_VIDEO, "x.mp4")
+    h33 = addHint(a3, Hint.HINT_MAP, "31.265129,34.801575")
 
     track1 = addTrack(null, [a1], 1)
     track2 = addTrack(null, [a2], 1)
+    track3 = addTrack(null, [a3], 1)
 
     track12 = addTrack(track1, [a2], 2)
+    track13 = addTrack(track1, [a3], 2)
+    track23 = addTrack(track2, [a3], 2)
+
+    track123 = addTrack(track12, [a3], 2)
 
     f1 = addFeedback("Feedback 1 rating ??", Feedback.FEEDBACK_RATING)
     f2 = addFeedback("Feedback 2 text ??", Feedback.FEEDBACK_TEXT)
-    return track12
+    return track123
 
 
 class AddToDal(generics.GenericAPIView):

@@ -6,36 +6,59 @@ using System.Threading.Tasks;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
-
+using trumpeldor.SheredClasses;
 namespace trumpeldor.Views
 {
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class NavigationPage : ContentPage
 	{
-
-        //((App)(Application.Current)).getGameController().currentTrip.GetCurrentAttraction()-for the hint
-
-        //public GameController gc = ((App)Application.Current).getGameController();
+        //        gc.currentTrip.GetCurrentAttraction();//-for the hint
+        public Attraction nextAttraction;
+        public static int hintsIndex = 0;
+        trumpeldor.SheredClasses.Point p;
+        public GameController gc = ((App)Application.Current).getGameController();
         public NavigationPage ()
 		{
 			InitializeComponent ();
-            scoreLabel.Text = "score: "/* + gc.currentTrip.score*/;
+            nextAttraction = gc.currentTrip.GetCurrentAttraction();
+            p = new trumpeldor.SheredClasses.Point(nextAttraction.x, nextAttraction.y);
+            //nextAttraction = gc.currentTrip.GetCurrentAttraction();
+            scoreLabel.Text = AppResources.score+ ": " + gc.currentTrip.score;
             //mapImage.Source = ImageSource.FromResource("trumpeldor.Resources.MapIcon.png");
-            mapImage.Text = "map";
+            mapImage.Text = AppResources.map;
             //SheredClasses.Clue nextClue = gc.GetFisrtHint();
             //nextClue.addToLayout(hintsLayout);
         }
 
-        private void Get_Hint_Button_Clicked(object sender, EventArgs e)
+        private async void Get_Hint_Button_Clicked(object sender, EventArgs e)
         {
-            //SheredClasses.Clue nextHint=((App)(Application.Current)).getGameController().GetHint();
-            //nextHint.addToLayout(hintsLayout);
-            //scoreLabel.Text = "score: " + gc.currentTrip.score; 
+            if (nextAttraction != null && hintsIndex>=0 && hintsIndex<nextAttraction.hints.Count)
+            {
+                
+                Hint nextHint;
+                nextHint = nextAttraction.hints[hintsIndex];
+                if (nextHint != null)
+                {
+                    if (nextHint.kind.Equals("HM"))//hint map
+                    {
+                        await Navigation.PushModalAsync(new MapPage(p));
+                    }
+                    else
+                    {
+                        await Navigation.PushModalAsync(new HintPage(nextHint));
+                    }
+                    //nextHint.addToLayout(hintsLayout);
+                    //scoreLabel.Text = "score: " + gc.currentTrip.score;
+
+                    hintsIndex++;
+                }
+            }
+            
         }
 
         private void Next_Destination_Button_Clicked(object sender, EventArgs e)
         {
-            DisplayAlert("success", "You've Reached Your Destionation", "OK");
+            DisplayAlert(AppResources.success, AppResources.You_have_Reached_Your_Destionation, AppResources.ok);
             var existingPages = Navigation.NavigationStack.ToList();
             foreach (var page in existingPages)
             {
@@ -47,6 +70,14 @@ namespace trumpeldor.Views
         private async void mapImage_Clicked(object sender, EventArgs e)
         {
             await Navigation.PushModalAsync(new MapPage());
+        }
+
+        private void addToLayout(StackLayout layout)
+        {
+            Button btn = new Button();
+            string strIndex = (hintsIndex + 1).ToString();
+            btn.Text = "Hint " + strIndex;
+            layout.Children.Add(btn);
         }
     }
 }

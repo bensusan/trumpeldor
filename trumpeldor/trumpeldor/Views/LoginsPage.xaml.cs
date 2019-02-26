@@ -22,9 +22,9 @@ namespace trumpeldor.Views
             await Navigation.PushModalAsync(new AccessFacebookProfile());
             //Application.Current.MainPage = new AccessFacebookProfile();
         }
-        private async void Anonymus_Clicked(object sender, EventArgs e)
+        /*private async void Anonymus_Clicked(object sender, EventArgs e)
         {
             await Navigation.PushModalAsync(new groupCreationPage());
-        }
+        }*/
     }
 }

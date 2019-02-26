@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Timers;
 using System.Threading.Tasks;
+using trumpeldor.SheredClasses;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Maps;
@@ -15,18 +16,23 @@ namespace trumpeldor.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class MapPage : ContentPage
     {
-        //fixed point
-        private GameController gc = ((App)(Application.Current)).getGameController();
-        private const double DESIRED_DISTANCE = 30;
+        
+        private const double DESIRED_DISTANCE = 600;
         private const double DESIRED_SECONDS = 10;
-        Point p = new Point(31.262566, 34.796832);
+
+        //Point p = new Point(31.262566, 34.796832); (latitude -> x, longtitude -> y)
+        //Point p = new Point(31.262566, 34.796832);
+        trumpeldor.SheredClasses.Point p;
+
         Pin previous = null;
         //current point
         double currLat = 0, currLong = 0;
-
-        public MapPage(Point p)
+        public GameController gc = ((App)Application.Current).getGameController();
+        public Attraction nextAttraction;
+        public MapPage(trumpeldor.SheredClasses.Point p)
         {
             InitializeComponent();
+            nextAttraction = gc.currentTrip.GetCurrentAttraction();
             Map map = new Map()
             {
                 HeightRequest = 100,
@@ -43,7 +49,8 @@ namespace trumpeldor.Views
         public MapPage()
         {
             InitializeComponent();
-
+            nextAttraction = gc.currentTrip.GetCurrentAttraction();
+            p = new trumpeldor.SheredClasses.Point(nextAttraction.x, nextAttraction.y);
             //gc.currentTrip.GetCurrentAttraction().x
             Map map = new Map()
             {
@@ -76,21 +83,22 @@ namespace trumpeldor.Views
                     OnLocationCheck(map);
 
                     //!((_&&_)||(_&&_))-->!(_&&_) && !(_&&_)
-                    if (DistanceBetween(currLat, currLong, p.X, p.Y) > DESIRED_DISTANCE)
+                    if (DistanceBetween(currLat, currLong, p.x, p.y) > DESIRED_DISTANCE)
                     {
-                        DisplayAlert("not arrived", DistanceBetween(currLat, currLong, p.X, p.Y).ToString() , "Close");
+                        DisplayAlert(AppResources.not_arrived, DistanceBetween(currLat, currLong, p.x, p.y).ToString()+"curr lat: "+ currLat.ToString() +"curr long: "+ currLong.ToString() +"x: "+p.x + "y: " + p.y+" point info: "+nextAttraction.name, AppResources.close);
                         return true;
                     }
                     else
                     {
-                        DisplayAlert("arrived", "arrived!  "+ DistanceBetween(currLat, currLong, p.X, p.Y).ToString(), "Close");
+                        DisplayAlert(AppResources.arrived, AppResources.arrived+"!  " + DistanceBetween(currLat, currLong, p.x, p.y).ToString(), AppResources.close);
+                        Application.Current.MainPage = new AttractionPage();
                         return false;
                     }
                     // True = Repeat again, False = Stop the timer
                 }
                 catch (Exception e)
                 {
-                    Console.WriteLine("ERROR: "+e.Message);
+                    Console.WriteLine(AppResources.error+": "+e.Message);
                     return false;
                 }
             });
@@ -113,12 +121,12 @@ namespace trumpeldor.Views
         }
 
 
-        private void AddPointToMap(Map map, Point p)
+        private void AddPointToMap(Map map, trumpeldor.SheredClasses.Point p)
         {
             Pin toAdd = new Pin
             {
                 Type = PinType.Place,
-                Position = new Position(p.X, p.Y),
+                Position = new Position(p.x, p.y),
                 Label = "the attraction"
             };
             map.Pins.Add(toAdd);
@@ -146,7 +154,7 @@ namespace trumpeldor.Views
             map.Pins.Add(newCurrLocationPin);
             previous = newCurrLocationPin;
         }
-        public double DistanceBetween(double lat1, double lon1, double lat2, double lon2)//distance in meters
+        public static double DistanceBetween(double lat1, double lon1, double lat2, double lon2)//distance in meters
         {
             double R = 6371000; // Radius of the earth in meters
             double dLat = deg2rad(lat2 - lat1);  // deg2rad below
@@ -161,7 +169,7 @@ namespace trumpeldor.Views
             return d;
         }
 
-        public double deg2rad(double deg)
+        public static double deg2rad(double deg)
         {
             return deg * (Math.PI / 180);
         }

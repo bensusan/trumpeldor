@@ -1,14 +1,17 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="trumpeldor.Views.FirstPage">
+             x:Class="trumpeldor.Views.FirstPage"
+             xmlns:translator="clr-namespace:trumpeldor.Helpers">
 
 
     <ContentPage.Content>
         <StackLayout Style="{DynamicResource mainStackLayout}">
-            <Button Text="play" Clicked="Play_Button_Clicked" Style="{StaticResource largeButtonStyle}"/>
-            <Button Text="how to play" Clicked="HowToPlay_Button_Clicked" Style="{StaticResource largeButtonStyle}" />
-            <Button Text="information" Clicked="Info_Button_Clicked" Style="{StaticResource largeButtonStyle}" AutomationId="ToHint"/>
+            <Button Text="english" Clicked="Button_Clicked" Style="{StaticResource largeButtonStyle}"/>
+            <Button Text="עיברית" Clicked="Button_Clicked_1" Style="{StaticResource largeButtonStyle}"/>
+            <Button Text="{translator:Translate play}" Clicked="Play_Button_Clicked" Style="{StaticResource largeButtonStyle}"/>
+            <Button Text="{translator:Translate how_to_play}" Clicked="HowToPlay_Button_Clicked" Style="{StaticResource largeButtonStyle}" />
+            <Button Text="{translator:Translate information}" Clicked="Info_Button_Clicked" Style="{StaticResource largeButtonStyle}" AutomationId="ToHint"/>
             <Image x:Name="tryImg" Style="{DynamicResource largeImageStyle}"/>
         </StackLayout>
     </ContentPage.Content>

@@ -6,17 +6,44 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using trumpeldor.SheredClasses;
+using System.Configuration;
+using System.Threading;
+using trumpeldor.Configuration;
 
 namespace trumpeldor
 {
     class ServerConection
     {
+        private static ServerConection instance = null;
         //public readonly static string IP = "132.72.23.64";
-        public readonly static string IP = "132.72.213.116";
-        public readonly static string PORT = "12345";
-        private readonly String urlPrefix = "http://" + IP +":" + PORT + "/usersystem/";
-        public ServerConection()
+        //public readonly static string IP = GetIP().Result;
+        //public readonly static string PORT = "12345";
+        //private readonly String urlPrefix = "http://" + IP +":" + PORT + "/usersystem/";
+        public static string IP;
+        public static string PORT;
+        public static int DEBUG;
+        private string urlPrefix;
+
+        public static ServerConection getInstance()
         {
+            if (instance == null)
+            {
+                using (var cts = new CancellationTokenSource())
+                {
+                    var config = ConfigurationManager.Instance.GetAsync(cts.Token).Result;
+                    IP = config.IP;
+                    PORT = config.PORT;
+                    DEBUG = config.DEBUG;
+                }
+                instance = new ServerConection();
+                
+            }
+            return instance;
+        }
+
+        private ServerConection()
+        {
+            urlPrefix = "http://" + IP + ":" + PORT + "/usersystem/";
         }
         
         public async Task<User> SignUp(String name, String socialNetwork)
@@ -30,10 +57,18 @@ namespace trumpeldor
             return JsonConvert.DeserializeObject<User>(jsonResponse);
         }
 
-        internal async Task<KeyValuePair<string, List<int>>> LoadRelevantInformationFromLastTrip(User currentUser)
+        internal async Task<RelevantInformation> LoadRelevantInformationFromLastTrip(User currentUser)
         {
             string jsonResponse = await SendToServerAndGetResponseBack(currentUser, "getRelevantPreviousTripInformation/");
-            return JsonConvert.DeserializeObject<KeyValuePair<string, List<int>>>(jsonResponse);
+            return JsonConvert.DeserializeObject<RelevantInformation>(jsonResponse);
+        }
+
+        internal async Task<Attraction> GetAttractionForDebug()
+        {
+            string jsonResponse = await GetFromServer("getAttractionForDebug/");
+            Attraction toReturn = JsonConvert.DeserializeObject<Attraction>(jsonResponse);
+            await GetFullAttraction(toReturn);
+            return toReturn;
         }
 
         internal async Task GetFullAttraction(Attraction attraction)
@@ -57,6 +92,8 @@ namespace trumpeldor
         internal async Task<AmericanQuestion> GetAmericanQuestionByAttraction(Attraction attraction)
         {
             string jsonResponse = await SendToServerAndGetResponseBack(new { id = attraction.id, }, "getAmericanQuestion/");
+            if (jsonResponse.Equals("{\"question\":\"\",\"answers\":null,\"indexOfCorrectAnswer\":null}"))
+                return null;
             return JsonConvert.DeserializeObject<AmericanQuestion>(jsonResponse);
         }
 
@@ -84,7 +121,7 @@ namespace trumpeldor
         //}
 
 
-        internal async Task<Trip> CreateTripAsync(User currentUser, string groupName, List<int> playersAges, int trackLength, float xUser, float yUser)
+        internal async Task<Trip> CreateTripAsync(User currentUser, string groupName, List<int> playersAges, int trackLength, double xUser, double yUser)
         {
             var toSend = new { user = currentUser, groupName = groupName, playersAges = playersAges, trackLength = trackLength, x = xUser, y = yUser, };
             string jsonResponse = await SendToServerAndGetResponseBack(toSend, "createTrip/");
@@ -97,6 +134,12 @@ namespace trumpeldor
             trip.track = await GetFullTrack(trip.track);
             trip.feedbacks = await GetFeedbacks(trip);            
             return trip;
+        }
+
+        internal async Task<Track> GetExtendedTrack(Track track, SheredClasses.Point userLocation)
+        {
+            string jsonResponse = await SendToServerAndGetResponseBack(new { track = track, x = userLocation.x, y = userLocation.y,}, "getExtendedTrack/");
+            return JsonConvert.DeserializeObject<Track>(jsonResponse);
         }
 
         internal async Task<Track> GetFullTrack(Track track)
@@ -149,10 +192,15 @@ namespace trumpeldor
             }
         }
 
-        private async Task<string> GetFromServer(HttpClient client, string endOfUri)
+        private async Task<string> GetFromServer(string endOfUri)
         {
-            var uri = urlPrefix + endOfUri;
-            return await client.GetStringAsync(uri);
+            using (var client = new HttpClient())
+            {
+                var uri = urlPrefix + endOfUri;
+                var response = await client.GetAsync(uri);
+                response.EnsureSuccessStatusCode();
+                return await response.Content.ReadAsStringAsync();
+            }
         }
     }
 }

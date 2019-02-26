@@ -1,16 +1,17 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="trumpeldor.Views.AttractionPage">
+             x:Class="trumpeldor.Views.AttractionPage"
+             xmlns:translator="clr-namespace:trumpeldor.Helpers">
     <ContentPage.Content>
-        <StackLayout>
+        <StackLayout Style="{DynamicResource mainStackLayout}">
             <Label x:Name = "scoreLabel" Style="{DynamicResource lableStyle}"/>
             <Label x:Name = "attractionName" Style="{DynamicResource lableStyle}"/>
             <Image x:Name = "attractionImage" Style="{DynamicResource largeImageStyle}"/>
-            <Button x:Name = "informationButton" Text="information" Clicked="Information_Button_Clicked" Style="{StaticResource largeButtonStyle}"/>
-            <Button x:Name = "missionButton" Text="mission" Clicked="Mission_Button_Clicked" Style="{StaticResource largeButtonStyle}"/>
-            <Button x:Name = "questionButton" Text="question" Clicked="Question_Button_Clicked" Style="{StaticResource largeButtonStyle}"/>
-            <Button x:Name = "watchAgainButton" Text="watch again" Clicked="Watch_Again_Button_Clicked" Style="{StaticResource largeButtonStyle}"/>
+            <Button x:Name = "informationButton" Text="{translator:Translate information}" Clicked="Information_Button_Clicked" Style="{StaticResource largeButtonStyle}"/>
+            <Button x:Name = "missionButton" Text="{translator:Translate mission}" Clicked="Mission_Button_Clicked" Style="{StaticResource largeButtonStyle}"/>
+            <Button x:Name = "questionButton" Text="{translator:Translate question}" Clicked="Question_Button_Clicked" Style="{StaticResource largeButtonStyle}"/>
+            <Button x:Name = "watchAgainButton" Text="{translator:Translate watch_again}" Clicked="Watch_Again_Button_Clicked" Style="{StaticResource largeButtonStyle}"/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

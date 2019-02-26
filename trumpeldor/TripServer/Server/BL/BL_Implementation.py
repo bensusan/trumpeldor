@@ -3,11 +3,12 @@ from .BL import BL_Abstract
 from Server.DAL.DAL import DALProxy
 from Server.serializers import *
 from Server.models import *
+from itertools import chain
 
 
 def getDistance(lat1, lon1, lat2, lon2):
     def haversin(x):
-        return sin(x /  2) ** 2
+        return sin(x / 2) ** 2
 
     return 2 * asin(sqrt(
         haversin(lat2 - lat1) +
@@ -39,7 +40,7 @@ class BL_Implementation(BL_Abstract):
     def getAllAttractionsFromTrack(self, track):
         if track.subTrack is None:
             return track.points.all()
-        return track.points.all() + self.getAllAttractionsFromTrack(track.subTrack)
+        return track.points.all() | self.getAllAttractionsFromTrack(track.subTrack)
 
     def getClosestAttractionFromTrack(self, track, xUser, yUser):
         allAttractions = self.getAllAttractionsFromTrack(track)
@@ -53,9 +54,7 @@ class BL_Implementation(BL_Abstract):
 
         return minAttraction, minDist
 
-    def getTrackAndNextAttractionByLengthAndUserLocation(self, trackLength, xUser, yUser):
-        tracks = self.DAL.getTracksWithSameLength(trackLength)
-
+    def getMinTrackAndAttraction(self, tracks, xUser, yUser):
         minTrack, minAttraction, minDist = None, None, inf
         for track in tracks:
             attraction, dist = self.getClosestAttractionFromTrack(track, xUser, yUser)
@@ -63,6 +62,10 @@ class BL_Implementation(BL_Abstract):
                 minDist, minAttraction, minTrack = dist, attraction, track
 
         return minTrack, minAttraction
+
+    def getTrackAndNextAttractionByLengthAndUserLocation(self, trackLength, xUser, yUser):
+        tracks = self.DAL.getTracksWithSameLength(trackLength)
+        return self.getMinTrackAndAttraction(tracks, xUser, yUser)
 
     def createTrip(self, data):
         track, attraction = self.getTrackAndNextAttractionByLengthAndUserLocation(data['trackLength'], data['x'], data['y'])
@@ -97,3 +100,36 @@ class BL_Implementation(BL_Abstract):
 
     def getTrip(self, trip):
         return self.DAL.getTrip(trip['id'])
+
+    def add_attraction(self, attraction):
+        return self.DAL.add_attraction(attraction['name'], attraction['x'], attraction['y'],
+                                       attraction['description'], attraction['picturesURLS'], attraction['videosURLS'])
+
+    def add_hint(self, attraction, hint):
+        return self.DAL.add_hint(attraction, hint['kind'], attraction['data'])
+
+    def add_american_question(self, attraction, a_question):
+        return self.DAL.add_american_question(a_question['question'], a_question['answers'],a_question['indexOfCorrectAnswer'],
+                                       a_question['question'], attraction)
+
+    def add_track(self, track):
+        return self.DAL.add_track(track['subTrack'], track['points'], track['length'])
+
+    def add_feedback_question(self, question, kind):#question, kind
+        return self.DAL.add_feedback_question(question, kind)
+
+    def get_track(self, track_len):
+        return self.DAL.add_track(track_len)
+
+    def get_attraction(self, id):
+        return self.DAL.get_attraction(id)
+
+    def get_attractions(self):
+        return self.DAL.get_attractions()
+
+    def getExtendedTrack(self, data):
+        track = self.DAL.getTrackById(data["track"]["id"])
+        tracks = self.DAL.getAllTracksThatIncludeThisTrack(track)
+        track, attraction = self.getMinTrackAndAttraction(tracks, data["x"], data["y"])
+        return track
+

@@ -1,15 +1,16 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="trumpeldor.Views.FinishTrackPage">
+             x:Class="trumpeldor.Views.FinishTrackPage"
+             xmlns:translator="clr-namespace:trumpeldor.Helpers">
     <ContentPage.Content>
         <StackLayout Style="{DynamicResource mainStackLayout}">
-            <Label x:Name="titleLabel" Text="congrdulation you finish the track with " Style="{DynamicResource lableStyle}"/>
-            <Button x:Name = "continueButton" Text="continue to longer track" Clicked="Continiue_Button_Clicked" Style="{StaticResource largeButtonStyle}"/> 
-            <Button x:Name = "shareButton" Text="share" Clicked="Share_Button_Clicked" Style="{StaticResource largeButtonStyle}"/>
-            <Button x:Name = "leadingTableButton" Text="Leading Table" Clicked="Leading_Table_Button_Clicked" Style="{StaticResource largeButtonStyle}"/>
-            <Button x:Name = "feedbackButton" Text="feedback" Clicked="feedback_Button_Clicked" Style="{StaticResource largeButtonStyle}"/>
-            <Button x:Name = "informationButton" Text="information" Clicked="information_Button_Clicked" Style="{StaticResource largeButtonStyle}"/>
+            <Label x:Name="titleLabel" Text="{translator:Translate congrdulation_you_finish_the_track_with }" Style="{DynamicResource lableStyle}"/>
+            <Button x:Name = "continueButton" Text="{translator:Translate continue_to_longer_track}" Clicked="Continiue_Button_Clicked" Style="{StaticResource largeButtonStyle}"/>
+            <Button x:Name = "shareButton" Text="{translator:Translate share}" Clicked="Share_Button_Clicked" Style="{StaticResource largeButtonStyle}"/>
+            <Button x:Name = "leadingTableButton" Text="{translator:Translate leading_Table}" Clicked="Leading_Table_Button_Clicked" Style="{StaticResource largeButtonStyle}"/>
+            <Button x:Name = "feedbackButton" Text="{translator:Translate feedback}" Clicked="feedback_Button_Clicked" Style="{StaticResource largeButtonStyle}"/>
+            <Button x:Name = "informationButton" Text="{translator:Translate information}" Clicked="information_Button_Clicked" Style="{StaticResource largeButtonStyle}"/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

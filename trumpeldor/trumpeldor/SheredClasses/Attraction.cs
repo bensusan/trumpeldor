@@ -20,5 +20,11 @@ namespace trumpeldor.SheredClasses
         {
             return picturesURLS != null && picturesURLS.Count > 0 ? picturesURLS[0] : "";    //TODO: for now return first image.
         }
+
+        internal string GetARURL()
+        {
+            //TODO
+            return "";
+        }
     }
 }

@@ -57,7 +57,7 @@ ROOT_URLCONF = 'TripServer.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'templates')]
+        'DIRS': [os.path.join(BASE_DIR, 'Server/templates')]
         ,
         'APP_DIRS': True,
         'OPTIONS': {
@@ -80,7 +80,7 @@ WSGI_APPLICATION = 'TripServer.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'ProjectFirstIteration',
+        'NAME': 'ProjectSemester2',
         'USER': 'postgres',
         'PASSWORD': 'trumpeldor',
         'HOST': '127.0.0.1',
@@ -133,3 +133,5 @@ STATICFILES_DIRS = (
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+VALID_SECTOR = (0, 0, 0, 0)     # (Min_X, Max_X, Min_Y, Max_Y)

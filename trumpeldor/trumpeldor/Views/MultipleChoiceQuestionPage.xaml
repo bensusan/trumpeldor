@@ -1,15 +1,16 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="trumpeldor.Views.MultipleChoiceQuestionPage">
+             x:Class="trumpeldor.Views.MultipleChoiceQuestionPage"
+             xmlns:translator="clr-namespace:trumpeldor.Helpers">
     <ContentPage.Content>
         <StackLayout Style="{DynamicResource mainStackLayout}">
             <Label x:Name = "scoreLabel"  Style="{DynamicResource lableStyle}"/>
             <Label x:Name = "attractionQuestion" Style="{DynamicResource lableStyle}"/>
-            <Image x:Name="attractionQuestionImage" Style="{DynamicResource largeImageStyle}"/>
+            <!--<Image x:Name="attractionQuestionImage" Style="{DynamicResource largeImageStyle}"/>-->
             <StackLayout x:Name="answersLayout" Style="{DynamicResource mainorStackLayout}">
             </StackLayout>
-            <Button x:Name="returnButton" Text="information" Clicked="returnButton_Clicked" Style="{StaticResource largeButtonStyle}"/>
+            <Button x:Name="returnButton" Text="{translator:Translate information}" Clicked="returnButton_Clicked" Style="{StaticResource largeButtonStyle}"/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

@@ -1,3 +1,5 @@
+import null
+
 from Server.models import *
 from .DAL import DAL_Abstract
 
@@ -49,3 +51,49 @@ class DAL_Implementation(DAL_Abstract):
 
     def getTrip(self, tripId):
         return Trip.objects.filter(id=tripId).first()
+
+    def add_attraction(self, name, x, y, description, picturesURLS, videosURLS):
+        attraction = Attraction(name=name, x=x, y=y, description=description, picturesURLS=picturesURLS,
+                                videosURLS=videosURLS)
+        attraction.save()
+        return attraction
+
+    def add_hint(self, attraction, kind, data):
+        hint = Hint(attraction=attraction, kind=kind, data=data)
+        hint.save()
+        return hint
+
+    def add_american_question(self, question, answers, indexOfCorrectAnswer, attraction):
+        aq = AmericanQuestion(question=question, answers=answers, indexOfCorrectAnswer=indexOfCorrectAnswer,
+                              attraction=attraction)
+        aq.save()
+        return aq
+
+    def add_track(self, subTrack, points, length):
+        track = None
+        if subTrack == null:
+            track = Track(length=length)
+        else:
+            track = Track(subTrack=subTrack, length=length)
+        track.save()
+        for p in points:
+            track.points.add(p)
+        return track
+
+    def add_feedback_question(self, question, kind):
+        feedback = Feedback(question=question, kind=kind)
+        feedback.save()
+        return feedback
+
+    def get_track(self, track_len):
+        return Track.objects.filter(length=track_len).all()
+
+    def get_attraction(self, id):
+        return Attraction.objects.get(pk=id)
+
+    def get_attractions(self):
+        return Attraction.objects.all()
+
+    def getAllTracksThatIncludeThisTrack(self, track):
+        return Track.objects.filter(subTrack=track).all()
+

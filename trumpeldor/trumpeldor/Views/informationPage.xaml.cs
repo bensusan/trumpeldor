@@ -16,9 +16,12 @@ namespace trumpeldor.Views
 		{
 			InitializeComponent ();
             generalInformation.Text = ((App)Application.Current).getGameController().GetGeneralInformation();
-            
-
-
         }
-	}
+
+        public informationPage(string information)
+        {
+            InitializeComponent();
+            generalInformation.Text = information;
+        }
+    }
 }

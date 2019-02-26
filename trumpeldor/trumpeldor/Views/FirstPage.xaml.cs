@@ -1,5 +1,7 @@
-﻿using System;
+﻿using Plugin.Multilingual;
+using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -15,8 +17,7 @@ namespace trumpeldor.Views
     {
 		public FirstPage ()
 		{
-			InitializeComponent();
-           
+            InitializeComponent();
         }
 
         private void Play_Button_Clicked(object sender, EventArgs e)
@@ -25,13 +26,13 @@ namespace trumpeldor.Views
             Application.Current.MainPage = new LoginsPage();
         }
 
-        private async void HowToPlay_Button_Clicked(object sender, EventArgs e)
+        private void HowToPlay_Button_Clicked(object sender, EventArgs e)
         {
-            //Application.Current.MainPage = new instructionsPage();
+            Application.Current.MainPage = new instructionsPage();
 
 
 
-            await Navigation.PushModalAsync(new MapPage());
+            //await Navigation.PushModalAsync(new MapPage());
             //Application.Current.MainPage = new NavigationPage();
 
 
@@ -55,16 +56,25 @@ namespace trumpeldor.Views
                 * async
                 * await Navigation.PushModalAsync(new NavigationPage(new informationPage()));
             */
-            //Application.Current.MainPage = new informationPage();
+            Application.Current.MainPage = new informationPage();
+            //Application.Current.MainPage = new AttractionPage(await GameController.getInstance().GetTempAttraction());
 
             //await Navigation.PushModalAsync(new HintPage("31.263440,34.799115"));
             //await Navigation.PushModalAsync(new HintPage("http://132.72.23.64:12345/media/x.jpg"));
-            await Navigation.PushModalAsync(new HintPage("this is a text hint"));
+            //await Navigation.PushModalAsync(new HintPage("this is a text hint"));
             //await Navigation.PushModalAsync(new MapPage(new Point(31.263440, 34.799115)));
         }
 
+        private void Button_Clicked(object sender, EventArgs e)
+        {
+            CrossMultilingual.Current.CurrentCultureInfo = new CultureInfo("en");
+            Application.Current.MainPage = new FirstPage();
+        }
 
-
-        
+        private void Button_Clicked_1(object sender, EventArgs e)
+        {
+            CrossMultilingual.Current.CurrentCultureInfo = new CultureInfo("he");
+            Application.Current.MainPage = new FirstPage();
+        }
     }
 }

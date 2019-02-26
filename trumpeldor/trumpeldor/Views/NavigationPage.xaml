@@ -1,17 +1,18 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="trumpeldor.Views.NavigationPage">
+             x:Class="trumpeldor.Views.NavigationPage"
+             xmlns:translator="clr-namespace:trumpeldor.Helpers">
     <ContentPage.Content>
         <StackLayout Style="{DynamicResource mainStackLayout}">
 
             <Label x:Name="scoreLabel" Style="{DynamicResource lableStyle}"/>
-            <StackLayout x:Name="hintsLayout" Style="{DynamicResource mainorStackLayout}"> 
-                <Label Text="hints" Style="{DynamicResource lableStyle}"/>
+            <StackLayout x:Name="hintsLayout" Style="{DynamicResource mainorStackLayout}">
+                <Label Text="{translator:Translate hints}" Style="{DynamicResource lableStyle}"/>
             </StackLayout>
-            <Button Text="add hint" Clicked="Get_Hint_Button_Clicked" Style="{StaticResource largeButtonStyle}" /> 
-            <Button Text="You've Reached Your Destionation" Clicked="Next_Destination_Button_Clicked" Style="{StaticResource largeButtonStyle}" />
-            <Label Text="map:" Style="{DynamicResource lableStyle}"/>
+            <Button Text="{translator:Translate add_hint}" Clicked="Get_Hint_Button_Clicked" Style="{StaticResource largeButtonStyle}" />
+            <Button Text="{translator:Translate You_have_Reached_Your_Destionation}" Clicked="Next_Destination_Button_Clicked" Style="{StaticResource largeButtonStyle}" />
+            <Label Text="{translator:Translate map}" Style="{DynamicResource lableStyle}"/>
             <Button x:Name="mapImage" Clicked="mapImage_Clicked"/>
             <!--<Image x:Name="mapImage" Style="{DynamicResource smallImageStyle}"/>-->
         </StackLayout>
