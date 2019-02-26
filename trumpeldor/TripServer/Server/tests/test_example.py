@@ -129,6 +129,6 @@ class SimpleTestForHint(TestCase):
 
         response = self.client.post('/usersystem/getHints/',
                                     {'id':'1', 'kind':'text', 'data':'this is a hint!'})
-        tr = Track(1)
-        response = self.dal_prox.getAmericanQuestion(attr)
-        self.assertEqual(response, tr)
+        the_hint = Hint(1)
+        response = self.dal_prox.getHints(attr)
+        self.assertEqual(response, the_hint)
