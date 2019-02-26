@@ -109,27 +109,27 @@ class SimpleTestForTrack(TestCase):
         response = self.dal_prox.getAmericanQuestion(attr)
         self.assertEqual(response, tr)
 
-        class SimpleTestForHint(TestCase):
-            def setUp(self):
-                # Every test needs a client.
-                self.dal_abst = DAL_Abstract()
-                self.dal_prox = DALProxy()
-                self.dal_impl = DAL_Implementation()
-                self.dal_prox.setImplementation(self.dal_impl)
-                self.client = Client()
+class SimpleTestForHint(TestCase):
+    def setUp(self):
+        # Every test needs a client.
+        self.dal_abst = DAL_Abstract()
+        self.dal_prox = DALProxy()
+        self.dal_impl = DAL_Implementation()
+        self.dal_prox.setImplementation(self.dal_impl)
+        self.client = Client()
 
-            def test_details(self):
-                response = self.client.post('/managementsystem/attractions/',
-                                            {'name': 'de vinchi', 'x': '32.1111', 'y': '23.43433',
-                                             'description': 'bla bla',
-                                             'picturesURLS': '{}', 'videosURLS': '{}'})
-                attr = Attraction(1)
-                response = self.dal_prox.getAmericanQuestion(attr)
-                self.assertEqual(response, None)
+    def test_details(self):
+        response = self.client.post('/managementsystem/attractions/',
+                                    {'name': 'de vinchi', 'x': '32.1111', 'y': '23.43433',
+                                        'description': 'bla bla',
+                                        'picturesURLS': '{}', 'videosURLS': '{}'})
+        attr = Attraction(1)
+        response = self.dal_prox.getAmericanQuestion(attr)
+        self.assertEqual(response, None)
 
-                response = self.client.post('/usersystem/getAmericanQuestion/',
-                                            {'id': '1', 'subTrack': '', 'points': '{(x:323,y:2314),(x:332,y:3333)}',
-                                             'length': '132'})
-                tr = Track(1)
-                response = self.dal_prox.getAmericanQuestion(attr)
-                self.assertEqual(response, tr)
+        response = self.client.post('/usersystem/getAmericanQuestion/',
+                                    {'id': '1', 'subTrack': '', 'points': '{(x:323,y:2314),(x:332,y:3333)}',
+                                        'length': '132'})
+        tr = Track(1)
+        response = self.dal_prox.getAmericanQuestion(attr)
+        self.assertEqual(response, tr)
