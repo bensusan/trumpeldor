@@ -1,6 +1,7 @@
 from rest_framework import serializers
 from .models import *
 
+# we can see what is being sent
 
 class AmericanQuestionSerializer(serializers.ModelSerializer):
     class Meta:

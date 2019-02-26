@@ -15,7 +15,7 @@ urlpatterns = {
     path('track/', Track.as_view()),
     # path('americanQuestion/', views.AmericanQuestion.as_view()),
     # path('attraction/(\d+)/(\d+)/', views.SpecificAttraction.as_view()),
-    # path('attractions/', views.Attractions.as_view()),
+    path('attractions/', views.Attractions.as_view()),
     # path('tracks/', views.Tracks.as_view()),
     # path('feedback/', views.Feedback.as_view()),
     # # path('hint/', views.Hint.as_view()),
