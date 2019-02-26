@@ -240,4 +240,7 @@
   <data name="You_have_Reached_Your_Destionation" xml:space="preserve">
     <value>הגעת ליעד</value>
   </data>
+  <data name="Destionation_Complete" xml:space="preserve">
+    <value>סיימת יעד!</value>
+  </data>
 </root>

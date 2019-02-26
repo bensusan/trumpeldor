@@ -57,6 +57,9 @@ class BL_Abstract(object):
             user = self.createUser(data)
         return user
 
+    def getExtendedTrack(self, data):
+        raise NotImplementedError("Should have implemented this")
+
 
 class BLProxy(BL_Abstract):
     Implementation = None
@@ -128,3 +131,8 @@ class BLProxy(BL_Abstract):
         if self.Implementation is None:
             raise NotImplementedError("Should have implemented this")
         return self.Implementation.getTrip(trip)
+
+    def getExtendedTrack(self, data):
+        if self.Implementation is None:
+            raise NotImplementedError("Should have implemented this")
+        return self.Implementation.getExtendedTrack(data)

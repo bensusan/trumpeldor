@@ -44,3 +44,6 @@ class DAL_Implementation(DAL_Abstract):
 
     def getTrip(self, tripId):
         return Trip.objects.filter(id=tripId).first()
+
+    def getAllTracksThatIncludeThisTrack(self, track):
+        return Track.objects.filter(subTrack=track).all()
