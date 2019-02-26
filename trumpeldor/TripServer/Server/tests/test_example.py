@@ -151,7 +151,7 @@ class SimpleTestForTrack(TestCase):
 
         response = self.client.post('/usersystem/getTrackAndNextAttractionByLengthAndUserLocation/',
                                     {'id': '1', 'subTrack': '', 'points': '{(x:323,y:2314),(x:332,y:3333)}',
-                                     'length': '132'})
+                                     'length': '132'}) # need to know if points were added the way they should
 
         # Check that the response is 200 OK.
         self.assertEqual(response.status_code, 200)
