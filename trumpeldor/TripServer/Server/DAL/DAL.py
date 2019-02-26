@@ -38,8 +38,6 @@ class DAL_Abstract(object):
     def getTrip(self, tripId):
         raise NotImplementedError("Should have implemented this")
 
-    ####################Management System##########################
-
     def add_attraction(self, name, x, y, description, picturesURLS, videosURLS):
         raise NotImplementedError("Should have implemented this")
 
@@ -64,6 +62,8 @@ class DAL_Abstract(object):
     def get_attractions(self):
         raise NotImplementedError("Should have implemented this")
 
+    def getAllTracksThatIncludeThisTrack(self, track):
+        raise NotImplementedError("Should have implemented this")
 
 class DALProxy(DAL_Abstract):
     Implementation = None
@@ -131,9 +131,6 @@ class DALProxy(DAL_Abstract):
             raise NotImplementedError("Should have implemented this")
         return self.Implementation.getTrip(tripId)
 
-
-    ####################Management System##########################
-
     def add_attraction(self, name, x, y, description, picturesURLS, videosURLS):
         if self.Implementation is None:
             raise NotImplementedError("Should have implemented this")
@@ -173,3 +170,9 @@ class DALProxy(DAL_Abstract):
         if self.Implementation is None:
             raise NotImplementedError("Should have implemented this")
         return self.Implementation.get_attractions()
+
+    def getAllTracksThatIncludeThisTrack(self, track):
+        if self.Implementation is None:
+            raise NotImplementedError("Should have implemented this")
+        return self.Implementation.getAllTracksThatIncludeThisTrack(track)
+

@@ -15,16 +15,15 @@ namespace trumpeldor.Views
         //        gc.currentTrip.GetCurrentAttraction();//-for the hint
         public Attraction nextAttraction;
         public static int hintsIndex = 0;
-        Point p = new Point();
+        trumpeldor.SheredClasses.Point p;
         public GameController gc = ((App)Application.Current).getGameController();
         public NavigationPage ()
 		{
 			InitializeComponent ();
             nextAttraction = gc.currentTrip.GetCurrentAttraction();
-            p.X = nextAttraction.x;
-            p.Y = nextAttraction.y;
+            p = new trumpeldor.SheredClasses.Point(nextAttraction.x, nextAttraction.y);
             //nextAttraction = gc.currentTrip.GetCurrentAttraction();
-            scoreLabel.Text = AppResources.score+": "/* + gc.currentTrip.score*/;
+            scoreLabel.Text = AppResources.score+ ": " + gc.currentTrip.score;
             //mapImage.Source = ImageSource.FromResource("trumpeldor.Resources.MapIcon.png");
             mapImage.Text = AppResources.map;
             //SheredClasses.Clue nextClue = gc.GetFisrtHint();

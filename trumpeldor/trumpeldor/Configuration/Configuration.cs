@@ -8,5 +8,6 @@ namespace trumpeldor.Configuration
     {
         public string IP { get; set; }
         public string PORT { get; set; }
+        public int DEBUG { get; set; }
     }
 }

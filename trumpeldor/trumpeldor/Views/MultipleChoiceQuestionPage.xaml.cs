@@ -6,40 +6,32 @@ using System.Threading.Tasks;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using trumpeldor.SheredClasses;
 
 namespace trumpeldor.Views
 {
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class MultipleChoiceQuestionPage : ContentPage
 	{
-        GameController gc = ((App)Application.Current).getGameController();
-
-        public MultipleChoiceQuestionPage ()
+        GameController gc;
+        private AmericanQuestion aq;
+        public MultipleChoiceQuestionPage (AmericanQuestion aq)
 		{
 			InitializeComponent ();
-            scoreLabel.Text = AppResources.score+": " + gc.GetScore();
-            attractionQuestion.Text = gc.GetCurrentAttractionQuestion();
-            if (gc.IsCurrentAttractionHasQuestionImage())
-            {
-                attractionQuestionImage.IsVisible = true;
-                attractionQuestionImage.Source = gc.GetCurrentAttractionQuestionImage();
-            }
-            else
-            {
-                attractionQuestionImage.IsVisible = false;
-            }
+            this.aq = aq;
+            gc = GameController.getInstance();
+            scoreLabel.Text = AppResources.score + ": " + gc.GetScore();
+            attractionQuestion.Text = aq.question;
             answersInitialize();
         }
         private void answersInitialize()
         {
-            List<String> answers = gc.GetCurrentAttractionQuestionAnswers();
-            int correctAnswer = gc.GetCurrentAttractionCurrectAnswersToQuestion();
-            for (int i = 0; i < answers.Count; i++)
+            for (int i = 0; i < aq.answers.Count; i++)
             {
                 Button answerButton = new Button();
-                answerButton.Text = answers.ElementAt(i);
+                answerButton.Text = aq.answers.ElementAt(i);
                 answerButton.Style = (Style)Application.Current.Resources["largeButtonStyle"];
-                if (i == correctAnswer)
+                if (i == aq.indexOfCorrectAnswer)
                 {
                     answerButton.Clicked += Correct_Answer_Button_Clicked;
                 }
@@ -50,7 +42,7 @@ namespace trumpeldor.Views
                 answersLayout.Children.Add(answerButton);
             }
         }
-        private void Correct_Answer_Button_Clicked(object sender, EventArgs e)
+        private async void Correct_Answer_Button_Clicked(object sender, EventArgs e)
         {
             
             foreach (Button answer in answersLayout.Children)
@@ -65,13 +57,14 @@ namespace trumpeldor.Views
             {
                 Navigation.RemovePage(page);
             }
+            await DisplayAlert(AppResources.Destionation_Complete, "", AppResources.ok);
+            await gc.FinishAttraction();
             if (gc.isFinishTrip)
             {
-                Application.Current.MainPage = new FinishTrackPage();
+                Application.Current.MainPage = new FinishTrackPage(await gc.CanContinueToLongerTrack());
             }
             else
             {
-                ((App)Application.Current).getGameController().SelectNextAttraction();
                 Application.Current.MainPage = new NavigationPage();
             }
 

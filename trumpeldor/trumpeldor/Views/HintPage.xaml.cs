@@ -54,7 +54,7 @@ namespace trumpeldor.Views
                 {
                     lat = Convert.ToDouble(coordinates[0]);
                     lon = Convert.ToDouble(coordinates[1]);
-                    Point p = new Point(lat, lon);
+                    trumpeldor.SheredClasses.Point p = new trumpeldor.SheredClasses.Point(lat, lon);
                     await DisplayAlert(AppResources.final_hint, AppResources.click_ok_to_view_the_next_point_on_the_map, AppResources.ok);
                         //.ContinueWith((a) =>
                    // Application.Current.MainPage = new MapPage(p));
