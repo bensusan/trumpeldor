@@ -159,6 +159,9 @@ class Attraction(generics.GenericAPIView):
             AttractionSerializer)
 
 
+def sign_in_page(request):
+    return render(request, "signIn.html")
+
 def addFeedback(question, kind):
     feedback = Feedback(question=question, kind=kind)
     feedback.save()

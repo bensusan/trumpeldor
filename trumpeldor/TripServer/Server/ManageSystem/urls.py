@@ -14,6 +14,7 @@ urlpatterns = {
     path('attraction/', AttractionsList.as_view()),
     path('attraction/<int:id>/', Attraction.as_view()),
     path('track/', Track.as_view()),
+    path('signin/', views.sign_in_page),
     # path('americanQuestion/', views.AmericanQuestion.as_view()),
     # path('attraction/(\d+)/(\d+)/', views.SpecificAttraction.as_view()),
     # path('attractions/', views.Attractions.as_view()),
