@@ -133,6 +133,15 @@ namespace trumpeldor {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to סיימת יעד!.
+        /// </summary>
+        public static string Destionation_Complete {
+            get {
+                return ResourceManager.GetString("Destionation_Complete", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to רוצה להמשיך את המסלול הקודם שלך?.
         /// </summary>
         public static string Do_you_want_to_continue_last_trip {

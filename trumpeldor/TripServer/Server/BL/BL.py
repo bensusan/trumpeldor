@@ -57,8 +57,6 @@ class BL_Abstract(object):
             user = self.createUser(data)
         return user
 
-    ####################Management System##########################
-
     def add_attraction(self, attraction):
         raise NotImplementedError("Should have implemented this")
 
@@ -83,7 +81,8 @@ class BL_Abstract(object):
     def get_attractions(self):
         raise NotImplementedError("Should have implemented this")
 
-
+    def getExtendedTrack(self, data):
+        raise NotImplementedError("Should have implemented this")
 
 class BLProxy(BL_Abstract):
     Implementation = None
@@ -156,8 +155,6 @@ class BLProxy(BL_Abstract):
             raise NotImplementedError("Should have implemented this")
         return self.Implementation.getTrip(trip)
 
-    ####################Management System##########################
-
     def add_attraction(self, attraction):
         if self.Implementation is None:
             raise NotImplementedError("Should have implemented this")
@@ -197,3 +194,9 @@ class BLProxy(BL_Abstract):
         if self.Implementation is None:
             raise NotImplementedError("Should have implemented this")
         return self.Implementation.get_attractions()
+
+    def getExtendedTrack(self, data):
+        if self.Implementation is None:
+            raise NotImplementedError("Should have implemented this")
+        return self.Implementation.getExtendedTrack(data)
+

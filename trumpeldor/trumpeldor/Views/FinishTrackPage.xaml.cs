@@ -12,28 +12,26 @@ namespace trumpeldor.Views
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class FinishTrackPage : ContentPage
 	{
-		public FinishTrackPage ()
+        GameController gc;
+		public FinishTrackPage (bool isSubTrack)
 		{
 			InitializeComponent ();
-            titleLabel.Text = AppResources.congrdulation_you_finish_the_track_with+" " + ((App)Application.Current).getGameController().GetScore() + " "+AppResources.points+ " .";
-            if (!((App)Application.Current).getGameController().CanContinueToLongerTrack())
-            {
-                continueButton.IsVisible = false;
-            }
-
+            gc = GameController.getInstance();
+            titleLabel.Text = AppResources.congrdulation_you_finish_the_track_with + " " + ((App)Application.Current).getGameController().GetScore() + " " + AppResources.points+ " .";
+            continueButton.IsVisible = isSubTrack;
         }
 
         private void Continiue_Button_Clicked(object sender, EventArgs e)
         {
-            ((App)Application.Current).getGameController().ContinueToLongerTrack();
-            ((App)Application.Current).getGameController().SelectNextAttraction();
+            //((App)Application.Current).getGameController().ContinueToLongerTrack();
+            //((App)Application.Current).getGameController().SelectNextAttraction();
 
-            var existingPages = Navigation.NavigationStack.ToList();
-            foreach (var page in existingPages)
-            {
-                Navigation.RemovePage(page);
-            }
-            Application.Current.MainPage = new NavigationPage(); 
+            //var existingPages = Navigation.NavigationStack.ToList();
+            //foreach (var page in existingPages)
+            //{
+            //    Navigation.RemovePage(page);
+            //}
+            //Application.Current.MainPage = new NavigationPage(); 
         }
         private void Share_Button_Clicked(object sender, EventArgs e)
         {

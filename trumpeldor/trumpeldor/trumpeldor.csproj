@@ -53,9 +53,6 @@
     <Compile Update="Views\firsPage.xaml.cs">
       <DependentUpon>firsPage.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Views\AttractionInformationPage.xaml.cs">
-      <DependentUpon>AttractionInformationPage.xaml</DependentUpon>
-    </Compile>
     <Compile Update="Views\AttractionPage.xaml.cs">
       <DependentUpon>AttractionPage.xaml</DependentUpon>
     </Compile>
@@ -106,9 +103,6 @@
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\MultipleChoiceQuestionPage.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Update="Views\AttractionInformationPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\AttractionPage.xaml">

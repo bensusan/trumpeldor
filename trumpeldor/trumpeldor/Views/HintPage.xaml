@@ -4,7 +4,7 @@
              x:Class="trumpeldor.Views.HintPage">
     <ContentPage.Content>
         <StackLayout Style="{DynamicResource mainStackLayout}">
-            <Label x:Name="generalInformation" AutomationId="HintDisplay" />
+            <Label x:Name="textualHint" AutomationId="HintDisplay" />
             <WebView x:Name="webView" WidthRequest="500" HeightRequest="500"/>
         </StackLayout>
     </ContentPage.Content>

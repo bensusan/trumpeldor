@@ -49,7 +49,7 @@ namespace trumpeldor.Views
             //await Navigation.PushModalAsync(new instructionsPage());
         }
 
-        private void Info_Button_Clicked(object sender, EventArgs e)
+        private async void Info_Button_Clicked(object sender, EventArgs e)
         {
             /*
                 * with back click 
@@ -57,6 +57,7 @@ namespace trumpeldor.Views
                 * await Navigation.PushModalAsync(new NavigationPage(new informationPage()));
             */
             Application.Current.MainPage = new informationPage();
+            //Application.Current.MainPage = new AttractionPage(await GameController.getInstance().GetTempAttraction());
 
             //await Navigation.PushModalAsync(new HintPage("31.263440,34.799115"));
             //await Navigation.PushModalAsync(new HintPage("http://132.72.23.64:12345/media/x.jpg"));
