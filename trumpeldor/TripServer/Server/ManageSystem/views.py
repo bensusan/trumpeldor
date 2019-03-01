@@ -135,6 +135,13 @@ class AttractionsList(generics.GenericAPIView):
             print("Sent:", ans, sep="\n")
         return Response(ans)
 
+    def post(self, request, *args, **kwargs):
+        return general_post_or_get(
+            request,
+            "AddAttraction",
+            BL.add_attraction,
+            AttractionSerializer)
+
 
 class Attraction(generics.GenericAPIView):
     serializer_class = AttractionSerializer
@@ -151,16 +158,14 @@ class Attraction(generics.GenericAPIView):
         #     BL.get_attraction,
         #     AttractionSerializer)
 
-    def post(self, request, *args, **kwargs):
-        return general_post_or_get(
-            request,
-            "AddAttraction",
-            BL.add_attraction,
-            AttractionSerializer)
+
 
 
 def sign_in_page(request):
     return render(request, "signIn.html")
+
+def manage_attractions_page(request):
+    return render(request, "attractions.html")
 
 def addFeedback(question, kind):
     feedback = Feedback(question=question, kind=kind)

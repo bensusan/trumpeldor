@@ -2,19 +2,16 @@
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<style>
-<link rel="stylesheet" type="text/css" href="signInForm.css">
-</style>
+{% load static %}
+<link rel="stylesheet" href="{% static 'signInForm.css' %}?version=1">
 </head>
 <body>
-
+<div align="center">
 <h2>Login Form</h2>
-
 <form>
   <div class="imgcontainer">
     <!-- <img src="img_avatar2.png" alt="Avatar" class="avatar"> -->  <!-- need to add logo or something-->
   </div>
-
   <div class="container">
     <label for="uname"><b>Username</b></label>
     <input type="text" placeholder="Enter Username" name="uname" required>
@@ -33,6 +30,6 @@
     <span class="psw">Forgot <a href="#">password?</a></span>
   </div>
 </form>
-
+</div>
 </body>
 </html>
