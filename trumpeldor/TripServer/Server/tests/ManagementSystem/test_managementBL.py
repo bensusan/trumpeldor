@@ -10,10 +10,6 @@ import random
 
 
 
-def randomValidNumber(Min, Max):
-    while True:
-        yield random.random() * Max + Min
-
 
 class BLUnitTests(TestCase):
         BL_Impl = BL_Implementation()
@@ -21,8 +17,12 @@ class BLUnitTests(TestCase):
         bl = BLProxy()
         bl.setImplementation(BL_Impl)
 
-        attraction = {'id': 1, 'name': 'de vinchi', 'x': 32.1111, 'y': 23.43433, 'description': 'bla bla',
-                      'picturesURLS': [], 'videosURLS': []}
+        # attraction = {'id': 1, 'name': 'de vinchi', 'x': 32.1111, 'y': 23.43433, 'description': 'bla bla',
+        #               'picturesURLS': [], 'videosURLS': []}
+        attr = Attraction(id=1, name='de vinchi', x=32.1111, y=23.43433, description='bla bla', picturesURLS=[],
+                          videosURLS=[])
+        serializerActual = AttractionSerializer(attr, many=False)
+        jsonActualAttraction = json.loads(json.dumps(serializerActual.data))
 
         def check(self, expected, actual, classSerializer=None, many=False, assertFunc=None):
             jsonActual = None
@@ -42,16 +42,13 @@ class BLUnitTests(TestCase):
         #     )
 
         def test_add_hint(self):
-            attr = Attraction(id=1, name='de vinchi', x=32.1111, y=23.43433, description='bla bla', picturesURLS=[],
-                              videosURLS=[])
-            serializerActual = AttractionSerializer(attr, many=False)
-            jsonActual = json.loads(json.dumps(serializerActual.data))
-            self.bl.add_attraction(jsonActual)
-            hint = {'id': 1, 'attraction': attr, 'kind': 'HM', 'data': 'bla bla bla'}
+
+            self.bl.add_attraction(self.jsonActualAttraction)
+            hint = {'id': 1, 'attraction': self.attr, 'kind': 'HM', 'data': 'bla bla bla'}
 
             self.check(
                 hint,
-                self.bl.add_hint(attr, hint),
+                self.bl.add_hint(self.attr, hint),
                 HintSerializer
             )
 
