@@ -14,6 +14,8 @@ urlpatterns = [
     path('getAmericanQuestion/', GetAmericanQuestion.as_view()),
     path('getFeedbacks/', GetFeedbacks.as_view()),
     path('addToDal/', AddToDal.as_view()),
+    path('getExtendedTrack/', GetExtendedTrack.as_view()),
+    path('getAttractionForDebug/', GetAttractionForDebug.as_view())
 ]
 
 urlpatterns = format_suffix_patterns(urlpatterns)

@@ -42,6 +42,12 @@ class TrackSerializer(serializers.ModelSerializer):
             return None
 
 
+class GetExtendedTrackSerializer(serializers.Serializer):
+    track = TrackSerializer()
+    x = serializers.FloatField()
+    y = serializers.FloatField()
+
+
 class TripSerializer(serializers.ModelSerializer):
     user = UserSerializer()
     track = TrackSerializer()
@@ -112,6 +118,7 @@ class CreateTripSerializer(serializers.ModelSerializer):
     trackLength = serializers.IntegerField()
     x = serializers.FloatField()
     y = serializers.FloatField()
+
 
 class TestSerializer(serializers.ModelSerializer):
 

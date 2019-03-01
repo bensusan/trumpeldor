@@ -47,9 +47,6 @@ class DAL_Implementation(DAL_Abstract):
     def getTrip(self, tripId):
         return Trip.objects.filter(id=tripId).first()
 
-
-    ####################Management System##########################
-
     def add_attraction(self, name, x, y, description, picturesURLS, videosURLS):
         attraction = Attraction(name=name, x=x, y=y, description=description, picturesURLS=picturesURLS,
                                 videosURLS=videosURLS)
@@ -85,3 +82,13 @@ class DAL_Implementation(DAL_Abstract):
 
     def get_track(self, track_len):
         return Track.objects.filter(length=track_len).all()
+
+    def get_attraction(self, id):
+        return Attraction.objects.get(pk=id)
+
+    def get_attractions(self):
+        return Attraction.objects.all()
+
+    def getAllTracksThatIncludeThisTrack(self, track):
+        return Track.objects.filter(subTrack=track).all()
+

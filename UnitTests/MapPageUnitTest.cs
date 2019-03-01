@@ -10,7 +10,12 @@ namespace UnitTests
         [TestMethod]
         public void deg2radTest()
         {
-            
+            trumpeldor.Views.MapPage map = new trumpeldor.Views.MapPage();
+            Assert.IsFalse(0==1);
+            Assert.IsTrue(1 + 1 == 2);
+            //Assert.IsTrue(map.deg2rad(0) == 0);
+
+
         }
     }
 }

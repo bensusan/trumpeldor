@@ -15,7 +15,7 @@ class User(models.Model):
     name = models.TextField()
     socialNetwork = models.TextField()
     lastSeen = models.DateTimeField(blank=True, null=True)
-    email = models.TextField(blank=True, null=True) # To send user notifications in the mail
+    email = models.TextField(blank=True, null=True)     # To send user notifications in the mail
 
     class Meta:
         unique_together = (("name", "socialNetwork"),)
@@ -93,10 +93,10 @@ class Hint(models.Model):
     HINT_VIDEO = 'HV'
     HINT_MAP = 'HM'
     HINT_KIND = (
-        (HINT_TEXT, 'HintText'),
-        (HINT_PICTURE, 'HintPicture'),
-        (HINT_VIDEO, 'HintVideo'),
-        (HINT_MAP, 'HintMap'),
+        (HINT_TEXT, 'HintText'),            # "Something"
+        (HINT_PICTURE, 'HintPicture'),      # "x.jpg"
+        (HINT_VIDEO, 'HintVideo'),          # "x.mp4"
+        (HINT_MAP, 'HintMap'),              # "x,y"
     )
     kind = models.CharField(
         max_length=2,

@@ -57,7 +57,7 @@ ROOT_URLCONF = 'TripServer.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'templates')]
+        'DIRS': [os.path.join(BASE_DIR, 'Management System/templates')]
         ,
         'APP_DIRS': True,
         'OPTIONS': {
@@ -127,9 +127,11 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, 'Server/static'),
+    os.path.join(BASE_DIR, 'Management System/static'),
     '/static',
 )
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+VALID_SECTOR = (0, 0, 0, 0)     # (Min_X, Max_X, Min_Y, Max_Y)

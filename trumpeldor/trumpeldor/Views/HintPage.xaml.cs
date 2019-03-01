@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using trumpeldor.SheredClasses;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -13,37 +13,32 @@ namespace trumpeldor.Views
 	public partial class HintPage : ContentPage
 	{
         private double lat=0, lon=0;
-		public HintPage (string hintStr)
+		public HintPage (Hint hint)
 		{
 			InitializeComponent ();
-            
-            if (hintStr.Contains("http://132.72.23.64:12345/media/"))
+            string hintStr = hint.kind;
+            string urlPref = "http://132.72.23.64:12345/media/";
+            if (hintStr.Equals( "HP" ) || hintStr=="HV")//case picture or video
             {
+                webView.IsVisible = true;
+                string tmp = hint.data.Substring(1, hint.data.Length - 2);
+
                 try
                 {
-                    webView.Source = hintStr;
-                    /*WebView wv = new WebView();
-                    wv.WidthRequest = 1000;
-                    wv.HeightRequest = 1000;
-                    wv.Source = hintStr;*/
+                    string dt = hint.data;
+                    webView.Source = urlPref + dt;
                 }
                 catch(Exception e)
                 {
                     Alert(e.Message);
                 }
-                
-            }
-            else
-            {
-                generalInformation.Text = hintStr;
-            }
-            /*else if (hintStr.Contains(','))
-            {
-                CallToMapPage(hintStr);
-                
-            }*/
-
             
+            }
+            else //case text
+            {
+                webView.IsVisible = false;
+                textualHint.Text = hint.data;
+            }
 		}
 
         private async void Alert(string s)
@@ -61,7 +56,7 @@ namespace trumpeldor.Views
                 {
                     lat = Convert.ToDouble(coordinates[0]);
                     lon = Convert.ToDouble(coordinates[1]);
-                    Point p = new Point(lat, lon);
+                    trumpeldor.SheredClasses.Point p = new trumpeldor.SheredClasses.Point(lat, lon);
                     await DisplayAlert(AppResources.final_hint, AppResources.click_ok_to_view_the_next_point_on_the_map, AppResources.ok);
                         //.ContinueWith((a) =>
                    // Application.Current.MainPage = new MapPage(p));
