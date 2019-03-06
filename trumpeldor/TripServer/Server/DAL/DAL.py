@@ -44,7 +44,7 @@ class DAL_Abstract(object):
     def add_hint(self, attraction, kind, data):
         raise NotImplementedError("Should have implemented this")
 
-    def add_american_question(self, question, answers, indexOfCorrectAnswer, attraction):
+    def add_american_question(self, attraction, question, answers, indexOfCorrectAnswer):
         raise NotImplementedError("Should have implemented this")
 
     def add_track(self, subTrack, points, length):
@@ -141,10 +141,10 @@ class DALProxy(DAL_Abstract):
             raise NotImplementedError("Should have implemented this")
         return self.Implementation.add_hint(attraction, kind, data)
 
-    def add_american_question(self, question, answers, indexOfCorrectAnswer, attraction):
+    def add_american_question(self, attraction, question, answers, indexOfCorrectAnswer):
         if self.Implementation is None:
             raise NotImplementedError("Should have implemented this")
-        return self.Implementation.add_american_question(question, answers, indexOfCorrectAnswer, attraction)
+        return self.Implementation.add_american_question(attraction, question, answers, indexOfCorrectAnswer)
 
     def add_track(self, subTrack, points, length):
         if self.Implementation is None:

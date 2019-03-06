@@ -105,8 +105,8 @@ class BL_Implementation(BL_Abstract):
         return self.DAL.add_hint(attraction, hint['kind'], hint['data'])
 
     def add_american_question(self, attraction, a_question):
-        return self.DAL.add_american_question(a_question['question'], a_question['answers'],a_question['indexOfCorrectAnswer'],
-                                       a_question['question'], attraction)
+        return self.DAL.add_american_question(attraction, a_question['question'], a_question['answers'],
+                                              a_question['indexOfCorrectAnswer'])
 
     def add_track(self, track):
         return self.DAL.add_track(track['subTrack'], track['points'], track['length'])
