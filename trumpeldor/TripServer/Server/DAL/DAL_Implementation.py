@@ -58,7 +58,7 @@ class DAL_Implementation(DAL_Abstract):
         hint.save()
         return hint
 
-    def add_american_question(self, question, answers, indexOfCorrectAnswer, attraction):
+    def add_american_question(self, attraction, question, answers, indexOfCorrectAnswer):
         aq = AmericanQuestion(question=question, answers=answers, indexOfCorrectAnswer=indexOfCorrectAnswer,
                               attraction=attraction)
         aq.save()
