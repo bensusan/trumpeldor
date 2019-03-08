@@ -8,7 +8,9 @@ from django.conf import settings
 
 urlpatterns = [
     path('signIn/', views.sign_in_page),
-    path('attractions/', views.manage_attractions_page),
+    path('attractions/', views.manage_attractions_page, name='attractions'),
+    path('main/', views.main_page),
+
 ]
 
 urlpatterns = format_suffix_patterns(urlpatterns)

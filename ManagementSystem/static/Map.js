@@ -1,40 +1,46 @@
 //from django.conf import settings
+let curPosClicked;
+let curMarker;
+let addAttractionBTN;
+const mapHtml = document.getElementById('map');
+const addAttractionTextToBTN = document.createTextNode("Add Attraction");
 
+
+function initMapAndAttractions(){
+    initMap();
+    initAttractionsMarkers();
+}
 function initMap() {
-    map = new google.maps.Map(document.getElementById('map'), {
+     map = new google.maps.Map(document.getElementById('map'), {
         zoom: 18,
         center: {lat: 31.262860, lng: 34.801753}
     });
-
+    listenerForMap(map);
 }
 
-function addListener(){
+function listenerForMap(map){
     google.maps.event.addListener(map, 'click', (function(event) {
-        if (location.href == 'http://132.72.23.64:12345/managementsystem/main/map/' && currPointClicked) {
-            marker.setMap(null);
-            pointsForTrack = null;
+        if(curPosClicked) {
+            curMarker.setMap(null);
         }
-        currPointClicked = createPoint(event.latLng.lat(), event.latLng.lng());
-        markerPoint(currPointClicked);
+        curPosClicked = positionInMap(event.latLng.lat(), event.latLng.lng());
+        curMarker = markAttraction(curPosClicked);
+        addAttractionBTN = document.createElement("BUTTON");
+        addAttractionBTN.appendChild(addAttractionTextToBTN);
+        mapHtml.parentNode.insertBefore(addAttractionBTN, mapHtml);
     }));
 }
 
 
-function markAttraction(pos){
-    marker = new google.maps.Marker({
-        position: pos,
-        map: map
-    });
-    marker.setMap(map);
+function addListenerForMarker(marker) {
+     google.maps.event.addListener(marker, 'click', (function(event) {
+              return function() {
+
+              }
+          })(event));
+
 }
 
-function markerPoint(p){
-    let pointToMarker = {lat: p.lat, lng: p.lng};
-    marker = new google.maps.Marker({
-        position: pointToMarker,
-        map: map
-    });
-    marker.setMap(map);
-}
-
-
+function positionInMap(lat, lng){
+          return {lat: lat, lng: lng};
+      }
