@@ -1,7 +1,7 @@
 //from django.conf import settings
 let curPosClicked;
 let curMarker;
-
+let coordinates_of_last_click;
 
 function initMapAndAttractions(){
     initMap();
@@ -17,6 +17,7 @@ function initMap() {
 
 function listenerForMap(map){
     google.maps.event.addListener(map, 'click', (function(event) {
+        coordinates_of_last_click=event.latLng;
         if(curPosClicked) {
             curMarker.setMap(null);
         }
@@ -24,6 +25,7 @@ function listenerForMap(map){
         curMarker = markAttraction(curPosClicked);
         addBTN = document.getElementById('add_attraction');
         addBTN.addEventListener('click', function(event) {
+        localStorage.setItem("addedPoint", coordinates_of_last_click);
             window.location.href='/add_attraction';
         });
     }));

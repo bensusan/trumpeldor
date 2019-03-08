@@ -1,4 +1,4 @@
-
+alert(localStorage.getItem("addedPoint"))
 
 window.onload=function(){
 (function localFileVideoPlayer() {
