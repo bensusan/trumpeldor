@@ -1,4 +1,4 @@
-alert(localStorage.getItem("addedPoint"))
+// alert(localStorage.getItem("addedPoint"));
 
 window.onload=function(){
 (function localFileVideoPlayer() {
@@ -34,5 +34,6 @@ window.onload=function(){
     }
 
     function showDataCollected() {
-        alert("name:"+document.getElementById("attr_name").value);
+        alert("point:"+localStorage.getItem("addedPoint")+"\n"+
+            "name:"+document.getElementById("attr_name").value);
     }

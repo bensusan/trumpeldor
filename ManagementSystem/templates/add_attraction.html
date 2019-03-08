@@ -7,7 +7,7 @@
 </head>
 <body>
 
-
+<button type="button">Back to menu</button>
 <div align="center">
 <h2>Add Attraction</h2>
 <form>
@@ -30,6 +30,13 @@
     <label for="desc"><b>Description</b></label>
     <input type="text" placeholder="Enter description" name="attr_desc" required>
 
+    <label for="desc"><b>Add American Question:</b></label>
+    <input type="text" placeholder="Enter Question" name="attr_desc" required>
+      <input type="text" placeholder="ans1" name="a1" required>
+      <input type="text" placeholder="ans2" name="a2" required>
+      <input type="text" placeholder="ans3" name="a3" required>
+      <input type="text" placeholder="ans4" name="a4" required>
+
     {% load static %}
     <script src="{% static 'add_attraction.js' %}"></script>
     <button onclick="showDataCollected()" type="button">Submit</button>
@@ -38,6 +45,7 @@
   </div>
 
 </form>
+
 
 </div>
 
