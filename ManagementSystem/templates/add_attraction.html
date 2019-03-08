@@ -25,13 +25,15 @@
 
   <div class="container">
     <label for="name"><b>Name of attraction: </b></label>
-    <input type="text" placeholder="Enter name" name="attr_name" required>
+    <input id="attr_name" type="text" placeholder="Enter name" name="attr_name" required>
 
     <label for="desc"><b>Description</b></label>
     <input type="text" placeholder="Enter description" name="attr_desc" required>
 
-
-
+    {% load static %}
+    <script src="{% static 'add_attraction.js' %}"></script>
+    <button onclick="showDataCollected()" type="button">Submit</button>
+    <button type="button">Clean</button>
 
   </div>
 

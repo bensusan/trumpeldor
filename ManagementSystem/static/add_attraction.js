@@ -33,3 +33,6 @@ window.onload=function(){
 
     }
 
+    function showDataCollected() {
+        alert("name:"+document.getElementById("attr_name").value);
+    }
