@@ -8,6 +8,12 @@
 <script src="{% static 'attractions.js' %}"></script>
 </head>
 <body>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+{% load static %}
+<link rel="stylesheet" href="{% static 'Map.css' %}?version=1">
+{% load static %}
+<script src="{% static 'attractions.js' %}"></script>
+
 <div id="map">
 {% load static %}
 <script src="{% static 'Map.js' %}"></script>
@@ -18,6 +24,7 @@
 </div>
 
 <div class="buttonStyle">
+
 <button id="add_attraction" type="button">Add Attraction</button>
 <button type="button">Edit Attraction</button>
 </div>
