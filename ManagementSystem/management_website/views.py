@@ -13,3 +13,8 @@ def manage_attractions_page(request):
 
 def main_page(request):
     return render(request, "main_page.html")
+
+
+def add_attraction_page(request):
+    return render(request, "add_attraction.html")
+
