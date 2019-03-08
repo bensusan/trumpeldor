@@ -1,9 +1,6 @@
 //from django.conf import settings
 let curPosClicked;
 let curMarker;
-let addAttractionBTN;
-const mapHtml = document.getElementById('map');
-const addAttractionTextToBTN = document.createTextNode("Add Attraction");
 
 
 function initMapAndAttractions(){
@@ -25,9 +22,10 @@ function listenerForMap(map){
         }
         curPosClicked = positionInMap(event.latLng.lat(), event.latLng.lng());
         curMarker = markAttraction(curPosClicked);
-        addAttractionBTN = document.createElement("BUTTON");
-        addAttractionBTN.appendChild(addAttractionTextToBTN);
-        mapHtml.parentNode.insertBefore(addAttractionBTN, mapHtml);
+        addBTN = document.getElementById('add_attraction');
+        addBTN.addEventListener('click', function(event) {
+            window.location.href='/add_attraction';
+        });
     }));
 }
 
@@ -35,7 +33,6 @@ function listenerForMap(map){
 function addListenerForMarker(marker) {
      google.maps.event.addListener(marker, 'click', (function(event) {
               return function() {
-
               }
           })(event));
 
