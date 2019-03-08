@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+{% load static %}
+<link rel="stylesheet" href="{% static 'signInForm.css' %}?version=1">
+</head>
+<body>
+<div align="center">
+<h2>Add Attraction</h2>
+<form>
+  <div class="imgcontainer">
+    <!-- <img src="img_avatar2.png" alt="Avatar" class="avatar"> -->  <!-- need to add logo or something-->
+  </div>
+  <div class="container">
+    <label for="name"><b>Name of attraction: </b></label>
+    <input type="text" placeholder="Enter name" name="attr_name" required>
+
+    <label for="desc"><b>Description</b></label>
+    <input type="text" placeholder="Enter description" name="attr_desc" required>
+  </div>
+
+</form>
+</div>
+</body>
+</html>
