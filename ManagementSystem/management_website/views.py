@@ -18,5 +18,10 @@ def main_page(request):
 def add_attraction_page(request):
     return render(request, "add_attraction.html")
 
+
 def add_game_page(request):
     return render(request, "add_game.html")
+
+
+def info_page(request):
+    return render(request, "add_info.html")

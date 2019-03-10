@@ -12,7 +12,7 @@ urlpatterns = [
     path('add_attraction/', views.add_attraction_page, name='add_attraction'),
     path('main/', views.main_page),
     path('add_game/', views.add_game_page),
-
+    path('additional_info/', views.info_page),
 ]
 
 urlpatterns = format_suffix_patterns(urlpatterns)
