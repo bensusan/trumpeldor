@@ -1,8 +1,16 @@
-alert(localStorage.getItem("edited"));
+// alert(localStorage.getItem("edited"));
+// alert(localStorage.getItem("ans1"+localStorage.getItem("editedNum")));
+//  document.getElementById("ans2").value = localStorage.getItem("ans21"+localStorage.getItem("editedNum"));
+//     document.getElementById("ans1").value = "afddffd";
+//     document.getElementById("ans2").value = localStorage.getItem("ans21");
+//     document.getElementById("ans3").value = localStorage.getItem("ans31");
+//     document.getElementById("ans4").value = localStorage.getItem("ans41");
+
 
 var loadFile = function(event) {
 	var image = document.getElementById('output');
 	image.src = URL.createObjectURL(event.target.files[0]);
+
 };
 
 window.onload=function(){

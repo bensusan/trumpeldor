@@ -37,6 +37,14 @@ function initMap() {
     });
     m.setMap(map);
 
+    localStorage.setItem("editedNum", num);
+
+    localStorage.setItem("ques"+num, "the question of p"+num);
+    localStorage.setItem("ans1"+num, "the ans1 of p"+num);
+    localStorage.setItem("ans2"+num, "the ans2 of p"+num);
+    localStorage.setItem("ans3"+num, "the ans3 of p"+num);
+    localStorage.setItem("ans4"+num, "the ans4 of p"+num);
+
     m.addListener('click', function() {
         alert("ppppp: "+num);
 
