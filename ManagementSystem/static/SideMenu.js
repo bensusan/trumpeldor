@@ -1,5 +1,5 @@
 document.getElementById("sideMenu").innerHTML = '<div class="sidenav">\n' +
-    '  <h2 style="color:#818181;">Welome, Yael!</h2>' +
+    '  <h2 style="color:#818181;">Welcome, Yael!</h2>' +
     '  <a href="/attractions">Manage Attractions</a>\n' +
     '  <button class="dropdown-btn">Paths\n' +
     '    <i class="fa fa-caret-down"></i>\n' +
@@ -17,6 +17,7 @@ document.getElementById("sideMenu").innerHTML = '<div class="sidenav">\n' +
     '    <a href="#">Delete Path</a>\n' +
     '  </div>\n' +
     '  <a href="#services">Statistics</a>\n' +
+    '  <a href="#services">Additional Info</a>\n' +
     '</div>\n' +
     '\n' +
     '<div class="main">\n' +
