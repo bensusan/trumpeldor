@@ -1,5 +1,10 @@
 // alert(localStorage.getItem("addedPoint"));
 
+var loadFile = function(event) {
+	var image = document.getElementById('output');
+	image.src = URL.createObjectURL(event.target.files[0]);
+};
+
 window.onload=function(){
 (function localFileVideoPlayer() {
 	'use strict'
