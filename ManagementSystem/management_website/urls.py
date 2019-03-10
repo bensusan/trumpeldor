@@ -11,6 +11,7 @@ urlpatterns = [
     path('attractions/', views.manage_attractions_page, name='attractions'),
     path('add_attraction/', views.add_attraction_page, name='add_attraction'),
     path('main/', views.main_page),
+    path('add_game/', views.add_game_page),
 
 ]
 
