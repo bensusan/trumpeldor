@@ -3,9 +3,9 @@ let curPosClicked;
 let curMarker;
 let coordinates_of_last_click;
 let points= [
-    {lat: 31.263465932844372, lng: 34.80194628238678},
-    {lat: 31.3114324, lng: 34.5555555555555},
-    {lat: 31.45255555372, lng: 34.9238678},
+    {lat: 31.263465932844372, lng: 34.801946282386783},
+    {lat: 31.263065932844372, lng: 34.801146282386783},
+    {lat: 31.263865932844372, lng: 34.802146282386783},
     {lat: 31.262773527283052, lng: 34.802075028419495}
 ];
 
@@ -24,18 +24,29 @@ function initMap() {
 
   function initPoints(){
   for (var i = 0; i < points.length; i++) {
-    addPoint2(points[i])
+    addPoint2(points[i],i)
   }
   }
 
-  function addPoint2(p){
+  function addPoint2(p,num){
     var myLatLng = {lat: p.lat, lng: p.lng};
     var m = new google.maps.Marker({
       position:myLatLng,
       map: map,
-      title: 'Hello World!'
+      title: "Point no."+(num+1)
     });
     m.setMap(map);
+
+    m.addListener('click', function() {
+        alert("ppppp: "+num);
+
+    var editBTN = document.getElementById('edit_attraction');
+        editBTN.addEventListener('click', function(event) {
+            localStorage.setItem("edited", m.position);
+            window.location.href='/edit_attraction';
+        });
+  });
+
   }
 
 function listenerForMap(map){
@@ -46,12 +57,18 @@ function listenerForMap(map){
         }
         curPosClicked = positionInMap(event.latLng.lat(), event.latLng.lng());
         curMarker = markAttraction(curPosClicked);
-        editBTN=document.getElementById('edit_attraction');
-        editBTN.addEventListener('click', function(event) {
-        if(points.indexOf(curPosClicked)!=-1)
-            {}
-        });
-        addBTN = document.getElementById('add_attraction');
+
+        // editBTN=document.getElementById('edit_attraction');
+        // editBTN.addEventListener('click', function(event) {
+        //     var ccc= points.indexOf(coordinates_of_last_click);
+        //     //alert(coordinates_of_last_click +" and : : : "+ points);
+        // if(ccc!=-1)
+        //     {
+        //         window.location.href='/edit_attraction';
+        //     }
+        // });
+
+        var addBTN = document.getElementById('add_attraction');
         addBTN.addEventListener('click', function(event) {
         localStorage.setItem("addedPoint", coordinates_of_last_click);
             window.location.href='/add_attraction';

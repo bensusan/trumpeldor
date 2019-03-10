@@ -10,6 +10,7 @@ urlpatterns = [
     path('signIn/', views.sign_in_page),
     path('attractions/', views.manage_attractions_page, name='attractions'),
     path('add_attraction/', views.add_attraction_page, name='add_attraction'),
+    path('edit_attraction/', views.edit_attraction_page, name='edit_attraction'),
     path('main/', views.main_page),
     path('add_game/', views.add_game_page),
     path('additional_info/', views.info_page),
