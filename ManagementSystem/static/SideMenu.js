@@ -17,7 +17,7 @@ document.getElementById("sideMenu").innerHTML = '<div class="sidenav">\n' +
     '    <a href="#">Delete Path</a>\n' +
     '  </div>\n' +
     '  <a href="#services">Statistics</a>\n' +
-    '  <a href="#services">Additional Info</a>\n' +
+    '  <a href="/additional_info">Additional Info</a>\n' +
     '</div>\n' +
     '\n' +
     '<div class="main">\n' +
