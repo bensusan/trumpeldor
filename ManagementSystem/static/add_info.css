@@ -100,7 +100,7 @@ input[type=text], select, textarea {
     padding: 20px;
 
 	position:absolute;
-	top:200px;
+	top:80px;
 	left:150px;
 	width:75%;
 	height:300px;
@@ -131,7 +131,7 @@ input[type=text], select, textarea {
 .subject {
 	position:absolute;
 	top:50px;
-	left:200px;
+	left:300px;
 	width:40%;
 	height:400px;
 }
