@@ -18,7 +18,7 @@ namespace trumpeldor.Views
     {
         
         private const double DESIRED_DISTANCE = 600;
-        private const double DESIRED_SECONDS = 10;
+        private const double DESIRED_SECONDS = 5;
 
         //Point p = new Point(31.262566, 34.796832); (latitude -> x, longtitude -> y)
         //Point p = new Point(31.262566, 34.796832);
@@ -27,11 +27,12 @@ namespace trumpeldor.Views
         Pin previous = null;
         //current point
         double currLat = 0, currLong = 0;
-        public GameController gc = ((App)Application.Current).getGameController();
+        public GameController gc;
         public Attraction nextAttraction;
         public MapPage(trumpeldor.SheredClasses.Point p)
         {
             InitializeComponent();
+            gc = GameController.getInstance();
             nextAttraction = gc.currentTrip.GetCurrentAttraction();
             Map map = new Map()
             {
@@ -40,7 +41,7 @@ namespace trumpeldor.Views
                 VerticalOptions = LayoutOptions.FillAndExpand
             };
             map.MoveToRegion(MapSpan.FromCenterAndRadius(new Position(31.262820, 34.802352), Distance.FromKilometers(3)).WithZoom(10));
-            List<SheredClasses.Attraction> visitedTrackPoints = ((App)(Application.Current)).getGameController().GetVisitedAttractions();
+            //List<SheredClasses.Attraction> visitedTrackPoints = ((App)(Application.Current)).getGameController().GetVisitedAttractions();
             AddCurrlocationToMap(map);
             AddPointToMap(map, p);
             Content = map;
@@ -49,6 +50,7 @@ namespace trumpeldor.Views
         public MapPage()
         {
             InitializeComponent();
+            gc = GameController.getInstance();
             nextAttraction = gc.currentTrip.GetCurrentAttraction();
             p = new trumpeldor.SheredClasses.Point(nextAttraction.x, nextAttraction.y);
             //gc.currentTrip.GetCurrentAttraction().x
@@ -59,7 +61,7 @@ namespace trumpeldor.Views
                 VerticalOptions = LayoutOptions.FillAndExpand
             };
             map.MoveToRegion(MapSpan.FromCenterAndRadius(new Position(31.262820, 34.802352), Distance.FromKilometers(3)).WithZoom(10));
-            List<SheredClasses.Attraction> visitedTrackPoints = ((App)(Application.Current)).getGameController().GetVisitedAttractions();
+            List<SheredClasses.Attraction> visitedTrackPoints = gc.GetVisitedAttractions();
             foreach (SheredClasses.Attraction attraction in visitedTrackPoints)
             {
                 Pin pin = new Pin
@@ -73,7 +75,7 @@ namespace trumpeldor.Views
             }
             AddCurrlocationToMap(map);
 
-             Content = map;
+            Content = map;
             
             //return FromLocA.GetDistanceTo(ToLocB);
             Device.StartTimer(TimeSpan.FromSeconds(DESIRED_SECONDS), () =>
@@ -90,6 +92,8 @@ namespace trumpeldor.Views
                     }
                     else
                     {
+
+                        gc.EditScore(GameController.SCORE_VALUE.Attraction_Arrive);
                         DisplayAlert(AppResources.arrived, AppResources.arrived+"!  " + DistanceBetween(currLat, currLong, p.x, p.y).ToString(), AppResources.close);
                         Application.Current.MainPage = new AttractionPage();
                         return false;
@@ -104,19 +108,20 @@ namespace trumpeldor.Views
             });
         }
 
-        private async void AddCurrlocationToMap (Map map)
+        private void AddCurrlocationToMap (Map map)
         {
-            var locator = CrossGeolocator.Current;
-            Plugin.Geolocator.Abstractions.Position position =await locator.GetPositionAsync();
+            //var locator = CrossGeolocator.Current;
+            //Plugin.Geolocator.Abstractions.Position position =await locator.GetPositionAsync();
+            trumpeldor.SheredClasses.Point p = gc.GetUserLocation();
             Pin currLocationPin = new Pin
             {
                 Type = PinType.Place,
-                Position = new Position(position.Latitude, position.Longitude),
+                Position = new Position(p.x, p.y),
                 Label = "current location"
             };
             previous = currLocationPin;
-            currLat = position.Latitude;
-            currLong = position.Longitude;
+            currLat = p.x;
+            currLong = p.y;
             map.Pins.Add(currLocationPin); 
         }
 
@@ -133,23 +138,24 @@ namespace trumpeldor.Views
         }
 
 
-        private async void OnLocationCheck(Map map)
+        private void OnLocationCheck(Map map)
         {
             //remove from map the previous current location
             //draw on map the current location
             //chec if current location is around the fixed point:
             //if yes-show message to go to the point page and stop check location
             //if no-continue check location
-            var locator = CrossGeolocator.Current;
-            Plugin.Geolocator.Abstractions.Position position = await locator.GetPositionAsync();
+            //var locator = CrossGeolocator.Current;
+            //Plugin.Geolocator.Abstractions.Position position = await locator.GetPositionAsync();
+            SheredClasses.Point p = gc.GetUserLocation();
             Pin newCurrLocationPin = new Pin
             {
                 Type = PinType.Place,
-                Position = new Position(position.Latitude, position.Longitude),
+                Position = new Position(p.x, p.y),
                 Label = "current new location"
             };
-            currLat = position.Latitude;
-            currLong = position.Longitude;
+            currLat = p.x;
+            currLong = p.y;
             map.Pins.Remove(previous);
             map.Pins.Add(newCurrLocationPin);
             previous = newCurrLocationPin;

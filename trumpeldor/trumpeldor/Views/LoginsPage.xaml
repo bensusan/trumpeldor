@@ -6,7 +6,7 @@
     <ContentPage.Content>
         <StackLayout Style="{DynamicResource mainStackLayout}">
             <Button Text="{translator:Translate login_with_facebook}" Clicked="FacebookLogin_Clicked" Style="{StaticResource largeButtonStyle}"/>
-            <!--<Button Text="anonymus login" Clicked="Anonymus_Clicked" Style="{StaticResource largeButtonStyle}"/>-->
+            <Button Text="{translator:Translate login_as_anonymous}" Clicked="Anonymus_Clicked" Style="{StaticResource largeButtonStyle}"/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

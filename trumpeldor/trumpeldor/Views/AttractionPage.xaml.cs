@@ -20,11 +20,9 @@ namespace trumpeldor.Views
 			InitializeComponent ();
             gc = GameController.getInstance();
             this.attraction = gc.currentTrip.GetCurrentAttraction();
-            scoreLabel.Text = AppResources.score + ": " + gc.currentTrip.score;
             attractionName.Text = this.attraction.name;
             string mainPictureUrl = this.attraction.GetMainPictureUrl();
             attractionImage.Source = mainPictureUrl;
-
             attractionImage.IsVisible = !mainPictureUrl.Equals("");
             watchAgainButton.IsVisible = !this.attraction.GetARURL().Equals("");
         }
@@ -33,12 +31,17 @@ namespace trumpeldor.Views
         {
             InitializeComponent();
             this.attraction = attraction;
-            scoreLabel.Text = AppResources.score + ": -1";
             attractionName.Text = attraction.name;
             string mainPictureUrl = attraction.GetMainPictureUrl();
             attractionImage.Source = mainPictureUrl;
             attractionImage.IsVisible = !mainPictureUrl.Equals("");
             watchAgainButton.IsVisible = !this.attraction.GetARURL().Equals("");
+        }
+
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+            scoreLabel.Text = AppResources.score + ": " + gc.GetScore();
         }
 
         private async void Information_Button_Clicked(object sender, EventArgs e)

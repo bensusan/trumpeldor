@@ -39,7 +39,7 @@ class BL_Abstract(object):
     def getHints(self, attraction):
         raise NotImplementedError("Should have implemented this")
 
-    def getFeedbacks(self, trip):
+    def getFeedbackInstances(self, trip):
         raise NotImplementedError("Should have implemented this")
 
     def getAmericanQuestion(self, attraction):
@@ -83,6 +83,13 @@ class BL_Abstract(object):
 
     def getExtendedTrack(self, data):
         raise NotImplementedError("Should have implemented this")
+
+    def getOpenMessages(self):
+        raise NotImplementedError("Should have implemented this")
+
+    def updateTrip(self, dataTrip):
+        raise NotImplementedError("Should have implemented this")
+
 
 class BLProxy(BL_Abstract):
     Implementation = None
@@ -135,10 +142,10 @@ class BLProxy(BL_Abstract):
             raise NotImplementedError("Should have implemented this")
         return self.Implementation.getHints(attraction)
 
-    def getFeedbacks(self, trip):
+    def getFeedbackInstances(self, trip):
         if self.Implementation is None:
             raise NotImplementedError("Should have implemented this")
-        return self.Implementation.getFeedbacks(trip)
+        return self.Implementation.getFeedbackInstances(trip)
 
     def getAmericanQuestion(self, attraction):
         if self.Implementation is None:
@@ -200,3 +207,12 @@ class BLProxy(BL_Abstract):
             raise NotImplementedError("Should have implemented this")
         return self.Implementation.getExtendedTrack(data)
 
+    def getOpenMessages(self):
+        if self.Implementation is None:
+            raise NotImplementedError("Should have implemented this")
+        return self.Implementation.getOpenMessages()
+
+    def updateTrip(self, dataTrip):
+        if self.Implementation is None:
+            raise NotImplementedError("Should have implemented this")
+        return self.Implementation.updateTrip(dataTrip)

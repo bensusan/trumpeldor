@@ -7,9 +7,9 @@
 
     <ContentPage.Content>
         <StackLayout Style="{DynamicResource mainStackLayout}">
-            <Button Text="english" Clicked="Button_Clicked" Style="{StaticResource largeButtonStyle}"/>
-            <Button Text="עיברית" Clicked="Button_Clicked_1" Style="{StaticResource largeButtonStyle}"/>
-            <Button Text="{translator:Translate play}" Clicked="Play_Button_Clicked" Style="{StaticResource largeButtonStyle}"/>
+            <!--<Button Text="english" Clicked="Button_Clicked" Style="{StaticResource largeButtonStyle}"/>-->
+            <!--<Button Text="עיברית" Clicked="Button_Clicked_1" Style="{StaticResource largeButtonStyle}"/>-->
+            <Button x:Name="playButton" Text="{translator:Translate play}" Clicked="Play_Button_Clicked" Style="{StaticResource largeButtonStyle}"/>
             <Button Text="{translator:Translate how_to_play}" Clicked="HowToPlay_Button_Clicked" Style="{StaticResource largeButtonStyle}" />
             <Button Text="{translator:Translate information}" Clicked="Info_Button_Clicked" Style="{StaticResource largeButtonStyle}" AutomationId="ToHint"/>
             <Image x:Name="tryImg" Style="{DynamicResource largeImageStyle}"/>

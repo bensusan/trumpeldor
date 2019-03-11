@@ -15,39 +15,81 @@ namespace trumpeldor.Views
         GameController gc;
 		public FinishTrackPage (bool isSubTrack)
 		{
-			InitializeComponent ();
+			InitializeComponent();
             gc = GameController.getInstance();
-            titleLabel.Text = AppResources.congrdulation_you_finish_the_track_with + " " + ((App)Application.Current).getGameController().GetScore() + " " + AppResources.points+ " .";
             continueButton.IsVisible = isSubTrack;
+        }
+
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+            titleLabel.Text = AppResources.congrdulation_you_finish_the_track_with + " " + gc.GetScore() + " " + AppResources.points + " .";
+        }
+
+        private async Task<bool> GetFeedback()
+        {
+            int answer = 0;
+            bool ans = await DisplayAlert(AppResources.Done_Trip_Title, AppResources.Done_Trip_Message, AppResources.Yes, AppResources.No);
+            if (ans)
+                answer = 1;
+            else
+                answer = 2;
+            if (answer == 1)
+            {
+                Application.Current.MainPage = new FeedbackPage();
+                return true;
+            }
+            return false;
+            //await Navigation.PushModalAsync();
         }
 
         private void Continiue_Button_Clicked(object sender, EventArgs e)
         {
-            //((App)Application.Current).getGameController().ContinueToLongerTrack();
-            //((App)Application.Current).getGameController().SelectNextAttraction();
+            gc.ContinueToLongerTrack();
+            var existingPages = Navigation.NavigationStack.ToList();
+            foreach (var page in existingPages)
+            {
+                Navigation.RemovePage(page);
+            }
+            Application.Current.MainPage = new NavigationPage();
+        }
 
-            //var existingPages = Navigation.NavigationStack.ToList();
-            //foreach (var page in existingPages)
-            //{
-            //    Navigation.RemovePage(page);
-            //}
-            //Application.Current.MainPage = new NavigationPage(); 
+        private async void Share_Button_Clicked(object sender, EventArgs e)
+        {
+            int answer = 0;
+            bool ans = await DisplayAlert(AppResources.Share_Title, AppResources.Share_First_Part_Message + gc.currentUser.socialNetwork + "?\n" + AppResources.Share_Second_Part_Message, AppResources.Option_1, AppResources.Option_2);
+            if (ans)
+                answer = 1;
+            else
+                answer = 2;
+            if (answer == 1)
+                ShareInExistingSocialNetwork();
+            await Navigation.PushModalAsync(new SharePageChoice());
         }
-        private void Share_Button_Clicked(object sender, EventArgs e)
+
+        private void ShareInExistingSocialNetwork()
         {
 
         }
-        private void Leading_Table_Button_Clicked(object sender, EventArgs e)
-        {
 
-        }
-        private async void feedback_Button_Clicked(object sender, EventArgs e)
+        private async void Leading_Table_Button_Clicked(object sender, EventArgs e)
         {
-            await Navigation.PushModalAsync(new FeedbackPage());
+            await Navigation.PushModalAsync(new LeadingTablePage());
         }
-        private async void information_Button_Clicked(object sender, EventArgs e)
+
+        private async void Done_Button_Clicked(object sender, EventArgs e)
         {
-            await Navigation.PushModalAsync(new informationPage());
+            if (!await GetFeedback())
+            {
+                var existingPages = Navigation.NavigationStack.ToList();
+                foreach (var page in existingPages)
+                {
+                    Navigation.RemovePage(page);
+                }
+                gc.UpdateTrip();
+                Application.Current.MainPage = new FirstPage(false);
+            }
         }
+
     }
 }

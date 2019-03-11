@@ -19,8 +19,8 @@ namespace trumpeldor.Views
 
         private void Get_Hint_Button_Clicked(object sender, EventArgs e)
         {
-            SheredClasses.Clue nextHint=((App)(Application.Current)).getGameController().GetHint();
-            nextHint.addToLayout(hintsLayout);
+            //SheredClasses.Clue nextHint=((App)(Application.Current)).getGameController().GetHint();
+            //nextHint.addToLayout(hintsLayout);
             //scoreLabel.Text = "score: " + gc.currentTrip.score; 
         }
     }

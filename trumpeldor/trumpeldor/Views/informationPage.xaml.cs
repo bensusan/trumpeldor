@@ -12,15 +12,16 @@ namespace trumpeldor.Views
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class informationPage : ContentPage
 	{
+        GameController gc;
 		public informationPage ()
 		{
 			InitializeComponent ();
-            generalInformation.Text = ((App)Application.Current).getGameController().GetGeneralInformation();
+            gc = GameController.getInstance();
+            generalInformation.Text = gc.GetGeneralInformation();
         }
 
-        public informationPage(string information)
+        public informationPage(string information) : this()
         {
-            InitializeComponent();
             generalInformation.Text = information;
         }
     }

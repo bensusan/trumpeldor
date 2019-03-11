@@ -10,7 +10,6 @@ namespace trumpeldor.SheredClasses
 {
     public class FeedbackInstance
     {
-        public int id { get; set; }
         public Feedback feedback { get; set; }
         public string answer { get; set; }
     }

@@ -20,10 +20,22 @@ DEBUG = True
 
 # General post for all the posts here
 # blFunction must include only 1 argument (request.data)
-def generalPost(request, className, blFunction, classSerializer, many=False):
+def generalPost(request, className, blFunction, classSerializer=None, many=False):
     if DEBUG:
         print(className + ":", "Get:", request.data, sep="\n")
     ans = blFunction(request.data)
+    if (ans is not None) and (classSerializer is not None):
+        ans = classSerializer(ans, many=many)
+        ans = json.loads(json.dumps(ans.data))
+    if DEBUG:
+        print("Sent:", ans, sep="\n")
+    return Response(ans)
+
+
+def generalGet(className, blFunction, classSerializer, many=False):
+    if DEBUG:
+        print(className + ":")
+    ans = blFunction()
     ans = classSerializer(ans, many=many)
     ans = json.loads(json.dumps(ans.data))
     if DEBUG:
@@ -83,14 +95,14 @@ class GetHints(generics.GenericAPIView):
             True)
 
 
-class GetFeedbacks(generics.GenericAPIView):
+class GetFeedbackInstances(generics.GenericAPIView):
     serializer_class = TripSerializer
 
     def post(self, request, *args, **kwargs):
         return generalPost(
             request,
-            "GetFeedbacks",
-            BL.getFeedbacks,
+            "GetFeedbackInstances",
+            BL.getFeedbackInstances,
             FeedbackInstanceSerializer,
             True)
 
@@ -127,40 +139,28 @@ class GetAttractionForDebug(views.APIView):
             print("Sent:", ans, sep="\n")
         return Response(ans)
 
-# class GetTrackById(generics.GenericAPIView):
-#     serializer_class = IdSerializer
-#
-#     def post(self, request, *args, **kwargs):
-#         return generalPost(
-#             request,
-#             "GetAmericanQuestion",
-#             BL.getTrackById,
-#             TrackSerializer)
-#
-#
-# class GetAttractionsById(generics.GenericAPIView):
-#     serializer_class = IdSerializer
-#
-#     def post(self, request, *args, **kwargs):
-#         return generalPost(
-#             request,
-#             "GetAmericanQuestion",
-#             BL.getAmericanQuestion,
-#             AmericanQuestionSerializer)
-#
-#
-# class GetAmericanQuestion(generics.GenericAPIView):
-#     serializer_class = IdSerializer
-#
-#     def post(self, request, *args, **kwargs):
-#         return generalPost(
-#             request,
-#             "GetAmericanQuestion",
-#             BL.getAmericanQuestion,
-#             AmericanQuestionSerializer)
+
+class GetOpenMessages(views.APIView):
+
+    def get(self, request):
+        return generalGet(
+            "GetOpenMessages",
+            BL.getOpenMessages,
+            MessageSerializer,
+            True)
 
 
+class UpdateTrip(generics.GenericAPIView):
+    serializer_class = UpdateTripSerializer
 
+    def post(self, request, *args, **kwargs):
+        return generalPost(
+            request,
+            "UpdateTrip",
+            BL.updateTrip)
+######################################################################################################
+# ----------------------------------------Add Manual Data Part----------------------------------------
+######################################################################################################
 
 
 def addFeedback(question, kind):
@@ -199,7 +199,19 @@ def addAttraction(name, x, y, description, picturesURLS, videosURLS):
     return attraction
 
 
-def insertToDal(data):
+def addMessage(title, data):
+    message = Message(title=title, data=data)
+    message.save()
+    return message
+
+
+def addUser(userName, socialNetwork):
+    user = User(name=userName, socialNetwork=socialNetwork)
+    user.save()
+    return user
+
+
+def insertDebugData():
     a1 = addAttraction("Meonot dalet", "31.263913", "34.796959", "We Are in Attraction 1", ["x.jpg"], [])
     a2 = addAttraction("96 building", "31.264934", "34.802062", "We Are in Attraction 2", ["y.png"], [])
     a3 = addAttraction("Shnizale", "31.265129", "34.801575", "We Are in Attraction 3", ["y.png"], ["x.mp4"])
@@ -211,24 +223,21 @@ def insertToDal(data):
                                                             "Correct answer",
                                                             "Incorrect answer",
                                                             "Incorrect answer"], 1, a2)
-    aq2 = addAmericanQuestion("AQ3: Some question here ?", ["Incorrect answer",
+    aq3 = addAmericanQuestion("AQ3: Some question here ?", ["Incorrect answer",
                                                             "Incorrect answer",
                                                             "Correct answer",
-                                                            "Incorrect answer"], 2, a2)
+                                                            "Incorrect answer"], 2, a3)
     h11 = addHint(a1, Hint.HINT_TEXT, "This is text hint for Attraction 1")
     h12 = addHint(a1, Hint.HINT_PICTURE, "x.jpg")
     h13 = addHint(a1, Hint.HINT_VIDEO, "x.mp4")
-    h14 = addHint(a1, Hint.HINT_MAP, "31.263913,34.796959")
 
     h21 = addHint(a2, Hint.HINT_TEXT, "This is text hint for Attraction 2")
     h22 = addHint(a2, Hint.HINT_PICTURE, "y.png")
     h23 = addHint(a2, Hint.HINT_VIDEO, "x.mp4")
-    h23 = addHint(a2, Hint.HINT_MAP, "31.264934,34.802062")
 
     h31 = addHint(a3, Hint.HINT_TEXT, "This is text hint for Attraction 3")
     h32 = addHint(a3, Hint.HINT_PICTURE, "reka.jpg")
     h33 = addHint(a3, Hint.HINT_VIDEO, "x.mp4")
-    h33 = addHint(a3, Hint.HINT_MAP, "31.265129,34.801575")
 
     track1 = addTrack(null, [a1], 1)
     track2 = addTrack(null, [a2], 1)
@@ -238,26 +247,22 @@ def insertToDal(data):
     track13 = addTrack(track1, [a3], 2)
     track23 = addTrack(track2, [a3], 2)
 
-    track123 = addTrack(track12, [a3], 2)
+    track123 = addTrack(track12, [a3], 3)
 
     f1 = addFeedback("Feedback 1 rating ??", Feedback.FEEDBACK_RATING)
     f2 = addFeedback("Feedback 2 text ??", Feedback.FEEDBACK_TEXT)
+
+    msg1 = addMessage("Title for message 1", "data for message 1")
+    msg2 = addMessage("Title for message 2", "data for message 2")
+
+    anonymousUser = addUser("", "")
     return track123
 
 
-class AddToDal(generics.GenericAPIView):
-    serializer_class = TestSerializer
+class InsertDebugData(views.APIView):
 
-    def post(self, request, *args, **kwargs):
-        return generalPost(
-            request,
-            "GetFeedbacks",
-            insertToDal,
+    def get(self, request):
+        return generalGet(
+            "InsertDebugData",
+            insertDebugData,
             TrackSerializer)
-        # if DEBUG:
-        #     print("AddToDal" + ":", "Got Message data:", request.data, sep="\n")
-        # track = insertToDal()
-        # serializer = TrackSerializer(track)
-        # if DEBUG:
-        #     print("Sent Message data:", serializer.data, sep="\n")
-        # return Response(serializer.data)

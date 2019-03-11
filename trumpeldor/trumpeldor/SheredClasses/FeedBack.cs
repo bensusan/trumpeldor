@@ -10,8 +10,12 @@ namespace trumpeldor.SheredClasses
         public string question { get; set; }
         public string kind { get; set; }
 
-        //not to use
-        public enum Kinds { FeedBackRating = 1, FeedBackText = 2};
+        public enum Kinds {FeedBackRating, FeedBackText};
+        public static Dictionary<string, Kinds> kindToEnum = new Dictionary<string, Kinds>
+            {
+                {"FT", Kinds.FeedBackText },
+                {"FR", Kinds.FeedBackRating }
+            };
 
     }
 }

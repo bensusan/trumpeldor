@@ -83,9 +83,9 @@ class BL_Implementation(BL_Abstract):
         attr = self.getAttraction(attraction)
         return self.DAL.getHints(attr)
 
-    def getFeedbacks(self, trip):
+    def getFeedbackInstances(self, trip):
         trip = self.getTrip(trip)
-        return self.DAL.getFeedbacks(trip)
+        return self.DAL.getFeedbackInstances(trip)
 
     def getAmericanQuestion(self, attraction):
         attr = self.getAttraction(attraction)
@@ -124,8 +124,27 @@ class BL_Implementation(BL_Abstract):
         return self.DAL.get_attractions()
 
     def getExtendedTrack(self, data):
-        track = self.DAL.getTrackById(data["track"]["id"])
+        track = self.DAL.getTrackById(data["trackId"])
         tracks = self.DAL.getAllTracksThatIncludeThisTrack(track)
         track, attraction = self.getMinTrackAndAttraction(tracks, data["x"], data["y"])
         return track
+
+    def getOpenMessages(self):
+        return self.DAL.getOpenMessages()
+
+    def updateTrip(self, dataTrip):
+        trip = self.getTrip(dataTrip)
+        self.DAL.updateTrip(trip, self.DAL.getTrackById(dataTrip["track"]["id"]), dataTrip["groupName"],
+                            dataTrip["score"], dataTrip["playersAges"],
+                            map(lambda x: self.DAL.getAttraction(x["id"]), dataTrip["attractionsDone"]))
+
+        trip = self.getTrip(dataTrip)
+        self.updateFeedbackInstances(dataTrip["feedbacks"], trip)
+
+    def updateFeedbackInstances(self, feedbackInstancesAsJson, trip):
+        for fi in feedbackInstancesAsJson:
+            self.DAL.updateFeedbackInstance(self.getFeedback(fi["feedback"]), trip, fi["answer"])
+
+    def getFeedback(self, feedback):
+        return self.DAL.getFeedbackById(feedback["id"])
 

@@ -11,22 +11,19 @@ namespace trumpeldor
 {
     public class GameController
     {
+        public enum SCORE_VALUE {
+            Hints_More_Than_Three = -10,
+            AQ_Mistake = -2,
+            AQ_Correct = 10,
+            Attraction_Arrive = 50
+        }
+
         private static GameController instance = null;
-        //TODO MAKE TRIP INSTEAD OF SCORE, GROUPNAME, USER, TRACK
         public Trip currentTrip = null;
         public User currentUser = null; //Also will show in Trip object but necessary also.
-        //public enum PathLength { shortPath = 1, mediumPath = 2, longPath = 3 }
         private ServerConection conn;
-        //private String groupName;
-        //public int score;
-        private Dictionary<Attraction,Boolean> destinations;
         public bool isFinishTrip;
-
-        //private PathLength currentPathLength;
-        //public Attraction currentAttractionDestination = null;
         const int LOGIN_RECENETLY_DIFFERENCE_HOURS = 36; //TODO - Very specific for now
-        //float latitude = 0;
-        //float longtitude = 0;
         public Track extendTrack = null;
 
         public static GameController getInstance()
@@ -39,19 +36,67 @@ namespace trumpeldor
             return instance;
         }
 
+        internal bool IsUserInValidSector()
+        {
+            SheredClasses.Point userLocation = GetUserLocation();
+            //Very specific to BGU!!! TODO CHANGE
+            List<SheredClasses.Point> points = new List<SheredClasses.Point>()
+            {
+                new SheredClasses.Point(31.265372, 34.798240),
+                new SheredClasses.Point(31.261009, 34.798178),
+                new SheredClasses.Point(31.260975, 34.805906),
+                new SheredClasses.Point(31.263513, 34.805998),
+                new SheredClasses.Point(31.265315, 34.803155)
+            };
+
+            //xMin, xMax, yMin, yMax
+            double[] relevantValues = GetRelevantValuesFromPolygonSector(points);
+
+            if (
+                userLocation.x > relevantValues[0] &&
+                userLocation.x < relevantValues[1] &&
+                userLocation.y > relevantValues[2] &&
+                userLocation.y < relevantValues[3])
+                return true;
+            return false;
+        }
+
+        private double[] GetRelevantValuesFromPolygonSector(List<SheredClasses.Point> points)
+        {
+            double[] ans = new double[4]; //xMin, xMax, yMin, yMax
+            foreach(SheredClasses.Point p in points)
+            {
+                if (p.x < ans[0]) ans[0] = p.x;
+                if (p.x > ans[1]) ans[1] = p.x;
+                if (p.y < ans[2]) ans[2] = p.y;
+                if (p.y > ans[3]) ans[3] = p.y;
+            }
+            return ans;
+        }
+
+        internal List<Attraction> GetVisitedAttractions()
+        {
+            List<Attraction> visited = new List<Attraction>(currentTrip.attractionsDone);
+            if (!isFinishTrip)
+                visited.RemoveAt(visited.Count - 1);
+            return visited;
+        }
+
+        internal List<OpenMessage> GetOpenMessages()
+        {
+            return conn.GetOpenMessages();
+        }
+
         internal bool IsNewUser()
         {
-            return currentUser.lastSeen == null;
+            string anonymousString;
+            User.SocialNetwork2string.TryGetValue(User.SOCIAL_NETWORK.Anonymous, out anonymousString);
+            return currentUser.lastSeen == null || currentUser.socialNetwork.Equals(anonymousString);
         }
 
         internal int GetScore()
         {
             return currentTrip.score;
-        }
-
-        private int GetNextPathLength(int pl)
-        {
-            return pl + 1;
         }
 
         public bool IsUserConnectedRecently()
@@ -60,85 +105,54 @@ namespace trumpeldor
                 (DateTime.Now - (DateTime)currentUser.lastSeen).TotalHours <= LOGIN_RECENETLY_DIFFERENCE_HOURS;
         }
 
-        internal async Task<Attraction> GetTempAttraction()
+        internal Attraction GetTempAttraction()
         {
-            return await conn.GetAttractionForDebug();
+            return conn.GetAttractionForDebug();
         }
 
-        internal async Task<RelevantInformation> LoadRelevantInformationFromLastTrip()
+        internal RelevantInformation LoadRelevantInformationFromLastTrip()
         {
-            return await conn.LoadRelevantInformationFromLastTrip(currentUser);
+            return conn.LoadRelevantInformationFromLastTrip(currentUser);
         }
 
-        internal async Task FinishAttraction()
+        internal void UpdateTrip()
         {
-            SheredClasses.Point userLocation = await GetUserLocation();
+            this.conn.UpdateTrip(this.currentTrip);
+        }
+
+        internal void FinishAttraction()
+        {
+            SheredClasses.Point userLocation = GetUserLocation();
             isFinishTrip = this.currentTrip.DoneMyAttraction(userLocation.x, userLocation.y);
         }
 
-        internal async Task ContinuePreviousTrip()
+        internal void ContinuePreviousTrip()
         {
-            this.currentTrip = await conn.GetPreviousTrip(currentUser);
+            this.currentTrip = conn.GetPreviousTrip(currentUser);
         }
 
         private GameController(ServerConection serverConnection)
         {
             this.conn = serverConnection;
-            destinations = new Dictionary<Attraction, bool>();
         }
 
-        public async Task CreateTrip(string groupName, List<int> playersAges, int trackLength)
+        public void CreateTrip(string groupName, List<int> playersAges, int trackLength)
         {
-            SheredClasses.Point userLocation = await GetUserLocation();
-            currentTrip = await conn.CreateTripAsync(currentUser, groupName, playersAges, trackLength, userLocation.x, userLocation.y);
+            SheredClasses.Point userLocation = GetUserLocation();
+            currentTrip = conn.CreateTrip(currentUser, groupName, playersAges, trackLength, userLocation.x, userLocation.y);
         }
 
-        private async Task <SheredClasses.Point> GetUserLocation()
+        public SheredClasses.Point GetUserLocation()
         {
-            var locator = CrossGeolocator.Current;
-            Plugin.Geolocator.Abstractions.Position position = await locator.GetPositionAsync(TimeSpan.FromSeconds(10));
-            return new SheredClasses.Point(position.Latitude, position.Longitude);
-            //return new SheredClasses.Point(31.262960, 34.797152); 
-        }
-
-        //private float GetUserY()
-        //{
-        //    if(latitude==0 && longtitude==0)
-        //    {
-        //        GetLocation();
-        //        return longtitude;
-        //    }
-        //    return longtitude;
-        //}
-
-        //private float GetUserX()
-        //{
-        //    if(latitude==0 && longtitude==0)
-        //    {
-        //        GetLocation();
-        //        return longtitude;
-        //    }
-        //    return longtitude;
-        //}
-
-        //private async void GetLocation()
-        //{
-        //    var locator = CrossGeolocator.Current;
-        //    var position = await locator.GetPositionAsync(TimeSpan.FromSeconds(10));
-        //    latitude = (float)position.Latitude;
-        //    longtitude = (float)position.Longitude;
-        //}
-        
-        public Clue GetFisrtHint()
-        {
-            //TODO
-            return new TextClue();
-        }
-
-        public Clue GetHint()
-        {
-            //TODO
-            return new TextClue();
+            trumpeldor.SheredClasses.Point p = null;
+            var t = Task.Run(async () =>
+            {
+                var locator = CrossGeolocator.Current;
+                Plugin.Geolocator.Abstractions.Position position = await locator.GetPositionAsync(TimeSpan.FromSeconds(5));
+                p = new SheredClasses.Point(position.Latitude, position.Longitude);
+            });
+            t.Wait();
+            return p;
         }
 
         //get y.png for example return http://IP:PORT/media/y.png
@@ -152,80 +166,30 @@ namespace trumpeldor
             return "some general information";
         }
 
-        public async Task<bool> CanContinueToLongerTrack()
+        public bool CanContinueToLongerTrack()
         {
-            trumpeldor.SheredClasses.Point userLocation = await GetUserLocation();
-            this.extendTrack = await conn.GetExtendedTrack(this.currentTrip.track, userLocation);
+            trumpeldor.SheredClasses.Point userLocation = GetUserLocation();
+            this.extendTrack = conn.GetExtendedTrack(this.currentTrip.track, userLocation);
             return this.extendTrack != null;
         }
 
         public void ContinueToLongerTrack()
         {
-           
+            currentTrip.track = extendTrack;
+            trumpeldor.SheredClasses.Point p = GetUserLocation();
+            isFinishTrip = currentTrip.DoneMyAttraction(p.x, p.y);
+            UpdateTrip();
         }
-
-        public List<Attraction> GetVisitedAttractions()
-        {
-            List<Attraction> visitedAttractions = new List<Attraction>();
-            foreach (Attraction Attraction in destinations.Keys)
-            {
-                if (destinations[Attraction])
-                {
-                    visitedAttractions.Add(Attraction);
-                }
-            }
-            return visitedAttractions;
-        }
-
-
-
-        /*private double GetDistanceFromLatLonInKm(double lat1, double lon1, double lat2, double lon2)
-        {
-            double R = 6371; // Radius of the earth in km
-            double dLat = Deg2rad(lat2 - lat1);  // deg2rad below
-            double dLon = Deg2rad(lon2 - lon1);
-            double a =
-              Math.Sin(dLat / 2) * Math.Sin(dLat / 2) +
-              Math.Cos(Deg2rad(lat1)) * Math.Cos(Deg2rad(lat2)) *
-              Math.Sin(dLon / 2) * Math.Sin(dLon / 2);
-            double c = 2 * Math.Atan2(Math.Sqrt(a), Math.Sqrt(1 - a));
-            double d = R * c; // Distance in km
-            return d;
-        }
-        private double Deg2rad(double deg)
-        {
-            return deg * (Math.PI / 180);
-        }
-        private void SelectNextAttractionHelper(double latitude, double longitude)
-        {
-            double ShortestDistance = double.MaxValue;
-            Attraction closestAttraction = null;
-
-
-            foreach (Attraction tp in destinations.Keys)
-            {
-                if(!destinations[tp])//we dont visit at tp
-                {
-                    
-                    double distance=GetDistanceFromLatLonInKm(position.Latitude, position.Longitude, tp.GetLatitude(), tp.GetLongitude());
-                    if(ShortestDistance > distance)
-                    {
-                        ShortestDistance = distance;
-                        closestAttraction = tp;
-                    }
-                }
-            }
-            if (closestAttraction == null) { this.isFinishTrack = true; }
-            else
-            {
-                this.currentAttractionDestination = closestAttraction;
-                this.destinations[closestAttraction] = true;
-            }
-        }*/
         
-        public async Task SignUp(string name, string socialNetwork)
+        public void SignUp(string name, string socialNetwork)
         {
-            this.currentUser = await conn.SignUp(name, socialNetwork);
+            this.currentUser = conn.SignUp(name, socialNetwork);
+        }
+
+        public int EditScore(SCORE_VALUE actionScore)
+        {
+            currentTrip.score += (int)actionScore;
+            return currentTrip.score;
         }
     }
 }
