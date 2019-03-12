@@ -149,7 +149,7 @@ namespace trumpeldor.Views
                 }
                 else
                 {
-                    await DisplayAlert("Illegal Input!", "You must fill all the fields", "OK");
+                   DisplayAlert("Illegal Input!", "You must fill all the fields", "OK");
 
                 }
             }
@@ -157,7 +157,7 @@ namespace trumpeldor.Views
             {
                 if (!(groupName != null && agesList.Count != 0 &&
                     (selectedPathLength == 1 || selectedPathLength == 2 || selectedPathLength == 3)))
-                    await DisplayAlert("Illegal Input!", "You must fill all the fields", "OK");
+                    DisplayAlert("Illegal Input!", "You must fill all the fields", "OK");
 
             }
         }

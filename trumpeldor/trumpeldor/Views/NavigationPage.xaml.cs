@@ -78,27 +78,17 @@ namespace trumpeldor.Views
 
         private async void DynamicBtn_Clicked(object sender, EventArgs e)
         {
-            try
+            Button clicked = (Button)sender;
+            string strIdx = clicked.Text.Substring(5, clicked.Text.Length - 5);
+            int currIdx = Int32.Parse(strIdx) -1;
+            if (nextAttraction.IsThisLastHint(currIdx))//hint map
             {
-                Button clicked = (Button)sender;
-                string strIdx = clicked.Text.Substring(5, clicked.Text.Length - 5);
-                int currIdx = Int32.Parse(strIdx) -1;
-                Hint toShow = nextAttraction.hints[currIdx];
-                if (toShow.kind.Equals("HM"))//hint map
-                {
-                    await Navigation.PushModalAsync(new MapPage(p));
-                }
-                else
-                {
-                    await Navigation.PushModalAsync(new HintPage(toShow));
-                }
+                await Navigation.PushModalAsync(new MapPage(new SheredClasses.Point(nextAttraction.x, nextAttraction.y)));
             }
-
-            catch (Exception exp)
+            else
             {
-                Console.WriteLine(exp.Message);
+                await Navigation.PushModalAsync(new HintPage(nextAttraction.hints[currIdx]));
             }
-            
         }
         
 
