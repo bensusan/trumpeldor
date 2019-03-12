@@ -22,7 +22,11 @@ namespace trumpeldor
         public static string IP;
         public static string PORT;
         public static int DEBUG;
+        
         private string urlPrefix;
+
+        private static int MAX_TRIES_POST = 1;
+        private static int MAX_TRIES_GET = 3;
 
         public static ServerConection getInstance()
         {
@@ -30,7 +34,9 @@ namespace trumpeldor
             {
                 using (var cts = new CancellationTokenSource())
                 {
-                    var config = ConfigurationManager.Instance.GetAsync(cts.Token).Result;
+                    var t = Task.Run(async () => await ConfigurationManager.Instance.GetAsync(cts.Token));
+                    t.Wait();
+                    var config = t.Result;
                     IP = config.IP;
                     PORT = config.PORT;
                     DEBUG = config.DEBUG;
@@ -45,36 +51,40 @@ namespace trumpeldor
         {
             urlPrefix = "http://" + IP + ":" + PORT + "/usersystem/";
         }
-        
-        public async Task<User> SignUp(String name, String socialNetwork)
-        {
+
+        public User SignUp(String name, String socialNetwork) {
             var newUser = new
             {
                 name = name,
                 socialNetwork = socialNetwork,
             };
-            string jsonResponse = await SendToServerAndGetResponseBack(newUser, "signUp/");
+            string jsonResponse = SendToServerAndGetResponseBack(newUser, "signUp/");
             return JsonConvert.DeserializeObject<User>(jsonResponse);
         }
 
-        internal async Task<RelevantInformation> LoadRelevantInformationFromLastTrip(User currentUser)
+        internal RelevantInformation LoadRelevantInformationFromLastTrip(User currentUser)
         {
-            string jsonResponse = await SendToServerAndGetResponseBack(currentUser, "getRelevantPreviousTripInformation/");
+            string jsonResponse = SendToServerAndGetResponseBack(currentUser, "getRelevantPreviousTripInformation/");
             return JsonConvert.DeserializeObject<RelevantInformation>(jsonResponse);
         }
 
-        internal async Task<Attraction> GetAttractionForDebug()
+        internal Attraction GetAttractionForDebug()
         {
-            string jsonResponse = await GetFromServer("getAttractionForDebug/");
+            string jsonResponse = GetFromServer("getAttractionForDebug/");
             Attraction toReturn = JsonConvert.DeserializeObject<Attraction>(jsonResponse);
-            await GetFullAttraction(toReturn);
+            GetFullAttraction(toReturn);
             return toReturn;
         }
 
-        internal async Task GetFullAttraction(Attraction attraction)
+        internal void UpdateTrip(Trip currentTrip)
         {
-            attraction.hints = await GetHintsByAttraction(attraction);
-            attraction.americanQuestion = await GetAmericanQuestionByAttraction(attraction);
+            SendToServerAndGetResponseBack(currentTrip, "updateTrip/");
+        }
+
+        internal void GetFullAttraction(Attraction attraction)
+        {
+            attraction.hints = GetHintsByAttraction(attraction);
+            attraction.americanQuestion = GetAmericanQuestionByAttraction(attraction);
         }
 
         private class HelpHints
@@ -82,16 +92,16 @@ namespace trumpeldor
             public List<Hint> hints { get; set; }
         }
 
-        internal async Task<List<Hint>> GetHintsByAttraction(Attraction attraction)
+        internal List<Hint> GetHintsByAttraction(Attraction attraction)
         {
-            string jsonResponse = await SendToServerAndGetResponseBack(new { id = attraction.id, }, "getHints/");
+            string jsonResponse = SendToServerAndGetResponseBack(new { id = attraction.id, }, "getHints/");
             jsonResponse = "{ 'hints': " + jsonResponse + "}";
             return JsonConvert.DeserializeObject<HelpHints>(jsonResponse).hints;
         }
 
-        internal async Task<AmericanQuestion> GetAmericanQuestionByAttraction(Attraction attraction)
+        internal AmericanQuestion GetAmericanQuestionByAttraction(Attraction attraction)
         {
-            string jsonResponse = await SendToServerAndGetResponseBack(new { id = attraction.id, }, "getAmericanQuestion/");
+            string jsonResponse = SendToServerAndGetResponseBack(new { id = attraction.id, }, "getAmericanQuestion/");
             if (jsonResponse.Equals("{\"question\":\"\",\"answers\":null,\"indexOfCorrectAnswer\":null}"))
                 return null;
             return JsonConvert.DeserializeObject<AmericanQuestion>(jsonResponse);
@@ -102,72 +112,66 @@ namespace trumpeldor
             public List<FeedbackInstance> feedbacks { get; set; }
         }
 
-        private async Task<List<FeedbackInstance>> GetFeedbacks(Trip trip)
+        private List<FeedbackInstance> GetFeedbacks(Trip trip)
         {
-            string jsonResponse = await SendToServerAndGetResponseBack(new { id = trip.id, }, "getFeedbacks/");
+            string jsonResponse = SendToServerAndGetResponseBack(new { id = trip.id, }, "getFeedbackInstances/");
             jsonResponse = "{ 'feedbacks': " + jsonResponse + "}";
             HelpFeedbacks hf = JsonConvert.DeserializeObject<HelpFeedbacks>(jsonResponse);
             return hf.feedbacks;
         }
 
-        //private class TripDB
-        //{
-        //        public int user { get; set; }
-        //        public string groupName { get; set; }
-        //        public List<int> playersAges { get; set; }
-        //        public int score { get; set; }
-        //        public int track { get; set; }
-        //        public List<int> attractionsDone { get; set; }
-        //}
-
-
-        internal async Task<Trip> CreateTripAsync(User currentUser, string groupName, List<int> playersAges, int trackLength, double xUser, double yUser)
+        internal Trip CreateTrip(User currentUser, string groupName, List<int> playersAges, int trackLength, double xUser, double yUser)
         {
             var toSend = new { user = currentUser, groupName = groupName, playersAges = playersAges, trackLength = trackLength, x = xUser, y = yUser, };
-            string jsonResponse = await SendToServerAndGetResponseBack(toSend, "createTrip/");
+            string jsonResponse = SendToServerAndGetResponseBack(toSend, "createTrip/");
             Trip trip = JsonConvert.DeserializeObject<Trip>(jsonResponse);
-            //string jsonResponse = await SendToServerAndGetResponseBack(toSend, "createTrip/");
-            //Trip trip = JsonConvert.DeserializeObject<Trip>(jsonResponse);
-            //trip.groupName = tripDB.groupName; trip.playersAges = tripDB.playersAges; trip.score = tripDB.score;
-            //trip.user = await GetUserById(tripDB.user);
-            trip.attractionsDone = await GetFullAttractions(trip.attractionsDone);
-            trip.track = await GetFullTrack(trip.track);
-            trip.feedbacks = await GetFeedbacks(trip);            
+            trip.attractionsDone = GetFullAttractions(trip.attractionsDone);
+            trip.track = GetFullTrack(trip.track);
+            trip.feedbacks = GetFeedbacks(trip);            
             return trip;
         }
 
-        internal async Task<Track> GetExtendedTrack(Track track, SheredClasses.Point userLocation)
+        internal Track GetExtendedTrack(Track track, SheredClasses.Point userLocation)
         {
-            string jsonResponse = await SendToServerAndGetResponseBack(new { track = track, x = userLocation.x, y = userLocation.y,}, "getExtendedTrack/");
-            return JsonConvert.DeserializeObject<Track>(jsonResponse);
+            string jsonResponse = SendToServerAndGetResponseBack(new { trackId = track.id, x = userLocation.x, y = userLocation.y,}, "getExtendedTrack/");
+            return GetFullTrack(JsonConvert.DeserializeObject<Track>(jsonResponse));
         }
 
-        internal async Task<Track> GetFullTrack(Track track)
+        internal Track GetFullTrack(Track track)
         {
+            if (track == null)
+                return null;
             if (track.subTrack != null)
-                track.subTrack = await GetFullTrack(track.subTrack);
-            track.points = await GetFullAttractions(track.points);
+                track.subTrack = GetFullTrack(track.subTrack);
+            track.points = GetFullAttractions(track.points);
             return track;
         }
 
-        internal async Task<List<Attraction>> GetFullAttractions(List<Attraction> attractions)
+        internal List<Attraction> GetFullAttractions(List<Attraction> attractions)
         {
             foreach (Attraction attraction in attractions)
-                await GetFullAttraction(attraction);
+                GetFullAttraction(attraction);
             return attractions;
         }
 
-        //internal async Task<User> GetUserById(int user)
-        //{
-        //    string jsonResponse = await SendToServerAndGetResponseBack(new { user = user }, "getUserById/");
-        //    return JsonConvert.DeserializeObject<User>(jsonResponse);
-        //}
-
-        internal async Task<Trip> GetPreviousTrip(User currentUser)
+        internal Trip GetPreviousTrip(User currentUser)
         {
-            string jsonResponse = await SendToServerAndGetResponseBack(currentUser, "previousTrip/");
+            string jsonResponse = SendToServerAndGetResponseBack(currentUser, "previousTrip/");
             return JsonConvert.DeserializeObject<Trip>(jsonResponse);
         }
+
+        class HelpOpenMessages
+        {
+            public List<OpenMessage> messages { get; set; }
+        }
+
+        internal List<OpenMessage> GetOpenMessages()
+        {
+            string jsonResponse = GetFromServer("getOpenMessages/");
+            jsonResponse = "{ 'messages': " + jsonResponse + "}";
+            return JsonConvert.DeserializeObject<HelpOpenMessages>(jsonResponse).messages;
+        }
+
 
         public StringContent ContentPost(Object obj)
         {
@@ -176,31 +180,72 @@ namespace trumpeldor
             return content;
         }
 
-        private async Task<string> SendToServerAndGetResponseBack(Object toSend, string endOfUri)
+        private string SendToServerAndGetResponseBack(Object toSend, string endOfUri)
         {
+            string ans = "";
+            bool error = true;
+            int numOfTries = 0;
+            Exception lastException = null;
+
+            var content = ContentPost(toSend);
+            var uri = urlPrefix + endOfUri;
+
             using (var client = new HttpClient())
             {
-                var content = ContentPost(toSend);
-
-                //  send a POST request  
-                var uri = urlPrefix + endOfUri;
-                var response = await client.PostAsync(uri, content);
-
-                // on error throw a exception  
-                response.EnsureSuccessStatusCode();
-                return await response.Content.ReadAsStringAsync();
+                while (error && numOfTries < MAX_TRIES_POST)
+                {
+                    try
+                    {
+                        var t1 = Task.Run(async () => await client.PostAsync(uri, content));
+                        t1.Wait();
+                        var response = t1.Result;
+                        response.EnsureSuccessStatusCode();
+                        var t2 = Task.Run(async () => await response.Content.ReadAsStringAsync());
+                        ans = t2.Result;
+                        error = false;
+                    }
+                    catch (Exception e)
+                    {
+                        numOfTries++;
+                        lastException = e;
+                    }
+                }
             }
+            if (error)
+                throw lastException;
+            return ans;
         }
 
-        private async Task<string> GetFromServer(string endOfUri)
+        private string GetFromServer(string endOfUri)
         {
+            string ans = "";
+            bool error = true;
+            int numOfTries = 0;
+            Exception lastException = null;
+
+            var uri = urlPrefix + endOfUri;
+
             using (var client = new HttpClient())
             {
-                var uri = urlPrefix + endOfUri;
-                var response = await client.GetAsync(uri);
-                response.EnsureSuccessStatusCode();
-                return await response.Content.ReadAsStringAsync();
+                while (error && numOfTries < MAX_TRIES_GET)
+                {
+                    try
+                    {
+                        var t = Task.Run(async () => await client.GetStringAsync(uri));
+                        t.Wait();
+                        ans = t.Result;
+                        error = false;
+                    }
+                    catch (Exception e)
+                    {
+                        numOfTries++;
+                        lastException = e;
+                    }
+                }
             }
+            if (error)
+                throw lastException;
+            return ans;
         }
     }
 }

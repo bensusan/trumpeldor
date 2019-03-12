@@ -26,5 +26,10 @@ namespace trumpeldor.SheredClasses
             //TODO
             return "";
         }
+
+        internal bool IsThisLastHint(int hintsIndex)
+        {
+            return hints.Count == hintsIndex;
+        }
     }
 }

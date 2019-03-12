@@ -6,15 +6,62 @@ using System.Threading.Tasks;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using trumpeldor.SheredClasses;
 
 namespace trumpeldor.Views
 {
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class FeedbackPage : ContentPage
 	{
-		public FeedbackPage ()
+        GameController gc;
+
+        public FeedbackPage ()
 		{
-			InitializeComponent ();
-		}
-	}
+			InitializeComponent();
+            gc = GameController.getInstance();
+            AddFeedbacks();
+        }
+
+        private void AddFeedbacks()
+        {
+            List<FeedbackInstance> tripFeedbacks = gc.currentTrip.feedbacks;
+            foreach (FeedbackInstance fi in tripFeedbacks)
+                AddFeedback(fi);
+        }
+
+        private void AddFeedback(FeedbackInstance fi)
+        {
+            int nextRow = feedbacks.RowDefinitions.Count;
+            feedbacks.RowDefinitions.Add(new RowDefinition { Height = GridLength.Star });
+            Label lbl = new Label { Text = fi.feedback.question };
+            lbl.SetDynamicResource(VisualElement.StyleProperty, "lableStyle");
+            feedbacks.Children.Add(lbl, 0, nextRow);
+            Feedback.Kinds kind;
+            Feedback.kindToEnum.TryGetValue(fi.feedback.kind, out kind);
+            Entry entry = null;
+            if (kind == Feedback.Kinds.FeedBackText)
+                entry = new Entry { Keyboard = Keyboard.Text };
+            else if (kind == Feedback.Kinds.FeedBackRating)
+                entry = new Entry { Keyboard = Keyboard.Numeric };
+            if(fi.answer != null)
+                entry.Text = fi.answer;
+            entry.SetDynamicResource(VisualElement.StyleProperty, "entryStyle");
+            feedbacks.Children.Add(entry, 1, nextRow);
+        }
+
+        private void Reply_Button_Clicked(object sender, EventArgs e)
+        {
+            int indexFeedback = 0;
+            foreach (View child in feedbacks.Children)
+            {
+                if (child is Entry)
+                {
+                    gc.currentTrip.feedbacks[indexFeedback].answer = ((Entry)child).Text;
+                    indexFeedback++;
+                }
+            }
+            gc.UpdateTrip();
+            Application.Current.MainPage = new FirstPage(false);
+        }
+    }
 }
