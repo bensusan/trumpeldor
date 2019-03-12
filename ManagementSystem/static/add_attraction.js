@@ -60,6 +60,9 @@ window.onload=function(){
         localStorage.setItem("ans4"+numberOfPoints, document.getElementById("ans4").value);
         localStorage.setItem("path_len"+numberOfPoints, document.getElementById("path_len").value);
 
+//         var e = document.getElementById("ddlViewBy");
+// var strUser = e.options[e.selectedIndex].value;
+
         window.location.href='/attractions';
         // alert("point:"+localStorage.getItem("addedPoint")+"\n"+
         //     "name:"+document.getElementById("attr_name").value);

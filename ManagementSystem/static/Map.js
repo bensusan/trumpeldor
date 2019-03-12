@@ -36,9 +36,11 @@ function initMap() {
     var m = new google.maps.Marker({
       position:myLatLng,
       map: map,
-      title: "Point no."+(num+1)+".\n Belongs to the "+document.getElementById("path_len"+num) +"path."
+      title: "Point no."+(num+1)+".\n Belongs to the "+localStorage.getItem("path_len"+num) +" path."
     });
     m.setMap(map);
+//         var e = document.getElementById("ddlViewBy");
+// var strUser = e.options[e.selectedIndex].value;
 
     if(num<4) {
         localStorage.setItem("editedNum", num);
@@ -50,7 +52,7 @@ function initMap() {
         localStorage.setItem("ans2" + num, "ans2 of point no." + num);
         localStorage.setItem("ans3" + num, "ans3 of point no." + num);
         localStorage.setItem("ans4" + num, "ans4 of point no." + num);
-        localStorage.setItem("path_len" + num, "1");
+        localStorage.setItem("path_len" + num, "long");
     }
 
     m.addListener('click', function() {

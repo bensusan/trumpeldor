@@ -65,6 +65,8 @@ window.onload=function(){
       document.getElementById("ans2").value = localStorage.getItem("ans2"+localStorage.getItem("editedNum"));
       document.getElementById("ans3").value = localStorage.getItem("ans3"+localStorage.getItem("editedNum"));
       document.getElementById("ans4").value = localStorage.getItem("ans4"+localStorage.getItem("editedNum"));
-      document.getElementById("path_len").value = 1;
+
+      document.getElementById("path_len").value = localStorage.getItem("path_len"+localStorage.getItem("editedNum"));
+      alert(localStorage.getItem("path_len"+localStorage.getItem("editedNum")));
           // localStorage.getItem("path_len"+localStorage.getItem("editedNum"));
     }
