@@ -23,7 +23,7 @@ namespace trumpeldor.Views
 		{
             InitializeComponent ();
 
-            width = 4;
+            width = 3;
             tiles = new SlidingPuzzleTile[width, width];
             emptyRow = width - 1;
             emptyCol = width - 1;

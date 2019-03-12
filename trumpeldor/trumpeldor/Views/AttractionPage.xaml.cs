@@ -51,7 +51,7 @@ namespace trumpeldor.Views
         }
         private async void Mission_Button_Clicked(object sender, EventArgs e)
         {
-            //await Navigation.PushModalAsync(new MissionPage());
+            await Navigation.PushModalAsync(new SlidingPuzzlePage());
         }
         private async void Question_Button_Clicked(object sender, EventArgs e)
         {

@@ -9,7 +9,8 @@ namespace trumpeldor.ViewModels
 {
 	public class SlidingPuzzleTile 
 	{
-        const string UrlPrefix = "http://xamarin.github.io/xamarin-forms-book-samples/XamagonXuzzle/";
+        //const string UrlPrefix = "http://xamarin.github.io/xamarin-forms-book-samples/XamagonXuzzle/";
+        string urlPrefix = "http://" + ServerConection.IP + ":" + ServerConection.PORT + "/media/";
 
         public static Dictionary<View, SlidingPuzzleTile> Dictionary { get; } = new Dictionary<View, SlidingPuzzleTile>();
 
@@ -44,7 +45,7 @@ namespace trumpeldor.ViewModels
             //TODO get image from our server
             return new Image
             {
-                Source = ImageSource.FromUri(new Uri(UrlPrefix + "Bitmap" + row + col + ".png"))
+                Source = ImageSource.FromUri(new Uri(urlPrefix + "example" + row + col + ".png"))
             };
         }
 
