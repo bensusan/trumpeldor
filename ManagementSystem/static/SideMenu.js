@@ -49,6 +49,6 @@ let points= [
     {lat: 31.262773527283052, lng: 34.802075028419495}
 ];
 
-localStorage.setItem("points",points);
+localStorage.setItem("points",JSON.stringify(points));
 
-// alert("the number of points is now :" + points.length)
+alert("the number of points is now :" + points.length)
