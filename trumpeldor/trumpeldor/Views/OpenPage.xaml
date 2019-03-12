@@ -4,7 +4,7 @@
              x:Class="trumpeldor.Views.OpenPage">
     <ContentPage.Content>
         <StackLayout Style="{DynamicResource mainStackLayout}">
-            <Button Text="english" Clicked="Button_Clicked" Style="{StaticResource largeButtonStyle}"/>
+            <Button Text="english" Clicked="Button_Clicked" Style="{StaticResource largeButtonStyle}" AutomationId="EnglishBtn"/>
             <Button Text="עיברית" Clicked="Button_Clicked_1" Style="{StaticResource largeButtonStyle}"/>
         </StackLayout>
     </ContentPage.Content>
