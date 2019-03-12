@@ -90,6 +90,9 @@ class BL_Abstract(object):
     def updateTrip(self, dataTrip):
         raise NotImplementedError("Should have implemented this")
 
+    def getBestScores(self):
+        raise NotImplementedError("Should have implemented this")
+
 
 class BLProxy(BL_Abstract):
     Implementation = None
@@ -216,3 +219,8 @@ class BLProxy(BL_Abstract):
         if self.Implementation is None:
             raise NotImplementedError("Should have implemented this")
         return self.Implementation.updateTrip(dataTrip)
+
+    def getBestScores(self):
+        if self.Implementation is None:
+            raise NotImplementedError("Should have implemented this")
+        return self.Implementation.getBestScores()

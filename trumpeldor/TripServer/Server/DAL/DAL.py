@@ -86,6 +86,8 @@ class DAL_Abstract(object):
     def updateLastSeenToNow(self, user):
         raise NotImplementedError("Should have implemented this")
 
+    def getAllTrips(self):
+        raise NotImplementedError("Should have implemented this")
 
 class DALProxy(DAL_Abstract):
     Implementation = None
@@ -232,3 +234,8 @@ class DALProxy(DAL_Abstract):
         if self.Implementation is None:
             raise NotImplementedError("Should have implemented this")
         return self.Implementation.updateLastSeenToNow(user)
+
+    def getAllTrips(self):
+        if self.Implementation is None:
+            raise NotImplementedError("Should have implemented this")
+        return self.Implementation.getAllTrips()

@@ -158,6 +158,15 @@ class UpdateTrip(generics.GenericAPIView):
             request,
             "UpdateTrip",
             BL.updateTrip)
+
+
+class GetBestScores(views.APIView):
+    def get(self, request):
+        return generalGet(
+            "GetBestScores",
+            BL.getBestScores,
+            ScoreSerializer,
+            True)
 ######################################################################################################
 # ----------------------------------------Add Manual Data Part----------------------------------------
 ######################################################################################################

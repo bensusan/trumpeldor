@@ -128,3 +128,6 @@ class DAL_Implementation(DAL_Abstract):
         user.lastSeen = datetime.datetime.now()
         user.save()
         return user
+
+    def getAllTrips(self):
+        return Trip.objects.order_by('score')

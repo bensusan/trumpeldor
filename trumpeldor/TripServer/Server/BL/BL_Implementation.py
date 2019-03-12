@@ -4,7 +4,7 @@ from Server.DAL.DAL import DALProxy
 from Server.serializers import *
 from Server.models import *
 from itertools import chain
-
+import TripServer.settings as settings
 
 def getDistance(lat1, lon1, lat2, lon2):
     def haversin(x):
@@ -152,4 +152,7 @@ class BL_Implementation(BL_Abstract):
 
     def getFeedback(self, feedback):
         return self.DAL.getFeedbackById(feedback["id"])
+
+    def getBestScores(self):
+        return self.DAL.getAllTrips()[:settings.TOP_X]
 

@@ -142,3 +142,10 @@ class UpdateTripSerializer(serializers.Serializer):
     track = TrackSerializer()
     attractionsDone = AttractionSerializer(many=True)
     feedbacks = FeedbackInstanceSerializer(many=True)
+
+
+class ScoreSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        fields = ('groupName', 'score')
+        model = Trip
