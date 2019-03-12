@@ -2,12 +2,12 @@
 let curPosClicked;
 let curMarker;
 let coordinates_of_last_click;
-let points= [
-    {lat: 31.263465932844372, lng: 34.801946282386783},
-    {lat: 31.263065932844372, lng: 34.801146282386783},
-    {lat: 31.263865932844372, lng: 34.802146282386783},
-    {lat: 31.262773527283052, lng: 34.802075028419495}
-];
+// let points= [
+//     {lat: 31.263465932844372, lng: 34.801946282386783},
+//     {lat: 31.263065932844372, lng: 34.801146282386783},
+//     {lat: 31.263865932844372, lng: 34.802146282386783},
+//     {lat: 31.262773527283052, lng: 34.802075028419495}
+// ];
 
 function initMapAndAttractions(){
     initMap();
@@ -20,6 +20,7 @@ function initMap() {
     });
     listenerForMap(map);
     initPoints();
+    alert("the number of points is now :" + points.length)
 }
 
   function initPoints(){
@@ -70,16 +71,6 @@ function listenerForMap(map){
         }
         curPosClicked = positionInMap(event.latLng.lat(), event.latLng.lng());
         curMarker = markAttraction(curPosClicked);
-
-        // editBTN=document.getElementById('edit_attraction');
-        // editBTN.addEventListener('click', function(event) {
-        //     var ccc= points.indexOf(coordinates_of_last_click);
-        //     //alert(coordinates_of_last_click +" and : : : "+ points);
-        // if(ccc!=-1)
-        //     {
-        //         window.location.href='/edit_attraction';
-        //     }
-        // });
 
         var addBTN = document.getElementById('add_attraction');
         addBTN.addEventListener('click', function(event) {

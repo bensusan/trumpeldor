@@ -38,3 +38,17 @@ for (i = 0; i < dropdown.length; i++) {
   }
   });
 }
+
+
+
+
+let points= [
+    {lat: 31.263465932844372, lng: 34.801946282386783},
+    {lat: 31.263065932844372, lng: 34.801146282386783},
+    {lat: 31.263865932844372, lng: 34.802146282386783},
+    {lat: 31.262773527283052, lng: 34.802075028419495}
+];
+
+localStorage.setItem("points",points);
+
+// alert("the number of points is now :" + points.length)
