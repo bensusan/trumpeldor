@@ -9,6 +9,8 @@ let coordinates_of_last_click;
 //     {lat: 31.262773527283052, lng: 34.802075028419495}
 // ];
 
+var pointsOfPath=[];
+
 let points = JSON.parse(localStorage.getItem("points"));
 
 function initMapAndAttractions(){
@@ -21,19 +23,28 @@ function initMap() {
         zoom: 18,
         center: {lat: 31.262860, lng: 34.801753}
     });
-    listenerForMap(map);
     initPoints();
-    alert("the number of points is now :" + points.length)
-    var shortPath1 = JSON.parse(localStorage.getItem("short_path"));
-        var medPath1 = JSON.parse(localStorage.getItem("medium_path"));
-        var longPath1 = JSON.parse(localStorage.getItem("long_path"));
-          alert("short:"+shortPath1.length +"\nmedium: "+medPath1.length +"\nlong: "+longPath1.length);
+    // alert("the number of points is now :" + points.length)
+    // var shortPath1 = JSON.parse(localStorage.getItem("short_path"));
+    //     var medPath1 = JSON.parse(localStorage.getItem("medium_path"));
+    //     var longPath1 = JSON.parse(localStorage.getItem("long_path"));
+    //       alert("short:"+shortPath1.length +"\nmedium: "+medPath1.length +"\nlong: "+longPath1.length);
 }
 
   function initPoints(){
   for (var i = 0; i < points.length; i++) {
     addPoint2(points[i],i)
   }
+
+   var finishBTN = document.getElementById('finish');
+        finishBTN.addEventListener('click', function(event) {
+            var shortPaths= JSON.parse(localStorage.getItem("short_paths"));
+            var path = pointsOfPath;
+            shortPaths.push(path);
+            localStorage.setItem("short_paths",JSON.stringify(shortPaths));
+            alert("the path: "+ pointsOfPath.toString());
+        });
+
   }
 
   function addPoint2(p,num){
@@ -47,30 +58,29 @@ function initMap() {
 //         var e = document.getElementById("ddlViewBy");
 // var strUser = e.options[e.selectedIndex].value;
 
-    if(num<4) {
-        localStorage.setItem("editedNum", num);
-
-        localStorage.setItem("attr_name" + num, "the name of point no." + num);
-        localStorage.setItem("desc" + num, "the description of point no." + num);
-        localStorage.setItem("ques" + num, "the question of point no." + num);
-        localStorage.setItem("ans1" + num, "ans1 of point no." + num);
-        localStorage.setItem("ans2" + num, "ans2 of point no." + num);
-        localStorage.setItem("ans3" + num, "ans3 of point no." + num);
-        localStorage.setItem("ans4" + num, "ans4 of point no." + num);
-        localStorage.setItem("path_len" + num, "long");
-    }
+    // if(num<4) {
+    //     localStorage.setItem("editedNum", num);
+    //
+    //     localStorage.setItem("attr_name" + num, "the name of point no." + num);
+    //     localStorage.setItem("desc" + num, "the description of point no." + num);
+    //     localStorage.setItem("ques" + num, "the question of point no." + num);
+    //     localStorage.setItem("ans1" + num, "ans1 of point no." + num);
+    //     localStorage.setItem("ans2" + num, "ans2 of point no." + num);
+    //     localStorage.setItem("ans3" + num, "ans3 of point no." + num);
+    //     localStorage.setItem("ans4" + num, "ans4 of point no." + num);
+    //     localStorage.setItem("path_len" + num, "long");
+    // }
 
     m.addListener('click', function() {
-        alert("ppppp: "+num);
+      alert(m.position);
 
-
-    var editBTN = document.getElementById('edit_attraction');
+    var editBTN = document.getElementById('add_point');
         editBTN.addEventListener('click', function(event) {
-            localStorage.setItem("edited", m.position);
-            localStorage.setItem("editedNum", num);
-            window.location.href='/edit_attraction';
+            pointsOfPath.push(m.position);
         });
   });
+
+
 
   }
 
@@ -91,14 +101,6 @@ function listenerForMap(map){
     }));
 }
 
-
-function addListenerForMarker(marker) {
-     google.maps.event.addListener(marker, 'click', (function(event) {
-              return function() {
-              }
-          })(event));
-
-}
 
 function positionInMap(lat, lng){
           return {lat: lat, lng: lng};
