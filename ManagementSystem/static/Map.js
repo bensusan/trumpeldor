@@ -76,7 +76,7 @@ function listenerForMap(map){
 
         var addBTN = document.getElementById('add_attraction');
         addBTN.addEventListener('click', function(event) {
-        localStorage.setItem("addedPoint", coordinates_of_last_click);
+        localStorage.setItem("addedPoint", JSON.stringify(coordinates_of_last_click));
             window.location.href='/add_attraction';
         });
     }));

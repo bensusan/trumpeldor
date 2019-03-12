@@ -1,4 +1,5 @@
 alert(localStorage.getItem("addedPoint"));
+var addedPoint = JSON.parse(localStorage.getItem("addedPoint"));
 
 var loadFile = function(event) {
 	var image = document.getElementById('output');
@@ -44,7 +45,8 @@ window.onload=function(){
         localStorage.setItem("numberOfPoints",""+numberOfPoints);
 
         var currPoints = JSON.parse(localStorage.getItem("points"));
-
+        currPoints.append(addedPoint);
+        localStorage.setItem("points",JSON.stringify(currPoints));
 
         localStorage.setItem("attr_name"+numberOfPoints, document.getElementById("attr_name").value);
         localStorage.setItem("desc"+numberOfPoints, document.getElementById("desc").value);
@@ -55,7 +57,7 @@ window.onload=function(){
         localStorage.setItem("ans4"+numberOfPoints, document.getElementById("ans4").value);
         localStorage.setItem("path_len"+numberOfPoints, document.getElementById("path_len").value);
 
-
-        alert("point:"+localStorage.getItem("addedPoint")+"\n"+
-            "name:"+document.getElementById("attr_name").value);
+        window.location.href='/attractions';
+        // alert("point:"+localStorage.getItem("addedPoint")+"\n"+
+        //     "name:"+document.getElementById("attr_name").value);
     }
