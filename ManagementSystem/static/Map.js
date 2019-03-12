@@ -37,20 +37,25 @@ function initMap() {
     });
     m.setMap(map);
 
-    localStorage.setItem("editedNum", num);
-
-    localStorage.setItem("ques"+num, "the question of p"+num);
-    localStorage.setItem("ans1"+num, "the ans1 of p"+num);
-    localStorage.setItem("ans2"+num, "the ans2 of p"+num);
-    localStorage.setItem("ans3"+num, "the ans3 of p"+num);
-    localStorage.setItem("ans4"+num, "the ans4 of p"+num);
+    // localStorage.setItem("editedNum", num);
+    //
+    localStorage.setItem("attr_name"+num, "the name of point no."+num);
+    localStorage.setItem("desc"+num, "the description of point no."+num);
+    localStorage.setItem("ques"+num, "the question of point no."+num);
+    localStorage.setItem("ans1"+num, "ans1 of point no."+num);
+    localStorage.setItem("ans2"+num, "ans2 of point no."+num);
+    localStorage.setItem("ans3"+num, "ans3 of point no."+num);
+    localStorage.setItem("ans4"+num, "ans4 of point no."+num);
+    localStorage.setItem("path_len"+num, "1");
 
     m.addListener('click', function() {
         alert("ppppp: "+num);
 
+
     var editBTN = document.getElementById('edit_attraction');
         editBTN.addEventListener('click', function(event) {
             localStorage.setItem("edited", m.position);
+            localStorage.setItem("editedNum", num);
             window.location.href='/edit_attraction';
         });
   });

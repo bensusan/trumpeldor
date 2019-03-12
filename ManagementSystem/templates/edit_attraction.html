@@ -7,12 +7,15 @@
 </head>
 <body>
 
-
-    {% load static %}
-<script src="{% static 'edit_attraction.js' %}"></script>
-
 <button onclick="window.location.href='/main'" type="button">Back to menu</button>
 <button onclick="window.location.href='/attractions'" type="button">Back to map</button>
+
+
+    {% load static %}
+<script src="{% static 'edit_attraction.js' %}?version=1"></script>
+
+<button onclick="showVals()" type="button">Show Values</button>
+
 
 <div align="center">
 <h2>Edit Attraction</h2>
@@ -42,27 +45,27 @@
 
   <div class="container">
     <label for="name"><b>Name of attraction: </b></label>
-    <input id="attr_name" type="text" placeholder="Enter name" name="attr_name" required>
+    <input  type="text" id="attr_name" placeholder="Enter name" name="attr_name" required>
 
     <label for="desc"><b>Description</b></label>
-    <input type="text" placeholder="Enter description" name="attr_desc" required>
+    <input  type="text" id="desc" placeholder="Enter description" name="attr_desc" required>
 
               {% load static %}
 <script src="{% static 'Map.js' %}"?version="1"></script>
 
 
-{#{% load static %}#}
-{#<script src="{% static 'edit_attraction.js' %}?version=1"></script>#}
+{% load static %}
+<script src="{% static 'edit_attraction.js' %}?version=1"></script>
 
     <label for="desc"><b>Add American Question:</b></label>
-    <input type="text" placeholder="Enter Question" name="attr_desc" required>
+    <input type="text" id="ques" placeholder="Enter Question" name="attr_desc" required>
       <input  type="text" id="ans1" placeholder="ans1" name="a1" required>
       <input type="text" id="ans2" placeholder="ans2" name="a2" required>
       <input type="text" id="ans3" placeholder="ans3" name="a3" required>
       <input  type="text" id="ans4" placeholder="ans4" name="a4" required>
 
       <label for="desc"><b>Choose path length:</b></label>
-      <select>
+      <select id="path_len">
       <option value="short">Short</option>
       <option value="medium">Medium</option>
       <option value="long">Long</option>
