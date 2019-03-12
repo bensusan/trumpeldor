@@ -14,6 +14,7 @@ urlpatterns = [
     path('main/', views.main_page),
     path('add_game/', views.add_game_page),
     path('additional_info/', views.info_page),
+    path('add_short_path/', views.add_short_path_page),
 ]
 
 urlpatterns = format_suffix_patterns(urlpatterns)

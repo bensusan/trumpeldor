@@ -19,3 +19,9 @@ function checkPassword1() {
            document.getElementById("demo").innerHTML = "wrong password or username!";
 
 }
+
+var shortPaths=[[]];
+
+localStorage.setItem("short_paths",JSON.stringify(shortPaths));
+// localStorage.setItem("medium_path",JSON.stringify(med));
+// localStorage.setItem("long_path",JSON.stringify(long));
