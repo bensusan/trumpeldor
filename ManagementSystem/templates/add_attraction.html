@@ -23,13 +23,13 @@
     <label for="name"><b>Upload Video: </b></label>
 
     {% load static %}
-<script src="{% static 'add_attraction.js' %}"></script>
+<script src="{% static 'add_attraction.js' %}?version=1"></script>
     <div id="message"></div>
 <video height="200px" width="350px" controls="" autoplay=""></video>
     <input type="file" accept="video/*">
 
         {% load static %}
-<script src="{% static 'add_attraction.js' %}"></script>
+<script src="{% static 'add_attraction.js' %}?version=1"></script>
 
     <p></p>
     <label for="hint"><b>Upload Image:</b></label>
@@ -60,7 +60,7 @@
       </select>
 
     {% load static %}
-    <script src="{% static 'add_attraction.js' %}"></script>
+    <script src="{% static 'add_attraction.js' %}?version=1"></script>
     <button onclick="showDataCollected()" type="button">Submit</button>
     <button type="button">Clean</button>
 

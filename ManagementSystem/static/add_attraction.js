@@ -1,5 +1,5 @@
-alert(localStorage.getItem("addedPoint"));
-var addedPoint = JSON.parse(localStorage.getItem("addedPoint"));
+// alert(localStorage.getItem("addedPoint"));
+
 
 var loadFile = function(event) {
 	var image = document.getElementById('output');
@@ -43,9 +43,11 @@ window.onload=function(){
         var numberOfPoints =Number(localStorage.getItem("numberOfPoints"));
         numberOfPoints=numberOfPoints+1;
         localStorage.setItem("numberOfPoints",""+numberOfPoints);
-
+        // alert("1!");
         var currPoints = JSON.parse(localStorage.getItem("points"));
-        currPoints.append(addedPoint);
+        var addedPoint = JSON.parse(localStorage.getItem("addedPoint"));
+        // alert("2!");
+        currPoints.push(addedPoint);
         localStorage.setItem("points",JSON.stringify(currPoints));
 
         localStorage.setItem("attr_name"+numberOfPoints, document.getElementById("attr_name").value);
