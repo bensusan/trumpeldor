@@ -50,6 +50,7 @@ window.onload=function(){
         currPoints.push(addedPoint);
         localStorage.setItem("points",JSON.stringify(currPoints));
 
+        numberOfPoints--;
         localStorage.setItem("attr_name"+numberOfPoints, document.getElementById("attr_name").value);
         localStorage.setItem("desc"+numberOfPoints, document.getElementById("desc").value);
         localStorage.setItem("ques"+numberOfPoints, document.getElementById("ques").value);
