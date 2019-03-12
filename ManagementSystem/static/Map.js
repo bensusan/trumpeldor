@@ -10,7 +10,7 @@ let coordinates_of_last_click;
 // ];
 
 let points = JSON.parse(localStorage.getItem("points"));
-
+//
 function initMapAndAttractions(){
     initMap();
     initAttractionsMarkers();
