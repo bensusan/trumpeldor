@@ -20,6 +20,38 @@ function checkPassword1() {
 
 }
 
+
+let points= [
+    {lat: 31.263465932844372, lng: 34.801946282386783},
+    {lat: 31.263065932844372, lng: 34.801146282386783},
+    {lat: 31.263865932844372, lng: 34.802146282386783},
+    {lat: 31.262773527283052, lng: 34.802075028419495}
+];
+
+let short= [
+    {lat: 31.263465932844372, lng: 34.801946282386783}
+];
+
+let med= [
+    {lat: 31.263465932844372, lng: 34.801946282386783},
+    {lat: 31.263065932844372, lng: 34.801146282386783}
+];
+
+let long= [
+    {lat: 31.263465932844372, lng: 34.801946282386783},
+    {lat: 31.263065932844372, lng: 34.801146282386783},
+    {lat: 31.263865932844372, lng: 34.802146282386783}
+];
+
+localStorage.setItem("points",JSON.stringify(points));
+localStorage.setItem("numberOfPoints",""+points.length);
+
+localStorage.setItem("short_path",JSON.stringify(short));
+localStorage.setItem("medium_path",JSON.stringify(med));
+localStorage.setItem("long_path",JSON.stringify(long));
+
+alert("the number of points is now :" + points.length)
+
 var shortPaths=[[]];
 
 localStorage.setItem("short_paths",JSON.stringify(shortPaths));
