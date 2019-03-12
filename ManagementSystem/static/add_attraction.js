@@ -60,6 +60,32 @@ window.onload=function(){
         localStorage.setItem("ans4"+numberOfPoints, document.getElementById("ans4").value);
         localStorage.setItem("path_len"+numberOfPoints, document.getElementById("path_len").value);
 
+        var shortPath = JSON.parse(localStorage.getItem("short_path"));
+        var medPath = JSON.parse(localStorage.getItem("medium_path"));
+        var longPath = JSON.parse(localStorage.getItem("long_path"));
+
+
+          longPath.push(addedPoint);
+          localStorage.setItem("long_path", JSON.stringify(longPath));
+
+
+          if(document.getElementById("path_len").value=="short") {
+            shortPath.push(addedPoint);
+            localStorage.setItem("short_path", JSON.stringify(shortPath));
+            medPath.push(addedPoint);
+            localStorage.setItem("medium_path", JSON.stringify(medPath));
+        }
+
+          if(document.getElementById("path_len").value=="medium") {
+            medPath.push(addedPoint);
+            localStorage.setItem("medium_path", JSON.stringify(medPath));
+        }
+
+          var shortPath1 = JSON.parse(localStorage.getItem("short_path"));
+        var medPath1 = JSON.parse(localStorage.getItem("medium_path"));
+        var longPath1 = JSON.parse(localStorage.getItem("long_path"));
+          alert("short:"+shortPath1.length +"\nmedium: "+medPath1.length +"\nlong: "+longPath1.length);
+
 //         var e = document.getElementById("ddlViewBy");
 // var strUser = e.options[e.selectedIndex].value;
 
