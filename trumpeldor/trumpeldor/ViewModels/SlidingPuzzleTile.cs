@@ -45,7 +45,7 @@ namespace trumpeldor.ViewModels
             //TODO get image from our server
             return new Image
             {
-                Source = ImageSource.FromUri(new Uri(urlPrefix + "example" + row + col + ".png"))
+                Source = ImageSource.FromUri(new Uri(urlPrefix + "example" + row + col + ".jpg"))
             };
         }
 
