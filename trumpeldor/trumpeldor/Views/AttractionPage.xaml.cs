@@ -42,6 +42,7 @@ namespace trumpeldor.Views
         {
             base.OnAppearing();
             scoreLabel.Text = AppResources.score + ": " + gc.GetScore();
+            DependencyService.Get<IAudioService>().PlayAudioFile("TaDa.mp3");
         }
 
         private async void Information_Button_Clicked(object sender, EventArgs e)

@@ -74,6 +74,7 @@ class BL_Implementation(BL_Abstract):
         if attraction is None:
             raise RuntimeError("Tracks are empty")
         user = self.getUser(data['user'])
+        user = self.DAL.updateLastSeenToNow(user)
         return self.DAL.createTrip(user, data['groupName'], data['playersAges'], track, attraction)
 
     def createUser(self, data):
@@ -134,11 +135,15 @@ class BL_Implementation(BL_Abstract):
 
     def updateTrip(self, dataTrip):
         trip = self.getTrip(dataTrip)
-        self.DAL.updateTrip(trip, self.DAL.getTrackById(dataTrip["track"]["id"]), dataTrip["groupName"],
-                            dataTrip["score"], dataTrip["playersAges"],
-                            map(lambda x: self.DAL.getAttraction(x["id"]), dataTrip["attractionsDone"]))
+        trip = self.DAL.updateTrip(
+            trip,
+            self.DAL.getTrackById(dataTrip["track"]["id"]),
+            dataTrip["groupName"],
+            dataTrip["score"],
+            dataTrip["playersAges"],
+            map(lambda x: self.DAL.getAttraction(x["id"]), dataTrip["attractionsDone"]))
 
-        trip = self.getTrip(dataTrip)
+        self.DAL.updateLastSeenToNow(self.getUser(dataTrip["user"]))
         self.updateFeedbackInstances(dataTrip["feedbacks"], trip)
 
     def updateFeedbackInstances(self, feedbackInstancesAsJson, trip):

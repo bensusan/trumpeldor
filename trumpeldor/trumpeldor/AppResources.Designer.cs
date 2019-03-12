@@ -547,6 +547,42 @@ namespace trumpeldor {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to שגית יותר מ.
+        /// </summary>
+        public static string Too_Much_Mistakes_In_AQ_Message_Part1 {
+            get {
+                return ResourceManager.GetString("Too_Much_Mistakes_In_AQ_Message_Part1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to פעמים. ולכן תאלץ לחכות.
+        /// </summary>
+        public static string Too_Much_Mistakes_In_AQ_Message_Part2 {
+            get {
+                return ResourceManager.GetString("Too_Much_Mistakes_In_AQ_Message_Part2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to שניות.
+        /// </summary>
+        public static string Too_Much_Mistakes_In_AQ_Message_Part3 {
+            get {
+                return ResourceManager.GetString("Too_Much_Mistakes_In_AQ_Message_Part3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to עצור.
+        /// </summary>
+        public static string Too_Much_Mistakes_In_AQ_title {
+            get {
+                return ResourceManager.GetString("Too_Much_Mistakes_In_AQ_title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to צפה שוב.
         /// </summary>
         public static string watch_again {

@@ -78,6 +78,7 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AudioRender.cs" />
     <Compile Include="Configuration\AndroidConfigurationStreamProvider.cs" />
     <Compile Include="Configuration\AndroidConfigurationStreamProviderFactory.cs" />
     <Compile Include="MainActivity.cs" />
@@ -123,6 +124,9 @@
       <Project>{4808BDDE-8A9D-48D9-9B2C-2F0DE2ED93B7}</Project>
       <Name>trumpeldor</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidAsset Include="Assets\TaDa.mp3" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
 </Project>

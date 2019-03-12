@@ -124,6 +124,7 @@ namespace trumpeldor
         {
             SheredClasses.Point userLocation = GetUserLocation();
             isFinishTrip = this.currentTrip.DoneMyAttraction(userLocation.x, userLocation.y);
+            UpdateTrip();
         }
 
         internal void ContinuePreviousTrip()

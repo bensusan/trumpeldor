@@ -1,5 +1,5 @@
 import null
-
+import datetime
 from Server.models import *
 from .DAL import DAL_Abstract
 
@@ -110,6 +110,7 @@ class DAL_Implementation(DAL_Abstract):
         prevTrip.attractionsDone.clear()
         for attraction in attractionsDone:
             prevTrip.attractionsDone.add(attraction)
+        return prevTrip
 
     def updateFeedbackInstance(self, feedback, trip, answer):
         prevFI = FeedbackInstance.objects.filter(trip=trip).filter(feedback=feedback).first()
@@ -122,3 +123,8 @@ class DAL_Implementation(DAL_Abstract):
 
     def getFeedbackById(self, feedbackId):
         return Feedback.objects.get(id=feedbackId)
+
+    def updateLastSeenToNow(self, user):
+        user.lastSeen = datetime.datetime.now()
+        user.save()
+        return user

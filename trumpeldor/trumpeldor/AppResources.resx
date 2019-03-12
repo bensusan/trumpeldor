@@ -288,4 +288,16 @@
   <data name="Out_Of_Valid_Sector_Title" xml:space="preserve">
     <value>אתה נמצא מחוץ לגבולות הגזרה</value>
   </data>
+  <data name="Too_Much_Mistakes_In_AQ_Message_Part1" xml:space="preserve">
+    <value>שגית יותר מ</value>
+  </data>
+  <data name="Too_Much_Mistakes_In_AQ_Message_Part2" xml:space="preserve">
+    <value>פעמים. ולכן תאלץ לחכות</value>
+  </data>
+  <data name="Too_Much_Mistakes_In_AQ_Message_Part3" xml:space="preserve">
+    <value>שניות</value>
+  </data>
+  <data name="Too_Much_Mistakes_In_AQ_title" xml:space="preserve">
+    <value>עצור</value>
+  </data>
 </root>

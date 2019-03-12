@@ -285,4 +285,16 @@
   <data name="Out_Of_Valid_Sector_Title" xml:space="preserve">
     <value>You are out of the bounds of the valid sector</value>
   </data>
+  <data name="Too_Much_Mistakes_In_AQ_Message_Part1" xml:space="preserve">
+    <value>You have more than</value>
+  </data>
+  <data name="Too_Much_Mistakes_In_AQ_Message_Part2" xml:space="preserve">
+    <value>mistakes. Therefore, you have to wait</value>
+  </data>
+  <data name="Too_Much_Mistakes_In_AQ_Message_Part3" xml:space="preserve">
+    <value>seconds</value>
+  </data>
+  <data name="Too_Much_Mistakes_In_AQ_title" xml:space="preserve">
+    <value>Stop</value>
+  </data>
 </root>

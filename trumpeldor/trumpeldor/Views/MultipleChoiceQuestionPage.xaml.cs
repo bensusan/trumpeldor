@@ -17,6 +17,10 @@ namespace trumpeldor.Views
         private AmericanQuestion aq;
         private int mistakes;
         private static int DESIRED_MISTAKES = 2;
+        private static int DESIRED_SECONDS_TO_WAIT = 5;
+
+        bool doneWaiting = false;
+        int numOfSecondsLeft = 5;
 
         public MultipleChoiceQuestionPage (AmericanQuestion aq)
 		{
@@ -103,7 +107,7 @@ namespace trumpeldor.Views
             }
 
         }
-        private void Wrong_Answer_Button_Clicked(object sender, EventArgs e)
+        private async void Wrong_Answer_Button_Clicked(object sender, EventArgs e)
         {
             scoreLabel.Text = AppResources.score + ": " + gc.EditScore(GameController.SCORE_VALUE.AQ_Mistake);
             foreach (Button answer in answersLayout.Children)
@@ -113,8 +117,41 @@ namespace trumpeldor.Views
             }
             ((Button)sender).BackgroundColor = Color.Red;
             mistakes += 1;
-            if(mistakes >= DESIRED_MISTAKES)
-                Device.BeginInvokeOnMainThread(async() => await Task.Delay(5000));
+            if (mistakes >= DESIRED_MISTAKES)
+            {
+                await DisplayAlert(
+                    AppResources.Too_Much_Mistakes_In_AQ_title,
+                    AppResources.Too_Much_Mistakes_In_AQ_Message_Part1
+                    + " " + DESIRED_MISTAKES + " "
+                    + AppResources.Too_Much_Mistakes_In_AQ_Message_Part2
+                    + " " + DESIRED_SECONDS_TO_WAIT + " "
+                    + AppResources.Too_Much_Mistakes_In_AQ_Message_Part3,
+                    AppResources.ok);
+
+                //Device.StartTimer(TimeSpan.FromSeconds(1), () => callBack());
+                //while (!doneWaiting) ;
+                //doneWaiting = false;
+                for (int i = 0; i < DESIRED_SECONDS_TO_WAIT; i++)
+                {
+                    //await DisplayAlert("" + i, "", AppResources.ok);
+                    var t = Task.Delay(1000);
+                    t.Wait();
+                }
+                await DisplayAlert("You are good to go", "", AppResources.ok);
+            }
+        }
+        
+        bool callBack()
+        {
+            Device.BeginInvokeOnMainThread(() => DisplayAlert("" + numOfSecondsLeft, "", AppResources.ok));
+            if (numOfSecondsLeft == 1)
+            {
+                numOfSecondsLeft = 5;
+                doneWaiting = true;
+                return false;
+            }
+            numOfSecondsLeft--;
+            return true;
         }
     }
 }

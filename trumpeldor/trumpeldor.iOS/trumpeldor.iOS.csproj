@@ -94,6 +94,7 @@
     <LaunchForBackgroundFetch>true</LaunchForBackgroundFetch>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="AudioRender.cs" />
     <Compile Include="Configuration\IOSConfigurationStreamProvider.cs" />
     <Compile Include="Configuration\IOSConfigurationStreamProviderFactory.cs" />
     <Compile Include="Main.cs" />
@@ -182,5 +183,7 @@
       <Name>trumpeldor</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="TaDa.mp3" />
+  </ItemGroup>
 </Project>
