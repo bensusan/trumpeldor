@@ -108,6 +108,7 @@ namespace trumpeldor.Views
             });
         }
 
+
         private void AddCurrlocationToMap (Map map)
         {
             //var locator = CrossGeolocator.Current;
@@ -124,6 +125,7 @@ namespace trumpeldor.Views
             currLong = p.y;
             map.Pins.Add(currLocationPin); 
         }
+
 
 
         private void AddPointToMap(Map map, trumpeldor.SheredClasses.Point p)

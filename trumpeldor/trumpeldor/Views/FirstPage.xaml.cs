@@ -91,10 +91,10 @@ namespace trumpeldor.Views
             });
         }
 
-        private void Play_Button_Clicked(object sender, EventArgs e)
+        private async void Play_Button_Clicked(object sender, EventArgs e)
         {
             //Application.Current.MainPage = new groupCreationPage();
-            Application.Current.MainPage = new LoginsPage();
+            await Navigation.PushModalAsync(new LoginsPage());
         }
 
         private async void HowToPlay_Button_Clicked(object sender, EventArgs e)
@@ -104,15 +104,7 @@ namespace trumpeldor.Views
 
         private async void Info_Button_Clicked(object sender, EventArgs e)
         {
-            /*
-                * with back click 
-                * async
-                * await Navigation.PushModalAsync(new NavigationPage(new informationPage()));
-            */
             await Navigation.PushModalAsync(new informationPage());
-            //Application.Current.MainPage = new informationPage();
         }
-
-
     }
 }

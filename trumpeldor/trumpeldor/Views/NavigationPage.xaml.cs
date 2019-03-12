@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using trumpeldor.SheredClasses;
+using trumpeldor;
 namespace trumpeldor.Views
 {
 	[XamlCompilation(XamlCompilationOptions.Compile)]
@@ -21,12 +22,7 @@ namespace trumpeldor.Views
 		{
 			InitializeComponent ();
             nextAttraction = gc.currentTrip.GetCurrentAttraction();
-            //p = new trumpeldor.SheredClasses.Point(nextAttraction.x, nextAttraction.y);
-            //nextAttraction = gc.currentTrip.GetCurrentAttraction();
-            //mapImage.Source = ImageSource.FromResource("trumpeldor.Resources.MapIcon.png");
             mapImage.Text = AppResources.map;
-            //SheredClasses.Clue nextClue = gc.GetFisrtHint();
-            //nextClue.addToLayout(hintsLayout);
         }
 
         protected override void OnAppearing()
@@ -48,20 +44,15 @@ namespace trumpeldor.Views
                 if (!dialogAnswer)
                     return;
                 temp = new MapPage(new SheredClasses.Point(nextAttraction.x, nextAttraction.y));
+                Button hintBtn = (Button)FindByName("hintBtn");
+                if (hintBtn != null)
+                    hintBtn.IsEnabled = false;
             }
             else
             {
-                //Hint nextHint = nextAttraction.hints[hintsIndex];
-                //if (nextHint.kind.Equals("HM"))//hint map
-                //{
-                //    await Navigation.PushModalAsync(new MapPage(gc.GetUserLocation()));
-                //}
-                //else
-                //{
-                //await Navigation.PushModalAsync(new HintPage(nextHint));
-                //}
                 temp = new HintPage(nextAttraction.hints[hintsIndex]);
             }
+            addToLayout(hintsLayout);
             hintsIndex++;
             if (hintsIndex >= 3)
                 scoreLabel.Text = AppResources.score + ": " + gc.EditScore(GameController.SCORE_VALUE.Hints_More_Than_Three);
@@ -85,11 +76,39 @@ namespace trumpeldor.Views
             await Navigation.PushModalAsync(new MapPage());
         }
 
+        private async void DynamicBtn_Clicked(object sender, EventArgs e)
+        {
+            try
+            {
+                Button clicked = (Button)sender;
+                string strIdx = clicked.Text.Substring(5, clicked.Text.Length - 5);
+                int currIdx = Int32.Parse(strIdx) -1;
+                Hint toShow = nextAttraction.hints[currIdx];
+                if (toShow.kind.Equals("HM"))//hint map
+                {
+                    await Navigation.PushModalAsync(new MapPage(p));
+                }
+                else
+                {
+                    await Navigation.PushModalAsync(new HintPage(toShow));
+                }
+            }
+
+            catch (Exception exp)
+            {
+                Console.WriteLine(exp.Message);
+            }
+            
+        }
+        
+
         private void addToLayout(StackLayout layout)
         {
             Button btn = new Button();
             string strIndex = (hintsIndex + 1).ToString();
             btn.Text = "Hint " + strIndex;
+            btn.AutomationId = "savedHint" + strIndex;
+            btn.Clicked += DynamicBtn_Clicked;
             layout.Children.Add(btn);
         }
     }

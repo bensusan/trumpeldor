@@ -14,7 +14,7 @@ namespace trumpeldor.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class groupCreationPage : ContentPage
     {
-        private GameController gc = ((App)(Application.Current)).getGameController();
+        private GameController gc;
         //private GameController.PathLength selectedPathLength;
         private int selectedPathLength;
 
@@ -22,6 +22,7 @@ namespace trumpeldor.Views
 
         public groupCreationPage(string userName, User.SOCIAL_NETWORK socialNetwork){
             InitializeComponent();
+            gc = GameController.getInstance();
             string socialnetworkString;
             User.SocialNetwork2string.TryGetValue(socialNetwork, out socialnetworkString);
             gc.SignUp(userName, socialnetworkString);
@@ -123,23 +124,42 @@ namespace trumpeldor.Views
         {
             String groupName = groupNameEntry.Text;
             List<int> agesList = new List<int>();
-            foreach (View child in agesGrid.Children)
+            try
             {
-                if (child is Entry)
+                foreach (View child in agesGrid.Children)
                 {
-                    string age = ((Entry)child).Text;
-                    if (age != "" && age != null)
-                        agesList.Add(Int32.Parse(age));
+                    if (child is Entry)
+                    {
+                        string age = ((Entry)child).Text;
+                        if (age != "" && age != null)
+                            agesList.Add(Int32.Parse(age));
+                    }
+                }
+
+                var existingPages = Navigation.NavigationStack.ToList();
+                foreach (var page in existingPages)
+                {
+                    Navigation.RemovePage(page);
+                }
+                if (groupName != "" && agesList.Count != 0 &&
+                    (selectedPathLength == 1 || selectedPathLength == 2 || selectedPathLength == 3))
+                {
+                    gc.CreateTrip(groupName, agesList, selectedPathLength);
+                    Application.Current.MainPage = new NavigationPage();
+                }
+                else
+                {
+                    await DisplayAlert("Illegal Input!", "You must fill all the fields", "OK");
+
                 }
             }
-            var existingPages = Navigation.NavigationStack.ToList();
-            foreach (var page in existingPages)
+            catch (Exception ex)
             {
-                Navigation.RemovePage(page);
+                if (!(groupName != null && agesList.Count != 0 &&
+                    (selectedPathLength == 1 || selectedPathLength == 2 || selectedPathLength == 3)))
+                    await DisplayAlert("Illegal Input!", "You must fill all the fields", "OK");
+
             }
-            gc.CreateTrip(groupName, agesList, selectedPathLength);
-           
-            Application.Current.MainPage = new NavigationPage();
         }
     }
 }

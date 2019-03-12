@@ -1,14 +1,17 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using trumpeldor;
 
 namespace UnitTests
 {
     [TestClass]
-    public class UnitTest1
+    public class GroupCreationTest
     {
         [TestMethod]
-        public void TestMethod1()
+        public void AllGroupInfoInserted()
         {
+            //trumpeldor.Views.groupCreationPage.
+            //trumpeldor.Views.groupCreationPage
         }
     }
 }
