@@ -14,6 +14,7 @@ namespace trumpeldor.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class groupCreationPage : ContentPage
     {
+        public static bool canProcceed = false;
         private GameController gc = ((App)(Application.Current)).getGameController();
         //private GameController.PathLength selectedPathLength;
         private int selectedPathLength;
@@ -104,22 +105,44 @@ namespace trumpeldor.Views
         {
             String groupName = groupNameEntry.Text;
             List<int> agesList = new List<int>();
-            foreach(View child in agesGrid.Children)
+            try
             {
-                if(child is Entry)
+                foreach (View child in agesGrid.Children)
                 {
-                    agesList.Add(Int32.Parse(((Entry)child).Text));
+                    if (child is Entry)
+                    {
+                        if(Int32.Parse(((Entry)child).Text)>0)
+                            agesList.Add(Int32.Parse(((Entry)child).Text));
+                    }
+                }
+
+                var existingPages = Navigation.NavigationStack.ToList();
+                foreach (var page in existingPages)
+                {
+                    Navigation.RemovePage(page);
+                }
+                if (groupName != "" && agesList.Count != 0 &&
+                    (selectedPathLength == 1 || selectedPathLength == 2 || selectedPathLength == 3))
+                {
+                    await gc.CreateTrip(groupName, agesList, selectedPathLength);
+                    if (ServerConection.DEBUG == 1)
+                        await DisplayAlert("", AppResources.group_name + " " + gc.currentTrip.groupName + " " + AppResources.Players_Ages + gc.currentTrip.playersAges[0].ToString() + " " + AppResources.First_Attraction + gc.currentTrip.GetCurrentAttraction().ToString(), AppResources.ok);
+                    canProcceed = true;
+                    Application.Current.MainPage = new NavigationPage();
+                }
+                else
+                {
+                    await DisplayAlert("Illegal Input!", "You must fill all the fields", "OK");
+
                 }
             }
-            var existingPages = Navigation.NavigationStack.ToList();
-            foreach (var page in existingPages)
+            catch (Exception ex)
             {
-                Navigation.RemovePage(page);
+                if (!(groupName != null && agesList.Count != 0 &&
+                    (selectedPathLength == 1 || selectedPathLength == 2 || selectedPathLength == 3)))
+                    await DisplayAlert("Illegal Input!", "You must fill all the fields", "OK");
+
             }
-            await gc.CreateTrip(groupName, agesList, selectedPathLength);
-            if(ServerConection.DEBUG == 1)
-                await DisplayAlert("", AppResources.group_name +" " + gc.currentTrip.groupName + " " + AppResources.Players_Ages + gc.currentTrip.playersAges[0].ToString() + " "+ AppResources.First_Attraction + gc.currentTrip.GetCurrentAttraction().ToString(), AppResources.ok);
-            Application.Current.MainPage = new NavigationPage();
         }
     }
 }

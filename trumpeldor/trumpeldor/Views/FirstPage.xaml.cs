@@ -20,49 +20,22 @@ namespace trumpeldor.Views
             InitializeComponent();
         }
 
-        private void Play_Button_Clicked(object sender, EventArgs e)
+        private async void Play_Button_Clicked(object sender, EventArgs e)
         {
-            //Application.Current.MainPage = new groupCreationPage();
-            Application.Current.MainPage = new LoginsPage();
+            await Navigation.PushModalAsync(new LoginsPage());
+            //Application.Current.MainPage = new LoginsPage();
         }
 
-        private void HowToPlay_Button_Clicked(object sender, EventArgs e)
+        private async void HowToPlay_Button_Clicked(object sender, EventArgs e)
         {
-            Application.Current.MainPage = new instructionsPage();
-
-
-
-            //await Navigation.PushModalAsync(new MapPage());
-            //Application.Current.MainPage = new NavigationPage();
-
-
-            //Task<byte[]> ans = ((App)(Application.Current)).getGameController().getFile();
-            //byte[] fileBytes = await ans;
-            ////Image image = new Image();
-            //Stream stream = new MemoryStream(fileBytes);
-
-
-            //tryImg.IsVisible = true;
-            //tryImg.Source = ImageSource.FromStream(() => new MemoryStream(fileBytes));
-
-
-            //await Navigation.PushModalAsync(new instructionsPage());
+            await Navigation.PushModalAsync(new instructionsPage());
+            //Application.Current.MainPage = new instructionsPage();
         }
 
         private async void Info_Button_Clicked(object sender, EventArgs e)
         {
-            /*
-                * with back click 
-                * async
-                * await Navigation.PushModalAsync(new NavigationPage(new informationPage()));
-            */
-            Application.Current.MainPage = new informationPage();
-            //Application.Current.MainPage = new AttractionPage(await GameController.getInstance().GetTempAttraction());
-
-            //await Navigation.PushModalAsync(new HintPage("31.263440,34.799115"));
-            //await Navigation.PushModalAsync(new HintPage("http://132.72.23.64:12345/media/x.jpg"));
-            //await Navigation.PushModalAsync(new HintPage("this is a text hint"));
-            //await Navigation.PushModalAsync(new MapPage(new Point(31.263440, 34.799115)));
+            await Navigation.PushModalAsync(new informationPage());
+            //Application.Current.MainPage = new informationPage();
         }
 
         private void Button_Clicked(object sender, EventArgs e)
@@ -76,5 +49,13 @@ namespace trumpeldor.Views
             CrossMultilingual.Current.CurrentCultureInfo = new CultureInfo("he");
             Application.Current.MainPage = new FirstPage();
         }
+
+        /*
+        private void Shortcut_Button_Clicked(object sender, EventArgs e)
+        {
+            Application.Current.MainPage = new NavigationPage();
+        }
+        */
+        
     }
 }

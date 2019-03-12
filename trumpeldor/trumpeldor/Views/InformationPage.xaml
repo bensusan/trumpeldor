@@ -4,7 +4,7 @@
              x:Class="trumpeldor.Views.informationPage">
     <ContentPage.Content>
         <StackLayout Style="{DynamicResource mainStackLayout}">
-            <Label x:Name="generalInformation" />
+            <Label x:Name="generalInformation" AutomationId="InfoTxt" />
             
         </StackLayout>
     </ContentPage.Content>

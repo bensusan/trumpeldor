@@ -26,7 +26,7 @@ namespace trumpeldor.Views
 
         Pin previous = null;
         //current point
-        double currLat = 0, currLong = 0;
+        public double currLat = 0, currLong = 0;
         public GameController gc = ((App)Application.Current).getGameController();
         public Attraction nextAttraction;
         public MapPage(trumpeldor.SheredClasses.Point p)
@@ -104,7 +104,7 @@ namespace trumpeldor.Views
             });
         }
 
-        private async void AddCurrlocationToMap (Map map)
+        public async void AddCurrlocationToMap (Map map)
         {
             var locator = CrossGeolocator.Current;
             Plugin.Geolocator.Abstractions.Position position =await locator.GetPositionAsync();
@@ -119,6 +119,7 @@ namespace trumpeldor.Views
             currLong = position.Longitude;
             map.Pins.Add(currLocationPin); 
         }
+
 
 
         private void AddPointToMap(Map map, trumpeldor.SheredClasses.Point p)
