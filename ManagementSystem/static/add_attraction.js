@@ -1,4 +1,4 @@
-// alert(localStorage.getItem("addedPoint"));
+alert(localStorage.getItem("addedPoint"));
 
 var loadFile = function(event) {
 	var image = document.getElementById('output');
@@ -39,6 +39,23 @@ window.onload=function(){
     }
 
     function showDataCollected() {
+        var numberOfPoints =Number(localStorage.getItem("numberOfPoints"));
+        numberOfPoints=numberOfPoints+1;
+        localStorage.setItem("numberOfPoints",""+numberOfPoints);
+
+        var currPoints = JSON.parse(localStorage.getItem("points"));
+
+
+        localStorage.setItem("attr_name"+numberOfPoints, document.getElementById("attr_name").value);
+        localStorage.setItem("desc"+numberOfPoints, document.getElementById("desc").value);
+        localStorage.setItem("ques"+numberOfPoints, document.getElementById("ques").value);
+        localStorage.setItem("ans1"+numberOfPoints, document.getElementById("ans1").value);
+        localStorage.setItem("ans2"+numberOfPoints, document.getElementById("ans2").value);
+        localStorage.setItem("ans3"+numberOfPoints, document.getElementById("ans3").value);
+        localStorage.setItem("ans4"+numberOfPoints, document.getElementById("ans4").value);
+        localStorage.setItem("path_len"+numberOfPoints, document.getElementById("path_len").value);
+
+
         alert("point:"+localStorage.getItem("addedPoint")+"\n"+
             "name:"+document.getElementById("attr_name").value);
     }

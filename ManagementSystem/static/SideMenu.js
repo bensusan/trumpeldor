@@ -50,5 +50,6 @@ let points= [
 ];
 
 localStorage.setItem("points",JSON.stringify(points));
+localStorage.setItem("numberOfPoints",""+points.length);
 
 alert("the number of points is now :" + points.length)
