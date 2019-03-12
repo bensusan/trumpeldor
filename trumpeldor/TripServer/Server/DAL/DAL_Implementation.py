@@ -64,7 +64,7 @@ class DAL_Implementation(DAL_Abstract):
         hint.save()
         return hint
 
-    def add_american_question(self, question, answers, indexOfCorrectAnswer, attraction):
+    def add_american_question(self, attraction, question, answers, indexOfCorrectAnswer):
         aq = AmericanQuestion(question=question, answers=answers, indexOfCorrectAnswer=indexOfCorrectAnswer,
                               attraction=attraction)
         aq.save()
@@ -131,3 +131,46 @@ class DAL_Implementation(DAL_Abstract):
 
     def getAllTrips(self):
         return Trip.objects.order_by('score')
+
+    def delete_attraction(self, id):
+        return self.get_attraction(id).delete()
+
+    def edit_attraction(self, id, name, x, y, description, picturesURLS, videosURLS):
+        attraction = self.get_attraction(id)
+        attraction.name=name
+        attraction.x=x
+        attraction.y=y
+        attraction.description=description
+        attraction.picturesURLS=picturesURLS
+        attraction.videosURLS=videosURLS
+        attraction.save()
+        return attraction
+
+    def delete_american_question(self, id_attraction, id_a_question):
+        return self.get_american_question(id_attraction, id_a_question).delete()
+
+    def delete_hint(self, id_attraction, id_hint):
+        return self.get_hint(id_attraction, id_hint).delete()
+
+    def edit_hint(self, id_attraction, id_hint, data):
+        hint = self.get_hint(id_attraction, id_hint)
+        hint.data=data
+        hint.save()
+        return hint
+
+    def get_all_tracks(self):
+        return Track.objects.all()
+
+    def delete_feedback_question(self, id_feedback):
+        return self.get_feedback_question(id_feedback).delete()
+
+    def get_american_question(self, id_attraction, id_american_question):
+        return AmericanQuestion.objects.filter(pk=id_american_question,
+                                               attraction=self.get_attraction(id_attraction)).all()
+
+    def get_hint(self, id_attraction, id_hint):
+        return Hint.objects.filter(pk=id_hint, attraction=self.get_attraction(id_attraction)).all()
+
+    def get_feedback_question(self, id_feedback):
+        return Feedback.objects.filter(pk=id_feedback).all()
+
