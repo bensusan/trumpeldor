@@ -32,7 +32,7 @@ function markAttraction(pos){
 function getRequestAttractions(funcOnAttractions){
     // serverRequest("GET", funcOnAttractions, 'http://192.168.1.12:12344/managementsystem/attraction/?format=json');
     // serverRequest("GET", funcOnAttractions, 'http://http://132.73.215.60:12345/managementsystem/attraction/?format=json');
-    serverRequest("GET", funcOnAttractions, 'http://http://132.73.215.60:12344/managementsystem/attraction/?format=json');
+    serverRequest("GET", funcOnAttractions, 'http://132.72.23.64:12344/managementsystem/attraction/?format=json');
 }
 
 function initAttractionsMarkers() {
