@@ -21,7 +21,9 @@ function initMap() {
         zoom: 18,
         center: {lat: 31.262860, lng: 34.801753}
     });
+     initAttractionsMarkers();
     listenerForMap(map);
+
     initPoints();
     alert("the number of points is now :" + points.length)
     var shortPath1 = JSON.parse(localStorage.getItem("short_path"));

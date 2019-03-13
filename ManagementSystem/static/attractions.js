@@ -2,7 +2,8 @@
 const Http = new XMLHttpRequest();
 
 
-function serverRequest(getOrPost, functionOnReady, url, post = null){
+function serverRequest(getOrPost, functionOnReady, url, post=null){
+    alert("blat");
     Http.onreadystatechange = function(){
         if(Http.readyState == 4 && Http.status == 200){
             functionOnReady(JSON.parse(Http.responseText));
@@ -37,8 +38,8 @@ function markAttraction(pos){
 
 function getRequestAttractions(funcOnAttractions){
     // serverRequest("GET", funcOnAttractions, 'http://192.168.1.12:12344/managementsystem/attraction/?format=json');
-    // serverRequest("GET", funcOnAttractions, 'http://http://132.73.215.60:12345/managementsystem/attraction/?format=json');
-    serverRequest("GET", funcOnAttractions, 'http://132.72.23.64:12344/managementsystem/attraction/?format=json');
+    // the server port and my ip
+    serverRequest("GET", funcOnAttractions, 'http://132.73.215.60:12344/managementsystem/attraction/?format=json');
 }
 
 function initAttractionsMarkers() {
@@ -47,6 +48,6 @@ function initAttractionsMarkers() {
 
 
 function postRequestAttraction(attraction){
-    serverRequest("POST", function noop(dummy){}, 'http://192.168.1.12:12344/managementsystem/attraction/',
+    serverRequest("POST", function noop(dummy){}, 'http://132.73.215.60:12344/managementsystem/attraction/',
         JSON.stringify(attraction));
 }

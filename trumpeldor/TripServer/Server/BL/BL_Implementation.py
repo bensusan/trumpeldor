@@ -98,8 +98,8 @@ class BL_Implementation(BL_Abstract):
         return self.DAL.getTrip(trip['id'])
 
     def add_attraction(self, attraction):
-        if self.getAttraction(attraction['id']) is None:
-            return self.DAL.add_attraction(attraction['name'], attraction['x'], attraction['y'],
+        #if self.getAttraction(attraction['id']) is None:
+        return self.DAL.add_attraction(attraction['name'], attraction['x'], attraction['y'],
                                        attraction['description'], attraction['picturesURLS'], attraction['videosURLS'])
 
     def add_hint(self, attraction, hint):
