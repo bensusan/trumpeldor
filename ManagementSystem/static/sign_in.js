@@ -50,7 +50,7 @@ localStorage.setItem("short_path",JSON.stringify(short));
 localStorage.setItem("medium_path",JSON.stringify(med));
 localStorage.setItem("long_path",JSON.stringify(long));
 
-alert("the number of points is now :" + points.length)
+// alert("the number of points is now :" + points.length)
 
 var shortPaths=[[]];
 
