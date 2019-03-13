@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+{% load static %}
+<link rel="stylesheet" href="{% static 'signInForm.css' %}?version=1">
+</head>
+<body>
+{% load static %}
+<script src="{% static 'add_attraction.js' %}?version=1"></script>
+
+<button onclick="window.location.href='/main'" type="button">Back to menu</button>
+<button onclick="window.location.href='/attractions'" type="button">Back to map</button>
+
+<div align="center">
+<h2>Add Attraction</h2>
+<form>
+  <div class="imgcontainer">
+    <!-- <img src="img_avatar2.png" alt="Avatar" class="avatar"> -->  <!-- need to add logo or something-->
+  </div>
+
+
+    <label for="name"><b>Upload Video: </b></label>
+
+    {% load static %}
+<script src="{% static 'add_attraction.js' %}?version=1"></script>
+    <div id="message"></div>
+<video height="200px" width="350px" controls="" autoplay=""></video>
+    <input type="file" accept="video/*">
+
+        {% load static %}
+<script src="{% static 'add_attraction.js' %}?version=1"></script>
+
+    <p></p>
+    <label for="hint"><b>Upload Image:</b></label>
+    <p><input type="file"  accept="image/*" name="image" id="file"  onchange="loadFile(event)" style="display: none;"></p>
+    <p><label for="file" style="cursor: pointer;">Click Here!</label></p>
+    <p><img id="output" width="200" /></p>
+
+
+  <div class="container">
+    <label for="name"><b>Name of attraction: </b></label>
+    <input type="text" id="attr_name" placeholder="Enter name" name="attr_name" required>
+
+    <label for="desc"><b>Description</b></label>
+    <input type="text" id="desc" placeholder="Enter description" name="attr_desc" required>
+
+        <label for="desc"><b>Add American Question:</b></label>
+    <input type="text" id="ques" placeholder="Enter Question" name="attr_desc" required>
+      <input  type="text" id="ans1" placeholder="ans1" name="a1" required>
+      <input type="text" id="ans2" placeholder="ans2" name="a2" required>
+      <input type="text" id="ans3" placeholder="ans3" name="a3" required>
+      <input  type="text" id="ans4" placeholder="ans4" name="a4" required>
+
+      <label for="desc"><b>Choose path length:</b></label>
+      <select id="path_len">
+      <option value="short">Short</option>
+      <option value="medium">Medium</option>
+      <option value="long">Long</option>
+      </select>
+
+    {% load static %}
+    <script src="{% static 'add_attraction.js' %}?version=1"></script>
+    <button onclick="showDataCollected()" type="button">Submit</button>
+    <button type="button">Clean</button>
+
+  </div>
+
+</form>
+
+
+</div>
+
+
+
+
+</body>
+</html>

@@ -16,7 +16,6 @@ def getDistance(lat1, lon1, lat2, lon2):
 
 
 class BL_Implementation(BL_Abstract):
-
     def __init__(self):
         self.DAL = DALProxy()
 
@@ -99,15 +98,16 @@ class BL_Implementation(BL_Abstract):
         return self.DAL.getTrip(trip['id'])
 
     def add_attraction(self, attraction):
-        return self.DAL.add_attraction(attraction['name'], attraction['x'], attraction['y'],
+        if self.getAttraction(attraction['id']) is None:
+            return self.DAL.add_attraction(attraction['name'], attraction['x'], attraction['y'],
                                        attraction['description'], attraction['picturesURLS'], attraction['videosURLS'])
 
     def add_hint(self, attraction, hint):
-        return self.DAL.add_hint(attraction, hint['kind'], attraction['data'])
+        return self.DAL.add_hint(attraction, hint['kind'], hint['data'])
 
     def add_american_question(self, attraction, a_question):
-        return self.DAL.add_american_question(a_question['question'], a_question['answers'],a_question['indexOfCorrectAnswer'],
-                                       a_question['question'], attraction)
+        return self.DAL.add_american_question(attraction, a_question['question'], a_question['answers'],
+                                              a_question['indexOfCorrectAnswer'])
 
     def add_track(self, track):
         return self.DAL.add_track(track['subTrack'], track['points'], track['length'])
@@ -155,4 +155,45 @@ class BL_Implementation(BL_Abstract):
 
     def getBestScores(self):
         return self.DAL.getAllTrips()[:settings.TOP_X]
+
+    def delete_attraction(self, id):
+        if self.get_attraction(id) is not None:
+            return self.DAL.delete_attraction(id)
+
+    def edit_attraction(self, attraction):
+        if self.get_attraction(attraction['id']) is not None:
+            return self.DAL.edit_attraction(attraction['id'], attraction['name'], attraction['x'], attraction['y'],
+                                            attraction['description'], attraction['picturesURLS'], attraction['videosURLS'])
+
+    def delete_american_question(self, id_attraction, id_a_question):
+        if self.get_american_question(id_attraction, id_a_question):
+            return self.DAL.delete_american_question(id_attraction, id_a_question)
+
+    def delete_hint(self, id_attraction, id_hint):
+        if self.get_hint(id_attraction, id_hint):
+            return self.DAL.delete_hint(id_attraction, id_hint)
+
+    def edit_hint(self, id_attraction, hint):
+        hint_before_edit = self.get_hint(id_attraction, hint['id'])
+        if hint_before_edit is not None and hint_before_edit['kind'] == hint['kind']:
+            return self.DAL.edit_hint(id_attraction, hint['id'], hint['data'])
+
+    def get_all_tracks(self):
+        return self.DAL.get_all_tracks()
+
+    def delete_feedback_question(self, id_feedback):
+        if self.get_feedback_question(id_feedback) is not None:
+            return self.DAL.delete_feedback_question(id_feedback)
+
+    def get_american_question(self, id_attraction, id_american_question):
+        if self.get_attraction(id_attraction) is not None:
+            return self.DAL.get_american_question(id_attraction, id_american_question)
+
+    def get_hint(self, id_attraction, id_hint):
+        if self.get_attraction(id_attraction) is not None:
+            return self.DAL.get_hint(id_attraction, id_hint)
+
+    def get_feedback_question(self, id_feedback):
+        return self.DAL.get_feedback_question(id_feedback)
+
 

@@ -40,9 +40,12 @@ INSTALLED_APPS = [
     'Server.apps.ServerConfig',
 
     'rest_framework',
+    'corsheaders',
 ]
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
+    'django.middleware.common.CommonMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -57,7 +60,7 @@ ROOT_URLCONF = 'TripServer.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'Server/templates')]
+        'DIRS': [os.path.join(BASE_DIR, 'Management System/templates')]
         ,
         'APP_DIRS': True,
         'OPTIONS': {
@@ -127,7 +130,7 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, 'Server/static'),
+    os.path.join(BASE_DIR, 'Management System/static'),
     '/static',
 )
 
@@ -137,3 +140,14 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 VALID_SECTOR = (0, 0, 0, 0)     # (Min_X, Max_X, Min_Y, Max_Y)
 
 TOP_X = 10
+
+CORS_ORIGIN_ALLOW_ALL=True
+
+CORS_ALLOW_METHODS = (
+    'DELETE',
+    'GET',
+    'OPTIONS',
+    'PATCH',
+    'POST',
+    'PUT',
+)
