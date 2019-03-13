@@ -1,4 +1,5 @@
 //from django.conf import settings
+
 let curPosClicked;
 let curMarker;
 let coordinates_of_last_click;
@@ -85,15 +86,9 @@ function listenerForMap(map){
         }
         curPosClicked = positionInMap(event.latLng.lat(), event.latLng.lng());
         curMarker = markAttraction(curPosClicked);
-         alert("that: "+curPosClicked.lat);
-
         var addBTN = document.getElementById('add_attraction');
         addBTN.addEventListener('click', function(event) {
         localStorage.setItem("addedPoint", JSON.stringify(curPosClicked));
-            localStorage.setItem("addedPointLat",JSON.stringify(curPosClicked.lat));
-            localStorage.setItem("addedPointLang",JSON.stringify(curPosClicked.lang));
-            alert("did");
-
             window.location.href='/add_attraction';
         });
     }));
