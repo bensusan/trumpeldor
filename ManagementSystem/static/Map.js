@@ -21,7 +21,7 @@ function initMap() {
         zoom: 18,
         center: {lat: 31.262860, lng: 34.801753}
     });
-     initAttractionsMarkers();
+    initAttractionsMarkers();
     listenerForMap(map);
 
     initPoints();
@@ -79,15 +79,21 @@ function initMap() {
 function listenerForMap(map){
     google.maps.event.addListener(map, 'click', (function(event) {
         coordinates_of_last_click=event.latLng;
+
         if(curPosClicked) {
             curMarker.setMap(null);
         }
         curPosClicked = positionInMap(event.latLng.lat(), event.latLng.lng());
         curMarker = markAttraction(curPosClicked);
+         alert("that: "+curPosClicked.lat);
 
         var addBTN = document.getElementById('add_attraction');
         addBTN.addEventListener('click', function(event) {
-        localStorage.setItem("addedPoint", JSON.stringify(coordinates_of_last_click));
+        localStorage.setItem("addedPoint", JSON.stringify(curPosClicked));
+            localStorage.setItem("addedPointLat",JSON.stringify(curPosClicked.lat));
+            localStorage.setItem("addedPointLang",JSON.stringify(curPosClicked.lang));
+            alert("did");
+
             window.location.href='/add_attraction';
         });
     }));

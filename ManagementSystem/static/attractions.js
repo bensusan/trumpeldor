@@ -22,6 +22,11 @@ function markAttractions(attractionsJSON){
     attractionsJSON.forEach(function (attr) {
         let pos = {lat: attr['x'], lng: attr['y']};
         markAttraction(pos);
+        // var currPoints = JSON.parse(localStorage.getItem("points"));
+        // currPoints.push(x.position);
+        // localStorage.setItem("points",JSON.stringify(currPoints));
+
+
     });
 }
 
@@ -38,7 +43,7 @@ function markAttraction(pos){
 function getRequestAttractions(funcOnAttractions){
     // serverRequest("GET", funcOnAttractions, 'http://192.168.1.12:12344/managementsystem/attraction/?format=json');
     // the server port and my ip
-    serverRequest("GET", funcOnAttractions, 'http://132.73.215.60:12344/managementsystem/attraction/?format=json');
+    serverRequest("GET", funcOnAttractions, 'http://10.0.0.8:12344/managementsystem/attraction/?format=json');
 }
 
 function initAttractionsMarkers() {
@@ -48,6 +53,6 @@ function initAttractionsMarkers() {
 
 function postRequestAttraction(attraction){
     alert("blat");
-    serverRequest("POST", function noop(dummy){}, 'http://132.73.215.60:12344/managementsystem/attraction/',
+    serverRequest("POST", function noop(dummy){}, 'http://10.0.0.8:12344/managementsystem/attraction/',
         JSON.stringify(attraction));
 }

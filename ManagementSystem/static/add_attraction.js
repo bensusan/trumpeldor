@@ -45,11 +45,6 @@ window.onload=function(){
         // localStorage.setItem("numberOfPoints",""+numberOfPoints);
         // // alert("1!");
         // var currPoints = JSON.parse(localStorage.getItem("points"));
-        //let addedPoint = JSON.parse(localStorage.getItem("addedPoint"));
-        // // alert("2!");
-        // currPoints.push(addedPoint);
-        // let lat = addedPoint.lat();
-        // let lang = addedPoint.lang();
         // localStorage.setItem("points",JSON.stringify(currPoints));
 
         // numberOfPoints--;
@@ -90,12 +85,36 @@ window.onload=function(){
 
 //         var e = document.getElementById("ddlViewBy");
 // var strUser = e.options[e.selectedIndex].value;
-        let attraction_to_send = {name:document.getElementById("attr_name").value
-            ,x:31.262860,y:34.801753
+
+        let addedPoint = JSON.parse(localStorage.getItem("addedPoint"));
+        let latPoint = JSON.parse(localStorage.getItem("addedPointLat"));
+        let langPoint = JSON.parse(localStorage.getItem("addedPointLang"));
+        // alert("2!");
+        // currPoints.push(addedPoint);
+        // let lat = addedPoint.lat;
+        // let lang = addedPoint.lang;
+        let lat = parseFloat(latPoint);
+        let lang = parseFloat(langPoint);
+        let attraction_to_send = {
+            name:document.getElementById("attr_name").value
+            //,x:31.262860,y:34.801753
+            ,x:lat ,y:lang
             ,description:document.getElementById("desc").value
             ,picturesURLS:[],videosURLS:[]};
         postRequestAttraction(attraction_to_send);
-        //window.location.href='/attractions';
+        window.location.href='/attractions';
         // alert("point:"+localStorage.getItem("addedPoint")+"\n"+
         //     "name:"+document.getElementById("attr_name").value);
+    }
+
+    function check(){
+
+    let attraction_to_send = {name:"nekuda"
+            ,x:31.262860,y:34.801753
+            ,description:"this is a nekuda"
+            ,picturesURLS:[],videosURLS:[]};
+        alert("yayyyyyyyyyy!");
+        postRequestAttraction(attraction_to_send);
+        alert("yayyyyyyyyyy!");
+
     }

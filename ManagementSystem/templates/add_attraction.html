@@ -9,6 +9,9 @@
 {% load static %}
 <script src="{% static 'add_attraction.js' %}?version=1"></script>
 
+{% load static %}
+    <script src="{% static 'attractions.js' %}?version=1"></script>
+
 <button onclick="window.location.href='/main'" type="button">Back to menu</button>
 <button onclick="window.location.href='/attractions'" type="button">Back to map</button>
 
@@ -60,12 +63,12 @@
       </select>
 
 
-    {% load static %}
-    <script src="{% static 'attractions.js' %}?version=1"></script>
 {#    {% load static %}#}
-{#    <script src="{% static 'add_attraction.js' %}?version=1"></script>#}
+{#    <script src="{% static 'attractions.js' %}?version=1"></script>#}
+    {% load static %}
+    <script src="{% static 'add_attraction.js' %}?version=3"></script>
     <button onclick="showDataCollected()" type="button">Submit</button>
-    <button type="button">Clean</button>
+    <button onclick="check()" type="button">Clean</button>
 
   </div>
 
