@@ -45,11 +45,11 @@ window.onload=function(){
         // localStorage.setItem("numberOfPoints",""+numberOfPoints);
         // // alert("1!");
         // var currPoints = JSON.parse(localStorage.getItem("points"));
-        let addedPoint = JSON.parse(localStorage.getItem("addedPoint"));
+        //let addedPoint = JSON.parse(localStorage.getItem("addedPoint"));
         // // alert("2!");
         // currPoints.push(addedPoint);
-        let lat = addedPoint.lat();
-        let lang = addedPoint.lang();
+        // let lat = addedPoint.lat();
+        // let lang = addedPoint.lang();
         // localStorage.setItem("points",JSON.stringify(currPoints));
 
         // numberOfPoints--;
@@ -91,11 +91,11 @@ window.onload=function(){
 //         var e = document.getElementById("ddlViewBy");
 // var strUser = e.options[e.selectedIndex].value;
         let attraction_to_send = {name:document.getElementById("attr_name").value
-            ,x:lat,y:lang
+            ,x:31.262860,y:34.801753
             ,description:document.getElementById("desc").value
             ,picturesURLS:[],videosURLS:[]};
         postRequestAttraction(attraction_to_send);
-        window.location.href='/attractions';
+        //window.location.href='/attractions';
         // alert("point:"+localStorage.getItem("addedPoint")+"\n"+
         //     "name:"+document.getElementById("attr_name").value);
     }

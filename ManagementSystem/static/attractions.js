@@ -3,8 +3,6 @@ const Http = new XMLHttpRequest();
 
 
 function serverRequest(getOrPost, functionOnReady, url, post=null){
-        alert("blat");
-
     Http.onreadystatechange = function(){
         if(Http.readyState == 4 && Http.status == 200){
             functionOnReady(JSON.parse(Http.responseText));
