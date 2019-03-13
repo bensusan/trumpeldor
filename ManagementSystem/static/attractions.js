@@ -3,7 +3,8 @@ const Http = new XMLHttpRequest();
 
 
 function serverRequest(getOrPost, functionOnReady, url, post=null){
-    alert("blat");
+        alert("blat");
+
     Http.onreadystatechange = function(){
         if(Http.readyState == 4 && Http.status == 200){
             functionOnReady(JSON.parse(Http.responseText));
@@ -48,6 +49,7 @@ function initAttractionsMarkers() {
 
 
 function postRequestAttraction(attraction){
+    alert("blat");
     serverRequest("POST", function noop(dummy){}, 'http://132.73.215.60:12344/managementsystem/attraction/',
         JSON.stringify(attraction));
 }

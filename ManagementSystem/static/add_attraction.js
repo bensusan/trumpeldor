@@ -40,55 +40,61 @@ window.onload=function(){
     }
 
     function showDataCollected() {
-        var numberOfPoints =Number(localStorage.getItem("numberOfPoints"));
-        numberOfPoints=numberOfPoints+1;
-        localStorage.setItem("numberOfPoints",""+numberOfPoints);
-        // alert("1!");
-        var currPoints = JSON.parse(localStorage.getItem("points"));
-        var addedPoint = JSON.parse(localStorage.getItem("addedPoint"));
-        // alert("2!");
-        currPoints.push(addedPoint);
-        localStorage.setItem("points",JSON.stringify(currPoints));
+        // var numberOfPoints =Number(localStorage.getItem("numberOfPoints"));
+        // numberOfPoints=numberOfPoints+1;
+        // localStorage.setItem("numberOfPoints",""+numberOfPoints);
+        // // alert("1!");
+        // var currPoints = JSON.parse(localStorage.getItem("points"));
+        let addedPoint = JSON.parse(localStorage.getItem("addedPoint"));
+        // // alert("2!");
+        // currPoints.push(addedPoint);
+        let lat = addedPoint.lat();
+        let lang = addedPoint.lang();
+        // localStorage.setItem("points",JSON.stringify(currPoints));
 
-        numberOfPoints--;
-        localStorage.setItem("attr_name"+numberOfPoints, document.getElementById("attr_name").value);
-        localStorage.setItem("desc"+numberOfPoints, document.getElementById("desc").value);
-        localStorage.setItem("ques"+numberOfPoints, document.getElementById("ques").value);
-        localStorage.setItem("ans1"+numberOfPoints, document.getElementById("ans1").value);
-        localStorage.setItem("ans2"+numberOfPoints, document.getElementById("ans2").value);
-        localStorage.setItem("ans3"+numberOfPoints, document.getElementById("ans3").value);
-        localStorage.setItem("ans4"+numberOfPoints, document.getElementById("ans4").value);
-        localStorage.setItem("path_len"+numberOfPoints, document.getElementById("path_len").value);
-
-        var shortPath = JSON.parse(localStorage.getItem("short_path"));
-        var medPath = JSON.parse(localStorage.getItem("medium_path"));
-        var longPath = JSON.parse(localStorage.getItem("long_path"));
-
-
-          longPath.push(addedPoint);
-          localStorage.setItem("long_path", JSON.stringify(longPath));
-
-
-          if(document.getElementById("path_len").value=="short") {
-            shortPath.push(addedPoint);
-            localStorage.setItem("short_path", JSON.stringify(shortPath));
-            medPath.push(addedPoint);
-            localStorage.setItem("medium_path", JSON.stringify(medPath));
-        }
-
-          if(document.getElementById("path_len").value=="medium") {
-            medPath.push(addedPoint);
-            localStorage.setItem("medium_path", JSON.stringify(medPath));
-        }
-
-          var shortPath1 = JSON.parse(localStorage.getItem("short_path"));
-        var medPath1 = JSON.parse(localStorage.getItem("medium_path"));
-        var longPath1 = JSON.parse(localStorage.getItem("long_path"));
-          alert("short:"+shortPath1.length +"\nmedium: "+medPath1.length +"\nlong: "+longPath1.length);
+        // numberOfPoints--;
+        // localStorage.setItem("attr_name"+numberOfPoints, document.getElementById("attr_name").value);
+        // localStorage.setItem("desc"+numberOfPoints, document.getElementById("desc").value);
+        // localStorage.setItem("ques"+numberOfPoints, document.getElementById("ques").value);
+        // localStorage.setItem("ans1"+numberOfPoints, document.getElementById("ans1").value);
+        // localStorage.setItem("ans2"+numberOfPoints, document.getElementById("ans2").value);
+        // localStorage.setItem("ans3"+numberOfPoints, document.getElementById("ans3").value);
+        // localStorage.setItem("ans4"+numberOfPoints, document.getElementById("ans4").value);
+        // localStorage.setItem("path_len"+numberOfPoints, document.getElementById("path_len").value);
+        //
+        // var shortPath = JSON.parse(localStorage.getItem("short_path"));
+        // var medPath = JSON.parse(localStorage.getItem("medium_path"));
+        // var longPath = JSON.parse(localStorage.getItem("long_path"));
+        //
+        //
+        //   longPath.push(addedPoint);
+        //   localStorage.setItem("long_path", JSON.stringify(longPath));
+        //
+        //
+        //   if(document.getElementById("path_len").value=="short") {
+        //     shortPath.push(addedPoint);
+        //     localStorage.setItem("short_path", JSON.stringify(shortPath));
+        //     medPath.push(addedPoint);
+        //     localStorage.setItem("medium_path", JSON.stringify(medPath));
+        // }
+        //
+        //   if(document.getElementById("path_len").value=="medium") {
+        //     medPath.push(addedPoint);
+        //     localStorage.setItem("medium_path", JSON.stringify(medPath));
+        // }
+        //
+        //   let shortPath1 = JSON.parse(localStorage.getItem("short_path"));
+        // let medPath1 = JSON.parse(localStorage.getItem("medium_path"));
+        // let longPath1 = JSON.parse(localStorage.getItem("long_path"));
+        //   alert("short:"+shortPath1.length +"\nmedium: "+medPath1.length +"\nlong: "+longPath1.length);
 
 //         var e = document.getElementById("ddlViewBy");
 // var strUser = e.options[e.selectedIndex].value;
-
+        let attraction_to_send = {name:document.getElementById("attr_name").value
+            ,x:lat,y:lang
+            ,description:document.getElementById("desc").value
+            ,picturesURLS:[],videosURLS:[]};
+        postRequestAttraction(attraction_to_send);
         window.location.href='/attractions';
         // alert("point:"+localStorage.getItem("addedPoint")+"\n"+
         //     "name:"+document.getElementById("attr_name").value);
