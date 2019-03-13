@@ -41,6 +41,7 @@ function initMap() {
             var shortPaths= JSON.parse(localStorage.getItem("short_paths"));
             var path = pointsOfPath;
             shortPaths.push(path);
+            localStorage.setItem("points_of_path",JSON.stringify(pointsOfPath));
             localStorage.setItem("short_paths",JSON.stringify(shortPaths));
             alert("the path: "+ pointsOfPath.toString());
         });
