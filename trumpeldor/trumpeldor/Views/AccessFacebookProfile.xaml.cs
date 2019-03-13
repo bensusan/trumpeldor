@@ -110,12 +110,13 @@ namespace trumpeldor.Views
                 JObject json = JObject.Parse(userJson);
                 string username = (string)json["name"];
                 string id = (string)json["id"];
-                await gc.SignUp(id, "facebook");
-                if(ServerConection.DEBUG == 1)
-                    await DisplayAlert("Hey, " + gc.currentUser.name + "!", "", "ok");
-                ContentPage nextPage = new groupCreationPage();
-                nextPage = await ((groupCreationPage)nextPage).ShowPastDetailsAsync();
-                Application.Current.MainPage = nextPage;
+                //gc.SignUp(id, "facebook");
+                //if(ServerConection.DEBUG == 1)
+                //    await DisplayAlert("Hey, " + gc.currentUser.name + "!", "", "ok");
+                //ContentPage nextPage = new groupCreationPage();
+                //nextPage = ((groupCreationPage)nextPage).ShowPastDetails();
+                //Application.Current.MainPage = nextPage;
+                Application.Current.MainPage = new groupCreationPage(id, User.SOCIAL_NETWORK.Facebook);
             }
             catch (Exception e)
             {

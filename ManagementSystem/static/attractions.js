@@ -2,13 +2,19 @@
 const Http = new XMLHttpRequest();
 
 
-function serverRequest(getOrPost, functionOnReady, url){
+function serverRequest(getOrPost, functionOnReady, url, post = null){
     Http.onreadystatechange = function(){
         if(Http.readyState == 4 && Http.status == 200){
             functionOnReady(JSON.parse(Http.responseText));
         }
     }
-    Http.open(getOrPost, url);
+    Http.open(getOrPost, url, true);
+    if(post) {
+        Http.setRequestHeader('Content-type','application/json; charset=utf-8');
+        Http.send(post);
+        window.location.href = '/attractions';
+        return false;
+    }
     Http.send();
 }
 
@@ -39,19 +45,8 @@ function initAttractionsMarkers() {
     getRequestAttractions(markAttractions);
 }
 
-// function addAttraction(pos){
-//           if(!currPointClicked)
-//               currPointClicked = JSON.parse(localStorage.getItem('currPoint'));
-//           let name = document.getElementById('name').value;
-//           let descp = document.getElementById('description').value;
-//           pointToAdd = {name:name, x:currPointClicked.lat, y:currPointClicked.lng, description:descp, picturesURLS:{}, videosURLS:{}};
-//     Http.open("POST", attractionsURL, true);
-// Http.setRequestHeader('Content-type','application/json; charset=utf-8');
-// Http.onload = function () {
-//     alert(pointToAdd.x +" ");
-//
-// }
-// Http.send(JSON.stringify(pointToAdd));
-//     window.location.href = "http://132.72.23.64:12345/managementsystem/main/map/";
-//     return false;
-// }
+
+function postRequestAttraction(attraction){
+    serverRequest("POST", function noop(dummy){}, 'http://192.168.1.12:12344/managementsystem/attraction/',
+        JSON.stringify(attraction));
+}

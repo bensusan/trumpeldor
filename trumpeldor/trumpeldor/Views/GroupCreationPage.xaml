@@ -6,12 +6,12 @@
     <ContentPage.Content>
         <StackLayout Style="{DynamicResource mainStackLayout}">
             <Label Text="{translator:Translate group_name}" Style="{StaticResource lableStyle}"/>
-            <Entry Placeholder="{translator:Translate group_name}" x:Name="groupNameEntry" Style="{StaticResource entryStyle}"/>
+            <Entry Placeholder="{translator:Translate group_name}" x:Name="groupNameEntry" Style="{StaticResource entryStyle}" AutomationId="EnterGroupName" />
             <Label Text="{translator:Translate path_length}" Style="{StaticResource lableStyle}"/>
             <StackLayout x:Name="lengthButtonGroup" Orientation="Vertical" Style="{DynamicResource mainorStackLayout}">
-                <Button Text="{translator:Translate short_path}" CommandParameter="1" Clicked="Select_Short_Path_Button_Clicked" Style="{DynamicResource smallButtonStyle}"/>
-                <Button Text="{translator:Translate medium_path}" CommandParameter="2" Clicked="Select_Medium_Path_Button_Clicked" Style="{DynamicResource smallButtonStyle}"/>
-                <Button Text="{translator:Translate long_path}" CommandParameter="3" Clicked="Select_Long_Path_Button_Clicked" Style="{DynamicResource smallButtonStyle}"/>
+                <Button Text="{translator:Translate short_path}" CommandParameter="1" Clicked="Select_Short_Path_Button_Clicked" Style="{DynamicResource smallButtonStyle}" AutomationId="Btn1Clicked" />
+                <Button Text="{translator:Translate medium_path}" CommandParameter="2" Clicked="Select_Medium_Path_Button_Clicked" Style="{DynamicResource smallButtonStyle}" AutomationId="Btn2Clicked"/>
+                <Button Text="{translator:Translate long_path}" CommandParameter="3" Clicked="Select_Long_Path_Button_Clicked" Style="{DynamicResource smallButtonStyle}" AutomationId="Btn3Clicked"/>
             </StackLayout>
 
             <Grid x:Name="agesGrid" VerticalOptions="CenterAndExpand" Style="{DynamicResource gridStyle}">
@@ -26,11 +26,11 @@
                 <Label Text="{translator:Translate player}" Grid.Column="0" Grid.Row="0" Style="{DynamicResource lableStyle}"/>
                 <Label Text="{translator:Translate age}" Grid.Column="1" Grid.Row="0" Style="{DynamicResource lableStyle}"/>
                 <Label Text="1)" Grid.Column="0" Grid.Row="1" Style="{DynamicResource lableStyle}"/>
-                <Entry Keyboard="Numeric" Grid.Column="1" Grid.Row="1" Style="{DynamicResource entryStyle}"/>
+                <Entry Keyboard="Numeric" Grid.Column="1" Grid.Row="1" Style="{DynamicResource entryStyle}" AutomationId="EnterAge"/>
             </Grid>
 
-            <Button Text="{translator:Translate add_player}" Clicked="Add_Player_Button_Clicked" Style="{StaticResource largeButtonStyle}"/>
-            <Button Text="{translator:Translate start_trip}" Clicked="Start_Trip_Button_Clicked" x:Name="StartTripButton" Style="{StaticResource largeButtonStyle}"/>
+            <Button Text="{translator:Translate add_player}" Clicked="Add_Player_Button_Clicked" Style="{StaticResource largeButtonStyle}" AutomationId="BtnAddPlayerClicked"/>
+            <Button Text="{translator:Translate start_trip}" Clicked="Start_Trip_Button_Clicked" x:Name="StartTripButton" Style="{StaticResource largeButtonStyle}" AutomationId="BtnStartTripClicked"/>
             
             
             

@@ -1,12 +1,29 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="trumpeldor.Views.FeedbackPage">
+             x:Class="trumpeldor.Views.FeedbackPage"
+             xmlns:translator="clr-namespace:trumpeldor.Helpers">
     <ContentPage.Content>
         <StackLayout Style="{DynamicResource mainStackLayout}">
             <Label Text="feedbackpage" TextColor="Black" HorizontalOptions="Center" />
-                
-            
+
+            <Grid x:Name="feedbacks" VerticalOptions="CenterAndExpand" Style="{DynamicResource gridStyle}">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Label Text="{translator:Translate question}" Grid.Column="0" Grid.Row="0" Style="{DynamicResource lableStyle}"/>
+                <Label Text="{translator:Translate Answer}" Grid.Column="1" Grid.Row="0" Style="{DynamicResource lableStyle}"/>
+                <!--<Label Text="1)" Grid.Column="0" Grid.Row="1" Style="{DynamicResource lableStyle}"/>-->
+                <!--<Entry Keyboard="Numeric" Grid.Column="1" Grid.Row="1" Style="{DynamicResource entryStyle}"/>-->
+            </Grid>
+
+            <Button Text="{translator:Translate Reply}" Clicked="Reply_Button_Clicked" x:Name="ReplyButton" Style="{StaticResource largeButtonStyle}"/>
+
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

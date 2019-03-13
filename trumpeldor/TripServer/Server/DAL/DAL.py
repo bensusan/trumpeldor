@@ -26,7 +26,10 @@ class DAL_Abstract(object):
     def getHints(self, attraction):
         raise NotImplementedError("Should have implemented this")
 
-    def getFeedbacks(self, trip):
+    def getFeedbacks(self):
+        raise NotImplementedError("Should have implemented this")
+
+    def getFeedbackInstances(self, trip):
         raise NotImplementedError("Should have implemented this")
 
     def getAmericanQuestion(self, attraction):
@@ -64,6 +67,58 @@ class DAL_Abstract(object):
 
     def getAllTracksThatIncludeThisTrack(self, track):
         raise NotImplementedError("Should have implemented this")
+
+    def getOpenMessages(self):
+        raise NotImplementedError("Should have implemented this")
+
+    def updateTrip(self, prevTrip, track, groupName, score, playersAges, attractionsDone):
+        raise NotImplementedError("Should have implemented this")
+
+    def updateFeedbackInstance(self, feedback, trip, answer):
+        raise NotImplementedError("Should have implemented this")
+
+    def createFeedbackInstance(self, feedback, trip):
+        raise NotImplementedError("Should have implemented this")
+
+    def getFeedbackById(self, feedbackId):
+        raise NotImplementedError("Should have implemented this")
+
+    def updateLastSeenToNow(self, user):
+        raise NotImplementedError("Should have implemented this")
+
+    def getAllTrips(self):
+        raise NotImplementedError("Should have implemented this")
+
+    def delete_attraction(self, id):
+        raise NotImplementedError("Should have implemented this")
+
+    def edit_attraction(self, id, name, x, y, description, picturesURLS, videosURLS):
+        raise NotImplementedError("Should have implemented this")
+
+    def delete_american_question(self, id_attraction, id_a_question):
+        raise NotImplementedError("Should have implemented this")
+
+    def delete_hint(self, id_attraction, id_hint, data):
+        raise NotImplementedError("Should have implemented this")
+
+    def edit_hint(self, id_attraction, id_hint, data):
+        raise NotImplementedError("Should have implemented this")
+
+    def get_all_tracks(self):
+        raise NotImplementedError("Should have implemented this")
+
+    def delete_feedback_question(self, id_feedback):
+        raise NotImplementedError("Should have implemented this")
+
+    def get_american_question(self, id_attraction, id_american_question):
+        raise NotImplementedError("Should have implemented this")
+
+    def get_hint(self, id_attraction, id_hint):
+        raise NotImplementedError("Should have implemented this")
+
+    def get_feedback_question(self, id_feedback):
+        raise NotImplementedError("Should have implemented this")
+
 
 class DALProxy(DAL_Abstract):
     Implementation = None
@@ -111,10 +166,15 @@ class DALProxy(DAL_Abstract):
             raise NotImplementedError("Should have implemented this")
         return self.Implementation.getHints(attraction)
 
-    def getFeedbacks(self, trip):
+    def getFeedbacks(self):
         if self.Implementation is None:
             raise NotImplementedError("Should have implemented this")
-        return self.Implementation.getFeedbacks(trip)
+        return self.Implementation.getFeedbacks()
+
+    def getFeedbackInstances(self, trip):
+        if self.Implementation is None:
+            raise NotImplementedError("Should have implemented this")
+        return self.Implementation.getFeedbackInstances(trip)
 
     def getAmericanQuestion(self, attraction):
         if self.Implementation is None:
@@ -175,4 +235,89 @@ class DALProxy(DAL_Abstract):
         if self.Implementation is None:
             raise NotImplementedError("Should have implemented this")
         return self.Implementation.getAllTracksThatIncludeThisTrack(track)
+
+    def getOpenMessages(self):
+        if self.Implementation is None:
+            raise NotImplementedError("Should have implemented this")
+        return self.Implementation.getOpenMessages()
+
+    def updateTrip(self, prevTrip, track, groupName, score, playersAges, attractionsDone):
+        if self.Implementation is None:
+            raise NotImplementedError("Should have implemented this")
+        return self.Implementation.updateTrip(prevTrip, track, groupName, score, playersAges, attractionsDone)
+
+    def updateFeedbackInstance(self, feedback, trip, answer):
+        if self.Implementation is None:
+            raise NotImplementedError("Should have implemented this")
+        return self.Implementation.updateFeedbackInstance(feedback, trip, answer)
+
+    def createFeedbackInstance(self, feedback, trip):
+        if self.Implementation is None:
+            raise NotImplementedError("Should have implemented this")
+        return self.Implementation.createFeedbackInstance(feedback, trip)
+
+    def getFeedbackById(self, feedbackId):
+        if self.Implementation is None:
+            raise NotImplementedError("Should have implemented this")
+        return self.Implementation.getFeedbackById(feedbackId)
+
+    def updateLastSeenToNow(self, user):
+        if self.Implementation is None:
+            raise NotImplementedError("Should have implemented this")
+        return self.Implementation.updateLastSeenToNow(user)
+
+    def getAllTrips(self):
+        if self.Implementation is None:
+            raise NotImplementedError("Should have implemented this")
+        return self.Implementation.getAllTrips()
+
+    def delete_attraction(self, id):
+        if self.Implementation is None:
+            raise NotImplementedError("Should have implemented this")
+        return self.Implementation.delete_attraction(id)
+
+    def edit_attraction(self, id, name, x, y, description, picturesURLS, videosURLS):
+        if self.Implementation is None:
+            raise NotImplementedError("Should have implemented this")
+        return self.Implementation.edit_attraction(id, name, x, y, description, picturesURLS, videosURLS)
+
+    def delete_american_question(self, id_attraction, id_a_question):
+        if self.Implementation is None:
+            raise NotImplementedError("Should have implemented this")
+        return self.Implementation.delete_american_question(id_attraction, id_a_question)
+
+    def delete_hint(self, id_attraction, id_hint):
+        if self.Implementation is None:
+            raise NotImplementedError("Should have implemented this")
+        return self.Implementation.delete_hint(id_attraction, id_hint)
+
+    def edit_hint(self, id_attraction, id_hint, data):
+        if self.Implementation is None:
+            raise NotImplementedError("Should have implemented this")
+        return self.Implementation.edit_hint(id_attraction, id_hint, data)
+
+    def get_all_tracks(self):
+        if self.Implementation is None:
+            raise NotImplementedError("Should have implemented this")
+        return self.Implementation.get_all_tracks()
+
+    def delete_feedback_question(self, id_feedback):
+        if self.Implementation is None:
+            raise NotImplementedError("Should have implemented this")
+        return self.Implementation.delete_feedback_question(id_feedback)
+
+    def get_american_question(self, id_attraction, id_american_question):
+        if self.Implementation is None:
+            raise NotImplementedError("Should have implemented this")
+        return self.Implementation.get_american_question(id_attraction, id_american_question)
+
+    def get_hint(self, id_attraction, id_hint):
+        if self.Implementation is None:
+            raise NotImplementedError("Should have implemented this")
+        return self.Implementation.get_hint(id_attraction, id_hint)
+
+    def get_feedback_question(self, id_feedback):
+        if self.Implementation is None:
+            raise NotImplementedError("Should have implemented this")
+        return self.Implementation.get_feedback_question(id_feedback)
 

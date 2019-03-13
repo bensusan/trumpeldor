@@ -91,12 +91,10 @@ class Hint(models.Model):
     HINT_TEXT = 'HT'
     HINT_PICTURE = 'HP'
     HINT_VIDEO = 'HV'
-    HINT_MAP = 'HM'
     HINT_KIND = (
         (HINT_TEXT, 'HintText'),            # "Something"
         (HINT_PICTURE, 'HintPicture'),      # "x.jpg"
         (HINT_VIDEO, 'HintVideo'),          # "x.mp4"
-        (HINT_MAP, 'HintMap'),              # "x,y"
     )
     kind = models.CharField(
         max_length=2,
@@ -105,3 +103,8 @@ class Hint(models.Model):
     )
 
     data = models.TextField()
+
+
+class Message(models.Model):
+    title = models.CharField(max_length=50)     # TODO - maybe change length
+    data = models.CharField(max_length=500)     # TODO - maybe change length

@@ -14,6 +14,7 @@ namespace UITest
             {
                 return ConfigureApp
                     .Android
+                    .InstalledApp("com.companyname.trumpeldor")
                     .StartApp();
             }
 

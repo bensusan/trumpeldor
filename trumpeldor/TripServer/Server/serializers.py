@@ -43,7 +43,7 @@ class TrackSerializer(serializers.ModelSerializer):
 
 
 class GetExtendedTrackSerializer(serializers.Serializer):
-    track = TrackSerializer()
+    trackId = serializers.IntegerField()
     x = serializers.FloatField()
     y = serializers.FloatField()
 
@@ -92,7 +92,7 @@ class FeedbackInstanceSerializer(serializers.ModelSerializer):
     feedback = FeedbackSerializer()
 
     class Meta:
-        fields = ('feedback', 'trip',)
+        fields = ('feedback', 'trip', 'answer')
         model = FeedbackInstance
 
 
@@ -125,3 +125,28 @@ class TestSerializer(serializers.ModelSerializer):
     class Meta:
         fields = ('question',)
         model = Feedback
+
+
+class MessageSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        fields = ('title', 'data')
+        model = Message
+
+
+class UpdateTripSerializer(serializers.Serializer):
+    id = serializers.IntegerField()
+    user = UserSerializer()
+    groupName = serializers.CharField(max_length=50)
+    playersAges = serializers.JSONField()
+    score = serializers.IntegerField()
+    track = TrackSerializer()
+    attractionsDone = AttractionSerializer(many=True)
+    feedbacks = FeedbackInstanceSerializer(many=True)
+
+
+class ScoreSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        fields = ('groupName', 'score')
+        model = Trip

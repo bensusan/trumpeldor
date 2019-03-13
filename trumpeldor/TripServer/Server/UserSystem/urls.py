@@ -12,10 +12,12 @@ urlpatterns = [
     path('createTrip/', CreateTrip.as_view()),
     path('getHints/', GetHints.as_view()),
     path('getAmericanQuestion/', GetAmericanQuestion.as_view()),
-    path('getFeedbacks/', GetFeedbacks.as_view()),
-    path('addToDal/', AddToDal.as_view()),
+    path('getFeedbackInstances/', GetFeedbackInstances.as_view()),
+    path('insertDebugData/', InsertDebugData.as_view()),
     path('getExtendedTrack/', GetExtendedTrack.as_view()),
-    path('getAttractionForDebug/', GetAttractionForDebug.as_view())
+    path('getAttractionForDebug/', GetAttractionForDebug.as_view()),
+    path('getOpenMessages/', GetOpenMessages.as_view()),
+    path('updateTrip/', UpdateTrip.as_view())
 ]
 
 urlpatterns = format_suffix_patterns(urlpatterns)
