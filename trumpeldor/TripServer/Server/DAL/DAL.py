@@ -95,6 +95,9 @@ class DAL_Abstract(object):
     def get_feedback_question(self, id_feedback):
         raise NotImplementedError("Should have implemented this")
 
+    def get_attraction_by_x_y(self, x, y):
+        raise NotImplementedError("Should have implemented this")
+
 
 class DALProxy(DAL_Abstract):
     Implementation = None
@@ -257,3 +260,7 @@ class DALProxy(DAL_Abstract):
             raise NotImplementedError("Should have implemented this")
         return self.Implementation.get_feedback_question(id_feedback)
 
+    def get_attraction_by_x_y(self, x, y):
+        if self.Implementation is None:
+            raise NotImplementedError("Should have implemented this")
+        return self.Implementation.get_attraction_by_x_y(x, y)

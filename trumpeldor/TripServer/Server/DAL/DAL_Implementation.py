@@ -93,7 +93,8 @@ class DAL_Implementation(DAL_Abstract):
         return Track.objects.filter(subTrack=track).all()
 
     def delete_attraction(self, id):
-        return self.get_attraction(id).delete()
+        delt=self.get_attraction(id).delete()
+        return True
 
     def edit_attraction(self, id, name, x, y, description, picturesURLS, videosURLS):
         attraction = self.get_attraction(id)
@@ -134,3 +135,5 @@ class DAL_Implementation(DAL_Abstract):
     def get_feedback_question(self, id_feedback):
         return Feedback.objects.filter(pk=id_feedback).all()
 
+    def get_attraction_by_x_y(self, x, y):
+        return Attraction.objects.filter(x=x, y=y).first()

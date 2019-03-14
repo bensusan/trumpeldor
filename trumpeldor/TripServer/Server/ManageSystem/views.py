@@ -1,18 +1,6 @@
-from django.http import JsonResponse, Http404
-import null
-import random
 
 from django.shortcuts import render
 from rest_framework.utils import json
-
-from ..models import *
-from django.http import JsonResponse, HttpResponse, Http404
-
-from rest_framework import generics
-from ..serializers import *
-from rest_framework.views import APIView
-from ..models import *
-
 
 import null
 from rest_framework.response import Response
@@ -151,12 +139,11 @@ class Attraction(generics.GenericAPIView):
         ans = AttractionSerializer(ans, many=False)
         ans = json.loads(json.dumps(ans.data))
         return Response(ans)
-        # print(self.kwargs['id'])
-        # return general_post_or_get(
-        #     self.kwargs['id'],
-        #     "GetAttraction",
-        #     BL.get_attraction,
-        #     AttractionSerializer)
+
+    def delete(self, request, *args, **kwargs):
+        ans = BL.delete_attraction(self.kwargs['id'])
+        ans = json.loads(json.dumps(ans))
+        return Response(ans)
 
 
 

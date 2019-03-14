@@ -97,7 +97,7 @@ class BL_Implementation(BL_Abstract):
         return self.DAL.getTrip(trip['id'])
 
     def add_attraction(self, attraction):
-        if self.getAttraction(attraction['id']) is None:
+        if self.get_attraction_by_x_y(attraction['x'], attraction['y']) is None:
             return self.DAL.add_attraction(attraction['name'], attraction['x'], attraction['y'],
                                        attraction['description'], attraction['picturesURLS'], attraction['videosURLS'])
 
@@ -169,4 +169,5 @@ class BL_Implementation(BL_Abstract):
     def get_feedback_question(self, id_feedback):
         return self.DAL.get_feedback_question(id_feedback)
 
-
+    def get_attraction_by_x_y(self, x, y):
+        return self.DAL.get_attraction_by_x_y(x, y)
