@@ -19,7 +19,6 @@ function initMap() {
     });
     initAttractionsMarkers();
     listenerForMap(map);
-    // alert("yes!");
     initPoints();
 
 }
@@ -52,12 +51,12 @@ function initMap() {
                 pointsOfPath.push(m.position);
                 i++;
             }
-            // alert("point been added! now its: "+ pointsOfPath.toString());
+            alert("point been added! now its: "+ pointsOfPath.toString());
         });
   });
   }
 
-function listenerForMap(map){
+  function listenerForMap(map){
     google.maps.event.addListener(map, 'click', (function(event) {
         coordinates_of_last_click=event.latLng;
 
@@ -67,17 +66,30 @@ function listenerForMap(map){
 
         curPosClicked = positionInMap(event.latLng.lat(), event.latLng.lng());
         curMarker = markAttraction(curPosClicked);
-        var addBTN = document.getElementById('edit_attraction');
+        var addBTN = document.getElementById('finish');
         addBTN.addEventListener('click', function(event) {
         // localStorage.setItem("addedPoint", JSON.stringify(curPosClicked));
             let pos = {lat: curPosClicked.lat, lng: curPosClicked.lng};
             // markAttraction(pos);
             localStorage.setItem("addedPoint", JSON.stringify(pos));
             // alert("this is what: "+ pos.lat +", " + pos.lng + ", "+ (typeof pos.lat));
-            window.location.href='/add_attraction';
+            window.location.href='/edit_path';
         });
     }));
 }
+//
+// function listenerForMap(map){
+//     google.maps.event.addListener(map, 'click', (function() {
+//
+//         var finishBTN = document.getElementById('finish');
+//         finishBTN.addEventListener('click', function() {
+//             alert("very done!");
+//             localStorage.setItem("the_points_of_the_path", JSON.stringify(pointsOfPath));
+//
+//             window.location.href='/edit_path';
+//         });
+//     }));
+// }
 
 
 function addListenerForMarker(marker) {

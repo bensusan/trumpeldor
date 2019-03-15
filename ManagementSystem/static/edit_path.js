@@ -4,7 +4,7 @@ let curPosClicked;
 let curMarker;
 let coordinates_of_last_click;
 
-let points = JSON.parse(localStorage.getItem("points"));
+let points = JSON.parse(localStorage.getItem("the_points_of_the_path"));
 let pointsOfPath = [];
 
 function initMapAndAttractions(){
@@ -17,8 +17,8 @@ function initMap() {
         zoom: 18,
         center: {lat: 31.262860, lng: 34.801753}
     });
-    initAttractionsMarkers();
-    listenerForMap(map);
+    // initAttractionsMarkers();
+    // listenerForMap(map);
     // alert("yes!");
     initPoints();
 
