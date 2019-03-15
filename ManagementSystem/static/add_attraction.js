@@ -87,10 +87,11 @@ window.onload=function(){
 // var strUser = e.options[e.selectedIndex].value;
 
         let addedPoint = JSON.parse(localStorage.getItem("addedPoint"));
+        alert("is what: "+ addedPoint.lat +", " + addedPoint.lng + ", "+ (typeof addedPoint.lng));
         // alert("2!");
         // currPoints.push(addedPoint);
         let lat = addedPoint.lat;
-        let lang = addedPoint.lang;
+        let lang = addedPoint.lng;
         let attraction_to_send = {
             name:document.getElementById("attr_name").value
             //,x:31.262860,y:34.801753

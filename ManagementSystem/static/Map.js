@@ -26,12 +26,14 @@ function initMap() {
     listenerForMap(map);
 
     initPoints();
-    alert("the number of points is now :" + points.length)
-    var shortPath1 = JSON.parse(localStorage.getItem("short_path"));
-        var medPath1 = JSON.parse(localStorage.getItem("medium_path"));
-        var longPath1 = JSON.parse(localStorage.getItem("long_path"));
-          alert("short:"+shortPath1.length +"\nmedium: "+medPath1.length +"\nlong: "+longPath1.length);
+    // alert("the number of points is now :" + points.length)
+    // var shortPath1 = JSON.parse(localStorage.getItem("short_path"));
+    //     var medPath1 = JSON.parse(localStorage.getItem("medium_path"));
+    //     var longPath1 = JSON.parse(localStorage.getItem("long_path"));
+          // alert("short:"+shortPath1.length +"\nmedium: "+medPath1.length +"\nlong: "+longPath1.length);
 }
+
+
 
   function initPoints(){
   for (var i = 0; i < points.length; i++) {
@@ -50,18 +52,18 @@ function initMap() {
 //         var e = document.getElementById("ddlViewBy");
 // var strUser = e.options[e.selectedIndex].value;
 
-    if(num<4) {
-        localStorage.setItem("editedNum", num);
-
-        localStorage.setItem("attr_name" + num, "the name of point no." + num);
-        localStorage.setItem("desc" + num, "the description of point no." + num);
-        localStorage.setItem("ques" + num, "the question of point no." + num);
-        localStorage.setItem("ans1" + num, "ans1 of point no." + num);
-        localStorage.setItem("ans2" + num, "ans2 of point no." + num);
-        localStorage.setItem("ans3" + num, "ans3 of point no." + num);
-        localStorage.setItem("ans4" + num, "ans4 of point no." + num);
-        localStorage.setItem("path_len" + num, "long");
-    }
+    // if(num<4) {
+    //     localStorage.setItem("editedNum", num);
+    //
+    //     localStorage.setItem("attr_name" + num, "the name of point no." + num);
+    //     localStorage.setItem("desc" + num, "the description of point no." + num);
+    //     localStorage.setItem("ques" + num, "the question of point no." + num);
+    //     localStorage.setItem("ans1" + num, "ans1 of point no." + num);
+    //     localStorage.setItem("ans2" + num, "ans2 of point no." + num);
+    //     localStorage.setItem("ans3" + num, "ans3 of point no." + num);
+    //     localStorage.setItem("ans4" + num, "ans4 of point no." + num);
+    //     localStorage.setItem("path_len" + num, "long");
+    // }
 
     m.addListener('click', function() {
         alert("ppppp: "+num);
@@ -84,11 +86,16 @@ function listenerForMap(map){
         if(curPosClicked) {
             curMarker.setMap(null);
         }
+
         curPosClicked = positionInMap(event.latLng.lat(), event.latLng.lng());
         curMarker = markAttraction(curPosClicked);
         var addBTN = document.getElementById('add_attraction');
         addBTN.addEventListener('click', function(event) {
-        localStorage.setItem("addedPoint", JSON.stringify(curPosClicked));
+        // localStorage.setItem("addedPoint", JSON.stringify(curPosClicked));
+            let pos = {lat: curPosClicked.lat, lng: curPosClicked.lng};
+            // markAttraction(pos);
+            localStorage.setItem("addedPoint", JSON.stringify(pos));
+            alert("this is what: "+ pos.lat +", " + pos.lng + ", "+ (typeof pos.lat));
             window.location.href='/add_attraction';
         });
     }));
