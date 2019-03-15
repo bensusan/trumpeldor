@@ -57,13 +57,15 @@ window.onload=function(){
     }
     
     function getName(attractionsJSON){
+      alert("in get name!");
       let editedPoint = JSON.parse(localStorage.getItem("edited"));
       let lat = editedPoint.lat;
       let lng = editedPoint.lng;
       let name = "didn't found!!!";
-
+      // alert("in get name! "+"of the origin : " + lat + " , " + lng);
       attractionsJSON.forEach(function (attr) {
         let p = {name: attr['name'], lat: attr['x'], lng: attr['y']};
+        alert("in get name! "+"of the origin : " + lat + " , " + lng + "\n of the other: "+p.lat +" , "+ p.lng);
         if(p.lat==lat&&p.lng==lng)
         {
           name=p.name;
@@ -74,7 +76,6 @@ window.onload=function(){
     }
 
     function  showVals() {
-      alert("here now");
       // document.getElementById("attr_name").value =localStorage.getItem("attr_name"+localStorage.getItem("editedNum"));
       // document.getElementById("desc").value = localStorage.getItem("desc"+localStorage.getItem("editedNum"));
       // document.getElementById("ques").value = localStorage.getItem("ques"+localStorage.getItem("editedNum"));

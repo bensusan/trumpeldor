@@ -10,9 +10,11 @@
 <button onclick="window.location.href='/main'" type="button">Back to menu</button>
 <button onclick="window.location.href='/attractions'" type="button">Back to map</button>
 
+{% load static %}
+    <script src="{% static 'attractions.js' %}?version=1"></script>
 
     {% load static %}
-<script src="{% static 'edit_attraction.js' %}?version=1"></script>
+<script src="{% static 'edit_attraction.js' %}?version=2"></script>
 
 <button onclick="showVals()" type="button">Show Values</button>
 
