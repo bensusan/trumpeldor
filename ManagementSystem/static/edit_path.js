@@ -5,9 +5,10 @@ let curMarker;
 let coordinates_of_last_click;
 
 let points = JSON.parse(localStorage.getItem("the_points_of_the_path"));
-let pointsOfPath = [];
 
-function initMapAndAttractions(){
+
+
+function initMapAndAttractions() {
     initMap();
     initAttractionsMarkers();
 }
@@ -40,7 +41,6 @@ function initMap() {
       title: "Point no."+(num+1)+".\n Belongs to the "+localStorage.getItem("path_len"+num) +" path."
     });
     m.setMap(map);
-
   }
 
   function addEditListener(m) {
