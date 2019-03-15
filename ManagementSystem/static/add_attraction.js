@@ -87,7 +87,7 @@ window.onload=function(){
 // var strUser = e.options[e.selectedIndex].value;
 
         let addedPoint = JSON.parse(localStorage.getItem("addedPoint"));
-        alert("is what: "+ addedPoint.lat +", " + addedPoint.lng + ", "+ (typeof addedPoint.lng));
+        // alert("is what: "+ addedPoint.lat +", " + addedPoint.lng + ", "+ (typeof addedPoint.lng));
         // alert("2!");
         // currPoints.push(addedPoint);
         let lat = addedPoint.lat;

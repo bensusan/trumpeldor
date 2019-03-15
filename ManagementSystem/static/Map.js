@@ -65,18 +65,30 @@ function initMap() {
     //     localStorage.setItem("path_len" + num, "long");
     // }
 
-    m.addListener('click', function() {
-        alert("ppppp: "+num);
+  //   m.addListener('click', function() {
+  //       alert("ppppp: "+num);
+  //
+  //
+  //   var editBTN = document.getElementById('edit_attraction');
+  //       editBTN.addEventListener('click', function(event) {
+  //           localStorage.setItem("edited", m.position);
+  //           localStorage.setItem("editedNum", num);
+  //           window.location.href='/edit_attraction';
+  //       });
+  // });
 
+  }
 
-    var editBTN = document.getElementById('edit_attraction');
-        editBTN.addEventListener('click', function(event) {
-            localStorage.setItem("edited", m.position);
-            localStorage.setItem("editedNum", num);
+  function addEditListener(m) {
+      m.addListener('click', function() {
+        alert("pppp");
+
+        var editBTN = document.getElementById('edit_attraction');
+        editBTN.addEventListener('click', function() {
+            localStorage.setItem("edited", JSON.stringify(m.position));
             window.location.href='/edit_attraction';
         });
   });
-
   }
 
 function listenerForMap(map){
@@ -95,7 +107,7 @@ function listenerForMap(map){
             let pos = {lat: curPosClicked.lat, lng: curPosClicked.lng};
             // markAttraction(pos);
             localStorage.setItem("addedPoint", JSON.stringify(pos));
-            alert("this is what: "+ pos.lat +", " + pos.lng + ", "+ (typeof pos.lat));
+            // alert("this is what: "+ pos.lat +", " + pos.lng + ", "+ (typeof pos.lat));
             window.location.href='/add_attraction';
         });
     }));

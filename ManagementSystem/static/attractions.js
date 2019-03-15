@@ -33,9 +33,11 @@ function markAttractions(attractionsJSON){
 function markAttraction(pos){
         let marker = new google.maps.Marker({
           position: pos,
-          map: map
+          map: map,
+          title: "Point ("+pos.lat+","+pos.lng+")."
         });
         marker.setMap(map);
+        addEditListener(marker);
         return marker;
 }
 

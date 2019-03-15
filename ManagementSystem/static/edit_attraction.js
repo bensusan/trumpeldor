@@ -56,17 +56,35 @@ window.onload=function(){
             "name:"+document.getElementById("attr_name").value);
     }
     
-    
-    function  showVals() {
-      document.getElementById("attr_name").value =localStorage.getItem("attr_name"+localStorage.getItem("editedNum"));
-      document.getElementById("desc").value = localStorage.getItem("desc"+localStorage.getItem("editedNum"));
-      document.getElementById("ques").value = localStorage.getItem("ques"+localStorage.getItem("editedNum"));
-      document.getElementById("ans1").value =localStorage.getItem("ans1"+localStorage.getItem("editedNum"));
-      document.getElementById("ans2").value = localStorage.getItem("ans2"+localStorage.getItem("editedNum"));
-      document.getElementById("ans3").value = localStorage.getItem("ans3"+localStorage.getItem("editedNum"));
-      document.getElementById("ans4").value = localStorage.getItem("ans4"+localStorage.getItem("editedNum"));
+    function getName(attractionsJSON){
+      let editedPoint = JSON.parse(localStorage.getItem("edited"));
+      let lat = editedPoint.lat;
+      let lng = editedPoint.lng;
+      let name = "didn't found!!!";
 
-      document.getElementById("path_len").value = localStorage.getItem("path_len"+localStorage.getItem("editedNum"));
-      alert(localStorage.getItem("path_len"+localStorage.getItem("editedNum")));
+      attractionsJSON.forEach(function (attr) {
+        let p = {name: attr['name'], lat: attr['x'], lng: attr['y']};
+        if(p.lat==lat&&p.lng==lng)
+        {
+          name=p.name;
+        }
+      });
+
+      alert("the name is: "+name);
+    }
+
+    function  showVals() {
+      alert("here now");
+      // document.getElementById("attr_name").value =localStorage.getItem("attr_name"+localStorage.getItem("editedNum"));
+      // document.getElementById("desc").value = localStorage.getItem("desc"+localStorage.getItem("editedNum"));
+      // document.getElementById("ques").value = localStorage.getItem("ques"+localStorage.getItem("editedNum"));
+      // document.getElementById("ans1").value =localStorage.getItem("ans1"+localStorage.getItem("editedNum"));
+      // document.getElementById("ans2").value = localStorage.getItem("ans2"+localStorage.getItem("editedNum"));
+      // document.getElementById("ans3").value = localStorage.getItem("ans3"+localStorage.getItem("editedNum"));
+      // document.getElementById("ans4").value = localStorage.getItem("ans4"+localStorage.getItem("editedNum"));
+      //
+      // document.getElementById("path_len").value = localStorage.getItem("path_len"+localStorage.getItem("editedNum"));
+      // alert(localStorage.getItem("path_len"+localStorage.getItem("editedNum")));
           // localStorage.getItem("path_len"+localStorage.getItem("editedNum"));
+      getRequestAttractions(getName);
     }
