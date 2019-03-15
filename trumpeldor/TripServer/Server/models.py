@@ -2,6 +2,8 @@ from django.db import models
 from django.contrib.postgres.fields import JSONField
 
 # we can see which type is every field
+
+
 class Attraction(models.Model):
     name = models.TextField()
     x = models.FloatField()

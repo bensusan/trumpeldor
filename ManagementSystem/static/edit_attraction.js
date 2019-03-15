@@ -55,6 +55,10 @@ window.onload=function(){
         alert("point:"+localStorage.getItem("addedPoint")+"\n"+
             "name:"+document.getElementById("attr_name").value);
     }
+
+    function deletePoint() {
+        alert("under Construction!!!");
+    }
     
     function getName(attractionsJSON){
       alert("in get name!");
