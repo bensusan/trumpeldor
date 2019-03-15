@@ -64,11 +64,13 @@ window.onload=function(){
       let name = "didn't found!!!";
       // alert("in get name! "+"of the origin : " + lat + " , " + lng);
       attractionsJSON.forEach(function (attr) {
-        let p = {name: attr['name'], lat: attr['x'], lng: attr['y']};
-        alert("in get name! "+"of the origin : " + lat + " , " + lng + "\n of the other: "+p.lat +" , "+ p.lng);
+        let p = {name: attr['name'], description:attr['description'], lat: attr['x'], lng: attr['y']};
+        // alert("in get name! "+"of the origin : " + lat + " , " + lng + "\n of the other: "+p.lat +" , "+ p.lng);
         if(p.lat==lat&&p.lng==lng)
         {
           name=p.name;
+          document.getElementById("attr_name").value = p.name;
+          document.getElementById("desc").value = p.description;
         }
       });
 

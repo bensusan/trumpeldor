@@ -81,11 +81,9 @@ function initMap() {
 
   function addEditListener(m) {
       m.addListener('click', function() {
-        alert("pppp");
 
         var editBTN = document.getElementById('edit_attraction');
         editBTN.addEventListener('click', function() {
-            alert("woowww "+m.position);
             localStorage.setItem("edited", JSON.stringify(m.position));
             window.location.href='/edit_attraction';
         });
