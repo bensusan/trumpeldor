@@ -99,19 +99,15 @@ window.onload=function(){
             ,description:document.getElementById("desc").value
             ,picturesURLS:[],videosURLS:[]};
         postRequestAttraction(attraction_to_send);
-        window.location.href='/attractions';
+
+        window.location.href='/add_game';
+        // window.location.href='/attractions';
         // alert("point:"+localStorage.getItem("addedPoint")+"\n"+
         //     "name:"+document.getElementById("attr_name").value);
     }
 
     function check(){
 
-    let attraction_to_send = {name:"nekuda"
-            ,x:31.262860,y:34.801753
-            ,description:"this is a nekuda"
-            ,picturesURLS:[],videosURLS:[]};
-        alert("yayyyyyyyyyy!");
-        postRequestAttraction(attraction_to_send);
-        alert("yayyyyyyyyyy!");
+    alert("ayooooooooo");
 
     }
