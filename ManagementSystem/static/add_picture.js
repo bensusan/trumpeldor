@@ -15,5 +15,5 @@ var loadFile = function(event) {
             // imo3.src=URL.createObjectURL(event.target.files[0]);
         });
 
-
+localStorage.setItem("trying", "wwwwwwwwwwwwwwwooooooooooooowwwwwww");
 };
