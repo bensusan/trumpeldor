@@ -50,7 +50,7 @@ class Hint(generics.GenericAPIView):
         return general_post_or_get(
             request,
             "GetHints",
-            BL.add_hint(),
+            BL.add_hint,
             HintSerializer,
             True)
 
@@ -89,26 +89,43 @@ class AmericanQuestion(generics.GenericAPIView):
         return general_post_or_get(
             request,
             "AddAmericanQuestion",
-            BL.add_american_question(),
+            BL.add_american_question,
             AmericanQuestionSerializer)
 
 
-class Track(generics.GenericAPIView):
-    serializer_class = TrackSerializer
+class TracksList(generics.GenericAPIView):
+    serializer_class = AttractionSerializer
+    queryset = ''
 
     def get(self, request, *args, **kwargs):
-        return general_post_or_get(
-            request,
-            "GetTrack",
-            BL.get_track(),
-            TrackSerializer)
+        ans = BL.get_all_tracks()
+        ans = TrackSerializer(ans, many=True)
+        ans = json.loads(json.dumps(ans.data))
+        if DEBUG:
+            print("Sent:", ans, sep="\n")
+        return Response(ans)
 
     def post(self, request, *args, **kwargs):
         return general_post_or_get(
             request,
-            "AddTrack",
-            BL.add_track(),
+            "AddAttraction",
+            BL.add_track,
             TrackSerializer)
+
+
+class Track(generics.GenericAPIView):
+    serializer_class = AttractionSerializer
+
+    def get(self, request, *args, **kwargs):
+        ans = BL.get_track(self.kwargs['length'])
+        ans = TrackSerializer(ans, many=False)
+        ans = json.loads(json.dumps(ans.data))
+        return Response(ans)
+
+    #def delete(self, request, *args, **kwargs):
+        # ans = BL.delete_track(self.kwargs['length'])
+        # ans = json.loads(json.dumps(ans))
+        # return Response(ans)
 
 
 class AttractionsList(generics.GenericAPIView):
