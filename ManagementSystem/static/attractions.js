@@ -46,6 +46,7 @@ function getRequestAttractions(funcOnAttractions){
     // serverRequest("GET", funcOnAttractions, 'http://192.168.1.12:12344/managementsystem/attraction/?format=json');
     // the server port and my ip
     serverRequest("GET", funcOnAttractions, 'http://10.0.0.7:12344/managementsystem/attraction/?format=json');
+    alert("need to remove this alert and fix funcToGetAttraction()!")
 }
 
 function initAttractionsMarkers() {
