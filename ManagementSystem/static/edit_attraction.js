@@ -45,7 +45,6 @@ window.onload=function(){
     }
 
     function deletePoint() {
-        alert("under Construction!!!");
         getRequestAttractions(functionOfDelete);
     }
 
@@ -65,7 +64,7 @@ window.onload=function(){
             deleteRequestAttraction(attr,attr['id']);
         }
       });
-        alert("cant believe this is happenning!");
+        // alert("cant believe this is happenning!");
     }
 
 

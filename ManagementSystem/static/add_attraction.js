@@ -99,7 +99,8 @@ window.onload=function(){
             ,description:document.getElementById("desc").value
             ,picturesURLS:[],videosURLS:[]};
         postRequestAttraction(attraction_to_send);
-
+        localStorage.setItem("name_for_add_aq", attraction_to_send.name);
+        localStorage.setItem("desc_for_add_aq", attraction_to_send.description);
         window.location.href='/add_game';
         // window.location.href='/attractions';
         // alert("point:"+localStorage.getItem("addedPoint")+"\n"+
