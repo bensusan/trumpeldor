@@ -6,7 +6,6 @@ from django.views.generic.base import TemplateView
 
 from django.contrib import admin
 from . import views
-#dsaf
 
 urlpatterns = {
     path('hint/', Hint.as_view()),
