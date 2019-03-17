@@ -59,16 +59,19 @@
 {#{% load static %}#}
 {#<script src="{% static 'edit_attraction.js' %}?version=1"></script>#}
 
-    <label for="desc"><b>Add American Question:</b></label>
-    <input type="text" id="ques" placeholder="Enter Question" name="attr_desc" required>
-      <input  type="text" id="ans1" placeholder="ans1" name="a1" required>
-      <input type="text" id="ans2" placeholder="ans2" name="a2" required>
-      <input type="text" id="ans3" placeholder="ans3" name="a3" required>
-      <input  type="text" id="ans4" placeholder="ans4" name="a4" required>
+
+
+{#    <label for="desc"><b>Add American Question:</b></label>#}
+{#    <input type="text" id="ques" placeholder="Enter Question" name="attr_desc" required>#}
+{#      <input  type="text" id="ans1" placeholder="ans1" name="a1" required>#}
+{#      <input type="text" id="ans2" placeholder="ans2" name="a2" required>#}
+{#      <input type="text" id="ans3" placeholder="ans3" name="a3" required>#}
+{#      <input  type="text" id="ans4" placeholder="ans4" name="a4" required>#}
 
 
     {% load static %}
     <script src="{% static 'add_attraction.js' %}"></script>
+      <button onclick="window.location.href='/add_game'" type="button">Add Game</button>
     <button onclick="showDataCollected()" type="button">Submit</button>
     <button onclick="deletePoint()" type="button">Delete Point</button>
 

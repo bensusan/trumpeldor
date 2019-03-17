@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Add American Question:</title>
+</head>
+<body>
+{#<form>#}
+{#    <div>#}
+    <input type="text" id="ques" placeholder="Enter Question" name="attr_desc" required>
+      <input  type="text" id="ans1" placeholder="ans1" name="a1" required>
+      <input type="text" id="ans2" placeholder="ans2" name="a2" required>
+      <input type="text" id="ans3" placeholder="ans3" name="a3" required>
+      <input  type="text" id="ans4" placeholder="ans4" name="a4" required>
+<input  type="text" id="correctAns" placeholder="correctAns index" name="correctAns" required>
+{#        </div>#}
+{#</form>#}
+{% load static %}
+<script src="{% static 'add_aq.js' %}?version=1"></script>
+<button onclick="addAQ()" type="button">Finish</button>
+</body>
+</html>

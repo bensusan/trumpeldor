@@ -27,6 +27,10 @@ def add_game_page(request):
     return render(request, "add_game.html")
 
 
+def add_aq_page(request):
+    return render(request, "add_aq.html")
+
+
 def add_picture_page(request):
     return render(request, "add_picture.html")
 
