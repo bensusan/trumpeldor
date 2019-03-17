@@ -70,7 +70,7 @@ window.onload=function(){
       attractionsJSON.forEach(function (attr) {
         let p = {name: attr['name'], description:attr['description'], lat: attr['x'], lng: attr['y']};
         // alert("in get name! "+"of the origin : " + lat + " , " + lng + "\n of the other: "+p.lat +" , "+ p.lng);
-        if(p.lat==lat&&p.lng==lng)
+        if(p.lat==lat&&(p.lng).toFixed(8)==lng.toFixed(8))
         {
           name=p.name;
           document.getElementById("attr_name").value = p.name;
