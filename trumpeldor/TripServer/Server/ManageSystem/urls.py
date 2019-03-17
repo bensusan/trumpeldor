@@ -9,7 +9,8 @@ from . import views
 
 urlpatterns = {
     path('hint/', Hint.as_view()),
-    path('aquestion/', AmericanQuestion.as_view()),
+    path('attraction/<int:id_attr>/aquestion/<int:id_quest>/', AmericanQuestion.as_view()),
+    path('attraction/<int:id_attr>/aquestion/', AmericanQuestionsList.as_view()),
     path('feedback/', Feedback.as_view()),
     path('attraction/', AttractionsList.as_view()),
     path('attraction/<int:id>/', Attraction.as_view()),

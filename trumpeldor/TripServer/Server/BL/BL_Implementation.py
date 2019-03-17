@@ -86,8 +86,8 @@ class BL_Implementation(BL_Abstract):
         trip = self.getTrip(trip)
         return self.DAL.getFeedbacks(trip)
 
-    def getAmericanQuestion(self, attraction):
-        attr = self.getAttraction(attraction)
+    def getAmericanQuestion(self, id_attraction):
+        attr = self.get_attraction(id_attraction)
         return self.DAL.getAmericanQuestion(attr)
 
     def getAttraction(self, attraction):
@@ -104,8 +104,8 @@ class BL_Implementation(BL_Abstract):
     def add_hint(self, attraction, hint):
         return self.DAL.add_hint(attraction, hint['kind'], hint['data'])
 
-    def add_american_question(self, attraction, a_question):
-        return self.DAL.add_american_question(attraction, a_question['question'], a_question['answers'],
+    def add_american_question(self, id_attraction, a_question):
+        return self.DAL.add_american_question(id_attraction, a_question['question'], a_question['answers'],
                                               a_question['indexOfCorrectAnswer'])
 
     def add_track(self, track):
@@ -133,9 +133,9 @@ class BL_Implementation(BL_Abstract):
         if self.get_attraction(id) is not None:
             return self.DAL.delete_attraction(id)
 
-    def edit_attraction(self, attraction):
-        if self.get_attraction(attraction['id']) is not None:
-            return self.DAL.edit_attraction(attraction['id'], attraction['name'], attraction['x'], attraction['y'],
+    def edit_attraction(self, id, attraction):
+        if self.get_attraction(id) is not None:
+            return self.DAL.edit_attraction(id, attraction['name'], attraction['x'], attraction['y'],
                                             attraction['description'], attraction['picturesURLS'], attraction['videosURLS'])
 
     def delete_american_question(self, id_attraction, id_a_question):
@@ -171,3 +171,6 @@ class BL_Implementation(BL_Abstract):
 
     def get_attraction_by_x_y(self, x, y):
         return self.DAL.get_attraction_by_x_y(x, y)
+
+    def get_all_aquestions_for_attraction(self, id_attraction):
+        return self.DAL.get_all_aquestions_for_attraction(id_attraction)

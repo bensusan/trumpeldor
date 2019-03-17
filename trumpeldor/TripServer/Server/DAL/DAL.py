@@ -44,7 +44,7 @@ class DAL_Abstract(object):
     def add_hint(self, attraction, kind, data):
         raise NotImplementedError("Should have implemented this")
 
-    def add_american_question(self, attraction, question, answers, indexOfCorrectAnswer):
+    def add_american_question(self, id_attraction, question, answers, indexOfCorrectAnswer):
         raise NotImplementedError("Should have implemented this")
 
     def add_track(self, subTrack, points, length):
@@ -98,6 +98,8 @@ class DAL_Abstract(object):
     def get_attraction_by_x_y(self, x, y):
         raise NotImplementedError("Should have implemented this")
 
+    def get_all_aquestions_for_attraction(self, id_attraction):
+        raise NotImplementedError("Should have implemented this")
 
 class DALProxy(DAL_Abstract):
     Implementation = None
@@ -175,10 +177,10 @@ class DALProxy(DAL_Abstract):
             raise NotImplementedError("Should have implemented this")
         return self.Implementation.add_hint(attraction, kind, data)
 
-    def add_american_question(self, attraction, question, answers, indexOfCorrectAnswer):
+    def add_american_question(self, id_attraction, question, answers, indexOfCorrectAnswer):
         if self.Implementation is None:
             raise NotImplementedError("Should have implemented this")
-        return self.Implementation.add_american_question(attraction, question, answers, indexOfCorrectAnswer)
+        return self.Implementation.add_american_question(id_attraction, question, answers, indexOfCorrectAnswer)
 
     def add_track(self, subTrack, points, length):
         if self.Implementation is None:
@@ -264,3 +266,8 @@ class DALProxy(DAL_Abstract):
         if self.Implementation is None:
             raise NotImplementedError("Should have implemented this")
         return self.Implementation.get_attraction_by_x_y(x, y)
+
+    def get_all_aquestions_for_attraction(self, id_attraction):
+        if self.Implementation is None:
+            raise NotImplementedError("Should have implemented this")
+        return self.Implementation.get_all_aquestions_for_attraction(id_attraction)

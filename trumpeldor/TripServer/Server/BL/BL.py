@@ -63,7 +63,7 @@ class BL_Abstract(object):
     def add_hint(self, attraction, hint):
         raise NotImplementedError("Should have implemented this")
 
-    def add_american_question(self, attraction, a_question):
+    def add_american_question(self, id_attraction, a_question):
         raise NotImplementedError("Should have implemented this")
 
     def add_track(self, track):
@@ -87,7 +87,7 @@ class BL_Abstract(object):
     def delete_attraction(self, id):
         raise NotImplementedError("Should have implemented this")
 
-    def edit_attraction(self, attraction):
+    def edit_attraction(self, id, attraction):
         raise NotImplementedError("Should have implemented this")
 
     def delete_american_question(self, id_attraction, id_a_question):
@@ -116,6 +116,9 @@ class BL_Abstract(object):
         raise NotImplementedError("Should have implemented this")
 
     def get_attraction_by_x_y(self, x, y):
+        raise NotImplementedError("Should have implemented this")
+
+    def get_all_aquestions_for_attraction(self, id_attraction):
         raise NotImplementedError("Should have implemented this")
 
 
@@ -200,10 +203,10 @@ class BLProxy(BL_Abstract):
             raise NotImplementedError("Should have implemented this")
         return self.Implementation.add_hint(attraction, hint)
 
-    def add_american_question(self, attraction, a_question):
+    def add_american_question(self, id_attraction, a_question):
         if self.Implementation is None:
             raise NotImplementedError("Should have implemented this")
-        return self.Implementation.add_american_question(attraction, a_question)
+        return self.Implementation.add_american_question(id_attraction, a_question)
 
     def add_track(self, track):
         if self.Implementation is None:
@@ -240,10 +243,10 @@ class BLProxy(BL_Abstract):
             raise NotImplementedError("Should have implemented this")
         return self.Implementation.delete_attraction(id)
 
-    def edit_attraction(self, attraction):
+    def edit_attraction(self, id, attraction):
         if self.Implementation is None:
             raise NotImplementedError("Should have implemented this")
-        return self.Implementation.edit_attraction(attraction)
+        return self.Implementation.edit_attraction(id, attraction)
 
     def delete_american_question(self, id_attraction, id_a_question):
         if self.Implementation is None:
@@ -289,3 +292,8 @@ class BLProxy(BL_Abstract):
         if self.Implementation is None:
             raise NotImplementedError("Should have implemented this")
         return self.Implementation.get_attraction_by_x_y(x, y)
+
+    def get_all_aquestions_for_attraction(self, id_attraction):
+        if self.Implementation is None:
+            raise NotImplementedError("Should have implemented this")
+        return self.Implementation.get_all_aquestions_for_attraction(id_attraction)

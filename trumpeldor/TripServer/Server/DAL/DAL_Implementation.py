@@ -58,9 +58,9 @@ class DAL_Implementation(DAL_Abstract):
         hint.save()
         return hint
 
-    def add_american_question(self, attraction, question, answers, indexOfCorrectAnswer):
+    def add_american_question(self, id_attraction, question, answers, indexOfCorrectAnswer):
         aq = AmericanQuestion(question=question, answers=answers, indexOfCorrectAnswer=indexOfCorrectAnswer,
-                              attraction=attraction)
+                              attraction=self.getAttraction(id_attraction))
         aq.save()
         return aq
 
@@ -108,10 +108,12 @@ class DAL_Implementation(DAL_Abstract):
         return attraction
 
     def delete_american_question(self, id_attraction, id_a_question):
-        return self.get_american_question(id_attraction, id_a_question).delete()
+        aq = self.get_american_question(id_attraction, id_a_question).delete()
+        return True
 
     def delete_hint(self, id_attraction, id_hint):
-        return self.get_hint(id_attraction, id_hint).delete()
+        hint = self.get_hint(id_attraction, id_hint).delete()
+        return True
 
     def edit_hint(self, id_attraction, id_hint, data):
         hint = self.get_hint(id_attraction, id_hint)
@@ -127,7 +129,7 @@ class DAL_Implementation(DAL_Abstract):
 
     def get_american_question(self, id_attraction, id_american_question):
         return AmericanQuestion.objects.filter(pk=id_american_question,
-                                               attraction=self.get_attraction(id_attraction)).all()
+                                               attraction=self.get_attraction(id_attraction)).first()
 
     def get_hint(self, id_attraction, id_hint):
         return Hint.objects.filter(pk=id_hint, attraction=self.get_attraction(id_attraction)).all()
@@ -137,3 +139,6 @@ class DAL_Implementation(DAL_Abstract):
 
     def get_attraction_by_x_y(self, x, y):
         return Attraction.objects.filter(x=x, y=y).first()
+
+    def get_all_aquestions_for_attraction(self, id_attraction):
+        return AmericanQuestion.objects.filter(attraction=self.get_attraction(id_attraction)).all()
