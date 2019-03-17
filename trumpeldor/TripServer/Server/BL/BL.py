@@ -4,7 +4,7 @@ from Server.DAL.DAL import DAL_Abstract
 # /////////////////////////////////////////////////////////
 #                    Functions for BL
 # /////////////////////////////////////////////////////////
-
+# asdfd
 
 class BL_Abstract(object):
     DAL = DAL_Abstract()
