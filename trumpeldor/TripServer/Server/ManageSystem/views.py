@@ -26,7 +26,10 @@ DEBUG = False
 def general_post_or_get(request, className, bl_function, classSerializer, many=False):
     if DEBUG:
         print(className + ":", "Get:", request.data, sep="\n")
-    ans = bl_function(request.data)
+    if request is not None:
+        ans = bl_function(request.data)
+    else:
+        ans = bl_function()
     ans = classSerializer(ans, many=many)
     ans = json.loads(json.dumps(ans.data))
     if DEBUG:
@@ -74,22 +77,44 @@ class Feedback(generics.GenericAPIView):
             True)
 
 
-class AmericanQuestion(generics.GenericAPIView):
-    serializer_class = AttractionSerializer
+class AmericanQuestionsList(generics.GenericAPIView):
+    serializer_class = AmericanQuestionSerializer
+    queryset = ''
 
     def get(self, request, *args, **kwargs):
-        return general_post_or_get(
-            request,
-            "GetAmericanQuestion",
-            BL.getAmericanQuestion,
-            AmericanQuestionSerializer)
+        ans = BL.get_all_aquestions_for_attraction(self.kwargs['id_attr'])
+        ans = AmericanQuestionSerializer(ans, many=True)
+        ans = json.loads(json.dumps(ans.data))
+        if DEBUG:
+            print("Sent:", ans, sep="\n")
+        return Response(ans)
 
     def post(self, request, *args, **kwargs):
-        return general_post_or_get(
-            request,
-            "AddAmericanQuestion",
-            BL.add_american_question,
-            AmericanQuestionSerializer)
+        ans = BL.add_american_question(self.kwargs['id_attr'], request.data)
+        ans = AmericanQuestionSerializer(ans, many=False)
+        ans = json.loads(json.dumps(ans.data))
+        return Response(ans)
+
+
+class AmericanQuestion(generics.GenericAPIView):
+    serializer_class = AmericanQuestionSerializer
+
+    def get(self, request, *args, **kwargs):
+        ans = BL.get_american_question(self.kwargs['id_attr'], self.kwargs['id_quest'])
+        ans = AmericanQuestionSerializer(ans, many=False)
+        ans = json.loads(json.dumps(ans.data))
+        return Response(ans)
+
+    def delete(self, request, *args, **kwargs):
+        ans = BL.delete_american_question(self.kwargs['id_attr'], self.kwargs['id_quest'])
+        ans = json.loads(json.dumps(ans))
+        return Response(ans)
+
+    def post(self, request, *args, **kwargs):
+        ans = BL.add_american_question(self.kwargs['id_attr'], request.data)
+        ans = AmericanQuestionSerializer(ans, many=False)
+        ans = json.loads(json.dumps(ans.data))
+        return Response(ans)
 
 
 class TracksList(generics.GenericAPIView):
@@ -132,12 +157,18 @@ class AttractionsList(generics.GenericAPIView):
     queryset = ''
 
     def get(self, request, *args, **kwargs):
-        ans = BL.get_attractions()
-        ans = AttractionSerializer(ans, many=True)
-        ans = json.loads(json.dumps(ans.data))
-        if DEBUG:
-            print("Sent:", ans, sep="\n")
-        return Response(ans)
+        # ans = BL.get_attractions()
+        # ans = AttractionSerializer(ans, many=True)
+        # ans = json.loads(json.dumps(ans.data))
+        # if DEBUG:
+        #     print("Sent:", ans, sep="\n")
+        # return Response(ans)
+        return general_post_or_get(
+            None,
+            "AddAttraction",
+            BL.get_attractions,
+            AttractionSerializer,
+            True)
 
     def post(self, request, *args, **kwargs):
         return general_post_or_get(
@@ -158,8 +189,16 @@ class Attraction(generics.GenericAPIView):
 
     def delete(self, request, *args, **kwargs):
         ans = BL.delete_attraction(self.kwargs['id'])
+        ans = AttractionSerializer(ans, many=False)
         ans = json.loads(json.dumps(ans))
         return Response(ans)
+
+    def post(self, request, *args, **kwargs):
+        ans = BL.edit_attraction(self.kwargs['id'], request.data)
+        ans = AttractionSerializer(ans, many=False)
+        ans = json.loads(json.dumps(ans.data))
+        return Response(ans)
+
 
 
 
@@ -204,8 +243,6 @@ def addAttraction(name, x, y, description, picturesURLS, videosURLS):
     attraction = Attraction(name=name, x=x, y=y, description=description, picturesURLS=picturesURLS, videosURLS=videosURLS)
     attraction.save()
     return attraction
-
-
 
 
 
