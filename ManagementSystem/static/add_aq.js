@@ -34,7 +34,7 @@ function addAQ(){
 
       // alert("in get name! "+"of the origin : " + lat + " , " + lng);
       attractionsJSON.forEach(function (attr) {
-          // alert("the id is: "+attr['id']);
+          alert("the id is: "+attr['id']);
         let p = {name: attr['name'], description:attr['description']};
          // alert("in get name! "+"of the origin : " + name + " , " + desc + "\n of the other: "+p.name +" , "+ p.description);
         if(p.name==name && p.description==desc)
