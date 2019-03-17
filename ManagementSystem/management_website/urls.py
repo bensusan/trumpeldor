@@ -18,6 +18,7 @@ urlpatterns = [
     path('edit_path/', views.edit_path_page),
     path('add_picture/', views.add_picture_page),
     path('add_aq/', views.add_aq_page),
+    path('add_hint/', views.add_hint_page),
 ]
 
 urlpatterns = format_suffix_patterns(urlpatterns)

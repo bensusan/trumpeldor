@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Hint</title>
+</head>
+<body>
+
+<label for="hint"><b>Existing Hints:</b></label>
+<p>to implement...</p>
+
+<label for="hint"><b>Add Hint:</b></label>
+
+{% load static %}
+<script src="{% static 'add_hint.js' %}?version=1"></script>
+<button onclick="addAQ()" type="button">add picture</button>
+<button onclick="addAQ()" type="button">add text</button>
+<button onclick="addAQ()" type="button">add video</button>
+<button onclick="finishHint()" type="button">Finish</button>
+
+
+</body>
+</html>
