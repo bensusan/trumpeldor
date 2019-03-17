@@ -58,3 +58,9 @@ function postRequestAttraction(attraction){
     serverRequest("POST", function noop(dummy){}, 'http://10.0.0.7:12344/managementsystem/attraction/',
         JSON.stringify(attraction));
 }
+
+function deleteRequestAttraction(attraction,id){
+    alert("blin");
+    serverRequest("DELETE", function noop(dummy){}, 'http://10.0.0.7:12344/managementsystem/attraction/'+id,
+        JSON.stringify(attraction));
+}

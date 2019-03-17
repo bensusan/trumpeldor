@@ -1,15 +1,3 @@
-// alert(localStorage.getItem("edited"));
-// alert(localStorage.getItem("ans1"+localStorage.getItem("editedNum")));
-//  document.getElementById("ans2").value = localStorage.getItem("ans21"+localStorage.getItem("editedNum"));
-
-
-  // document.getElementById("ans1").value = "afddffd";
-
-//     document.getElementById("ans2").value = localStorage.getItem("ans21");
-//     document.getElementById("ans3").value = localStorage.getItem("ans31");
-//     document.getElementById("ans4").value = localStorage.getItem("ans41");
-
-
 var loadFile = function(event) {
 	var image = document.getElementById('output');
 	image.src = URL.createObjectURL(event.target.files[0]);
@@ -58,8 +46,29 @@ window.onload=function(){
 
     function deletePoint() {
         alert("under Construction!!!");
+        getRequestAttractions(functionOfDelete);
     }
-    
+
+    function functionOfDelete(attractionsJSON) {
+
+        let editedPoint = JSON.parse(localStorage.getItem("edited"));
+      let lat = editedPoint.lat;
+      let lng = editedPoint.lng;
+      let name = "didn't found!!!";
+      // alert("in get name! "+"of the origin : " + lat + " , " + lng);
+      attractionsJSON.forEach(function (attr) {
+          // alert("the id is: "+attr['id']);
+        let p = {name: attr['name'], description:attr['description'], lat: attr['x'], lng: attr['y']};
+        // alert("in get name! "+"of the origin : " + lat + " , " + lng + "\n of the other: "+p.lat +" , "+ p.lng);
+        if(p.lat==lat&&(p.lng).toFixed(8)==lng.toFixed(8))
+        {
+            deleteRequestAttraction(attr,attr['id']);
+        }
+      });
+        alert("cant believe this is happenning!");
+    }
+
+
     function getName(attractionsJSON){
       alert("in get name!");
       let editedPoint = JSON.parse(localStorage.getItem("edited"));
@@ -68,6 +77,7 @@ window.onload=function(){
       let name = "didn't found!!!";
       // alert("in get name! "+"of the origin : " + lat + " , " + lng);
       attractionsJSON.forEach(function (attr) {
+          // alert("the id is: "+attr['id']);
         let p = {name: attr['name'], description:attr['description'], lat: attr['x'], lng: attr['y']};
         // alert("in get name! "+"of the origin : " + lat + " , " + lng + "\n of the other: "+p.lat +" , "+ p.lng);
         if(p.lat==lat&&(p.lng).toFixed(8)==lng.toFixed(8))
