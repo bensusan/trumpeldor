@@ -31,7 +31,7 @@ function addAQ(){
     function funcToGetAttraction(attractionsJSON) {
         let name = localStorage.getItem("name_for_add_aq");
         let desc = localStorage.getItem("desc_for_add_aq");
-
+        alert("aaaaaaaaaa");
       // alert("in get name! "+"of the origin : " + lat + " , " + lng);
       attractionsJSON.forEach(function (attr) {
           alert("the id is: "+attr['id']);
