@@ -39,9 +39,45 @@ var vidHintBTN = document.getElementById('add_vid_hint');
             sendButton.style.display = "inline";
         });
 
+var sendTextHintBTN = document.getElementById('send_text_hint');
+    sendTextHintBTN.addEventListener('click', function() {
+        getRequestAttractions(hint_funcToGetAttraction);
+    });
+
+var sendPicHintBTN = document.getElementById('send_pic_hint');
+    sendPicHintBTN.addEventListener('click', function() {
+
+    });
+
+var sendVidHintBTN = document.getElementById('send_vid_hint');
+    sendVidHintBTN.addEventListener('click', function() {
+
+    });
+
         localFileVideoPlayer();
 
 };
+
+function hint_funcToGetAttraction(attractionsJSON) {
+        let name = localStorage.getItem("name_for_add_aq");
+        let desc = localStorage.getItem("desc_for_add_aq");
+      // alert("in get name! "+"of the origin : " + lat + " , " + lng);
+        attractionsJSON.forEach(function (attr) {
+        let p = {name: attr['name'], description:attr['description']};
+       // alert("in get name! "+"of the origin : " + name + " , " + desc + "\n of the other: "+p.name +" , "+ p.description);
+        if(p.name===name && p.description===desc)
+        {
+            var textHintToSend = {
+            attraction:attr,
+            kind:'HT',
+            data:document.getElementById("text_hint_id").value
+            };
+            postRequestHint(textHintToSend,attr['id']);
+            window.location.href='/add_hint';
+        }
+      });
+
+    }
 
 function localFileVideoPlayer() {
 	'use strict';
@@ -85,4 +121,11 @@ function finishHint() {
         // postRequestHint(hint_to_send);
 
     window.location.href='/attractions';
+}
+
+function postRequestHint(the_hint,attr_id){
+    alert("hint blat");
+    serverRequest("POST", function noop(dummy){}, 'http://10.0.0.7:12344/managementsystem/attraction/'+
+        attr_id+'/hint/',
+        JSON.stringify(the_hint));
 }
