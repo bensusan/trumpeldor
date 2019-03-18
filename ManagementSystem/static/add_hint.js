@@ -3,6 +3,23 @@ var loadFile = function(event) {
 	image.src = URL.createObjectURL(event.target.files[0]);
 };
 
+var textHintBTN = document.getElementById('add_text_hint');
+        textHintBTN.addEventListener('click', function() {
+            var textLine = document.getElementById("text_hint_id");
+            textLine.style.display = "inline";
+        });
+
+var picHintBTN = document.getElementById('add_pic_hint');
+        picHintBTN.addEventListener('click', function() {
+
+        });
+
+var vidHintBTN = document.getElementById('add_vid_hint');
+        vidHintBTN.addEventListener('click', function() {
+
+        });
+
+
 
 function finishHint() {
     alert("hint was added successfully!");
