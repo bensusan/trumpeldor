@@ -35,8 +35,8 @@
 <video height="200px" width="350px" controls="" autoplay=""></video>
     <input type="file" accept="video/*">
 
-        {% load static %}
-<script src="{% static 'add_attraction.js' %}"></script>
+{#        {% load static %}#}
+{#<script src="{% static 'add_attraction.js' %}"></script>#}
 
     <p></p>
     <label for="hint"><b>Upload Image:</b></label>
@@ -73,7 +73,8 @@
     <script src="{% static 'add_attraction.js' %}"></script>
       <button onclick="window.location.href='/add_game'" type="button">Add Game</button>
     <button onclick="showDataCollected()" type="button">Submit</button>
-    <button onclick="deletePoint()" type="button">Delete Point</button>
+{#    <button onclick="deletePoint()" type="button">Delete Point</button>#}
+      <button type="button" id="delete_point">Delete Point</button>
 
   </div>
 

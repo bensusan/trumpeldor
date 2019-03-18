@@ -6,11 +6,6 @@ window.onload = function() {
         //alert("2");
         // window.location.href='/add_hint';
     });
-    //
-    // var moveonBTN = document.getElementById('move_on');
-    // moveonBTN.addEventListener('click', function() {
-    //     window.location.href='/add_hint';
-    // });
 
 }
 

@@ -4,8 +4,7 @@ let loadFile = function(event) {
 
 };
 
-window.onload=function(){
-(function localFileVideoPlayer() {
+function localFileVideoPlayer() {
 	'use strict';
   let URL = window.URL || window.webkitURL;
   let displayMessage = function (message, isError) {
@@ -33,9 +32,10 @@ window.onload=function(){
   };
   let inputNode = document.querySelector('input');
   inputNode.addEventListener('change', playSelectedFile, false);
-})()
+}
 
-
+window.onload=function(){
+    localFileVideoPlayer();
     };
 
 
@@ -61,7 +61,9 @@ window.onload=function(){
         // alert("in get name! "+"of the origin : " + lat + " , " + lng + "\n of the other: "+p.lat +" , "+ p.lng);
         if(p.lat===lat&&(p.lng).toFixed(8)===lng.toFixed(8))
         {
+            alert("s");
             deleteRequestAttraction(attr,attr['id']);
+            window.location.href='/attractions';
         }
       });
         // alert("cant believe this is happenning!");
