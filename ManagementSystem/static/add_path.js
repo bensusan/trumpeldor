@@ -1,8 +1,10 @@
 //from django.conf import settings
-alert("aaaaaaaa");
-let curPosClicked;
-let curMarker;
-let coordinates_of_last_click;
+
+// alert("aaaaaaaa");
+
+// let curPosClicked;
+// let curMarker;
+// let coordinates_of_last_click;
 
 let points = JSON.parse(localStorage.getItem("points"));
 let pointsOfPath = [];
@@ -27,7 +29,8 @@ function initMap() {
 
   function initPoints(){
   for (var i = 0; i < points.length; i++) {
-    addPoint2(points[i],i)
+    addPoint2(points[i],i);
+      localStorage.setItem("i" + i, "0");
   }
   }
 
@@ -44,21 +47,22 @@ function initMap() {
 
   function addEditListener(m) {
       m.addListener('click', function() {
-        var i=0;
-        var addToPathBTN = document.getElementById('add_to_path');
+
+        var addToPathBTN = document.getElementById('add_reg_to_path');
         addToPathBTN.addEventListener('click', function() {
-            if(i==0) {
+            if(pointsOfPath.indexOf(m.position)==-1)
+            {
+                // alert("only once!");
                 pointsOfPath.push(m.position);
-                i++;
             }
-            alert("point been added! now its: "+ pointsOfPath.toString());
+           // alert("point been added! now its: "+ pointsOfPath.toString());
         });
   });
   }
 
 
 function listenerForMap(){
-        var finishBTN = document.getElementById('finish');
+        var finishBTN = document.getElementById('finish_reg');
         finishBTN.addEventListener('click', function() {
             localStorage.setItem("the_points_of_the_path", JSON.stringify(pointsOfPath));
             window.location.href='/edit_path';
@@ -66,14 +70,14 @@ function listenerForMap(){
 }
 
 
-function addListenerForMarker(marker) {
-     google.maps.event.addListener(marker, 'click', (function(event) {
-              return function() {
-              }
-          })(event));
-
-}
-
-function positionInMap(lat, lng){
-          return {lat: lat, lng: lng};
-      }
+// function addListenerForMarker(marker) {
+//      google.maps.event.addListener(marker, 'click', (function(event) {
+//               return function() {
+//               }
+//           })(event));
+//
+// }
+//
+// function positionInMap(lat, lng){
+//           return {lat: lat, lng: lng};
+//       }
