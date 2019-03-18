@@ -1,5 +1,5 @@
 //from django.conf import settings
-
+alert("dsaaaaaaaaaaaaaaaaaaa");
 let curPosClicked;
 let curMarker;
 let coordinates_of_last_click;
