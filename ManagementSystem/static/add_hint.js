@@ -6,24 +6,37 @@ var loadFile = function(event) {
 window.onload = function () {
 var textHintBTN = document.getElementById('add_text_hint');
         textHintBTN.addEventListener('click', function() {
+
             var textLine = document.getElementById("text_hint_id");
             textLine.style.display = "inline";
+
+            var sendButton = document.getElementById("send_text_hint");
+            sendButton.style.display = "inline";
+
         });
 
 var picHintBTN = document.getElementById('add_pic_hint');
         picHintBTN.addEventListener('click', function() {
             var clickHere = document.getElementById("click_here_label");
             clickHere.style.display = "inline";
+
             var outpic = document.getElementById("output");
             outpic.style.display = "inline";
+
+            var sendButton = document.getElementById("send_pic_hint");
+            sendButton.style.display = "inline";
         });
 
 var vidHintBTN = document.getElementById('add_vid_hint');
         vidHintBTN.addEventListener('click', function() {
             var thevid = document.getElementById("vid_hint_id");
             thevid.style.display = "inline";
+
             var thevidbrowse = document.getElementById("vid_hint_browse_id");
             thevidbrowse.style.display = "inline";
+
+            var sendButton = document.getElementById("send_vid_hint");
+            sendButton.style.display = "inline";
         });
 
         localFileVideoPlayer();

@@ -19,6 +19,7 @@
 <button type="button" id="add_text_hint">add text</button>
 <p></p>
 <textarea id="text_hint_id" name="subject" placeholder="Write something..." style="display: none"></textarea>
+<button type="button" id="send_text_hint" style="display: none">Send</button>
 <p></p>
 
 <button type="button" id="add_vid_hint">add video</button>
@@ -27,7 +28,7 @@
 <video id="vid_hint_id" height="200px" width="350px" controls="" autoplay="" style="display: none"></video>
 <p></p>
     <input type="file" id="vid_hint_browse_id" accept="video/*" style="display: none">
-
+<button type="button" id="send_vid_hint" style="display: none">Send</button>
 <p></p>
 
 <button type="button" id="add_pic_hint">add picture</button>
@@ -35,8 +36,9 @@
     <p><input type="file"  accept="image/*" name="image" id="file"  onchange="loadFile(event)" style="display: none;"></p>
     <p><label id="click_here_label" for="file" style="display: none">Click Here!</label></p>
     <p><img id="output" width="200"  style="display: none"/></p>
+<button type="button" id="send_pic_hint" style="display: none">Send</button>
 
-
+<p></p>
 <button onclick="finishHint()" type="button">Finish</button>
 
 {#style="display:none"#}
