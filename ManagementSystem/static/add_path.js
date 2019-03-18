@@ -43,17 +43,19 @@ function initMap() {
 
   }
 
+  let i=0;
   function addEditListener(m) {
-        var i=0;
       m.addListener('click', function() {
 
         var addToPathBTN = document.getElementById('add_to_path');
         addToPathBTN.addEventListener('click', function() {
-            if(i==0) {
+            // if(i==0) {
+                //localStorage.setItem("ans1" + num, "ans1 of point no." + num);
+                alert(i);
                 pointsOfPath.push(m.position);
                 i++;
-            }
-            alert("point been added! now its: "+ pointsOfPath.toString());
+           // }
+           // alert("point been added! now its: "+ pointsOfPath.toString());
         });
   });
   }
