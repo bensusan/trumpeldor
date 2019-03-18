@@ -13,11 +13,27 @@
 
 {% load static %}
 <script src="{% static 'add_hint.js' %}?version=1"></script>
-<button onclick="addAQ()" type="button">add picture</button>
-<button onclick="addAQ()" type="button">add text</button>
-<button onclick="addAQ()" type="button">add video</button>
+<p></p>
+<button type="button" id="add_text_hint">add text</button>
+<p></p>
+<textarea id="text_hint_id" name="subject" placeholder="Write something..." style="display: none"></textarea>
+
+<button type="button" id="add_pic_hint">add picture</button>
+    <p></p>
+    <p><input type="file"  accept="image/*" name="image" id="file"  onchange="loadFile(event)" style="display: none;"></p>
+    <p><label id="click_here_label" for="file" style="display: none">Click Here!</label></p>
+    <p><img id="output" width="200"  style="display: none"/></p>
+
+<button type="button" id="add_vid_hint">add video</button>
+<p></p>
+    <div id="message"></div>
+<video id="vid_hint_id" height="200px" width="350px" controls="" autoplay="" style="display: none"></video>
+<p></p>
+    <input type="file" id="vid_hint_browse_id" accept="video/*" style="display: none">
+
+<p></p>
 <button onclick="finishHint()" type="button">Finish</button>
 
-
+{#style="display:none"#}
 </body>
 </html>
