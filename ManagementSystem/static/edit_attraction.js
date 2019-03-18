@@ -35,6 +35,12 @@ function localFileVideoPlayer() {
 }
 
 window.onload=function(){
+    var deletePointBTN = document.getElementById('delete_point');
+    deletePointBTN.addEventListener('click', function() {
+        // alert("clicked delp()");
+        getRequestAttractions(functionOfDelete);
+
+    });
     localFileVideoPlayer();
     };
 
@@ -44,16 +50,16 @@ window.onload=function(){
             "name:"+document.getElementById("attr_name").value);
     }
 
-    function deletePoint() {
-        getRequestAttractions(functionOfDelete);
-    }
+    // function deletePoint() {
+    //     getRequestAttractions(functionOfDelete);
+    // }
 
     function functionOfDelete(attractionsJSON) {
 
         let editedPoint = JSON.parse(localStorage.getItem("edited"));
       let lat = editedPoint.lat;
       let lng = editedPoint.lng;
-      let name = "didn't found!!!";
+      //let name = "didn't found!!!";
       // alert("in get name! "+"of the origin : " + lat + " , " + lng);
       attractionsJSON.forEach(function (attr) {
           // alert("the id is: "+attr['id']);
@@ -61,8 +67,9 @@ window.onload=function(){
         // alert("in get name! "+"of the origin : " + lat + " , " + lng + "\n of the other: "+p.lat +" , "+ p.lng);
         if(p.lat===lat&&(p.lng).toFixed(8)===lng.toFixed(8))
         {
-            alert("s");
-            deleteRequestAttraction(attr,attr['id']);
+            // alert("s");
+           // deleteRequestAttraction(attr,attr['id']);
+            deleteRequestAttraction(attr['id']);
             window.location.href='/attractions';
         }
       });

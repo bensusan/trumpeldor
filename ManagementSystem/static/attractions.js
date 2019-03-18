@@ -60,8 +60,14 @@ function postRequestAttraction(attraction){
         JSON.stringify(attraction));
 }
 
-function deleteRequestAttraction(attraction,id){
-    alert("blin");
-    serverRequest("DELETE", function noop(dummy){}, 'http://10.0.0.7:12344/managementsystem/attraction/'+id,
-        JSON.stringify(attraction));
+
+function deleteRequestAttraction(id){
+    alert("blich");
+    serverRequest("DELETE", function noop(dummy){}, 'http://10.0.0.7:12344/managementsystem/attraction/'+id);
 }
+
+// function deleteRequestAttraction(attraction,id){
+//     alert("blin");
+//     serverRequest("DELETE", function noop(dummy){}, 'http://10.0.0.7:12344/managementsystem/attraction/'+id,
+//         JSON.stringify(attraction));
+// }
