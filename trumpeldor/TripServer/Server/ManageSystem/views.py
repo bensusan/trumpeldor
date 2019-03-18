@@ -118,7 +118,7 @@ class AmericanQuestion(generics.GenericAPIView):
 
 
 class TracksList(generics.GenericAPIView):
-    serializer_class = AttractionSerializer
+    serializer_class = TrackSerializer
     queryset = ''
 
     def get(self, request, *args, **kwargs):
