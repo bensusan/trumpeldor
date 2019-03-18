@@ -65,10 +65,14 @@ function listenerForMap(){
         var finishBTN = document.getElementById('finish_reg');
         finishBTN.addEventListener('click', function() {
             localStorage.setItem("the_points_of_the_path", JSON.stringify(pointsOfPath));
+            
             window.location.href='/edit_path';
         });
 }
 
+// function postRequestTrack() {
+//
+// }
 
 // function addListenerForMarker(marker) {
 //      google.maps.event.addListener(marker, 'click', (function(event) {

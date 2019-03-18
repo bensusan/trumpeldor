@@ -5,7 +5,7 @@ var loadFile = function(event) {
 
 
 function finishHint() {
-    alert("hint was added successfully!")
+    alert("hint was added successfully!");
     // let data=document.getElementById("data").value;
     // let hint_to_send = {
     //         attraction:"" //atraction id needs to be here
