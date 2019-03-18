@@ -221,9 +221,9 @@ def addUser(userName, socialNetwork):
 
 
 def insertDebugData():
-    a1 = addAttraction("Meonot dalet", "31.263913", "34.796959", "We Are in Attraction 1", ["x.jpg"], [])
-    a2 = addAttraction("96 building", "31.264934", "34.802062", "We Are in Attraction 2", ["y.png"], [])
-    a3 = addAttraction("Shnizale", "31.265129", "34.801575", "We Are in Attraction 3", ["y.png"], ["x.mp4"])
+    a1 = addAttraction("Meonot dalet", "31.263913", "34.796959", "We Are in Attraction 1", ["meonot_dalet_1.jpg", "meonot_dalet_2.jpg"], [])
+    a2 = addAttraction("96 building", "31.264934", "34.802062", "We Are in Attraction 2", ["96_1.jpg"], [])
+    a3 = addAttraction("Shnizale", "31.265129", "34.801575", "We Are in Attraction 3", ["shnizale_1.jpg", "shnizale_2.jpg"], ["shnizale_video.mp4"])
     aq1 = addAmericanQuestion("AQ1: Some question here ?", ["Correct answer",
                                                             "Incorrect answer",
                                                             "Incorrect answer",
@@ -258,8 +258,8 @@ def insertDebugData():
 
     track123 = addTrack(track12, [a3], 3)
 
-    f1 = addFeedback("Feedback 1 rating ??", Feedback.FEEDBACK_RATING)
-    f2 = addFeedback("Feedback 2 text ??", Feedback.FEEDBACK_TEXT)
+    f1 = addFeedback("Feedback 1 rating ?", Feedback.FEEDBACK_RATING)
+    f2 = addFeedback("Feedback 2 text ?", Feedback.FEEDBACK_TEXT)
 
     msg1 = addMessage("Title for message 1", "data for message 1")
     msg2 = addMessage("Title for message 2", "data for message 2")

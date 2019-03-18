@@ -154,7 +154,7 @@ class BL_Implementation(BL_Abstract):
         return self.DAL.getFeedbackById(feedback["id"])
 
     def getBestScores(self):
-        return self.DAL.getAllTrips()[:settings.TOP_X]
+        return self.DAL.getAllTrips()[::-1][:settings.TOP_X]
 
     def delete_attraction(self, id):
         if self.get_attraction(id) is not None:

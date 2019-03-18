@@ -47,7 +47,7 @@ namespace trumpeldor.Views
 
         private async void Information_Button_Clicked(object sender, EventArgs e)
         {
-            await Navigation.PushModalAsync(new informationPage(this.attraction.description));
+            await Navigation.PushModalAsync(new informationPage(this.attraction));
         }
         private async void Mission_Button_Clicked(object sender, EventArgs e)
         {

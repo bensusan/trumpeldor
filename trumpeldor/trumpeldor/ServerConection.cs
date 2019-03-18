@@ -172,6 +172,18 @@ namespace trumpeldor
             return JsonConvert.DeserializeObject<HelpOpenMessages>(jsonResponse).messages;
         }
 
+        class HelpUserGroupScore
+        {
+            public List<UserGroupScore> userGroupScores { get; set; }
+        }
+
+        internal List<UserGroupScore> GetBestScoreData()
+        {
+            string jsonResponse = GetFromServer("getBestScores/");
+            jsonResponse = "{ 'userGroupScores': " + jsonResponse + "}";
+            return JsonConvert.DeserializeObject<HelpUserGroupScore>(jsonResponse).userGroupScores;
+        }
+
 
         public StringContent ContentPost(Object obj)
         {
