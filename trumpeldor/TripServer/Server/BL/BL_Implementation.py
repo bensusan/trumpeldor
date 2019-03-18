@@ -102,14 +102,16 @@ class BL_Implementation(BL_Abstract):
         return self.DAL.add_attraction(attraction['name'], attraction['x'], attraction['y'],
                                        attraction['description'], attraction['picturesURLS'], attraction['videosURLS'])
 
-    def add_hint(self, attraction, hint):
-        return self.DAL.add_hint(attraction, hint['kind'], hint['data'])
+    def add_hint(self, id_attraction, hint):
+        return self.DAL.add_hint(id_attraction, hint['kind'], hint['data'])
 
     def add_american_question(self, id_attraction, a_question):
         return self.DAL.add_american_question(id_attraction, a_question['question'], a_question['answers'],
                                               a_question['indexOfCorrectAnswer'])
 
     def add_track(self, track):
+        print(track['points'])
+        print(track['subTrack'])
         return self.DAL.add_track(track['subTrack'], track['points'], track['length'])
 
     def add_feedback_question(self, question, kind):#question, kind
@@ -173,10 +175,10 @@ class BL_Implementation(BL_Abstract):
         if self.get_hint(id_attraction, id_hint):
             return self.DAL.delete_hint(id_attraction, id_hint)
 
-    def edit_hint(self, id_attraction, hint):
-        hint_before_edit = self.get_hint(id_attraction, hint['id'])
-        if hint_before_edit is not None and hint_before_edit['kind'] == hint['kind']:
-            return self.DAL.edit_hint(id_attraction, hint['id'], hint['data'])
+    def edit_hint(self, id_attraction, id_hint_to_edit, hint):
+        hint_before_edit = self.get_hint(id_attraction, id_hint_to_edit)
+        if hint_before_edit is not None and hint_before_edit.kind == hint['kind']:
+            return self.DAL.edit_hint(id_attraction, id_hint_to_edit, hint['data'])
 
     def get_all_tracks(self):
         return self.DAL.get_all_tracks()
@@ -201,3 +203,6 @@ class BL_Implementation(BL_Abstract):
 
     def get_all_aquestions_for_attraction(self, id_attraction):
         return self.DAL.get_all_aquestions_for_attraction(id_attraction)
+
+    def get_all_hints_for_attraction(self, id_attraction):
+        return self.DAL.get_all_hints_for_attraction(id_attraction)

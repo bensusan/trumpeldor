@@ -37,24 +37,43 @@ def general_post_or_get(request, className, bl_function, classSerializer, many=F
     return Response(ans)
 
 
-class Hint(generics.GenericAPIView):
-    serializer_class = AttractionSerializer
+class HintsList(generics.GenericAPIView):
+    serializer_class = HintSerializer
+    queryset = ''
 
     def get(self, request, *args, **kwargs):
-        return general_post_or_get(
-            request,
-            "GetHints",
-            BL.getHints,
-            HintSerializer,
-            True)
+        ans = BL.get_all_hints_for_attraction(self.kwargs['id_attr'])
+        ans = HintSerializer(ans, many=True)
+        ans = json.loads(json.dumps(ans.data))
+        if DEBUG:
+            print("Sent:", ans, sep="\n")
+        return Response(ans)
 
     def post(self, request, *args, **kwargs):
-        return general_post_or_get(
-            request,
-            "GetHints",
-            BL.add_hint,
-            HintSerializer,
-            True)
+        ans = BL.add_hint(self.kwargs['id_attr'], request.data)
+        ans = HintSerializer(ans, many=False)
+        ans = json.loads(json.dumps(ans.data))
+        return Response(ans)
+
+
+class Hint(generics.GenericAPIView):
+    serializer_class = HintSerializer
+
+    def get(self, request, *args, **kwargs):
+        ans = BL.get_hint(self.kwargs['id_attr'], self.kwargs['id_hint'])
+        ans = HintSerializer(ans, many=False)
+        ans = json.loads(json.dumps(ans.data))
+        return Response(ans)
+
+    def delete(self, request, *args, **kwargs):
+        ans = BL.delete_hint(self.kwargs['id_attr'], self.kwargs['id_hint'])
+        ans = json.loads(json.dumps(ans))
+        return Response(ans)
+
+    def put(self, request, *args, **kwargs):
+        ans = BL.edit_hint(self.kwargs['id_attr'], self.kwargs['id_hint'], request.data)
+        ans = json.loads(json.dumps(ans))
+        return Response(ans)
 
 
 class Feedback(generics.GenericAPIView):
@@ -138,7 +157,7 @@ class TracksList(generics.GenericAPIView):
 
 
 class Track(generics.GenericAPIView):
-    serializer_class = AttractionSerializer
+    serializer_class = TrackSerializer
 
     def get(self, request, *args, **kwargs):
         ans = BL.get_track(self.kwargs['length'])

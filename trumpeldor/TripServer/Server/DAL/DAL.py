@@ -44,7 +44,7 @@ class DAL_Abstract(object):
     def add_attraction(self, name, x, y, description, picturesURLS, videosURLS):
         raise NotImplementedError("Should have implemented this")
 
-    def add_hint(self, attraction, kind, data):
+    def add_hint(self, id_attraction, kind, data):
         raise NotImplementedError("Should have implemented this")
 
     def add_american_question(self, id_attraction, question, answers, indexOfCorrectAnswer):
@@ -125,6 +125,10 @@ class DAL_Abstract(object):
     def get_all_aquestions_for_attraction(self, id_attraction):
         raise NotImplementedError("Should have implemented this")
 
+    def get_all_hints_for_attraction(self, id_attraction):
+        raise NotImplementedError("Should have implemented this")
+
+
 class DALProxy(DAL_Abstract):
     Implementation = None
 
@@ -201,10 +205,10 @@ class DALProxy(DAL_Abstract):
             raise NotImplementedError("Should have implemented this")
         return self.Implementation.add_attraction(name, x, y, description, picturesURLS, videosURLS)
 
-    def add_hint(self, attraction, kind, data):
+    def add_hint(self, id_attraction, kind, data):
         if self.Implementation is None:
             raise NotImplementedError("Should have implemented this")
-        return self.Implementation.add_hint(attraction, kind, data)
+        return self.Implementation.add_hint(id_attraction, kind, data)
 
     def add_american_question(self, id_attraction, question, answers, indexOfCorrectAnswer):
         if self.Implementation is None:
@@ -335,3 +339,8 @@ class DALProxy(DAL_Abstract):
         if self.Implementation is None:
             raise NotImplementedError("Should have implemented this")
         return self.Implementation.get_all_aquestions_for_attraction(id_attraction)
+
+    def get_all_hints_for_attraction(self, id_attraction):
+        if self.Implementation is None:
+            raise NotImplementedError("Should have implemented this")
+        return self.Implementation.get_all_hints_for_attraction(id_attraction)
