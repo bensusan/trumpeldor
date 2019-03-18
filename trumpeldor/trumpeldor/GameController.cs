@@ -157,7 +157,7 @@ namespace trumpeldor
         }
 
         //get y.png for example return http://IP:PORT/media/y.png
-        public string GetImageURLFromName(string pictureName)
+        public string GetMediaURLFromName(string pictureName)
         {
             return "http://" + ServerConection.IP + ":" + ServerConection.PORT + "/media/" + pictureName;
         }
@@ -192,5 +192,26 @@ namespace trumpeldor
             currentTrip.score += (int)actionScore;
             return currentTrip.score;
         }
+
+        internal List<string> GetMainImages()
+        {
+            return new List<string>();
+        }
+
+        internal List<string> GetMainVideos()
+        {
+            return new List<string>();
+        }
+
+        internal double GetHeightSizeOfPage()
+        {
+            return Application.Current.MainPage.Height;
+        }
+
+        internal double GetWidthSizeOfPage()
+        {
+            return Application.Current.MainPage.Width;
+        }
+
     }
 }

@@ -7,7 +7,6 @@
             <Label Text="Welcome to instructions"
                 VerticalOptions="CenterAndExpand" 
                 HorizontalOptions="CenterAndExpand" />
-            <WebView x:Name="w" WidthRequest="1000" HeightRequest="1000"/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
