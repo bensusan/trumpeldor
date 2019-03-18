@@ -15,8 +15,8 @@ class DALUnitTests(TestCase):
 
 class DALUnitTestsForCreating(DALUnitTests):
 
-    # attraction = {'id': 0, 'name': 'de vinchi', 'x': 32.1111, 'y': 23.43433, 'description': 'bla bla',
-    #               'picturesURLS': [], 'videosURLS': []}
+    # attraction = {"id": 0, "name": "de vinchi", "x": 32.1111, "y": 23.43433, "description": "bla bla",
+    #               "picturesURLS": [], "videosURLS": []}
     attr = Attraction(id=1, name='de vinchi', x=32.1111, y=23.43433, description='bla bla', picturesURLS=[],
                       videosURLS=[])
     serializerActual = AttractionSerializer(attr, many=False)

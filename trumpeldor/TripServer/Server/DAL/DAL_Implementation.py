@@ -53,8 +53,8 @@ class DAL_Implementation(DAL_Abstract):
         attraction.save()
         return attraction
 
-    def add_hint(self, attraction, kind, data):
-        hint = Hint(attraction=attraction, kind=kind, data=data)
+    def add_hint(self, id_attraction, kind, data):
+        hint = Hint(attraction=self.getAttraction(id_attraction), kind=kind, data=data)
         hint.save()
         return hint
 
@@ -117,22 +117,23 @@ class DAL_Implementation(DAL_Abstract):
 
     def edit_hint(self, id_attraction, id_hint, data):
         hint = self.get_hint(id_attraction, id_hint)
-        hint.data=data
+        hint.data = data
         hint.save()
-        return hint
+        return True
 
     def get_all_tracks(self):
         return Track.objects.all()
 
     def delete_feedback_question(self, id_feedback):
-        return self.get_feedback_question(id_feedback).delete()
+        feedback = self.get_feedback_question(id_feedback).delete()
+        return True
 
     def get_american_question(self, id_attraction, id_american_question):
         return AmericanQuestion.objects.filter(pk=id_american_question,
                                                attraction=self.get_attraction(id_attraction)).first()
 
     def get_hint(self, id_attraction, id_hint):
-        return Hint.objects.filter(pk=id_hint, attraction=self.get_attraction(id_attraction)).all()
+        return Hint.objects.filter(pk=id_hint, attraction=self.getAttraction(id_attraction)).first()
 
     def get_feedback_question(self, id_feedback):
         return Feedback.objects.filter(pk=id_feedback).all()
@@ -142,3 +143,6 @@ class DAL_Implementation(DAL_Abstract):
 
     def get_all_aquestions_for_attraction(self, id_attraction):
         return AmericanQuestion.objects.filter(attraction=self.get_attraction(id_attraction)).all()
+
+    def get_all_hints_for_attraction(self, id_attraction):
+        return Hint.objects.filter(attraction=self.get_attraction(id_attraction)).all()
