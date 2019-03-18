@@ -44,6 +44,7 @@ function initMap() {
   }
 
   let i=0;
+
   function addEditListener(m) {
       m.addListener('click', function() {
 
