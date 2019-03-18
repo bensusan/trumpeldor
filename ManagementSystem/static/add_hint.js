@@ -3,7 +3,43 @@ var loadFile = function(event) {
 	image.src = URL.createObjectURL(event.target.files[0]);
 };
 
+var str;
+
+function funcForExistingHints(attractionsJSON){
+    let name = localStorage.getItem("name_for_add_aq");
+        let desc = localStorage.getItem("desc_for_add_aq");
+      // alert("in get name! "+"of the origin : " + lat + " , " + lng);
+        attractionsJSON.forEach(function (attr) {
+        let p = {name: attr['name'], description:attr['description']};
+        if(p.name===name && p.description===desc)
+        {
+            getRequestHints(hints_func,attr['id']);
+        }
+        });
+}
+
+function hints_func(hintsJSON) {
+        str="";
+        hintsJSON.forEach(function (hint) {
+            str=str+"id: "+hint['id'] +", data: "+ hint['data']+'\n';
+            alert(str);
+        });
+        document.getElementById("existing_hints").innerHTML = str ;
+}
+
+function getRequestHints(funcOnHints,attr_id){
+    // serverRequest("GET", funcOnAttractions, 'http://192.168.1.12:12344/managementsystem/attraction/?format=json');
+    // the server port and my ip
+    serverRequest("GET", funcOnHints, 'http://10.0.0.7:12344/managementsystem/attraction/'+ attr_id+
+        '/hint/?format=json');
+    //alert("need to remove this alert and fix funcToGetAttraction()!");
+}
+
 window.onload = function () {
+    getRequestAttractions(funcForExistingHints);
+    alert("ale: "+ str);
+
+
 var textHintBTN = document.getElementById('add_text_hint');
         textHintBTN.addEventListener('click', function() {
 
