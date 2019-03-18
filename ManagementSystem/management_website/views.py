@@ -39,6 +39,10 @@ def add_picture_page(request):
     return render(request, "add_picture.html")
 
 
+def add_path_page(request):
+    return render(request, "add_path.html")
+
+
 def add_short_path_page(request):
     return render(request, "add_short_path.html")
 
