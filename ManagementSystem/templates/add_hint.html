@@ -3,6 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <title>Add Hint</title>
+    {% load static %}
+<script src="{% static 'add_hint.js' %}?version=2"></script>
 </head>
 <body>
 
@@ -11,8 +13,8 @@
 
 <label for="hint"><b>Add Hint:</b></label>
 
-{% load static %}
-<script src="{% static 'add_hint.js' %}?version=1"></script>
+
+
 <p></p>
 <button type="button" id="add_text_hint">add text</button>
 <p></p>

@@ -3,8 +3,10 @@ var loadFile = function(event) {
 	image.src = URL.createObjectURL(event.target.files[0]);
 };
 
+window.onload = function () {
 var textHintBTN = document.getElementById('add_text_hint');
         textHintBTN.addEventListener('click', function() {
+            alert("yo");
             var textLine = document.getElementById("text_hint_id");
             textLine.style.display = "inline";
         });
@@ -18,6 +20,8 @@ var vidHintBTN = document.getElementById('add_vid_hint');
         vidHintBTN.addEventListener('click', function() {
 
         });
+
+};
 
 
 
