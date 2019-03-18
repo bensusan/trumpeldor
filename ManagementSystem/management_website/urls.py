@@ -20,6 +20,8 @@ urlpatterns = [
     path('add_picture/', views.add_picture_page),
     path('add_aq/', views.add_aq_page),
     path('add_hint/', views.add_hint_page),
+    path('pick_hint/', views.pick_hint_page),
+    path('edit_hint/', views.edit_hint_page),
 
 ]
 

@@ -35,6 +35,14 @@ def add_aq_page(request):
     return render(request, "add_aq.html")
 
 
+def pick_hint_page(request):
+    return render(request, "pick_hint.html")
+
+
+def edit_hint_page(request):
+    return render(request, "edit_hint.html")
+
+
 def add_picture_page(request):
     return render(request, "add_picture.html")
 
