@@ -1,12 +1,23 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="trumpeldor.Views.LeadingTablePage">
+             x:Class="trumpeldor.Views.LeadingTablePage"
+             xmlns:translator="clr-namespace:trumpeldor.Helpers">
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
+        <StackLayout Style="{DynamicResource mainStackLayout}">
+            <Grid x:Name="leadingTable" VerticalOptions="StartAndExpand" Style="{DynamicResource gridStyle}">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Label Text="{translator:Translate position}" Grid.Column="0" Grid.Row="0" Style="{DynamicResource lableStyle}"/>
+                <Label Text="{translator:Translate group_name}" Grid.Column="1" Grid.Row="0" Style="{DynamicResource lableStyle}"/>
+                <Label Text="{translator:Translate score}" Grid.Column="2" Grid.Row="0" Style="{DynamicResource lableStyle}"/>
+            </Grid>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

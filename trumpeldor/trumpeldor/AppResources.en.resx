@@ -297,4 +297,7 @@
   <data name="Too_Much_Mistakes_In_AQ_title" xml:space="preserve">
     <value>Stop</value>
   </data>
+  <data name="position" xml:space="preserve">
+    <value>Position</value>
+  </data>
 </root>

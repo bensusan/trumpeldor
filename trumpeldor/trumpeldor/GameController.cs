@@ -19,6 +19,7 @@ namespace trumpeldor
         }
 
         private static GameController instance = null;
+
         public Trip currentTrip = null;
         public User currentUser = null; //Also will show in Trip object but necessary also.
         private ServerConection conn;
@@ -211,6 +212,11 @@ namespace trumpeldor
         internal double GetWidthSizeOfPage()
         {
             return Application.Current.MainPage.Width;
+        }
+
+        internal List<UserGroupScore> GetLeadingTable()
+        {
+            return conn.GetBestScoreData();
         }
 
     }

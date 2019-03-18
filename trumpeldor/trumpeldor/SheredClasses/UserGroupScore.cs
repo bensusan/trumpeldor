@@ -1,13 +1,13 @@
-﻿
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace trumpeldor.SheredClasses
 {
-    public class RelevantInformation
+    public class UserGroupScore
     {
+        public string name { get; set; }
         public string groupName { get; set; }
-        public List<int> playersAges { get; set; }
+        public int score { get; set; }
     }
 }
