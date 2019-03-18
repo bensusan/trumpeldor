@@ -44,8 +44,9 @@ function initMap() {
   }
 
   function addEditListener(m) {
-      m.addListener('click', function() {
         var i=0;
+      m.addListener('click', function() {
+
         var addToPathBTN = document.getElementById('add_to_path');
         addToPathBTN.addEventListener('click', function() {
             if(i==0) {
