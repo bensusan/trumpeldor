@@ -6,7 +6,7 @@ var loadFile = function(event) {
 var str;
 
 function funcForExistingHints(attractionsJSON){
-    let name = localStorage.getItem("name_for_add_aq");
+        let name = localStorage.getItem("name_for_add_aq");
         let desc = localStorage.getItem("desc_for_add_aq");
       // alert("in get name! "+"of the origin : " + lat + " , " + lng);
         attractionsJSON.forEach(function (attr) {
@@ -16,6 +16,23 @@ function funcForExistingHints(attractionsJSON){
             getRequestHints(hints_func,attr['id']);
         }
         });
+
+        let editedPoint = JSON.parse(localStorage.getItem("edited"));
+      let lat = editedPoint.lat;
+      let lng = editedPoint.lng;
+      //let name = "didn't found!!!";
+      // alert("in get name! "+"of the origin : " + lat + " , " + lng);
+      attractionsJSON.forEach(function (attr) {
+          // alert("the id is: "+attr['id']);
+        let p = {name: attr['name'], description:attr['description'], lat: attr['x'], lng: attr['y']};
+        // alert("in get name! "+"of the origin : " + lat + " , " + lng + "\n of the other: "+p.lat +" , "+ p.lng);
+        if(p.lat===lat&&(p.lng).toFixed(8)===lng.toFixed(8))
+        {
+            alert("before delete hint!");
+            deleteRequestHint(attr['id'],);
+            window.location.href='/pick_hint';
+        }
+      });
 }
 
 function hints_func(hintsJSON) {
@@ -37,55 +54,16 @@ function getRequestHints(funcOnHints,attr_id){
 
 window.onload = function () {
     getRequestAttractions(funcForExistingHints);
-var textHintBTN = document.getElementById('add_text_hint');
-        textHintBTN.addEventListener('click', function() {
 
-            var textLine = document.getElementById("text_hint_id");
-            textLine.style.display = "inline";
+    var wantToDeleteBTN = document.getElementById('want_to_delete_hint');
+        wantToDeleteBTN.addEventListener('click', function() {
+            var writeChosenHintText = document.getElementById("write_hint_id_to_delete");
+            writeChosenHintText.style.display = "inline";
 
-            var sendButton = document.getElementById("send_text_hint");
-            sendButton.style.display = "inline";
-
+            var deleteChosenHintBTN = document.getElementById("delete_chosen_hint");
+            deleteChosenHintBTN.style.display = "inline";
         });
 
-var picHintBTN = document.getElementById('add_pic_hint');
-        picHintBTN.addEventListener('click', function() {
-            var clickHere = document.getElementById("click_here_label");
-            clickHere.style.display = "inline";
-
-            var outpic = document.getElementById("output");
-            outpic.style.display = "inline";
-
-            var sendButton = document.getElementById("send_pic_hint");
-            sendButton.style.display = "inline";
-        });
-
-var vidHintBTN = document.getElementById('add_vid_hint');
-        vidHintBTN.addEventListener('click', function() {
-            var thevid = document.getElementById("vid_hint_id");
-            thevid.style.display = "inline";
-
-            var thevidbrowse = document.getElementById("vid_hint_browse_id");
-            thevidbrowse.style.display = "inline";
-
-            var sendButton = document.getElementById("send_vid_hint");
-            sendButton.style.display = "inline";
-        });
-
-var sendTextHintBTN = document.getElementById('send_text_hint');
-    sendTextHintBTN.addEventListener('click', function() {
-        getRequestAttractions(hint_funcToGetAttraction);
-    });
-
-var sendPicHintBTN = document.getElementById('send_pic_hint');
-    sendPicHintBTN.addEventListener('click', function() {
-
-    });
-
-var sendVidHintBTN = document.getElementById('send_vid_hint');
-    sendVidHintBTN.addEventListener('click', function() {
-
-    });
 
         localFileVideoPlayer();
 
@@ -125,12 +103,17 @@ function hint_funcToGetAttraction(attractionsJSON) {
         // alert("in get name! "+"of the origin : " + lat + " , " + lng + "\n of the other: "+p.lat +" , "+ p.lng);
         if(p.lat===lat&&(p.lng).toFixed(8)===lng.toFixed(8))
         {
-            // alert("s");
-      //      deleteRequestHint(attr['id']);
-            window.location.href='/attractions';
+            alert("before delete hint!");
+            deleteRequestHint(attr['id'],);
+            window.location.href='/pick_hint';
         }
       });
         // alert("cant believe this is happenning!");
+    }
+
+
+    function deleteRequestHint(attr_id,hint_id){
+     serverRequest("DELETE", function noop(dummy){}, 'http://10.0.0.7:12344/managementsystem/attraction/'+attr_id+'/hint/'+hint_id);
     }
 
 function localFileVideoPlayer() {
