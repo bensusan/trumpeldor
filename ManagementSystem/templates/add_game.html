@@ -1,37 +1,31 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-{% load static %}
-<link rel="stylesheet" href="{% static 'signInForm.css' %}?version=1">
+    <meta charset="UTF-8">
+    <title>Add Game</title>
     {% load static %}
-<link rel="stylesheet" href="{% static 'add_game.css' %}?version=1">
+<link rel="stylesheet" href="{% static 'signInForm.css' %}?version=1">
+{#    {% load static %}#}
+{#<link rel="stylesheet" href="{% static 'add_game.css' %}?version=1">#}
+    {% load static %}
+<script src="{% static 'add_game.js' %}?version=2"></script>
 </head>
 <body>
+
 <button onclick="window.location.href='/main'" type="button">Back to menu</button>
 <div align="center">
 <h2>Add Game</h2>
-<form>
-  <div class="imgcontainer">
-    <!-- <img src="img_avatar2.png" alt="Avatar" class="avatar"> -->  <!-- need to add logo or something-->
-  </div>
-  <div class="container">
 
-      {% load static %}
-<script src="{% static 'add_game.js' %}?version=3"></script>
+
 
 {#      <p><a href="JavaScript:newPopup('/add_picture');">Open a popup window</a></p>#}
-      <button type="submit" >Sliding Puzzle</button>
-      <button onclick="JavaScript:newPopup('/add_picture');" type="submit">Drag Puzzle</button>
-      <button onclick="JavaScript:newPopup('/add_picture');" type="submit">Take A Picture</button>
-      <button onclick="JavaScript:newPopup('/add_picture');" type="submit">Find The Differences</button>
+      <button type="button" id="sliding_puzzle_button">Sliding Puzzle</button>
+{#      <button onclick="JavaScript:newPopup('/add_picture');" type="submit">Drag Puzzle</button>#}
+{#      <button onclick="JavaScript:newPopup('/add_picture');" type="submit">Take A Picture</button>#}
+{#      <button onclick="JavaScript:newPopup('/add_picture');" type="submit">Find The Differences</button>#}
+{#    #}
 
-  </div>
-
-
-</form>
 </div>
-<button onclick="window.location.href='/add_aq'" type="button">Skip</button>
-<button onclick="addGames()" type="button">Finish</button>
+
 </body>
 </html>
