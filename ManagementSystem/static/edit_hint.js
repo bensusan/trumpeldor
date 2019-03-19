@@ -33,8 +33,7 @@ function hints_func_in_edit(hintsJSON) {
                         data:document.getElementById("write_hint_text_in_edit").value
                     };
                     editRequestHint(hint_to_send,localStorage.getItem("attr_id_for_hint_edit"),localStorage.getItem("hint_id_to_edit"));
-                     window.location.href='/edit_hint';
-                    // window.location.href='/pick_hint';
+                     window.location.href='/pick_hint';
             });
             }
         });
