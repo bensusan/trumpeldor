@@ -1,4 +1,3 @@
-
 const Http = new XMLHttpRequest();
 
 
@@ -33,7 +32,6 @@ function markAttractions(attractionsJSON){
 
 function markAttraction(pos){
     let the_title=localStorage.getItem("title"+pos);
-    alert(the_title);
         let marker = new google.maps.Marker({
           position: pos,
           map: map,
