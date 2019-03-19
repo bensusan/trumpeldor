@@ -4,18 +4,21 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 {% load static %}
 <link rel="stylesheet" href="{% static 'signInForm.css' %}?version=1">
+
+
+              {% load static %}
+<script src="{% static 'Map.js' %}"?version="1"></script>
+    {% load static %}
+    <script src="{% static 'attractions.js' %}?version=1"></script>
+    {% load static %}
+<script src="{% static 'add_attraction.js' %}"></script>
+    {% load static %}
+<script src="{% static 'edit_attraction.js' %}?version=2"></script>
 </head>
 <body>
 
 <button onclick="window.location.href='/main'" type="button">Back to menu</button>
 <button onclick="window.location.href='/attractions'" type="button">Back to map</button>
-
-{% load static %}
-    <script src="{% static 'attractions.js' %}?version=1"></script>
-
-    {% load static %}
-<script src="{% static 'edit_attraction.js' %}?version=2"></script>
-
 <button onclick="showVals()" type="button">Show Values</button>
 
 
@@ -29,14 +32,10 @@
 
     <label for="name"><b>Upload Video: </b></label>
 
-    {% load static %}
-<script src="{% static 'add_attraction.js' %}"></script>
     <div id="message"></div>
 <video height="200px" width="350px" controls="" autoplay=""></video>
     <input type="file" accept="video/*">
 
-{#        {% load static %}#}
-{#<script src="{% static 'add_attraction.js' %}"></script>#}
 
     <p></p>
     <label for="hint"><b>Upload Image:</b></label>
@@ -52,25 +51,7 @@
     <label for="desc"><b>Description</b></label>
     <input  type="text" id="desc" placeholder="Enter description" name="attr_desc" required>
 
-              {% load static %}
-<script src="{% static 'Map.js' %}"?version="1"></script>
 
-
-{#{% load static %}#}
-{#<script src="{% static 'edit_attraction.js' %}?version=1"></script>#}
-
-
-
-{#    <label for="desc"><b>Add American Question:</b></label>#}
-{#    <input type="text" id="ques" placeholder="Enter Question" name="attr_desc" required>#}
-{#      <input  type="text" id="ans1" placeholder="ans1" name="a1" required>#}
-{#      <input type="text" id="ans2" placeholder="ans2" name="a2" required>#}
-{#      <input type="text" id="ans3" placeholder="ans3" name="a3" required>#}
-{#      <input  type="text" id="ans4" placeholder="ans4" name="a4" required>#}
-
-
-    {% load static %}
-    <script src="{% static 'add_attraction.js' %}"></script>
       <button onclick="window.location.href='/add_game'" type="button">Add Game</button>
       <button onclick="window.location.href='/pick_hint'" type="button">Edit Hints</button>
     <button onclick="finishEditingAttraction()" type="button">Submit</button>
