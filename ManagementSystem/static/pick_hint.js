@@ -180,5 +180,5 @@ function postRequestHint(the_hint,attr_id){
 }
 
 function deleteRequestHint(attr_id,hint_id){
-     serverRequest("DELETE", function noop(dummy){}, 'http://10.0.0.7:12344/managementsystem/attraction/'+attr_id+'/hint/'+hint_id);
+     serverRequest("DELETE", function noop(dummy){}, 'http://10.0.0.7:12344/managementsystem/attraction/'+attr_id+'/hint/'+hint_id+'/');
     }
