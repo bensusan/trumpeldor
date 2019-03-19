@@ -52,15 +52,15 @@ window.onload = function () {
 };
 
 function funcInOrderToDeleteHint(hintsJSON) {
-
+    let hint_id_that_was_picked = document.getElementById("write_hint_id_to_delete").value;
+   // let number_hint_id = Number(hint_id_that_was_picked);
       hintsJSON.forEach(function (hint) {
           // alert("the id is: "+attr['id']);
-        let p = {name: attr['name'], description:attr['description'], lat: attr['x'], lng: attr['y']};
         // alert("in get name! "+"of the origin : " + lat + " , " + lng + "\n of the other: "+p.lat +" , "+ p.lng);
-        if(p.lat===lat&&(p.lng).toFixed(8)===lng.toFixed(8))
+        if(hint['id']==hint_id_that_was_picked)
         {
             alert("before delete hint!");
-            deleteRequestHint(attr['id'],);
+            deleteRequestHint(attractionObjToUseInHintDelete['id'],hint['id']);
             window.location.href='/pick_hint';
         }
       });
