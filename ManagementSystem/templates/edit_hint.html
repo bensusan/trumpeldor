@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Hint</title>
+    {% load static %}
+    <script src="{% static 'attractions.js' %}?version=1"></script>
+    {% load static %}
+    <script src="{% static 'pick_hint.js' %}?version=1"></script>
+    {% load static %}
+    <script src="{% static 'edit_hint.js' %}?version=1"></script>
+</head>
+<body>
+
+<label for="hint"><b>Edit Hint:</b></label>
+<p>Hint id:</p>
+<p id="hints_id_in_edit"></p>
+<p></p>
+<textarea id="write_hint_text_in_edit" placeholder="Write Text Of Hint..."></textarea>
+<button type="button" id="submit_to_edit_hint">Submit</button>
+<p></p>
+
+
+</body>
+</html>

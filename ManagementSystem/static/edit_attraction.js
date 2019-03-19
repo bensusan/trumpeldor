@@ -54,7 +54,7 @@ window.onload=function(){
         // window.location.href='/attractions';
     }
 
-    
+
     // function deletePoint() {
     //     getRequestAttractions(functionOfDelete);
     // }

@@ -33,6 +33,22 @@ function hints_func(hintsJSON) {
 window.onload = function () {
     getRequestAttractions(funcForExistingHints);
 
+    var wantToEditBTN = document.getElementById('want_to_edit_hint');
+        wantToEditBTN.addEventListener('click', function() {
+            var writeChosenHintTextEdit = document.getElementById("write_hint_id_to_edit");
+            writeChosenHintTextEdit.style.display = "inline";
+
+            var editChosenHintBTN = document.getElementById("edit_chosen_hint");
+            editChosenHintBTN.style.display = "inline";
+
+            editChosenHintBTN.addEventListener('click', function() {
+                let hint_id_that_was_picked = document.getElementById("write_hint_id_to_edit").value;
+                localStorage.setItem("hint_id_to_edit", hint_id_that_was_picked);
+                localStorage.setItem("attr_id_for_hint_edit", attractionObjToUseInHintDelete['id']);
+                window.location.href='/edit_hint';
+            });
+        });
+
     var wantToDeleteBTN = document.getElementById('want_to_delete_hint');
         wantToDeleteBTN.addEventListener('click', function() {
             var writeChosenHintText = document.getElementById("write_hint_id_to_delete");
