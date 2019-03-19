@@ -6,7 +6,7 @@
     {% load static %}
 <script src="{% static 'attractions.js' %}?version=1"></script>
     {% load static %}
-<script src="{% static 'pick_hint.js' %}?version=2"></script>
+<script src="{% static 'pick_hint.js' %}?version=1"></script>
 </head>
 <body>
 
@@ -15,8 +15,9 @@
 
 <p></p>
 <button type="button" id="want_to_delete_hint">Delete Hint</button>
+<p></p>
 <textarea id="write_hint_id_to_delete" placeholder="Write Hint ID..." style="display: none"></textarea>
-<button type="button" id="delete_chosen_hint" style="display: none">Send</button>
+<button type="button" id="delete_chosen_hint" style="display: none">Delete</button>
 <p></p>
 <button onclick="finishHint()" type="button">Finish</button>
 

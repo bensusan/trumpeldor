@@ -4,6 +4,7 @@ var loadFile = function(event) {
 };
 
 var str;
+var attractionObjToUseInHintDelete;
 
 function funcForExistingHints(attractionsJSON){
         let name = localStorage.getItem("name_for_add_aq");
@@ -14,25 +15,10 @@ function funcForExistingHints(attractionsJSON){
         if(p.name===name && p.description===desc)
         {
             getRequestHints(hints_func,attr['id']);
+            attractionObjToUseInHintDelete=attr;
         }
         });
 
-        let editedPoint = JSON.parse(localStorage.getItem("edited"));
-      let lat = editedPoint.lat;
-      let lng = editedPoint.lng;
-      //let name = "didn't found!!!";
-      // alert("in get name! "+"of the origin : " + lat + " , " + lng);
-      attractionsJSON.forEach(function (attr) {
-          // alert("the id is: "+attr['id']);
-        let p = {name: attr['name'], description:attr['description'], lat: attr['x'], lng: attr['y']};
-        // alert("in get name! "+"of the origin : " + lat + " , " + lng + "\n of the other: "+p.lat +" , "+ p.lng);
-        if(p.lat===lat&&(p.lng).toFixed(8)===lng.toFixed(8))
-        {
-            alert("before delete hint!");
-            deleteRequestHint(attr['id'],);
-            window.location.href='/pick_hint';
-        }
-      });
 }
 
 function hints_func(hintsJSON) {
@@ -42,14 +28,6 @@ function hints_func(hintsJSON) {
             // alert(str);
         });
         document.getElementById("existing_hints").innerHTML = str ;
-}
-
-function getRequestHints(funcOnHints,attr_id){
-    // serverRequest("GET", funcOnAttractions, 'http://192.168.1.12:12344/managementsystem/attraction/?format=json');
-    // the server port and my ip
-    serverRequest("GET", funcOnHints, 'http://10.0.0.7:12344/managementsystem/attraction/'+ attr_id+
-        '/hint/?format=json');
-    //alert("need to remove this alert and fix funcToGetAttraction()!");
 }
 
 window.onload = function () {
@@ -62,12 +40,32 @@ window.onload = function () {
 
             var deleteChosenHintBTN = document.getElementById("delete_chosen_hint");
             deleteChosenHintBTN.style.display = "inline";
+
+            deleteChosenHintBTN.addEventListener('click', function() {
+                getRequestHints(funcInOrderToDeleteHint,attractionObjToUseInHintDelete['id']);
+            });
         });
 
 
         localFileVideoPlayer();
 
 };
+
+function funcInOrderToDeleteHint(hintsJSON) {
+
+      hintsJSON.forEach(function (hint) {
+          // alert("the id is: "+attr['id']);
+        let p = {name: attr['name'], description:attr['description'], lat: attr['x'], lng: attr['y']};
+        // alert("in get name! "+"of the origin : " + lat + " , " + lng + "\n of the other: "+p.lat +" , "+ p.lng);
+        if(p.lat===lat&&(p.lng).toFixed(8)===lng.toFixed(8))
+        {
+            alert("before delete hint!");
+            deleteRequestHint(attr['id'],);
+            window.location.href='/pick_hint';
+        }
+      });
+
+}
 
 function hint_funcToGetAttraction(attractionsJSON) {
         let name = localStorage.getItem("name_for_add_aq");
@@ -112,9 +110,6 @@ function hint_funcToGetAttraction(attractionsJSON) {
     }
 
 
-    function deleteRequestHint(attr_id,hint_id){
-     serverRequest("DELETE", function noop(dummy){}, 'http://10.0.0.7:12344/managementsystem/attraction/'+attr_id+'/hint/'+hint_id);
-    }
 
 function localFileVideoPlayer() {
 	'use strict';
@@ -160,9 +155,23 @@ function finishHint() {
     window.location.href='/attractions';
 }
 
+
+function getRequestHints(funcOnHints,attr_id){
+    // serverRequest("GET", funcOnAttractions, 'http://192.168.1.12:12344/managementsystem/attraction/?format=json');
+    // the server port and my ip
+    serverRequest("GET", funcOnHints, 'http://10.0.0.7:12344/managementsystem/attraction/'+ attr_id+
+        '/hint/?format=json');
+    //alert("need to remove this alert and fix funcToGetAttraction()!");
+}
+
+
 function postRequestHint(the_hint,attr_id){
     alert("hint blat");
     serverRequest("POST", function noop(dummy){}, 'http://10.0.0.7:12344/managementsystem/attraction/'+
         attr_id+'/hint/',
         JSON.stringify(the_hint));
 }
+
+function deleteRequestHint(attr_id,hint_id){
+     serverRequest("DELETE", function noop(dummy){}, 'http://10.0.0.7:12344/managementsystem/attraction/'+attr_id+'/hint/'+hint_id);
+    }
