@@ -82,7 +82,7 @@ function initMap() {
   function addEditListener(m) {
       m.addListener('click', function() {
 
-          alert("the point "+m.position);
+          // alert("the point "+m.position);
         var editBTN = document.getElementById('edit_attraction');
         editBTN.addEventListener('click', function() {
             localStorage.setItem("edited", JSON.stringify(m.position));
