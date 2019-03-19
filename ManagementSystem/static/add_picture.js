@@ -1,10 +1,8 @@
-
-
-
+alert("SDA");
 var loadFile = function(event) {
 	var image = document.getElementById('output');
 	image.src = URL.createObjectURL(event.target.files[0]);
-
+    localStorage.setItem("trying", JSON.stringify(image.toString()));
 	var editBTN = document.getElementById('newone');
         editBTN.addEventListener('click', function() {
         	var imo = document.getElementById('newone2');
@@ -13,7 +11,8 @@ var loadFile = function(event) {
 
             document.getElementById("url_of_pic").innerHTML = URL.createObjectURL(event.target.files[0]);
             // imo3.src=URL.createObjectURL(event.target.files[0]);
+
         });
 
-// localStorage.setItem("trying", "wwwwwwwwwwwwwwwooooooooooooowwwwwww");
+
 };
