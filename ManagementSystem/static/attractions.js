@@ -62,8 +62,7 @@ function postRequestAttraction(attraction){
 
 
 function deleteRequestAttraction(id){
-    // alert("blich");
-    alert("need to fix delete somehow to work all the time...");
+    alert("blich");
     serverRequest("DELETE", function noop(dummy){}, 'http://10.0.0.7:12344/managementsystem/attraction/'+id+'/');
 }
 
