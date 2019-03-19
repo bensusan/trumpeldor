@@ -21,8 +21,9 @@ var suki;
 function shit(suk) {
     suki=suk;
     document.getElementById("suka").innerHTML=suki;
-    var tmuna = document.getElementById("sukablat");
-    tmuna.src = suki;
+    localStorage.setItem("url_of_img",suki);
+    // var tmuna = document.getElementById("sukablat");
+    // tmuna.src = suki;
 }
 
 
