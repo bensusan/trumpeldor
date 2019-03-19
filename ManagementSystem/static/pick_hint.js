@@ -142,16 +142,7 @@ function localFileVideoPlayer() {
 }
 
 
-function finishHint() {
-    alert("hint was added successfully!");
-    // let data=document.getElementById("data").value;
-    // let hint_to_send = {
-    //         attraction:"" //atraction id needs to be here
-    //     ,kind:
-    //     ,data:
-    // };
-        // postRequestHint(hint_to_send);
-
+function donePickingHints() {
     window.location.href='/attractions';
 }
 
