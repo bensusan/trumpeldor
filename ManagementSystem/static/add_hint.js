@@ -21,7 +21,7 @@ function funcForExistingHints(attractionsJSON){
 function hints_func(hintsJSON) {
         str="";
         hintsJSON.forEach(function (hint) {
-            str=str+"id: "+hint['id'] +", data: "+ hint['data']+'\n';
+            str=str+"id: "+hint['id'] +", data: "+ hint['data']+"<br />";
             // alert(str);
         });
         document.getElementById("existing_hints").innerHTML = str ;
