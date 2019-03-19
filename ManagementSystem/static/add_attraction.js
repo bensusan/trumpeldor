@@ -65,29 +65,6 @@ window.onload=function(){
         // var longPath = JSON.parse(localStorage.getItem("long_path"));
         //
         //
-        //   longPath.push(addedPoint);
-        //   localStorage.setItem("long_path", JSON.stringify(longPath));
-        //
-        //
-        //   if(document.getElementById("path_len").value=="short") {
-        //     shortPath.push(addedPoint);
-        //     localStorage.setItem("short_path", JSON.stringify(shortPath));
-        //     medPath.push(addedPoint);
-        //     localStorage.setItem("medium_path", JSON.stringify(medPath));
-        // }
-        //
-        //   if(document.getElementById("path_len").value=="medium") {
-        //     medPath.push(addedPoint);
-        //     localStorage.setItem("medium_path", JSON.stringify(medPath));
-        // }
-        //
-        //   let shortPath1 = JSON.parse(localStorage.getItem("short_path"));
-        // let medPath1 = JSON.parse(localStorage.getItem("medium_path"));
-        // let longPath1 = JSON.parse(localStorage.getItem("long_path"));
-        //   alert("short:"+shortPath1.length +"\nmedium: "+medPath1.length +"\nlong: "+longPath1.length);
-
-//         var e = document.getElementById("ddlViewBy");
-// var strUser = e.options[e.selectedIndex].value;
 
         let addedPoint = JSON.parse(localStorage.getItem("addedPoint"));
         // alert("is what: "+ addedPoint.lat +", " + addedPoint.lng + ", "+ (typeof addedPoint.lng));
