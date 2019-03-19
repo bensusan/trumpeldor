@@ -34,7 +34,10 @@ function localFileVideoPlayer() {
   inputNode.addEventListener('change', playSelectedFile, false);
 }
 
+var attr_for_editing;
+
 window.onload=function(){
+    getName();
     var deletePointBTN = document.getElementById('delete_point');
     deletePointBTN.addEventListener('click', function() {
         // alert("clicked delp()");
@@ -45,11 +48,13 @@ window.onload=function(){
     };
 
 
-    function showDataCollected() {
-        alert("point:"+localStorage.getItem("addedPoint")+"\n"+
-            "name:"+document.getElementById("attr_name").value);
+    function finishEditingAttraction() {
+        alert("under construction!");
+        // editRequestAttraction(attr_for_editing,attr_for_editing['id']);
+        // window.location.href='/attractions';
     }
 
+    
     // function deletePoint() {
     //     getRequestAttractions(functionOfDelete);
     // }
@@ -90,6 +95,7 @@ window.onload=function(){
         // alert("in get name! "+"of the origin : " + lat + " , " + lng + "\n of the other: "+p.lat +" , "+ p.lng);
         if(p.lat===lat&&(p.lng).toFixed(8)===lng.toFixed(8))
         {
+            attr_for_editing=attr;
           name=p.name;
           document.getElementById("attr_name").value = p.name;
           document.getElementById("desc").value = p.description;
@@ -113,3 +119,9 @@ window.onload=function(){
           // localStorage.getItem("path_len"+localStorage.getItem("editedNum"));
       getRequestAttractions(getName);
     }
+
+    function editRequestAttraction(attraction,attr_id){
+    alert("edit blat hui");
+    serverRequest("PUT", function noop(dummy){}, 'http://10.0.0.7:12344/managementsystem/attraction/'+attr_id,
+        JSON.stringify(attraction));
+}
