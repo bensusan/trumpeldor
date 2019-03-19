@@ -1,3 +1,5 @@
+var attr_for_editing;
+
 let loadFile = function(event) {
 	let image = document.getElementById('output');
 	image.src = URL.createObjectURL(event.target.files[0]);
@@ -34,10 +36,10 @@ function localFileVideoPlayer() {
   inputNode.addEventListener('change', playSelectedFile, false);
 }
 
-var attr_for_editing;
+
 
 window.onload=function(){
-    getName();
+    getRequestAttractions(getName);
     var deletePointBTN = document.getElementById('delete_point');
     deletePointBTN.addEventListener('click', function() {
         // alert("clicked delp()");
@@ -83,11 +85,11 @@ window.onload=function(){
 
 
     function getName(attractionsJSON){
-      alert("in get name!");
+      // alert("in get name!");
       let editedPoint = JSON.parse(localStorage.getItem("edited"));
       let lat = editedPoint.lat;
       let lng = editedPoint.lng;
-      let name = "didn't found!!!";
+      // let name = "didn't found!!!";
       // alert("in get name! "+"of the origin : " + lat + " , " + lng);
       attractionsJSON.forEach(function (attr) {
           // alert("the id is: "+attr['id']);
@@ -96,13 +98,13 @@ window.onload=function(){
         if(p.lat===lat&&(p.lng).toFixed(8)===lng.toFixed(8))
         {
             attr_for_editing=attr;
-          name=p.name;
+          // name=p.name;
           document.getElementById("attr_name").value = p.name;
           document.getElementById("desc").value = p.description;
         }
       });
 
-      alert("the name is: "+name);
+      // alert("the name is: "+name);
     }
 
     function  showVals() {

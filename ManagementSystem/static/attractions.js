@@ -21,6 +21,7 @@ function serverRequest(getOrPost, functionOnReady, url, post=null){
 function markAttractions(attractionsJSON){
     attractionsJSON.forEach(function (attr) {
         let pos = {lat: attr['x'], lng: attr['y']};
+        localStorage.setItem("title"+pos,"attraction ID: "+attr['id']+"\nattraction name: "+attr['name']+"\nposition: ("+attr['x']+","+attr['y']+")");
         markAttraction(pos);
         // var currPoints = JSON.parse(localStorage.getItem("points"));
         // currPoints.push(x.position);
@@ -31,10 +32,12 @@ function markAttractions(attractionsJSON){
 }
 
 function markAttraction(pos){
+    let the_title=localStorage.getItem("title"+pos);
+    alert(the_title);
         let marker = new google.maps.Marker({
           position: pos,
           map: map,
-          title: "Point ("+pos.lat+","+pos.lng+")."
+          title:the_title
         });
         marker.setMap(map);
         addEditListener(marker);
