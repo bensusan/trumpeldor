@@ -1,6 +1,6 @@
 //from django.conf import settings
 
-alert("aaaaaaaa");
+// alert("aaaaaaaa");
 
 // let curPosClicked;
 // let curMarker;
@@ -22,7 +22,7 @@ function initMap() {
     });
     initAttractionsMarkers();
     listenerForMap();
-    initPoints();
+   // initPoints();
 
 }
 
@@ -55,10 +55,10 @@ function initMap() {
             {
                 // alert("only once!");
                 pointsOfPath.push(m.position);
-                str=str+m.position+"<br />";
+                str_of_points=str_of_points+m.position+"<br />";
             }
-            alert(str);
-            document.getElementById("showing_added_points").innerHTML = str ;
+            // alert(str_of_points);
+            document.getElementById("showing_added_points").innerHTML = str_of_points ;
            // alert("point been added! now its: "+ pointsOfPath.toString());
         });
   });

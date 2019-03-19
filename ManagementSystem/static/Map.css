@@ -1,12 +1,12 @@
 #map {
-        position: fixed;
-        top:30px;
-        bottom:100px;
+        /*position: fixed;*/
+        /*top:30px;*/
+        /*bottom:100px;*/
         height: 360px;
         width: 660px;
     }
 
 .buttonStyle{
-        position:fixed;
-        top:400px;
+        /*position:fixed;*/
+        /*top:400px;*/
 }
