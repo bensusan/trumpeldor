@@ -68,6 +68,7 @@ namespace UITest
         {
 
             //Act
+            app.Tap("EnglishBtn");
             app.Tap("InfoBtn");
 
             //Assert
@@ -139,7 +140,6 @@ namespace UITest
             
             var tst = app.Query("HintDisplay").FirstOrDefault(res => res.Text != "");
             Assert.IsTrue(tst != null, "problem");
-            
         }
 
         [Test]

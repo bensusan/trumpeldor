@@ -25,8 +25,10 @@ namespace trumpeldor.Views
         trumpeldor.SheredClasses.Point p;
 
         Pin previous = null;
+        private static bool firstListInit = true;
+        private static List<Position> traveledPins;
         //current point
-        double currLat = 0, currLong = 0;
+        public double currLat = 0, currLong = 0;
         public GameController gc;
         public Attraction nextAttraction;
         public MapPage(trumpeldor.SheredClasses.Point p)
@@ -34,16 +36,24 @@ namespace trumpeldor.Views
             InitializeComponent();
             gc = GameController.getInstance();
             nextAttraction = gc.currentTrip.GetCurrentAttraction();
-            Map map = new Map()
+            if (firstListInit)
             {
-                HeightRequest = 100,
-                WidthRequest = 960,
+                traveledPins = new List<Position>();
+                firstListInit = false;
+            }
+            //-------------------------------------------------------------------
+            var map = new CustomMap
+            {
+                MapType = MapType.Street,
+                WidthRequest = 100,
+                HeightRequest = 960,
                 VerticalOptions = LayoutOptions.FillAndExpand
             };
             map.MoveToRegion(MapSpan.FromCenterAndRadius(new Position(31.262820, 34.802352), Distance.FromKilometers(3)).WithZoom(10));
             //List<SheredClasses.Attraction> visitedTrackPoints = ((App)(Application.Current)).getGameController().GetVisitedAttractions();
             AddCurrlocationToMap(map);
             AddPointToMap(map, p);
+            
             Content = map;
         }
 
@@ -53,13 +63,16 @@ namespace trumpeldor.Views
             gc = GameController.getInstance();
             nextAttraction = gc.currentTrip.GetCurrentAttraction();
             p = new trumpeldor.SheredClasses.Point(nextAttraction.x, nextAttraction.y);
-            //gc.currentTrip.GetCurrentAttraction().x
-            Map map = new Map()
+            //-------------------------------------------------------------------
+            var map = new CustomMap
             {
-                HeightRequest = 100,
-                WidthRequest = 960,
+                MapType = MapType.Street,
+                WidthRequest = 100,
+                HeightRequest = 960,
                 VerticalOptions = LayoutOptions.FillAndExpand
             };
+            //-------------------------------------------------------------------
+            //gc.currentTrip.GetCurrentAttraction().x
             map.MoveToRegion(MapSpan.FromCenterAndRadius(new Position(31.262820, 34.802352), Distance.FromKilometers(3)).WithZoom(10));
             List<SheredClasses.Attraction> visitedTrackPoints = gc.GetVisitedAttractions();
             foreach (SheredClasses.Attraction attraction in visitedTrackPoints)
@@ -75,26 +88,34 @@ namespace trumpeldor.Views
             }
             AddCurrlocationToMap(map);
 
+           
             Content = map;
-            
+            DrawPastPath(map);
+            map.MoveToRegion(MapSpan.FromCenterAndRadius(new Position(37.79752, -122.40183), Distance.FromMiles(1.0)));
+
+            TimerCheck(map);
             //return FromLocA.GetDistanceTo(ToLocB);
+            
+        }
+
+        private void TimerCheck(CustomMap map)
+        {
             Device.StartTimer(TimeSpan.FromSeconds(DESIRED_SECONDS), () =>
             {
                 try
                 {
                     OnLocationCheck(map);
-
-                    //!((_&&_)||(_&&_))-->!(_&&_) && !(_&&_)
+                    if(traveledPins != null)
+                        traveledPins.Add(new Position(currLat, currLong));
                     if (DistanceBetween(currLat, currLong, p.x, p.y) > DESIRED_DISTANCE)
                     {
-                        DisplayAlert(AppResources.not_arrived, DistanceBetween(currLat, currLong, p.x, p.y).ToString()+"curr lat: "+ currLat.ToString() +"curr long: "+ currLong.ToString() +"x: "+p.x + "y: " + p.y+" point info: "+nextAttraction.name, AppResources.close);
+                        //DisplayAlert(AppResources.not_arrived, DistanceBetween(currLat, currLong, p.x, p.y).ToString()+"curr lat: "+ currLat.ToString() +"curr long: "+ currLong.ToString() +"x: "+p.x + "y: " + p.y+" point info: "+nextAttraction.name, AppResources.close);
                         return true;
                     }
                     else
                     {
-
                         gc.EditScore(GameController.SCORE_VALUE.Attraction_Arrive);
-                        DisplayAlert(AppResources.arrived, AppResources.arrived+"!  " + DistanceBetween(currLat, currLong, p.x, p.y).ToString(), AppResources.close);
+                        //DisplayAlert(AppResources.arrived, AppResources.arrived+"!  " + DistanceBetween(currLat, currLong, p.x, p.y).ToString(), AppResources.close);
                         Application.Current.MainPage = new AttractionPage();
                         return false;
                     }
@@ -102,7 +123,6 @@ namespace trumpeldor.Views
                 }
                 catch (Exception e)
                 {
-                    Console.WriteLine(AppResources.error+": "+e.Message);
                     return false;
                 }
             });
@@ -135,6 +155,8 @@ namespace trumpeldor.Views
                 Type = PinType.Place,
                 Position = new Position(p.x, p.y),
                 Label = "the attraction"
+                
+               
             };
             map.Pins.Add(toAdd);
         }
@@ -182,7 +204,12 @@ namespace trumpeldor.Views
             return deg * (Math.PI / 180);
         }
 
-
+        private void DrawPastPath(CustomMap map)
+        {
+            map.RouteCoordinates.Clear();
+            foreach(Position pos in traveledPins)
+                map.RouteCoordinates.Add(pos);
+        }
 
 
     }
