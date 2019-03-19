@@ -1,13 +1,14 @@
 //from django.conf import settings
 
-// alert("aaaaaaaa");
+alert("aaaaaaaa");
 
 // let curPosClicked;
 // let curMarker;
 // let coordinates_of_last_click;
-
+var str_of_points="";
 let points = JSON.parse(localStorage.getItem("points"));
 let pointsOfPath = [];
+
 
 function initMapAndAttractions(){
     initMap();
@@ -54,7 +55,10 @@ function initMap() {
             {
                 // alert("only once!");
                 pointsOfPath.push(m.position);
+                str=str+m.position+"<br />";
             }
+            alert(str);
+            document.getElementById("showing_added_points").innerHTML = str ;
            // alert("point been added! now its: "+ pointsOfPath.toString());
         });
   });
