@@ -1,4 +1,4 @@
-alert("SDA");
+
 var loadFile = function(event) {
 	var image = document.getElementById('output');
 	image.src = URL.createObjectURL(event.target.files[0]);
@@ -16,3 +16,23 @@ var loadFile = function(event) {
 
 
 };
+var suki;
+
+function shit(suk) {
+    suki=suk;
+    document.getElementById("suka").innerHTML=suki;
+    var tmuna = document.getElementById("sukablat");
+    tmuna.src = suki;
+}
+
+
+function encodeImageFileAsURL(element) {
+    suki="";
+  var file = element.files[0];
+  var reader = new FileReader();
+  reader.onloadend = function() {
+   //alert(reader.result)
+   shit(reader.result)
+  }
+  reader.readAsDataURL(file);
+}

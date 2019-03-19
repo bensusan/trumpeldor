@@ -13,12 +13,14 @@
     <p><label for="file" style="cursor: pointer;">Click Here!</label></p>
     <p><img id="output" width="200" /></p>
 
-
 <button id="newone">now</button>
 
     <p><img id="newone2" width="200" /></p>
 <p>This Is The URL:</p>
 <p id="url_of_pic"></p>
+<input type="file" onchange="encodeImageFileAsURL(this)" />
+<p id="suka"></p>
+<p><img id="sukablat" width="200" /></p>
 
 <button onclick="window.location.href='/add_game'">Finished</button>
 </body>
