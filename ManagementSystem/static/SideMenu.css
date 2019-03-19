@@ -68,3 +68,8 @@ body {
   .sidenav a {font-size: 18px;}
 }
 
+/* Fixed sidenav, full height */
+.moveRight {
+  position: fixed;
+  left: 300px;
+}

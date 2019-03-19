@@ -4,15 +4,24 @@
     <meta charset="UTF-8">
     <title>Hints of attraction</title>
     {% load static %}
+<link rel="stylesheet" href="{% static 'SideMenu.css' %}?version=3">
+    {% load static %}
 <script src="{% static 'attractions.js' %}?version=1"></script>
     {% load static %}
 <script src="{% static 'pick_hint.js' %}?version=1"></script>
 </head>
 <body>
 
-<label for="hint"><b>Existing Hints:</b></label>
-<p id="existing_hints"></p>
+<div>
+<nav id="sideMenu"></nav>
+{% load static %}
+<script src="{% static 'mimicOfSide.js' %}?version=1"></script>
 
+</div>
+
+<div class="moveRight">
+    <label for="hint"><b>Existing Hints:</b></label>
+<p id="existing_hints"></p>
 <p></p>
 <button onclick="window.location.href='/add_hint'" type="button">Add Hint</button>
 <p></p>
@@ -28,6 +37,9 @@
 <button type="button" id="delete_chosen_hint" style="display: none">Delete</button>
 <p></p>
 <button onclick="donePickingHints()" type="button">Finish</button>
+
+
+</div>
 
 {#style="display:none"#}
 </body>

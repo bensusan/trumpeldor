@@ -33,6 +33,11 @@ function hints_func(hintsJSON) {
 window.onload = function () {
     getRequestAttractions(funcForExistingHints);
 
+    var shiri = document.getElementById('shirimaimon');
+        shiri.addEventListener('click', function() {
+            alert("Shiri Maimon Kusit!");
+        });
+
     var wantToEditBTN = document.getElementById('want_to_edit_hint');
         wantToEditBTN.addEventListener('click', function() {
             var writeChosenHintTextEdit = document.getElementById("write_hint_id_to_edit");
