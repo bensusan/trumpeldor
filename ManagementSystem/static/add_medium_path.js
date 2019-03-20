@@ -92,6 +92,10 @@ function listenerForMappo(){
         var finishBTN = document.getElementById('finish_reg_med');
         finishBTN.addEventListener('click', function() {
             localStorage.setItem("the_points_of_the_medium_path", JSON.stringify(pointsOfPath));
+            let arrShow = shitFuncToDelete(short_path_points_for_medium,pointsOfPath);
+            alert(arrShow.length);
+            localStorage.setItem("the_points_of_the_finish_path", JSON.stringify(arrShow));
+
             // let short_to_send = {length:1,points:pointsOfPath};
             // let medium_to_send = {length:2,points:pointsOfPath};
             // let long_to_send = {length:3,points:pointsOfPath};
@@ -137,3 +141,13 @@ function initAttractionsMarkersOfMediumPath() {
     getRequestAttractions(markAttractionsOfMediumPath);
 }
 
+function shitFuncToDelete(arr1,arr2) {
+    let j;
+    for(j=0;j<arr1.length;j++)
+    {
+        arr2.push(arr1[j]);
+    }
+
+    return arr2;
+    
+}

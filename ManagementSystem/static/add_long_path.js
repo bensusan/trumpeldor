@@ -2,6 +2,7 @@ let short_path_points_for_long = JSON.parse(localStorage.getItem("the_points_of_
 let medium_path_points_for_long = JSON.parse(localStorage.getItem("the_points_of_the_medium_path"));
 let the_path_points_for_long_lat = [];
 let the_path_points_for_long_lng = [];
+let the_path_points_for_long = [];
 
 var str_of_points="";
 let pointsOfPath = [];
@@ -14,7 +15,7 @@ function initMapAndAttractionsss(){
     short_path_points_for_long = JSON.parse(localStorage.getItem("the_points_of_the_short_path"));
     medium_path_points_for_long = JSON.parse(localStorage.getItem("the_points_of_the_medium_path"));
     // let the_path_points_for_long = medium_path_points_for_long.push(short_path_points_for_medium);
-    let the_path_points_for_long = [];
+    the_path_points_for_long = [];
     for(j=0;j<short_path_points_for_long.length;j++)
     {
         the_path_points_for_long.push(short_path_points_for_long[j]);
@@ -108,6 +109,8 @@ function listenerForMappo(){
         var finishBTN = document.getElementById('finish_reg_long');
         finishBTN.addEventListener('click', function() {
             localStorage.setItem("the_points_of_the_long_path", JSON.stringify(pointsOfPath));
+            let arrShow = shitFuncToDelete(the_path_points_for_long,pointsOfPath);
+            localStorage.setItem("the_points_of_the_finish_path", JSON.stringify(arrShow));
             // let short_to_send = {length:1,points:pointsOfPath};
             // let medium_to_send = {length:2,points:pointsOfPath};
             // let long_to_send = {length:3,points:pointsOfPath};
@@ -151,4 +154,15 @@ function markAttractionElse(pos){
 
 function initAttractionsMarkersOfLongPath() {
     getRequestAttractions(markAttractionsOfLongPath);
+}
+
+function shitFuncToDelete(arr1,arr2) {
+    let j;
+    for(j=0;j<arr1.length;j++)
+    {
+        arr2.push(arr1[j]);
+    }
+
+    return arr2;
+
 }
