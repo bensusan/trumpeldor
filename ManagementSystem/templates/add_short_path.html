@@ -2,20 +2,21 @@
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Add Short Path</title>
 {% load static %}
-<link rel="stylesheet" href="{% static 'Map.css' %}?version=1">
+<link rel="stylesheet" href="{% static 'Map.css' %}?version=3">
 {% load static %}
-<script src="{% static 'attractions.js' %}?version=1"></script>
+<script src="{% static 'attractions.js' %}?version=3"></script>
     {% load static %}
-<script src="{% static 'add_short_path.js' %}?version=2"></script>
+<script src="{% static 'add_short_path.js' %}?version=1"></script>
 </head>
 <body>
 <button onclick="window.location.href='/main'" type="button">Back to menu</button>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-{% load static %}
-<link rel="stylesheet" href="{% static 'Map.css' %}?version=1">
-{% load static %}
-<script src="{% static 'attractions.js' %}?version=1"></script>
+{#<meta name="viewport" content="width=device-width, initial-scale=1">#}
+{#{% load static %}#}
+{#<link rel="stylesheet" href="{% static 'Map.css' %}?version=1">#}
+{#{% load static %}#}
+{#<script src="{% static 'attractions.js' %}?version=1"></script>#}
 
 
 <div id="map">
@@ -29,10 +30,15 @@
 
 <div class="buttonStyle">
 
-<button id="add_to_path" type="button">Add To Path</button>
-<button id="finish" type="button">Finish!</button>
+<button id="add_reg_to_path" type="button">Add To Path</button>
+<button id="finish_reg" type="button">Finish!</button>
 </div>
 
 
 </body>
+<p></p>
+<p></p>
+<p> </p>
+
+<p id="showing_added_points"></p>
 </html>

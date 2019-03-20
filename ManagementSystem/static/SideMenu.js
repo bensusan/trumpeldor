@@ -9,7 +9,7 @@ document.getElementById("sideMenu").innerHTML = '<div class="sidenav">\n' +
     '    <i class="fa fa-caret-down"></i>\n' +
     '  </button>\n' +
     '  <div class="dropdown-container">\n' +
-    '    <a href="/add_path">Short</a>\n' +
+    '    <a href="/add_short_path">Short</a>\n' +
     '    <a href="maptrack">Medium</a>\n' +
     '    <a href="maptrack">Long</a>\n' +
     '  </div>\n' +
