@@ -71,6 +71,7 @@ function listenerForMap(){
         finishBTN.addEventListener('click', function() {
             localStorage.setItem("the_points_of_the_path", JSON.stringify(pointsOfPath));
 
+
             window.location.href='/edit_path';
         });
 }
@@ -107,9 +108,10 @@ function markAttractionOfShortPath(pos){
           position: pos,
           map: map,
           title:the_title
-          ,icon: {
-                url: "http://maps.google.com/mapfiles/ms/icons/blue-dot.png"
-                }
+          // ,icon: {
+          //       url: "http://maps.google.com/mapfiles/ms/icons/blue-dot.png"
+          //       // https://medium.com/@letian1997/how-to-change-javascript-google-map-marker-color-8a72131d1207
+          //       }
         });
         marker.setMap(map);
         addEditListener(marker);
