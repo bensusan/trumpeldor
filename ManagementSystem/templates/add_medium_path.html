@@ -8,7 +8,7 @@
 {% load static %}
 <script src="{% static 'attractions.js' %}?version=5"></script>
     {% load static %}
-<script src="{% static 'add_medium_path.js' %}?version=3"></script>
+<script src="{% static 'add_medium_path.js' %}?version=6"></script>
 </head>
 <body>
 <button onclick="window.location.href='/main'" type="button">Back to menu</button>
@@ -28,8 +28,13 @@
 
 </div>
 
-<button id="add_reg_to_path" type="button">Add To Path</button>
-<button id="finish_reg" type="button">Finish!</button>
+<button id="add_reg_to_path_med" type="button">Add To Path</button>
+<button id="finish_reg_med" type="button">Finish!</button>
 
 </body>
+<p></p>
+<p></p>
+<p id="things_to_fix"> </p>
+
+<p id="showing_added_points_med"></p>
 </html>

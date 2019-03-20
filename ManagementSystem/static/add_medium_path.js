@@ -2,8 +2,12 @@ let short_path_points_for_medium = JSON.parse(localStorage.getItem("the_points_o
 let short_path_points_for_medium_lat = [];
 let short_path_points_for_medium_lng = [];
 
+var str_of_points="";
+let pointsOfPath = [];
 
 function initMapAndAttractionss(){
+    str_of_points="";
+    pointsOfPath = [];
     short_path_points_for_medium = JSON.parse(localStorage.getItem("the_points_of_the_short_path"));
     short_path_points_for_medium_lat = [];
     short_path_points_for_medium_lng = [];
@@ -13,11 +17,29 @@ function initMapAndAttractionss(){
         short_path_points_for_medium_lat.push(short_path_points_for_medium[i].lat);
         short_path_points_for_medium_lng.push(short_path_points_for_medium[i].lng);
     }
+    document.getElementById("things_to_fix").innerHTML = "need to fix: if we click on to points and then on the 'add' button it adds both of them." ;
 
     getRequestAttractions(markAttractionsOfMediumPath);
     initMapp();
     initAttractionsMarkersOfMediumPath();
 }
+
+  function addEditListenerr(m) {
+
+      m.addListener('click', function() {
+        var addToPathBTN = document.getElementById('add_reg_to_path_med');
+        addToPathBTN.addEventListener('click', function() {
+            if(pointsOfPath.indexOf(m.position)==-1)
+            {
+                pointsOfPath.push(m.position);
+                str_of_points=str_of_points+m.position+"<br />";
+            }
+            // alert(str_of_points);
+            document.getElementById("showing_added_points_med").innerHTML = str_of_points ;
+           // alert("point been added! now its: "+ pointsOfPath.toString());
+        });
+  });
+  }
 
 function initMapp() {
      map = new google.maps.Map(document.getElementById('map'), {
@@ -25,8 +47,9 @@ function initMapp() {
         center: {lat: 31.262860, lng: 34.801753}
     });
 
-   initAttractionsMarkersOfMediumPath();
-    listenerForMap();
+   //initAttractionsMarkersOfMediumPath();
+
+    listenerForMappo();
    // initPoints();
 
 }
@@ -59,9 +82,27 @@ function markAttractionsOfMediumPath(attractionsJSON){
         }
         else{
             localStorage.setItem("title" + pos, "attraction ID: " + attr['id'] + "\nattraction name: " + attr['name'] + "\nposition: (" + attr['x'] + "," + attr['y'] + ")");
-            markAttraction(pos);
+            markAttractionElse(pos);
         }
     });
+}
+
+function listenerForMappo(){
+
+        var finishBTN = document.getElementById('finish_reg_med');
+        finishBTN.addEventListener('click', function() {
+            localStorage.setItem("the_points_of_the_short_path", JSON.stringify(pointsOfPath));
+            // let short_to_send = {length:1,points:pointsOfPath};
+            // let medium_to_send = {length:2,points:pointsOfPath};
+            // let long_to_send = {length:3,points:pointsOfPath};
+            // postRequestShortPath(short_to_send);
+            // postRequestMediumPath(medium_to_send);
+            // postRequestLongPath(long_to_send);
+
+//the_points_of_the_short_path
+
+            window.location.href='/edit_path';
+        });
 }
 
 function markAttractionOfMediumPath(pos){
@@ -76,7 +117,19 @@ function markAttractionOfMediumPath(pos){
                 }
         });
         marker.setMap(map);
-        addEditListener(marker);
+        addEditListenerr(marker);
+        return marker;
+}
+
+function markAttractionElse(pos){
+    let the_title=localStorage.getItem("title"+pos);
+        let marker = new google.maps.Marker({
+          position: pos,
+          map: map,
+          title:the_title
+        });
+        marker.setMap(map);
+        addEditListenerr(marker);
         return marker;
 }
 
