@@ -16,8 +16,10 @@ window.onload=function () {
 
 
 function initMapAndAttractions(){
+
     initMap();
     initAttractionsMarkersOfMediumPath();
+    alert("das");
 }
 
 function initMap() {
@@ -25,10 +27,9 @@ function initMap() {
         zoom: 18,
         center: {lat: 31.262860, lng: 34.801753}
     });
-    //initAttractionsMarkersOfShortPath();
+   initAttractionsMarkersOfMediumPath();
     listenerForMap();
    // initPoints();
-    document.getElementById("things_to_fix").innerHTML = "need to fix: if we click on to points and then on the 'add' button it adds both of them." ;
 
 }
 
@@ -77,6 +78,7 @@ function markAttractionOfMediumPath(pos){
 }
 
 function initAttractionsMarkersOfMediumPath() {
+    alert("das");
     getRequestAttractions(markAttractionsOfMediumPath);
 }
 
