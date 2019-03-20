@@ -1,12 +1,11 @@
 function checkPassword() {
-
-    var username=document.getElementById("uname").value;
-    var password=document.getElementById("psw").value;
-        if(username=="admin"&& password=="1234")
+    var username=document.getElementById("user_name").value;
+    var password=document.getElementById("password").value;
+        if(username=="admin"&& password=="1234") {
             window.location.href = "/main";
+        }
         else
-           document.getElementById("demo").innerHTML = "wrong password or username!";
-
+           document.getElementById("errorMsg").innerHTML = "wrong password or username!";
 }
 
 function checkPassword1() {
