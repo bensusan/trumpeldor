@@ -37,13 +37,14 @@ function initMap() {
     });
     initAttractionsMarkers();
     listenerForMap(map);
-
     initPoints();
     // alert("the number of points is now :" + points.length)
     // var shortPath1 = JSON.parse(localStorage.getItem("short_path"));
     //     var medPath1 = JSON.parse(localStorage.getItem("medium_path"));
     //     var longPath1 = JSON.parse(localStorage.getItem("long_path"));
           // alert("short:"+shortPath1.length +"\nmedium: "+medPath1.length +"\nlong: "+longPath1.length);
+
+
 }
 
   //
