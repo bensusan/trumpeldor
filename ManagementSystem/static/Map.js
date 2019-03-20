@@ -33,51 +33,51 @@ function initMap() {
           // alert("short:"+shortPath1.length +"\nmedium: "+medPath1.length +"\nlong: "+longPath1.length);
 }
 
-
-
-  function initPoints(){
-  for (var i = 0; i < points.length; i++) {
-    addPoint2(points[i],i)
-  }
-  }
-
-  function addPoint2(p,num){
-    var myLatLng = {lat: p.lat, lng: p.lng};
-    var m = new google.maps.Marker({
-      position:myLatLng,
-      map: map,
-      title: "Point no."+(num+1)+".\n Belongs to the "+localStorage.getItem("path_len"+num) +" path."
-    });
-    m.setMap(map);
-//         var e = document.getElementById("ddlViewBy");
-// var strUser = e.options[e.selectedIndex].value;
-
-    // if(num<4) {
-    //     localStorage.setItem("editedNum", num);
-    //
-    //     localStorage.setItem("attr_name" + num, "the name of point no." + num);
-    //     localStorage.setItem("desc" + num, "the description of point no." + num);
-    //     localStorage.setItem("ques" + num, "the question of point no." + num);
-    //     localStorage.setItem("ans1" + num, "ans1 of point no." + num);
-    //     localStorage.setItem("ans2" + num, "ans2 of point no." + num);
-    //     localStorage.setItem("ans3" + num, "ans3 of point no." + num);
-    //     localStorage.setItem("ans4" + num, "ans4 of point no." + num);
-    //     localStorage.setItem("path_len" + num, "long");
-    // }
-
-  //   m.addListener('click', function() {
-  //       alert("ppppp: "+num);
   //
   //
-  //   var editBTN = document.getElementById('edit_attraction');
-  //       editBTN.addEventListener('click', function(event) {
-  //           localStorage.setItem("edited", m.position);
-  //           localStorage.setItem("editedNum", num);
-  //           window.location.href='/edit_attraction';
-  //       });
-  // });
-
-  }
+  // function initPoints(){
+  // for (var i = 0; i < points.length; i++) {
+  //   addPoint2(points[i],i)
+  // }
+  // }
+//
+//   function addPoint2(p,num){
+//     var myLatLng = {lat: p.lat, lng: p.lng};
+//     var m = new google.maps.Marker({
+//       position:myLatLng,
+//       map: map,
+//       title: "Point no."+(num+1)+".\n Belongs to the "+localStorage.getItem("path_len"+num) +" path."
+//     });
+//     m.setMap(map);
+// //         var e = document.getElementById("ddlViewBy");
+// // var strUser = e.options[e.selectedIndex].value;
+//
+//     // if(num<4) {
+//     //     localStorage.setItem("editedNum", num);
+//     //
+//     //     localStorage.setItem("attr_name" + num, "the name of point no." + num);
+//     //     localStorage.setItem("desc" + num, "the description of point no." + num);
+//     //     localStorage.setItem("ques" + num, "the question of point no." + num);
+//     //     localStorage.setItem("ans1" + num, "ans1 of point no." + num);
+//     //     localStorage.setItem("ans2" + num, "ans2 of point no." + num);
+//     //     localStorage.setItem("ans3" + num, "ans3 of point no." + num);
+//     //     localStorage.setItem("ans4" + num, "ans4 of point no." + num);
+//     //     localStorage.setItem("path_len" + num, "long");
+//     // }
+//
+//   //   m.addListener('click', function() {
+//   //       alert("ppppp: "+num);
+//   //
+//   //
+//   //   var editBTN = document.getElementById('edit_attraction');
+//   //       editBTN.addEventListener('click', function(event) {
+//   //           localStorage.setItem("edited", m.position);
+//   //           localStorage.setItem("editedNum", num);
+//   //           window.location.href='/edit_attraction';
+//   //       });
+//   // });
+//
+//   }
 
   function addEditListener(m) {
       m.addListener('click', function() {

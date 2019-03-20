@@ -26,26 +26,26 @@ function initMap() {
     document.getElementById("things_to_fix").innerHTML = "need to fix: if we click on to points and then on the 'add' button it adds both of them." ;
 
 }
-
-
-
-  function initPoints(){
-  for (var i = 0; i < points.length; i++) {
-    addPoint2(points[i],i);
-      localStorage.setItem("i" + i, "0");
-  }
-  }
-
-  function addPoint2(p,num){
-    var myLatLng = {lat: p.lat, lng: p.lng};
-    var m = new google.maps.Marker({
-      position:myLatLng,
-      map: map,
-      title: "Point no."+(num+1)+".\n Belongs to the "+localStorage.getItem("path_len"+num) +" path."
-    });
-    m.setMap(map);
-
-  }
+  //
+  //
+  //
+  // function initPoints(){
+  // for (var i = 0; i < points.length; i++) {
+  //   addPoint2(points[i],i);
+  //     localStorage.setItem("i" + i, "0");
+  // }
+  // }
+  //
+  // function addPoint2(p,num){
+  //   var myLatLng = {lat: p.lat, lng: p.lng};
+  //   var m = new google.maps.Marker({
+  //     position:myLatLng,
+  //     map: map,
+  //     title: "Point no."+(num+1)+".\n Belongs to the "+localStorage.getItem("path_len"+num) +" path."
+  //   });
+  //   m.setMap(map);
+  //
+  // }
 
   function addEditListener(m) {
       m.addListener('click', function() {
@@ -69,8 +69,15 @@ function initMap() {
 function listenerForMap(){
         var finishBTN = document.getElementById('finish_reg');
         finishBTN.addEventListener('click', function() {
-            localStorage.setItem("the_points_of_the_path", JSON.stringify(pointsOfPath));
+            localStorage.setItem("the_points_of_the_short_path", JSON.stringify(pointsOfPath));
+            // let short_to_send = {length:1,points:pointsOfPath};
+            // let medium_to_send = {length:2,points:pointsOfPath};
+            // let long_to_send = {length:3,points:pointsOfPath};
+            // postRequestShortPath(short_to_send);
+            // postRequestMediumPath(medium_to_send);
+            // postRequestLongPath(long_to_send);
 
+//the_points_of_the_short_path
 
             window.location.href='/edit_path';
         });
