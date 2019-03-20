@@ -12,6 +12,19 @@ let coordinates_of_last_click;
 
 let points = JSON.parse(localStorage.getItem("points"));
 
+window.onload=function () {
+    let addManuallyBTN = document.getElementById('add_manually');
+        addManuallyBTN.addEventListener('click', function() {
+            let manualLat = document.getElementById('manual_lat').value;
+            let manualLng = document.getElementById('manual_lng').value;
+            let pos = {lat: manualLat, lng: manualLng};
+            // markAttraction(pos);
+            localStorage.setItem("addedPoint", JSON.stringify(pos));
+            // alert("this is what: "+ pos.lat +", " + pos.lng + ", "+ (typeof pos.lat));
+            window.location.href='/add_attraction';
+        });
+};
+
 function initMapAndAttractions(){
     initMap();
     initAttractionsMarkers();
@@ -94,7 +107,7 @@ function initMap() {
 function listenerForMap(map){
     google.maps.event.addListener(map, 'click', (function(event) {
         coordinates_of_last_click=event.latLng;
-
+        alert(coordinates_of_last_click);
         if(curPosClicked) {
             curMarker.setMap(null);
         }
