@@ -10,8 +10,8 @@ document.getElementById("sideMenu").innerHTML = '<div class="sidenav">\n' +
     '  </button>\n' +
     '  <div class="dropdown-container">\n' +
     '    <a href="/add_short_path">Short</a>\n' +
-    '    <a href="maptrack">Medium</a>\n' +
-    '    <a href="maptrack">Long</a>\n' +
+    '    <a href="/add_medium_path">Medium</a>\n' +
+    '    <a href="/add_long_path">Long</a>\n' +
     '  </div>\n' +
     '    <a href="/edit_path">Edit Path</a>\n' +
     '    <a href="#">Delete Path</a>\n' +

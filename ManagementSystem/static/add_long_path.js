@@ -15,7 +15,7 @@ function markAttractionsOfLongPath(attractionsJSON){
     attractionsJSON.forEach(function (attr) {
         let pos = {lat: attr['x'], lng: attr['y']};
         localStorage.setItem("title"+pos,"attraction ID: "+attr['id']+"\nattraction name: "+attr['name']+"\nposition: ("+attr['x']+","+attr['y']+")");
-        markAttractionsOfLongPath(pos);
+        markAttractionOfLongPath(pos);
         // var currPoints = JSON.parse(localStorage.getItem("points"));
         // currPoints.push(x.position);
         // localStorage.setItem("points",JSON.stringify(currPoints));
@@ -24,7 +24,7 @@ function markAttractionsOfLongPath(attractionsJSON){
     });
 }
 
-function markAttractionsOfLongPath(pos){
+function markAttractionOfLongPath(pos){
     let the_title=localStorage.getItem("title"+pos);
         let marker = new google.maps.Marker({
           position: pos,

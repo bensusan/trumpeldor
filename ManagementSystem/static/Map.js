@@ -108,7 +108,7 @@ function initMap() {
 function listenerForMap(map){
     google.maps.event.addListener(map, 'click', (function(event) {
         coordinates_of_last_click=event.latLng;
-        alert(coordinates_of_last_click);
+        // alert(coordinates_of_last_click);
         if(curPosClicked) {
             curMarker.setMap(null);
         }

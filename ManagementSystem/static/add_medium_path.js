@@ -1,3 +1,7 @@
+let short_path_points_for_medium = JSON.parse(localStorage.getItem("the_points_of_the_short_path"));
+window.onload=function () {
+    getRequestAttractions(markAttractionsOfMediumPath);
+};
 
 function getRequestMediumPath(funcOnMedPath){
     // the server port and my ip
@@ -14,17 +18,16 @@ function postRequestMediumPath(medium_path){
 function markAttractionsOfMediumPath(attractionsJSON){
     attractionsJSON.forEach(function (attr) {
         let pos = {lat: attr['x'], lng: attr['y']};
-        localStorage.setItem("title"+pos,"attraction ID: "+attr['id']+"\nattraction name: "+attr['name']+"\nposition: ("+attr['x']+","+attr['y']+")");
-        markAttractionsOfMediumPath(pos);
-        // var currPoints = JSON.parse(localStorage.getItem("points"));
-        // currPoints.push(x.position);
-        // localStorage.setItem("points",JSON.stringify(currPoints));
+        if(true) {
+            alert("if point in:"+short_path_points_for_medium.includes(pos) +"\nthe point attr: "+pos+"\n the arr: "+short_path_points_for_medium);
 
-
+            // localStorage.setItem("title" + pos, "attraction ID: " + attr['id'] + "\nattraction name: " + attr['name'] + "\nposition: (" + attr['x'] + "," + attr['y'] + ")");
+            // markAttractionOfMediumPath(pos);
+        }
     });
 }
 
-function markAttractionsOfMediumPath(pos){
+function markAttractionOfMediumPath(pos){
     let the_title=localStorage.getItem("title"+pos);
         let marker = new google.maps.Marker({
           position: pos,
