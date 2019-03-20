@@ -12,7 +12,7 @@ let pointsOfPath = [];
 
 function initMapAndAttractions(){
     initMap();
-    initAttractionsMarkers();
+    initAttractionsMarkersOfShortPath();
 }
 
 function initMap() {
@@ -20,7 +20,7 @@ function initMap() {
         zoom: 18,
         center: {lat: 31.262860, lng: 34.801753}
     });
-    initAttractionsMarkers();
+    //initAttractionsMarkersOfShortPath();
     listenerForMap();
    // initPoints();
     document.getElementById("things_to_fix").innerHTML = "need to fix: if we click on to points and then on the 'add' button it adds both of them." ;
@@ -73,5 +73,50 @@ function listenerForMap(){
 
             window.location.href='/edit_path';
         });
+}
+
+function getRequestShortPath(funcOnShortPath){
+    // serverRequest("GET", funcOnAttractions, 'http://192.168.1.12:12344/managementsystem/attraction/?format=json');
+    // the server port and my ip
+    serverRequest("GET", funcOnShortPath, 'http://10.0.0.7:12344/managementsystem/track/1/?format=json');
+}
+
+function postRequestShortPath(short_path){
+    alert("blatos");
+    serverRequest("POST", function noop(dummy){}, 'http://10.0.0.7:12344/managementsystem/track/1/',
+        JSON.stringify(short_path));
+}
+
+
+function markAttractionsOfShortPath(attractionsJSON){
+    attractionsJSON.forEach(function (attr) {
+        let pos = {lat: attr['x'], lng: attr['y']};
+        localStorage.setItem("title"+pos,"attraction ID: "+attr['id']+"\nattraction name: "+attr['name']+"\nposition: ("+attr['x']+","+attr['y']+")");
+        markAttractionOfShortPath(pos);
+        // var currPoints = JSON.parse(localStorage.getItem("points"));
+        // currPoints.push(x.position);
+        // localStorage.setItem("points",JSON.stringify(currPoints));
+
+
+    });
+}
+
+function markAttractionOfShortPath(pos){
+    let the_title=localStorage.getItem("title"+pos);
+        let marker = new google.maps.Marker({
+          position: pos,
+          map: map,
+          title:the_title
+          ,icon: {
+                url: "http://maps.google.com/mapfiles/ms/icons/blue-dot.png"
+                }
+        });
+        marker.setMap(map);
+        addEditListener(marker);
+        return marker;
+}
+
+function initAttractionsMarkersOfShortPath() {
+    getRequestAttractions(markAttractionsOfShortPath);
 }
 

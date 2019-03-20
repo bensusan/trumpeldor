@@ -36,6 +36,9 @@ function markAttraction(pos){
           position: pos,
           map: map,
           title:the_title
+          // ,icon: {
+          //       url: "http://maps.google.com/mapfiles/ms/icons/blue-dot.png"
+          //       }
         });
         marker.setMap(map);
         addEditListener(marker);
@@ -72,3 +75,6 @@ function deleteRequestAttraction(id){
 //     serverRequest("DELETE", function noop(dummy){}, 'http://10.0.0.7:12344/managementsystem/attraction/'+id,
 //         JSON.stringify(attraction));
 // }
+
+
+
