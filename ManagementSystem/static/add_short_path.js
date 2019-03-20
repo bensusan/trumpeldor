@@ -23,6 +23,7 @@ function initMap() {
     initAttractionsMarkers();
     listenerForMap();
    // initPoints();
+    document.getElementById("things_to_fix").innerHTML = "need to fix: if we click on to points and then on the 'add' button it adds both of them." ;
 
 }
 
