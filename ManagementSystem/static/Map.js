@@ -26,6 +26,7 @@ window.onload=function () {
 };
 
 function initMapAndAttractions(){
+        //alert("dasmaps");
     initMap();
     initAttractionsMarkers();
 }

@@ -2,7 +2,11 @@ let short_path_points_for_medium = JSON.parse(localStorage.getItem("the_points_o
 let short_path_points_for_medium_lat = [];
 let short_path_points_for_medium_lng = [];
 
-window.onload=function () {
+
+function initMapAndAttractionss(){
+    short_path_points_for_medium = JSON.parse(localStorage.getItem("the_points_of_the_short_path"));
+    short_path_points_for_medium_lat = [];
+    short_path_points_for_medium_lng = [];
     let i;
     for(i=0;i<short_path_points_for_medium.length;i++)
     {
@@ -11,22 +15,16 @@ window.onload=function () {
     }
 
     getRequestAttractions(markAttractionsOfMediumPath);
-};
-
-
-
-function initMapAndAttractions(){
-
-    initMap();
+    initMapp();
     initAttractionsMarkersOfMediumPath();
-    alert("das");
 }
 
-function initMap() {
+function initMapp() {
      map = new google.maps.Map(document.getElementById('map'), {
         zoom: 18,
         center: {lat: 31.262860, lng: 34.801753}
     });
+
    initAttractionsMarkersOfMediumPath();
     listenerForMap();
    // initPoints();
@@ -46,17 +44,22 @@ function postRequestMediumPath(medium_path){
 
 
 function markAttractionsOfMediumPath(attractionsJSON){
+
     attractionsJSON.forEach(function (attr) {
 
         let pos = {lat: attr['x'], lng: attr['y']};
         let lats=short_path_points_for_medium_lat.map(function (x){return x.toFixed(8)});
         let lngs=short_path_points_for_medium_lng.map(function (x){return x.toFixed(8)});
-
-        if(lats.includes((pos.lat).toFixed(8))&& lngs.includes((pos.lng).toFixed(8))) {
+        let firstBool = lats.includes((pos.lat).toFixed(8));
+        let secondBool = lngs.includes((pos.lng).toFixed(8));
+        if(firstBool && secondBool) {
             // alert("if point in:"+lats.includes((pos.lat).toFixed(8)) +lngs.includes((pos.lng).toFixed(8)));
-
             localStorage.setItem("title" + pos, "attraction ID: " + attr['id'] + "\nattraction name: " + attr['name'] + "\nposition: (" + attr['x'] + "," + attr['y'] + ")");
             markAttractionOfMediumPath(pos);
+        }
+        else{
+            localStorage.setItem("title" + pos, "attraction ID: " + attr['id'] + "\nattraction name: " + attr['name'] + "\nposition: (" + attr['x'] + "," + attr['y'] + ")");
+            markAttraction(pos);
         }
     });
 }
@@ -78,7 +81,6 @@ function markAttractionOfMediumPath(pos){
 }
 
 function initAttractionsMarkersOfMediumPath() {
-    alert("das");
     getRequestAttractions(markAttractionsOfMediumPath);
 }
 

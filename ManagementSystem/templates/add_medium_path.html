@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Add Medium Path</title>
-    {% load static %}
+{% load static %}
 <link rel="stylesheet" href="{% static 'Map.css' %}?version=3">
+{% load static %}
+<script src="{% static 'attractions.js' %}?version=5"></script>
     {% load static %}
-<script src="{% static 'attractions.js' %}?version=3"></script>
-    {% load static %}
-<script src="{% static 'add_medium_path.js' %}?version=5"></script>
+<script src="{% static 'add_medium_path.js' %}?version=3"></script>
 </head>
 <body>
 <button onclick="window.location.href='/main'" type="button">Back to menu</button>
@@ -22,7 +22,7 @@
 <div id="map">
 {% load static %}
 <script src="{% static 'Map.js' %}?version=3"></script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD7rvXqYArUeu8hVHETM6g9w-ek0RqusZ4&callback=initMapAndAttractions&language=he&region=UK"
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD7rvXqYArUeu8hVHETM6g9w-ek0RqusZ4&callback=initMapAndAttractionss&language=he&region=UK"
     async defer>
     </script>
 
