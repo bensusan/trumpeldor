@@ -55,6 +55,14 @@ def add_short_path_page(request):
     return render(request, "add_short_path.html")
 
 
+def add_medium_path_page(request):
+    return render(request, "add_medium_path.html")
+
+
+def add_long_path_page(request):
+    return render(request, "add_long_path.html")
+
+
 def edit_path_page(request):
     return render(request, "edit_path.html")
 
