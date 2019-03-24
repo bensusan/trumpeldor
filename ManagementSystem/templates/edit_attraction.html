@@ -7,7 +7,7 @@
     {% load static %}
 <link rel="stylesheet" href="{% static 'SideMenu.css' %}?version=3">
 {% load static %}
-<link rel="stylesheet" href="{% static 'signInForm.css' %}?version=1">
+<link rel="stylesheet" href="{% static 'signInForm.css' %}?version=2">
 
               {% load static %}
 <script src="{% static 'Map.js' %}"?version="1"></script>
@@ -50,6 +50,8 @@
     <label for="desc"><b>Description</b></label>
     <input  type="text" id="desc" placeholder="Enter description" name="attr_desc" required>
 
+      <label for="subt"><b>Subtitles</b></label>
+    <input  type="text" id="subt" placeholder="Enter Subtitles" name="attr_subt" required>
 
 {#      <button onclick="window.location.href='/add_game'" type="button">Add Game</button>#}
 {#      <button onclick="window.location.href='/pick_aq'" type="button">Edit American Questions</button>#}
