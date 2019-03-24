@@ -2,12 +2,18 @@
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
+    {% load static %}
+<link rel="stylesheet" href="{% static 'attractions_style.css' %}?version=2">
+      {% load static %}
+<link rel="stylesheet" href="{% static 'SideMenu.css' %}?version=3">
+
 {% load static %}
 <link rel="stylesheet" href="{% static 'Map.css' %}?version=1">
 {% load static %}
 <script src="{% static 'attractions.js' %}?version=4"></script>
 </head>
 <body>
+<div class="paging">
 <button onclick="window.location.href='/main'" type="button">Back to menu</button>
 
 <div id="map">
@@ -25,9 +31,17 @@
 <button id="edit_attraction" type="button">Edit Attraction</button>
 </div>
 <p></p>
-<input type="text" id="manual_lat" placeholder="Enter latitude" required>
-<input type="text" id="manual_lng" placeholder="Enter longitude" required>
-<button id="add_manually" type="button">Add Manually</button>
+<input type="text" id="manual_lat" placeholder="Enter latitude" style="display: none" required>
+<input type="text" id="manual_lng" placeholder="Enter longitude" style="display: none" required>
+<button id="add_manually" type="button" style="display: none">Add Manually</button>
 
+</div>
+
+<div>
+<nav id="sideMenu"></nav>
+{% load static %}
+<script src="{% static 'menu_of_attractions.js' %}?version=1"></script>
+
+</div>
 </body>
 </html>

@@ -13,6 +13,18 @@ let coordinates_of_last_click;
 let points = JSON.parse(localStorage.getItem("points"));
 
 window.onload=function () {
+    let add_manually_menu = document.getElementById('add_manually_menu');
+    add_manually_menu.addEventListener('click', function() {
+            var the_manual_lat = document.getElementById("manual_lat");
+            the_manual_lat.style.display = "inline";
+
+            var the_manual_lng = document.getElementById("manual_lng");
+            the_manual_lng.style.display = "inline";
+
+            var add_manually_button = document.getElementById("add_manually");
+            add_manually_button.style.display = "inline";
+        });
+
     let addManuallyBTN = document.getElementById('add_manually');
         addManuallyBTN.addEventListener('click', function() {
             let manualLat = document.getElementById('manual_lat').value;
