@@ -1,6 +1,7 @@
 let short_path_points_for_medium = JSON.parse(localStorage.getItem("the_points_of_the_short_path"));
 let short_path_points_for_medium_lat = [];
 let short_path_points_for_medium_lng = [];
+let curPosClicked;
 
 var str_of_points="";
 let pointsOfPath = [];
@@ -27,9 +28,10 @@ function initMapAndAttractionss(){
   function addEditListenerr(m) {
 
       m.addListener('click', function() {
+          curPosClicked=m.position;
         var addToPathBTN = document.getElementById('add_reg_to_path_med');
         addToPathBTN.addEventListener('click', function() {
-            if(pointsOfPath.indexOf(m.position)==-1)
+            if(pointsOfPath.indexOf(m.position)==-1 && curPosClicked==m.position)
             {
                 pointsOfPath.push(m.position);
                 str_of_points=str_of_points+m.position+"<br />";

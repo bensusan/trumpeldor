@@ -4,6 +4,9 @@ let the_path_points_for_long_lat = [];
 let the_path_points_for_long_lng = [];
 let the_path_points_for_long = [];
 
+let curPosClicked;
+
+
 var str_of_points="";
 let pointsOfPath = [];
 
@@ -44,9 +47,10 @@ function initMapAndAttractionsss(){
   function addEditListenerr(m) {
 
       m.addListener('click', function() {
+          curPosClicked=m.position;
         var addToPathBTN = document.getElementById('add_reg_to_path_long');
         addToPathBTN.addEventListener('click', function() {
-            if(pointsOfPath.indexOf(m.position)==-1)
+            if(pointsOfPath.indexOf(m.position)==-1 && curPosClicked==m.position)
             {
                 pointsOfPath.push(m.position);
                 str_of_points=str_of_points+m.position+"<br />";

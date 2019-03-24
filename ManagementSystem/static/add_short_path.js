@@ -2,7 +2,7 @@
 
 // alert("aaaaaaaa");
 
-// let curPosClicked;
+let curPosClicked;
 // let curMarker;
 // let coordinates_of_last_click;
 var str_of_points="";
@@ -49,10 +49,11 @@ function initMap() {
 
   function addEditListener(m) {
       m.addListener('click', function() {
-
+        curPosClicked=m.position;
         var addToPathBTN = document.getElementById('add_reg_to_path');
         addToPathBTN.addEventListener('click', function() {
-            if(pointsOfPath.indexOf(m.position)==-1)
+
+            if(pointsOfPath.indexOf(m.position)==-1 && curPosClicked==m.position)
             {
                 // alert("only once!");
                 pointsOfPath.push(m.position);
@@ -83,6 +84,28 @@ function listenerForMap(){
 
             window.location.href='/edit_path';
         });
+
+         var showwBTN = document.getElementById('showingshit');
+        showwBTN.addEventListener('click', function() {
+            getRequestPaths(doShitToDelete);
+             alert("shit!");
+
+        });
+}
+
+
+function doShitToDelete(pathsJSON) {
+
+    pathsJSON.forEach(function (path) {
+      alert("this: "+path.points);
+    });
+
+}
+
+function getRequestPaths(funcOnPaths){
+    // serverRequest("GET", funcOnAttractions, 'http://192.168.1.12:12344/managementsystem/attraction/?format=json');
+    // the server port and my ip
+    serverRequest("GET", funcOnPaths, 'http://10.0.0.4:12344/managementsystem/track/?format=json');
 }
 
 function getRequestShortPath(funcOnShortPath){
