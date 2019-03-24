@@ -73,12 +73,12 @@ function initMapp() {
 
 function getRequestLongPath(funcOnLongPath){
     // the server port and my ip
-    serverRequest("GET", funcOnLongPath, 'http://10.0.0.7:12344/managementsystem/track/3/?format=json');
+    serverRequest("GET", funcOnLongPath, 'http://10.0.0.4:12344/managementsystem/track/3/?format=json');
 }
 
 function postRequestLongPath(long_path){
     alert("long_blatos");
-    serverRequest("POST", function noop(dummy){}, 'http://10.0.0.7:12344/managementsystem/track/3/',
+    serverRequest("POST", function noop(dummy){}, 'http://10.0.0.4:12344/managementsystem/track/3/',
         JSON.stringify(long_path));
 }
 

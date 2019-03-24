@@ -86,12 +86,12 @@ function listenerForMap(){
 function getRequestShortPath(funcOnShortPath){
     // serverRequest("GET", funcOnAttractions, 'http://192.168.1.12:12344/managementsystem/attraction/?format=json');
     // the server port and my ip
-    serverRequest("GET", funcOnShortPath, 'http://10.0.0.7:12344/managementsystem/track/1/?format=json');
+    serverRequest("GET", funcOnShortPath, 'http://10.0.0.4:12344/managementsystem/track/1/?format=json');
 }
 
 function postRequestShortPath(short_path){
     alert("blatos");
-    serverRequest("POST", function noop(dummy){}, 'http://10.0.0.7:12344/managementsystem/track/1/',
+    serverRequest("POST", function noop(dummy){}, 'http://10.0.0.4:12344/managementsystem/track/1/',
         JSON.stringify(short_path));
 }
 

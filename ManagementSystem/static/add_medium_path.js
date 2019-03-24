@@ -56,12 +56,12 @@ function initMapp() {
 
 function getRequestMediumPath(funcOnMedPath){
     // the server port and my ip
-    serverRequest("GET", funcOnMedPath, 'http://10.0.0.7:12344/managementsystem/track/2/?format=json');
+    serverRequest("GET", funcOnMedPath, 'http://10.0.0.4:12344/managementsystem/track/2/?format=json');
 }
 
 function postRequestMediumPath(medium_path){
     alert("med_blatos");
-    serverRequest("POST", function noop(dummy){}, 'http://10.0.0.7:12344/managementsystem/track/2/',
+    serverRequest("POST", function noop(dummy){}, 'http://10.0.0.4:12344/managementsystem/track/2/',
         JSON.stringify(medium_path));
 }
 

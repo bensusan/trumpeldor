@@ -124,6 +124,6 @@ window.onload=function(){
 
     function editRequestAttraction(attraction,attr_id){
     alert("edit blat hui");
-    serverRequest("PUT", function noop(dummy){}, 'http://10.0.0.7:12344/managementsystem/attraction/'+attr_id+'/',
+    serverRequest("PUT", function noop(dummy){}, 'http://10.0.0.4:12344/managementsystem/attraction/'+attr_id+'/',
         JSON.stringify(attraction));
 }
