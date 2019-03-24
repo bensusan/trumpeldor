@@ -6,7 +6,7 @@ var loadFile = function(event) {
 var str;
 var attractionObjToUseInHintDelete;
 
-function funcForExistingHints(attractionsJSON){
+function funcForExistingAmericanQuestions(attractionsJSON){
         let name = localStorage.getItem("name_for_add_aq");
         let desc = localStorage.getItem("desc_for_add_aq");
       // alert("in get name! "+"of the origin : " + lat + " , " + lng);
@@ -14,24 +14,24 @@ function funcForExistingHints(attractionsJSON){
         let p = {name: attr['name'], description:attr['description']};
         if(p.name===name && p.description===desc)
         {
-            getRequestHints(hints_func,attr['id']);
+            getRequestAmericanQuestions(AmericanQuestions_func,attr['id']);
             attractionObjToUseInHintDelete=attr;
         }
         });
 
 }
 
-function hints_func(hintsJSON) {
+function AmericanQuestions_func(AmericanQuestionsJSON) {
         str="";
-        hintsJSON.forEach(function (hint) {
-            str=str+"id: "+hint['id'] +", data: "+ hint['data']+"<br />";
+        AmericanQuestionsJSON.forEach(function (aq) {
+            str=str+"id: "+aq['id'] +", question: "+ aq['question']+", answers: "+ aq['answers']+", indexOfCorrectAnswer: "+ aq['indexOfCorrectAnswer']+"<br />";
             // alert(str);
         });
         document.getElementById("existing_aqs").innerHTML = str ;
 }
 
 window.onload = function () {
-    getRequestAttractions(funcForExistingHints);
+    getRequestAttractions(funcForExistingAmericanQuestions);
 //////////////////////////////////////////////////////////////////////////////////////////
     var shiri = document.getElementById('shirimaimon');
         shiri.addEventListener('click', function() {
@@ -64,7 +64,7 @@ window.onload = function () {
             deleteChosenHintBTN.style.display = "inline";
 
             deleteChosenHintBTN.addEventListener('click', function() {
-                getRequestHints(funcInOrderToDeleteHint,attractionObjToUseInHintDelete['id']);
+                getRequestAmericanQuestions(funcInOrderToDeleteAmericanQuestion,attractionObjToUseInHintDelete['id']);
             });
         });
 
@@ -73,17 +73,18 @@ window.onload = function () {
 
 };
 
-function funcInOrderToDeleteHint(hintsJSON) {
-    let hint_id_that_was_picked = document.getElementById("write_aq_id_to_delete").value;
+
+function funcInOrderToDeleteAmericanQuestion(AmericanQuestionsJSON) {
+    let aq_id_that_was_picked = document.getElementById("write_aq_id_to_delete").value;
    // let number_hint_id = Number(hint_id_that_was_picked);
-      hintsJSON.forEach(function (hint) {
+      AmericanQuestionsJSON.forEach(function (aq) {
           // alert("the id is: "+attr['id']);
         // alert("in get name! "+"of the origin : " + lat + " , " + lng + "\n of the other: "+p.lat +" , "+ p.lng);
-        if(hint['id']==hint_id_that_was_picked)
+        if(aq['id']==aq_id_that_was_picked)
         {
             alert("before delete aq!");
-            deleteRequestHint(attractionObjToUseInHintDelete['id'],hint['id']);
-            window.location.href='/pick_hint';
+            deleteRequestAmericanQuestion(attractionObjToUseInHintDelete['id'],aq['id']);
+            window.location.href='/pick_aq';
         }
       });
 
@@ -155,5 +156,5 @@ function postRequestAmericanQuestion(aq,attr_id){
 }
 
 function deleteRequestAmericanQuestion(attr_id,aq_id){
-     serverRequest("DELETE", function noop(dummy){}, 'http://10.0.0.4:12344/managementsystem/attraction/'+attr_id+'/hint/'+aq_id+'/');
+     serverRequest("DELETE", function noop(dummy){}, 'http://10.0.0.4:12344/managementsystem/attraction/'+attr_id+'/aquestion/'+aq_id+'/');
     }
