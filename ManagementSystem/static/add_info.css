@@ -1,4 +1,9 @@
-body {font-family: Arial, Helvetica, sans-serif;}
+body {
+    background-image: url("back.jpg");
+    background-repeat: no-repeat;
+    background-color: #cccccc;
+    background-size: cover;
+    font-family: Arial, Helvetica, sans-serif;}
 
 input[type=text], select, textarea {
     width: 100%;
