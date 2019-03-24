@@ -24,6 +24,7 @@ urlpatterns = [
     path('add_hint/', views.add_hint_page),
     path('pick_hint/', views.pick_hint_page),
     path('edit_hint/', views.edit_hint_page),
+    path('pick_aq/', views.pick_aq_page),
 
 ]
 

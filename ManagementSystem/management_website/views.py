@@ -51,6 +51,10 @@ def add_path_page(request):
     return render(request, "add_path.html")
 
 
+def pick_aq_page(request):
+    return render(request, "pick_aq.html")
+
+
 def add_short_path_page(request):
     return render(request, "add_short_path.html")
 
