@@ -2,9 +2,12 @@
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
+    {% load static %}
+<link rel="stylesheet" href="{% static 'edit_attr_style.css' %}?version=1">
+    {% load static %}
+<link rel="stylesheet" href="{% static 'SideMenu.css' %}?version=3">
 {% load static %}
 <link rel="stylesheet" href="{% static 'signInForm.css' %}?version=1">
-
 
               {% load static %}
 <script src="{% static 'Map.js' %}"?version="1"></script>
@@ -21,14 +24,10 @@
 <button onclick="window.location.href='/attractions'" type="button">Back to map</button>
 <button onclick="showVals()" type="button">Show Values</button>
 
-
+<div class="paging">
 <div align="center">
 <h2>Edit Attraction</h2>
 <form>
-  <div class="imgcontainer">
-    <!-- <img src="img_avatar2.png" alt="Avatar" class="avatar"> -->  <!-- need to add logo or something-->
-  </div>
-
 
     <label for="name"><b>Upload Video: </b></label>
 
@@ -65,8 +64,15 @@
 
 
 </div>
+</div>
 
+<div>
 
+<nav id="sideMenu"></nav>
+{% load static %}
+<script src="{% static 'menu_of_edit_attractions.js' %}?version=1"></script>
+
+</div>
 
 
 </body>
