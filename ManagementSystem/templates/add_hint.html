@@ -4,9 +4,9 @@
     <meta charset="UTF-8">
     <title>Add Hint</title>
     {% load static %}
-<script src="{% static 'attractions.js' %}?version=1"></script>
+<script src="{% static 'attractions.js' %}?version=2"></script>
     {% load static %}
-<script src="{% static 'add_hint.js' %}?version=1"></script>
+<script src="{% static 'add_hint.js' %}?version=2"></script>
 </head>
 <body>
 
@@ -26,6 +26,8 @@
 
 <button type="button" id="add_vid_hint">add video</button>
 <p></p>
+<textarea id="vid_hint_description" placeholder="Write description..." style="display: none"></textarea>
+<p></p>
     <div id="message"></div>
 <video id="vid_hint_id" height="200px" width="350px" controls="" autoplay="" style="display: none"></video>
 <p></p>
@@ -34,6 +36,8 @@
 <p></p>
 
 <button type="button" id="add_pic_hint">add picture</button>
+<p></p>
+<textarea id="pic_hint_description" placeholder="Write description..." style="display: none"></textarea>
     <p></p>
     <p><input type="file"  accept="image/*" name="image" id="file"  onchange="loadFile(event)" style="display: none;"></p>
     <p><label id="click_here_label" for="file" style="display: none">Click Here!</label></p>

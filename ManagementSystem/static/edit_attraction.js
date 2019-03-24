@@ -101,6 +101,9 @@ window.onload=function(){
           // name=p.name;
           document.getElementById("attr_name").value = p.name;
           document.getElementById("desc").value = p.description;
+
+          localStorage.setItem("name_for_add_aq", p.name);
+        localStorage.setItem("desc_for_add_aq", p.description);
         }
       });
 

@@ -53,6 +53,9 @@ var picHintBTN = document.getElementById('add_pic_hint');
             var clickHere = document.getElementById("click_here_label");
             clickHere.style.display = "inline";
 
+            var picDesc = document.getElementById("pic_hint_description");
+            picDesc.style.display = "inline";
+
             var outpic = document.getElementById("output");
             outpic.style.display = "inline";
 
@@ -64,6 +67,9 @@ var vidHintBTN = document.getElementById('add_vid_hint');
         vidHintBTN.addEventListener('click', function() {
             var thevid = document.getElementById("vid_hint_id");
             thevid.style.display = "inline";
+
+            var vidDesc = document.getElementById("vid_hint_description");
+            vidDesc.style.display = "inline";
 
             var thevidbrowse = document.getElementById("vid_hint_browse_id");
             thevidbrowse.style.display = "inline";
@@ -108,6 +114,7 @@ function hint_funcToGetAttraction(attractionsJSON) {
             postRequestHint(textHintToSend,attr['id']);
             window.location.href='/add_hint';
         }
+
       });
 
     }
