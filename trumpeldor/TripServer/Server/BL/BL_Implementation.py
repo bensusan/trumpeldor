@@ -109,15 +109,13 @@ class BL_Implementation(BL_Abstract):
                                               a_question['indexOfCorrectAnswer'])
 
     def add_track(self, track):
-        print(track['points'])
-        print(track['subTrack'])
-        return self.DAL.add_track(track['subTrack'], track['points'], track['length'])
+        return self.DAL.add_track(track['points'], track['length'])
 
     def add_feedback_question(self, question, kind):#question, kind
         return self.DAL.add_feedback_question(question, kind)
 
     def get_track(self, track_len):
-        return self.DAL.add_track(track_len)
+        return self.DAL.get_track(track_len)
 
     def get_attraction(self, id):
         return self.DAL.get_attraction(id)
