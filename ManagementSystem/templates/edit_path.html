@@ -2,6 +2,8 @@
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
+    {% load static %}
+<link rel="stylesheet" href="{% static 'paths_style.css' %}?version=1">
 {% load static %}
 <link rel="stylesheet" href="{% static 'Map.css' %}?version=1">
 {#{% load static %}#}
@@ -17,7 +19,7 @@
 {#{% load static %}#}
 {#<script src="{% static 'attractions.js' %}?version=1"></script>#}
 
-
+<div align="center">
 <div id="map">
 {#{% load static %}#}
 {#<script src="{% static 'edit_path.js' %}?version=2"></script>#}
@@ -33,6 +35,6 @@
 {#<button id="edit_attraction" type="button">Finish!</button>#}
 </div>
 
-
+</div>
 </body>
 </html>

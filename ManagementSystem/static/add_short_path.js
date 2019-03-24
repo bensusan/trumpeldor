@@ -1,7 +1,5 @@
 //from django.conf import settings
 
-// alert("aaaaaaaa");
-
 let curPosClicked;
 // let curMarker;
 // let coordinates_of_last_click;
@@ -25,26 +23,7 @@ function initMap() {
    // initPoints();
 
 }
-  //
-  //
-  //
-  // function initPoints(){
-  // for (var i = 0; i < points.length; i++) {
-  //   addPoint2(points[i],i);
-  //     localStorage.setItem("i" + i, "0");
-  // }
-  // }
-  //
-  // function addPoint2(p,num){
-  //   var myLatLng = {lat: p.lat, lng: p.lng};
-  //   var m = new google.maps.Marker({
-  //     position:myLatLng,
-  //     map: map,
-  //     title: "Point no."+(num+1)+".\n Belongs to the "+localStorage.getItem("path_len"+num) +" path."
-  //   });
-  //   m.setMap(map);
-  //
-  // }
+
 
   function addEditListener(m) {
       m.addListener('click', function() {
