@@ -162,13 +162,13 @@ class Track(generics.GenericAPIView):
     def get(self, request, *args, **kwargs):
         ans = BL.get_track(self.kwargs['length'])
         ans = TrackSerializer(ans, many=False)
-        ans = json.loads(json.dumps(ans.data))
+        ans = json.dumps(list(ans.data))
         return Response(ans)
 
-    #def delete(self, request, *args, **kwargs):
-        # ans = BL.delete_track(self.kwargs['length'])
-        # ans = json.loads(json.dumps(ans))
-        # return Response(ans)
+    def delete(self, request, *args, **kwargs):
+        ans = BL.delete_track(self.kwargs['length'])
+        ans = json.loads(json.dumps(ans))
+        return Response(ans)
 
 
 class AttractionsList(generics.GenericAPIView):
@@ -219,8 +219,24 @@ class Attraction(generics.GenericAPIView):
         return Response(ans)
 
 
+class EntertainmentsList(generics.GenericAPIView):
+    serializer_class = EntertainmentSerializer
+    queryset = ''
 
+    def get(self, request, *args, **kwargs):
+        return general_post_or_get(
+            None,
+            "AddAttraction",
+            BL.get_attractions,
+            AttractionSerializer,
+            True)
 
+    def post(self, request, *args, **kwargs):
+        return general_post_or_get(
+            request,
+            "AddAttraction",
+            BL.add_attraction,
+            AttractionSerializer)
 
 def sign_in_page(request):
     return render(request, "signIn.html")

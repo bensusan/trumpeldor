@@ -70,15 +70,13 @@ class DAL_Implementation(DAL_Abstract):
         aq.save()
         return aq
 
-    def add_track(self, subTrack, points, length):
-        track = None
-        if subTrack == null:
-            track = Track(length=length)
-        else:
-            track = Track(subTrack=subTrack, length=length)
+    def add_track(self, points, length):
+        track = Track(length=length)
         track.save()
         for p in points:
-            track.points.add(p)
+            attr = self.get_attraction(p['id'])
+            track.points.add(attr)
+            track.save()
         return track
 
     def add_feedback_question(self, question, kind):

@@ -215,10 +215,10 @@ class DALProxy(DAL_Abstract):
             raise NotImplementedError("Should have implemented this")
         return self.Implementation.add_american_question(id_attraction, question, answers, indexOfCorrectAnswer)
 
-    def add_track(self, subTrack, points, length):
+    def add_track(self, points, length):
         if self.Implementation is None:
             raise NotImplementedError("Should have implemented this")
-        return self.Implementation.add_track(subTrack, points, length)
+        return self.Implementation.add_track(points, length)
 
     def add_feedback_question(self, question, kind):
         if self.Implementation is None:
