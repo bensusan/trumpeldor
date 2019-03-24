@@ -1,3 +1,10 @@
+body {
+    background-image: url("back.jpg");
+    background-repeat: no-repeat;
+    background-color: #cccccc;
+    background-size: cover;
+}
+
 .paging {
     position: absolute;
     top: 50px;
