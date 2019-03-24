@@ -23,6 +23,6 @@ function encodeImageFileAsURL(element) {
    //alert(reader.result)
    shit(reader.result)
   }
-  
+
   reader.readAsDataURL(file);
 }
