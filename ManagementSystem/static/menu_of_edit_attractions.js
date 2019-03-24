@@ -4,7 +4,9 @@ document.getElementById("sideMenu").innerHTML = '<div class="sidenav">\n' +
     '  <h2 style="color:#818181;">Edit Attraction</h2>' +
     '  <a href="/main">Back</a>\n' +
     '  <a href="/attractions">Back To Map</a>\n' +
-    '  <a href="/additional_info">Additional Info</a>\n' +
+    '  <a href="/add_game">Add Game</a>\n' +
+    '  <a href="/pick_aq">Edit American Questions</a>\n' +
+    '  <a href="/pick_hint">Edit Hints</a>\n' +
     '</div>\n' +
     '\n' +
     '<div class="main">\n' +
