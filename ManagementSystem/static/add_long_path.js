@@ -37,7 +37,6 @@ function initMapAndAttractionsss(){
         the_path_points_for_long_lat.push(the_path_points_for_long[i].lat);
         the_path_points_for_long_lng.push(the_path_points_for_long[i].lng);
     }
-    document.getElementById("things_to_fix_long").innerHTML = "need to fix: if we click on to points and then on the 'add' button it adds both of them." ;
 
     getRequestAttractions(markAttractionsOfLongPath);
     initMapp();

@@ -18,7 +18,6 @@ function initMapAndAttractionss(){
         short_path_points_for_medium_lat.push(short_path_points_for_medium[i].lat);
         short_path_points_for_medium_lng.push(short_path_points_for_medium[i].lng);
     }
-    document.getElementById("things_to_fix").innerHTML = "need to fix: if we click on to points and then on the 'add' button it adds both of them." ;
 
     getRequestAttractions(markAttractionsOfMediumPath);
     initMapp();
