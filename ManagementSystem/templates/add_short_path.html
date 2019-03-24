@@ -3,6 +3,8 @@
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Add Short Path</title>
+    {% load static %}
+<link rel="stylesheet" href="{% static 'paths_style.css' %}?version=1">
 {% load static %}
 <link rel="stylesheet" href="{% static 'Map.css' %}?version=3">
 {% load static %}
@@ -18,7 +20,7 @@
 {#{% load static %}#}
 {#<script src="{% static 'attractions.js' %}?version=1"></script>#}
 
-
+<div align="center">
 <div id="map">
 {% load static %}
 <script src="{% static 'Map.js' %}?version=1"></script>
@@ -35,7 +37,7 @@
     <button id="showingshit" type="button">show shit!</button>
 </div>
 
-
+</div>
 </body>
 <p></p>
 <p></p>

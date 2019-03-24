@@ -3,6 +3,8 @@
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Add Long Path</title>
+    {% load static %}
+<link rel="stylesheet" href="{% static 'paths_style.css' %}?version=1">
 {% load static %}
 <link rel="stylesheet" href="{% static 'Map.css' %}?version=3">
 {% load static %}
@@ -18,7 +20,7 @@
 {#{% load static %}#}
 {#<script src="{% static 'attractions.js' %}?version=1"></script>#}
 
-
+<div align="center">
 <div id="map">
 {% load static %}
 <script src="{% static 'Map.js' %}?version=3"></script>
@@ -31,6 +33,7 @@
 <button id="add_reg_to_path_long" type="button">Add To Path</button>
 <button id="finish_reg_long" type="button">Finish!</button>
 
+</div>
 </body>
 <p></p>
 <p></p>
