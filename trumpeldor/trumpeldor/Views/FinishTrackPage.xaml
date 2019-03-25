@@ -7,9 +7,8 @@
         <StackLayout Style="{DynamicResource mainStackLayout}">
             <Label x:Name="titleLabel" Text="{translator:Translate congrdulation_you_finish_the_track_with }" Style="{DynamicResource lableStyle}"/>
             <Button x:Name = "continueButton" Text="{translator:Translate continue_to_longer_track}" Clicked="Continiue_Button_Clicked" Style="{StaticResource largeButtonStyle}"/>
-            <Button x:Name = "shareButton" Text="{translator:Translate share}" Clicked="Share_Button_Clicked" Style="{StaticResource largeButtonStyle}"/>
             <Button x:Name = "leadingTableButton" Text="{translator:Translate leading_Table}" Clicked="Leading_Table_Button_Clicked" Style="{StaticResource largeButtonStyle}"/>
-            <!--<Button x:Name = "feedbackButton" Text="{translator:Translate feedback}" Clicked="feedback_Button_Clicked" Style="{StaticResource largeButtonStyle}"/>-->
+            <Button x:Name = "shareButton" Text="{translator:Translate share}" Clicked="Share_Button_Clicked" Style="{StaticResource largeButtonStyle}"/>
             <Button x:Name = "done" Text="{translator:Translate End}" Clicked="Done_Button_Clicked" Style="{StaticResource largeButtonStyle}"/>
         </StackLayout>
     </ContentPage.Content>

@@ -15,7 +15,8 @@ namespace trumpeldor
             Hints_More_Than_Three = -10,
             AQ_Mistake = -2,
             AQ_Correct = 10,
-            Attraction_Arrive = 50
+            Attraction_Arrive = 50,
+            Sliding_Puzzle_Solved = 10
         }
 
         private static GameController instance = null;
@@ -26,6 +27,7 @@ namespace trumpeldor
         public bool isFinishTrip;
         const int LOGIN_RECENETLY_DIFFERENCE_HOURS = 36; //TODO - Very specific for now
         public Track extendTrack = null;
+        public bool isAttractionDone = false;
 
         public static GameController getInstance()
         {
@@ -123,6 +125,7 @@ namespace trumpeldor
 
         internal void FinishAttraction()
         {
+            isAttractionDone = true;
             SheredClasses.Point userLocation = GetUserLocation();
             isFinishTrip = this.currentTrip.DoneMyAttraction(userLocation.x, userLocation.y);
             UpdateTrip();

@@ -21,13 +21,15 @@ namespace trumpeldor.Views
 
         bool doneWaiting = false;
         int numOfSecondsLeft = 5;
+        private ContentPage nextPage;
 
-        public MultipleChoiceQuestionPage (AmericanQuestion aq)
+        public MultipleChoiceQuestionPage (ContentPage nextPage)
 		{
 			InitializeComponent ();
+            this.nextPage = nextPage;
             this.mistakes = 0;
-            this.aq = aq;
             gc = GameController.getInstance();
+            this.aq = gc.currentTrip.GetCurrentAttraction().americanQuestion;
             attractionQuestion.Text = aq.question;
             answersInitialize();
         }
@@ -79,32 +81,30 @@ namespace trumpeldor.Views
                 answersLayout.Children.Add(answerButton);
             }
         }
-        private void Correct_Answer_Button_Clicked(object sender, EventArgs e)
+        private async void Correct_Answer_Button_Clicked(object sender, EventArgs e)
         {
             scoreLabel.Text = AppResources.score + ": " + gc.EditScore(GameController.SCORE_VALUE.AQ_Correct);
             foreach (Button answer in answersLayout.Children)
             {
-                answer.BackgroundColor = Color.Default;
+                //answer.BackgroundColor = Color.Default;
                 answer.Style = (Style)Application.Current.Resources["largeButtonStyle"];
             }
-
+            Color regular = ((Button)sender).BackgroundColor;
             ((Button)sender).BackgroundColor = Color.Green;
-            Device.BeginInvokeOnMainThread(async () => await DisplayAlert(AppResources.Destionation_Complete, "", AppResources.ok));
+            await Task.Delay(100);
             gc.FinishAttraction();
 
-            var existingPages = Navigation.NavigationStack.ToList();
-            foreach (var page in existingPages)
-            {
-                Navigation.RemovePage(page);
-            }
-            if (gc.isFinishTrip)
-            {
-                Application.Current.MainPage = new FinishTrackPage(gc.CanContinueToLongerTrack());
-            }
-            else
-            {
-                Application.Current.MainPage = new NavigationPage();
-            }
+            ((Button)sender).BackgroundColor = regular;
+
+            await Navigation.PopModalAsync();
+            //await Navigation.PopModalAsync();
+            //await Navigation.PopModalAsync();
+            //var existingPages = Navigation.NavigationStack.ToList();
+            //foreach (var page in existingPages)
+            //{
+            //    Navigation.RemovePage(page);
+            //}
+            //Application.Current.MainPage = nextPage;
 
         }
         private async void Wrong_Answer_Button_Clicked(object sender, EventArgs e)
@@ -112,10 +112,12 @@ namespace trumpeldor.Views
             scoreLabel.Text = AppResources.score + ": " + gc.EditScore(GameController.SCORE_VALUE.AQ_Mistake);
             foreach (Button answer in answersLayout.Children)
             {
-                answer.BackgroundColor = Color.Default;
+                //answer.BackgroundColor = Color.Default;
                 answer.Style = (Style)Application.Current.Resources["largeButtonStyle"];
             }
+            Color regular = ((Button)sender).BackgroundColor;
             ((Button)sender).BackgroundColor = Color.Red;
+            await Task.Delay(100);
             mistakes += 1;
             if (mistakes >= DESIRED_MISTAKES)
             {
@@ -139,6 +141,7 @@ namespace trumpeldor.Views
                 }
                 await DisplayAlert("You are good to go", "", AppResources.ok);
             }
+            ((Button)sender).BackgroundColor = regular;
         }
         
         bool callBack()

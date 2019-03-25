@@ -18,7 +18,9 @@ urlpatterns = [
     path('getAttractionForDebug/', GetAttractionForDebug.as_view()),
     path('getOpenMessages/', GetOpenMessages.as_view()),
     path('updateTrip/', UpdateTrip.as_view()),
-    path('getBestScores/', GetBestScores.as_view())
+    path('getBestScores/', GetBestScores.as_view()),
+    path('getEntertainment/', GetEntertainment.as_view())
+
 ]
 
 urlpatterns = format_suffix_patterns(urlpatterns)

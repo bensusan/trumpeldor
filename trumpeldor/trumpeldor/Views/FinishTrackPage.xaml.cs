@@ -87,7 +87,7 @@ namespace trumpeldor.Views
                     Navigation.RemovePage(page);
                 }
                 gc.UpdateTrip();
-                Application.Current.MainPage = new FirstPage(false);
+                Application.Current.MainPage = new FirstPage();
             }
         }
 

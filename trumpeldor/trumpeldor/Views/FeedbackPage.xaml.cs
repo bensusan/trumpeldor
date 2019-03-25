@@ -61,7 +61,13 @@ namespace trumpeldor.Views
                 }
             }
             gc.UpdateTrip();
-            Application.Current.MainPage = new FirstPage(false);
+
+            var existingPages = Navigation.NavigationStack.ToList();
+            foreach (var page in existingPages)
+            {
+                Navigation.RemovePage(page);
+            }
+            Application.Current.MainPage = new FirstPage();
         }
     }
 }

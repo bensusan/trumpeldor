@@ -5,6 +5,8 @@ from Server.serializers import *
 from Server.models import *
 from itertools import chain
 import TripServer.settings as settings
+import json
+
 
 def getDistance(lat1, lon1, lat2, lon2):
     def haversin(x):
@@ -155,6 +157,26 @@ class BL_Implementation(BL_Abstract):
 
     def getBestScores(self):
         return self.DAL.getAllTrips()[::-1][:settings.TOP_X]
+
+    def getEntertainment(self, attraction):
+        attr = self.getAttraction(attraction)
+        entertainment = self.DAL.getSlidingPuzzle(attr)
+        classSerializer = SlidingPuzzleSerializer
+        className = 'SlidingPuzzle'
+        # TODO - Other entertainments
+        # if entertainment is None:
+        #     entertainment = self.DAL.getPuzzle(attr)
+        #     classSerializer = PuzzleSerializer
+        #     className = 'Puzzle'
+        #     if entertainment is None:
+        #         entertainment = self.DAL.getFindTheDifferences(attr)
+        #         classSerializer = FindTheDifferencesSerializer
+        #         className = 'FindTheDifferences'
+        entertainment = classSerializer(entertainment)
+        entertainment = json.loads(json.dumps(entertainment.data))
+        # entertainmentWrapper = '{"className":' + className + ',"object":' + entertainment + '}'
+        entertainmentWrapper = {'className': className, 'object': entertainment}
+        return entertainmentWrapper
 
     def delete_attraction(self, id):
         if self.get_attraction(id) is not None:

@@ -6,37 +6,40 @@ using System.Threading.Tasks;
 using trumpeldor.ViewModels;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
-
+using trumpeldor.SheredClasses;
 namespace trumpeldor.Views
 {
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class SlidingPuzzlePage : ContentPage
 	{
-        private int width;
         private SlidingPuzzleTile[,] tiles;
         private int emptyRow ;
         private int emptyCol ;
         private double tileSize;
         private bool isBusy;
+        private SlidingPuzzle sp;
+        private ContentPage nextPage;
+        private GameController gc;
 
-        public SlidingPuzzlePage ()
+        public SlidingPuzzlePage (SlidingPuzzle sp, ContentPage nextPage)
 		{
             InitializeComponent ();
+            this.nextPage = nextPage;
+            this.gc = GameController.getInstance();
+            this.sp = sp;
+            tiles = new SlidingPuzzleTile[sp.width, sp.height];
+            emptyRow = sp.width - 1;
+            emptyCol = sp.height - 1;
 
-            width = 3;
-            tiles = new SlidingPuzzleTile[width, width];
-            emptyRow = width - 1;
-            emptyCol = width - 1;
-
-            for (int row = 0; row < width; row++)
+            for (int row = 0; row < sp.width; row++)
             {
-                for (int col = 0; col < width; col++)
+                for (int col = 0; col < sp.height; col++)
                 {
-                    if (row == width-1 && col == width - 1)
+                    if (row == emptyRow && col == emptyCol)
                     {
                         break;
                     }
-                    SlidingPuzzleTile tile = new SlidingPuzzleTile(row, col);
+                    SlidingPuzzleTile tile = new SlidingPuzzleTile(row, col, sp.piecesURLS[row*sp.width +col]);
 
                     TapGestureRecognizer tapGestureRecognizer = new TapGestureRecognizer();
                     tapGestureRecognizer.Tapped += OnTileTapped;
@@ -48,6 +51,12 @@ namespace trumpeldor.Views
             }
 
             shuffle();
+        }
+
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+            scoreLabel.Text = AppResources.score + ": " + gc.GetScore();
         }
 
         void OnContainerSizeChanged(object sender, EventArgs args)
@@ -64,9 +73,9 @@ namespace trumpeldor.Views
                                                          StackOrientation.Horizontal;
 
             // Calculate tile size and position based on ContentView size.
-            tileSize = Math.Min(width, height) / this.width;
-            absoluteLayout.WidthRequest = this.width * tileSize;
-            absoluteLayout.HeightRequest = this.width * tileSize;
+            tileSize = Math.Min(width, height) / this.sp.width;
+            absoluteLayout.WidthRequest = this.sp.width * tileSize;
+            absoluteLayout.HeightRequest = this.sp.width * tileSize;
 
             foreach (View fileView in absoluteLayout.Children)
             {
@@ -89,18 +98,18 @@ namespace trumpeldor.Views
 
             await ShiftIntoEmpty(tappedTile.currentRow, tappedTile.currentCol);
             isBusy = false;
-            isPuzzleSolved();
+            await isPuzzleSolved();
         }
 
-        private void isPuzzleSolved()
+        private async Task isPuzzleSolved()
         {
             try
             {
 
 
-                for (int row = 0; row < width; row++)
+                for (int row = 0; row < sp.width; row++)
                 {
-                    for (int col = 0; col < width; col++)
+                    for (int col = 0; col < sp.height; col++)
                     {
                         if (tiles[row, col]!=null && !tiles[row, col].isTilePossitionIsCorrect())
                         {
@@ -113,8 +122,13 @@ namespace trumpeldor.Views
             {
                 Console.WriteLine(e.StackTrace);
             }
+
+            scoreLabel.Text = "" + gc.EditScore(GameController.SCORE_VALUE.Sliding_Puzzle_Solved);
+            gc.FinishAttraction();
+
+            await Navigation.PopModalAsync();
             //TODO puzzle solve
-            DisplayAlert("", "puzzle solved", "OK");
+            //DisplayAlert("", "puzzle solved", "OK");
         }
 
         async Task ShiftIntoEmpty(int tappedRow, int tappedCol, uint length = 100)
@@ -187,8 +201,8 @@ namespace trumpeldor.Views
             isBusy = true;
             for (int i = 0; i < 50; i++)
             {
-                await ShiftIntoEmpty(rand.Next(width), emptyCol, 25);
-                await ShiftIntoEmpty(emptyRow, rand.Next(width), 25);
+                await ShiftIntoEmpty(rand.Next(sp.height), emptyCol, 25);
+                await ShiftIntoEmpty(emptyRow, rand.Next(sp.width), 25);
             }
             isBusy = false;
         }

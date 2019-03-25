@@ -19,29 +19,17 @@ namespace trumpeldor.Views
     public partial class FirstPage : ContentPage
     {
         private GameController gc;
-        private bool firstAppear;
 		public FirstPage ()
 		{
             InitializeComponent();
             gc = GameController.getInstance();
-            firstAppear = true;
-        }
-
-        public FirstPage(bool firstAppear) : this()
-        {
-            this.firstAppear = firstAppear;
         }
 
         protected override void OnAppearing()
         {
             base.OnAppearing();
-            if (this.firstAppear)
-            {
-                AskPermissionToUseLocation();
-                ShowMessagesInStart();
-            }
             ShowRelevantFunctionalitiesAccordingToLocation();
-        }
+    }
 
         private void ShowRelevantFunctionalitiesAccordingToLocation()
         {
@@ -62,38 +50,37 @@ namespace trumpeldor.Views
             });
         }
 
-        private void AskPermissionToUseLocation()
+        private Task<bool> AskPermissionToUseLocation()
         {
 
-            Task.Run(async () =>
+            //Task.Run(async () =>
+            //{
+            //    Permission permission = Permission.Location;
+            //    var permissionStatus = await CrossPermissions.Current.CheckPermissionStatusAsync(permission);
+            //    while (permissionStatus != PermissionStatus.Granted)
+            //    {
+            //        var response = await CrossPermissions.Current.RequestPermissionsAsync(permission);
+            //        permissionStatus = response[permission];
+            //    }
+            //});
+
+            var task = Task.Run(async () =>
             {
                 Permission permission = Permission.Location;
                 var permissionStatus = await CrossPermissions.Current.CheckPermissionStatusAsync(permission);
-                while (permissionStatus != PermissionStatus.Granted)
+                if (permissionStatus != PermissionStatus.Granted)
                 {
                     var response = await CrossPermissions.Current.RequestPermissionsAsync(permission);
-                    permissionStatus = response[permission];
+                    return response[permission] == PermissionStatus.Granted;
                 }
+                return true;
             });
-        }
-
-        private void ShowMessagesInStart()
-        {
-            Task.Run(() =>
-            {
-                List<OpenMessage> messagesToShow = gc.GetOpenMessages();
-                foreach (OpenMessage om in messagesToShow)
-                {
-                    Device.BeginInvokeOnMainThread(async () => {
-                        await DisplayAlert(om.title, om.data, AppResources.ok);
-                    });
-                }
-            });
+            return task;
         }
 
         private async void Play_Button_Clicked(object sender, EventArgs e)
         {
-            //Application.Current.MainPage = new groupCreationPage();
+            while (!await AskPermissionToUseLocation()) ;
             await Navigation.PushModalAsync(new LoginsPage());
         }
 

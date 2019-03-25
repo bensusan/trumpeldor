@@ -175,7 +175,7 @@
     <value>leading table</value>
   </data>
   <data name="login_with_facebook" xml:space="preserve">
-    <value>login with facebook</value>
+    <value>Login with Facebook</value>
   </data>
   <data name="long_path" xml:space="preserve">
     <value>long</value>
@@ -299,5 +299,14 @@
   </data>
   <data name="position" xml:space="preserve">
     <value>Position</value>
+  </data>
+  <data name="continue_trip" xml:space="preserve">
+    <value>Continue trip</value>
+  </data>
+  <data name="login_with_google" xml:space="preserve">
+    <value>Login with Google account</value>
+  </data>
+  <data name="sliding_puzzle" xml:space="preserve">
+    <value>Sliding puzzle</value>
   </data>
 </root>

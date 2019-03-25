@@ -57,6 +57,9 @@ class BL_Abstract(object):
             user = self.createUser(data)
         return user
 
+    def getEntertainment(self, attraction):
+        raise NotImplementedError("Should have implemented this")
+
     def add_attraction(self, attraction):
         raise NotImplementedError("Should have implemented this")
 
@@ -123,6 +126,8 @@ class BL_Abstract(object):
 
     def get_feedback_question(self, id_feedback):
         raise NotImplementedError("Should have implemented this")
+
+
 
 
 class BLProxy(BL_Abstract):
@@ -195,6 +200,11 @@ class BLProxy(BL_Abstract):
         if self.Implementation is None:
             raise NotImplementedError("Should have implemented this")
         return self.Implementation.getTrip(trip)
+
+    def getEntertainment(self, attraction):
+        if self.Implementation is None:
+            raise NotImplementedError("Should have implemented this")
+        return self.Implementation.getEntertainment(attraction)
 
     def add_attraction(self, attraction):
         if self.Implementation is None:

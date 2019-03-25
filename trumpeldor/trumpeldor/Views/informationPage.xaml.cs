@@ -14,17 +14,20 @@ namespace trumpeldor.Views
 	public partial class informationPage : ContentPage
 	{
         GameController gc;
+        bool isGeneral;
 		public informationPage ()
 		{
 			InitializeComponent ();
             gc = GameController.getInstance();
             generalInformation.Text = gc.GetGeneralInformation();
+            isGeneral = true;
             SetScrollViews(gc.GetMainImages(), gc.GetMainVideos());
         }
 
         public informationPage(Attraction attraction) : this()
         {
             generalInformation.Text = attraction.description;
+            isGeneral = false;
             SetScrollViews(attraction.picturesURLS, attraction.videosURLS);
         }
 
@@ -48,6 +51,27 @@ namespace trumpeldor.Views
                     WidthRequest = gc.GetWidthSizeOfPage() * 3 / 4
                 });
             }
+        }
+
+        private void ShowMessagesInStart()
+        {
+            Task.Run(() =>
+            {
+                List<OpenMessage> messagesToShow = gc.GetOpenMessages();
+                foreach (OpenMessage om in messagesToShow)
+                {
+                    Device.BeginInvokeOnMainThread(async () => {
+                        await DisplayAlert(om.title, om.data, AppResources.ok);
+                    });
+                }
+            });
+        }
+
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+            if(isGeneral)
+                ShowMessagesInStart();
         }
     }
 }

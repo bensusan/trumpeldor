@@ -24,7 +24,7 @@ namespace trumpeldor.ViewModels
 
         public View TileView { private set; get; }
 
-        public SlidingPuzzleTile(int row, int col)
+        public SlidingPuzzleTile(int row, int col, string pictureName)
         {
             currentRow = row;
             correctRow = row;
@@ -34,20 +34,21 @@ namespace trumpeldor.ViewModels
             TileView = new ContentView
             {
                 Padding = new Thickness(1),
-                Content = getTileImage(row, col)
+                //Content = getTileImage(row, col)
+                Content = new Image { Source = ImageSource.FromUri(new Uri(urlPrefix + pictureName)) }
             };
 
             Dictionary.Add(TileView, this);
         }
 
-        private Image getTileImage(int row,int col)
-        {
-            //TODO get image from our server
-            return new Image
-            {
-                Source = ImageSource.FromUri(new Uri(urlPrefix + "example" + row + col + ".jpg"))
-            };
-        }
+        //private Image getTileImage(int row,int col)
+        //{
+        //    //TODO get image from our server
+        //    return new Image
+        //    {
+        //        Source = ImageSource.FromUri(new Uri(urlPrefix + "example" + row + col + ".jpg"))
+        //    };
+        //}
 
         public bool isTilePossitionIsCorrect()
         {

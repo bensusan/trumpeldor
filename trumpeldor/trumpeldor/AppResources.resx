@@ -303,4 +303,13 @@
   <data name="position" xml:space="preserve">
     <value>מקום</value>
   </data>
+  <data name="continue_trip" xml:space="preserve">
+    <value>המשך מסלול</value>
+  </data>
+  <data name="login_with_google" xml:space="preserve">
+    <value>התחבר עם חשבון גוגל</value>
+  </data>
+  <data name="sliding_puzzle" xml:space="preserve">
+    <value>פאזל הזזה</value>
+  </data>
 </root>

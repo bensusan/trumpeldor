@@ -1,7 +1,6 @@
 from rest_framework import serializers
 from .models import *
 
-# we can see what is being sent
 
 class AmericanQuestionSerializer(serializers.ModelSerializer):
     class Meta:
@@ -58,27 +57,27 @@ class TripSerializer(serializers.ModelSerializer):
         model = Trip
 
 
-class EntertainmentSerializer(serializers.ModelSerializer):
-    class Meta:
-        fields = ('id', 'attraction',)
-        model = Entertainment
+# class EntertainmentSerializer(serializers.ModelSerializer):
+#     class Meta:
+#         fields = ('id', 'attraction',)
+#         model = Entertainment
 
 
-class FindTheDifferencesSerializer(EntertainmentSerializer):
+class FindTheDifferencesSerializer(serializers.ModelSerializer):
     class Meta:
         fields = ('id', 'pictureURL', 'differences',)
         model = FindTheDifferences
 
 
-class PuzzleSerializer(EntertainmentSerializer):
+class PuzzleSerializer(serializers.ModelSerializer):
     class Meta:
         fields = ('id', 'pictureURL',)
         model = Puzzle
 
 
-class SlidingPuzzleSerializer(EntertainmentSerializer):
+class SlidingPuzzleSerializer(serializers.ModelSerializer):
     class Meta:
-        fields = ('id', 'piecesURLS',)
+        fields = ('id', 'piecesURLS', 'width', 'height',)
         model = SlidingPuzzle
 
 

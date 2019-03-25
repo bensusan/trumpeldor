@@ -142,6 +142,15 @@ namespace trumpeldor {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to המשך מסלול.
+        /// </summary>
+        public static string continue_trip {
+            get {
+                return ResourceManager.GetString("continue_trip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to סיימת יעד!.
         /// </summary>
         public static string Destionation_Complete {
@@ -309,6 +318,15 @@ namespace trumpeldor {
         public static string login_with_facebook {
             get {
                 return ResourceManager.GetString("login_with_facebook", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to התחבר עם חשבון גוגל.
+        /// </summary>
+        public static string login_with_google {
+            get {
+                return ResourceManager.GetString("login_with_google", resourceCulture);
             }
         }
         
@@ -534,6 +552,15 @@ namespace trumpeldor {
         public static string short_path {
             get {
                 return ResourceManager.GetString("short_path", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to פאזל הזזה.
+        /// </summary>
+        public static string sliding_puzzle {
+            get {
+                return ResourceManager.GetString("sliding_puzzle", resourceCulture);
             }
         }
         

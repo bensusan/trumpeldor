@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.postgres.fields import JSONField
 
+
 # we can see which type is every field
 class Attraction(models.Model):
     name = models.TextField()
@@ -58,6 +59,8 @@ class Puzzle(Entertainment):
 
 class SlidingPuzzle(Entertainment):
     piecesURLS = JSONField()  # Should be list of paths
+    width = models.IntegerField()
+    height = models.IntegerField()
 
 
 class Feedback(models.Model):

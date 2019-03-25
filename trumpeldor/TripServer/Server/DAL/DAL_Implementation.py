@@ -132,6 +132,9 @@ class DAL_Implementation(DAL_Abstract):
     def getAllTrips(self):
         return Trip.objects.order_by('score')
 
+    def getSlidingPuzzle(self, attraction):
+        return SlidingPuzzle.objects.filter(attraction=attraction).first()
+
     def delete_attraction(self, id):
         return self.get_attraction(id).delete()
 
