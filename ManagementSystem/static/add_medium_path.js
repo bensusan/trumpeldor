@@ -102,10 +102,17 @@ function listenerForMappo(){
         finishBTN.addEventListener('click', function() {
 
         //     let the_point = {
-        // x: 31.262644482198,
-        // y: 34.8007766759185};
+        //          id: 66,
+        // name: "newPoint",
+        // x: 31.2628508290397,
+        // y: 34.8014150416641,
+        // description: "someDesc",
+        // picturesURLS: [],
+        // videosURLS: []
+        //     };
         //         addPointToTrackRequest(the_point,idOfMedium);
         //         addPointToTrackRequest(the_point,idOfLong);
+
             pointsOfPath.forEach(function (point) {
                 let the_point = {x: point.lat , y: point.lng};
                 addPointToTrackRequest(the_point,idOfMedium);
@@ -157,6 +164,6 @@ function getRequestTracks(funcOnTrack){
 
 function addPointToTrackRequest(point_to_add,track_id){
     alert("trackos blatikus");
-    serverRequest("PUT", function noop(dummy){}, 'http://10.0.0.4:12344/managementsystem/track/'+track_id+"/add",
+    serverRequest("PUT", function noop(dummy){}, 'http://10.0.0.4:12344/managementsystem/track/'+track_id+'/add',
         JSON.stringify(point_to_add));
 }
