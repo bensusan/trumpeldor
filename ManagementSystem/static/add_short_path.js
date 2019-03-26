@@ -6,7 +6,7 @@ let curPosClicked;
 var str_of_points="";
 let points = JSON.parse(localStorage.getItem("points"));
 let pointsOfPath = [];
-
+let arr_of_complete_points = [];
 
 function initMapAndAttractions(){
     initMap();
@@ -50,7 +50,8 @@ function listenerForMap(){
         finishBTN.addEventListener('click', function() {
             localStorage.setItem("the_points_of_the_short_path", JSON.stringify(pointsOfPath));
             localStorage.setItem("the_points_of_the_finish_path", JSON.stringify(pointsOfPath));
-            let short_to_send = {points:pointsOfPath,length:1};
+            getRequestAttractions(funcInOrderToGetAttractions);
+            let short_to_send = {points:arr_of_complete_points,length:1};
             // let medium_to_send = {length:2,points:pointsOfPath};
             // let long_to_send = {length:3,points:pointsOfPath};
              postRequestShortPath(short_to_send);
@@ -69,6 +70,21 @@ function listenerForMap(){
              alert("shit!");
 
         });
+}
+
+function funcInOrderToGetAttractions(attractionsJSON) {
+    alert("got here");
+      attractionsJSON.forEach(function (attr) {
+        let pos = {lat: attr['x'], lng: attr['y']};
+        let lats=pointsOfPath.map(function (x){return x.lat.toFixed(8)});
+        let lngs=pointsOfPath.map(function (x){return x.lng.toFixed(8)});
+        let firstBool = lats.includes((pos.lat).toFixed(8));
+        let secondBool = lngs.includes((pos.lng).toFixed(8));
+        if(firstBool && secondBool) {
+            arr_of_complete_points.push(attr);
+        }
+      });
+    alert(arr_of_complete_points.length);
 }
 
 
