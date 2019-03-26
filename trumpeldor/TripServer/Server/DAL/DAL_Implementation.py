@@ -84,8 +84,9 @@ class DAL_Implementation(DAL_Abstract):
         feedback.save()
         return feedback
 
-    def get_track(self, track_len):
-        return Track.objects.filter(length=track_len).all()
+    def get_track(self, id):
+        track = Track.objects.filter(pk=id).first()
+        return track
 
     def get_attraction(self, id):
         return Attraction.objects.get(pk=id)
@@ -183,3 +184,28 @@ class DAL_Implementation(DAL_Abstract):
 
     def get_all_hints_for_attraction(self, id_attraction):
         return Hint.objects.filter(attraction=self.get_attraction(id_attraction)).all()
+
+    def add_attraction_to_track(self, id_track, x, y):
+        attr = self.get_attraction_by_x_y(x, y)
+        print(attr)
+        if attr is not None:
+            track = self.get_track(id_track)
+            track.points.add(attr)
+            track.save()
+            print(track)
+            return True
+
+    def delete_attraction_from_track(self, id_track, x, y):
+        attr = self.get_attraction_by_x_y(x, y)
+        if attr is not None:
+            track = self.get_track(id_track)
+            track.points.remove(attr)
+            track.save()
+            return True
+
+    def delete_track(self, id_track):
+        track = self.get_track(id_track).delete()
+        return True
+
+    def get_track_by_length(self, len):
+        return Track.objects.filter(length=len).first()

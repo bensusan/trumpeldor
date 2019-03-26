@@ -110,13 +110,14 @@ class BL_Implementation(BL_Abstract):
                                               a_question['indexOfCorrectAnswer'])
 
     def add_track(self, track):
-        return self.DAL.add_track(track['points'], track['length'])
+        if self.get_track_by_length(track['length']) is None:
+            return self.DAL.add_track(track['points'], track['length'])
 
     def add_feedback_question(self, question, kind):#question, kind
         return self.DAL.add_feedback_question(question, kind)
 
-    def get_track(self, track_len):
-        return self.DAL.get_track(track_len)
+    def get_track(self, id):
+        return self.DAL.get_track(id)
 
     def get_attraction(self, id):
         return self.DAL.get_attraction(id)
@@ -204,3 +205,15 @@ class BL_Implementation(BL_Abstract):
 
     def get_all_hints_for_attraction(self, id_attraction):
         return self.DAL.get_all_hints_for_attraction(id_attraction)
+
+    def add_attraction_to_track(self, id_track, x, y):
+        return self.DAL.add_attraction_to_track(id_track, x, y)
+
+    def delete_attraction_from_track(self, id_track, x, y):
+        return self.DAL.delete_attraction_from_track(id_track, x, y)
+
+    def delete_track(self, id_track):
+        return self.DAL.delete_track(id_track)
+
+    def get_track_by_length(self, len):
+        return self.DAL.get_track_by_length(len)

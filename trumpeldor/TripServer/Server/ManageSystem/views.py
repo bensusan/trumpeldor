@@ -160,13 +160,21 @@ class Track(generics.GenericAPIView):
     serializer_class = TrackSerializer
 
     def get(self, request, *args, **kwargs):
-        ans = BL.get_track(self.kwargs['length'])
+        ans = BL.get_track(self.kwargs['id'])
         ans = TrackSerializer(ans, many=False)
-        ans = json.dumps(list(ans.data))
+        ans = json.dumps(ans.data)
         return Response(ans)
 
     def delete(self, request, *args, **kwargs):
-        ans = BL.delete_track(self.kwargs['length'])
+        ans = BL.delete_track(self.kwargs['id'])
+        ans = json.loads(json.dumps(ans))
+        return Response(ans)
+
+    def put(self, request, *args, **kwargs):
+        if self.kwargs['action'] == 'del':
+            ans = BL.delete_attraction_from_track(self.kwargs['id'], request.data['x'], request.data['y'])
+        elif self.kwargs['action'] == "add":
+            ans = BL.add_attraction_to_track(self.kwargs['id'], request.data['x'], request.data['y'])
         ans = json.loads(json.dumps(ans))
         return Response(ans)
 
