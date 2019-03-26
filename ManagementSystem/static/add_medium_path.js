@@ -62,7 +62,7 @@ function getRequestMediumPath(funcOnMedPath){
 
 function postRequestMediumPath(medium_path){
     alert("med_blatos");
-    serverRequest("POST", function noop(dummy){}, 'http://10.0.0.4:12344/managementsystem/track/2/',
+    serverRequest("POST", function noop(dummy){}, 'http://10.0.0.4:12344/managementsystem/track/',
         JSON.stringify(medium_path));
 }
 

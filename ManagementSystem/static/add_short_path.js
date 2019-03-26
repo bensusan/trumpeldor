@@ -79,11 +79,11 @@ function funcInOrderToGetAttractions(attractionsJSON) {
       });
     alert(arr_of_complete_points.length);
     let short_to_send = {points:arr_of_complete_points,length:1};
-            // let medium_to_send = {length:2,points:pointsOfPath};
-            // let long_to_send = {length:3,points:pointsOfPath};
+            let medium_to_send = {points:arr_of_complete_points,length:2};
+            let long_to_send = {points:arr_of_complete_points,length:3};
              postRequestShortPath(short_to_send);
-            // postRequestMediumPath(medium_to_send);
-            // postRequestLongPath(long_to_send);
+            postRequestMediumPath(medium_to_send);
+            postRequestLongPath(long_to_send);
 
             window.location.href='/edit_path';
 }
