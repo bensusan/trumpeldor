@@ -34,7 +34,8 @@ function initMap() {
             if(pointsOfPath.indexOf(m.position)==-1 && curPosClicked==m.position)
             {
                 // alert("only once!");
-                pointsOfPath.push(m.position);
+                let point_to_push = {lat: m.position.lat().toFixed(8), lng: m.position.lng().toFixed(8)};
+                pointsOfPath.push(point_to_push);
                 str_of_points=str_of_points+m.position+"<br />";
             }
             // alert(str_of_points);
@@ -51,17 +52,7 @@ function listenerForMap(){
             localStorage.setItem("the_points_of_the_short_path", JSON.stringify(pointsOfPath));
             localStorage.setItem("the_points_of_the_finish_path", JSON.stringify(pointsOfPath));
             getRequestAttractions(funcInOrderToGetAttractions);
-            let short_to_send = {points:arr_of_complete_points,length:1};
-            // let medium_to_send = {length:2,points:pointsOfPath};
-            // let long_to_send = {length:3,points:pointsOfPath};
-             postRequestShortPath(short_to_send);
-             alert("alerto");
-            // postRequestMediumPath(medium_to_send);
-            // postRequestLongPath(long_to_send);
 
-//the_points_of_the_short_path
-
-            window.location.href='/edit_path';
         });
 
          var showwBTN = document.getElementById('showingshit');
@@ -73,18 +64,28 @@ function listenerForMap(){
 }
 
 function funcInOrderToGetAttractions(attractionsJSON) {
-    alert("got here");
       attractionsJSON.forEach(function (attr) {
-        let pos = {lat: attr['x'], lng: attr['y']};
-        let lats=pointsOfPath.map(function (x){return x.lat.toFixed(8)});
-        let lngs=pointsOfPath.map(function (x){return x.lng.toFixed(8)});
-        let firstBool = lats.includes((pos.lat).toFixed(8));
-        let secondBool = lngs.includes((pos.lng).toFixed(8));
-        if(firstBool && secondBool) {
-            arr_of_complete_points.push(attr);
+        let pos = {lat: (attr['x']).toFixed(8), lng: (attr['y']).toFixed(8)};
+        let lats=pointsOfPath.map(function (x){return x.lat});
+        let lngs=pointsOfPath.map(function (x){return x.lng});
+        let firstBool = lats.includes(pos.lat);
+        let secondBool = lngs.includes(pos.lng);
+
+  if(firstBool && secondBool) {
+      let the_point = {id:attr['id'],name:attr['name'],x:attr['x'],y:attr['y'],description:attr['description'],picturesURLS:attr['picturesURLS'],videosURLS:attr['videosURLS']};
+            arr_of_complete_points.push(the_point);
         }
+
       });
     alert(arr_of_complete_points.length);
+    let short_to_send = {points:arr_of_complete_points,length:1};
+            // let medium_to_send = {length:2,points:pointsOfPath};
+            // let long_to_send = {length:3,points:pointsOfPath};
+             postRequestShortPath(short_to_send);
+            // postRequestMediumPath(medium_to_send);
+            // postRequestLongPath(long_to_send);
+
+            window.location.href='/edit_path';
 }
 
 
