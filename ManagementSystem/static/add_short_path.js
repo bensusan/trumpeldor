@@ -82,8 +82,8 @@ function funcInOrderToGetAttractions(attractionsJSON) {
             let medium_to_send = {points:arr_of_complete_points,length:2};
             let long_to_send = {points:arr_of_complete_points,length:3};
              postRequestShortPath(short_to_send);
-            postRequestMediumPath(medium_to_send);
-            postRequestLongPath(long_to_send);
+            postRequestShortPath(medium_to_send);
+            postRequestShortPath(long_to_send);
 
             window.location.href='/edit_path';
 }
@@ -113,6 +113,7 @@ function postRequestShortPath(short_path){
     alert("blatos");
     serverRequest("POST", function noop(dummy){}, 'http://10.0.0.4:12344/managementsystem/track/',
         JSON.stringify(short_path));
+
 }
 
 
@@ -149,3 +150,27 @@ function initAttractionsMarkersOfShortPath() {
     getRequestAttractions(markAttractionsOfShortPath);
 }
 
+
+
+
+function getRequestLongPath(funcOnLongPath){
+    // the server port and my ip
+    serverRequest("GET", funcOnLongPath, 'http://10.0.0.4:12344/managementsystem/track/3/?format=json');
+}
+
+function postRequestLongPath(long_path){
+    alert("long_blatos");
+    serverRequest("POST", function noop(dummy){}, 'http://10.0.0.4:12344/managementsystem/track/',
+        JSON.stringify(long_path));
+}
+
+function getRequestMediumPath(funcOnMedPath){
+    // the server port and my ip
+    serverRequest("GET", funcOnMedPath, 'http://10.0.0.4:12344/managementsystem/track/2/?format=json');
+}
+
+function postRequestMediumPath(medium_path){
+    alert("med_blatos");
+    serverRequest("POST", function noop(dummy){}, 'http://10.0.0.4:12344/managementsystem/track/',
+        JSON.stringify(medium_path));
+}

@@ -55,16 +55,6 @@ function initMapp() {
 
 }
 
-function getRequestMediumPath(funcOnMedPath){
-    // the server port and my ip
-    serverRequest("GET", funcOnMedPath, 'http://10.0.0.4:12344/managementsystem/track/2/?format=json');
-}
-
-function postRequestMediumPath(medium_path){
-    alert("med_blatos");
-    serverRequest("POST", function noop(dummy){}, 'http://10.0.0.4:12344/managementsystem/track/',
-        JSON.stringify(medium_path));
-}
 
 
 function markAttractionsOfMediumPath(attractionsJSON){
