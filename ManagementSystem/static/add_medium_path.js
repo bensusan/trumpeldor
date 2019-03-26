@@ -110,16 +110,18 @@ function listenerForMappo(){
         // picturesURLS: [],
         // videosURLS: []
         //     };
-        //         addPointToTrackRequest(the_point,idOfMedium);
-        //         addPointToTrackRequest(the_point,idOfLong);
+        //     alert("wiiiiiiii");
+            // let the_point = {x:2.3,y:2.3};
+            //     addPointToTrackRequest(the_point,idOfMedium);
+            //     addPointToTrackRequest(the_point,idOfLong);
 
             pointsOfPath.forEach(function (point) {
                 let the_point = {x: point.lat , y: point.lng};
-                addPointToTrackRequest(the_point,idOfMedium);
+                // addPointToTrackRequest(the_point,idOfMedium);
                 addPointToTrackRequest(the_point,idOfLong);
             });
-
-            window.location.href='/edit_path';
+            window.location.href='/add_medium_path';
+            //window.location.href='/edit_path';
         });
 }
 
