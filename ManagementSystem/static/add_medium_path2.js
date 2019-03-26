@@ -1,20 +1,31 @@
-
+let short_path_points_for_medium = JSON.parse(localStorage.getItem("the_points_of_the_short_path"));
+let short_path_points_for_medium_lat = [];
+let short_path_points_for_medium_lng = [];
 let curPosClicked;
 
 var str_of_points="";
 let pointsOfPath = [];
-let pointsOfShort = [];
 
 function initMapAndAttractionss(){
     str_of_points="";
     pointsOfPath = [];
+    short_path_points_for_medium = JSON.parse(localStorage.getItem("the_points_of_the_short_path"));
+    short_path_points_for_medium_lat = [];
+    short_path_points_for_medium_lng = [];
+    let i;
+    for(i=0;i<short_path_points_for_medium.length;i++)
+    {
+        short_path_points_for_medium_lat.push(short_path_points_for_medium[i].lat);
+        short_path_points_for_medium_lng.push(short_path_points_for_medium[i].lng);
+    }
 
-    getRequestTracks(markAttractionsOfMediumPaths);
+    getRequestAttractions(markAttractionsOfMediumPath);
     initMapp();
     initAttractionsMarkersOfMediumPath();
 }
 
   function addEditListenerr(m) {
+
       m.addListener('click', function() {
           curPosClicked=m.position;
         var addToPathBTN = document.getElementById('add_reg_to_path_med');
@@ -36,6 +47,7 @@ function initMapp() {
         zoom: 18,
         center: {lat: 31.262860, lng: 34.801753}
     });
+
    //initAttractionsMarkersOfMediumPath();
 
     listenerForMappo();
@@ -44,43 +56,22 @@ function initMapp() {
 }
 
 
-function markAttractionsOfMediumPaths(tracksJSON){
 
-    tracksJSON.forEach(function (track) {
-
-        if(track['length']==2) {
-
-            let points_of_track = track['points'];
-            points_of_track.forEach(function (attr) {
-
-                let pos2 = {lat: (attr['x']).toFixed(8), lng: (attr['y']).toFixed(8)};
-
-                    let pos = {lat: attr['x'], lng: attr['y']};
-                    pointsOfShort.push(pos2);
-                    localStorage.setItem("title" + pos, "attraction ID: " + attr['id'] + "\nattraction name: " + attr['name'] + "\nposition: (" + attr['x'] + "," + attr['y'] + ")");
-                    markAttractionOfMediumPath(pos);
-
-            })
-        }
-    });
-    getRequestAttractions(markAttractionsOfMediumPath_left);
-
-}
-
-function markAttractionsOfMediumPath_left(attractionsJSON){
+function markAttractionsOfMediumPath(attractionsJSON){
 
     attractionsJSON.forEach(function (attr) {
 
         let pos = {lat: attr['x'], lng: attr['y']};
-        let pos2 = {lat: (attr['x']).toFixed(8), lng: (attr['y']).toFixed(8)};
-
-        let lats=pointsOfShort.map(function (x){return (x.lat)});
-        let lngs=pointsOfShort.map(function (x){return (x.lng)});
-        let firstBool = lats.includes(pos2.lat);
-        let secondBool = lngs.includes(pos2.lng);
-        // alert(lats.length);
-         if(!(firstBool && secondBool)){
-             // alert("ad");
+        let lats=short_path_points_for_medium_lat.map(function (x){return x.toFixed(8)});
+        let lngs=short_path_points_for_medium_lng.map(function (x){return x.toFixed(8)});
+        let firstBool = lats.includes((pos.lat).toFixed(8));
+        let secondBool = lngs.includes((pos.lng).toFixed(8));
+        if(firstBool && secondBool) {
+            // alert("if point in:"+lats.includes((pos.lat).toFixed(8)) +lngs.includes((pos.lng).toFixed(8)));
+            localStorage.setItem("title" + pos, "attraction ID: " + attr['id'] + "\nattraction name: " + attr['name'] + "\nposition: (" + attr['x'] + "," + attr['y'] + ")");
+            markAttractionOfMediumPath(pos);
+        }
+        else{
             localStorage.setItem("title" + pos, "attraction ID: " + attr['id'] + "\nattraction name: " + attr['name'] + "\nposition: (" + attr['x'] + "," + attr['y'] + ")");
             markAttractionElse(pos);
         }
@@ -88,10 +79,22 @@ function markAttractionsOfMediumPath_left(attractionsJSON){
 }
 
 function listenerForMappo(){
+
         var finishBTN = document.getElementById('finish_reg_med');
         finishBTN.addEventListener('click', function() {
+            localStorage.setItem("the_points_of_the_medium_path", JSON.stringify(pointsOfPath));
+            let arrShow = shitFuncToDelete(short_path_points_for_medium,pointsOfPath);
+            alert(arrShow.length);
+            localStorage.setItem("the_points_of_the_finish_path", JSON.stringify(arrShow));
 
-            /////////////////////////////////////////////////////////////////////////////////////////////////
+            // let short_to_send = {length:1,points:pointsOfPath};
+            // let medium_to_send = {length:2,points:pointsOfPath};
+            // let long_to_send = {length:3,points:pointsOfPath};
+            // postRequestShortPath(short_to_send);
+            // postRequestMediumPath(medium_to_send);
+            // postRequestLongPath(long_to_send);
+
+//the_points_of_the_short_path
 
             window.location.href='/edit_path';
         });
@@ -126,12 +129,16 @@ function markAttractionElse(pos){
 }
 
 function initAttractionsMarkersOfMediumPath() {
-    getRequestTracks(markAttractionsOfMediumPaths);
+    getRequestAttractions(markAttractionsOfMediumPath);
 }
 
+function shitFuncToDelete(arr1,arr2) {
+    let j;
+    for(j=0;j<arr1.length;j++)
+    {
+        arr2.push(arr1[j]);
+    }
 
-function getRequestTracks(funcOnTrack){
-    // serverRequest("GET", funcOnAttractions, 'http://192.168.1.12:12344/managementsystem/attraction/?format=json');
-    // the server port and my ip
-    serverRequest("GET", funcOnTrack, 'http://10.0.0.4:12344/managementsystem/track/?format=json');
+    return arr2;
+    
 }
