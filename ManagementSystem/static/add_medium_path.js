@@ -4,6 +4,8 @@ let curPosClicked;
 var str_of_points="";
 let pointsOfPath = [];
 let pointsOfShort = [];
+let idOfMedium = 0;
+let idOfLong = 0;
 
 function initMapAndAttractionss(){
     str_of_points="";
@@ -21,7 +23,10 @@ function initMapAndAttractionss(){
         addToPathBTN.addEventListener('click', function() {
             if(pointsOfPath.indexOf(m.position)==-1 && curPosClicked==m.position)
             {
-                pointsOfPath.push(m.position);
+                let point_to_push = {lat: m.position.lat(), lng: m.position.lng()};
+                //let point_to_push2 = {lat: m.position.lat().toFixed(8), lng: m.position.lng().toFixed(8)};
+                pointsOfPath.push(point_to_push);
+                // pointsOfPath.push(m.position);
                 str_of_points=str_of_points+m.position+"<br />";
             }
             // alert(str_of_points);
@@ -49,6 +54,7 @@ function markAttractionsOfMediumPaths(tracksJSON){
     tracksJSON.forEach(function (track) {
 
         if(track['length']==2) {
+            idOfMedium = track['id'];
 
             let points_of_track = track['points'];
             points_of_track.forEach(function (attr) {
@@ -61,6 +67,10 @@ function markAttractionsOfMediumPaths(tracksJSON){
                     markAttractionOfMediumPath(pos);
 
             })
+        }
+
+        if(track['length']==3) {
+        idOfLong = track['id'];
         }
     });
     getRequestAttractions(markAttractionsOfMediumPath_left);
@@ -91,7 +101,16 @@ function listenerForMappo(){
         var finishBTN = document.getElementById('finish_reg_med');
         finishBTN.addEventListener('click', function() {
 
-            /////////////////////////////////////////////////////////////////////////////////////////////////
+        //     let the_point = {
+        // x: 31.262644482198,
+        // y: 34.8007766759185};
+        //         addPointToTrackRequest(the_point,idOfMedium);
+        //         addPointToTrackRequest(the_point,idOfLong);
+            pointsOfPath.forEach(function (point) {
+                let the_point = {x: point.lat , y: point.lng};
+                addPointToTrackRequest(the_point,idOfMedium);
+                addPointToTrackRequest(the_point,idOfLong);
+            });
 
             window.location.href='/edit_path';
         });
@@ -134,4 +153,10 @@ function getRequestTracks(funcOnTrack){
     // serverRequest("GET", funcOnAttractions, 'http://192.168.1.12:12344/managementsystem/attraction/?format=json');
     // the server port and my ip
     serverRequest("GET", funcOnTrack, 'http://10.0.0.4:12344/managementsystem/track/?format=json');
+}
+
+function addPointToTrackRequest(point_to_add,track_id){
+    alert("trackos blatikus");
+    serverRequest("PUT", function noop(dummy){}, 'http://10.0.0.4:12344/managementsystem/track/'+track_id+"/add",
+        JSON.stringify(point_to_add));
 }
