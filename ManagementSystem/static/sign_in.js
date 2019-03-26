@@ -8,6 +8,16 @@ function checkPassword() {
            document.getElementById("errorMsg").innerHTML = "wrong password or username!";
 }
 
+// function addMore(x,y){
+//     return x+y;
+// }
+//
+// describe("A suite", function() {
+//   it("contains spec with an expectation", function() {
+//     expect(true).toBe(true);
+//   });
+// });
+//
 
 // let points = [{lat: 31.263465932844372, lng: 34.801946282386783}];
 let points = [];

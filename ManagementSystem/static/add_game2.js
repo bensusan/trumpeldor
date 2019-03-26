@@ -1,13 +1,13 @@
-alert("haddddra");
+//alert("haddddra");
 // alert(localStorage.getItem("trying"));
 
-window.onload=function () {
-
-		let slidingPuzzleBTN = document.getElementById('sliding_puzzle_button');
-        slidingPuzzleBTN.addEventListener('click', function() {
-			window.location.href='/add_picture';
-        });
-};
+// window.onload=function () {
+//
+// 		let slidingPuzzleBTN = document.getElementById('sliding_puzzle_button');
+//         slidingPuzzleBTN.addEventListener('click', function() {
+// 			window.location.href='/add_picture';
+//         });
+// };
 
 // function newPopup(url) {
 // 	popupWindow = window.open(
@@ -18,3 +18,6 @@ function addGames() {
 	alert("not implemented yet!");
 }
 
+function addition(x,y){
+	return x+y;
+}
