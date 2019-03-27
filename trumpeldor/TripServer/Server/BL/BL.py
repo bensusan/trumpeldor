@@ -124,10 +124,10 @@ class BL_Abstract(object):
     def get_all_hints_for_attraction(self, id_attraction):
         raise NotImplementedError("Should have implemented this")
 
-    def add_attraction_to_track(self, id_track, x, y):
+    def add_attraction_to_track(self, id_track, id_attraction):
         raise NotImplementedError("Should have implemented this")
 
-    def delete_attraction_from_track(self, id_track, x ,y):
+    def delete_attraction_from_track(self, id_track, id_attraction):
         raise NotImplementedError("Should have implemented this")
 
     def delete_track(self, id_track):
@@ -320,15 +320,15 @@ class BLProxy(BL_Abstract):
             raise NotImplementedError("Should have implemented this")
         return self.Implementation.get_all_hints_for_attraction(id_attraction)
 
-    def add_attraction_to_track(self, id_track, x, y):
+    def add_attraction_to_track(self, id_track, id_attraction):
         if self.Implementation is None:
             raise NotImplementedError("Should have implemented this")
-        return self.Implementation.add_attraction_to_track(id_track, x, y)
+        return self.Implementation.add_attraction_to_track(id_track, id_attraction)
 
-    def delete_attraction_from_track(self, id_track, x, y):
+    def delete_attraction_from_track(self, id_track, id_attraction):
         if self.Implementation is None:
             raise NotImplementedError("Should have implemented this")
-        return self.Implementation.delete_attraction_from_track(id_track, x, y)
+        return self.Implementation.delete_attraction_from_track(id_track, id_attraction)
 
     def delete_track(self, id_track):
         if self.Implementation is None:

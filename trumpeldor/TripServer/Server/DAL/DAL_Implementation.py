@@ -185,18 +185,16 @@ class DAL_Implementation(DAL_Abstract):
     def get_all_hints_for_attraction(self, id_attraction):
         return Hint.objects.filter(attraction=self.get_attraction(id_attraction)).all()
 
-    def add_attraction_to_track(self, id_track, x, y):
-        attr = self.get_attraction_by_x_y(x, y)
-        print(attr)
+    def add_attraction_to_track(self, id_track, id_attraction):
+        attr = self.getAttraction(id_attraction)
         if attr is not None:
             track = self.get_track(id_track)
             track.points.add(attr)
             track.save()
-            print(track)
             return True
 
-    def delete_attraction_from_track(self, id_track, x, y):
-        attr = self.get_attraction_by_x_y(x, y)
+    def delete_attraction_from_track(self, id_track, id_attraction):
+        attr = self.getAttraction(id_attraction)
         if attr is not None:
             track = self.get_track(id_track)
             track.points.remove(attr)

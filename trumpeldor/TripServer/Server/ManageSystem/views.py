@@ -172,9 +172,9 @@ class Track(generics.GenericAPIView):
 
     def put(self, request, *args, **kwargs):
         if self.kwargs['action'] == 'del':
-            ans = BL.delete_attraction_from_track(self.kwargs['id'], request.data['x'], request.data['y'])
+            ans = BL.delete_attraction_from_track(self.kwargs['id'], request.data)
         elif self.kwargs['action'] == "add":
-            ans = BL.add_attraction_to_track(self.kwargs['id'], request.data['x'], request.data['y'])
+            ans = BL.add_attraction_to_track(self.kwargs['id'], request.data)
         ans = json.loads(json.dumps(ans))
         return Response(ans)
 
@@ -220,7 +220,7 @@ class Attraction(generics.GenericAPIView):
         ans = json.loads(json.dumps(ans))
         return Response(ans)
 
-    def post(self, request, *args, **kwargs):
+    def put(self, request, *args, **kwargs):
         ans = BL.edit_attraction(self.kwargs['id'], request.data)
         ans = AttractionSerializer(ans, many=False)
         ans = json.loads(json.dumps(ans.data))
