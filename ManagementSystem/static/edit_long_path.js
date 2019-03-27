@@ -144,7 +144,7 @@ function needThisToGetPointsIDs(attractionsJSON) {
 
             });
     });
-    window.location.href='/add_long_path';
+    window.location.href='/edit_long_path';
     //window.location.href='/edit_path';
 }
 
