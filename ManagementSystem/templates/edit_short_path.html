@@ -1,40 +1,42 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Add Medium Path</title>
     {% load static %}
 <link rel="stylesheet" href="{% static 'paths_style.css' %}?version=1">
 {% load static %}
-<link rel="stylesheet" href="{% static 'Map.css' %}?version=1">
-{#{% load static %}#}
-{#<script src="{% static 'attractions.js' %}?version=1"></script>#}
+<link rel="stylesheet" href="{% static 'Map.css' %}?version=3">
+{% load static %}
+<script src="{% static 'attractions.js' %}?version=5"></script>
     {% load static %}
-<script src="{% static 'edit_short_path.js' %}?version=4"></script>
+<script src="{% static 'edit_short_path.js' %}?version=1"></script>
 </head>
 <body>
 <button onclick="window.location.href='/main'" type="button">Back to menu</button>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-{% load static %}
-<link rel="stylesheet" href="{% static 'Map.css' %}?version=1">
+{#<meta name="viewport" content="width=device-width, initial-scale=1">#}
+{#{% load static %}#}
+{#<link rel="stylesheet" href="{% static 'Map.css' %}?version=1">#}
 {#{% load static %}#}
 {#<script src="{% static 'attractions.js' %}?version=1"></script>#}
-
 <div align="center">
 <div id="map">
-{#{% load static %}#}
-{#<script src="{% static 'edit_path.js' %}?version=2"></script>#}
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD7rvXqYArUeu8hVHETM6g9w-ek0RqusZ4&callback=initMapAndAttractions&language=he&region=UK"
+{% load static %}
+<script src="{% static 'Map.js' %}?version=3"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD7rvXqYArUeu8hVHETM6g9w-ek0RqusZ4&callback=initMapAndAttractionss&language=he&region=UK"
     async defer>
     </script>
 
 </div>
 
-<div class="buttonStyle">
-
-{#<button id="add_to_path" type="button">Add To Path</button>#}
-{#<button id="edit_attraction" type="button">Finish!</button>#}
-</div>
-
+<button id="add_reg_to_path_med" type="button">Add To Path</button>
+<button id="delete_from_path_med" type="button">Delete Point</button>
+<button id="finish_reg_med" type="button">Finish!</button>
 </div>
 </body>
+<p></p>
+<p></p>
+<p id="things_to_fix"> </p>
+
+<p id="showing_added_points_med"></p>
 </html>

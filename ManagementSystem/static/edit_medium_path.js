@@ -142,9 +142,10 @@ function needThisToGetPointsIDs(attractionsJSON) {
                 // let bolia = attr_point == the_point;
                 // alert("attr: "+ attr_point.x +","+ attr_point.y +"\npont: "+the_point.x +","+the_point.y+"\n"+bolia);
                 if((attr_point.x == the_point.x)  &&  (attr_point.y == the_point.y) ){
-                   // alert("bazinga!");
-                    executeAsynchronously(
-    [addPointToTrackRequest(attr_id,idOfMedium), addPointToTrackRequest(attr_id,idOfLong)], 10);
+                   alert("bazinga!");
+                    addPointToTrackRequest(attr_id,idOfMedium);
+    //                 executeAsynchronously(
+    // [addPointToTrackRequest(attr_id,idOfMedium), addPointToTrackRequest(attr_id,idOfLong)], 10);
                    // addPointToTrackRequest(attr_id,idOfMedium);
                     //funcToDoSameShit(attr_id,idOfLong);
                     //addPointToTrackRequest(attr_id,idOfLong);

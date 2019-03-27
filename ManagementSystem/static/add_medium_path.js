@@ -7,6 +7,7 @@ let pointsOfShort = [];
 let idOfMedium = 0;
 let idOfLong = 0;
 
+
 function initMapAndAttractionss(){
     str_of_points="";
     pointsOfPath = [];
@@ -116,14 +117,16 @@ function needThisToGetPointsIDs(attractionsJSON) {
     attractionsJSON.forEach(function (attr) {
         let attr_point = {x: (attr['x']).toFixed(13) , y: (attr['y']).toFixed(13)};
         let attr_id = attr['id'];
+
         pointsOfPath.forEach(function (point) {
                 let the_point = {x: (point.lat).toFixed(13) , y: (point.lng).toFixed(13)};
                 // let bolia = attr_point == the_point;
                 // alert("attr: "+ attr_point.x +","+ attr_point.y +"\npont: "+the_point.x +","+the_point.y+"\n"+bolia);
                 if((attr_point.x == the_point.x)  &&  (attr_point.y == the_point.y) ){
                     alert("bazinga!");
-                    executeAsynchronously(
-    [addPointToTrackRequest(attr_id,idOfMedium), addPointToTrackRequest(attr_id,idOfLong)], 10);
+                    addPointToTrackRequest(attr_id,idOfMedium);
+    //                 executeAsynchronously(
+    // [addPointToTrackRequest(attr_id,idOfMedium), addPointToTrackRequest(attr_id,idOfLong)], 10);
                    // addPointToTrackRequest(attr_id,idOfMedium);
                     //funcToDoSameShit(attr_id,idOfLong);
                     //addPointToTrackRequest(attr_id,idOfLong);
