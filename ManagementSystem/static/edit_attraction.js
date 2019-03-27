@@ -51,9 +51,17 @@ window.onload=function(){
 
 
     function finishEditingAttraction() {
-        alert("under construction!");
-        // editRequestAttraction(attr_for_editing,attr_for_editing['id']);
-        // window.location.href='/attractions';
+        let attr_after_editing = {
+            id: 66,
+    name:  document.getElementById("attr_name").value,
+    x: attr_for_editing['x'],
+    y: attr_for_editing['y'],
+    description:  document.getElementById("desc").value,
+    picturesURLS: attr_for_editing['picturesURLS'],
+    videosURLS: attr_for_editing['videosURLS']};
+
+         editRequestAttraction(attr_after_editing,attr_for_editing['id']);
+         window.location.href='/attractions';
     }
 
 
