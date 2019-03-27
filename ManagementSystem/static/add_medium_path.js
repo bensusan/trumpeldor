@@ -110,19 +110,39 @@ function listenerForMappo(){
         // picturesURLS: [],
         // videosURLS: []
         //     };
-             alert("hayush!");
-            let the_point = {id:66};
-               // addPointToTrackRequest(the_point,idOfMedium);
-                addPointToTrackRequest(the_point,idOfLong);
+        //      alert("hayush!");
+        //     let the_point = 66;
+        //         addPointToTrackRequest(the_point,idOfMedium);
+        //         addPointToTrackRequest(the_point,idOfLong);
+            getRequestAttractions(needThisToGetPointsIDs);
 
-            // pointsOfPath.forEach(function (point) {
-            //     let the_point = {x: point.lat , y: point.lng};
-            //     // addPointToTrackRequest(the_point,idOfMedium);
-            //     addPointToTrackRequest(the_point,idOfLong);
-            //});
-            window.location.href='/add_medium_path';
-            //window.location.href='/edit_path';
         });
+}
+
+function needThisToGetPointsIDs(attractionsJSON) {
+
+    attractionsJSON.forEach(function (attr) {
+        let attr_point = {x: (attr['x']).toFixed(13) , y: (attr['y']).toFixed(13)};
+        let attr_id = attr['id'];
+        pointsOfPath.forEach(function (point) {
+                let the_point = {x: (point.lat).toFixed(13) , y: (point.lng).toFixed(13)};
+                // let bolia = attr_point == the_point;
+                // alert("attr: "+ attr_point.x +","+ attr_point.y +"\npont: "+the_point.x +","+the_point.y+"\n"+bolia);
+                if((attr_point.x == the_point.x)  &&  (attr_point.y == the_point.y) ){
+                    alert("bazinga!");
+                    addPointToTrackRequest(attr_id,idOfMedium);
+                    funcToDoSameShit(attr_id,idOfLong);
+                    //addPointToTrackRequest(attr_id,idOfLong);
+                }
+
+            });
+    });
+    window.location.href='/add_medium_path';
+    //window.location.href='/edit_path';
+}
+
+function funcToDoSameShit(attr_id,idOfLong) {
+    addPointToTrackRequest(attr_id,idOfLong);
 }
 
 function markAttractionOfMediumPath(pos){
@@ -164,8 +184,8 @@ function getRequestTracks(funcOnTrack){
     serverRequest("GET", funcOnTrack, 'http://10.0.0.4:12344/managementsystem/track/?format=json');
 }
 
-function addPointToTrackRequest(point_to_add,track_id){
+function addPointToTrackRequest(id_of_point_to_add,track_id){
     alert("trackos blatikus");
     serverRequest("PUT", function noop(dummy){}, 'http://10.0.0.4:12344/managementsystem/track/'+track_id+'/add',
-        JSON.stringify(point_to_add));
+        JSON.stringify(id_of_point_to_add));
 }
