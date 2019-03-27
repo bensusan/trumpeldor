@@ -4,6 +4,7 @@ let curPosClicked;
 var str_of_points="";
 let pointsOfPath = [];
 let pointsOfShort = [];
+let pointsOfMedium = [];
 let idOfMedium = 0;
 let idOfLong = 0;
 
@@ -60,6 +61,8 @@ function markAttractionsOfMediumPaths(tracksJSON){
             let points_of_track = track['points'];
             points_of_track.forEach(function (attr) {
                     let pos = {lat: attr['x'], lng: attr['y']};
+                    let pos2 = {lat: (attr['x']).toFixed(8), lng: (attr['y']).toFixed(8)};
+                    pointsOfMedium.push(pos2);
                     localStorage.setItem("title" + pos, "attraction ID: " + attr['id'] + "\nattraction name: " + attr['name'] + "\nposition: (" + attr['x'] + "," + attr['y'] + ")");
                     markAttractionOfMediumPath(pos);
             })
@@ -90,8 +93,8 @@ function markAttractionsOfMediumPath_left(attractionsJSON){
         let pos = {lat: attr['x'], lng: attr['y']};
         let pos2 = {lat: (attr['x']).toFixed(8), lng: (attr['y']).toFixed(8)};
 
-        let lats=pointsOfShort.map(function (x){return (x.lat)});
-        let lngs=pointsOfShort.map(function (x){return (x.lng)});
+        let lats=pointsOfMedium.map(function (x){return (x.lat)});
+        let lngs=pointsOfMedium.map(function (x){return (x.lng)});
         let firstBool = lats.includes(pos2.lat);
         let secondBool = lngs.includes(pos2.lng);
         // alert(lats.length);
