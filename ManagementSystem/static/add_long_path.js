@@ -4,7 +4,6 @@ let curPosClicked;
 var str_of_points="";
 let pointsOfPath = [];
 let pointsOfMedium = [];
-let idOfMedium = 0;
 let idOfLong = 0;
 
 function initMapAndAttractionss(){
@@ -19,7 +18,7 @@ function initMapAndAttractionss(){
   function addEditListenerr(m) {
       m.addListener('click', function() {
           curPosClicked=m.position;
-        var addToPathBTN = document.getElementById('add_reg_to_path_med');
+        var addToPathBTN = document.getElementById('add_reg_to_path_long');
         addToPathBTN.addEventListener('click', function() {
             if(pointsOfPath.indexOf(m.position)==-1 && curPosClicked==m.position)
             {
@@ -30,7 +29,7 @@ function initMapAndAttractionss(){
                 str_of_points=str_of_points+m.position+"<br />";
             }
             // alert(str_of_points);
-            document.getElementById("showing_added_points_med").innerHTML = str_of_points ;
+            document.getElementById("showing_added_points_long").innerHTML = str_of_points ;
            // alert("point been added! now its: "+ pointsOfPath.toString());
         });
   });
@@ -95,7 +94,7 @@ function markAttractionsOfLongPath_left(attractionsJSON){
 }
 
 function listenerForMappo(){
-        var finishBTN = document.getElementById('finish_reg_med');
+        var finishBTN = document.getElementById('finish_reg_long');
         finishBTN.addEventListener('click', function() {
 
             getRequestAttractions(needThisToGetPointsIDs);
@@ -114,8 +113,7 @@ function needThisToGetPointsIDs(attractionsJSON) {
                 // alert("attr: "+ attr_point.x +","+ attr_point.y +"\npont: "+the_point.x +","+the_point.y+"\n"+bolia);
                 if((attr_point.x == the_point.x)  &&  (attr_point.y == the_point.y) ){
                     alert("bazinga!");
-                    addPointToTrackRequest(attr_id,idOfMedium);
-                    funcToDoSameShit(attr_id,idOfLong);
+                    addPointToTrackRequest(attr_id,idOfLong);
                     //addPointToTrackRequest(attr_id,idOfLong);
                 }
 
@@ -125,9 +123,6 @@ function needThisToGetPointsIDs(attractionsJSON) {
     //window.location.href='/edit_path';
 }
 
-function funcToDoSameShit(attr_id,idOfLong) {
-    addPointToTrackRequest(attr_id,idOfLong);
-}
 
 function markAttractionOfLongPath(pos){
     let the_title=localStorage.getItem("title"+pos);
