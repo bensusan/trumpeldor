@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Add Long Path</title>
+    {% load static %}
+<link rel="stylesheet" href="{% static 'paths_style.css' %}?version=1">
+{% load static %}
+<link rel="stylesheet" href="{% static 'Map.css' %}?version=3">
+{% load static %}
+<script src="{% static 'attractions.js' %}?version=5"></script>
+    {% load static %}
+<script src="{% static 'edit_long_path.js' %}?version=1"></script>
+</head>
+<body>
+<button onclick="window.location.href='/main'" type="button">Back to menu</button>
+{#<meta name="viewport" content="width=device-width, initial-scale=1">#}
+{#{% load static %}#}
+{#<link rel="stylesheet" href="{% static 'Map.css' %}?version=1">#}
+{#{% load static %}#}
+{#<script src="{% static 'attractions.js' %}?version=1"></script>#}
+
+<div align="center">
+<div id="map">
+{% load static %}
+<script src="{% static 'Map.js' %}?version=3"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD7rvXqYArUeu8hVHETM6g9w-ek0RqusZ4&callback=initMapAndAttractionss&language=he&region=UK"
+    async defer>
+    </script>
+
+</div>
+
+<button id="add_reg_to_path_long" type="button">Add To Path</button>
+<button id="delete_from_path_long" type="button">Delete Point</button>
+<button id="finish_reg_long" type="button">Finish!</button>
+
+</div>
+</body>
+<p></p>
+<p></p>
+<p id="things_to_fix_long"> </p>
+
+<p id="showing_added_points_long"></p>
+</html>

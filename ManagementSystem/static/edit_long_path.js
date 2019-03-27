@@ -3,23 +3,31 @@ let curPosClicked;
 
 var str_of_points="";
 let pointsOfPath = [];
-let pointsOfShort = [];
-let idOfMedium = 0;
+let pointsOfMedium = [];
 let idOfLong = 0;
+
+
+
+let pointsOfShort = [];
+
+let fullMedPoints = [];
+let fullLongPoints = [];
+let idOfMedium = 0;
+
 
 function initMapAndAttractionss(){
     str_of_points="";
     pointsOfPath = [];
 
-    getRequestTracks(markAttractionsOfMediumPaths);
+    getRequestTracks(markAttractionsOfLongPaths);
     initMapp();
-    initAttractionsMarkersOfMediumPath();
+    initAttractionsMarkersOfLongPath();
 }
 
   function addEditListenerr(m) {
       m.addListener('click', function() {
           curPosClicked=m.position;
-        var addToPathBTN = document.getElementById('add_reg_to_path_med');
+        var addToPathBTN = document.getElementById('add_reg_to_path_long');
         addToPathBTN.addEventListener('click', function() {
             if(pointsOfPath.indexOf(m.position)==-1 && curPosClicked==m.position)
             {
@@ -30,8 +38,24 @@ function initMapAndAttractionss(){
                 str_of_points=str_of_points+m.position+"<br />";
             }
             // alert(str_of_points);
-            document.getElementById("showing_added_points_med").innerHTML = str_of_points ;
+            document.getElementById("showing_added_points_long").innerHTML = str_of_points ;
            // alert("point been added! now its: "+ pointsOfPath.toString());
+        });
+
+           var deleteFromPathBTN = document.getElementById('delete_from_path_long');
+        deleteFromPathBTN.addEventListener('click', function() {
+                //let point_to_delete = {lat: m.position.lat(), lng: m.position.lng()};
+                let point_to_delete2 = {lat: m.position.lat().toFixed(10), lng: m.position.lng().toFixed(10)};
+                fullLongPoints.forEach(function (long_point) {
+                   // alert(med_point['x'] +","+med_point['y'] +"\n"+point_to_delete2.lat+","+point_to_delete2.lng);
+                     if((long_point['x'].toFixed(10) == point_to_delete2.lat)  &&
+                         (long_point['y'].toFixed(10) == point_to_delete2.lng))
+                     {
+                         deletePointFromTrackRequest(long_point['id'],idOfLong);
+                    }
+                });
+            window.location.href='/edit_long_path';
+
         });
   });
   }
@@ -49,48 +73,40 @@ function initMapp() {
 }
 
 
-function markAttractionsOfMediumPaths(tracksJSON){
+function markAttractionsOfLongPaths(tracksJSON){
 
     tracksJSON.forEach(function (track) {
 
-        if(track['length']==2) {
-            idOfMedium = track['id'];
-
-            let points_of_track = track['points'];
-            points_of_track.forEach(function (attr) {
-                    let pos = {lat: attr['x'], lng: attr['y']};
-                    localStorage.setItem("title" + pos, "attraction ID: " + attr['id'] + "\nattraction name: " + attr['name'] + "\nposition: (" + attr['x'] + "," + attr['y'] + ")");
-                    markAttractionOfMediumPath(pos);
-            })
-        }
-
-        if(track['length']==1)
-        {
-            let points_of_track = track['points'];
-            points_of_track.forEach(function (attr) {
-                    let pos2 = {lat: (attr['x']).toFixed(8), lng: (attr['y']).toFixed(8)};
-                    pointsOfShort.push(pos2);
-            })
-        }
-
-
         if(track['length']==3) {
-        idOfLong = track['id'];
+            idOfLong = track['id'];
+
+            let points_of_track = track['points'];
+            points_of_track.forEach(function (attr) {
+                    fullLongPoints.push(attr);
+                let pos2 = {lat: (attr['x']).toFixed(8), lng: (attr['y']).toFixed(8)}; // change to 13 instead of 8!!!
+
+                    let pos = {lat: attr['x'], lng: attr['y']};
+                    pointsOfMedium.push(pos2);
+                    localStorage.setItem("title" + pos, "attraction ID: " + attr['id'] + "\nattraction name: " + attr['name'] + "\nposition: (" + attr['x'] + "," + attr['y'] + ")");
+                    markAttractionOfLongPath(pos);
+
+            })
         }
+
     });
-    getRequestAttractions(markAttractionsOfMediumPath_left);
+    getRequestAttractions(markAttractionsOfLongPath_left);
 
 }
 
-function markAttractionsOfMediumPath_left(attractionsJSON){
+function markAttractionsOfLongPath_left(attractionsJSON){
 
     attractionsJSON.forEach(function (attr) {
 
         let pos = {lat: attr['x'], lng: attr['y']};
-        let pos2 = {lat: (attr['x']).toFixed(8), lng: (attr['y']).toFixed(8)};
+        let pos2 = {lat: (attr['x']).toFixed(8), lng: (attr['y']).toFixed(8)};// change to 13 instead of 8!!!
 
-        let lats=pointsOfShort.map(function (x){return (x.lat)});
-        let lngs=pointsOfShort.map(function (x){return (x.lng)});
+        let lats=pointsOfMedium.map(function (x){return (x.lat)});
+        let lngs=pointsOfMedium.map(function (x){return (x.lng)});
         let firstBool = lats.includes(pos2.lat);
         let secondBool = lngs.includes(pos2.lng);
         // alert(lats.length);
@@ -103,7 +119,7 @@ function markAttractionsOfMediumPath_left(attractionsJSON){
 }
 
 function listenerForMappo(){
-        var finishBTN = document.getElementById('finish_reg_med');
+        var finishBTN = document.getElementById('finish_reg_long');
         finishBTN.addEventListener('click', function() {
 
             getRequestAttractions(needThisToGetPointsIDs);
@@ -122,41 +138,25 @@ function needThisToGetPointsIDs(attractionsJSON) {
                 // alert("attr: "+ attr_point.x +","+ attr_point.y +"\npont: "+the_point.x +","+the_point.y+"\n"+bolia);
                 if((attr_point.x == the_point.x)  &&  (attr_point.y == the_point.y) ){
                     alert("bazinga!");
-                    executeAsynchronously(
-    [addPointToTrackRequest(attr_id,idOfMedium), addPointToTrackRequest(attr_id,idOfLong)], 10);
-                   // addPointToTrackRequest(attr_id,idOfMedium);
-                    //funcToDoSameShit(attr_id,idOfLong);
+                    addPointToTrackRequest(attr_id,idOfLong);
                     //addPointToTrackRequest(attr_id,idOfLong);
                 }
 
             });
     });
-    window.location.href='/add_medium_path';
+    window.location.href='/add_long_path';
     //window.location.href='/edit_path';
 }
 
-function funcToDoSameShit(attr_id,idOfLong) {
-    //alert("daf");
-    setTimeout(function(){
-  addPointToTrackRequest(attr_id,idOfLong);
-}, 10000);
-    // addPointToTrackRequest(attr_id,idOfLong);
-}
 
-function executeAsynchronously(functions, timeout) {
-  for(let i = 0; i < functions.length; i++) {
-    setTimeout(functions[i], timeout);
-  }
-}
-
-function markAttractionOfMediumPath(pos){
+function markAttractionOfLongPath(pos){
     let the_title=localStorage.getItem("title"+pos);
         let marker = new google.maps.Marker({
           position: pos,
           map: map,
           title:the_title
           ,icon: {
-                url: "http://maps.google.com/mapfiles/ms/icons/orange-dot.png"
+                url: "http://maps.google.com/mapfiles/ms/icons/blue-dot.png"
                 // https://medium.com/@letian1997/how-to-change-javascript-google-map-marker-color-8a72131d1207
                 }
         });
@@ -177,8 +177,8 @@ function markAttractionElse(pos){
         return marker;
 }
 
-function initAttractionsMarkersOfMediumPath() {
-    getRequestTracks(markAttractionsOfMediumPaths);
+function initAttractionsMarkersOfLongPath() {
+    getRequestTracks(markAttractionsOfLongPaths);
 }
 
 
@@ -189,7 +189,13 @@ function getRequestTracks(funcOnTrack){
 }
 
 function addPointToTrackRequest(id_of_point_to_add,track_id){
-    alert("trackos blatikus");
+    alert("trackos blatikus longos");
     serverRequest("PUT", function noop(dummy){}, 'http://10.0.0.4:12344/managementsystem/track/'+track_id+'/add',
         JSON.stringify(id_of_point_to_add));
+}
+
+function deletePointFromTrackRequest(id_of_point_to_del,track_id){
+    alert("trackos mohekos");
+    serverRequest("PUT", function noop(dummy){}, 'http://10.0.0.4:12344/managementsystem/track/'+track_id+'/del',
+        JSON.stringify(id_of_point_to_del));
 }

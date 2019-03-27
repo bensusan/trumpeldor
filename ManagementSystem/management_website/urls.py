@@ -18,13 +18,17 @@ urlpatterns = [
     path('add_medium_path/', views.add_medium_path_page),
     path('add_long_path/', views.add_long_path_page),
     path('add_path/', views.add_path_page),
-    path('edit_path/', views.edit_path_page),
     path('add_picture/', views.add_picture_page),
     path('add_aq/', views.add_aq_page),
     path('add_hint/', views.add_hint_page),
     path('pick_hint/', views.pick_hint_page),
     path('edit_hint/', views.edit_hint_page),
     path('pick_aq/', views.pick_aq_page),
+    path('pick_path_edit/', views.pick_path_edit_page),
+    path('pick_path_delete/', views.pick_path_delete_page),
+    path('edit_short_path/', views.edit_short_path_page),
+    path('edit_medium_path/', views.edit_medium_path_page),
+    path('edit_long_path/', views.edit_long_path_page),
 
 ]
 

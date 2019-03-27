@@ -4,6 +4,8 @@ let curPosClicked;
 var str_of_points="";
 let pointsOfPath = [];
 let pointsOfShort = [];
+let pointsOfMedium = [];
+let fullMedPoints = [];
 let idOfMedium = 0;
 let idOfLong = 0;
 
@@ -33,6 +35,22 @@ function initMapAndAttractionss(){
             document.getElementById("showing_added_points_med").innerHTML = str_of_points ;
            // alert("point been added! now its: "+ pointsOfPath.toString());
         });
+
+        var deleteFromPathBTN = document.getElementById('delete_from_path_med');
+        deleteFromPathBTN.addEventListener('click', function() {
+                //let point_to_delete = {lat: m.position.lat(), lng: m.position.lng()};
+                let point_to_delete2 = {lat: m.position.lat().toFixed(10), lng: m.position.lng().toFixed(10)};
+                fullMedPoints.forEach(function (med_point) {
+                   // alert(med_point['x'] +","+med_point['y'] +"\n"+point_to_delete2.lat+","+point_to_delete2.lng);
+                     if((med_point['x'].toFixed(10) == point_to_delete2.lat)  &&
+                         (med_point['y'].toFixed(10) == point_to_delete2.lng))
+                     {
+                         deletePointFromTrackRequest(med_point['id'],idOfMedium);
+                    }
+                });
+            window.location.href='/edit_medium_path';
+
+        });
   });
   }
 
@@ -59,6 +77,9 @@ function markAttractionsOfMediumPaths(tracksJSON){
             let points_of_track = track['points'];
             points_of_track.forEach(function (attr) {
                     let pos = {lat: attr['x'], lng: attr['y']};
+                    let pos2 = {lat: (attr['x']).toFixed(8), lng: (attr['y']).toFixed(8)};
+                    fullMedPoints.push(attr);
+                    pointsOfMedium.push(pos2);
                     localStorage.setItem("title" + pos, "attraction ID: " + attr['id'] + "\nattraction name: " + attr['name'] + "\nposition: (" + attr['x'] + "," + attr['y'] + ")");
                     markAttractionOfMediumPath(pos);
             })
@@ -89,8 +110,8 @@ function markAttractionsOfMediumPath_left(attractionsJSON){
         let pos = {lat: attr['x'], lng: attr['y']};
         let pos2 = {lat: (attr['x']).toFixed(8), lng: (attr['y']).toFixed(8)};
 
-        let lats=pointsOfShort.map(function (x){return (x.lat)});
-        let lngs=pointsOfShort.map(function (x){return (x.lng)});
+        let lats=pointsOfMedium.map(function (x){return (x.lat)});
+        let lngs=pointsOfMedium.map(function (x){return (x.lng)});
         let firstBool = lats.includes(pos2.lat);
         let secondBool = lngs.includes(pos2.lng);
         // alert(lats.length);
@@ -114,14 +135,14 @@ function listenerForMappo(){
 function needThisToGetPointsIDs(attractionsJSON) {
 
     attractionsJSON.forEach(function (attr) {
-        let attr_point = {x: (attr['x']).toFixed(13) , y: (attr['y']).toFixed(13)};
+        let attr_point = {x: (attr['x']).toFixed(10) , y: (attr['y']).toFixed(10)};
         let attr_id = attr['id'];
         pointsOfPath.forEach(function (point) {
-                let the_point = {x: (point.lat).toFixed(13) , y: (point.lng).toFixed(13)};
+                let the_point = {x: (point.lat).toFixed(10) , y: (point.lng).toFixed(10)};
                 // let bolia = attr_point == the_point;
                 // alert("attr: "+ attr_point.x +","+ attr_point.y +"\npont: "+the_point.x +","+the_point.y+"\n"+bolia);
                 if((attr_point.x == the_point.x)  &&  (attr_point.y == the_point.y) ){
-                    alert("bazinga!");
+                   // alert("bazinga!");
                     executeAsynchronously(
     [addPointToTrackRequest(attr_id,idOfMedium), addPointToTrackRequest(attr_id,idOfLong)], 10);
                    // addPointToTrackRequest(attr_id,idOfMedium);
@@ -131,7 +152,7 @@ function needThisToGetPointsIDs(attractionsJSON) {
 
             });
     });
-    window.location.href='/add_medium_path';
+    window.location.href='/edit_medium_path';
     //window.location.href='/edit_path';
 }
 
@@ -192,4 +213,10 @@ function addPointToTrackRequest(id_of_point_to_add,track_id){
     alert("trackos blatikus");
     serverRequest("PUT", function noop(dummy){}, 'http://10.0.0.4:12344/managementsystem/track/'+track_id+'/add',
         JSON.stringify(id_of_point_to_add));
+}
+
+function deletePointFromTrackRequest(id_of_point_to_del,track_id){
+    alert("trackos mohekos");
+    serverRequest("PUT", function noop(dummy){}, 'http://10.0.0.4:12344/managementsystem/track/'+track_id+'/del',
+        JSON.stringify(id_of_point_to_del));
 }
