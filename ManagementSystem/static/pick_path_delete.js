@@ -1,11 +1,9 @@
 let the_length = 0 ;
 
 function funcToGetTrackID(tracksJSON){
-    alert("aaaa");
     tracksJSON.forEach(function (track) {
-        alert("d "+ the_length);
         if(track['length']==the_length) {
-            alert("d");
+            alert("wat");
             deleteRequestTrack(track['id']);
             window.location.href='/main';
         }
@@ -22,7 +20,6 @@ window.onload = function () {
         if(length == "1"){
             the_length=1;
             getRequestTracks(funcToGetTrackID);
-           // alert("alerto");
         }
         if(length == "2"){
             the_length=2;
@@ -43,7 +40,6 @@ function getRequestTracks(funcOnTrack){
     // the server port and my ip
     alert("alerddto");
     serverRequest("GET", funcOnTrack, 'http://10.0.0.4:12344/managementsystem/track/?format=json');
-    alert("alerddto");
 }
 
 function deleteRequestTrack(id){

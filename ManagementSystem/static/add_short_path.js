@@ -85,7 +85,7 @@ function funcInOrderToGetAttractions(attractionsJSON) {
             postRequestShortPath(medium_to_send);
             postRequestShortPath(long_to_send);
 
-            window.location.href='/edit_path';
+            window.location.href='/main';
 }
 
 
