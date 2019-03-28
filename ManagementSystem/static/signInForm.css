@@ -2,7 +2,8 @@ body {
     background-image: url("back.jpg");
     background-repeat: no-repeat;
     background-color: #cccccc;
-    background-size: cover;
+    /*background-size: cover;*/
+    background-attachment: fixed;
     font-family: Arial, Helvetica, sans-serif;
 
 }
