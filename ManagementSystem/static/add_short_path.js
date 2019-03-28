@@ -63,12 +63,6 @@ function listenerForMap(){
 
         });
 
-         var showwBTN = document.getElementById('showingshit');
-        showwBTN.addEventListener('click', function() {
-            getRequestPaths(doShitToDelete);
-             alert("shit!");
-
-        });
 }
 
 function funcInOrderToGetAttractions(attractionsJSON) {
@@ -108,13 +102,6 @@ function executeAsynchronously(functions, timeout) {
   }
 }
 
-function doShitToDelete(pathsJSON) {
-
-    pathsJSON.forEach(function (path) {
-      alert("this: "+path.points);
-    });
-
-}
 
 function getRequestPaths(funcOnPaths){
     // the server port and my ip
@@ -127,7 +114,7 @@ function getRequestShortPath(funcOnShortPath){
 }
 
 function postRequestShortPath(short_path){
-    alert("blatos");
+   // alert("blatos");
     serverRequest("POST", function noop(dummy){}, 'http://'+ip+':12344/managementsystem/track/',
         JSON.stringify(short_path));
         readyToMedium=1;
@@ -165,30 +152,4 @@ function markAttractionOfShortPath(pos){
 
 function initAttractionsMarkersOfShortPath() {
     getRequestAttractions(markAttractionsOfShortPath);
-}
-
-
-
-
-function getRequestLongPath(funcOnLongPath){
-    // the server port and my ip
-    serverRequest("GET", funcOnLongPath, 'http://'+ip+':12344/managementsystem/track/3/?format=json');
-}
-
-function postRequestLongPath(long_path){
-    alert("long_blatos");
-    serverRequest("POST", function noop(dummy){}, 'http://'+ip+':12344/managementsystem/track/',
-        JSON.stringify(long_path));
-}
-
-function getRequestMediumPath(funcOnMedPath){
-    // the server port and my ip
-    serverRequest("GET", funcOnMedPath, 'http://'+ip+':12344/managementsystem/track/2/?format=json');
-}
-
-function postRequestMediumPath(medium_path){
-    alert("med_blatos");
-    serverRequest("POST", function noop(dummy){}, 'http://'+ip+':12344/managementsystem/track/',
-        JSON.stringify(medium_path));
-    readyToLong=1;
 }

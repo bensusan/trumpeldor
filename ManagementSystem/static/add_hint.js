@@ -164,7 +164,7 @@ function finishHint() {
 }
 
 function postRequestHint(the_hint,attr_id){
-    alert("hint blat");
+    //alert("hint blat");
     serverRequest("POST", function noop(dummy){}, 'http://'+ip+':12344/managementsystem/attraction/'+
         attr_id+'/hint/',
         JSON.stringify(the_hint));

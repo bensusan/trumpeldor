@@ -43,28 +43,7 @@ window.onload=function(){
     }
 
     function showDataCollected() {
-        // var numberOfPoints =Number(localStorage.getItem("numberOfPoints"));
-        // numberOfPoints=numberOfPoints+1;
-        // localStorage.setItem("numberOfPoints",""+numberOfPoints);
-        // // alert("1!");
-        // var currPoints = JSON.parse(localStorage.getItem("points"));
-        // localStorage.setItem("points",JSON.stringify(currPoints));
 
-        // numberOfPoints--;
-        // localStorage.setItem("attr_name"+numberOfPoints, document.getElementById("attr_name").value);
-        // localStorage.setItem("desc"+numberOfPoints, document.getElementById("desc").value);
-        // localStorage.setItem("ques"+numberOfPoints, document.getElementById("ques").value);
-        // localStorage.setItem("ans1"+numberOfPoints, document.getElementById("ans1").value);
-        // localStorage.setItem("ans2"+numberOfPoints, document.getElementById("ans2").value);
-        // localStorage.setItem("ans3"+numberOfPoints, document.getElementById("ans3").value);
-        // localStorage.setItem("ans4"+numberOfPoints, document.getElementById("ans4").value);
-        // localStorage.setItem("path_len"+numberOfPoints, document.getElementById("path_len").value);
-        //
-        // var shortPath = JSON.parse(localStorage.getItem("short_path"));
-        // var medPath = JSON.parse(localStorage.getItem("medium_path"));
-        // var longPath = JSON.parse(localStorage.getItem("long_path"));
-        //
-        //
 
         let addedPoint = JSON.parse(localStorage.getItem("addedPoint"));
         // alert("is what: "+ addedPoint.lat +", " + addedPoint.lng + ", "+ (typeof addedPoint.lng));

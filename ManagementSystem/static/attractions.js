@@ -65,14 +65,14 @@ function initAttractionsMarkers() {
 
 
 function postRequestAttraction(attraction){
-    alert("blat");
+   // alert("blat");
     serverRequest("POST", function noop(dummy){}, 'http://'+ip+':12344/managementsystem/attraction/',
         JSON.stringify(attraction));
 }
 
 
 function deleteRequestAttraction(id){
-    alert("blich");
+   // alert("blich");
     serverRequest("DELETE", function noop(dummy){}, 'http://'+ip+':12344/managementsystem/attraction/'+id+'/');
 }
 

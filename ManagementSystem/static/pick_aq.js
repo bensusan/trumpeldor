@@ -82,7 +82,7 @@ function funcInOrderToDeleteAmericanQuestion(AmericanQuestionsJSON) {
         // alert("in get name! "+"of the origin : " + lat + " , " + lng + "\n of the other: "+p.lat +" , "+ p.lng);
         if(aq['id']==aq_id_that_was_picked)
         {
-            alert("before delete aq!");
+            //alert("before delete aq!");
             deleteRequestAmericanQuestion(attractionObjToUseInHintDelete['id'],aq['id']);
             window.location.href='/pick_aq';
         }
@@ -149,7 +149,7 @@ function getRequestAmericanQuestions(funcOnAqs,attr_id){
 
 
 function postRequestAmericanQuestion(aq,attr_id){
-    alert("aq blat");
+  //  alert("aq blat");
     serverRequest("POST", function noop(dummy){}, 'http://'+ip+':12344/managementsystem/attraction/'+
         attr_id+'/aquestion/',
         JSON.stringify(aq));

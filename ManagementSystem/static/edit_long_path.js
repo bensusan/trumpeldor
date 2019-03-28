@@ -197,13 +197,13 @@ function getRequestTracks(funcOnTrack){
 }
 
 function addPointToTrackRequest(id_of_point_to_add,track_id){
-    alert("trackos blatikus longos");
+    //alert("trackos blatikus longos");
     serverRequest("PUT", function noop(dummy){}, 'http://'+ip+':12344/managementsystem/track/'+track_id+'/add',
         JSON.stringify(id_of_point_to_add));
 }
 
 function deletePointFromTrackRequest(id_of_point_to_del,track_id){
-    alert("trackos mohekos");
+//    alert("trackos mohekos");
     serverRequest("PUT", function noop(dummy){}, 'http://'+ip+':12344/managementsystem/track/'+track_id+'/del',
         JSON.stringify(id_of_point_to_del));
 }

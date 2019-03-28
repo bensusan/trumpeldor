@@ -132,7 +132,7 @@ window.onload=function(){
     }
 
     function editRequestAttraction(attraction,attr_id){
-    alert("edit blat hui");
+   // alert("edit blat hui");
     serverRequest("PUT", function noop(dummy){}, 'http://'+ip+':12344/managementsystem/attraction/'+attr_id+'/',
         JSON.stringify(attraction));
 }

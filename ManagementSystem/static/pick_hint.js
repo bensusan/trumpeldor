@@ -81,7 +81,7 @@ function funcInOrderToDeleteHint(hintsJSON) {
         // alert("in get name! "+"of the origin : " + lat + " , " + lng + "\n of the other: "+p.lat +" , "+ p.lng);
         if(hint['id']==hint_id_that_was_picked)
         {
-            alert("before delete hint!");
+            //alert("before delete hint!");
             deleteRequestHint(attractionObjToUseInHintDelete['id'],hint['id']);
             window.location.href='/pick_hint';
         }
@@ -179,7 +179,7 @@ function getRequestHints(funcOnHints,attr_id){
 
 
 function postRequestHint(the_hint,attr_id){
-    alert("hint blat");
+ //   alert("hint blat");
     serverRequest("POST", function noop(dummy){}, 'http://'+ip+':12344/managementsystem/attraction/'+
         attr_id+'/hint/',
         JSON.stringify(the_hint));

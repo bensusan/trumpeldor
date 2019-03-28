@@ -136,7 +136,7 @@ function needThisToGetPointsIDs(attractionsJSON) {
             // let bolia = attr_point == the_point;
             // alert("attr: "+ attr_point.x +","+ attr_point.y +"\npont: "+the_point.x +","+the_point.y+"\n"+bolia);
             if ((attr_point.x == the_point.x) && (attr_point.y == the_point.y)) {
-                alert("bazinga");
+             //   alert("bazinga");
                 addPointToTrackRequest(attr_id,idOfMedium);
 
 
@@ -194,7 +194,7 @@ function getRequestTracks(funcOnTrack){
 }
 
 function addPointToTrackRequest(id_of_point_to_add,track_id){
-    alert("trackos blatikus");
+    //alert("trackos blatikus");
     serverRequest("PUT", function noop(dummy){}, 'http://'+ip+':12344/managementsystem/track/'+track_id+'/add',
         JSON.stringify(id_of_point_to_add));
 }

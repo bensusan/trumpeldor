@@ -154,27 +154,15 @@ function needThisToGetPointsIDs(attractionsJSON) {
                 // let bolia = attr_point == the_point;
                 // alert("attr: "+ attr_point.x +","+ attr_point.y +"\npont: "+the_point.x +","+the_point.y+"\n"+bolia);
                 if((attr_point.x == the_point.x)  &&  (attr_point.y == the_point.y) ){
-                   alert("bazinga!");
+                //   alert("bazinga!");
                     addPointToTrackRequest(attr_id,idOfShort);
-    //                 executeAsynchronously(
-    // [addPointToTrackRequest(attr_id,idOfMedium), addPointToTrackRequest(attr_id,idOfLong)], 10);
-                   // addPointToTrackRequest(attr_id,idOfMedium);
-                    //funcToDoSameShit(attr_id,idOfLong);
-                    //addPointToTrackRequest(attr_id,idOfLong);
+
                 }
 
             });
     });
     window.location.href='/edit_short_path';
     //window.location.href='/edit_path';
-}
-
-function funcToDoSameShit(attr_id,idOfLong) {
-    //alert("daf");
-    setTimeout(function(){
-  addPointToTrackRequest(attr_id,idOfLong);
-}, 10000);
-    // addPointToTrackRequest(attr_id,idOfLong);
 }
 
 function executeAsynchronously(functions, timeout) {
@@ -225,13 +213,13 @@ function getRequestTracks(funcOnTrack){
 }
 
 function addPointToTrackRequest(id_of_point_to_add,track_id){
-    alert("trackos blatikus");
+    //alert("trackos blatikus");
     serverRequest("PUT", function noop(dummy){}, 'http://'+ip+':12344/managementsystem/track/'+track_id+'/add',
         JSON.stringify(id_of_point_to_add));
 }
 
 function deletePointFromTrackRequest(id_of_point_to_del,track_id){
-    alert("trackos mohekos");
+   // alert("trackos mohekos");
     serverRequest("PUT", function noop(dummy){}, 'http://'+ip+':12344/managementsystem/track/'+track_id+'/del',
         JSON.stringify(id_of_point_to_del));
 }
