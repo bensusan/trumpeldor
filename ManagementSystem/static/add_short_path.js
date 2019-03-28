@@ -98,20 +98,18 @@ function doShitToDelete(pathsJSON) {
 }
 
 function getRequestPaths(funcOnPaths){
-    // serverRequest("GET", funcOnAttractions, 'http://192.168.1.12:12344/managementsystem/attraction/?format=json');
     // the server port and my ip
-    serverRequest("GET", funcOnPaths, 'http://10.0.0.4:12344/managementsystem/track/?format=json');
+    serverRequest("GET", funcOnPaths, 'http://'+ip+':12344/managementsystem/track/?format=json');
 }
 
 function getRequestShortPath(funcOnShortPath){
-    // serverRequest("GET", funcOnAttractions, 'http://192.168.1.12:12344/managementsystem/attraction/?format=json');
     // the server port and my ip
-    serverRequest("GET", funcOnShortPath, 'http://10.0.0.4:12344/managementsystem/track/1/?format=json');
+    serverRequest("GET", funcOnShortPath, 'http://'+ip+':12344/managementsystem/track/1/?format=json');
 }
 
 function postRequestShortPath(short_path){
     alert("blatos");
-    serverRequest("POST", function noop(dummy){}, 'http://10.0.0.4:12344/managementsystem/track/',
+    serverRequest("POST", function noop(dummy){}, 'http://'+ip+':12344/managementsystem/track/',
         JSON.stringify(short_path));
 
 }
@@ -155,22 +153,22 @@ function initAttractionsMarkersOfShortPath() {
 
 function getRequestLongPath(funcOnLongPath){
     // the server port and my ip
-    serverRequest("GET", funcOnLongPath, 'http://10.0.0.4:12344/managementsystem/track/3/?format=json');
+    serverRequest("GET", funcOnLongPath, 'http://'+ip+':12344/managementsystem/track/3/?format=json');
 }
 
 function postRequestLongPath(long_path){
     alert("long_blatos");
-    serverRequest("POST", function noop(dummy){}, 'http://10.0.0.4:12344/managementsystem/track/',
+    serverRequest("POST", function noop(dummy){}, 'http://'+ip+':12344/managementsystem/track/',
         JSON.stringify(long_path));
 }
 
 function getRequestMediumPath(funcOnMedPath){
     // the server port and my ip
-    serverRequest("GET", funcOnMedPath, 'http://10.0.0.4:12344/managementsystem/track/2/?format=json');
+    serverRequest("GET", funcOnMedPath, 'http://'+ip+':12344/managementsystem/track/2/?format=json');
 }
 
 function postRequestMediumPath(medium_path){
     alert("med_blatos");
-    serverRequest("POST", function noop(dummy){}, 'http://10.0.0.4:12344/managementsystem/track/',
+    serverRequest("POST", function noop(dummy){}, 'http://'+ip+':12344/managementsystem/track/',
         JSON.stringify(medium_path));
 }

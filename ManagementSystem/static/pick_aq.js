@@ -142,7 +142,7 @@ function donePickingAqs() {
 function getRequestAmericanQuestions(funcOnAqs,attr_id){
     // serverRequest("GET", funcOnAttractions, 'http://192.168.1.12:12344/managementsystem/attraction/?format=json');
     // the server port and my ip
-    serverRequest("GET", funcOnAqs, 'http://10.0.0.4:12344/managementsystem/attraction/'+ attr_id+
+    serverRequest("GET", funcOnAqs, 'http://'+ip+':12344/managementsystem/attraction/'+ attr_id+
         '/aquestion/?format=json');
     //alert("need to remove this alert and fix funcToGetAttraction()!");
 }
@@ -150,11 +150,11 @@ function getRequestAmericanQuestions(funcOnAqs,attr_id){
 
 function postRequestAmericanQuestion(aq,attr_id){
     alert("aq blat");
-    serverRequest("POST", function noop(dummy){}, 'http://10.0.0.4:12344/managementsystem/attraction/'+
+    serverRequest("POST", function noop(dummy){}, 'http://'+ip+':12344/managementsystem/attraction/'+
         attr_id+'/aquestion/',
         JSON.stringify(aq));
 }
 
 function deleteRequestAmericanQuestion(attr_id,aq_id){
-     serverRequest("DELETE", function noop(dummy){}, 'http://10.0.0.4:12344/managementsystem/attraction/'+attr_id+'/aquestion/'+aq_id+'/');
+     serverRequest("DELETE", function noop(dummy){}, 'http://'+ip+':12344/managementsystem/attraction/'+attr_id+'/aquestion/'+aq_id+'/');
     }

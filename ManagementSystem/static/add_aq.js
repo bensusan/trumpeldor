@@ -13,7 +13,7 @@ window.onload = function() {
 
 function postRequestAmericanQuestion(aq,attr_id){
     alert("aq blat");
-    serverRequest("POST", function noop(dummy){}, 'http://10.0.0.4:12344/managementsystem/attraction/'+
+    serverRequest("POST", function noop(dummy){}, 'http://'+ip+':12344/managementsystem/attraction/'+
         attr_id+'/aquestion/',
         JSON.stringify(aq));
 }

@@ -36,13 +36,12 @@ window.onload = function () {
 
 
 function getRequestTracks(funcOnTrack){
-    // serverRequest("GET", funcOnAttractions, 'http://192.168.1.12:12344/managementsystem/attraction/?format=json');
     // the server port and my ip
     alert("alerddto");
-    serverRequest("GET", funcOnTrack, 'http://10.0.0.4:12344/managementsystem/track/?format=json');
+    serverRequest("GET", funcOnTrack, 'http://'+ip+':12344/managementsystem/track/?format=json');
 }
 
 function deleteRequestTrack(id){
     alert("delitos");
-    serverRequest("DELETE", function noop(dummy){}, 'http://10.0.0.4:12344/managementsystem/track/'+id+'/');
+    serverRequest("DELETE", function noop(dummy){}, 'http://'+ip+':12344/managementsystem/track/'+id+'/');
 }

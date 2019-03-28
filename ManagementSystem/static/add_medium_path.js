@@ -191,11 +191,12 @@ function initAttractionsMarkersOfMediumPath() {
 function getRequestTracks(funcOnTrack){
     // serverRequest("GET", funcOnAttractions, 'http://192.168.1.12:12344/managementsystem/attraction/?format=json');
     // the server port and my ip
-    serverRequest("GET", funcOnTrack, 'http://10.0.0.4:12344/managementsystem/track/?format=json');
+    serverRequest("GET", funcOnTrack, 'http://'+ip+':12344/managementsystem/track/?format=json');
+
 }
 
 function addPointToTrackRequest(id_of_point_to_add,track_id){
     alert("trackos blatikus");
-    serverRequest("PUT", function noop(dummy){}, 'http://10.0.0.4:12344/managementsystem/track/'+track_id+'/add',
+    serverRequest("PUT", function noop(dummy){}, 'http://'+ip+':12344/managementsystem/track/'+track_id+'/add',
         JSON.stringify(id_of_point_to_add));
 }

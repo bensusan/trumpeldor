@@ -30,7 +30,7 @@ function hints_func(hintsJSON) {
 function getRequestHints(funcOnHints,attr_id){
     // serverRequest("GET", funcOnAttractions, 'http://192.168.1.12:12344/managementsystem/attraction/?format=json');
     // the server port and my ip
-    serverRequest("GET", funcOnHints, 'http://10.0.0.4:12344/managementsystem/attraction/'+ attr_id+
+    serverRequest("GET", funcOnHints, 'http://'+ip+':12344/managementsystem/attraction/'+ attr_id+
         '/hint/?format=json');
     //alert("need to remove this alert and fix funcToGetAttraction()!");
 }
@@ -165,7 +165,7 @@ function finishHint() {
 
 function postRequestHint(the_hint,attr_id){
     alert("hint blat");
-    serverRequest("POST", function noop(dummy){}, 'http://10.0.0.4:12344/managementsystem/attraction/'+
+    serverRequest("POST", function noop(dummy){}, 'http://'+ip+':12344/managementsystem/attraction/'+
         attr_id+'/hint/',
         JSON.stringify(the_hint));
 }
