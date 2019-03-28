@@ -92,7 +92,7 @@ class DAL_Implementation(DAL_Abstract):
         return Track.objects.filter(subTrack=track).all()
 
     def delete_attraction(self, id):
-        delt=self.get_attraction(id).delete()
+        delt=self.getAttraction(id).delete()
         return True
 
     def edit_attraction(self, id, name, x, y, description, picturesURLS, videosURLS):

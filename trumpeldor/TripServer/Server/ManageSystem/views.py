@@ -217,7 +217,7 @@ class Attraction(generics.GenericAPIView):
 
     def delete(self, request, *args, **kwargs):
         ans = BL.delete_attraction(self.kwargs['id'])
-        ans = AttractionSerializer(ans, many=False)
+        #ans = AttractionSerializer(ans, many=False)
         ans = json.loads(json.dumps(ans))
         return Response(ans)
 
