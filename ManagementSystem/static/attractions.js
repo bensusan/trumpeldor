@@ -1,5 +1,6 @@
 const Http = new XMLHttpRequest();
 
+let marker_arr = [];
 
 function serverRequest(getOrPost, functionOnReady, url, post=null){
     Http.onreadystatechange = function(){
@@ -20,6 +21,7 @@ function serverRequest(getOrPost, functionOnReady, url, post=null){
 function markAttractions(attractionsJSON){
     attractionsJSON.forEach(function (attr) {
         let pos = {lat: attr['x'], lng: attr['y']};
+        marker_arr.push(pos);
         localStorage.setItem("title"+pos,"attraction ID: "+attr['id']+"\nattraction name: "+attr['name']+"\nposition: ("+attr['x']+","+attr['y']+")");
         markAttraction(pos);
         // var currPoints = JSON.parse(localStorage.getItem("points"));
@@ -28,6 +30,8 @@ function markAttractions(attractionsJSON){
 
 
     });
+        localStorage.setItem("arr_of_markers",JSON.stringify(marker_arr));
+
 }
 
 function markAttraction(pos){
@@ -36,14 +40,17 @@ function markAttraction(pos){
           position: pos,
           map: map,
           title:the_title
-          // ,icon: {
-          //       url: "http://maps.google.com/mapfiles/ms/icons/blue-dot.png"
-          //       }
+          ,icon: {
+                url: "http://maps.google.com/mapfiles/ms/icons/red-dot.png"
+                }
         });
+
+        // marker_arr.push(marker);
         marker.setMap(map);
         addEditListener(marker);
         return marker;
 }
+
 
 
 function getRequestAttractions(funcOnAttractions){

@@ -26,6 +26,15 @@ function initMap() {
 
   function addEditListener(m) {
       m.addListener('click', function() {
+            if(prev_m!=1) {
+
+              prev_m.setIcon(prev_icon);
+          }
+          //alert("sda");
+          prev_icon=m.icon;
+          m.setIcon("http://maps.google.com/mapfiles/ms/icons/pink-dot.png");
+
+          prev_m=m;
         curPosClicked=m.position;
         var addToPathBTN = document.getElementById('add_reg_to_path');
         addToPathBTN.addEventListener('click', function() {
@@ -144,10 +153,10 @@ function markAttractionOfShortPath(pos){
           position: pos,
           map: map,
           title:the_title
-          // ,icon: {
-          //       url: "http://maps.google.com/mapfiles/ms/icons/blue-dot.png"
-          //       // https://medium.com/@letian1997/how-to-change-javascript-google-map-marker-color-8a72131d1207
-          //       }
+          ,icon: {
+                url: "http://maps.google.com/mapfiles/ms/icons/red-dot.png"
+                // https://medium.com/@letian1997/how-to-change-javascript-google-map-marker-color-8a72131d1207
+                }
         });
         marker.setMap(map);
         addEditListener(marker);

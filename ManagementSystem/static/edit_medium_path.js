@@ -20,6 +20,12 @@ function initMapAndAttractionss(){
 
   function addEditListenerr(m) {
       m.addListener('click', function() {
+          if(prev_m!=1) {
+              prev_m.setIcon("http://maps.google.com/mapfiles/ms/icons/red-dot.png");
+          }
+          //alert("sda");
+          m.setIcon("http://maps.google.com/mapfiles/ms/icons/pink-dot.png");
+          prev_m=m;
           curPosClicked=m.position;
         var addToPathBTN = document.getElementById('add_reg_to_path_med');
         addToPathBTN.addEventListener('click', function() {
@@ -193,6 +199,9 @@ function markAttractionElse(pos){
           position: pos,
           map: map,
           title:the_title
+          ,icon: {
+                url: "http://maps.google.com/mapfiles/ms/icons/red-dot.png"
+                }
         });
         marker.setMap(map);
         addEditListenerr(marker);

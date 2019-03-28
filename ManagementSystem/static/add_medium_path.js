@@ -21,6 +21,15 @@ function initMapAndAttractionss(){
 
   function addEditListenerr(m) {
       m.addListener('click', function() {
+          if(prev_m!=1) {
+
+              prev_m.setIcon(prev_icon);
+          }
+          //alert("sda");
+          prev_icon=m.icon;
+          m.setIcon("http://maps.google.com/mapfiles/ms/icons/pink-dot.png");
+
+          prev_m=m;
           curPosClicked=m.position;
         var addToPathBTN = document.getElementById('add_reg_to_path_med');
         addToPathBTN.addEventListener('click', function() {
@@ -122,7 +131,7 @@ function needThisToGetPointsIDs(attractionsJSON) {
         let attr_point = {x: (attr['x']).toFixed(13) , y: (attr['y']).toFixed(13)};
         let attr_id = attr['id'];
 
-        pointsOfPath.forEach(async function (point) {
+        pointsOfPath.forEach( function (point) {
             let the_point = {x: (point.lat).toFixed(13), y: (point.lng).toFixed(13)};
             // let bolia = attr_point == the_point;
             // alert("attr: "+ attr_point.x +","+ attr_point.y +"\npont: "+the_point.x +","+the_point.y+"\n"+bolia);
@@ -163,6 +172,9 @@ function markAttractionElse(pos){
           position: pos,
           map: map,
           title:the_title
+          ,icon: {
+                url: "http://maps.google.com/mapfiles/ms/icons/red-dot.png"
+                }
         });
         marker.setMap(map);
         addEditListenerr(marker);

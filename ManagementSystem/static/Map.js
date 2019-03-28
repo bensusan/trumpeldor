@@ -109,6 +109,13 @@ function initMap() {
   function addEditListener(m) {
       m.addListener('click', function() {
 
+          if(prev_m!=1) {
+              prev_m.setIcon("http://maps.google.com/mapfiles/ms/icons/red-dot.png");
+          }
+          //alert("sda");
+          m.setIcon("http://maps.google.com/mapfiles/ms/icons/pink-dot.png");
+          prev_m=m;
+           // markSpecificAttraction(pos);
           // alert("the point "+m.position);
         var editBTN = document.getElementById('edit_attraction');
         editBTN.addEventListener('click', function() {
@@ -152,3 +159,20 @@ function addListenerForMarker(marker) {
 function positionInMap(lat, lng){
           return {lat: lat, lng: lng};
       }
+
+function markSpecificAttraction(pos){
+
+let marker_arr=JSON.parse(localStorage.getItem("arr_of_markers"));
+
+        marker_arr.forEach(function (marker) {
+            let b1 = marker.lat.toFixed(10)==pos.lat.toFixed(10);
+            let b2 = marker.lng.toFixed(10)==pos.lng.toFixed(10);
+          //  alert(b1 +" "+b2);
+             if(b1 && b2){
+                 alert(marker.pos.lat);
+                marker.setIcon("http://maps.google.com/mapfiles/ms/icons/blue-dot.png");
+                // marker.setMap();
+            }
+        });
+
+}
