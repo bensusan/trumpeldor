@@ -48,6 +48,11 @@ window.onload=function(){
     };
 
 
+function doVideo(){
+    	let vid_input = document.getElementById('video_input');
+        vid_input.click();
+}
+
     function finishEditingAttraction() {
         let attr_after_editing = {
             id: 66,
