@@ -1,6 +1,6 @@
 document.getElementById("sideMenu").innerHTML = '<div class="sidenav">\n' +
     '  <h2 style="color:#818181;">Welcome, Yael!</h2>' +
-    '  <a href="/attractions">Manage Attractions</a>\n' +
+    '  <a href="/attractions" name="manage_attr_page">Manage Attractions</a>\n' +
     '  <button class="dropdown-btn">Paths\n' +
     '    <i class="fa fa-caret-down"></i>\n' +
     '  </button>\n' +
