@@ -151,8 +151,9 @@ class DAL_Implementation(DAL_Abstract):
         attr = self.getAttraction(id_attraction)
         if attr is not None:
             track = self.get_track(id_track)
-            for i in range(track.length-1, 3):
-                track = self.get_track(id_track+i)
+            len = track.length
+            for i in range(len, 4):
+                track = self.get_track_by_length(i)
                 track.points.add(attr)
                 track.save()
             return True
@@ -161,8 +162,9 @@ class DAL_Implementation(DAL_Abstract):
         attr = self.getAttraction(id_attraction)
         if attr is not None:
             track = self.get_track(id_track)
-            for i in range(track.length):
-                track = self.get_track(id_track-i)
+            len = track.length
+            for i in range(1, len+1):
+                track = self.get_track_by_length(i)
                 track.points.remove(attr)
                 track.save()
             return True
