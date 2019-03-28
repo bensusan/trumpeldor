@@ -2,6 +2,8 @@
 <html lang="en">
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
+    {% load static %}
+<link rel="stylesheet" href="{% static 'attractions_style.css' %}?version=1">
     <title>Add Medium Path</title>
     {% load static %}
 <link rel="stylesheet" href="{% static 'paths_style.css' %}?version=1">
@@ -31,8 +33,14 @@
 
 </div>
 
-<button id="add_reg_to_path_med" type="button">Add To Path</button>
-<button id="finish_reg_med" type="button">Finish!</button>
+    <div align="center">
+<div class="buttonStyle">
+
+<button class="button" id="add_reg_to_path_med" type="button">Add To Path</button>
+<button class="button" id="finish_reg_med" type="button">Finish!</button>
+</div>
+    </div>
+
 </div>
 </body>
 <p></p>
