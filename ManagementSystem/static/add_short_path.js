@@ -1,5 +1,4 @@
 //from django.conf import settings
-
 let curPosClicked;
 // let curMarker;
 // let coordinates_of_last_click;
@@ -39,7 +38,7 @@ function initMap() {
                 str_of_points=str_of_points+m.position+"<br />";
             }
             // alert(str_of_points);
-            document.getElementById("showing_added_points").innerHTML = str_of_points ;
+            document.getElementById("showing_added_points").innerHTML = str_of_points;
            // alert("point been added! now its: "+ pointsOfPath.toString());
         });
   });
@@ -81,13 +80,24 @@ function funcInOrderToGetAttractions(attractionsJSON) {
     let short_to_send = {points:arr_of_complete_points,length:1};
             let medium_to_send = {points:arr_of_complete_points,length:2};
             let long_to_send = {points:arr_of_complete_points,length:3};
-             postRequestShortPath(short_to_send);
-            postRequestShortPath(medium_to_send);
-            postRequestShortPath(long_to_send);
+            //postRequestShortPath(short_to_send);
+Promise.all([postRequestShortPath(short_to_send),  postRequestShortPath(medium_to_send)]).then(function() {
+  postRequestShortPath(long_to_send);
+});
+    //                         executeAsynchronously(
+    // [ postRequestShortPath(short_to_send),  postRequestShortPath(medium_to_send),postRequestShortPath(long_to_send)], 10);
+            //  postRequestShortPath(short_to_send);
+            // postRequestShortPath(medium_to_send);
+            // postRequestShortPath(long_to_send);
 
             window.location.href='/main';
 }
 
+function executeAsynchronously(functions, timeout) {
+  for(let i = 0; i < functions.length; i++) {
+    setTimeout(functions[i], timeout);
+  }
+}
 
 function doShitToDelete(pathsJSON) {
 
@@ -111,7 +121,7 @@ function postRequestShortPath(short_path){
     alert("blatos");
     serverRequest("POST", function noop(dummy){}, 'http://'+ip+':12344/managementsystem/track/',
         JSON.stringify(short_path));
-
+        readyToMedium=1;
 }
 
 
@@ -171,4 +181,5 @@ function postRequestMediumPath(medium_path){
     alert("med_blatos");
     serverRequest("POST", function noop(dummy){}, 'http://'+ip+':12344/managementsystem/track/',
         JSON.stringify(medium_path));
+    readyToLong=1;
 }

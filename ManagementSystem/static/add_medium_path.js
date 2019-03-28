@@ -1,4 +1,5 @@
 
+
 let curPosClicked;
 
 var str_of_points="";
@@ -121,26 +122,33 @@ function needThisToGetPointsIDs(attractionsJSON) {
         let attr_point = {x: (attr['x']).toFixed(13) , y: (attr['y']).toFixed(13)};
         let attr_id = attr['id'];
 
-        pointsOfPath.forEach(function (point) {
-                let the_point = {x: (point.lat).toFixed(13) , y: (point.lng).toFixed(13)};
-                // let bolia = attr_point == the_point;
-                // alert("attr: "+ attr_point.x +","+ attr_point.y +"\npont: "+the_point.x +","+the_point.y+"\n"+bolia);
-                if((attr_point.x == the_point.x)  &&  (attr_point.y == the_point.y) ){
-                    alert("bazinga!");
-                    addPointToTrackRequest(attr_id,idOfMedium);
-    //                 executeAsynchronously(
-    // [addPointToTrackRequest(attr_id,idOfMedium), addPointToTrackRequest(attr_id,idOfLong)], 10);
-                   // addPointToTrackRequest(attr_id,idOfMedium);
-                    //funcToDoSameShit(attr_id,idOfLong);
-                    //addPointToTrackRequest(attr_id,idOfLong);
-                }
+        pointsOfPath.forEach(async function (point) {
+            let the_point = {x: (point.lat).toFixed(13), y: (point.lng).toFixed(13)};
+            // let bolia = attr_point == the_point;
+            // alert("attr: "+ attr_point.x +","+ attr_point.y +"\npont: "+the_point.x +","+the_point.y+"\n"+bolia);
+            if ((attr_point.x == the_point.x) && (attr_point.y == the_point.y)) {
+                alert("bazinga");
+                addPointToTrackRequest(attr_id,idOfMedium);
+                //addPointToTrackRequest(attr_id,idOfLong);
 
-            });
+                //                 executeAsynchronously(
+                // [addPointToTrackRequest(attr_id,idOfMedium), addPointToTrackRequest(attr_id,idOfLong)], 2);
+                // addPointToTrackRequest(attr_id,idOfMedium);
+                //funcToDoSameShit(attr_id,idOfLong);
+                //addPointToTrackRequest(attr_id,idOfLong);
+
+            }
+
+        });
+
     });
-    window.location.href='/add_medium_path';
+
+     window.location.href='/add_medium_path';
     //window.location.href='/edit_path';
 }
-
+function sleep(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
 function funcToDoSameShit(attr_id,idOfLong) {
     //alert("daf");
     setTimeout(function(){
@@ -199,4 +207,25 @@ function addPointToTrackRequest(id_of_point_to_add,track_id){
     alert("trackos blatikus");
     serverRequest("PUT", function noop(dummy){}, 'http://'+ip+':12344/managementsystem/track/'+track_id+'/add',
         JSON.stringify(id_of_point_to_add));
+}
+
+function addPointToTrackRequest2(id,track_id1,track_id2){
+    serverRequest("PUT", function noop(dummy){}, 'http://'+ip+':12344/managementsystem/track/'+track_id1+'/add',
+        JSON.stringify(id));
+    serverRequest("PUT", function noop(dummy){}, 'http://'+ip+':12344/managementsystem/track/'+track_id2+'/add',
+        JSON.stringify(id));
+}
+
+function addPointToTrackRequestShort(id_of_point_to_add,track_id){
+    alert("trackos blatikus");
+    serverRequest("PUT", function noop(dummy){}, 'http://'+ip+':12344/managementsystem/track/'+track_id+'/add',
+        JSON.stringify(id_of_point_to_add));
+    readyToMedium=1;
+}
+
+function addPointToTrackRequestMed(id_of_point_to_add,track_id){
+    alert("trackos blatikus");
+    serverRequest("PUT", function noop(dummy){}, 'http://'+ip+':12344/managementsystem/track/'+track_id+'/add',
+        JSON.stringify(id_of_point_to_add));
+    readyToLong=1;
 }

@@ -42,9 +42,8 @@ window.onload=function(){
     getRequestAttractions(getName);
     var deletePointBTN = document.getElementById('delete_point');
     deletePointBTN.addEventListener('click', function() {
-        // alert("clicked delp()");
+        alert("clicked delp()");
         getRequestAttractions(functionOfDelete);
-
     });
     localFileVideoPlayer();
     };
@@ -80,7 +79,7 @@ window.onload=function(){
           // alert("the id is: "+attr['id']);
         let p = {name: attr['name'], description:attr['description'], lat: attr['x'], lng: attr['y']};
         // alert("in get name! "+"of the origin : " + lat + " , " + lng + "\n of the other: "+p.lat +" , "+ p.lng);
-        if(p.lat===lat&&(p.lng).toFixed(8)===lng.toFixed(8))
+        if((p.lat).toFixed(8)==lat.toFixed(8)&&(p.lng).toFixed(8)==lng.toFixed(8))
         {
             // alert("s");
            // deleteRequestAttraction(attr,attr['id']);
