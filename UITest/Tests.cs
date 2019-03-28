@@ -180,6 +180,21 @@ namespace UITest
             //Assert.IsTrue(tst2 != null, "problem");
             app.Back();
         }
+
+        [Test]
+        public void ContinueToLongerTrack()
+        {
+            app.Tap("EnglishBtn");
+            app.Tap("PlayBtn");
+            app.Tap("AnonymusLoginBtn");
+            app.WaitFor(() => app.Query("EnterGroupName").FirstOrDefault().Enabled, timeout: TimeSpan.FromSeconds(1200));
+            app.EnterText("EnterGroupName", "abc");
+            app.Tap("Btn1Clicked");
+            app.EnterText("EnterAge", "8");
+            app.Tap("BtnStartTripClicked");
+            app.WaitFor(() => app.Query("AddHintBtn").FirstOrDefault().Enabled, timeout: TimeSpan.FromSeconds(1200));
+
+        }
     }
 }
 

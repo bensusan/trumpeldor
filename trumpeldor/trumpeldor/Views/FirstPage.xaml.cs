@@ -38,7 +38,7 @@ namespace trumpeldor.Views
             if (this.firstAppear)
             {
                 AskPermissionToUseLocation();
-                ShowMessagesInStart();
+                //ShowMessagesInStart();
             }
             ShowRelevantFunctionalitiesAccordingToLocation();
         }
