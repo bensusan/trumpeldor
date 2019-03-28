@@ -150,11 +150,9 @@ class TracksList(generics.GenericAPIView):
         return Response(ans)
 
     def post(self, request, *args, **kwargs):
-        return general_post_or_get(
-            request,
-            "AddAttraction",
-            BL.add_track,
-            TrackSerializer)
+        ans = BL.add_track(request.data)
+        ans = json.loads(json.dumps(ans))
+        return Response(ans)
 
 
 class Track(generics.GenericAPIView):
