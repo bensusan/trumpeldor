@@ -129,13 +129,7 @@ function needThisToGetPointsIDs(attractionsJSON) {
             if ((attr_point.x == the_point.x) && (attr_point.y == the_point.y)) {
                 alert("bazinga");
                 addPointToTrackRequest(attr_id,idOfMedium);
-                //addPointToTrackRequest(attr_id,idOfLong);
 
-                //                 executeAsynchronously(
-                // [addPointToTrackRequest(attr_id,idOfMedium), addPointToTrackRequest(attr_id,idOfLong)], 2);
-                // addPointToTrackRequest(attr_id,idOfMedium);
-                //funcToDoSameShit(attr_id,idOfLong);
-                //addPointToTrackRequest(attr_id,idOfLong);
 
             }
 
@@ -145,22 +139,6 @@ function needThisToGetPointsIDs(attractionsJSON) {
 
      window.location.href='/add_medium_path';
     //window.location.href='/edit_path';
-}
-function sleep(ms) {
-  return new Promise(resolve => setTimeout(resolve, ms));
-}
-function funcToDoSameShit(attr_id,idOfLong) {
-    //alert("daf");
-    setTimeout(function(){
-  addPointToTrackRequest(attr_id,idOfLong);
-}, 10000);
-    // addPointToTrackRequest(attr_id,idOfLong);
-}
-
-function executeAsynchronously(functions, timeout) {
-  for(let i = 0; i < functions.length; i++) {
-    setTimeout(functions[i], timeout);
-  }
 }
 
 function markAttractionOfMediumPath(pos){
@@ -207,25 +185,4 @@ function addPointToTrackRequest(id_of_point_to_add,track_id){
     alert("trackos blatikus");
     serverRequest("PUT", function noop(dummy){}, 'http://'+ip+':12344/managementsystem/track/'+track_id+'/add',
         JSON.stringify(id_of_point_to_add));
-}
-
-function addPointToTrackRequest2(id,track_id1,track_id2){
-    serverRequest("PUT", function noop(dummy){}, 'http://'+ip+':12344/managementsystem/track/'+track_id1+'/add',
-        JSON.stringify(id));
-    serverRequest("PUT", function noop(dummy){}, 'http://'+ip+':12344/managementsystem/track/'+track_id2+'/add',
-        JSON.stringify(id));
-}
-
-function addPointToTrackRequestShort(id_of_point_to_add,track_id){
-    alert("trackos blatikus");
-    serverRequest("PUT", function noop(dummy){}, 'http://'+ip+':12344/managementsystem/track/'+track_id+'/add',
-        JSON.stringify(id_of_point_to_add));
-    readyToMedium=1;
-}
-
-function addPointToTrackRequestMed(id_of_point_to_add,track_id){
-    alert("trackos blatikus");
-    serverRequest("PUT", function noop(dummy){}, 'http://'+ip+':12344/managementsystem/track/'+track_id+'/add',
-        JSON.stringify(id_of_point_to_add));
-    readyToLong=1;
 }

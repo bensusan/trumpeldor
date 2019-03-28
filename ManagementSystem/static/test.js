@@ -2,16 +2,30 @@
 describe("Go to the Homepage ", function(){
    browser.ignoreSynchronization=true; // This allows to protractor to run on regular website, not specific to angular
 
+  // it("Go to the Home page ", function(){
+  //   browser.get("http://132.73.201.223:12345/main/"); // Go to a specific URL
+  //   console.log("Home Page Open succesffully"); // Log a message
+  // });
+  //
+  // it("Go to the attractions page ", function(){
+  //   // var pendants = element(by.id("manage_attr_page")); // set a variable for action
+  //   // pendants.click(); // Click on element
+  //   let nekuda = browser.findElement(By.id("manage_attr_page"));
+  //   nekuda.click();
+  //   console.log("attr page succesffully"); // Log a message
+  // });
   it("Go to the Home page ", function(){
-    browser.get("http://132.73.201.223:12345/main/"); // Go to a specific URL
+    browser.get("https://www.google.com/"); // Go to a specific URL
     console.log("Home Page Open succesffully"); // Log a message
   });
-  let webdriver = require('selenium-webdriver');
+
   it("Go to the attractions page ", function(){
     // var pendants = element(by.id("manage_attr_page")); // set a variable for action
     // pendants.click(); // Click on element
-    let nekuda = browser.findElement;
-    nekuda.click();
+    browser.get("https://www.google.com/");
+    let nekuda = browser.findElement(By.name("q")).sendKeys("shmul");
+    Keys.ENTER.click();
+    //nekuda.click();
     console.log("attr page succesffully"); // Log a message
   });
 
