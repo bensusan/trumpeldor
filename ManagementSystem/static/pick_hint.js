@@ -28,6 +28,10 @@ function hints_func(hintsJSON) {
             // alert(str);
         });
         document.getElementById("existing_hints").innerHTML = str ;
+        document.getElementById("existing_hints").style.fontWeight = 'bold';
+        document.getElementById("existing_hints").style.fontFamily='david';
+        document.getElementById("existing_hints").style.fontSize='24px';
+
 }
 
 window.onload = function () {
@@ -39,9 +43,17 @@ window.onload = function () {
         });
 /////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    var wantToEditBTN = document.getElementById('want_to_edit_hint');
-        wantToEditBTN.addEventListener('click', function() {
-            var writeChosenHintTextEdit = document.getElementById("write_hint_id_to_edit");
+
+
+
+
+        localFileVideoPlayer();
+
+};
+
+function wantToEditButton(){
+
+      var writeChosenHintTextEdit = document.getElementById("write_hint_id_to_edit");
             writeChosenHintTextEdit.style.display = "inline";
 
             var editChosenHintBTN = document.getElementById("edit_chosen_hint");
@@ -53,11 +65,11 @@ window.onload = function () {
                 localStorage.setItem("attr_id_for_hint_edit", attractionObjToUseInHintDelete['id']);
                 window.location.href='/edit_hint';
             });
-        });
+}
 
-    var wantToDeleteBTN = document.getElementById('want_to_delete_hint');
-        wantToDeleteBTN.addEventListener('click', function() {
-            var writeChosenHintText = document.getElementById("write_hint_id_to_delete");
+
+function wantToDeleteButton(){
+        var writeChosenHintText = document.getElementById("write_hint_id_to_delete");
             writeChosenHintText.style.display = "inline";
 
             var deleteChosenHintBTN = document.getElementById("delete_chosen_hint");
@@ -66,12 +78,7 @@ window.onload = function () {
             deleteChosenHintBTN.addEventListener('click', function() {
                 getRequestHints(funcInOrderToDeleteHint,attractionObjToUseInHintDelete['id']);
             });
-        });
-
-
-        localFileVideoPlayer();
-
-};
+}
 
 function funcInOrderToDeleteHint(hintsJSON) {
     let hint_id_that_was_picked = document.getElementById("write_hint_id_to_delete").value;
