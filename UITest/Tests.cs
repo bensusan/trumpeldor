@@ -68,6 +68,7 @@ namespace UITest
         {
 
             //Act
+            app.Tap("EnglishBtn");
             app.Tap("InfoBtn");
 
             //Assert
@@ -139,7 +140,6 @@ namespace UITest
             
             var tst = app.Query("HintDisplay").FirstOrDefault(res => res.Text != "");
             Assert.IsTrue(tst != null, "problem");
-            
         }
 
         [Test]
@@ -179,6 +179,21 @@ namespace UITest
             //var tst2 = app.Query("HintWebViewDisplay").FirstOrDefault(res => res.Text.Contains("http://132.72.23.64:12345/media/"));
             //Assert.IsTrue(tst2 != null, "problem");
             app.Back();
+        }
+
+        [Test]
+        public void ContinueToLongerTrack()
+        {
+            app.Tap("EnglishBtn");
+            app.Tap("PlayBtn");
+            app.Tap("AnonymusLoginBtn");
+            app.WaitFor(() => app.Query("EnterGroupName").FirstOrDefault().Enabled, timeout: TimeSpan.FromSeconds(1200));
+            app.EnterText("EnterGroupName", "abc");
+            app.Tap("Btn1Clicked");
+            app.EnterText("EnterAge", "8");
+            app.Tap("BtnStartTripClicked");
+            app.WaitFor(() => app.Query("AddHintBtn").FirstOrDefault().Enabled, timeout: TimeSpan.FromSeconds(1200));
+
         }
     }
 }

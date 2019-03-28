@@ -94,6 +94,7 @@
     <LaunchForBackgroundFetch>true</LaunchForBackgroundFetch>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="CustomMapRenderer.cs" />
     <Compile Include="AudioRender.cs" />
     <Compile Include="Configuration\IOSConfigurationStreamProvider.cs" />
     <Compile Include="Configuration\IOSConfigurationStreamProviderFactory.cs" />
