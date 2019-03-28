@@ -132,7 +132,8 @@ class DAL_Implementation(DAL_Abstract):
         return Trip.objects.order_by('score')
 
     def delete_attraction(self, id):
-        return self.get_attraction(id).delete()
+        delt=self.getAttraction(id).delete()
+        return True
 
     def edit_attraction(self, id, name, x, y, description, picturesURLS, videosURLS):
         attraction = self.get_attraction(id)
