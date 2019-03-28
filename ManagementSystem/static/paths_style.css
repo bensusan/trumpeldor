@@ -6,6 +6,10 @@ body {
     background-attachment: fixed;
 }
 
+.pointsBorder {border-style: dotted;
+border-radius: 5px;
+    width: 380px;
+border-color: green;}
 
 .button {
   background-color: blue;
