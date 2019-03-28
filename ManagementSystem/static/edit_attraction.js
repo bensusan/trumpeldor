@@ -42,7 +42,6 @@ window.onload=function(){
     getRequestAttractions(getName);
     var deletePointBTN = document.getElementById('delete_point');
     deletePointBTN.addEventListener('click', function() {
-        alert("clicked delp()");
         getRequestAttractions(functionOfDelete);
     });
     localFileVideoPlayer();
