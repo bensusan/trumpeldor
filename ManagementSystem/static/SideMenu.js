@@ -1,6 +1,6 @@
 document.getElementById("sideMenu").innerHTML = '<div class="sidenav">\n' +
     '  <h2 style="color:#818181;">Welcome, Yael!</h2>' +
-    '  <a href="/attractions">Manage Attractions</a>\n' +
+    '  <a href="/attractions" name="manage_attr_page">Manage Attractions</a>\n' +
     '  <button class="dropdown-btn">Paths\n' +
     '    <i class="fa fa-caret-down"></i>\n' +
     '  </button>\n' +
@@ -9,14 +9,15 @@ document.getElementById("sideMenu").innerHTML = '<div class="sidenav">\n' +
     '    <i class="fa fa-caret-down"></i>\n' +
     '  </button>\n' +
     '  <div class="dropdown-container">\n' +
-    '    <a href="maptrack">Short</a>\n' +
-    '    <a href="maptrack">Medium</a>\n' +
-    '    <a href="maptrack">Long</a>\n' +
+    '    <a href="/add_short_path">Short</a>\n' +
+    '    <a href="/add_medium_path">Medium</a>\n' +
+    '    <a href="/add_long_path">Long</a>\n' +
     '  </div>\n' +
-    '    <a href="#">Edit Path</a>\n' +
-    '    <a href="#">Delete Path</a>\n' +
+    '    <a href="/pick_path_edit">Edit Path</a>\n' +
+    '    <a href="/pick_path_delete">Delete Path</a>\n' +
     '  </div>\n' +
     '  <a href="#services">Statistics</a>\n' +
+    '  <a href="/additional_info">Additional Info</a>\n' +
     '</div>\n' +
     '\n' +
     '<div class="main">\n' +
@@ -37,3 +38,37 @@ for (i = 0; i < dropdown.length; i++) {
   }
   });
 }
+
+
+
+
+// let points= [
+//     {lat: 31.263465932844372, lng: 34.801946282386783},
+//     {lat: 31.263065932844372, lng: 34.801146282386783},
+//     {lat: 31.263865932844372, lng: 34.802146282386783},
+//     {lat: 31.262773527283052, lng: 34.802075028419495}
+// ];
+//
+// let short= [
+//     {lat: 31.263465932844372, lng: 34.801946282386783}
+// ];
+//
+// let med= [
+//     {lat: 31.263465932844372, lng: 34.801946282386783},
+//     {lat: 31.263065932844372, lng: 34.801146282386783}
+// ];
+//
+// let long= [
+//     {lat: 31.263465932844372, lng: 34.801946282386783},
+//     {lat: 31.263065932844372, lng: 34.801146282386783},
+//     {lat: 31.263865932844372, lng: 34.802146282386783}
+// ];
+//
+// localStorage.setItem("points",JSON.stringify(points));
+// localStorage.setItem("numberOfPoints",""+points.length);
+//
+// localStorage.setItem("short_path",JSON.stringify(short));
+// localStorage.setItem("medium_path",JSON.stringify(med));
+// localStorage.setItem("long_path",JSON.stringify(long));
+//
+// alert("the number of points is now :" + points.length)

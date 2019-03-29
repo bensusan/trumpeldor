@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+{% load static %}
+<link rel="stylesheet" href="{% static 'signInForm.css' %}?version=1">
+    {% load static %}
+<link rel="stylesheet" href="{% static 'add_game.css' %}?version=1">
+    {% load static %}
+<script src="{% static 'add_game.js' %}?version=4"></script>
+     {% load static %}
+<script src="{% static 'properties.js' %}?version=1"></script>
+</head>
+<body>
+<button onclick="window.location.href='/main'" type="button">Back to menu</button>
+<div align="center">
+<h2>Add Game</h2>
+<form>
+  <div class="container">
+
+
+
+{#      <p><a href="JavaScript:newPopup('/add_picture');">Open a popup window</a></p>#}
+      <button type="button" id="sliding_puzzle_button">Sliding Puzzle</button>
+<p><img id="sukablat" width="200" /></p>
+{#      <button onclick="JavaScript:newPopup('/add_picture');" type="button">Drag Puzzle</button>#}
+{#      <button onclick="JavaScript:newPopup('/add_picture');" type="button">Take A Picture</button>#}
+{#      <button onclick="JavaScript:newPopup('/add_picture');" type="button">Find The Differences</button>#}
+
+  </div>
+
+
+</form>
+</div>
+<button id="skip_game_btn" onclick="window.location.href='/add_aq'" type="button">Skip</button>
+<button onclick="addGames()" type="button">Finish</button>
+</body>
+</html>

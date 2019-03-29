@@ -89,7 +89,13 @@
     <CodesignKey>iPhone Distribution</CodesignKey>
     <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
   </PropertyGroup>
+  <PropertyGroup Condition=" '$(RunConfiguration)' == 'Default' ">
+    <AppExtensionDebugBundleId />
+    <LaunchForBackgroundFetch>true</LaunchForBackgroundFetch>
+  </PropertyGroup>
   <ItemGroup>
+    <Compile Include="CustomMapRenderer.cs" />
+    <Compile Include="AudioRender.cs" />
     <Compile Include="Configuration\IOSConfigurationStreamProvider.cs" />
     <Compile Include="Configuration\IOSConfigurationStreamProviderFactory.cs" />
     <Compile Include="Main.cs" />
@@ -160,12 +166,15 @@
     <PackageReference Include="Newtonsoft.Json">
       <Version>12.0.1</Version>
     </PackageReference>
+    <PackageReference Include="Plugin.Permissions">
+      <Version>3.0.0.12</Version>
+    </PackageReference>
     <PackageReference Include="Xam.Plugin.Geolocator">
       <Version>4.5.0.6</Version>
     </PackageReference>
-    <PackageReference Include="Xamarin.Forms" Version="3.3.0.967583" />
+    <PackageReference Include="Xamarin.Forms" Version="3.6.0.220655" />
     <PackageReference Include="Xamarin.Forms.Maps">
-      <Version>3.3.0.967583</Version>
+      <Version>3.6.0.220655</Version>
     </PackageReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
@@ -175,5 +184,7 @@
       <Name>trumpeldor</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="TaDa.mp3" />
+  </ItemGroup>
 </Project>

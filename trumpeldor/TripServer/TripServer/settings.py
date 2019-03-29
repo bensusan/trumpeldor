@@ -83,7 +83,7 @@ WSGI_APPLICATION = 'TripServer.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'Project4',
+        'NAME': 'Project14',
         'USER': 'postgres',
         'PASSWORD': 'trumpeldor',
         'HOST': '127.0.0.1',
@@ -139,6 +139,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 VALID_SECTOR = (0, 0, 0, 0)     # (Min_X, Max_X, Min_Y, Max_Y)
 
+TOP_X = 10
 
 CORS_ORIGIN_ALLOW_ALL=True
 

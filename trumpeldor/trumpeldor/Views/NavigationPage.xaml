@@ -6,11 +6,12 @@
     <ContentPage.Content>
         <StackLayout Style="{DynamicResource mainStackLayout}">
 
-            <Label x:Name="scoreLabel" Style="{DynamicResource lableStyle}"/>
+            <Label x:Name="scoreLabel" Style="{DynamicResource lableStyle}" AutomationId="scoreLbl"/>
             <StackLayout x:Name="hintsLayout" Style="{DynamicResource mainorStackLayout}">
-                <Label Text="{translator:Translate hints}" Style="{DynamicResource lableStyle}"/>
+               <!-- <Label Text="{translator:Translate hints}" Style="{DynamicResource lableStyle}"/> -->
+               <!-- <Button x:Name= "a" Clicked="DynamicBtn_Clicked"/> -->
             </StackLayout>
-            <Button Text="{translator:Translate add_hint}" Clicked="Get_Hint_Button_Clicked" Style="{StaticResource largeButtonStyle}" />
+            <Button x:Name="hintBtn" Text="{translator:Translate add_hint}" Clicked="Get_Hint_Button_Clicked" Style="{StaticResource largeButtonStyle}" AutomationId="AddHintBtn"/>
             <Button Text="{translator:Translate You_have_Reached_Your_Destionation}" Clicked="Next_Destination_Button_Clicked" Style="{StaticResource largeButtonStyle}" />
             <Label Text="{translator:Translate map}" Style="{DynamicResource lableStyle}"/>
             <Button x:Name="mapImage" Clicked="mapImage_Clicked"/>

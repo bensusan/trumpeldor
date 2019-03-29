@@ -15,23 +15,62 @@ namespace trumpeldor.Views
 	{
         GameController gc;
         private AmericanQuestion aq;
-        public MultipleChoiceQuestionPage (AmericanQuestion aq)
+        private int mistakes;
+        private static int DESIRED_MISTAKES = 2;
+        private static int DESIRED_SECONDS_TO_WAIT = 5;
+
+        bool doneWaiting = false;
+        int numOfSecondsLeft = 5;
+        private ContentPage nextPage;
+
+        public MultipleChoiceQuestionPage (ContentPage nextPage)
 		{
 			InitializeComponent ();
-            this.aq = aq;
+            this.nextPage = nextPage;
+            this.mistakes = 0;
             gc = GameController.getInstance();
-            scoreLabel.Text = AppResources.score + ": " + gc.GetScore();
+            this.aq = gc.currentTrip.GetCurrentAttraction().americanQuestion;
             attractionQuestion.Text = aq.question;
             answersInitialize();
         }
+
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+            scoreLabel.Text = AppResources.score + ": " + gc.GetScore();
+        }
+
+        private static Random rng = new Random();
+
+        public static int Shuffle(IList<string> list, int correctAnswerIndex)
+        {
+            int ans = correctAnswerIndex;
+            int n = list.Count;
+            while (n > 1)
+            {
+                n--;
+                int k = rng.Next(n + 1);
+                string value = list[k];
+                list[k] = list[n];
+                list[n] = value;
+                if (ans == k)
+                    ans = n;
+                else if (ans == n)
+                    ans = k;
+            }
+            return ans;
+        }
+
         private void answersInitialize()
         {
-            for (int i = 0; i < aq.answers.Count; i++)
+            List<string> answers = new List<string>(aq.answers);
+            int correctAnswerIndex = Shuffle(answers, aq.indexOfCorrectAnswer);
+            for (int i = 0; i < answers.Count; i++)
             {
                 Button answerButton = new Button();
-                answerButton.Text = aq.answers.ElementAt(i);
+                answerButton.Text = answers.ElementAt(i);
                 answerButton.Style = (Style)Application.Current.Resources["largeButtonStyle"];
-                if (i == aq.indexOfCorrectAnswer)
+                if (i == correctAnswerIndex)
                 {
                     answerButton.Clicked += Correct_Answer_Button_Clicked;
                 }
@@ -44,50 +83,78 @@ namespace trumpeldor.Views
         }
         private async void Correct_Answer_Button_Clicked(object sender, EventArgs e)
         {
-            
+            scoreLabel.Text = AppResources.score + ": " + gc.EditScore(GameController.SCORE_VALUE.AQ_Correct);
             foreach (Button answer in answersLayout.Children)
             {
-                answer.BackgroundColor = Color.Default;
+                //answer.BackgroundColor = Color.Default;
                 answer.Style = (Style)Application.Current.Resources["largeButtonStyle"];
             }
-
+            Color regular = ((Button)sender).BackgroundColor;
             ((Button)sender).BackgroundColor = Color.Green;
-            var existingPages = Navigation.NavigationStack.ToList();
-            foreach (var page in existingPages)
-            {
-                Navigation.RemovePage(page);
-            }
-            await DisplayAlert(AppResources.Destionation_Complete, "", AppResources.ok);
-            await gc.FinishAttraction();
-            if (gc.isFinishTrip)
-            {
-                Application.Current.MainPage = new FinishTrackPage(await gc.CanContinueToLongerTrack());
-            }
-            else
-            {
-                Application.Current.MainPage = new NavigationPage();
-            }
+            await Task.Delay(100);
+            gc.FinishAttraction();
+
+            ((Button)sender).BackgroundColor = regular;
+
+            await Navigation.PopModalAsync();
+            //await Navigation.PopModalAsync();
+            //await Navigation.PopModalAsync();
+            //var existingPages = Navigation.NavigationStack.ToList();
+            //foreach (var page in existingPages)
+            //{
+            //    Navigation.RemovePage(page);
+            //}
+            //Application.Current.MainPage = nextPage;
 
         }
-        private void Wrong_Answer_Button_Clicked(object sender, EventArgs e)
+        private async void Wrong_Answer_Button_Clicked(object sender, EventArgs e)
         {
+            scoreLabel.Text = AppResources.score + ": " + gc.EditScore(GameController.SCORE_VALUE.AQ_Mistake);
             foreach (Button answer in answersLayout.Children)
             {
-                answer.BackgroundColor = Color.Default;
+                //answer.BackgroundColor = Color.Default;
                 answer.Style = (Style)Application.Current.Resources["largeButtonStyle"];
             }
+            Color regular = ((Button)sender).BackgroundColor;
             ((Button)sender).BackgroundColor = Color.Red;
-        }
-
-
-        private void returnButton_Clicked(object sender, EventArgs e)
-        {
-            var existingPages = Navigation.NavigationStack.ToList();
-            foreach (var page in existingPages)
+            await Task.Delay(100);
+            mistakes += 1;
+            if (mistakes >= DESIRED_MISTAKES)
             {
-                Navigation.RemovePage(page);
+                await DisplayAlert(
+                    AppResources.Too_Much_Mistakes_In_AQ_title,
+                    AppResources.Too_Much_Mistakes_In_AQ_Message_Part1
+                    + " " + DESIRED_MISTAKES + " "
+                    + AppResources.Too_Much_Mistakes_In_AQ_Message_Part2
+                    + " " + DESIRED_SECONDS_TO_WAIT + " "
+                    + AppResources.Too_Much_Mistakes_In_AQ_Message_Part3,
+                    AppResources.ok);
+
+                //Device.StartTimer(TimeSpan.FromSeconds(1), () => callBack());
+                //while (!doneWaiting) ;
+                //doneWaiting = false;
+                for (int i = 0; i < DESIRED_SECONDS_TO_WAIT; i++)
+                {
+                    //await DisplayAlert("" + i, "", AppResources.ok);
+                    var t = Task.Delay(1000);
+                    t.Wait();
+                }
+                await DisplayAlert("You are good to go", "", AppResources.ok);
             }
-            Application.Current.MainPage = new AttractionPage();
+            ((Button)sender).BackgroundColor = regular;
+        }
+        
+        bool callBack()
+        {
+            Device.BeginInvokeOnMainThread(() => DisplayAlert("" + numOfSecondsLeft, "", AppResources.ok));
+            if (numOfSecondsLeft == 1)
+            {
+                numOfSecondsLeft = 5;
+                doneWaiting = true;
+                return false;
+            }
+            numOfSecondsLeft--;
+            return true;
         }
     }
 }

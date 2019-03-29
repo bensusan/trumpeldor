@@ -243,4 +243,73 @@
   <data name="Destionation_Complete" xml:space="preserve">
     <value>סיימת יעד!</value>
   </data>
+  <data name="Done_Trip_Message" xml:space="preserve">
+    <value>כל הכבוד סיימת את הטיול, נשמח למשוב עליו. האם ברצונך לעבור לדף המשוב?</value>
+  </data>
+  <data name="Done_Trip_Title" xml:space="preserve">
+    <value>סיימת את הטיול!</value>
+  </data>
+  <data name="Option_1" xml:space="preserve">
+    <value>אופציה 1</value>
+  </data>
+  <data name="Option_2" xml:space="preserve">
+    <value>אופציה 2</value>
+  </data>
+  <data name="Share_First_Part_Message" xml:space="preserve">
+    <value>האם אתה רוצה לשתף ב </value>
+  </data>
+  <data name="Share_Second_Part_Message" xml:space="preserve">
+    <value>או באפליקציה אחרת?</value>
+  </data>
+  <data name="Share_Title" xml:space="preserve">
+    <value>היכן תרצה לשתף?</value>
+  </data>
+  <data name="End" xml:space="preserve">
+    <value>סיום</value>
+  </data>
+  <data name="Answer" xml:space="preserve">
+    <value>תשובה</value>
+  </data>
+  <data name="Reply" xml:space="preserve">
+    <value>השב</value>
+  </data>
+  <data name="Last_Hint_Alert_Message" xml:space="preserve">
+    <value>הרמז האחרון חושף את המיקום של האטרקצייה על המפה, האם אתה בטוח שברצונך להשתמש ברמז זה?</value>
+  </data>
+  <data name="Last_Hint_Alert_Title" xml:space="preserve">
+    <value>הרמז האחרון!</value>
+  </data>
+  <data name="login_as_anonymous" xml:space="preserve">
+    <value>אנונימי</value>
+  </data>
+  <data name="Out_Of_Valid_Sector_Message" xml:space="preserve">
+    <value>תוכל להשתמש בחלקים בסיסיים מהאפליקציה</value>
+  </data>
+  <data name="Out_Of_Valid_Sector_Title" xml:space="preserve">
+    <value>אתה נמצא מחוץ לגבולות הגזרה</value>
+  </data>
+  <data name="Too_Much_Mistakes_In_AQ_Message_Part1" xml:space="preserve">
+    <value>שגית יותר מ</value>
+  </data>
+  <data name="Too_Much_Mistakes_In_AQ_Message_Part2" xml:space="preserve">
+    <value>פעמים. ולכן תאלץ לחכות</value>
+  </data>
+  <data name="Too_Much_Mistakes_In_AQ_Message_Part3" xml:space="preserve">
+    <value>שניות</value>
+  </data>
+  <data name="Too_Much_Mistakes_In_AQ_title" xml:space="preserve">
+    <value>עצור</value>
+  </data>
+  <data name="position" xml:space="preserve">
+    <value>מקום</value>
+  </data>
+  <data name="continue_trip" xml:space="preserve">
+    <value>המשך מסלול</value>
+  </data>
+  <data name="login_with_google" xml:space="preserve">
+    <value>התחבר עם חשבון גוגל</value>
+  </data>
+  <data name="sliding_puzzle" xml:space="preserve">
+    <value>פאזל הזזה</value>
+  </data>
 </root>

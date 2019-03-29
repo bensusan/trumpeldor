@@ -15,6 +15,7 @@ namespace trumpeldor.SheredClasses
         public List<string> videosURLS { get; set; }
         public List<Hint> hints { get; set; }
         public AmericanQuestion americanQuestion { get; set; }
+        public Entertainment entertainment { get; set; }
 
         internal string GetMainPictureUrl()
         {
@@ -25,6 +26,11 @@ namespace trumpeldor.SheredClasses
         {
             //TODO
             return "";
+        }
+
+        internal bool IsThisLastHint(int hintsIndex)
+        {
+            return hints.Count == hintsIndex;
         }
     }
 }

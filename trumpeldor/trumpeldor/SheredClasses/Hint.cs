@@ -12,6 +12,12 @@ namespace trumpeldor.SheredClasses
         public string data { get; set; }
 
         //not for use
-        public enum Kinds { HintMap = 1, HintPicture = 2, HintText = 3, HintVideo = 4 };
+        public enum Kinds { HintPicture, HintText, HintVideo };
+        public static Dictionary<Kinds, string> kind2String = new Dictionary<Kinds, string>()
+        {
+            {Kinds.HintPicture, "HP"},
+            {Kinds.HintText, "HT"},
+            {Kinds.HintVideo, "HV"}
+        };
     }
 }

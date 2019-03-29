@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+    {% load static %}
+<link rel="stylesheet" href="{% static 'edit_attr_style.css' %}?version=3">
+    {% load static %}
+<link rel="stylesheet" href="{% static 'SideMenu.css' %}?version=3">
+{% load static %}
+<link rel="stylesheet" href="{% static 'signInForm.css' %}?version=2">
+
+              {% load static %}
+<script src="{% static 'Map.js' %}"?version="1"></script>
+    {% load static %}
+    <script src="{% static 'attractions.js' %}?version=3"></script>
+    {% load static %}
+<script src="{% static 'edit_attraction.js' %}?version=3"></script>
+     {% load static %}
+<script src="{% static 'properties.js' %}?version=1"></script>
+</head>
+<body>
+
+{#<button onclick="window.location.href='/main'" type="button">Back to menu</button>#}
+{#<button onclick="window.location.href='/attractions'" type="button">Back to map</button>#}
+{#<button onclick="showVals()" type="button">Show Values</button>#}
+
+<div class="paging">
+<div align="center">
+<h2>Edit Attraction</h2>
+<form>
+
+    <label for="name"><b>Upload Video: </b></label>
+
+    <div id="message"></div>
+<video height="200px" width="350px" controls="" autoplay=""></video>
+    <input id="video_input" type="file" accept="video/*" style="display: none">
+<button class="button" onclick="doVideo()" type="button">Upload Video</button>
+
+{#    <p></p>#}
+{#    <label for="hint"><b>Upload Image:</b></label>#}
+{#    <p><input type="file"  accept="image/*" name="image" id="file"  onchange="loadFile(event)" style="display: none;"></p>#}
+{#    <p><label for="file" style="cursor: pointer;">Click Here!</label></p>#}
+{#    <p><img id="output" width="200" /></p>#}
+
+
+  <div class="container">
+    <label for="name"><b>Name of attraction: </b></label>
+    <input  type="text" id="attr_name" placeholder="Enter name" name="attr_name" required>
+
+    <label for="desc"><b>Description</b></label>
+    <input  type="text" id="desc" placeholder="Enter description" name="attr_desc" required>
+
+      <label for="subt"><b>Subtitles</b></label>
+    <input  type="text" id="subt" placeholder="Enter Subtitles" name="attr_subt" required>
+
+{#      <button onclick="window.location.href='/add_game'" type="button">Add Game</button>#}
+{#      <button onclick="window.location.href='/pick_aq'" type="button">Edit American Questions</button>#}
+{#      <button onclick="window.location.href='/pick_hint'" type="button">Edit Hints</button>#}
+    <button onclick="finishEditingAttraction()" type="button">Submit</button>
+{#    <button onclick="deletePoint()" type="button">Delete Point</button>#}
+      <button type="button" id="delete_point">Delete Point</button>
+
+  </div>
+
+</form>
+
+
+</div>
+</div>
+
+<div>
+
+<nav id="sideMenu"></nav>
+{% load static %}
+<script src="{% static 'menu_of_edit_attractions.js' %}?version=1"></script>
+
+</div>
+
+
+</body>
+</html>

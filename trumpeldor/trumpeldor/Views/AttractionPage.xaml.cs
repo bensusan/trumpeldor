@@ -15,47 +15,66 @@ namespace trumpeldor.Views
 	{
         private GameController gc;
         private Attraction attraction;
+        private bool isFirstAppear;
         public AttractionPage()
 		{
 			InitializeComponent ();
             gc = GameController.getInstance();
             this.attraction = gc.currentTrip.GetCurrentAttraction();
-            scoreLabel.Text = AppResources.score + ": " + gc.currentTrip.score;
             attractionName.Text = this.attraction.name;
             string mainPictureUrl = this.attraction.GetMainPictureUrl();
             attractionImage.Source = mainPictureUrl;
-
             attractionImage.IsVisible = !mainPictureUrl.Equals("");
-            watchAgainButton.IsVisible = !this.attraction.GetARURL().Equals("");
+            watchAgainButton.IsVisible = !this.attraction.GetARURL().Equals("");            
+            isFirstAppear = true;
         }
 
-        public AttractionPage(Attraction attraction)
+        protected override void OnAppearing()
         {
-            InitializeComponent();
-            this.attraction = attraction;
-            scoreLabel.Text = AppResources.score + ": -1";
-            attractionName.Text = attraction.name;
-            string mainPictureUrl = attraction.GetMainPictureUrl();
-            attractionImage.Source = mainPictureUrl;
-            attractionImage.IsVisible = !mainPictureUrl.Equals("");
-            watchAgainButton.IsVisible = !this.attraction.GetARURL().Equals("");
+            base.OnAppearing();
+            missionButton.IsEnabled = !gc.isAttractionDone;
+            continueButton.IsEnabled = gc.isAttractionDone;
+            scoreLabel.Text = AppResources.score + ": " + gc.GetScore();
+            if (isFirstAppear)
+            {
+                DependencyService.Get<IAudioService>().PlayAudioFile("TaDa.mp3");
+                isFirstAppear = false;
+            }
         }
 
         private async void Information_Button_Clicked(object sender, EventArgs e)
         {
-            await Navigation.PushModalAsync(new informationPage(this.attraction.description));
+            await Navigation.PushModalAsync(new informationPage(this.attraction));
         }
+
         private async void Mission_Button_Clicked(object sender, EventArgs e)
         {
-            //await Navigation.PushModalAsync(new MissionPage());
+            await Navigation.PushModalAsync(new MissionPage(this));
         }
-        private async void Question_Button_Clicked(object sender, EventArgs e)
-        {
-            await Navigation.PushModalAsync(new MultipleChoiceQuestionPage(attraction.americanQuestion));
-        }
+
         private void Watch_Again_Button_Clicked(object sender, EventArgs e)
         {
             //TODO
         }
+
+        private void Continue_Button_Clicked(object sender, EventArgs e)
+        {
+            gc.isAttractionDone = false;
+            var existingPages = Navigation.NavigationStack.ToList();
+            foreach (var page in existingPages)
+            {
+                Navigation.RemovePage(page);
+            }
+            if (gc.isFinishTrip)
+            {
+                Application.Current.MainPage = new FinishTrackPage(gc.CanContinueToLongerTrack());
+            }
+            else
+            {
+                Application.Current.MainPage = new NavigationPage();
+            }
+        }
+
+
     }
 }

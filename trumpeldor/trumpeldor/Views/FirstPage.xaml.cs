@@ -6,75 +6,92 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using trumpeldor.SheredClasses;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+
+using Plugin.Permissions;
+using Plugin.Permissions.Abstractions;
 
 namespace trumpeldor.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class FirstPage : ContentPage
     {
+        private GameController gc;
 		public FirstPage ()
 		{
             InitializeComponent();
+            gc = GameController.getInstance();
         }
 
-        private void Play_Button_Clicked(object sender, EventArgs e)
+        protected override void OnAppearing()
         {
-            //Application.Current.MainPage = new groupCreationPage();
-            Application.Current.MainPage = new LoginsPage();
+            base.OnAppearing();
+            ShowRelevantFunctionalitiesAccordingToLocation();
+    }
+
+        private void ShowRelevantFunctionalitiesAccordingToLocation()
+        {
+            Task.Run(() =>
+            { 
+                if (!gc.IsUserInValidSector())
+                {
+                    Device.BeginInvokeOnMainThread(async () => {
+                        await DisplayAlert(AppResources.Out_Of_Valid_Sector_Title, AppResources.Out_Of_Valid_Sector_Message, AppResources.ok);
+                    });
+                    if (ServerConection.DEBUG == 1)
+                        Device.BeginInvokeOnMainThread(async() => {
+                            await DisplayAlert("Debug Mode", "This functionality does not work in debug mode", "ok");
+                        });
+                    else
+                        playButton.IsVisible = false;
+                }
+            });
         }
 
-        private void HowToPlay_Button_Clicked(object sender, EventArgs e)
+        private Task<bool> AskPermissionToUseLocation()
         {
-            Application.Current.MainPage = new instructionsPage();
 
+            //Task.Run(async () =>
+            //{
+            //    Permission permission = Permission.Location;
+            //    var permissionStatus = await CrossPermissions.Current.CheckPermissionStatusAsync(permission);
+            //    while (permissionStatus != PermissionStatus.Granted)
+            //    {
+            //        var response = await CrossPermissions.Current.RequestPermissionsAsync(permission);
+            //        permissionStatus = response[permission];
+            //    }
+            //});
 
+            var task = Task.Run(async () =>
+            {
+                Permission permission = Permission.Location;
+                var permissionStatus = await CrossPermissions.Current.CheckPermissionStatusAsync(permission);
+                if (permissionStatus != PermissionStatus.Granted)
+                {
+                    var response = await CrossPermissions.Current.RequestPermissionsAsync(permission);
+                    return response[permission] == PermissionStatus.Granted;
+                }
+                return true;
+            });
+            return task;
+        }
 
-            //await Navigation.PushModalAsync(new MapPage());
-            //Application.Current.MainPage = new NavigationPage();
+        private async void Play_Button_Clicked(object sender, EventArgs e)
+        {
+            while (!await AskPermissionToUseLocation()) ;
+            await Navigation.PushModalAsync(new LoginsPage());
+        }
 
-
-            //Task<byte[]> ans = ((App)(Application.Current)).getGameController().getFile();
-            //byte[] fileBytes = await ans;
-            ////Image image = new Image();
-            //Stream stream = new MemoryStream(fileBytes);
-
-
-            //tryImg.IsVisible = true;
-            //tryImg.Source = ImageSource.FromStream(() => new MemoryStream(fileBytes));
-
-
-            //await Navigation.PushModalAsync(new instructionsPage());
+        private async void HowToPlay_Button_Clicked(object sender, EventArgs e)
+        {
+            await Navigation.PushModalAsync(new instructionsPage());
         }
 
         private async void Info_Button_Clicked(object sender, EventArgs e)
         {
-            /*
-                * with back click 
-                * async
-                * await Navigation.PushModalAsync(new NavigationPage(new informationPage()));
-            */
-            Application.Current.MainPage = new informationPage();
-            //Application.Current.MainPage = new AttractionPage(await GameController.getInstance().GetTempAttraction());
-
-            //await Navigation.PushModalAsync(new HintPage("31.263440,34.799115"));
-            //await Navigation.PushModalAsync(new HintPage("http://132.72.23.64:12345/media/x.jpg"));
-            //await Navigation.PushModalAsync(new HintPage("this is a text hint"));
-            //await Navigation.PushModalAsync(new MapPage(new Point(31.263440, 34.799115)));
-        }
-
-        private void Button_Clicked(object sender, EventArgs e)
-        {
-            CrossMultilingual.Current.CurrentCultureInfo = new CultureInfo("en");
-            Application.Current.MainPage = new FirstPage();
-        }
-
-        private void Button_Clicked_1(object sender, EventArgs e)
-        {
-            CrossMultilingual.Current.CurrentCultureInfo = new CultureInfo("he");
-            Application.Current.MainPage = new FirstPage();
+            await Navigation.PushModalAsync(new informationPage());
         }
     }
 }

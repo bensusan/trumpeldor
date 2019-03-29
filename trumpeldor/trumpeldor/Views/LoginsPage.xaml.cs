@@ -20,11 +20,16 @@ namespace trumpeldor.Views
         private async void FacebookLogin_Clicked(object sender, EventArgs e)
         {
             await Navigation.PushModalAsync(new AccessFacebookProfile());
-            //Application.Current.MainPage = new AccessFacebookProfile();
         }
-        /*private async void Anonymus_Clicked(object sender, EventArgs e)
+
+        private async void GoogleLogin_Clicked(object sender, EventArgs e)
+        {
+            await Navigation.PushModalAsync(new AccessGoogleProfile());
+        }
+
+        private async void Anonymus_Clicked(object sender, EventArgs e)
         {
             await Navigation.PushModalAsync(new groupCreationPage());
-        }*/
+        }
     }
 }

@@ -5,7 +5,7 @@
     <ContentPage.Content>
         <StackLayout Style="{DynamicResource mainStackLayout}">
             <Label x:Name="textualHint" AutomationId="HintDisplay" />
-            <WebView x:Name="webView" WidthRequest="500" HeightRequest="500"/>
+            <WebView x:Name="webView" WidthRequest="500" HeightRequest="500" AutomationId="HintWebViewDisplay"/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

@@ -14,38 +14,58 @@ namespace trumpeldor.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class groupCreationPage : ContentPage
     {
-        private GameController gc = ((App)(Application.Current)).getGameController();
+        private GameController gc;
         //private GameController.PathLength selectedPathLength;
         private int selectedPathLength;
-        public groupCreationPage()
-        {
+
+        public groupCreationPage() : this("", User.SOCIAL_NETWORK.Anonymous){}
+
+        public groupCreationPage(string userName, User.SOCIAL_NETWORK socialNetwork){
             InitializeComponent();
+            gc = GameController.getInstance();
+            string socialnetworkString;
+            User.SocialNetwork2string.TryGetValue(socialNetwork, out socialnetworkString);
+            gc.SignUp(userName, socialnetworkString);
         }
 
-        public async Task<ContentPage> ShowPastDetailsAsync()
+        protected override async void OnAppearing()
         {
-            if (!gc.IsNewUser())
-            {
-                if (gc.IsUserConnectedRecently())
-                {
-                    bool dialogAnswer = DisplayAlert(AppResources.Hey + ", " + gc.currentUser.name + "!", AppResources.Do_you_want_to_continue_last_trip, AppResources.Yes, AppResources.No).Result;
+            base.OnAppearing();
+            await ShowPastDetails();
+        }
+
+        public async Task ShowPastDetails()
+        {
+            if (!gc.IsNewUser()){
+                if (gc.IsUserConnectedRecently()){
+                    int dialogAns = 0;
+                    
+                    bool dialogAnswer = await DisplayAlert(
+                    AppResources.Hey + ", " + gc.currentUser.name + "!",
+                    AppResources.Do_you_want_to_continue_last_trip,
+                    AppResources.Yes,
+                    AppResources.No);
+
                     if (dialogAnswer)
+                        dialogAns = 1;
+                    else
+                        dialogAns = 2;
+                    
+                    
+                    if (dialogAns == 1)
                     {
-                        await gc.ContinuePreviousTrip();
-                        return new NavigationPage();
+                        gc.ContinuePreviousTrip();
+                        Application.Current.MainPage = new NavigationPage();
+                        return;
                     }
 
                 }
-                RelevantInformation ans = await gc.LoadRelevantInformationFromLastTrip();
+                RelevantInformation ans = gc.LoadRelevantInformationFromLastTrip();
                 groupNameEntry.Text = ans.groupName;
                 if (ans.playersAges != null)
-                {
                     for (int i = 0; i < ans.playersAges.Count; i++)
                         AddRowToPlayersGrid(ans.playersAges[i].ToString());
-                }
             }
-
-            return this;
         }
 
         private void Select_Short_Path_Button_Clicked(object sender, EventArgs e)
@@ -82,14 +102,14 @@ namespace trumpeldor.Views
         
         private void AddRowToPlayersGrid(String playerAge)
         {
+            if (playerAge != null)
+                ((Entry)agesGrid.Children.ElementAt(agesGrid.Children.Count - 1)).Text = playerAge;
             int nextRow = agesGrid.RowDefinitions.Count;
             agesGrid.RowDefinitions.Add(new RowDefinition { Height = GridLength.Star });
             Label lbl = new Label { Text = nextRow + ")" };
             lbl.SetDynamicResource(VisualElement.StyleProperty, "lableStyle");
             agesGrid.Children.Add(lbl, 0, nextRow);
-            Entry entry = new Entry { Keyboard = Keyboard.Numeric };
-            if (playerAge != null)
-                entry.Text = playerAge;
+            Entry entry = new Entry { Keyboard = Keyboard.Numeric };            
             entry.SetDynamicResource(VisualElement.StyleProperty, "entryStyle");
             agesGrid.Children.Add(entry, 1, nextRow);
         }
@@ -100,26 +120,44 @@ namespace trumpeldor.Views
             AddRowToPlayersGrid(null);
         }
 
-        private async void Start_Trip_Button_Clicked(object sender, EventArgs e)
+        private void Start_Trip_Button_Clicked(object sender, EventArgs e)
         {
             String groupName = groupNameEntry.Text;
             List<int> agesList = new List<int>();
-            foreach(View child in agesGrid.Children)
+            try
             {
-                if(child is Entry)
+                foreach (View child in agesGrid.Children)
                 {
-                    agesList.Add(Int32.Parse(((Entry)child).Text));
+                    if (child is Entry)
+                    {
+                        string age = ((Entry)child).Text;
+                        if (age != "" && age != null)
+                            agesList.Add(Int32.Parse(age));
+                    }
+                }
+
+                var existingPages = Navigation.NavigationStack.ToList();
+                foreach (var page in existingPages)
+                {
+                    Navigation.RemovePage(page);
+                }
+                if (groupName != "" && agesList.Count != 0 &&
+                    (selectedPathLength == 1 || selectedPathLength == 2 || selectedPathLength == 3))
+                {
+                    gc.CreateTrip(groupName, agesList, selectedPathLength);
+                    Application.Current.MainPage = new NavigationPage();
+                }
+                else
+                {
+                    DisplayAlert("Illegal Input!", "You must fill all the fields", "OK");
                 }
             }
-            var existingPages = Navigation.NavigationStack.ToList();
-            foreach (var page in existingPages)
+            catch (Exception ex)
             {
-                Navigation.RemovePage(page);
+                if (!(groupName != null && agesList.Count != 0 &&
+                    (selectedPathLength == 1 || selectedPathLength == 2 || selectedPathLength == 3)))
+                    DisplayAlert("Illegal Input!", "You must fill all the fields", "OK");
             }
-            await gc.CreateTrip(groupName, agesList, selectedPathLength);
-            if(ServerConection.DEBUG == 1)
-                await DisplayAlert("", AppResources.group_name +" " + gc.currentTrip.groupName + " " + AppResources.Players_Ages + gc.currentTrip.playersAges[0].ToString() + " "+ AppResources.First_Attraction + gc.currentTrip.GetCurrentAttraction().ToString(), AppResources.ok);
-            Application.Current.MainPage = new NavigationPage();
         }
     }
 }

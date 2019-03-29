@@ -175,7 +175,7 @@
     <value>leading table</value>
   </data>
   <data name="login_with_facebook" xml:space="preserve">
-    <value>login with facebook</value>
+    <value>Login with Facebook</value>
   </data>
   <data name="long_path" xml:space="preserve">
     <value>long</value>
@@ -214,7 +214,7 @@
     <value>points</value>
   </data>
   <data name="question" xml:space="preserve">
-    <value>question</value>
+    <value>Question</value>
   </data>
   <data name="score" xml:space="preserve">
     <value>score</value>
@@ -239,5 +239,74 @@
   </data>
   <data name="You_have_Reached_Your_Destionation" xml:space="preserve">
     <value>You Have Reached Your Destionation</value>
+  </data>
+  <data name="Done_Trip_Message" xml:space="preserve">
+    <value>Well done, you have done the trip. We would like to get feedback from you. Would you like to feedback us?</value>
+  </data>
+  <data name="Done_Trip_Title" xml:space="preserve">
+    <value>Trip complete!</value>
+  </data>
+  <data name="Option_1" xml:space="preserve">
+    <value>Option 1</value>
+  </data>
+  <data name="Option_2" xml:space="preserve">
+    <value>Option 2</value>
+  </data>
+  <data name="Share_First_Part_Message" xml:space="preserve">
+    <value>Would you like to share in </value>
+  </data>
+  <data name="Share_Second_Part_Message" xml:space="preserve">
+    <value>Or in other application?</value>
+  </data>
+  <data name="Share_Title" xml:space="preserve">
+    <value>Where do you like to share?</value>
+  </data>
+  <data name="End" xml:space="preserve">
+    <value>End</value>
+  </data>
+  <data name="Answer" xml:space="preserve">
+    <value>Answer</value>
+  </data>
+  <data name="Reply" xml:space="preserve">
+    <value>Reply</value>
+  </data>
+  <data name="Last_Hint_Alert_Message" xml:space="preserve">
+    <value>The last hint reveals the location of the attraction. Are you sure you want to use this hint?</value>
+  </data>
+  <data name="Last_Hint_Alert_Title" xml:space="preserve">
+    <value>Last Hint!</value>
+  </data>
+  <data name="login_as_anonymous" xml:space="preserve">
+    <value>Anonymous</value>
+  </data>
+  <data name="Out_Of_Valid_Sector_Message" xml:space="preserve">
+    <value>You may use basic parts of the application</value>
+  </data>
+  <data name="Out_Of_Valid_Sector_Title" xml:space="preserve">
+    <value>You are out of the bounds of the valid sector</value>
+  </data>
+  <data name="Too_Much_Mistakes_In_AQ_Message_Part1" xml:space="preserve">
+    <value>You have more than</value>
+  </data>
+  <data name="Too_Much_Mistakes_In_AQ_Message_Part2" xml:space="preserve">
+    <value>mistakes. Therefore, you have to wait</value>
+  </data>
+  <data name="Too_Much_Mistakes_In_AQ_Message_Part3" xml:space="preserve">
+    <value>seconds</value>
+  </data>
+  <data name="Too_Much_Mistakes_In_AQ_title" xml:space="preserve">
+    <value>Stop</value>
+  </data>
+  <data name="position" xml:space="preserve">
+    <value>Position</value>
+  </data>
+  <data name="continue_trip" xml:space="preserve">
+    <value>Continue trip</value>
+  </data>
+  <data name="login_with_google" xml:space="preserve">
+    <value>Login with Google account</value>
+  </data>
+  <data name="sliding_puzzle" xml:space="preserve">
+    <value>Sliding puzzle</value>
   </data>
 </root>

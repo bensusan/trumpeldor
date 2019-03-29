@@ -1,5 +1,5 @@
 import null
-
+import datetime
 from Server.models import *
 from .DAL import DAL_Abstract
 
@@ -22,6 +22,9 @@ class DAL_Implementation(DAL_Abstract):
         trip = Trip(user=user, groupName=groupName, playersAges=playersAges, track=track)
         trip.save()
         self.doneAttractionInTrip(trip, attraction)
+        feedbacks = self.getFeedbacks()
+        for feedback in feedbacks:
+            self.createFeedbackInstance(feedback, trip)
         return trip
 
     def doneAttractionInTrip(self, trip, newAttraction):
@@ -35,7 +38,10 @@ class DAL_Implementation(DAL_Abstract):
     def getHints(self, attraction):
         return Hint.objects.filter(attraction=attraction).all()
 
-    def getFeedbacks(self, trip):
+    def getFeedbacks(self):
+        return Feedback.objects.all()
+
+    def getFeedbackInstances(self, trip):
         return FeedbackInstance.objects.filter(trip=trip).all()
 
     def getAmericanQuestion(self, attraction):
@@ -91,6 +97,43 @@ class DAL_Implementation(DAL_Abstract):
 
     def getAllTracksThatIncludeThisTrack(self, track):
         return Track.objects.filter(subTrack=track).all()
+
+    def getOpenMessages(self):
+        return Message.objects.all()
+
+    def updateTrip(self, prevTrip, track, groupName, score, playersAges, attractionsDone):
+        prevTrip.track = track
+        prevTrip.groupName = groupName
+        prevTrip.score = score
+        prevTrip.playersAges = playersAges
+        prevTrip.save()
+        prevTrip.attractionsDone.clear()
+        for attraction in attractionsDone:
+            prevTrip.attractionsDone.add(attraction)
+        return prevTrip
+
+    def updateFeedbackInstance(self, feedback, trip, answer):
+        prevFI = FeedbackInstance.objects.filter(trip=trip).filter(feedback=feedback).first()
+        prevFI.answer = answer
+        prevFI.save()
+
+    def createFeedbackInstance(self, feedback, trip):
+        fi = FeedbackInstance(feedback=feedback, trip=trip, answer="")
+        fi.save()
+
+    def getFeedbackById(self, feedbackId):
+        return Feedback.objects.get(id=feedbackId)
+
+    def updateLastSeenToNow(self, user):
+        user.lastSeen = datetime.datetime.now()
+        user.save()
+        return user
+
+    def getAllTrips(self):
+        return Trip.objects.order_by('score')
+
+    def getSlidingPuzzle(self, attraction):
+        return SlidingPuzzle.objects.filter(attraction=attraction).first()
 
     def delete_attraction(self, id):
         delt=self.getAttraction(id).delete()

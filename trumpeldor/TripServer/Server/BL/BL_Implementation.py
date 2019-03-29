@@ -4,6 +4,8 @@ from Server.DAL.DAL import DALProxy
 from Server.serializers import *
 from Server.models import *
 from itertools import chain
+import TripServer.settings as settings
+import json
 
 
 def getDistance(lat1, lon1, lat2, lon2):
@@ -73,6 +75,7 @@ class BL_Implementation(BL_Abstract):
         if attraction is None:
             raise RuntimeError("Tracks are empty")
         user = self.getUser(data['user'])
+        user = self.DAL.updateLastSeenToNow(user)
         return self.DAL.createTrip(user, data['groupName'], data['playersAges'], track, attraction)
 
     def createUser(self, data):
@@ -82,9 +85,9 @@ class BL_Implementation(BL_Abstract):
         attr = self.getAttraction(attraction)
         return self.DAL.getHints(attr)
 
-    def getFeedbacks(self, trip):
+    def getFeedbackInstances(self, trip):
         trip = self.getTrip(trip)
-        return self.DAL.getFeedbacks(trip)
+        return self.DAL.getFeedbackInstances(trip)
 
     def getAmericanQuestion(self, id_attraction):
         attr = self.get_attraction(id_attraction)
@@ -97,8 +100,8 @@ class BL_Implementation(BL_Abstract):
         return self.DAL.getTrip(trip['id'])
 
     def add_attraction(self, attraction):
-        if self.get_attraction_by_x_y(attraction['x'], attraction['y']) is None:
-            return self.DAL.add_attraction(attraction['name'], attraction['x'], attraction['y'],
+        #if self.getAttraction(attraction['id']) is None:
+        return self.DAL.add_attraction(attraction['name'], attraction['x'], attraction['y'],
                                        attraction['description'], attraction['picturesURLS'], attraction['videosURLS'])
 
     def add_hint(self, id_attraction, hint):
@@ -125,10 +128,56 @@ class BL_Implementation(BL_Abstract):
         return self.DAL.get_attractions()
 
     def getExtendedTrack(self, data):
-        track = self.DAL.getTrackById(data["track"]["id"])
+        track = self.DAL.getTrackById(data["trackId"])
         tracks = self.DAL.getAllTracksThatIncludeThisTrack(track)
         track, attraction = self.getMinTrackAndAttraction(tracks, data["x"], data["y"])
         return track
+
+    def getOpenMessages(self):
+        return self.DAL.getOpenMessages()
+
+    def updateTrip(self, dataTrip):
+        trip = self.getTrip(dataTrip)
+        trip = self.DAL.updateTrip(
+            trip,
+            self.DAL.getTrackById(dataTrip["track"]["id"]),
+            dataTrip["groupName"],
+            dataTrip["score"],
+            dataTrip["playersAges"],
+            map(lambda x: self.DAL.getAttraction(x["id"]), dataTrip["attractionsDone"]))
+
+        self.DAL.updateLastSeenToNow(self.getUser(dataTrip["user"]))
+        self.updateFeedbackInstances(dataTrip["feedbacks"], trip)
+
+    def updateFeedbackInstances(self, feedbackInstancesAsJson, trip):
+        for fi in feedbackInstancesAsJson:
+            self.DAL.updateFeedbackInstance(self.getFeedback(fi["feedback"]), trip, fi["answer"])
+
+    def getFeedback(self, feedback):
+        return self.DAL.getFeedbackById(feedback["id"])
+
+    def getBestScores(self):
+        return self.DAL.getAllTrips()[::-1][:settings.TOP_X]
+
+    def getEntertainment(self, attraction):
+        attr = self.getAttraction(attraction)
+        entertainment = self.DAL.getSlidingPuzzle(attr)
+        classSerializer = SlidingPuzzleSerializer
+        className = 'SlidingPuzzle'
+        # TODO - Other entertainments
+        # if entertainment is None:
+        #     entertainment = self.DAL.getPuzzle(attr)
+        #     classSerializer = PuzzleSerializer
+        #     className = 'Puzzle'
+        #     if entertainment is None:
+        #         entertainment = self.DAL.getFindTheDifferences(attr)
+        #         classSerializer = FindTheDifferencesSerializer
+        #         className = 'FindTheDifferences'
+        entertainment = classSerializer(entertainment)
+        entertainment = json.loads(json.dumps(entertainment.data))
+        # entertainmentWrapper = '{"className":' + className + ',"object":' + entertainment + '}'
+        entertainmentWrapper = {'className': className, 'object': entertainment}
+        return entertainmentWrapper
 
     def delete_attraction(self, id):
         if self.get_attraction(id) is not None:

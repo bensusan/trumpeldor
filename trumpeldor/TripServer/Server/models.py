@@ -2,6 +2,9 @@ from django.db import models
 from django.contrib.postgres.fields import JSONField
 
 
+# we can see which type is every field
+
+
 class Attraction(models.Model):
     name = models.TextField()
     x = models.FloatField()
@@ -58,6 +61,8 @@ class Puzzle(Entertainment):
 
 class SlidingPuzzle(Entertainment):
     piecesURLS = JSONField()  # Should be list of paths
+    width = models.IntegerField()
+    height = models.IntegerField()
 
 
 class Feedback(models.Model):
@@ -91,12 +96,10 @@ class Hint(models.Model):
     HINT_TEXT = 'HT'
     HINT_PICTURE = 'HP'
     HINT_VIDEO = 'HV'
-    HINT_MAP = 'HM'
     HINT_KIND = (
         (HINT_TEXT, 'HintText'),            # "Something"
         (HINT_PICTURE, 'HintPicture'),      # "x.jpg"
         (HINT_VIDEO, 'HintVideo'),          # "x.mp4"
-        (HINT_MAP, 'HintMap'),              # "x,y"
     )
     kind = models.CharField(
         max_length=2,
@@ -105,3 +108,8 @@ class Hint(models.Model):
     )
 
     data = models.TextField()
+
+
+class Message(models.Model):
+    title = models.CharField(max_length=50)     # TODO - maybe change length
+    data = models.CharField(max_length=500)     # TODO - maybe change length

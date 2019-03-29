@@ -10,8 +10,8 @@
             <Image x:Name = "attractionImage" Style="{DynamicResource largeImageStyle}"/>
             <Button x:Name = "informationButton" Text="{translator:Translate information}" Clicked="Information_Button_Clicked" Style="{StaticResource largeButtonStyle}"/>
             <Button x:Name = "missionButton" Text="{translator:Translate mission}" Clicked="Mission_Button_Clicked" Style="{StaticResource largeButtonStyle}"/>
-            <Button x:Name = "questionButton" Text="{translator:Translate question}" Clicked="Question_Button_Clicked" Style="{StaticResource largeButtonStyle}"/>
             <Button x:Name = "watchAgainButton" Text="{translator:Translate watch_again}" Clicked="Watch_Again_Button_Clicked" Style="{StaticResource largeButtonStyle}"/>
+            <Button x:Name = "continueButton" Text="{translator:Translate continue_trip}" Clicked="Continue_Button_Clicked" Style="{StaticResource largeButtonStyle}"/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

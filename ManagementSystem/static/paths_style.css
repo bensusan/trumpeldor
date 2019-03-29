@@ -1,0 +1,26 @@
+body {
+    background-image: url("back.jpg");
+    background-repeat: no-repeat;
+    background-color: #cccccc;
+    /*background-size: cover;*/
+    background-attachment: fixed;
+}
+
+.pointsBorder {border-style: dotted;
+border-radius: 5px;
+    width: 380px;
+border-color: green;}
+
+.button {
+  background-color: blue;
+  border: none;
+    border-radius: 12px;
+  color: white;
+  padding: 10px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+}
