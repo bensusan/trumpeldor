@@ -89,8 +89,8 @@ class BL_Implementation(BL_Abstract):
         trip = self.getTrip(trip)
         return self.DAL.getFeedbackInstances(trip)
 
-    def getAmericanQuestion(self, attraction):
-        attr = self.getAttraction(attraction)
+    def getAmericanQuestion(self, id_attraction):
+        attr = self.get_attraction(id_attraction)
         return self.DAL.getAmericanQuestion(attr)
 
     def getAttraction(self, attraction):
@@ -100,25 +100,26 @@ class BL_Implementation(BL_Abstract):
         return self.DAL.getTrip(trip['id'])
 
     def add_attraction(self, attraction):
-        if self.getAttraction(attraction['id']) is None:
-            return self.DAL.add_attraction(attraction['name'], attraction['x'], attraction['y'],
+        #if self.getAttraction(attraction['id']) is None:
+        return self.DAL.add_attraction(attraction['name'], attraction['x'], attraction['y'],
                                        attraction['description'], attraction['picturesURLS'], attraction['videosURLS'])
 
-    def add_hint(self, attraction, hint):
-        return self.DAL.add_hint(attraction, hint['kind'], hint['data'])
+    def add_hint(self, id_attraction, hint):
+        return self.DAL.add_hint(id_attraction, hint['kind'], hint['data'])
 
-    def add_american_question(self, attraction, a_question):
-        return self.DAL.add_american_question(attraction, a_question['question'], a_question['answers'],
+    def add_american_question(self, id_attraction, a_question):
+        return self.DAL.add_american_question(id_attraction, a_question['question'], a_question['answers'],
                                               a_question['indexOfCorrectAnswer'])
 
     def add_track(self, track):
-        return self.DAL.add_track(track['subTrack'], track['points'], track['length'])
+        if self.get_track_by_length(track['length']) is None:
+            return self.DAL.add_track(track['points'], track['length'])
 
     def add_feedback_question(self, question, kind):#question, kind
         return self.DAL.add_feedback_question(question, kind)
 
-    def get_track(self, track_len):
-        return self.DAL.add_track(track_len)
+    def get_track(self, id):
+        return self.DAL.get_track(id)
 
     def get_attraction(self, id):
         return self.DAL.get_attraction(id)
@@ -182,9 +183,9 @@ class BL_Implementation(BL_Abstract):
         if self.get_attraction(id) is not None:
             return self.DAL.delete_attraction(id)
 
-    def edit_attraction(self, attraction):
-        if self.get_attraction(attraction['id']) is not None:
-            return self.DAL.edit_attraction(attraction['id'], attraction['name'], attraction['x'], attraction['y'],
+    def edit_attraction(self, id, attraction):
+        if self.get_attraction(id) is not None:
+            return self.DAL.edit_attraction(id, attraction['name'], attraction['x'], attraction['y'],
                                             attraction['description'], attraction['picturesURLS'], attraction['videosURLS'])
 
     def delete_american_question(self, id_attraction, id_a_question):
@@ -195,10 +196,10 @@ class BL_Implementation(BL_Abstract):
         if self.get_hint(id_attraction, id_hint):
             return self.DAL.delete_hint(id_attraction, id_hint)
 
-    def edit_hint(self, id_attraction, hint):
-        hint_before_edit = self.get_hint(id_attraction, hint['id'])
-        if hint_before_edit is not None and hint_before_edit['kind'] == hint['kind']:
-            return self.DAL.edit_hint(id_attraction, hint['id'], hint['data'])
+    def edit_hint(self, id_attraction, id_hint_to_edit, hint):
+        hint_before_edit = self.get_hint(id_attraction, id_hint_to_edit)
+        if hint_before_edit is not None and hint_before_edit.kind == hint['kind']:
+            return self.DAL.edit_hint(id_attraction, id_hint_to_edit, hint['data'])
 
     def get_all_tracks(self):
         return self.DAL.get_all_tracks()
@@ -218,4 +219,23 @@ class BL_Implementation(BL_Abstract):
     def get_feedback_question(self, id_feedback):
         return self.DAL.get_feedback_question(id_feedback)
 
+    def get_attraction_by_x_y(self, x, y):
+        return self.DAL.get_attraction_by_x_y(x, y)
 
+    def get_all_aquestions_for_attraction(self, id_attraction):
+        return self.DAL.get_all_aquestions_for_attraction(id_attraction)
+
+    def get_all_hints_for_attraction(self, id_attraction):
+        return self.DAL.get_all_hints_for_attraction(id_attraction)
+
+    def add_attraction_to_track(self, id_track, id_attraction):
+        return self.DAL.add_attraction_to_track(id_track, id_attraction)
+
+    def delete_attraction_from_track(self, id_track, id_attraction):
+        return self.DAL.delete_attraction_from_track(id_track, id_attraction)
+
+    def delete_track(self, id_track):
+        return self.DAL.delete_track(id_track)
+
+    def get_track_by_length(self, len):
+        return self.DAL.get_track_by_length(len)

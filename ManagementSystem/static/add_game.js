@@ -1,4 +1,13 @@
-function newPopup(url) {
-	popupWindow = window.open(
-		url,'popUpWindow','height=300,width=400,left=10,top=10,resizable=yes,scrollbars=yes,toolbar=yes,menubar=no,location=no,directories=no,status=yes')
-}
+
+window.onload=function () {
+	    let slidingPuzzleBTN = document.getElementById('sliding_puzzle_button');
+        slidingPuzzleBTN.addEventListener('click', function() {
+			window.location.href='/add_picture';
+        });
+
+var tmuna = document.getElementById("sukablat");
+    tmuna.src = localStorage.getItem("url_of_img");
+        // var image = document.getElementById('shitfuck');
+    	// image.src = URL.createObjectURL(event.target.files[0]);
+
+};

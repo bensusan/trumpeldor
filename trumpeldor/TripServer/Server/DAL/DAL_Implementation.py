@@ -59,35 +59,35 @@ class DAL_Implementation(DAL_Abstract):
         attraction.save()
         return attraction
 
-    def add_hint(self, attraction, kind, data):
-        hint = Hint(attraction=attraction, kind=kind, data=data)
+    def add_hint(self, id_attraction, kind, data):
+        hint = Hint(attraction=self.getAttraction(id_attraction), kind=kind, data=data)
         hint.save()
         return hint
 
-    def add_american_question(self, attraction, question, answers, indexOfCorrectAnswer):
+    def add_american_question(self, id_attraction, question, answers, indexOfCorrectAnswer):
         aq = AmericanQuestion(question=question, answers=answers, indexOfCorrectAnswer=indexOfCorrectAnswer,
-                              attraction=attraction)
+                              attraction=self.getAttraction(id_attraction))
         aq.save()
         return aq
 
-    def add_track(self, subTrack, points, length):
-        track = None
-        if subTrack == null:
-            track = Track(length=length)
-        else:
-            track = Track(subTrack=subTrack, length=length)
-        track.save()
-        for p in points:
-            track.points.add(p)
-        return track
+    def add_track(self, points, length):
+        for i in range(4-length):
+            track = Track(length=length+i)
+            track.save()
+            for p in points:
+                attr = self.get_attraction(p['id'])
+                track.points.add(attr)
+                track.save()
+        return True
 
     def add_feedback_question(self, question, kind):
         feedback = Feedback(question=question, kind=kind)
         feedback.save()
         return feedback
 
-    def get_track(self, track_len):
-        return Track.objects.filter(length=track_len).all()
+    def get_track(self, id):
+        track = Track.objects.filter(pk=id).first()
+        return track
 
     def get_attraction(self, id):
         return Attraction.objects.get(pk=id)
@@ -136,7 +136,8 @@ class DAL_Implementation(DAL_Abstract):
         return SlidingPuzzle.objects.filter(attraction=attraction).first()
 
     def delete_attraction(self, id):
-        return self.get_attraction(id).delete()
+        delt=self.getAttraction(id).delete()
+        return True
 
     def edit_attraction(self, id, name, x, y, description, picturesURLS, videosURLS):
         attraction = self.get_attraction(id)
@@ -150,30 +151,70 @@ class DAL_Implementation(DAL_Abstract):
         return attraction
 
     def delete_american_question(self, id_attraction, id_a_question):
-        return self.get_american_question(id_attraction, id_a_question).delete()
+        aq = self.get_american_question(id_attraction, id_a_question).delete()
+        return True
 
     def delete_hint(self, id_attraction, id_hint):
-        return self.get_hint(id_attraction, id_hint).delete()
+        hint = self.get_hint(id_attraction, id_hint).delete()
+        return True
 
     def edit_hint(self, id_attraction, id_hint, data):
         hint = self.get_hint(id_attraction, id_hint)
-        hint.data=data
+        hint.data = data
         hint.save()
-        return hint
+        return True
 
     def get_all_tracks(self):
         return Track.objects.all()
 
     def delete_feedback_question(self, id_feedback):
-        return self.get_feedback_question(id_feedback).delete()
+        feedback = self.get_feedback_question(id_feedback).delete()
+        return True
 
     def get_american_question(self, id_attraction, id_american_question):
         return AmericanQuestion.objects.filter(pk=id_american_question,
-                                               attraction=self.get_attraction(id_attraction)).all()
+                                               attraction=self.get_attraction(id_attraction)).first()
 
     def get_hint(self, id_attraction, id_hint):
-        return Hint.objects.filter(pk=id_hint, attraction=self.get_attraction(id_attraction)).all()
+        return Hint.objects.filter(pk=id_hint, attraction=self.getAttraction(id_attraction)).first()
 
     def get_feedback_question(self, id_feedback):
         return Feedback.objects.filter(pk=id_feedback).all()
 
+    def get_attraction_by_x_y(self, x, y):
+        return Attraction.objects.filter(x=x, y=y).first()
+
+    def get_all_aquestions_for_attraction(self, id_attraction):
+        return AmericanQuestion.objects.filter(attraction=self.get_attraction(id_attraction)).all()
+
+    def get_all_hints_for_attraction(self, id_attraction):
+        return Hint.objects.filter(attraction=self.get_attraction(id_attraction)).all()
+
+    def add_attraction_to_track(self, id_track, id_attraction):
+        attr = self.getAttraction(id_attraction)
+        if attr is not None:
+            track = self.get_track(id_track)
+            len = track.length
+            for i in range(len, 4):
+                track = self.get_track_by_length(i)
+                track.points.add(attr)
+                track.save()
+            return True
+
+    def delete_attraction_from_track(self, id_track, id_attraction):
+        attr = self.getAttraction(id_attraction)
+        if attr is not None:
+            track = self.get_track(id_track)
+            len = track.length
+            for i in range(1, len+1):
+                track = self.get_track_by_length(i)
+                track.points.remove(attr)
+                track.save()
+            return True
+
+    def delete_track(self, id_track):
+        track = self.get_track(id_track).delete()
+        return True
+
+    def get_track_by_length(self, len):
+        return Track.objects.filter(length=len).first()

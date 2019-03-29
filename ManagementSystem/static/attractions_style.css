@@ -1,0 +1,28 @@
+body {
+    background-image: url("back.jpg");
+    background-repeat: no-repeat;
+    background-color: #cccccc;
+    /*background-size: cover;*/
+    background-attachment: fixed;
+}
+
+.paging {
+    position: absolute;
+    top: 50px;
+    left: 400px;
+
+}
+
+.button {
+  background-color: blue;
+  border: none;
+    border-radius: 12px;
+  color: white;
+  padding: 10px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+}

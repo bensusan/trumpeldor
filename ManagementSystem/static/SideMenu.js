@@ -1,6 +1,6 @@
 document.getElementById("sideMenu").innerHTML = '<div class="sidenav">\n' +
     '  <h2 style="color:#818181;">Welcome, Yael!</h2>' +
-    '  <a href="/attractions">Manage Attractions</a>\n' +
+    '  <a href="/attractions" name="manage_attr_page">Manage Attractions</a>\n' +
     '  <button class="dropdown-btn">Paths\n' +
     '    <i class="fa fa-caret-down"></i>\n' +
     '  </button>\n' +
@@ -10,11 +10,11 @@ document.getElementById("sideMenu").innerHTML = '<div class="sidenav">\n' +
     '  </button>\n' +
     '  <div class="dropdown-container">\n' +
     '    <a href="/add_short_path">Short</a>\n' +
-    '    <a href="maptrack">Medium</a>\n' +
-    '    <a href="maptrack">Long</a>\n' +
+    '    <a href="/add_medium_path">Medium</a>\n' +
+    '    <a href="/add_long_path">Long</a>\n' +
     '  </div>\n' +
-    '    <a href="/edit_path">Edit Path</a>\n' +
-    '    <a href="#">Delete Path</a>\n' +
+    '    <a href="/pick_path_edit">Edit Path</a>\n' +
+    '    <a href="/pick_path_delete">Delete Path</a>\n' +
     '  </div>\n' +
     '  <a href="#services">Statistics</a>\n' +
     '  <a href="/additional_info">Additional Info</a>\n' +

@@ -3,6 +3,8 @@ from django.contrib.postgres.fields import JSONField
 
 
 # we can see which type is every field
+
+
 class Attraction(models.Model):
     name = models.TextField()
     x = models.FloatField()
@@ -23,7 +25,7 @@ class User(models.Model):
 
 
 class Track(models.Model):
-    subTrack = models.ForeignKey('Track', on_delete=models.CASCADE, blank=True, null=True)
+    #subTrack = models.ForeignKey('self', on_delete=models.CASCADE, blank=True, null=True)
     points = models.ManyToManyField(Attraction)
     length = models.IntegerField()
 

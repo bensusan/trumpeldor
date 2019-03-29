@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Picture:</title>
+     {% load static %}
+<script src="{% static 'properties.js' %}?version=1"></script>
+</head>
+<body>
+{% load static %}
+<script src="{% static 'add_picture.js' %}?version=3"></script>
+    <label for="hint"><b>Write Game Instructions:</b></label>
+<p></p>
+<textarea id="game_instructions_text" placeholder="Game Instructions..." style="height:100px;width:250px"></textarea>
+    <p></p>
+    <label for="hint"><b>Upload Image:</b></label>
+<p></p>
+
+<input type="file" onchange="encodeImageFileAsURL(this)" />
+<p><img id="output" width="200" /></p>
+<p>This Is The URL:</p>
+<p id="suka"></p>
+
+
+<button onclick="window.location.href='/add_game'">Finished</button>
+</body>
+</html>

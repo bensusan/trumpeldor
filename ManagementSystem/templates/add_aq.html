@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Add American Question:</title>
+ {% load static %}
+<script src="{% static 'properties.js' %}?version=1"></script>
+    {% load static %}
+    <script src="{% static 'attractions.js' %}?version=2"></script>
+</head>
+<body>
+{#<form>#}
+{#    <div>#}
+    <label for="hint"><b>American Question:</b></label>
+    <input type="text" id="ques" placeholder="Enter Question" name="attr_desc" required>
+      <input  type="text" id="ans1" placeholder="ans1" name="a1" required>
+      <input type="text" id="ans2" placeholder="ans2" name="a2" required>
+      <input type="text" id="ans3" placeholder="ans3" name="a3" required>
+      <input  type="text" id="ans4" placeholder="ans4" name="a4" required>
+<input  type="text" id="correctAns" placeholder="correctAns_index" name="correctAns" required>
+{#        </div>#}
+{#</form>#}
+{% load static %}
+<script src="{% static 'add_aq.js' %}?version=1"></script>
+{#<button onclick="addAQ()" type="button">Finish</button>#}
+<button id="finish_add_aq" type="button" >Send</button>
+</body>
+</html>

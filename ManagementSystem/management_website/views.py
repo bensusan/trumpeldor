@@ -27,12 +27,64 @@ def add_game_page(request):
     return render(request, "add_game.html")
 
 
+def add_hint_page(request):
+    return render(request, "add_hint.html")
+
+
+def add_aq_page(request):
+    return render(request, "add_aq.html")
+
+
+def pick_hint_page(request):
+    return render(request, "pick_hint.html")
+
+
+def edit_hint_page(request):
+    return render(request, "edit_hint.html")
+
+
+def add_picture_page(request):
+    return render(request, "add_picture.html")
+
+
+def add_path_page(request):
+    return render(request, "add_path.html")
+
+
+def pick_aq_page(request):
+    return render(request, "pick_aq.html")
+
+
+def pick_path_edit_page(request):
+    return render(request, "pick_path_edit.html")
+
+
+def pick_path_delete_page(request):
+    return render(request, "pick_path_delete.html")
+
+
 def add_short_path_page(request):
     return render(request, "add_short_path.html")
 
 
-def edit_path_page(request):
-    return render(request, "edit_path.html")
+def add_medium_path_page(request):
+    return render(request, "add_medium_path.html")
+
+
+def add_long_path_page(request):
+    return render(request, "add_long_path.html")
+
+
+def edit_short_path_page(request):
+    return render(request, "edit_short_path.html")
+
+
+def edit_medium_path_page(request):
+    return render(request, "edit_medium_path.html")
+
+
+def edit_long_path_page(request):
+    return render(request, "edit_long_path.html")
 
 
 def info_page(request):

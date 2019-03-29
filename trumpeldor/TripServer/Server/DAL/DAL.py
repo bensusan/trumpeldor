@@ -44,10 +44,10 @@ class DAL_Abstract(object):
     def add_attraction(self, name, x, y, description, picturesURLS, videosURLS):
         raise NotImplementedError("Should have implemented this")
 
-    def add_hint(self, attraction, kind, data):
+    def add_hint(self, id_attraction, kind, data):
         raise NotImplementedError("Should have implemented this")
 
-    def add_american_question(self, attraction, question, answers, indexOfCorrectAnswer):
+    def add_american_question(self, id_attraction, question, answers, indexOfCorrectAnswer):
         raise NotImplementedError("Should have implemented this")
 
     def add_track(self, subTrack, points, length):
@@ -56,7 +56,7 @@ class DAL_Abstract(object):
     def add_feedback_question(self, question, kind):
         raise NotImplementedError("Should have implemented this")
 
-    def get_track(self, track_len):
+    def get_track(self, id):
         raise NotImplementedError("Should have implemented this")
 
     def get_attraction(self, id):
@@ -120,6 +120,27 @@ class DAL_Abstract(object):
         raise NotImplementedError("Should have implemented this")
 
     def get_feedback_question(self, id_feedback):
+        raise NotImplementedError("Should have implemented this")
+
+    def get_attraction_by_x_y(self, x, y):
+        raise NotImplementedError("Should have implemented this")
+
+    def get_all_aquestions_for_attraction(self, id_attraction):
+        raise NotImplementedError("Should have implemented this")
+
+    def get_all_hints_for_attraction(self, id_attraction):
+        raise NotImplementedError("Should have implemented this")
+
+    def add_attraction_to_track(self, id_track, id_attraction):
+        raise NotImplementedError("Should have implemented this")
+
+    def delete_attraction_from_track(self, id_track,id_attraction):
+        raise NotImplementedError("Should have implemented this")
+
+    def delete_track(self, id_track):
+        raise NotImplementedError("Should have implemented this")
+
+    def get_track_by_length(self, len):
         raise NotImplementedError("Should have implemented this")
 
 
@@ -199,30 +220,30 @@ class DALProxy(DAL_Abstract):
             raise NotImplementedError("Should have implemented this")
         return self.Implementation.add_attraction(name, x, y, description, picturesURLS, videosURLS)
 
-    def add_hint(self, attraction, kind, data):
+    def add_hint(self, id_attraction, kind, data):
         if self.Implementation is None:
             raise NotImplementedError("Should have implemented this")
-        return self.Implementation.add_hint(attraction, kind, data)
+        return self.Implementation.add_hint(id_attraction, kind, data)
 
-    def add_american_question(self, attraction, question, answers, indexOfCorrectAnswer):
+    def add_american_question(self, id_attraction, question, answers, indexOfCorrectAnswer):
         if self.Implementation is None:
             raise NotImplementedError("Should have implemented this")
-        return self.Implementation.add_american_question(attraction, question, answers, indexOfCorrectAnswer)
+        return self.Implementation.add_american_question(id_attraction, question, answers, indexOfCorrectAnswer)
 
-    def add_track(self, subTrack, points, length):
+    def add_track(self, points, length):
         if self.Implementation is None:
             raise NotImplementedError("Should have implemented this")
-        return self.Implementation.add_track(subTrack, points, length)
+        return self.Implementation.add_track(points, length)
 
     def add_feedback_question(self, question, kind):
         if self.Implementation is None:
             raise NotImplementedError("Should have implemented this")
         return self.Implementation.add_feedback_question(question, kind)
 
-    def get_track(self, track_len):
+    def get_track(self, id):
         if self.Implementation is None:
             raise NotImplementedError("Should have implemented this")
-        return self.Implementation.get_track(track_len)
+        return self.Implementation.get_track(id)
 
     def get_attraction(self, id):
         if self.Implementation is None:
@@ -329,3 +350,37 @@ class DALProxy(DAL_Abstract):
             raise NotImplementedError("Should have implemented this")
         return self.Implementation.get_feedback_question(id_feedback)
 
+    def get_attraction_by_x_y(self, x, y):
+        if self.Implementation is None:
+            raise NotImplementedError("Should have implemented this")
+        return self.Implementation.get_attraction_by_x_y(x, y)
+
+    def get_all_aquestions_for_attraction(self, id_attraction):
+        if self.Implementation is None:
+            raise NotImplementedError("Should have implemented this")
+        return self.Implementation.get_all_aquestions_for_attraction(id_attraction)
+
+    def get_all_hints_for_attraction(self, id_attraction):
+        if self.Implementation is None:
+            raise NotImplementedError("Should have implemented this")
+        return self.Implementation.get_all_hints_for_attraction(id_attraction)
+
+    def add_attraction_to_track(self, id_track, id_attraction):
+        if self.Implementation is None:
+            raise NotImplementedError("Should have implemented this")
+        return self.Implementation.add_attraction_to_track(id_track, id_attraction)
+
+    def delete_attraction_from_track(self, id_track, id_attraction):
+        if self.Implementation is None:
+            raise NotImplementedError("Should have implemented this")
+        return self.Implementation.delete_attraction_from_track(id_track, id_attraction)
+
+    def delete_track(self, id_track):
+        if self.Implementation is None:
+            raise NotImplementedError("Should have implemented this")
+        return self.Implementation.delete_track(id_track)
+
+    def get_track_by_length(self, len):
+        if self.Implementation is None:
+            raise NotImplementedError("Should have implemented this")
+        return self.Implementation.get_track_by_length(len)
