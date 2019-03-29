@@ -41,9 +41,10 @@ function postRequestAmericanQuestion(aq,attr_id){
             };
             postRequestAmericanQuestion(american_question_to_send,attr['id']);
             localStorage.setItem("the_attr", JSON.stringify(attr));
-            window.location.href='/add_hint';
+
         }
       });
+        window.location.href='/add_hint';
         // alert("cant believe this is happenning!");
     }
 

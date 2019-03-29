@@ -1,7 +1,8 @@
 const Http = new XMLHttpRequest();
 
 let marker_arr = [];
-
+let attr_arr_for_test=[];
+let attr_arr_for_test2=[];
 function serverRequest(getOrPost, functionOnReady, url, post=null){
     Http.onreadystatechange = function(){
         if(Http.readyState === 4 && Http.status === 200){
@@ -18,8 +19,19 @@ function serverRequest(getOrPost, functionOnReady, url, post=null){
     Http.send();
 }
 
+function shitToDeleteFast(){
+    window.location.href='/main';
+}
+
+function funcThatReturnsOne(){
+    return 1;
+}
+
 function markAttractions(attractionsJSON){
+     attr_arr_for_test2 = [];
     attractionsJSON.forEach(function (attr) {
+       attr_arr_for_test2.push(attr);
+
         let pos = {lat: attr['x'], lng: attr['y']};
         marker_arr.push(pos);
         localStorage.setItem("title"+pos,"attraction ID: "+attr['id']+"\nattraction name: "+attr['name']+"\nposition: ("+attr['x']+","+attr['y']+")");
@@ -31,6 +43,8 @@ function markAttractions(attractionsJSON){
 
     });
         localStorage.setItem("arr_of_markers",JSON.stringify(marker_arr));
+        document.getElementById("points_arr_for_test").value=attr_arr_for_test;
+
 
 }
 
@@ -51,7 +65,13 @@ function markAttraction(pos){
         return marker;
 }
 
+function funcForTest(attractionsJSON){
+    attr_arr_for_test=[];
+    attractionsJSON.forEach(function (attr) {
+        attr_arr_for_test.push(attr);
+    });
 
+}
 
 function getRequestAttractions(funcOnAttractions){
     // the server port and my ip

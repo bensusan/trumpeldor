@@ -6,6 +6,7 @@ var loadFile = function(event) {
 var str;
 
 function funcForExistingHints(attractionsJSON){
+
     let name = localStorage.getItem("name_for_add_aq");
         let desc = localStorage.getItem("desc_for_add_aq");
       // alert("in get name! "+"of the origin : " + lat + " , " + lng);
@@ -151,7 +152,6 @@ function localFileVideoPlayer() {
 
 
 function finishHint() {
-    alert("hint was added successfully!");
     // let data=document.getElementById("data").value;
     // let hint_to_send = {
     //         attraction:"" //atraction id needs to be here
