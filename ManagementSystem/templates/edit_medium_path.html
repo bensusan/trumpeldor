@@ -6,13 +6,13 @@
     {% load static %}
 <link rel="stylesheet" href="{% static 'SideMenu.css' %}?version=3">
     {% load static %}
-<link rel="stylesheet" href="{% static 'paths_style.css' %}?version=1">
+<link rel="stylesheet" href="{% static 'paths_style.css' %}?version=4>
 {% load static %}
 <link rel="stylesheet" href="{% static 'Map.css' %}?version=3">
 {% load static %}
 <script src="{% static 'attractions.js' %}?version=5"></script>
     {% load static %}
-<script src="{% static 'edit_medium_path.js' %}?version=1"></script>
+<script src="{% static 'edit_medium_path.js' %}?version=3"></script>
      {% load static %}
 <script src="{% static 'properties.js' %}?version=1"></script>
 </head>
@@ -37,13 +37,17 @@
 <button class="button" id="add_reg_to_path_med" type="button">Add To Path</button>
 <button class="button" id="delete_from_path_med" type="button">Delete Point</button>
 <button class="button" id="finish_reg_med" type="button">Finish!</button>
+<p></p>
+<p></p>
+<div id="border_of_points" class="pointsBorder"  style="display: none" align="center">
+    <div align="center">
+        <p><b>Added Points:</b></p>
+    </div>
+<p id="showing_added_points"></p>
+    </div>
     </div>
 </div>
-<p></p>
-<p></p>
-<p id="things_to_fix"> </p>
 
-<p id="showing_added_points_med"></p>
 <nav id="sideMenu"></nav>
 {% load static %}
 <script src="{% static 'menu_for_paths.js' %}?version=1"></script>

@@ -14,7 +14,7 @@
 {% load static %}
 <script src="{% static 'attractions.js' %}?version=5"></script>
     {% load static %}
-<script src="{% static 'add_medium_path.js' %}?version=5"></script>
+<script src="{% static 'add_medium_path.js' %}?version=3"></script>
      {% load static %}
 <script src="{% static 'properties.js' %}?version=1"></script>
 </head>
@@ -41,15 +41,21 @@
 <button class="button" id="add_reg_to_path_med" type="button">Add To Path</button>
 <button class="button" id="finish_reg_med" type="button">Finish!</button>
 </div>
+
+        <p></p>
+<p></p>
+<div id="border_of_points" class="pointsBorder"  style="display: none" align="center">
+    <div align="center">
+        <p><b>Added Points:</b></p>
+    </div>
+<p id="showing_added_points"></p>
+    </div>
+
     </div>
 
 </div>
 
-<p></p>
-<p></p>
-<p id="things_to_fix"> </p>
 
-<p id="showing_added_points_med"></p>
 <nav id="sideMenu"></nav>
 {% load static %}
 <script src="{% static 'menu_for_paths.js' %}?version=1"></script>
