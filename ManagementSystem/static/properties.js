@@ -1,4 +1,4 @@
-let ip = '10.0.0.4';
+let ip = '10.0.0.6';
 
 let prev_m = 1;
 let prev_icon=2;
