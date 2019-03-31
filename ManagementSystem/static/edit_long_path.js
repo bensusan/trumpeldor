@@ -26,11 +26,14 @@ function initMapAndAttractionss(){
 
   function addEditListenerr(m) {
       m.addListener('click', function() {
-            if(prev_m!=1) {
-              prev_m.setIcon("http://maps.google.com/mapfiles/ms/icons/red-dot.png");
+             if(prev_m!=1) {
+
+              prev_m.setIcon(prev_icon);
           }
           //alert("sda");
+          prev_icon=m.icon;
           m.setIcon("http://maps.google.com/mapfiles/ms/icons/pink-dot.png");
+
           prev_m=m;
           curPosClicked=m.position;
         var addToPathBTN = document.getElementById('add_reg_to_path_long');
@@ -48,6 +51,7 @@ function initMapAndAttractionss(){
             border.style.display = "block";
             document.getElementById("showing_added_points").innerHTML = str_of_points;
             document.getElementById("showing_added_points").style.fontWeight = 'bold';
+            getRequestAttractions(needThisToGetPointsIDs);
            // alert("point been added! now its: "+ pointsOfPath.toString());
         });
 
@@ -130,8 +134,9 @@ function markAttractionsOfLongPath_left(attractionsJSON){
 function listenerForMappo(){
         var finishBTN = document.getElementById('finish_reg_long');
         finishBTN.addEventListener('click', function() {
+            window.location.href='/main'
 
-            getRequestAttractions(needThisToGetPointsIDs);
+            //getRequestAttractions(needThisToGetPointsIDs);
 
         });
 }
@@ -146,7 +151,7 @@ function needThisToGetPointsIDs(attractionsJSON) {
                 // let bolia = attr_point == the_point;
                 // alert("attr: "+ attr_point.x +","+ attr_point.y +"\npont: "+the_point.x +","+the_point.y+"\n"+bolia);
                 if((attr_point.x == the_point.x)  &&  (attr_point.y == the_point.y) ){
-                    alert("bazinga!");
+                    //alert("bazinga!");
                     addPointToTrackRequest(attr_id,idOfLong);
                     //addPointToTrackRequest(attr_id,idOfLong);
                 }

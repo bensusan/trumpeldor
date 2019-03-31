@@ -42,6 +42,7 @@ function initMapAndAttractionss(){
             border.style.display = "block";
             document.getElementById("showing_added_points").innerHTML = str_of_points;
             document.getElementById("showing_added_points").style.fontWeight = 'bold';
+            getRequestAttractions(needThisToGetPointsIDs);
            // alert("point been added! now its: "+ pointsOfPath.toString());
         });
 
@@ -135,8 +136,8 @@ function markAttractionsOfMediumPath_left(attractionsJSON){
 function listenerForMappo(){
         var finishBTN = document.getElementById('finish_reg_med');
         finishBTN.addEventListener('click', function() {
-
-            getRequestAttractions(needThisToGetPointsIDs);
+window.location.href='/main'
+            //getRequestAttractions(needThisToGetPointsIDs);
 
         });
 }

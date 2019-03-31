@@ -46,6 +46,7 @@ function initMapAndAttractionss(){
             border.style.display = "block";
             document.getElementById("showing_added_points").innerHTML = str_of_points;
             document.getElementById("showing_added_points").style.fontWeight = 'bold';
+            getRequestAttractions(needThisToGetPointsIDs);
            // alert("point been added! now its: "+ pointsOfPath.toString());
         });
   });

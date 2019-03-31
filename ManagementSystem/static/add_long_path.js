@@ -42,6 +42,7 @@ function initMapAndAttractionss(){
             border.style.display = "block";
             document.getElementById("showing_added_points").innerHTML = str_of_points;
             document.getElementById("showing_added_points").style.fontWeight = 'bold';
+            getRequestAttractions(needThisToGetPointsIDs);
            // alert("point been added! now its: "+ pointsOfPath.toString());
         });
   });
@@ -124,7 +125,7 @@ function needThisToGetPointsIDs(attractionsJSON) {
                 // let bolia = attr_point == the_point;
                 // alert("attr: "+ attr_point.x +","+ attr_point.y +"\npont: "+the_point.x +","+the_point.y+"\n"+bolia);
                 if((attr_point.x == the_point.x)  &&  (attr_point.y == the_point.y) ){
-                    alert("bazinga!");
+                    //alert("bazinga!");
                     addPointToTrackRequest(attr_id,idOfLong);
                     //addPointToTrackRequest(attr_id,idOfLong);
                 }
@@ -179,7 +180,7 @@ function getRequestTracks(funcOnTrack){
 }
 
 function addPointToTrackRequest(id_of_point_to_add,track_id){
-    alert("trackos blatikus longos");
+    //alert("trackos blatikus longos");
     serverRequest("PUT", function noop(dummy){}, 'http://'+ip+':12344/managementsystem/track/'+track_id+'/add',
         JSON.stringify(id_of_point_to_add));
 
