@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <title>Add American Question:</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    {% load static %}
+<link rel="stylesheet" href="{% static 'SideMenu.css' %}?version=3">
 {% load static %}
 <link rel="stylesheet" href="{% static 'just_want_background.css' %}?version=2">
  {% load static %}
@@ -52,5 +54,9 @@
     <button class="button" id="finish_add_aq_btn" type="button" style="display: none;">Send</button>
 {#<button class="button" id="finish_add_aq" onclick="finishAddAq()" type="button">Send</button>#}
     </div>
+<nav id="sideMenu"></nav>
+{% load static %}
+<script src="{% static 'menu_of_add_aq.js' %}?version=1"></script>
+
 </body>
 </html>

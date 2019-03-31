@@ -4,6 +4,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Add Medium Path</title>
     {% load static %}
+<link rel="stylesheet" href="{% static 'SideMenu.css' %}?version=3">
+    {% load static %}
 <link rel="stylesheet" href="{% static 'paths_style.css' %}?version=1">
 {% load static %}
 <link rel="stylesheet" href="{% static 'Map.css' %}?version=3">
@@ -37,10 +39,14 @@
 <button class="button" id="finish_reg_med" type="button">Finish!</button>
     </div>
 </div>
-</body>
+
 <p></p>
 <p></p>
 <p id="things_to_fix"> </p>
 
 <p id="showing_added_points_med"></p>
+<nav id="sideMenu"></nav>
+{% load static %}
+<script src="{% static 'menu_for_paths.js' %}?version=1"></script>
+</body>
 </html>

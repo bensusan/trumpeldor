@@ -6,6 +6,8 @@
 <link rel="stylesheet" href="{% static 'attractions_style.css' %}?version=1">
     <title>Add Short Path</title>
     {% load static %}
+<link rel="stylesheet" href="{% static 'SideMenu.css' %}?version=3">
+    {% load static %}
 <link rel="stylesheet" href="{% static 'paths_style.css' %}?version=2">
 {% load static %}
 <link rel="stylesheet" href="{% static 'Map.css' %}?version=3">
@@ -44,7 +46,6 @@
 </div>
 
 </div>
-</body>
 <p></p>
 <p></p>
 <p id="things_to_fix"> </p>
@@ -55,4 +56,8 @@
 <p id="showing_added_points"></p>
     </div>
 </div>
+<nav id="sideMenu"></nav>
+{% load static %}
+<script src="{% static 'menu_for_paths.js' %}?version=1"></script>
+</body>
 </html>
