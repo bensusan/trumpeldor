@@ -1,3 +1,41 @@
+
+
+window.onload = function () {
+    getRequestAttractions(funcForExistingAmericanQuestions);
+
+    var wantToEditBTN = document.getElementById('want_to_edit_aq');
+    var writeChosenHintTextEdit = document.getElementById("write_aq_id_to_edit");
+    var editChosenHintBTN = document.getElementById("edit_chosen_aq");
+    var wantToDeleteBTN = document.getElementById('want_to_delete_aq');
+    var writeChosenHintText = document.getElementById("write_aq_id_to_delete");
+    var deleteChosenHintBTN = document.getElementById("delete_chosen_aq");
+
+        wantToEditBTN.addEventListener('click', function() {
+            writeChosenHintTextEdit.style.display = "inline";
+            editChosenHintBTN.style.display = "inline";
+             writeChosenHintText.style.display = "none";
+            deleteChosenHintBTN.style.display = "none";
+            editChosenHintBTN.addEventListener('click', function() {
+                let hint_id_that_was_picked = document.getElementById("write_aq_id_to_edit").value;
+                localStorage.setItem("aq_id_to_edit", hint_id_that_was_picked);
+                localStorage.setItem("attr_id_for_aq_edit", attractionObjToUseInHintDelete['id']);
+                window.location.href='/edit_hint';
+            });
+        });
+
+        wantToDeleteBTN.addEventListener('click', function() {
+            writeChosenHintText.style.display = "inline";
+            deleteChosenHintBTN.style.display = "inline";
+            writeChosenHintTextEdit.style.display = "none";
+            editChosenHintBTN.style.display = "none";
+            deleteChosenHintBTN.addEventListener('click', function() {
+                getRequestAmericanQuestions(funcInOrderToDeleteAmericanQuestion,attractionObjToUseInHintDelete['id']);
+            });
+        });
+        localFileVideoPlayer();
+};
+
+
 var loadFile = function(event) {
 	var image = document.getElementById('output');
 	image.src = URL.createObjectURL(event.target.files[0]);
@@ -29,44 +67,6 @@ function AmericanQuestions_func(AmericanQuestionsJSON) {
         });
         document.getElementById("existing_aqs").innerHTML = str ;
 }
-
-window.onload = function () {
-    getRequestAttractions(funcForExistingAmericanQuestions);
-
-    var wantToEditBTN = document.getElementById('want_to_edit_aq');
-    alert("sad");
-        wantToEditBTN.addEventListener('click', function() {
-            var writeChosenHintTextEdit = document.getElementById("write_aq_id_to_edit");
-            writeChosenHintTextEdit.style.display = "inline";
-
-            var editChosenHintBTN = document.getElementById("edit_chosen_aq");
-            editChosenHintBTN.style.display = "inline";
-
-            editChosenHintBTN.addEventListener('click', function() {
-                let hint_id_that_was_picked = document.getElementById("write_aq_id_to_edit").value;
-                localStorage.setItem("aq_id_to_edit", hint_id_that_was_picked);
-                localStorage.setItem("attr_id_for_aq_edit", attractionObjToUseInHintDelete['id']);
-                window.location.href='/edit_hint';
-            });
-        });
-
-    var wantToDeleteBTN = document.getElementById('want_to_delete_aq');
-        wantToDeleteBTN.addEventListener('click', function() {
-            var writeChosenHintText = document.getElementById("write_aq_id_to_delete");
-            writeChosenHintText.style.display = "inline";
-
-            var deleteChosenHintBTN = document.getElementById("delete_chosen_aq");
-            deleteChosenHintBTN.style.display = "inline";
-
-            deleteChosenHintBTN.addEventListener('click', function() {
-                getRequestAmericanQuestions(funcInOrderToDeleteAmericanQuestion,attractionObjToUseInHintDelete['id']);
-            });
-        });
-
-
-        localFileVideoPlayer();
-
-};
 
 
 function funcInOrderToDeleteAmericanQuestion(AmericanQuestionsJSON) {

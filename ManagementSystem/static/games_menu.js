@@ -3,7 +3,7 @@
 document.getElementById("sideMenu").innerHTML = '<div class="sidenav">\n' +
     '  <h2 style="color:#818181;">Add Game</h2>' +
     '  <a href="/main">Back</a>\n' +
-    '  <a href="/add_aq">Skip</a>\n' +
+    '  <a id="skip_game_btn" href="/add_aq">Skip</a>\n' +
     '  <a href="/add_aq">Finish</a>\n' +
     '</div>\n' +
     '\n' +
