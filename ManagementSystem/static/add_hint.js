@@ -56,6 +56,14 @@ var sendVidHintBTN = document.getElementById('send_vid_hint');
         textHintBTN.addEventListener('click', function() {
             textLine.style.display = "inline";
             sendButtonTxt.style.display = "inline";
+             clickHere.style.display = "none";
+            picDesc.style.display = "none";
+            outpic.style.display = "none";
+            sendButtonPic.style.display = "none";
+            thevid.style.display = "none";
+            vidDesc.style.display = "none";
+            thevidbrowse.style.display = "none";
+            sendButtonVid.style.display = "none";
         });
 
 var picHintBTN = document.getElementById('add_pic_hint');
@@ -64,6 +72,12 @@ var picHintBTN = document.getElementById('add_pic_hint');
             picDesc.style.display = "inline";
             outpic.style.display = "inline";
             sendButtonPic.style.display = "inline";
+             textLine.style.display = "none";
+            sendButtonTxt.style.display = "none";
+            thevid.style.display = "none";
+            vidDesc.style.display = "none";
+            thevidbrowse.style.display = "none";
+            sendButtonVid.style.display = "none";
         });
 
 var vidHintBTN = document.getElementById('add_vid_hint');
@@ -72,6 +86,12 @@ var vidHintBTN = document.getElementById('add_vid_hint');
             vidDesc.style.display = "inline";
             thevidbrowse.style.display = "inline";
             sendButtonVid.style.display = "inline";
+            textLine.style.display = "none";
+            sendButtonTxt.style.display = "none";
+             clickHere.style.display = "none";
+            picDesc.style.display = "none";
+            outpic.style.display = "none";
+            sendButtonPic.style.display = "none";
         });
 
     sendTextHintBTN.addEventListener('click', function() {
