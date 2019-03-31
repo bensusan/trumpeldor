@@ -2,7 +2,9 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Hints of attraction</title>
+    <title>Edit Path</title>
+    {% load static %}
+<link rel="stylesheet" href="{% static 'just_want_background.css' %}?version=2">
     {% load static %}
 <link rel="stylesheet" href="{% static 'SideMenu.css' %}?version=3">
     {% load static %}
@@ -15,17 +17,18 @@
 <div>
 <nav id="sideMenu"></nav>
 {% load static %}
-<script src="{% static 'mimicOfSide.js' %}?version=1"></script>
+<script src="{% static 'menu_for_paths.js' %}?version=1"></script>
 
 </div>
 
-<div class="moveRight">
+<div align="center">
     <label for="hint"><b>Edit Path:</b></label>
 <p></p>
 <textarea id="write_path_length" placeholder="Write path length:
 1 - short
 2 - medium
-3 - long " style="height:100px;width: 100px;"></textarea>
+3 - long " style="height:100px;width: 200px;"></textarea>
+    <p></p>
 <button type="button" id="edit_chosen_path">Edit</button>
 <p></p>
 
