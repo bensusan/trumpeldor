@@ -34,19 +34,24 @@
     async defer>
     </script>
 
-   <div align="center">
-<div class="buttonStyle">
 
-<button class="button" id="add_reg_to_path_long" type="button">Add To Path</button>
-<button class="button" id="finish_reg_long" type="button">Finish!</button>
 
 
 </div>
-    </div>
-</body>
+
+<button class="button" id="add_reg_to_path_long" type="button">Add To Path</button>
+<button class="button" id="finish_reg_long" type="button">Finish!</button>
+</div>
+
 <p></p>
 <p></p>
 <p id="things_to_fix_long"> </p>
 
 <p id="showing_added_points_long"></p>
+
+<nav id="sideMenu"></nav>
+{% load static %}
+<script src="{% static 'menu_for_paths.js' %}?version=1"></script>
+
+</body>
 </html>
