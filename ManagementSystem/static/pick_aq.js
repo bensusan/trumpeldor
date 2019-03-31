@@ -32,14 +32,9 @@ function AmericanQuestions_func(AmericanQuestionsJSON) {
 
 window.onload = function () {
     getRequestAttractions(funcForExistingAmericanQuestions);
-//////////////////////////////////////////////////////////////////////////////////////////
-    var shiri = document.getElementById('shirimaimon');
-        shiri.addEventListener('click', function() {
-            alert("Shiri Maimon Kusit!");
-        });
-/////////////////////////////////////////////////////////////////////////////////////////////////////
 
     var wantToEditBTN = document.getElementById('want_to_edit_aq');
+    alert("sad");
         wantToEditBTN.addEventListener('click', function() {
             var writeChosenHintTextEdit = document.getElementById("write_aq_id_to_edit");
             writeChosenHintTextEdit.style.display = "inline";
