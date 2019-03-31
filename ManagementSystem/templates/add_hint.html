@@ -3,6 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <title>Add Hint</title>
+      {% load static %}
+<link rel="stylesheet" href="{% static 'just_want_background.css' %}?version=1">
+    {% load static %}
+<link rel="stylesheet" href="{% static 'SideMenu.css' %}?version=2">
     {% load static %}
 <script src="{% static 'attractions.js' %}?version=2"></script>
     {% load static %}
@@ -11,22 +15,22 @@
 <script src="{% static 'properties.js' %}?version=1"></script>
 </head>
 <body>
-
+<div align="center">
 <label for="hint"><b>Existing Hints:</b></label>
 <p id="existing_hints"></p>
 
-<label for="hint"><b>Add Hint:</b></label>
+{#<label for="hint"><b>Add Hint:</b></label>#}
 
 
 
 <p></p>
-<button type="button" id="add_text_hint">add text</button>
+{#<button type="button" id="add_text_hint">add text</button>#}
 <p></p>
 <textarea id="text_hint_id" name="subject" placeholder="Write something..." style="display: none"></textarea>
 <button type="button" id="send_text_hint" style="display: none">Send</button>
 <p></p>
 
-<button type="button" id="add_vid_hint">add video</button>
+{#<button type="button" id="add_vid_hint">add video</button>#}
 <p></p>
 <textarea id="vid_hint_description" placeholder="Write description..." style="display: none"></textarea>
 <p></p>
@@ -37,7 +41,7 @@
 <button type="button" id="send_vid_hint" style="display: none">Send</button>
 <p></p>
 
-<button type="button" id="add_pic_hint">add picture</button>
+{#<button type="button" id="add_pic_hint">add picture</button>#}
 <p></p>
 <textarea id="pic_hint_description" placeholder="Write description..." style="display: none"></textarea>
     <p></p>
@@ -47,8 +51,11 @@
 <button type="button" id="send_pic_hint" style="display: none">Send</button>
 
 <p></p>
-<button id="finish_add_hint" onclick="finishHint()" type="button">Finish</button>
-
+<button class="button" id="finish_add_hint" onclick="finishHint()" type="button">Finish</button>
+</div>
+<nav id="sideMenu"></nav>
+{% load static %}
+<script src="{% static 'menu_of_add_hint.js' %}?version=1"></script>
 {#style="display:none"#}
 </body>
 </html>

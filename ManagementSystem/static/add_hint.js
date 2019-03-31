@@ -39,57 +39,49 @@ function getRequestHints(funcOnHints,attr_id){
 window.onload = function () {
     getRequestAttractions(funcForExistingHints);
 var textHintBTN = document.getElementById('add_text_hint');
+var textLine = document.getElementById("text_hint_id");
+var sendButtonTxt = document.getElementById("send_text_hint");
+var clickHere = document.getElementById("click_here_label");
+var picDesc = document.getElementById("pic_hint_description");
+var outpic = document.getElementById("output");
+var sendButtonPic = document.getElementById("send_pic_hint");
+var thevid = document.getElementById("vid_hint_id");
+var vidDesc = document.getElementById("vid_hint_description");
+var thevidbrowse = document.getElementById("vid_hint_browse_id");
+var sendButtonVid = document.getElementById("send_vid_hint");
+var sendTextHintBTN = document.getElementById('send_text_hint');
+var sendPicHintBTN = document.getElementById('send_pic_hint');
+var sendVidHintBTN = document.getElementById('send_vid_hint');
+
         textHintBTN.addEventListener('click', function() {
-
-            var textLine = document.getElementById("text_hint_id");
             textLine.style.display = "inline";
-
-            var sendButton = document.getElementById("send_text_hint");
-            sendButton.style.display = "inline";
-
+            sendButtonTxt.style.display = "inline";
         });
 
 var picHintBTN = document.getElementById('add_pic_hint');
         picHintBTN.addEventListener('click', function() {
-            var clickHere = document.getElementById("click_here_label");
             clickHere.style.display = "inline";
-
-            var picDesc = document.getElementById("pic_hint_description");
             picDesc.style.display = "inline";
-
-            var outpic = document.getElementById("output");
             outpic.style.display = "inline";
-
-            var sendButton = document.getElementById("send_pic_hint");
-            sendButton.style.display = "inline";
+            sendButtonPic.style.display = "inline";
         });
 
 var vidHintBTN = document.getElementById('add_vid_hint');
         vidHintBTN.addEventListener('click', function() {
-            var thevid = document.getElementById("vid_hint_id");
             thevid.style.display = "inline";
-
-            var vidDesc = document.getElementById("vid_hint_description");
             vidDesc.style.display = "inline";
-
-            var thevidbrowse = document.getElementById("vid_hint_browse_id");
             thevidbrowse.style.display = "inline";
-
-            var sendButton = document.getElementById("send_vid_hint");
-            sendButton.style.display = "inline";
+            sendButtonVid.style.display = "inline";
         });
 
-var sendTextHintBTN = document.getElementById('send_text_hint');
     sendTextHintBTN.addEventListener('click', function() {
         getRequestAttractions(hint_funcToGetAttraction);
     });
 
-var sendPicHintBTN = document.getElementById('send_pic_hint');
     sendPicHintBTN.addEventListener('click', function() {
 
     });
 
-var sendVidHintBTN = document.getElementById('send_vid_hint');
     sendVidHintBTN.addEventListener('click', function() {
 
     });
