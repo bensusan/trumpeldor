@@ -4,6 +4,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 {% load static %}
 <link rel="stylesheet" href="{% static 'signInForm.css' %}?version=1">
+      {% load static %}
+<link rel="stylesheet" href="{% static 'SideMenu.css' %}?version=3">
+
     {% load static %}
 <link rel="stylesheet" href="{% static 'add_game.css' %}?version=1">
     {% load static %}
@@ -12,7 +15,7 @@
 <script src="{% static 'properties.js' %}?version=1"></script>
 </head>
 <body>
-<button onclick="window.location.href='/main'" type="button">Back to menu</button>
+{#<button onclick="window.location.href='/main'" type="button">Back to menu</button>#}
 <div align="center">
 <h2>Add Game</h2>
 <form>
@@ -32,7 +35,11 @@
 
 </form>
 </div>
-<button id="skip_game_btn" onclick="window.location.href='/add_aq'" type="button">Skip</button>
-<button onclick="addGames()" type="button">Finish</button>
+<nav id="sideMenu"></nav>
+{% load static %}
+<script src="{% static 'games_menu.js' %}?version=1"></script>
+
+{#<button onclick="window.location.href='/add_aq'" type="button">Skip</button>#}
+{#<button onclick="addGames()" type="button">Finish</button>#}
 </body>
 </html>
