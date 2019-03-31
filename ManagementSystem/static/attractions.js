@@ -28,6 +28,8 @@ function funcThatReturnsOne(){
 }
 
 function markAttractions(attractionsJSON){
+    //alert(window.innerHeight + " "+ window.innerWidth);
+
      attr_arr_for_test2 = [];
     attractionsJSON.forEach(function (attr) {
        attr_arr_for_test2.push(attr);
@@ -48,6 +50,7 @@ function markAttractions(attractionsJSON){
 
 }
 
+
 function markAttraction(pos){
     let the_title=localStorage.getItem("title"+pos);
         let marker = new google.maps.Marker({
@@ -58,7 +61,6 @@ function markAttraction(pos){
                 url: "http://maps.google.com/mapfiles/ms/icons/red-dot.png"
                 }
         });
-
         // marker_arr.push(marker);
         marker.setMap(map);
         addEditListener(marker);

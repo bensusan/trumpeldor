@@ -1,12 +1,17 @@
-window.onload = function() {
-    // alert("way");
-    var addAqBTN = document.getElementById('finish_add_aq');
-    addAqBTN.addEventListener('click', function() {
-        getRequestAttractions(funcToGetAttraction);
-        //alert("2");
-        // window.location.href='/add_hint';
-    });
+// window.onload = function() {
+//     // alert("way");
+//     var addAqBTN = document.getElementById('finish_add_aq');
+//     addAqBTN.addEventListener('click', function() {
+//         getRequestAttractions(funcToGetAttraction);
+//         //alert("2");
+//         // window.location.href='/add_hint';
+//     });
+//
+// }
 
+function finishAddAq(){
+    getRequestAttractions(funcToGetAttraction);
+    window.location.href='/add_hint';
 }
 
 
@@ -45,7 +50,6 @@ function postRequestAmericanQuestion(aq,attr_id){
         }
       });
         window.location.href='/add_hint';
-        // alert("cant believe this is happenning!");
     }
 
 

@@ -3,26 +3,36 @@
 <head>
     <meta charset="UTF-8">
     <title>Add American Question:</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+{% load static %}
+<link rel="stylesheet" href="{% static 'just_want_background.css' %}?version=2">
  {% load static %}
 <script src="{% static 'properties.js' %}?version=1"></script>
     {% load static %}
     <script src="{% static 'attractions.js' %}?version=2"></script>
+    {% load static %}
+<script src="{% static 'add_aq.js' %}?version=2"></script>
+
 </head>
 <body>
-{#<form>#}
-{#    <div>#}
+<div align="center">
     <label for="hint"><b>American Question:</b></label>
+    <p></p>
     <input type="text" id="ques" placeholder="Enter Question" name="attr_desc" required>
+    <p></p>
       <input  type="text" id="ans1" placeholder="ans1" name="a1" required>
+    <p></p>
       <input type="text" id="ans2" placeholder="ans2" name="a2" required>
+    <p></p>
       <input type="text" id="ans3" placeholder="ans3" name="a3" required>
+    <p></p>
       <input  type="text" id="ans4" placeholder="ans4" name="a4" required>
+    <p></p>
 <input  type="text" id="correctAns" placeholder="correctAns_index" name="correctAns" required>
-{#        </div>#}
-{#</form>#}
-{% load static %}
-<script src="{% static 'add_aq.js' %}?version=1"></script>
-{#<button onclick="addAQ()" type="button">Finish</button>#}
-<button id="finish_add_aq" type="button" >Send</button>
+    <p></p>
+{#window.location.href='/add_hint'#}
+
+<button class="button" id="finish_add_aq" onclick="finishAddAq()" type="button">Send</button>
+    </div>
 </body>
 </html>

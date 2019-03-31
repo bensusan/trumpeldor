@@ -9,10 +9,10 @@
 </head>
 <body>
 {% load static %}
-<script src="{% static 'add_attraction.js' %}?version=1"></script>
+<script src="{% static 'add_attraction.js' %}?version=2"></script>
 
 {% load static %}
-    <script src="{% static 'attractions.js' %}?version=1"></script>
+    <script src="{% static 'attractions.js' %}?version=2"></script>
 
 <button onclick="window.location.href='/main'" type="button">Back to menu</button>
 <button onclick="window.location.href='/attractions'" type="button">Back to map</button>
@@ -23,8 +23,6 @@
 
     <label for="name"><b>Upload Video: </b></label>
 
-    {% load static %}
-<script src="{% static 'add_attraction.js' %}?version=1"></script>
     <div id="message"></div>
 <video height="200px" width="350px" controls="" autoplay=""></video>
     <input id="video_input" type="file" accept="video/*" style="display: none">
@@ -68,8 +66,7 @@
 
 {#    {% load static %}#}
 {#    <script src="{% static 'attractions.js' %}?version=1"></script>#}
-    {% load static %}
-    <script src="{% static 'add_attraction.js' %}?version=2"></script>
+
     <button id="submit_btn_add_attr" onclick="showDataCollected()" type="button">Submit</button>
     <button onclick="check()" type="button">Clean</button>
 
