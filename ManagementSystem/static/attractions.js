@@ -3,6 +3,7 @@ const Http = new XMLHttpRequest();
 let marker_arr = [];
 let attr_arr_for_test=[];
 let attr_arr_for_test2=[];
+
 function serverRequest(getOrPost, functionOnReady, url, post=null){
     Http.onreadystatechange = function(){
         if(Http.readyState === 4 && Http.status === 200){
@@ -30,7 +31,6 @@ function funcThatReturnsOne(){
 function markAttractions(attractionsJSON){
     //alert(window.innerHeight + " "+ window.innerWidth);
 
-     attr_arr_for_test2 = [];
     attractionsJSON.forEach(function (attr) {
        attr_arr_for_test2.push(attr);
 
@@ -67,8 +67,15 @@ function markAttraction(pos){
         return marker;
 }
 
+function getRequestAttractionsTest(funcOnAttractions){
+    // the server port and my ip
+    serverRequest("GET", funcOnAttractions, 'http://'+ip+':12344/managementsystem/attraction/?format=json');
+    //alert("need to remove this alert and fix funcToGetAttraction()!");
+    return attr_arr_for_test;
+}
+
+
 function funcForTest(attractionsJSON){
-    attr_arr_for_test=[];
     attractionsJSON.forEach(function (attr) {
         attr_arr_for_test.push(attr);
     });
@@ -80,6 +87,7 @@ function getRequestAttractions(funcOnAttractions){
     serverRequest("GET", funcOnAttractions, 'http://'+ip+':12344/managementsystem/attraction/?format=json');
     //alert("need to remove this alert and fix funcToGetAttraction()!");
 }
+
 
 function initAttractionsMarkers() {
     getRequestAttractions(markAttractions);
