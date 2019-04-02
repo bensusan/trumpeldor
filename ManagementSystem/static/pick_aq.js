@@ -1,4 +1,6 @@
 
+let aq_arr_for_test = [];
+let id_to_delete=100;
 
 window.onload = function () {
     getRequestAttractions(funcForExistingAmericanQuestions);
@@ -61,11 +63,22 @@ function funcForExistingAmericanQuestions(attractionsJSON){
 
 function AmericanQuestions_func(AmericanQuestionsJSON) {
         str="";
+        let s;
         AmericanQuestionsJSON.forEach(function (aq) {
             str=str+"id: "+aq['id'] +", question: "+ aq['question']+", answers: "+ aq['answers']+", indexOfCorrectAnswer: "+ aq['indexOfCorrectAnswer']+"<br />";
             // alert(str);
+            id_to_delete = aq['id'];
+            s=id_to_delete;
+            aq_arr_for_test.push(aq);
         });
+        id_to_delete=s;
         document.getElementById("existing_aqs").innerHTML = str ;
+}
+
+function funcForTest(AmericanQuestionsJSON) {
+        AmericanQuestionsJSON.forEach(function (aq) {
+            aq_arr_for_test.push(aq);
+        });
 }
 
 
@@ -131,6 +144,17 @@ function hint_funcToGetAttraction(attractionsJSON) {
 
 function donePickingAqs() {
     window.location.href='/attractions';
+}
+
+
+
+function getRequestAmericanQuestions22(funcOnAqs,attr_id){
+    // serverRequest("GET", funcOnAttractions, 'http://192.168.1.12:12344/managementsystem/attraction/?format=json');
+    // the server port and my ip
+    serverRequest("GET", funcOnAqs, 'http://'+ip+':12344/managementsystem/attraction/'+ attr_id+
+        '/aquestion/?format=json');
+    //alert("need to remove this alert and fix funcToGetAttraction()!");
+    return aq_arr_for_test.length;
 }
 
 
