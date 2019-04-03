@@ -81,7 +81,6 @@ window.onload = function() {
         getRequestAttractions(funcToGetAttraction);
         //alert("2");
         //setTimeout(finishAddAq ,10);
-       // window.location.href='/add_hint';
     });
 
 };
@@ -122,7 +121,7 @@ function postRequestAmericanQuestion(aq,attr_id){
 
         }
       });
- window.location.href='/add_hint';
+        window.location.href='/pick_aq_edit';
     }
 
 
