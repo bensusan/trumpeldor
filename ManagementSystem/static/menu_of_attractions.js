@@ -1,7 +1,7 @@
 document.getElementById("sideMenu").innerHTML = '<div class="sidenav">\n' +
     '  <h2 style="color:#818181;">Attractions Menu</h2>' +
-    '  <a href="/main">Back</a>\n' +
     '  <a id="add_manually_menu">Add Manually</a>\n' +
+    '  <a href="/main">Back to Main Page</a>\n' +
     '</div>\n' +
     '\n' +
     '<div class="main">\n' +

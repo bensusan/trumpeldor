@@ -2,6 +2,8 @@
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
+    {% load static %}
+<link rel="stylesheet" href="{% static 'SideMenu.css' %}?version=3">
 {% load static %}
 <link rel="stylesheet" href="{% static 'signInForm.css' %}?version=1">
      {% load static %}
@@ -13,9 +15,6 @@
 
 {% load static %}
     <script src="{% static 'attractions.js' %}?version=2"></script>
-
-<button onclick="window.location.href='/main'" type="button">Back to menu</button>
-<button onclick="window.location.href='/attractions'" type="button">Back to map</button>
 
 <div align="center">
 <h2>Add Attraction</h2>
@@ -78,7 +77,13 @@
 </div>
 
 
+<div>
 
+<nav id="sideMenu"></nav>
+{% load static %}
+<script src="{% static 'menu_of_add_attractions.js' %}?version=1"></script>
+
+</div>
 
 </body>
 </html>

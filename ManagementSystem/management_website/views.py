@@ -27,16 +27,36 @@ def add_game_page(request):
     return render(request, "add_game.html")
 
 
+def add_game_edit_page(request):
+    return render(request, "add_game_edit.html")
+
+
 def add_hint_page(request):
     return render(request, "add_hint.html")
+
+
+def add_hint_edit_page(request):
+    return render(request, "add_hint_edit.html")
 
 
 def add_aq_page(request):
     return render(request, "add_aq.html")
 
 
+def add_aq_edit_page(request):
+    return render(request, "add_aq_edit.html")
+
+
 def pick_hint_page(request):
     return render(request, "pick_hint.html")
+
+
+def pick_hint_edit_page(request):
+    return render(request, "pick_hint_edit.html")
+
+
+def pick_aq_edit_page(request):
+    return render(request, "pick_aq_edit.html")
 
 
 def edit_hint_page(request):

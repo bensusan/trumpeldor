@@ -1,12 +1,10 @@
 //menu_of_edit_attractions
 
 document.getElementById("sideMenu").innerHTML = '<div class="sidenav">\n' +
-    '  <h2 style="color:#818181;">Edit Attraction</h2>' +
-    '  <a href="/attractions">Back</a>\n' +
-    '  <a href="/add_game_edit">Add Game</a>\n' +
-    '  <a href="/pick_aq">Edit American Questions</a>\n' +
-    '  <a href="/pick_hint">Edit Hints</a>\n' +
-     '  <a href="/main">Back to Main Page</a>\n' +
+    '  <h2 style="color:#818181;">Add Game</h2>' +
+    '  <a href="/edit_attraction">Back</a>\n' +
+    '  <a href="/edit_attraction">Finish</a>\n' +
+    '  <a href="/main">Back to Main Page</a>\n' +
     '</div>\n' +
     '\n' +
     '<div class="main">\n' +

@@ -2,11 +2,10 @@
 
 document.getElementById("sideMenu").innerHTML = '<div class="sidenav">\n' +
     '  <h2 style="color:#818181;">Add Hints</h2>' +
-    '  <a href="/main">Back</a>\n' +
     '  <a id="add_text_hint">Add Text Hint</a>\n' +
     '  <a id="add_vid_hint">Add Video Hint</a>\n' +
     '  <a id="add_pic_hint">Add Image Hint</a>\n' +
-    '  <a href="/pick_hint">Edit Hints</a>\n' +
+    '  <a href="/main">Back to Main Page</a>\n' +
     '</div>\n' +
     '\n' +
     '<div class="main">\n' +

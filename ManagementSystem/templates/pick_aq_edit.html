@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit American Question</title>
+     {% load static %}
+<link rel="stylesheet" href="{% static 'just_want_background.css' %}?version=1">
+    {% load static %}
+<link rel="stylesheet" href="{% static 'SideMenu.css' %}?version=3">
+    {% load static %}
+<script src="{% static 'pick_aq.js' %}?version=3"></script>
+    {% load static %}
+<script src="{% static 'attractions.js' %}?version=3"></script>
+     {% load static %}
+<script src="{% static 'properties.js' %}?version=2"></script>
+</head>
+<body>
+
+
+<div align="center">
+    <label for="hint"><b>Existing American Questions:</b></label>
+<p id="existing_aqs"></p>
+<p></p>
+{#<button onclick="window.location.href='/add_aq'" type="button">Add American Question</button>#}
+<p></p>
+{#<button type="button" id="want_to_edit_aq">Edit American Question</button>#}
+<p></p>
+<textarea id="write_aq_id_to_edit" placeholder="Write American Question ID..." style="display: none"></textarea>
+<button type="button" id="edit_chosen_aq" style="display: none">Edit</button>
+<p></p>
+<p></p>
+{#<button type="button" id="want_to_delete_aq">Delete American Question</button>#}
+<p></p>
+<textarea id="write_aq_id_to_delete" placeholder="Write American Question ID..." style="display: none"></textarea>
+<button type="button" id="delete_chosen_aq" style="display: none">Delete</button>
+<p></p>
+<button class="button" onclick="donePickingAqs()" type="button" id="finish_pick_aq">Finish</button>
+
+
+</div>
+<div>
+<nav id="sideMenu"></nav>
+{% load static %}
+<script src="{% static 'menu_for_edit_aq.js' %}?version=2"></script>
+
+</div>
+
+{#style="display:none"#}
+</body>
+</html>
