@@ -1,7 +1,4 @@
-
-const Http = new XMLHttpRequest();
 let loop_add_aq = true;
-
 window.onload = function() {
     let noOfAns = document.getElementById('noOfAns');
     let noOfCorrect = document.getElementById('noOfCorrect');
@@ -24,7 +21,6 @@ window.onload = function() {
     let correctAns3 = document.getElementById('correctAns3');
 
     okBTN.addEventListener('click',function () {
-    alert("sad");
     let numberOfAns = noOfAns.value;
     let numberOfCorrectAns = noOfCorrect.value;
 
@@ -83,38 +79,16 @@ window.onload = function() {
     });
 
     addAqBTN.addEventListener('click', function() {
-        getRequestAttractionsi(funcToGetAttraction);
+    getRequestAttractions(funcToGetAttraction);
         //alert("2");
         //setTimeout(finishAddAq ,10);
+
+
+
+
     });
 
 };
-
-function serverRequestInAddAq(getOrPost, functionOnReady, url, post=null){
-    Http.onreadystatechange = function(){
-        if(Http.readyState === 4 && Http.status === 200){
-            functionOnReady(JSON.parse(Http.responseText));
-        }
-    };
-    Http.open(getOrPost, url, true);
-    if(post) {
-        Http.setRequestHeader('Content-type','application/json; charset=utf-8');
-        Http.send(post);
-        window.location.href = '/pick_aq_edit';
-        return false;
-    }
-    Http.send();
-}
-
-function getRequestAttractionsi(funcOnAttractions){
-    // the server port and my ip
-    serverRequestInAddAq("GET", funcOnAttractions, 'http://'+ip+':12344/managementsystem/attraction/?format=json');
-    //alert("need to remove this alert and fix funcToGetAttraction()!");
-}
-
-
-
-
 
 
 function postRequestAmericanQuestion(aq,attr_id){
@@ -122,7 +96,6 @@ function postRequestAmericanQuestion(aq,attr_id){
     serverRequest("POST", function noop(dummy){}, 'http://'+ip+':12344/managementsystem/attraction/'+
         attr_id+'/aquestion/',
         JSON.stringify(aq));
-    //window.location.href='/pick_aq_edit';
 }
 
  function funcToGetAttraction(attractionsJSON) {
@@ -153,6 +126,7 @@ function postRequestAmericanQuestion(aq,attr_id){
         }
       });
 
+window.location.href='/pick_aq_edit';
 loop_add_aq=false;
     }
 
