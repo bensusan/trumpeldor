@@ -7,7 +7,7 @@ from selenium.webdriver.chrome.options import Options
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 import requests as req
-# from colors import red, green
+from colors import red, green
 import urllib.request
 import json
 import requests
@@ -45,7 +45,9 @@ def main():
     # test_req_one_eight_one(browser)
     # test_req_one_eight_two(browser)
     # test_req_two(browser)
-    test_req_two_five(browser)
+    # test_req_two_four(browser)
+    # test_req_two_five(browser)
+    test_req_two_six(browser)
 
     return
 
@@ -110,9 +112,9 @@ def test_req_one_one(driver):
     print(second_len)
 
     if second_len == first_len+1:
-        print('test passed!')
+        print(green('--- test passed!!! ---'))
     else:
-        print('test failed!')
+        print(red('--- test failed!!! ---'))
 
 
     return
@@ -141,9 +143,9 @@ def test_req_one_two(driver):
     print(second_len)
 
     if second_len == first_len - 1:
-        print('test passed!')
+        print(green('--- test passed!!! ---'))
     else:
-        print('test failed!')
+        print(red('--- test failed!!! ---'))
 
     return
 
@@ -183,9 +185,9 @@ def test_req_one_three(driver):
                                      "return y;")
 
     if attrNameAfterEdit==attrName2 or attrDescAfterEdit==attrDesc2 :
-        print('test passed!')
+        print(green('--- test passed!!! ---'))
     else:
-        print('test failed!')
+        print(red('--- test failed!!! ---'))
 
     return
 
@@ -221,6 +223,24 @@ def test_req_one_six_one(driver):
     submitBTN.click()
     print("edit: " + driver.current_url)
 
+    # driver.get("http://10.0.0.6:12345/attractions/")
+    # point1 = driver.find_element(By.XPATH, "//*[@id='map']/div/div/div[1]/div[3]/div/div[3]/div[2]/img")
+    # point1.click()
+    # editButton1 = driver.find_element(By.XPATH, "//*[@id='edit_attraction']")
+    # editButton1.click()
+    # editAqBTN1 = driver.find_element(By.CSS_SELECTOR, "#sideMenu > div.sidenav > a:nth-child(4)")
+    # editAqBTN1.click()
+    # second_len = get_length_from_url('http://10.0.0.6:12344/managementsystem/attraction/70/aquestion/')
+    # print(second_len)
+    # with urllib.request.urlopen("http://10.0.0.6:12344/managementsystem/attraction/70/aquestion/") as url:
+    #     data2 = json.loads(url.read().decode())
+    #     second_len = len(data2)
+    # print(second_len)
+
+    # if second_len == first_len + 1:
+    #     print(green('--- test passed!!! ---'))
+    # else:
+    #     print(red('--- test failed!!! ---'))
 
     return
 
@@ -249,7 +269,10 @@ def test_req_one_six_two(driver):
     deleteBTN.click()
     print("pick: " + driver.current_url)
 
-    print('test passed!')
+    # if second_len == first_len + 1:
+    print(green('--- test passed!!! ---'))
+    # else:
+    #     print(red('--- test failed!!! ---'))
 
 
     return
@@ -290,9 +313,9 @@ def test_req_one_eight_one(driver):
     leny = len(x)
 
     if leny > lenx:
-        print('test passed!')
+        print(green('--- test passed!!! ---'))
     else:
-        print('test failed!')
+        print(red('--- test failed!!! ---'))
 
     return
 
@@ -321,9 +344,9 @@ def test_req_one_eight_two(driver):
     leny = len(x)
 
     if lenx > leny:
-        print('--- test passed!!! ---')
+        print(green('--- test passed!!! ---'))
     else:
-        print('--- test failed!!! ---')
+        print(red('--- test failed!!! ---'))
 
     return
 
@@ -353,6 +376,28 @@ def test_req_two(driver):
 
     return
 
+
+def test_req_two_four(driver):
+    print("Test: Delete Point from Path test.")
+
+    driver.get("http://10.0.0.6:12345/main/")
+    driver.find_element(By.CSS_SELECTOR, "#sideMenu > div.sidenav > button").click()
+    driver.find_element(By.CSS_SELECTOR, "#sideMenu > div.sidenav > div > a:nth-child(3)").click()
+    driver.find_element_by_id('write_path_length').send_keys("1")
+    driver.find_element(By.ID, "edit_chosen_path").click()
+    point1 = driver.find_element(By.XPATH, "//*[@id='map']/div/div/div[1]/div[3]/div/div[3]/div[1]/img")
+    point1.click()
+    driver.find_element(By.CSS_SELECTOR, "#delete_from_path_med").click()
+    driver.find_element(By.CSS_SELECTOR, "#finish_reg_med").click()
+
+    if driver.current_url == 'http://10.0.0.6:12345/main/':
+        print(green('--- test passed!!! ---'))
+    else:
+        print(red('--- test failed!!! ---'))
+
+    return
+
+
 def test_req_two_five(driver):
     print("Test: Delete Paths test.")
 
@@ -364,9 +409,48 @@ def test_req_two_five(driver):
     driver.find_element(By.ID, "delete_chosen_path").click()
 
     if driver.current_url == 'http://10.0.0.6:12345/main/':
-        print('--- test passed!!! ---')
+        print(green('--- test passed!!! ---'))
     else:
-        print('--- test failed!!! ---')
+        print(red('--- test failed!!! ---'))
+
+    return
+
+
+def test_req_two_six(driver):
+    print("Test: Shows Paths test.")
+    driver.get("http://10.0.0.6:12345/main/")
+    driver.find_element(By.CSS_SELECTOR, "#sideMenu > div.sidenav > button").click()
+    driver.find_element(By.CSS_SELECTOR, "#sideMenu > div.sidenav > div > a:nth-child(3)").click()
+    driver.find_element_by_id('write_path_length').send_keys("1")
+    driver.find_element(By.ID, "edit_chosen_path").click()
+    driver.find_element(By.CSS_SELECTOR, "#finish_reg_med").click()
+
+    if driver.current_url == 'http://10.0.0.6:12345/main/':
+        print(green('--- test passed short!!! ---'))
+    else:
+        print(red('--- test failed short!!! ---'))
+
+    driver.find_element(By.CSS_SELECTOR, "#sideMenu > div.sidenav > button").click()
+    driver.find_element(By.CSS_SELECTOR, "#sideMenu > div.sidenav > div > a:nth-child(3)").click()
+    driver.find_element_by_id('write_path_length').send_keys("2")
+    driver.find_element(By.ID, "edit_chosen_path").click()
+    driver.find_element(By.CSS_SELECTOR, "#finish_reg_med").click()
+
+    if driver.current_url == 'http://10.0.0.6:12345/main/':
+        print(green('--- test passed med!!! ---'))
+    else:
+        print(red('--- test failed med!!! ---'))
+
+    driver.find_element(By.CSS_SELECTOR, "#sideMenu > div.sidenav > button").click()
+    driver.find_element(By.CSS_SELECTOR, "#sideMenu > div.sidenav > div > a:nth-child(3)").click()
+    driver.find_element_by_id('write_path_length').send_keys("3")
+    driver.find_element(By.ID, "edit_chosen_path").click()
+    driver.find_element(By.CSS_SELECTOR, "#finish_reg_long").click()
+
+    if driver.current_url == 'http://10.0.0.6:12345/main/':
+        print(green('--- test passed long!!! ---'))
+    else:
+        print(red('--- test failed long!!! ---'))
 
     return
 
