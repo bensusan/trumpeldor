@@ -31,14 +31,11 @@ function hints_func(hintsJSON) {
         document.getElementById("existing_hints").style.fontWeight = 'bold';
         document.getElementById("existing_hints").style.fontFamily='david';
         document.getElementById("existing_hints").style.fontSize='24px';
-
 }
 
 window.onload = function () {
     getRequestAttractions(funcForExistingHints);
-
-
-        localFileVideoPlayer();
+    localFileVideoPlayer();
 
 };
 
