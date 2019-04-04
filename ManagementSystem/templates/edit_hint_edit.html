@@ -3,6 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <title>Edit Hint</title>
+     {% load static %}
+<link rel="stylesheet" href="{% static 'just_want_background.css' %}?version=1">
     {% load static %}
 <link rel="stylesheet" href="{% static 'SideMenu.css' %}?version=3">
     {% load static %}
@@ -10,20 +12,22 @@
     {% load static %}
     <script src="{% static 'pick_hint.js' %}?version=1"></script>
     {% load static %}
-    <script src="{% static 'edit_hint_edit.js' %}?version=1"></script>
+    <script src="{% static 'edit_hint_edit.js' %}?version=3"></script>
      {% load static %}
 <script src="{% static 'properties.js' %}?version=1"></script>
 </head>
 <body>
 
-
+<div align="center">
 <label for="hint"><b>Edit Hint:</b></label>
 <p>Hint id:</p>
 <p id="hints_id_in_edit"></p>
 <p></p>
 <textarea id="write_hint_text_in_edit" placeholder="Write Text Of Hint..."></textarea>
-<button type="button" id="submit_to_edit_hint">Submit</button>
+    <p></p>
+<button class="button" type="button" id="submit_to_edit_hint">Submit</button>
 <p></p>
+    </div>
 <nav id="sideMenu"></nav>
 {% load static %}
 <script src="{% static 'menu_of_edit_hint.js' %}?version=1"></script>

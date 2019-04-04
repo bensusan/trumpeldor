@@ -26,7 +26,7 @@ function hints_func_in_edit(hintsJSON) {
                 document.getElementById('write_hint_text_in_edit').value = hint['data'];
                 let finishEditionOfHintBTN = document.getElementById('submit_to_edit_hint');
                 finishEditionOfHintBTN.addEventListener('click', function() {
-                    alert(document.getElementById("write_hint_text_in_edit").value);
+                   // alert(document.getElementById("write_hint_text_in_edit").value);
                     let hint_to_send = {
                         attraction: attractionObjToUseInHintEdit,
                         kind:'HT',
