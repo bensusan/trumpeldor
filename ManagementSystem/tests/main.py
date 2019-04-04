@@ -47,7 +47,9 @@ def main():
     # test_req_two(browser)
     # test_req_two_four(browser)
     # test_req_two_five(browser)
-    test_req_two_six(browser)
+    # test_req_two_six(browser)
+    # test_req_one_ten_one(browser)
+    # test_req_one_ten_two(browser)
 
     return
 
@@ -454,7 +456,31 @@ def test_req_two_six(driver):
 
     return
 
+def test_req_one_ten_one(driver):
+    print("Test: Additional Info addition test.")
+    driver.get("http://10.0.0.6:12345/main/")
+    driver.find_element(By.CSS_SELECTOR, "#sideMenu > div.sidenav > a:nth-child(6)").click()
+    driver.find_element_by_id('subject').send_keys("some additional info...")
+    driver.find_element(By.CSS_SELECTOR, "body > div > input:nth-child(4)").click()
 
+    if driver.current_url == 'http://10.0.0.6:12345/main/':
+        print(green('--- test passed!!! ---'))
+    else:
+        print(red('--- test failed!!! ---'))
+    return
+
+def test_req_one_ten_two(driver):
+    print("Test: Additional Info addition test.")
+    driver.get("http://10.0.0.6:12345/main/")
+    driver.find_element(By.CSS_SELECTOR, "#sideMenu > div.sidenav > a:nth-child(6)").click()
+    driver.find_element(By.CSS_SELECTOR, "body > div > input:nth-child(5)").click()
+    driver.find_element(By.CSS_SELECTOR, "body > div > input:nth-child(4)").click()
+
+    if driver.current_url == 'http://10.0.0.6:12345/main/':
+        print(green('--- test passed!!! ---'))
+    else:
+        print(red('--- test failed!!! ---'))
+    return
 
 if __name__ == '__main__':
     main()
