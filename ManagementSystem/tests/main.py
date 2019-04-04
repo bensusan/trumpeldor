@@ -7,7 +7,7 @@ from selenium.webdriver.chrome.options import Options
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 import requests as req
-from colors import red, green
+# from colors import red, green
 import urllib.request
 import json
 import requests
@@ -110,9 +110,9 @@ def test_req_one_one(driver):
     print(second_len)
 
     if second_len == first_len+1:
-        print(green('--- test passed!!! ---'))
+        print('test passed!')
     else:
-        print(red('--- test failed!!! ---'))
+        print('test failed!')
 
 
     return
@@ -141,9 +141,9 @@ def test_req_one_two(driver):
     print(second_len)
 
     if second_len == first_len - 1:
-        print(green('--- test passed!!! ---'))
+        print('test passed!')
     else:
-        print(red('--- test failed!!! ---'))
+        print('test failed!')
 
     return
 
@@ -183,9 +183,9 @@ def test_req_one_three(driver):
                                      "return y;")
 
     if attrNameAfterEdit==attrName2 or attrDescAfterEdit==attrDesc2 :
-        print(green('--- test passed!!! ---'))
+        print('test passed!')
     else:
-        print(red('--- test failed!!! ---'))
+        print('test failed!')
 
     return
 
@@ -221,24 +221,6 @@ def test_req_one_six_one(driver):
     submitBTN.click()
     print("edit: " + driver.current_url)
 
-    # driver.get("http://10.0.0.6:12345/attractions/")
-    # point1 = driver.find_element(By.XPATH, "//*[@id='map']/div/div/div[1]/div[3]/div/div[3]/div[2]/img")
-    # point1.click()
-    # editButton1 = driver.find_element(By.XPATH, "//*[@id='edit_attraction']")
-    # editButton1.click()
-    # editAqBTN1 = driver.find_element(By.CSS_SELECTOR, "#sideMenu > div.sidenav > a:nth-child(4)")
-    # editAqBTN1.click()
-    # second_len = get_length_from_url('http://10.0.0.6:12344/managementsystem/attraction/70/aquestion/')
-    # print(second_len)
-    # with urllib.request.urlopen("http://10.0.0.6:12344/managementsystem/attraction/70/aquestion/") as url:
-    #     data2 = json.loads(url.read().decode())
-    #     second_len = len(data2)
-    # print(second_len)
-
-    # if second_len == first_len + 1:
-    #     print(green('--- test passed!!! ---'))
-    # else:
-    #     print(red('--- test failed!!! ---'))
 
     return
 
@@ -267,10 +249,7 @@ def test_req_one_six_two(driver):
     deleteBTN.click()
     print("pick: " + driver.current_url)
 
-    # if second_len == first_len + 1:
-    print(green('--- test passed!!! ---'))
-    # else:
-    #     print(red('--- test failed!!! ---'))
+    print('test passed!')
 
 
     return
@@ -311,9 +290,9 @@ def test_req_one_eight_one(driver):
     leny = len(x)
 
     if leny > lenx:
-        print(green('--- test passed!!! ---'))
+        print('test passed!')
     else:
-        print(red('--- test failed!!! ---'))
+        print('test failed!')
 
     return
 
@@ -342,9 +321,9 @@ def test_req_one_eight_two(driver):
     leny = len(x)
 
     if lenx > leny:
-        print(green('--- test passed!!! ---'))
+        print('--- test passed!!! ---')
     else:
-        print(red('--- test failed!!! ---'))
+        print('--- test failed!!! ---')
 
     return
 
@@ -385,9 +364,9 @@ def test_req_two_five(driver):
     driver.find_element(By.ID, "delete_chosen_path").click()
 
     if driver.current_url == 'http://10.0.0.6:12345/main/':
-        print(green('--- test passed!!! ---'))
+        print('--- test passed!!! ---')
     else:
-        print(red('--- test failed!!! ---'))
+        print('--- test failed!!! ---')
 
     return
 
