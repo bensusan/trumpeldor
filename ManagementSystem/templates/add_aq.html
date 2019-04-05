@@ -4,9 +4,11 @@
     <meta charset="UTF-8">
     <title>Add American Question:</title>
  {% load static %}
-<script src="{% static 'properties.js' %}?version=1"></script>
+<script src="{% static 'properties.js' %}?version=2"></script>
     {% load static %}
-    <script src="{% static 'attractions.js' %}?version=2"></script>
+    <script src="{% static 'attractions.js' %}?version=3"></script>
+    {% load static %}
+<script src="{% static 'add_aq.js' %}?version=3"></script>
 </head>
 <body>
 {#<form>#}
@@ -20,9 +22,7 @@
 <input  type="text" id="correctAns" placeholder="correctAns_index" name="correctAns" required>
 {#        </div>#}
 {#</form>#}
-{% load static %}
-<script src="{% static 'add_aq.js' %}?version=1"></script>
-{#<button onclick="addAQ()" type="button">Finish</button>#}
+
 <button id="finish_add_aq" type="button" >Send</button>
 </body>
 </html>

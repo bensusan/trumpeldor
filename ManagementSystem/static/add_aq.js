@@ -2,6 +2,7 @@ window.onload = function() {
     // alert("way");
     var addAqBTN = document.getElementById('finish_add_aq');
     addAqBTN.addEventListener('click', function() {
+    //    alert("ssss");
         getRequestAttractions(funcToGetAttraction);
         //alert("2");
         // window.location.href='/add_hint';
@@ -19,6 +20,7 @@ function postRequestAmericanQuestion(aq,attr_id){
 }
 
  function funcToGetAttraction(attractionsJSON) {
+
         let name = localStorage.getItem("name_for_add_aq");
         let desc = localStorage.getItem("desc_for_add_aq");
       // alert("in get name! "+"of the origin : " + lat + " , " + lng);
@@ -41,10 +43,10 @@ function postRequestAmericanQuestion(aq,attr_id){
             };
             postRequestAmericanQuestion(american_question_to_send,attr['id']);
             localStorage.setItem("the_attr", JSON.stringify(attr));
-
+            window.location.href='/add_hint';
         }
       });
-        window.location.href='/add_hint';
+
         // alert("cant believe this is happenning!");
     }
 

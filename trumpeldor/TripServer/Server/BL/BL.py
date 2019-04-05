@@ -139,8 +139,8 @@ class BL_Abstract(object):
     def get_track_by_length(self, len):
         raise NotImplementedError("Should have implemented this")
 
-
-
+    def edit_track(self, id_track, points):
+        raise NotImplementedError("Should have implemented this")
 
 
 class BLProxy(BL_Abstract):
@@ -349,3 +349,8 @@ class BLProxy(BL_Abstract):
         if self.Implementation is None:
             raise NotImplementedError("Should have implemented this")
         return self.Implementation.get_track_by_length(len)
+
+    def edit_track(self, id_track, points):
+        if self.Implementation is None:
+            raise NotImplementedError("Should have implemented this")
+        return self.Implementation.edit_track(id_track, points)

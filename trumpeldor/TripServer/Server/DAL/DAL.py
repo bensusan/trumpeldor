@@ -143,6 +143,10 @@ class DAL_Abstract(object):
     def get_track_by_length(self, len):
         raise NotImplementedError("Should have implemented this")
 
+    def edit_track(self, id_track, points):
+        raise NotImplementedError("Should have implemented this")
+
+
 
 class DALProxy(DAL_Abstract):
     Implementation = None
@@ -230,10 +234,10 @@ class DALProxy(DAL_Abstract):
             raise NotImplementedError("Should have implemented this")
         return self.Implementation.add_american_question(id_attraction, question, answers, indexOfCorrectAnswer)
 
-    def add_track(self, points, length):
+    def add_track(self, subTrack, points, length):
         if self.Implementation is None:
             raise NotImplementedError("Should have implemented this")
-        return self.Implementation.add_track(points, length)
+        return self.Implementation.add_track(subTrack, points, length)
 
     def add_feedback_question(self, question, kind):
         if self.Implementation is None:
@@ -384,3 +388,9 @@ class DALProxy(DAL_Abstract):
         if self.Implementation is None:
             raise NotImplementedError("Should have implemented this")
         return self.Implementation.get_track_by_length(len)
+
+    def edit_track(self, id_track, points):
+        if self.Implementation is None:
+            raise NotImplementedError("Should have implemented this")
+        return self.Implementation.edit_track(id_track, points)
+

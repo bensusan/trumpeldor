@@ -18,7 +18,7 @@ urlpatterns = {
     path('track/', TracksList.as_view()),
     path('track/<int:id>/', Track.as_view()),
     path('track/<int:id>/<action>', Track.as_view()),
-    path('entertainment/', EntertainmentsList.as_view()),
+    # path('entertainment/', EntertainmentsList.as_view()),
     # path('americanQuestion/', views.AmericanQuestion.as_view()),
     # path('attraction/(\d+)/(\d+)/', views.SpecificAttraction.as_view()),
     # path('attractions/', views.Attractions.as_view()),
