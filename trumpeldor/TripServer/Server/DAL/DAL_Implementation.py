@@ -255,3 +255,6 @@ class DAL_Implementation(DAL_Abstract):
             track.points.add(attr)
         track.save()
         return track
+
+    def get_all_feedback_questions(self):
+        return Feedback.objects.all()

@@ -1,5 +1,7 @@
 from django.db import models
 from django.contrib.postgres.fields import JSONField
+from django.contrib.postgres.fields import ArrayField
+
 
 
 # we can see which type is every field
@@ -42,7 +44,7 @@ class Trip(models.Model):
 class AmericanQuestion(models.Model):
     question = models.TextField()
     answers = JSONField()  # Should be list of String
-    indexOfCorrectAnswer = models.IntegerField()
+    indexOfCorrectAnswer = ArrayField(models.IntegerField())
     attraction = models.ForeignKey(Attraction, on_delete=models.CASCADE)
 
 

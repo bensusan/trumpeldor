@@ -243,3 +243,6 @@ class BL_Implementation(BL_Abstract):
     def edit_track(self, id_track, points):
         return self.DAL.edit_track(id_track, points)
 
+    def get_all_feedback_questions(self):
+        return self.DAL.get_all_feedback_questions()
+

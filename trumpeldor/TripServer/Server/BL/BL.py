@@ -142,6 +142,9 @@ class BL_Abstract(object):
     def edit_track(self, id_track, points):
         raise NotImplementedError("Should have implemented this")
 
+    def get_all_feedback_questions(self):
+        raise NotImplementedError("Should have implemented this")
+
 
 class BLProxy(BL_Abstract):
 
@@ -354,3 +357,8 @@ class BLProxy(BL_Abstract):
         if self.Implementation is None:
             raise NotImplementedError("Should have implemented this")
         return self.Implementation.edit_track(id_track, points)
+
+    def get_all_feedback_questions(self):
+        if self.Implementation is None:
+            raise NotImplementedError("Should have implemented this")
+        return self.Implementation.get_all_feedback_questions()
