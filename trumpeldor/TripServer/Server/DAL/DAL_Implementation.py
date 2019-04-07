@@ -81,17 +81,19 @@ class DAL_Implementation(DAL_Abstract):
         #         track.points.add(attr)
         #         track.save()
         # return True
-        track = None
-        if subTrack is None:
-            track = Track(length=length)
-        else:
-            sub_track = self.get_track(subTrack['id'])
-            track = Track(subTrack=sub_track, length=length)
-        track.save()
-        for p in points:
-            attr = self.get_attraction(p['id'])
-            track.points.add(attr)
+        for i in range(4 - length):
+            track = None
+            if subTrack is None:
+                track = Track(length=length)
+            else:
+                # sub_track = self.get_track(subTrack['id'])
+                track = Track(subTrack=subTrack, length=length+i)
             track.save()
+            for p in points:
+                attr = self.get_attraction(p['id'])
+                track.points.add(attr)
+                track.save()
+            subTrack = track
         return True
 
     def add_feedback_question(self, question, kind):
