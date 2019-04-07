@@ -1,5 +1,8 @@
 from django.db import models
 from django.contrib.postgres.fields import JSONField
+from django.contrib.postgres.fields import ArrayField
+
+
 
 # we can see which type is every field
 
@@ -24,7 +27,7 @@ class User(models.Model):
 
 
 class Track(models.Model):
-    #subTrack = models.ForeignKey('self', on_delete=models.CASCADE, blank=True, null=True)
+    subTrack = models.ForeignKey('self', on_delete=models.CASCADE, blank=True, null=True)
     points = models.ManyToManyField(Attraction)
     length = models.IntegerField()
 
@@ -41,7 +44,7 @@ class Trip(models.Model):
 class AmericanQuestion(models.Model):
     question = models.TextField()
     answers = JSONField()  # Should be list of String
-    indexOfCorrectAnswer = models.IntegerField()
+    indexOfCorrectAnswer = ArrayField(models.IntegerField())
     attraction = models.ForeignKey(Attraction, on_delete=models.CASCADE)
 
 
@@ -60,6 +63,8 @@ class Puzzle(Entertainment):
 
 class SlidingPuzzle(Entertainment):
     piecesURLS = JSONField()  # Should be list of paths
+    width = models.IntegerField()
+    height = models.IntegerField()
 
 
 class Feedback(models.Model):

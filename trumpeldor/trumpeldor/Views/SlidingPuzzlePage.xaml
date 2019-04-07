@@ -8,12 +8,12 @@
     </ContentPage.Padding>
 
     <ContentView SizeChanged="OnContainerSizeChanged">
-        <StackLayout x:Name="stackLayout">
-
-            <Button Text="Randomize"
+        <StackLayout x:Name="stackLayout" Style="{DynamicResource mainStackLayout}">
+            <Label x:Name = "scoreLabel"  Style="{DynamicResource lableStyle}"/>
+            <!--<Button Text="Randomize"
                     Clicked="OnRandomizeButtonClicked"
                     HorizontalOptions="CenterAndExpand"
-                    VerticalOptions="CenterAndExpand" />
+                    VerticalOptions="CenterAndExpand" />-->
 
             <AbsoluteLayout x:Name="absoluteLayout"
                             BackgroundColor="Black" />

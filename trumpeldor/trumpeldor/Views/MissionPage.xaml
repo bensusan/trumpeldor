@@ -1,12 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="trumpeldor.Views.MissionPage">
+             x:Class="trumpeldor.Views.MissionPage"
+             xmlns:translator="clr-namespace:trumpeldor.Helpers">
     <ContentPage.Content>
         <StackLayout Style="{DynamicResource mainStackLayout}">
-            <Label Text="Welcome to mission page!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
+            <Label x:Name = "scoreLabel" Style="{DynamicResource lableStyle}"/>
+            <Button x:Name = "missionButton" Clicked="Mission_Button_Clicked" Style="{StaticResource largeButtonStyle}"/>
+            <Button x:Name = "questionButton" Text="{translator:Translate question}" Clicked="Question_Button_Clicked" Style="{StaticResource largeButtonStyle}"/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

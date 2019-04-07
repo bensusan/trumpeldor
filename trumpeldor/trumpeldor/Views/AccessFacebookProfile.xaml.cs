@@ -21,32 +21,13 @@ namespace trumpeldor.Views
         {
             try
             {
-                InitializeComponent();
-
-            
+                InitializeComponent();     
                 var apiRequest =
                     "https://www.facebook.com/dialog/oauth?client_id="
                     + ClientId
                     + "&display=popup&state={st=state123abc,ds=123456789}&response_type=token&redirect_uri=https://www.facebook.com/connect/login_success.html";
-
-            
-              /*  var webView = new WebView
-                {
-                    Source = "http://xamarin.com"
-                    //Source = apiRequest,
-                    //HeightRequest = 1
-                };*/
-                
             webView.Source = apiRequest;
-
-
-
             webView.Navigated += WebViewOnNavigated;
-
-            
-
-
-                // Content = webView;
             }
              catch (Exception e)
              {
@@ -73,25 +54,8 @@ namespace trumpeldor.Views
 
         string ExtractAccessTokenFromUrl(string url)
         {
-
             if (url.Contains("access_token") && url.Contains("&expires_in="))
-            {
-                //var at = url.Replace("https://www.facebook.com/connect/login_success.html#access_token=", "");
-                var at = url.Substring(url.IndexOf("access_token") + 13);
-                //var at = url.Replace("https://www.facebook.com/connect/login_success.html#access_token=", "");
-
-                if (Device.RuntimePlatform == "WinPhone" || Device.RuntimePlatform == "Windows")
-                {
-                    at = url.Substring(url.IndexOf("access_token") + 13);
-                }
-
-               // var accessToken = at.Remove(at.IndexOf("&expires_in="));
-
-
-
-                return at;
-            }
-
+                return url.Substring(url.IndexOf("access_token") + 13);
             return string.Empty;
         }
 
@@ -105,17 +69,11 @@ namespace trumpeldor.Views
                     + "&access_token=" + accessToken;
 
                 var httpClient = new HttpClient();
-
                 var userJson = await httpClient.GetStringAsync(requestUrl);
+                webView.IsVisible = false;
                 JObject json = JObject.Parse(userJson);
                 string username = (string)json["name"];
                 string id = (string)json["id"];
-                //gc.SignUp(id, "facebook");
-                //if(ServerConection.DEBUG == 1)
-                //    await DisplayAlert("Hey, " + gc.currentUser.name + "!", "", "ok");
-                //ContentPage nextPage = new groupCreationPage();
-                //nextPage = ((groupCreationPage)nextPage).ShowPastDetails();
-                //Application.Current.MainPage = nextPage;
                 Application.Current.MainPage = new groupCreationPage(id, User.SOCIAL_NETWORK.Facebook);
             }
             catch (Exception e)
@@ -124,6 +82,7 @@ namespace trumpeldor.Views
             }
         }
         
+
     }
     
 }

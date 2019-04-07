@@ -5,7 +5,7 @@ using System.Text;
 
 namespace trumpeldor.SheredClasses
 {
-    class RelevantInformation
+    public class RelevantInformation
     {
         public string groupName { get; set; }
         public List<int> playersAges { get; set; }

@@ -6,7 +6,7 @@
     <ContentPage.Content>
         <StackLayout Style="{DynamicResource mainStackLayout}">
 
-            <Label x:Name="scoreLabel" Style="{DynamicResource lableStyle}"/>
+            <Label x:Name="scoreLabel" Style="{DynamicResource lableStyle}" AutomationId="scoreLbl"/>
             <StackLayout x:Name="hintsLayout" Style="{DynamicResource mainorStackLayout}">
                <!-- <Label Text="{translator:Translate hints}" Style="{DynamicResource lableStyle}"/> -->
                <!-- <Button x:Name= "a" Clicked="DynamicBtn_Clicked"/> -->

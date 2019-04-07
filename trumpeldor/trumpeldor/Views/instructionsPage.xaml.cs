@@ -16,7 +16,7 @@ namespace trumpeldor.Views
 		public instructionsPage ()
 		{
             InitializeComponent ();
-            w.Source = "http://" + ServerConection.IP + ":" + ServerConection.PORT + "/media/y.png";
+            //w.Source = "http://" + ServerConection.IP + ":" + ServerConection.PORT + "/media/y.png";
             //w.Source = "https://www.xamarin.com/content/images/pages/forms/example-app.png";
         }
 	}

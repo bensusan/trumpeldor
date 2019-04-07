@@ -9,6 +9,7 @@ using trumpeldor.SheredClasses;
 using System.Configuration;
 using System.Threading;
 using trumpeldor.Configuration;
+using Newtonsoft.Json.Linq;
 
 namespace trumpeldor
 {
@@ -85,6 +86,29 @@ namespace trumpeldor
         {
             attraction.hints = GetHintsByAttraction(attraction);
             attraction.americanQuestion = GetAmericanQuestionByAttraction(attraction);
+            attraction.entertainment = GetEntertainmentByAttraction(attraction);
+        }
+
+        private Entertainment GetEntertainmentByAttraction(Attraction attraction)
+        {
+            string jsonResponse = SendToServerAndGetResponseBack(new { id = attraction.id, }, "getEntertainment/");
+            //if (jsonResponse.Equals("{\"question\":\"\",\"answers\":null,\"indexOfCorrectAnswer\":null}"))
+            //    return null;
+            JObject json = JObject.Parse(jsonResponse);
+            string className = (string)json["className"];
+            JObject obj = (JObject)json["object"];
+            if (SlidingPuzzle.isMyClassName(className)) {
+                //SlidingPuzzle sp = JsonConvert.DeserializeObject<SlidingPuzzle>((string)json["object"]);
+                SlidingPuzzle sp = new SlidingPuzzle
+                {
+                    id = (int)obj["id"],
+                    piecesURLS = ((JArray)obj["piecesURLS"]).ToObject<List<string>>(),
+                    width = (int)obj["width"],
+                    height = (int)obj["height"]
+                };
+                return sp;
+            }
+            return null;
         }
 
         private class HelpHints
@@ -170,6 +194,18 @@ namespace trumpeldor
             string jsonResponse = GetFromServer("getOpenMessages/");
             jsonResponse = "{ 'messages': " + jsonResponse + "}";
             return JsonConvert.DeserializeObject<HelpOpenMessages>(jsonResponse).messages;
+        }
+
+        class HelpUserGroupScore
+        {
+            public List<UserGroupScore> userGroupScores { get; set; }
+        }
+
+        internal List<UserGroupScore> GetBestScoreData()
+        {
+            string jsonResponse = GetFromServer("getBestScores/");
+            jsonResponse = "{ 'userGroupScores': " + jsonResponse + "}";
+            return JsonConvert.DeserializeObject<HelpUserGroupScore>(jsonResponse).userGroupScores;
         }
 
 

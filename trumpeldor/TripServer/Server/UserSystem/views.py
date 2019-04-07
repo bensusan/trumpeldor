@@ -167,6 +167,16 @@ class GetBestScores(views.APIView):
             BL.getBestScores,
             ScoreSerializer,
             True)
+
+
+class GetEntertainment(generics.GenericAPIView):
+    serializer_class = AttractionSerializer
+
+    def post(self, request, *args, **kwargs):
+        return generalPost(
+            request,
+            "GetEntertainment",
+            BL.getEntertainment)
 ######################################################################################################
 # ----------------------------------------Add Manual Data Part----------------------------------------
 ######################################################################################################
@@ -220,10 +230,16 @@ def addUser(userName, socialNetwork):
     return user
 
 
+def addSlidingPuzzle(attraction, width, height, listOfPicturesNames):
+    sp = SlidingPuzzle(attraction=attraction, width=width, height=height, piecesURLS=listOfPicturesNames)
+    sp.save()
+    return sp
+
+
 def insertDebugData():
-    a1 = addAttraction("Meonot dalet", "31.263913", "34.796959", "We Are in Attraction 1", ["x.jpg"], [])
-    a2 = addAttraction("96 building", "31.264934", "34.802062", "We Are in Attraction 2", ["y.png"], [])
-    a3 = addAttraction("Shnizale", "31.265129", "34.801575", "We Are in Attraction 3", ["y.png"], ["x.mp4"])
+    a1 = addAttraction("Meonot dalet", "31.263913", "34.796959", "We Are in Attraction 1", ["meonot_dalet_1.jpg", "meonot_dalet_2.jpg"], [])
+    a2 = addAttraction("96 building", "31.264934", "34.802062", "We Are in Attraction 2", ["96_1.jpg"], [])
+    a3 = addAttraction("Shnizale", "31.265129", "34.801575", "We Are in Attraction 3", ["shnizale_1.jpg", "shnizale_2.jpg"], ["shnizale_video.mp4"])
     aq1 = addAmericanQuestion("AQ1: Some question here ?", ["Correct answer",
                                                             "Incorrect answer",
                                                             "Incorrect answer",
@@ -236,6 +252,37 @@ def insertDebugData():
                                                             "Incorrect answer",
                                                             "Correct answer",
                                                             "Incorrect answer"], 2, a3)
+
+    sp1 = addSlidingPuzzle(a1, 3, 3,["example00.jpg",
+                                     "example01.jpg",
+                                     "example02.jpg",
+                                     "example10.jpg",
+                                     "example11.jpg",
+                                     "example12.jpg",
+                                     "example20.jpg",
+                                     "example21.jpg",
+                                     "example22.jpg"])
+
+    sp2 = addSlidingPuzzle(a2, 3, 3, ["example00.jpg",
+                                      "example01.jpg",
+                                      "example02.jpg",
+                                      "example10.jpg",
+                                      "example11.jpg",
+                                      "example12.jpg",
+                                      "example20.jpg",
+                                      "example21.jpg",
+                                      "example22.jpg"])
+
+    sp3 = addSlidingPuzzle(a3, 3, 3, ["example00.jpg",
+                                      "example01.jpg",
+                                      "example02.jpg",
+                                      "example10.jpg",
+                                      "example11.jpg",
+                                      "example12.jpg",
+                                      "example20.jpg",
+                                      "example21.jpg",
+                                      "example22.jpg"])
+
     h11 = addHint(a1, Hint.HINT_TEXT, "This is text hint for Attraction 1")
     h12 = addHint(a1, Hint.HINT_PICTURE, "x.jpg")
     h13 = addHint(a1, Hint.HINT_VIDEO, "x.mp4")
@@ -258,8 +305,8 @@ def insertDebugData():
 
     track123 = addTrack(track12, [a3], 3)
 
-    f1 = addFeedback("Feedback 1 rating ??", Feedback.FEEDBACK_RATING)
-    f2 = addFeedback("Feedback 2 text ??", Feedback.FEEDBACK_TEXT)
+    f1 = addFeedback("Feedback 1 rating ?", Feedback.FEEDBACK_RATING)
+    f2 = addFeedback("Feedback 2 text ?", Feedback.FEEDBACK_TEXT)
 
     msg1 = addMessage("Title for message 1", "data for message 1")
     msg2 = addMessage("Title for message 2", "data for message 2")

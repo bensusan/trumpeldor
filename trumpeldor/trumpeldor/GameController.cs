@@ -15,16 +15,19 @@ namespace trumpeldor
             Hints_More_Than_Three = -10,
             AQ_Mistake = -2,
             AQ_Correct = 10,
-            Attraction_Arrive = 50
+            Attraction_Arrive = 50,
+            Sliding_Puzzle_Solved = 10
         }
 
         private static GameController instance = null;
+
         public Trip currentTrip = null;
         public User currentUser = null; //Also will show in Trip object but necessary also.
         private ServerConection conn;
         public bool isFinishTrip;
         const int LOGIN_RECENETLY_DIFFERENCE_HOURS = 36; //TODO - Very specific for now
         public Track extendTrack = null;
+        public bool isAttractionDone = false;
 
         public static GameController getInstance()
         {
@@ -122,6 +125,7 @@ namespace trumpeldor
 
         internal void FinishAttraction()
         {
+            isAttractionDone = true;
             SheredClasses.Point userLocation = GetUserLocation();
             isFinishTrip = this.currentTrip.DoneMyAttraction(userLocation.x, userLocation.y);
             UpdateTrip();
@@ -157,7 +161,7 @@ namespace trumpeldor
         }
 
         //get y.png for example return http://IP:PORT/media/y.png
-        public string GetImageURLFromName(string pictureName)
+        public string GetMediaURLFromName(string pictureName)
         {
             return "http://" + ServerConection.IP + ":" + ServerConection.PORT + "/media/" + pictureName;
         }
@@ -192,5 +196,31 @@ namespace trumpeldor
             currentTrip.score += (int)actionScore;
             return currentTrip.score;
         }
+
+        internal List<string> GetMainImages()
+        {
+            return new List<string>();
+        }
+
+        internal List<string> GetMainVideos()
+        {
+            return new List<string>();
+        }
+
+        internal double GetHeightSizeOfPage()
+        {
+            return Application.Current.MainPage.Height;
+        }
+
+        internal double GetWidthSizeOfPage()
+        {
+            return Application.Current.MainPage.Width;
+        }
+
+        internal List<UserGroupScore> GetLeadingTable()
+        {
+            return conn.GetBestScoreData();
+        }
+
     }
 }

@@ -1,3 +1,5 @@
+from re import sub
+
 import null
 import datetime
 from Server.models import *
@@ -70,14 +72,26 @@ class DAL_Implementation(DAL_Abstract):
         aq.save()
         return aq
 
-    def add_track(self, points, length):
-        for i in range(4-length):
-            track = Track(length=length+i)
+    def add_track(self, subTrack, points, length):
+        # for i in range(4-length):
+        #     track = Track(length=length+i)
+        #     track.save()
+        #     for p in points:
+        #         attr = self.get_attraction(p['id'])
+        #         track.points.add(attr)
+        #         track.save()
+        # return True
+        track = None
+        if subTrack == null:
+            track = Track(length=length)
+        else:
+            sub_track = self.get_track(subTrack['id'])
+            track = Track(subTrack=sub_track, length=length)
+        track.save()
+        for p in points:
+            attr = self.get_attraction(p['id'])
+            track.points.add(attr)
             track.save()
-            for p in points:
-                attr = self.get_attraction(p['id'])
-                track.points.add(attr)
-                track.save()
         return True
 
     def add_feedback_question(self, question, kind):
@@ -131,6 +145,9 @@ class DAL_Implementation(DAL_Abstract):
 
     def getAllTrips(self):
         return Trip.objects.order_by('score')
+
+    def getSlidingPuzzle(self, attraction):
+        return SlidingPuzzle.objects.filter(attraction=attraction).first()
 
     def delete_attraction(self, id):
         delt=self.getAttraction(id).delete()
@@ -188,26 +205,39 @@ class DAL_Implementation(DAL_Abstract):
         return Hint.objects.filter(attraction=self.get_attraction(id_attraction)).all()
 
     def add_attraction_to_track(self, id_track, id_attraction):
+        # attr = self.getAttraction(id_attraction)
+        # if attr is not None:
+        #     track = self.get_track(id_track)
+        #     len = track.length
+        #     for i in range(len, 4):
+        #         track = self.get_track_by_length(i)
+        #         track.points.add(attr)
+        #         track.save()
+        #     return True
         attr = self.getAttraction(id_attraction)
         if attr is not None:
             track = self.get_track(id_track)
-            len = track.length
-            for i in range(len, 4):
-                track = self.get_track_by_length(i)
-                track.points.add(attr)
-                track.save()
+            track.points.add(attr)
+            track.save()
             return True
 
     def delete_attraction_from_track(self, id_track, id_attraction):
+        # attr = self.getAttraction(id_attraction)
+        # if attr is not None:
+        #     track = self.get_track(id_track)
+        #     len = track.length
+        #     for i in range(1, len+1):
+        #         track = self.get_track_by_length(i)
+        #         track.points.remove(attr)
+        #         track.save()
+        #     return True
         attr = self.getAttraction(id_attraction)
         if attr is not None:
             track = self.get_track(id_track)
-            len = track.length
-            for i in range(1, len+1):
-                track = self.get_track_by_length(i)
-                track.points.remove(attr)
-                track.save()
+            track.points.remove(attr)
+            track.save()
             return True
+
 
     def delete_track(self, id_track):
         track = self.get_track(id_track).delete()
@@ -215,3 +245,16 @@ class DAL_Implementation(DAL_Abstract):
 
     def get_track_by_length(self, len):
         return Track.objects.filter(length=len).first()
+
+    def edit_track(self, id_track, points):
+        track = self.get_track(id_track)
+        track.points.set(null)
+        print(points)
+        for p in points:
+            attr = self.getAttraction(p['id'])
+            track.points.add(attr)
+        track.save()
+        return track
+
+    def get_all_feedback_questions(self):
+        return Feedback.objects.all()

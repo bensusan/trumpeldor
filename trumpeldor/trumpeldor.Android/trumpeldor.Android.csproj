@@ -81,6 +81,7 @@
     <Compile Include="AudioRender.cs" />
     <Compile Include="Configuration\AndroidConfigurationStreamProvider.cs" />
     <Compile Include="Configuration\AndroidConfigurationStreamProviderFactory.cs" />
+    <Compile Include="CustomMapRenderer.cs" />
     <Compile Include="MainActivity.cs" />
     <Compile Include="MainApplication.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />

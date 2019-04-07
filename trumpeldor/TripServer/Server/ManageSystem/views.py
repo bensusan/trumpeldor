@@ -76,24 +76,38 @@ class Hint(generics.GenericAPIView):
         return Response(ans)
 
 
-class Feedback(generics.GenericAPIView):
-    serializer_class = TripSerializer
+class FeedbackList(generics.GenericAPIView):
+    serializer_class = FeedbackSerializer
+    queryset = ''
 
     def get(self, request, *args, **kwargs):
-        return general_post_or_get(
-            request,
-            "Feedbacks",
-            BL.getFeedbacks,
-            FeedbackInstanceSerializer,
-            True)
+        ans = BL.get_all_feedback_questions()
+        ans = AmericanQuestionSerializer(ans, many=True)
+        ans = json.loads(json.dumps(ans.data))
+        if DEBUG:
+            print("Sent:", ans, sep="\n")
+        return Response(ans)
 
     def post(self, request, *args, **kwargs):
-        return general_post_or_get(
-            request,
-            "GetFeedbacks",
-            BL.getFeedbacks,
-            FeedbackInstanceSerializer,
-            True)
+        ans = BL.add_feedback_question(request.data)
+        ans = FeedbackSerializer(ans, many=False)
+        ans = json.loads(json.dumps(ans.data))
+        return Response(ans)
+
+
+class Feedback(generics.GenericAPIView):
+    serializer_class = AmericanQuestionSerializer
+
+    def get(self, request, *args, **kwargs):
+        ans = BL.get_feedback_question(self.kwargs['id'])
+        ans = FeedbackSerializer(ans, many=False)
+        ans = json.loads(json.dumps(ans.data))
+        return Response(ans)
+
+    def delete(self, request, *args, **kwargs):
+        ans = BL.delete_feedback_question(self.kwargs['id'])
+        ans = json.loads(json.dumps(ans))
+        return Response(ans)
 
 
 class AmericanQuestionsList(generics.GenericAPIView):
@@ -225,24 +239,24 @@ class Attraction(generics.GenericAPIView):
         return Response(ans)
 
 
-class EntertainmentsList(generics.GenericAPIView):
-    serializer_class = EntertainmentSerializer
-    queryset = ''
-
-    def get(self, request, *args, **kwargs):
-        return general_post_or_get(
-            None,
-            "AddAttraction",
-            BL.get_attractions,
-            AttractionSerializer,
-            True)
-
-    def post(self, request, *args, **kwargs):
-        return general_post_or_get(
-            request,
-            "AddAttraction",
-            BL.add_attraction,
-            AttractionSerializer)
+# class EntertainmentsList(generics.GenericAPIView):
+#     serializer_class = EntertainmentSerializer
+#     queryset = ''
+#
+#     def get(self, request, *args, **kwargs):
+#         return general_post_or_get(
+#             None,
+#             "AddAttraction",
+#             BL.get_attractions,
+#             AttractionSerializer,
+#             True)
+#
+#     def post(self, request, *args, **kwargs):
+#         return general_post_or_get(
+#             request,
+#             "AddAttraction",
+#             BL.add_attraction,
+#             AttractionSerializer)
 
 def sign_in_page(request):
     return render(request, "signIn.html")

@@ -5,6 +5,8 @@ from Server.serializers import *
 from Server.models import *
 from itertools import chain
 import TripServer.settings as settings
+import json
+
 
 def getDistance(lat1, lon1, lat2, lon2):
     def haversin(x):
@@ -111,7 +113,7 @@ class BL_Implementation(BL_Abstract):
 
     def add_track(self, track):
         if self.get_track_by_length(track['length']) is None:
-            return self.DAL.add_track(track['points'], track['length'])
+            return self.DAL.add_track(track['subTrack'], track['points'], track['length'])
 
     def add_feedback_question(self, question, kind):#question, kind
         return self.DAL.add_feedback_question(question, kind)
@@ -155,7 +157,27 @@ class BL_Implementation(BL_Abstract):
         return self.DAL.getFeedbackById(feedback["id"])
 
     def getBestScores(self):
-        return self.DAL.getAllTrips()[:settings.TOP_X]
+        return self.DAL.getAllTrips()[::-1][:settings.TOP_X]
+
+    def getEntertainment(self, attraction):
+        attr = self.getAttraction(attraction)
+        entertainment = self.DAL.getSlidingPuzzle(attr)
+        classSerializer = SlidingPuzzleSerializer
+        className = 'SlidingPuzzle'
+        # TODO - Other entertainments
+        # if entertainment is None:
+        #     entertainment = self.DAL.getPuzzle(attr)
+        #     classSerializer = PuzzleSerializer
+        #     className = 'Puzzle'
+        #     if entertainment is None:
+        #         entertainment = self.DAL.getFindTheDifferences(attr)
+        #         classSerializer = FindTheDifferencesSerializer
+        #         className = 'FindTheDifferences'
+        entertainment = classSerializer(entertainment)
+        entertainment = json.loads(json.dumps(entertainment.data))
+        # entertainmentWrapper = '{"className":' + className + ',"object":' + entertainment + '}'
+        entertainmentWrapper = {'className': className, 'object': entertainment}
+        return entertainmentWrapper
 
     def delete_attraction(self, id):
         if self.get_attraction(id) is not None:
@@ -217,3 +239,10 @@ class BL_Implementation(BL_Abstract):
 
     def get_track_by_length(self, len):
         return self.DAL.get_track_by_length(len)
+
+    def edit_track(self, id_track, points):
+        return self.DAL.edit_track(id_track, points)
+
+    def get_all_feedback_questions(self):
+        return self.DAL.get_all_feedback_questions()
+

@@ -78,6 +78,7 @@ window.onload = function() {
     });
 
     addAqBTN.addEventListener('click', function() {
+    //    alert("ssss");
         getRequestAttractions(funcToGetAttraction);
         //alert("2");
         //setTimeout(finishAddAq ,10);
@@ -97,6 +98,7 @@ function postRequestAmericanQuestion(aq,attr_id){
 }
 
  function funcToGetAttraction(attractionsJSON) {
+
         let name = localStorage.getItem("name_for_add_aq");
         let desc = localStorage.getItem("desc_for_add_aq");
       // alert("in get name! "+"of the origin : " + lat + " , " + lng);
@@ -119,7 +121,7 @@ function postRequestAmericanQuestion(aq,attr_id){
             };
             postRequestAmericanQuestion(american_question_to_send,attr['id']);
             localStorage.setItem("the_attr", JSON.stringify(attr));
-
+            window.location.href='/add_hint';
         }
       });
  window.location.href='/add_hint';

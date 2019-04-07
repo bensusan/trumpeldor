@@ -5,7 +5,14 @@
     <ContentPage.Content>
         <StackLayout Style="{DynamicResource mainStackLayout}">
             <Label x:Name="generalInformation" AutomationId="InfoTxt" />
-            
+            <ScrollView x:Name="galleryImages" Orientation="Horizontal">
+                <StackLayout x:Name="stackGalleryImages" Orientation="Horizontal">
+                </StackLayout>
+            </ScrollView>
+            <ScrollView x:Name="galleryVideos" Orientation="Horizontal">
+                <StackLayout x:Name="stackGalleryVideos" Orientation="Horizontal">
+                </StackLayout>
+            </ScrollView>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

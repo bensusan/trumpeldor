@@ -1,7 +1,6 @@
 from rest_framework import serializers
 from .models import *
 
-# we can see what is being sent
 
 class AmericanQuestionSerializer(serializers.ModelSerializer):
     class Meta:
@@ -28,18 +27,18 @@ class UserSerializer(serializers.ModelSerializer):
 
 
 class TrackSerializer(serializers.ModelSerializer):
-    #subTrack = serializers.SerializerMethodField()
+    subTrack = serializers.SerializerMethodField()
     points = AttractionSerializer(many=True)
 
     class Meta:
-        fields = ('id', 'points', 'length',)
+        fields = ('id', 'subTrack', 'points', 'length',)
         model = Track
 
-    # def get_subTrack(self, obj):
-    #     if obj.subTrack is not None:
-    #         return TrackSerializer(obj.subTrack).data
-    #     else:
-    #         return None
+    def get_subTrack(self, obj):
+        if obj.subTrack is not None:
+            return TrackSerializer(obj.subTrack).data
+        else:
+            return None
 
 
 class GetExtendedTrackSerializer(serializers.Serializer):
@@ -57,28 +56,27 @@ class TripSerializer(serializers.ModelSerializer):
         fields = ('id', 'user', 'groupName', 'playersAges', 'score', 'track', 'attractionsDone')
         model = Trip
 
+# class EntertainmentSerializer(serializers.ModelSerializer):
+#     class Meta:
+#         fields = ('id', 'attraction',)
+#         model = Entertainment
 
-class EntertainmentSerializer(serializers.ModelSerializer):
-    class Meta:
-        fields = ('id', 'attraction', 'image',)
-        model = Entertainment
 
-
-class FindTheDifferencesSerializer(EntertainmentSerializer):
+class FindTheDifferencesSerializer(serializers.ModelSerializer):
     class Meta:
         fields = ('id', 'pictureURL', 'differences',)
         model = FindTheDifferences
 
 
-class PuzzleSerializer(EntertainmentSerializer):
+class PuzzleSerializer(serializers.ModelSerializer):
     class Meta:
         fields = ('id', 'pictureURL',)
         model = Puzzle
 
 
-class SlidingPuzzleSerializer(EntertainmentSerializer):
+class SlidingPuzzleSerializer(serializers.ModelSerializer):
     class Meta:
-        fields = ('id', 'piecesURLS',)
+        fields = ('id', 'piecesURLS', 'width', 'height',)
         model = SlidingPuzzle
 
 
