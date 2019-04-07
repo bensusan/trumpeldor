@@ -25,8 +25,8 @@ function initMapAndAttractionss(){
 }
 
   function addEditListenerr(m) {
-      m.addListener('click', function() {
-             if(prev_m!=1) {
+       m.addListener('click', function() {
+            if(prev_m!=1) {
 
               prev_m.setIcon(prev_icon);
           }
@@ -94,7 +94,10 @@ function markAttractionsOfLongPaths(tracksJSON){
             idOfLong = track['id'];
 
             let points_of_track = track['points'];
-            points_of_track.forEach(function (attr) {
+            let points_of_subtrack = track['subTrack']['points'];
+            let children = [].concat(points_of_subtrack,points_of_track);
+
+            children.forEach(function (attr) {
                     fullLongPoints.push(attr);
                 let pos2 = {lat: (attr['x']).toFixed(8), lng: (attr['y']).toFixed(8)}; // change to 13 instead of 8!!!
 

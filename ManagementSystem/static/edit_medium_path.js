@@ -20,11 +20,14 @@ function initMapAndAttractionss(){
 
   function addEditListenerr(m) {
       m.addListener('click', function() {
-          if(prev_m!=1) {
-              prev_m.setIcon("http://maps.google.com/mapfiles/ms/icons/red-dot.png");
+            if(prev_m!=1) {
+
+              prev_m.setIcon(prev_icon);
           }
           //alert("sda");
+          prev_icon=m.icon;
           m.setIcon("http://maps.google.com/mapfiles/ms/icons/pink-dot.png");
+
           prev_m=m;
           curPosClicked=m.position;
         var addToPathBTN = document.getElementById('add_reg_to_path_med');
@@ -85,7 +88,10 @@ function markAttractionsOfMediumPaths(tracksJSON){
             idOfMedium = track['id'];
 
             let points_of_track = track['points'];
-            points_of_track.forEach(function (attr) {
+            let points_of_subtrack = track['subTrack']['points'];
+            let children = [].concat(points_of_subtrack,points_of_track);
+
+            children.forEach(function (attr) {
                     let pos = {lat: attr['x'], lng: attr['y']};
                     let pos2 = {lat: (attr['x']).toFixed(8), lng: (attr['y']).toFixed(8)};
                     fullMedPoints.push(attr);

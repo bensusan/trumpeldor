@@ -69,7 +69,10 @@ function markAttractionsOfLongPaths(tracksJSON){
             idOfLong = track['id'];
 
             let points_of_track = track['points'];
-            points_of_track.forEach(function (attr) {
+            let points_of_subtrack = track['subTrack']['points'];
+            let children = [].concat(points_of_subtrack,points_of_track);
+
+            children.forEach(function (attr) {
 
                 let pos2 = {lat: (attr['x']).toFixed(8), lng: (attr['y']).toFixed(8)}; // change to 13 instead of 8!!!
 
@@ -78,7 +81,7 @@ function markAttractionsOfLongPaths(tracksJSON){
                     localStorage.setItem("title" + pos, "attraction ID: " + attr['id'] + "\nattraction name: " + attr['name'] + "\nposition: (" + attr['x'] + "," + attr['y'] + ")");
                     markAttractionOfLongPath(pos);
 
-            })
+            });
         }
 
     });
