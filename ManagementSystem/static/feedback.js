@@ -6,14 +6,14 @@ window.onload = function() {
     sendBTN.addEventListener('click', function () {
         let feed_type;
         if(feedback_type.value == 'opt1')
-            feed_type = 'FT';
+            feed_type = "FT";
         else
-            feed_type = 'FR';
+            feed_type = "FR";
 
         let feed_to_send = {question:feedback_question.value , kind: feed_type};
 
         postRequestFeedback(feed_to_send);
-
+        window.location.href='/main';
     });
 
 };

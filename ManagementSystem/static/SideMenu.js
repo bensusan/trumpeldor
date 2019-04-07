@@ -18,6 +18,7 @@ document.getElementById("sideMenu").innerHTML = '<div class="sidenav">\n' +
     '  </div>\n' +
     '  <a href="#services">Statistics</a>\n' +
     '  <a href="/additional_info">Additional Info</a>\n' +
+    '  <a href="/feedback">Feedback</a>\n' +
     '</div>\n' +
     '\n' +
     '<div class="main">\n' +
