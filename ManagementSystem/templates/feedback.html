@@ -2,44 +2,40 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Add Feedback Question:</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    {% load static %}
+<link rel="stylesheet" href="{% static 'SideMenu.css' %}?version=3">
+{% load static %}
+<link rel="stylesheet" href="{% static 'just_want_background.css' %}?version=2">
+ {% load static %}
+<script src="{% static 'properties.js' %}?version=3"></script>
+    {% load static %}
+    <script src="{% static 'attractions.js' %}?version=5"></script>
+    {% load static %}
+<script src="{% static 'feedback.js' %}?version=2"></script>
+
 </head>
 <body>
 <div align="center">
-    <label for="hint"><b>American Question:</b></label>
+    <label for="hint"><b>Feedback:</b></label>
     <p></p>
-    <p id="txt1">Number Of Feedback Questions:</p>
-    <input type="text"  id="noOfFeedbackQuestions" style="height: 20px; width: 50px; border-radius: 5px;" required>
+    <p>Question:</p>
+    <textarea type="text" id="fbquestion" placeholder="Enter Feedback Question" style="width: 310px;height: 200px; overflow: scroll"> </textarea>
+{#    <input type="text"  id="fbquestion" style="height: 20px; width: 50px; border-radius: 5px;" required>#}
+    <p>Feedback Type:</p>
+    <select id="feedback_type">
+      <option value="opt1">Text Feedback</option>
+      <option value="opt2">Rating Feedback</option>
+    </select>
+{#    <input type="text"  id="fbtype" style="height: 20px; width: 50px; border-radius: 5px;" required>#}
     <p></p>
-     <button id="ok_button_to_prepare" type="button">Ok</button>
-    <p></p>
-      <input type="text"  id="q1" placeholder="q1" name="q1" style="display: none;height: 40px; width: 200px; border-radius: 5px;" required>
-    <p></p>
-      <input type="text" id="q2" placeholder="q2" name="q2" style="display: none;height: 40px;width: 200px; border-radius: 5px;" required>
-    <p></p>
-      <input type="text" id="q3" placeholder="q3" name="q3" style="display: none;height: 40px;width: 200px; border-radius: 5px;" required>
-    <p></p>
-      <input  type="text" id="q4" placeholder="q4" name="q4" style="display: none;height: 40px;width: 200px; border-radius: 5px;" required>
-    <p></p>
-      <input  type="text" id="q5" placeholder="q5" name="q5" style="display: none; height: 40px;width: 200px; border-radius: 5px;" required>
-    <p></p>
-      <input  type="text" id="q6" placeholder="q6" name="q6" style="display:none;height: 40px;width: 200px; border-radius: 5px;" required>
-    <p></p>
-      <input  type="text" id="q7" placeholder="q7" name="q7" style="display: none;height: 40px;width: 200px; border-radius: 5px;" required>
-    <p></p>
-      <input  type="text" id="q8" placeholder="q8" name="q8" style="display:none;height: 40px;width: 200px; border-radius: 5px;" required>
-    <p></p>
-    <input  type="text" id="q9" placeholder="q9" name="q9" style="display:none;height: 40px;width: 200px; border-radius: 5px;" required>
-    <p></p>
-    <input  type="text" id="q10" placeholder="q10" name="q10" style="display:none;height: 40px;width: 200px; border-radius: 5px;" required>
-    <p></p>
+     <button class="button" id="send_feedback" type="button">Send Question</button>
 
-    <button class="button" id="finish_add_aq_btn" type="button">Send</button>
-{#<button class="button" id="finish_add_aq" onclick="finishAddAq()" type="button">Send</button>#}
     </div>
 <nav id="sideMenu"></nav>
 {% load static %}
-<script src="{% static 'menu_for_paths.js' %}?version=1"></script>
+<script src="{% static 'menu_of_feedback.js' %}?version=1"></script>
 
 </body>
 </html>

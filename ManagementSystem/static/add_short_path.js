@@ -84,7 +84,7 @@ function funcInOrderToGetAttractions(attractionsJSON) {
 
       });
     //alert(arr_of_complete_points.length);
-    let short_to_send = {points:arr_of_complete_points,length:1};
+    let short_to_send = {subTrack:null , points:arr_of_complete_points ,length:1};
             // let medium_to_send = {points:arr_of_complete_points,length:2};
             // let long_to_send = {points:arr_of_complete_points,length:3};
             postRequestShortPath(short_to_send);

@@ -82,7 +82,7 @@ class DAL_Implementation(DAL_Abstract):
         #         track.save()
         # return True
         track = None
-        if subTrack == null:
+        if subTrack is None:
             track = Track(length=length)
         else:
             sub_track = self.get_track(subTrack['id'])
