@@ -115,8 +115,10 @@ class BL_Implementation(BL_Abstract):
         if self.get_track_by_length(track['length']) is None:
             return self.DAL.add_track(track['subTrack'], track['points'], track['length'])
 
-    def add_feedback_question(self, question, kind):#question, kind
-        return self.DAL.add_feedback_question(question, kind)
+    def add_feedback_question(self, feedback):#question, kind
+        print(feedback)
+        print(feedback['question'])
+        return self.DAL.add_feedback_question(feedback['question'], feedback['kind'])
 
     def get_track(self, id):
         return self.DAL.get_track(id)

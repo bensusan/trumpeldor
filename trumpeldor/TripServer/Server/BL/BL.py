@@ -72,7 +72,7 @@ class BL_Abstract(object):
     def add_track(self, track):
         raise NotImplementedError("Should have implemented this")
 
-    def add_feedback_question(self, question, kind):
+    def add_feedback_question(self, feedback):
         raise NotImplementedError("Should have implemented this")
 
     def get_track(self, id):
@@ -243,10 +243,10 @@ class BLProxy(BL_Abstract):
             raise NotImplementedError("Should have implemented this")
         return self.Implementation.add_track(track)
 
-    def add_feedback_question(self, question, kind):
+    def add_feedback_question(self, feedback):
         if self.Implementation is None:
             raise NotImplementedError("Should have implemented this")
-        return self.Implementation.add_feedback_question(question)
+        return self.Implementation.add_feedback_question(feedback)
 
     def get_track(self, id):
         if self.Implementation is None:
