@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.postgres.fields import JSONField
 from django.contrib.postgres.fields import ArrayField
+from django.core.validators import int_list_validator
 
 
 
@@ -44,7 +45,7 @@ class Trip(models.Model):
 class AmericanQuestion(models.Model):
     question = models.TextField()
     answers = JSONField()  # Should be list of String
-    indexOfCorrectAnswer = ArrayField(models.IntegerField())
+    indexOfCorrectAnswer = ArrayField(models.IntegerField(null=True, blank=True), null=True, blank=True)
     attraction = models.ForeignKey(Attraction, on_delete=models.CASCADE)
 
 
