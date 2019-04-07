@@ -82,7 +82,7 @@ class FeedbackList(generics.GenericAPIView):
 
     def get(self, request, *args, **kwargs):
         ans = BL.get_all_feedback_questions()
-        ans = AmericanQuestionSerializer(ans, many=True)
+        ans = FeedbackSerializer(ans, many=True)
         ans = json.loads(json.dumps(ans.data))
         if DEBUG:
             print("Sent:", ans, sep="\n")
