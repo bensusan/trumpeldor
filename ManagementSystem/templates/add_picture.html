@@ -4,24 +4,32 @@
     <meta charset="UTF-8">
     <title>Add Picture:</title>
      {% load static %}
+<link rel="stylesheet" href="{% static 'SideMenu.css' %}?version=3">
+{% load static %}
+<link rel="stylesheet" href="{% static 'just_want_background.css' %}?version=2">
+     {% load static %}
 <script src="{% static 'properties.js' %}?version=2"></script>
+    {% load static %}
+<script src="{% static 'add_picture.js' %}?version=3"></script>
 </head>
 <body>
-{% load static %}
-<script src="{% static 'add_picture.js' %}?version=3"></script>
+<div align="center">
     <label for="hint"><b>Write Game Instructions:</b></label>
 <p></p>
 <textarea id="game_instructions_text" placeholder="Game Instructions..." style="height:100px;width:250px"></textarea>
     <p></p>
     <label for="hint"><b>Upload Image:</b></label>
 <p></p>
-
-<input type="file" onchange="encodeImageFileAsURL(this)" />
+<input type="file" onchange="encodeImageFileAsURL(this)"/>
 <p><img id="output" width="200" /></p>
-<p>This Is The URL:</p>
-<p id="suka"></p>
+{#<p>This Is The URL:</p>#}
+{#<p id="suka"></p>#}
 
 
-<button onclick="window.location.href='/add_game'">Finished</button>
+<button class="button" onclick="window.location.href='/add_game'">Finished</button>
+    </div>
+<nav id="sideMenu"></nav>
+{% load static %}
+<script src="{% static 'menu_add_pic.js' %}?version=1"></script>
 </body>
 </html>

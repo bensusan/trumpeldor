@@ -1,7 +1,7 @@
 //menu_of_edit_attractions
 
 document.getElementById("sideMenu").innerHTML = '<div class="sidenav">\n' +
-    '  <h2 style="color:#818181;">Add Path</h2>' +
+    '  <h2 style="color:#818181;">Add Picture</h2>' +
     '  <a href="/main">Back to Main Page</a>\n' +
     '</div>\n' +
     '\n' +

@@ -89,16 +89,16 @@ function markAttractionsOfMediumPaths(tracksJSON){
 
             let points_of_track = track['points'];
             let points_of_subtrack = track['subTrack']['points'];
-            let children = [].concat(points_of_subtrack,points_of_track);
 
-            children.forEach(function (attr) {
+            points_of_track.forEach(function (attr) {
                     let pos = {lat: attr['x'], lng: attr['y']};
                     let pos2 = {lat: (attr['x']).toFixed(8), lng: (attr['y']).toFixed(8)};
                     fullMedPoints.push(attr);
                     pointsOfMedium.push(pos2);
                     localStorage.setItem("title" + pos, "attraction ID: " + attr['id'] + "\nattraction name: " + attr['name'] + "\nposition: (" + attr['x'] + "," + attr['y'] + ")");
                     markAttractionOfMediumPath(pos);
-            })
+            });
+
         }
 
         if(track['length']==1)
@@ -118,6 +118,7 @@ function markAttractionsOfMediumPaths(tracksJSON){
     getRequestAttractions(markAttractionsOfMediumPath_left);
 
 }
+
 
 function markAttractionsOfMediumPath_left(attractionsJSON){
 

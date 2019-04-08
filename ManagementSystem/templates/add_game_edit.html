@@ -10,7 +10,7 @@
     {% load static %}
 <link rel="stylesheet" href="{% static 'add_game.css' %}?version=1">
     {% load static %}
-<script src="{% static 'add_game.js' %}?version=4"></script>
+<script src="{% static 'add_game.js' %}?version=3"></script>
      {% load static %}
 <script src="{% static 'properties.js' %}?version=1"></script>
 </head>
@@ -22,12 +22,11 @@
   <div class="container">
 
 
-
 {#      <p><a href="JavaScript:newPopup('/add_picture');">Open a popup window</a></p>#}
       <button type="button" id="sliding_puzzle_button">Sliding Puzzle</button>
-      <button type="button">Drag Puzzle</button>
-      <button type="button">Take A Picture</button>
-      <button type="button">Find The Differences</button>
+      <button type="button" id="drag_puzzle_button">Drag Puzzle</button>
+{#      <button type="button">Take A Picture</button>#}
+      <button type="button" id="find_the_diff">Find The Differences</button>
       <p><img id="sukablat" width="200" /></p>
 
   </div>

@@ -96,8 +96,11 @@ function markAttractionsOfLongPaths(tracksJSON){
             let points_of_track = track['points'];
             let points_of_subtrack = track['subTrack']['points'];
             let children = [].concat(points_of_subtrack,points_of_track);
-
-            children.forEach(function (attr) {
+            let uniqueNames = children.filter(function(item, pos) {
+                return children.indexOf(item).name == pos.name;
+            });
+            alert(uniqueNames.length +" "+ children.length);
+            uniqueNames.forEach(function (attr) {
                     fullLongPoints.push(attr);
                 let pos2 = {lat: (attr['x']).toFixed(8), lng: (attr['y']).toFixed(8)}; // change to 13 instead of 8!!!
 
