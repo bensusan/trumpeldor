@@ -120,3 +120,13 @@ class Message(models.Model):
 
 class Info(models.Model):
     info = models.TextField()
+
+
+class Admin(models.Model):
+    user_name = models.CharField(max_length=50)
+    password = models.TextField()
+
+
+
+
+

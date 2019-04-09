@@ -235,8 +235,16 @@ class DAL_Implementation(DAL_Abstract):
         #         track.save()
         #     return True
         attr = self.getAttraction(id_attraction)
+        track = self.get_track(id_track)
         if attr is not None:
-            track = self.get_track(id_track)
+            for i in range(1, track.length):
+                track_smaller = self.get_track_by_length(i)
+                print(i)
+                print(track_smaller)
+                print(track_smaller.points.all())
+                print(attr)
+                if attr in track_smaller.points.all():
+                    return False
             track.points.remove(attr)
             track.save()
             return True
