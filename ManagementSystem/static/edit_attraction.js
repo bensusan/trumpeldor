@@ -55,7 +55,6 @@ function doVideo(){
 
     function finishEditingAttraction() {
         let attr_after_editing = {
-            id: 66,
     name:  document.getElementById("attr_name").value,
     x: attr_for_editing['x'],
     y: attr_for_editing['y'],

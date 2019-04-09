@@ -38,7 +38,7 @@ window.onload = function () {
 
 
 function wantToChangeButton(){
-        var change_txt = document.getElementById("write_fb_to_change");
+            var change_txt = document.getElementById("write_fb_to_change");
             change_txt.style.display = "inline";
 
             var change_btn = document.getElementById("edit_chosen_fb");
@@ -51,9 +51,31 @@ function wantToChangeButton(){
             delete_btn.style.display = "none";
 
             change_btn.addEventListener('click', function() {
+                let fb_id = change_txt.value;
                 change_txt.style.display = "none";
                 change_btn.style.display = "none";
+                var firstTitle = document.getElementById("first");
+                firstTitle.style.display = "inline";
+                var feedback_question = document.getElementById("fbquestion");
+                feedback_question.style.display = "inline";
+                var secondTitle = document.getElementById("second");
+                secondTitle.style.display = "inline";
+                var feedback_type = document.getElementById("feedback_type");
+                feedback_type.style.display = "inline";
+                var sendFbBTN = document.getElementById("send_feedback");
+                sendFbBTN.style.display = "inline";
+                sendFbBTN.addEventListener('click', function() {
+                    let feed_type;
+                    if(feedback_type.value == 'opt1')
+                        feed_type = "FT";
+                    else
+                        feed_type = "FR";
 
+                    let feed_to_send = {question:feedback_question.value , kind: feed_type};
+
+                    editRequestFeedback(feed_to_send,fb_id);
+                    window.location.href='/edit_feedbacks';
+                });
 
             });
 }
@@ -124,13 +146,12 @@ function getRequestFeedbacks(funcOnAqs){
 }
 
 
-function postRequestAmericanQuestion(aq,attr_id){
-  //  alert("aq blat");
-    serverRequest("POST", function noop(dummy){}, 'http://'+ip+':12344/managementsystem/attraction/'+
-        attr_id+'/aquestion/',
-        JSON.stringify(aq));
-}
-
 function deleteRequestFeedback(fb_id){
      serverRequest("DELETE", function noop(dummy){}, 'http://'+ip+':12344/managementsystem/feedback/'+fb_id+'/');
     }
+
+function editRequestFeedback(feedback,feedback_id){
+   // alert("edit blat hui");
+    serverRequest("PUT", function noop(dummy){}, 'http://'+ip+':12344/managementsystem/feedback/'+feedback_id+'/',
+        JSON.stringify(feedback));
+}
