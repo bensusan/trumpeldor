@@ -70,7 +70,8 @@ function markAttractionsOfLongPaths(tracksJSON){
 
             let points_of_track = track['points'];
             let points_of_subtrack = track['subTrack']['points'];
-            let children = [].concat(points_of_subtrack,points_of_track);
+            let points_of_subsubtrack = track['subTrack']['subTrack']['points'];
+            let children = [].concat(points_of_subtrack,points_of_track,points_of_subsubtrack);
 
             children.forEach(function (attr) {
 
