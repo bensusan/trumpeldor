@@ -46,10 +46,10 @@ def main():
     # test_req_one_eight_three(browser)
     # test_req_one_ten_one(browser)
     # test_req_one_ten_two(browser)
-    test_req_two(browser)
+    # test_req_two(browser)
     # test_req_two_four(browser)
     # test_req_two_five(browser)
-    # test_req_two_six(browser)
+    test_req_two_six(browser)
 
     return
 
@@ -425,14 +425,21 @@ def test_req_two_four(driver):
     driver.get("http://10.0.0.6:12345/main/")
     driver.find_element(By.CSS_SELECTOR, "#sideMenu > div.sidenav > button").click()
     driver.find_element(By.CSS_SELECTOR, "#sideMenu > div.sidenav > div > a:nth-child(3)").click()
+    first = driver.current_url  # needs to be http://10.0.0.6:12345/pick_path_edit/
     driver.find_element_by_id('write_path_length').send_keys("1")
     driver.find_element(By.ID, "edit_chosen_path").click()
+    second = driver.current_url  # needs to be http://10.0.0.6:12345/edit_short_path/
     point1 = driver.find_element(By.XPATH, "//*[@id='map']/div/div/div[1]/div[3]/div/div[3]/div[1]/img")
     point1.click()
     driver.find_element(By.CSS_SELECTOR, "#delete_from_path_med").click()
     driver.find_element(By.CSS_SELECTOR, "#finish_reg_med").click()
+    third = driver.current_url  # needs to be http://10.0.0.6:12345/main/
 
-    if driver.current_url == 'http://10.0.0.6:12345/main/':
+    bool1 = first == 'http://10.0.0.6:12345/pick_path_edit/'
+    bool2 = second == 'http://10.0.0.6:12345/edit_short_path/'
+    bool3 = third == 'http://10.0.0.6:12345/main/'
+
+    if bool1 and bool2 and bool3:
         print(green('--- test passed!!! ---'))
     else:
         print(red('--- test failed!!! ---'))
@@ -446,10 +453,11 @@ def test_req_two_five(driver):
     driver.get("http://10.0.0.6:12345/main/")
     driver.find_element(By.CSS_SELECTOR, "#sideMenu > div.sidenav > button").click()
     driver.find_element(By.CSS_SELECTOR, "#sideMenu > div.sidenav > div > a:nth-child(4)").click()
-    driver.find_element(By.ID, "delete_chosen_path").click()
-    driver.find_element_by_id('write_path_length').send_keys("2")
-    driver.find_element(By.ID, "delete_chosen_path").click()
-
+    driver.find_element_by_id('write_path_length').send_keys("1")
+    driver.execute_script("the_length=1;"
+                          "getRequestTracks(funcToGetTrackID);"
+                          "window.location.href='/main';")
+    # driver.find_element(By.ID, "delete_chosen_path").click()
     if driver.current_url == 'http://10.0.0.6:12345/main/':
         print(green('--- test passed!!! ---'))
     else:
