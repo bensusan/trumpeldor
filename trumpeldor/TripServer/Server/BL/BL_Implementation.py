@@ -248,3 +248,11 @@ class BL_Implementation(BL_Abstract):
     def get_all_feedback_questions(self):
         return self.DAL.get_all_feedback_questions()
 
+    def add_info(self, info):
+        return self.DAL.add_info(info['info'])
+
+    def get_info(self):
+        return self.DAL.get_info()
+
+    def delete_info(self, id):
+        return self.DAL.delete_info(id)

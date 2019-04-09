@@ -116,3 +116,7 @@ class Hint(models.Model):
 class Message(models.Model):
     title = models.CharField(max_length=50)     # TODO - maybe change length
     data = models.CharField(max_length=500)     # TODO - maybe change length
+
+
+class Info(models.Model):
+    info = models.TextField()

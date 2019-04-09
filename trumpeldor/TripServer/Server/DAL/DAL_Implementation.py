@@ -252,7 +252,6 @@ class DAL_Implementation(DAL_Abstract):
     def edit_track(self, id_track, points):
         track = self.get_track(id_track)
         track.points.set(null)
-        print(points)
         for p in points:
             attr = self.getAttraction(p['id'])
             track.points.add(attr)
@@ -261,3 +260,16 @@ class DAL_Implementation(DAL_Abstract):
 
     def get_all_feedback_questions(self):
         return Feedback.objects.all()
+
+    def add_info(self, info):
+        info = Info(info=info)
+        info.save()
+        return info
+
+    def get_info(self):
+        return Info.objects.all()
+
+    def delete_info(self, id):
+        return Info.objects.filter(id=id).first().delete()
+
+

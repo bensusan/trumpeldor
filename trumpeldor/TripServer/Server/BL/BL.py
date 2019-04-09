@@ -145,6 +145,15 @@ class BL_Abstract(object):
     def get_all_feedback_questions(self):
         raise NotImplementedError("Should have implemented this")
 
+    def add_info(self, info):
+        raise NotImplementedError("Should have implemented this")
+
+    def get_info(self):
+        raise NotImplementedError("Should have implemented this")
+
+    def delete_info(self, id):
+        raise NotImplementedError("Should have implemented this")
+
 
 class BLProxy(BL_Abstract):
 
@@ -362,3 +371,18 @@ class BLProxy(BL_Abstract):
         if self.Implementation is None:
             raise NotImplementedError("Should have implemented this")
         return self.Implementation.get_all_feedback_questions()
+
+    def add_info(self, info):
+        if self.Implementation is None:
+            raise NotImplementedError("Should have implemented this")
+        return self.Implementation.add_info(info)
+
+    def get_info(self):
+        if self.Implementation is None:
+            raise NotImplementedError("Should have implemented this")
+        return self.Implementation.get_info()
+
+    def delete_info(self, id):
+        if self.Implementation is None:
+            raise NotImplementedError("Should have implemented this")
+        return self.Implementation.delete_info(id)
