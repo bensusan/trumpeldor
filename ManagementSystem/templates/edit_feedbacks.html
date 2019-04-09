@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Feedbacks</title>
+     {% load static %}
+<link rel="stylesheet" href="{% static 'just_want_background.css' %}?version=1">
+    {% load static %}
+<link rel="stylesheet" href="{% static 'SideMenu.css' %}?version=3">
+    {% load static %}
+<script src="{% static 'edit_feedbacks.js' %}?version=3"></script>
+    {% load static %}
+<script src="{% static 'attractions.js' %}?version=3"></script>
+     {% load static %}
+<script src="{% static 'properties.js' %}?version=2"></script>
+</head>
+<body>
+
+
+<div align="center">
+    <label for="hint"><b>Existing Feedbacks:</b></label>
+<p id="existing_fbs"></p>
+<p></p>
+{#<button onclick="window.location.href='/add_aq'" type="button">Add American Question</button>#}
+<p></p>
+{#<button type="button" id="want_to_edit_aq">Edit American Question</button>#}
+<p></p>
+<textarea id="write_fb_to_change" placeholder="Write Feedback ID..." style="display: none"></textarea>
+<button type="button" id="edit_chosen_fb" style="display: none">Edit</button>
+    <textarea id="write_fb_txt" placeholder="Write Feedback Question here..." style="display: none"></textarea>
+
+<p></p>
+<p></p>
+{#<button type="button" id="want_to_delete_aq">Delete American Question</button>#}
+<p></p>
+<textarea id="write_fb_id_to_delete" placeholder="Write Feedback ID..." style="display: none"></textarea>
+<button type="button" id="delete_chosen_fb" style="display: none">Delete</button>
+<p></p>
+<button class="button" onclick="doneEditingFbs()" type="button">Finish</button>
+
+
+</div>
+<div>
+<nav id="sideMenu"></nav>
+{% load static %}
+<script src="{% static 'menu_for_edit_feedbacks.js' %}?version=2"></script>
+
+</div>
+
+{#style="display:none"#}
+</body>
+</html>

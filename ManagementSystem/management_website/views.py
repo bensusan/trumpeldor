@@ -67,6 +67,10 @@ def edit_hint_edit_page(request):
     return render(request, "edit_hint_edit.html")
 
 
+def edit_feedbacks_page(request):
+    return render(request, "edit_feedbacks.html")
+
+
 def feedback_page(request):
     return render(request, "feedback.html")
 

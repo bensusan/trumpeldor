@@ -23,7 +23,7 @@ document.getElementById("sideMenu").innerHTML = '<div class="sidenav">\n' +
     '  </button>\n' +
     '  <div class="dropdown-container">\n' +
     '    <a href="/feedback">Add</a>\n' +
-    '    <a href="/add_medium_path">Edit</a>\n' +
+    '    <a href="/edit_feedbacks">Edit</a>\n' +
     '  </div>\n' +
     '</div>\n' +
     '\n' +
