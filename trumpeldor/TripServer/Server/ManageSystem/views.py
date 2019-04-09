@@ -239,6 +239,32 @@ class Attraction(generics.GenericAPIView):
         return Response(ans)
 
 
+class Info(generics.GenericAPIView):
+    serializer_class = InfoSerializer
+    queryset = ''
+
+    def get(self, request, *args, **kwargs):
+        ans = BL.get_info()
+        ans = InfoSerializer(ans, many=True)
+        ans = json.loads(json.dumps(ans.data))
+        return Response(ans)
+
+    def post(self, request, *args, **kwargs):
+        return general_post_or_get(
+            request,
+            "AddAttraction",
+            BL.add_info,
+            InfoSerializer)
+
+
+class InfoSpecific(generics.GenericAPIView):
+    serializer_class = InfoSerializer
+
+    def delete(self, request, *args, **kwargs):
+        ans = BL.delete_info(self.kwargs['id'])
+        ans = json.loads(json.dumps(ans))
+        return Response(ans)
+
 # class EntertainmentsList(generics.GenericAPIView):
 #     serializer_class = EntertainmentSerializer
 #     queryset = ''

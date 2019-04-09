@@ -89,11 +89,12 @@ class DAL_Implementation(DAL_Abstract):
                 # sub_track = self.get_track(subTrack['id'])
                 track = Track(subTrack=subTrack, length=length+i)
             track.save()
-            for p in points:
-                attr = self.get_attraction(p['id'])
-                track.points.add(attr)
-                track.save()
-            subTrack = track
+            if i == 0:
+                for p in points:
+                    attr = self.get_attraction(p['id'])
+                    track.points.add(attr)
+                    track.save()
+                subTrack = track
         return True
 
     def add_feedback_question(self, question, kind):
@@ -234,8 +235,16 @@ class DAL_Implementation(DAL_Abstract):
         #         track.save()
         #     return True
         attr = self.getAttraction(id_attraction)
+        track = self.get_track(id_track)
         if attr is not None:
-            track = self.get_track(id_track)
+            for i in range(1, track.length):
+                track_smaller = self.get_track_by_length(i)
+                print(i)
+                print(track_smaller)
+                print(track_smaller.points.all())
+                print(attr)
+                if attr in track_smaller.points.all():
+                    return False
             track.points.remove(attr)
             track.save()
             return True
@@ -251,7 +260,6 @@ class DAL_Implementation(DAL_Abstract):
     def edit_track(self, id_track, points):
         track = self.get_track(id_track)
         track.points.set(null)
-        print(points)
         for p in points:
             attr = self.getAttraction(p['id'])
             track.points.add(attr)
@@ -260,3 +268,16 @@ class DAL_Implementation(DAL_Abstract):
 
     def get_all_feedback_questions(self):
         return Feedback.objects.all()
+
+    def add_info(self, info):
+        info = Info(info=info)
+        info.save()
+        return info
+
+    def get_info(self):
+        return Info.objects.all()
+
+    def delete_info(self, id):
+        return Info.objects.filter(id=id).first().delete()
+
+

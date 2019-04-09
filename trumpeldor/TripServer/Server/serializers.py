@@ -148,3 +148,9 @@ class ScoreSerializer(serializers.ModelSerializer):
     class Meta:
         fields = ('groupName', 'score')
         model = Trip
+
+
+class InfoSerializer(serializers.ModelSerializer):
+    class Meta:
+        fields = ('id', 'info',)
+        model = Info
