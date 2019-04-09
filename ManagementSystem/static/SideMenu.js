@@ -18,7 +18,13 @@ document.getElementById("sideMenu").innerHTML = '<div class="sidenav">\n' +
     '  </div>\n' +
     '  <a href="#services">Statistics</a>\n' +
     '  <a href="/additional_info">Additional Info</a>\n' +
-    '  <a href="/feedback">Feedback</a>\n' +
+    '  <button class="dropdown-btn">Feedback\n' +
+    '    <i class="fa fa-caret-down"></i>\n' +
+    '  </button>\n' +
+    '  <div class="dropdown-container">\n' +
+    '    <a href="/feedback">Add</a>\n' +
+    '    <a href="/add_medium_path">Edit</a>\n' +
+    '  </div>\n' +
     '</div>\n' +
     '\n' +
     '<div class="main">\n' +

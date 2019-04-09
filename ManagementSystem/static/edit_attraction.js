@@ -40,10 +40,10 @@ function localFileVideoPlayer() {
 
 window.onload=function(){
     getRequestAttractions(getName);
-    var deletePointBTN = document.getElementById('delete_point');
-    deletePointBTN.addEventListener('click', function() {
-        getRequestAttractions(functionOfDelete);
-    });
+    // var deletePointBTN = document.getElementById('delete_point');
+    // deletePointBTN.addEventListener('click', function() {
+    //     getRequestAttractions(functionOfDelete);
+    // });
     localFileVideoPlayer();
     };
 
@@ -68,9 +68,9 @@ function doVideo(){
     }
 
 
-    // function deletePoint() {
-    //     getRequestAttractions(functionOfDelete);
-    // }
+    function deletePoint() {
+        getRequestAttractions(functionOfDelete);
+    }
 
     function functionOfDelete(attractionsJSON) {
 

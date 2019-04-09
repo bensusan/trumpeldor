@@ -14,7 +14,7 @@
     {% load static %}
     <script src="{% static 'attractions.js' %}?version=3"></script>
     {% load static %}
-<script src="{% static 'edit_attraction.js' %}?version=3"></script>
+<script src="{% static 'edit_attraction.js' %}?version=4"></script>
      {% load static %}
 <script src="{% static 'properties.js' %}?version=2"></script>
 </head>
@@ -58,12 +58,9 @@
       <textarea type="text" id="subt" placeholder="Enter Subtitles..." name="attr_subt" style="width: 310px;height: 200px; overflow: scroll"> </textarea>
 
 
-{#      <button onclick="window.location.href='/add_game'" type="button">Add Game</button>#}
-{#      <button onclick="window.location.href='/pick_aq'" type="button">Edit American Questions</button>#}
-{#      <button onclick="window.location.href='/pick_hint'" type="button">Edit Hints</button>#}
     <button onclick="finishEditingAttraction()" type="button">Submit</button>
-{#    <button onclick="deletePoint()" type="button">Delete Point</button>#}
-      <button type="button" id="delete_point">Delete Point</button>
+    <button onclick="deletePoint()" id='delete_point' type="button">Delete Point</button>
+{#    <button id="delete_point" type="button">Delete Point</button>#}
 
   </div>
 

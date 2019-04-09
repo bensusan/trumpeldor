@@ -1,4 +1,3 @@
-let loop_add_aq = true;
 let numberOfAns;
 let numberOfCorrectAns;
 
@@ -24,8 +23,8 @@ window.onload = function() {
     let correctAns3 = document.getElementById('correctAns3');
 
     okBTN.addEventListener('click',function () {
-    let numberOfAns = noOfAns.value;
-    let numberOfCorrectAns = noOfCorrect.value;
+    numberOfAns = noOfAns.value;
+    numberOfCorrectAns = noOfCorrect.value;
 
     okBTN.style.display = "none";
     txt1.style.display = "none";
@@ -81,18 +80,12 @@ window.onload = function() {
     }
     });
 
+
     addAqBTN.addEventListener('click', function() {
     getRequestAttractions(funcToGetAttraction);
-        //alert("2");
-        //setTimeout(finishAddAq ,10);
-
-
-
-
     });
 
 };
-
 
 function postRequestAmericanQuestion(aq,attr_id){
     //alert("aq blat");
@@ -111,8 +104,8 @@ function postRequestAmericanQuestion(aq,attr_id){
         if(p.name===name && p.description===desc)
         {
 
-            let ansNum = Number(numberOfAns);
-            let correct = Number(numberOfCorrectAns);
+            let ansNum = numberOfAns;
+            let correct = numberOfCorrectAns;
             let answers = fillWithText(1,ansNum);
             let correctArr = fillWithText(2,correct);
             // let ans1=document.getElementById("ans1").value;
@@ -129,13 +122,10 @@ function postRequestAmericanQuestion(aq,attr_id){
             };
             postRequestAmericanQuestion(american_question_to_send,attr['id']);
             localStorage.setItem("the_attr", JSON.stringify(attr));
-
-            loop_add_aq=false;
         }
       });
 
-window.location.href='/pick_aq_edit';
-loop_add_aq=false;
+    window.location.href='/pick_aq_edit';
     }
 
 
@@ -146,7 +136,7 @@ loop_add_aq=false;
 
     if(what==1){
         while(i<=iter){
-            retArr.push(document.getElementById("ans"+i).value);
+            retArr.push(document.getElementById("ans"+""+i).value);
             i++;
         }
     }
