@@ -94,7 +94,7 @@ class DAL_Implementation(DAL_Abstract):
                     attr = self.get_attraction(p['id'])
                     track.points.add(attr)
                     track.save()
-                subTrack = track
+            subTrack = track
         return True
 
     def add_feedback_question(self, question, kind):
