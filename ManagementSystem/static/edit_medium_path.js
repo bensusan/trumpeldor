@@ -89,8 +89,9 @@ function markAttractionsOfMediumPaths(tracksJSON){
 
             let points_of_track = track['points'];
             let points_of_subtrack = track['subTrack']['points'];
+            let children = [].concat(points_of_subtrack,points_of_track);
 
-            points_of_track.forEach(function (attr) {
+            children.forEach(function (attr) {
                     let pos = {lat: attr['x'], lng: attr['y']};
                     let pos2 = {lat: (attr['x']).toFixed(8), lng: (attr['y']).toFixed(8)};
                     fullMedPoints.push(attr);

@@ -95,15 +95,13 @@ function markAttractionsOfLongPaths(tracksJSON){
 
             let points_of_track = track['points'];
             let points_of_subtrack = track['subTrack']['points'];
+            let points_of_subsubtrack = track['subTrack']['subTrack']['points'];
+            alert(points_of_subsubtrack);
             let children = [].concat(points_of_subtrack,points_of_track);
-            let uniqueNames = children.filter(function(item, pos) {
-                return children.indexOf(item).name == pos.name;
-            });
-            // alert(uniqueNames.length +" "+ children.length);
-            uniqueNames.forEach(function (attr) {
-                    fullLongPoints.push(attr);
-                let pos2 = {lat: (attr['x']).toFixed(8), lng: (attr['y']).toFixed(8)}; // change to 13 instead of 8!!!
 
+            children.forEach(function (attr) {
+                    fullLongPoints.push(attr);
+                    let pos2 = {lat: (attr['x']).toFixed(8), lng: (attr['y']).toFixed(8)}; // change to 13 instead of 8!!!
                     let pos = {lat: attr['x'], lng: attr['y']};
                     pointsOfMedium.push(pos2);
                     localStorage.setItem("title" + pos, "attraction ID: " + attr['id'] + "\nattraction name: " + attr['name'] + "\nposition: (" + attr['x'] + "," + attr['y'] + ")");
