@@ -78,14 +78,11 @@ class Hint(generics.GenericAPIView):
 
 class FeedbackList(generics.GenericAPIView):
     serializer_class = FeedbackSerializer
-    queryset = ''
 
     def get(self, request, *args, **kwargs):
         ans = BL.get_all_feedback_questions()
         ans = FeedbackSerializer(ans, many=True)
         ans = json.loads(json.dumps(ans.data))
-        if DEBUG:
-            print("Sent:", ans, sep="\n")
         return Response(ans)
 
     def post(self, request, *args, **kwargs):
@@ -96,7 +93,7 @@ class FeedbackList(generics.GenericAPIView):
 
 
 class Feedback(generics.GenericAPIView):
-    serializer_class = AmericanQuestionSerializer
+    serializer_class = FeedbackSerializer
 
     def get(self, request, *args, **kwargs):
         ans = BL.get_feedback_question(self.kwargs['id'])
@@ -265,24 +262,31 @@ class InfoSpecific(generics.GenericAPIView):
         ans = json.loads(json.dumps(ans))
         return Response(ans)
 
-# class EntertainmentsList(generics.GenericAPIView):
-#     serializer_class = EntertainmentSerializer
-#     queryset = ''
-#
-#     def get(self, request, *args, **kwargs):
-#         return general_post_or_get(
-#             None,
-#             "AddAttraction",
-#             BL.get_attractions,
-#             AttractionSerializer,
-#             True)
-#
-#     def post(self, request, *args, **kwargs):
-#         return general_post_or_get(
-#             request,
-#             "AddAttraction",
-#             BL.add_attraction,
-#             AttractionSerializer)
+
+class SlidingPuzzleList(generics.GenericAPIView):
+    serializer_class = SlidingPuzzleSerializer
+    queryset = ''
+
+    def get(self, request, *args, **kwargs):
+        ans = BL.get_all_sliding_puzzles_for_attraction(self.kwargs['id_attr'])
+        ans = SlidingPuzzleSerializer(ans, many=True)
+        ans = json.loads(json.dumps(ans.data))
+        return Response(ans)
+
+    def delete(self, request, *args, **kwargs):
+        ans = BL.delete_sliding_puzzle(self.kwargs['id_attr'])
+        ans = json.loads(json.dumps(ans))
+        return Response(ans)
+
+    def post(self, request, *args, **kwargs):
+        ans = BL.add_sliding_puzzle(self.kwargs['id_attr'], request.data)
+        ans = SlidingPuzzleSerializer(ans, many=False)
+        ans = json.loads(json.dumps(ans.data))
+        return Response(ans)
+
+
+
+
 
 def sign_in_page(request):
     return render(request, "signIn.html")

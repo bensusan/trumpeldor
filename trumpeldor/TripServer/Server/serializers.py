@@ -76,7 +76,7 @@ class PuzzleSerializer(serializers.ModelSerializer):
 
 class SlidingPuzzleSerializer(serializers.ModelSerializer):
     class Meta:
-        fields = ('id', 'piecesURLS', 'width', 'height',)
+        fields = ('id', 'piecesURLS', 'width', 'height', 'description')
         model = SlidingPuzzle
 
 

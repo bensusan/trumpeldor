@@ -196,7 +196,7 @@ class DAL_Implementation(DAL_Abstract):
         return Hint.objects.filter(pk=id_hint, attraction=self.getAttraction(id_attraction)).first()
 
     def get_feedback_question(self, id_feedback):
-        return Feedback.objects.filter(pk=id_feedback).all()
+        return Feedback.objects.filter(pk=id_feedback).first()
 
     def get_attraction_by_x_y(self, x, y):
         return Attraction.objects.filter(x=x, y=y).first()
@@ -280,4 +280,14 @@ class DAL_Implementation(DAL_Abstract):
     def delete_info(self, id):
         return Info.objects.filter(id=id).first().delete()
 
+    def get_all_sliding_puzzles_for_attraction(self, id_attraction):
+        return SlidingPuzzle.objects.filter(attraction=self.get_attraction(id_attraction)).all()
 
+    def add_sliding_puzzle(self, id_attraction, piecesURLS, width, height, description):
+        sliding_puzzle = SlidingPuzzle(attraction=self.get_attraction(id_attraction), description=description, piecesURLS=piecesURLS, width=width, height=height)
+        sliding_puzzle.save()
+        return sliding_puzzle
+
+    def delete_sliding_puzzle(self, id_attraction):
+        self.get_all_sliding_puzzles_for_attraction(id_attraction).delete()
+        return True
