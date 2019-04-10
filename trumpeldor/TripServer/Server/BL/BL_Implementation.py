@@ -262,4 +262,7 @@ class BL_Implementation(BL_Abstract):
 
     def add_sliding_puzzle(self, id_attraction, sliding_puzzle):
         return self.DAL.add_sliding_puzzle(id_attraction, sliding_puzzle['piecesURLS'], sliding_puzzle['width'],
-                                           sliding_puzzle['height'])
+                                           sliding_puzzle['height'], sliding_puzzle['description'])
+
+    def delete_sliding_puzzle(self, id_attraction):
+        return self.DAL.delete_sliding_puzzle(id_attraction)

@@ -160,6 +160,9 @@ class BL_Abstract(object):
     def add_sliding_puzzle(self, id_attraction, sliding_puzzle):
         raise NotImplementedError("Should have implemented this")
 
+    def delete_sliding_puzzle(self, id_attraction):
+        raise NotImplementedError("Should have implemented this")
+
 
 class BLProxy(BL_Abstract):
 
@@ -403,3 +406,7 @@ class BLProxy(BL_Abstract):
             raise NotImplementedError("Should have implemented this")
         return self.Implementation.add_sliding_puzzle(id_attraction, sliding_puzzle)
 
+    def delete_sliding_puzzle(self, id_attraction):
+        if self.Implementation is None:
+            raise NotImplementedError("Should have implemented this")
+        return self.Implementation.delete_sliding_puzzle(id_attraction)

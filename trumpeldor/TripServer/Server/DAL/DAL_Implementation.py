@@ -283,7 +283,11 @@ class DAL_Implementation(DAL_Abstract):
     def get_all_sliding_puzzles_for_attraction(self, id_attraction):
         return SlidingPuzzle.objects.filter(attraction=self.get_attraction(id_attraction)).all()
 
-    def add_sliding_puzzle(self, id_attraction, piecesURLS, width, height):
-        sliding_puzzle = SlidingPuzzle(attraction=self.get_attraction(id_attraction), piecesURLS=piecesURLS, width=width, height=height)
+    def add_sliding_puzzle(self, id_attraction, piecesURLS, width, height, description):
+        sliding_puzzle = SlidingPuzzle(attraction=self.get_attraction(id_attraction), description=description, piecesURLS=piecesURLS, width=width, height=height)
         sliding_puzzle.save()
         return sliding_puzzle
+
+    def delete_sliding_puzzle(self, id_attraction):
+        self.get_all_sliding_puzzles_for_attraction(id_attraction).delete()
+        return True

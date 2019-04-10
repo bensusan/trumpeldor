@@ -51,6 +51,7 @@ class AmericanQuestion(models.Model):
 
 class Entertainment(models.Model):
     attraction = models.ForeignKey(Attraction, on_delete=models.CASCADE)
+    description = models.TextField()
 
 
 class FindTheDifferences(Entertainment):

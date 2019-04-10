@@ -273,11 +273,20 @@ class SlidingPuzzleList(generics.GenericAPIView):
         ans = json.loads(json.dumps(ans.data))
         return Response(ans)
 
+    def delete(self, request, *args, **kwargs):
+        ans = BL.delete_sliding_puzzle(self.kwargs['id_attr'])
+        ans = json.loads(json.dumps(ans))
+        return Response(ans)
+
     def post(self, request, *args, **kwargs):
         ans = BL.add_sliding_puzzle(self.kwargs['id_attr'], request.data)
         ans = SlidingPuzzleSerializer(ans, many=False)
         ans = json.loads(json.dumps(ans.data))
         return Response(ans)
+
+
+
+
 
 def sign_in_page(request):
     return render(request, "signIn.html")
