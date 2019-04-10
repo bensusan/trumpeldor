@@ -21,6 +21,7 @@ urlpatterns = {
     path('track/<int:id>/<action>', Track.as_view()),
     path('info/', Info.as_view()),
     path('info/<int:id>/', InfoSpecific.as_view()),
+    path('attraction/<int:id_attr>/sliding_puzzle/', SlidingPuzzleList.as_view()),
     # path('entertainment/', EntertainmentsList.as_view()),
     # path('americanQuestion/', views.AmericanQuestion.as_view()),
     # path('attraction/(\d+)/(\d+)/', views.SpecificAttraction.as_view()),
