@@ -9,8 +9,10 @@
 <link rel="stylesheet" href="{% static 'just_want_background.css' %}?version=2">
      {% load static %}
 <script src="{% static 'properties.js' %}?version=2"></script>
+        {% load static %}
+<script src="{% static 'attractions.js' %}?version=4"></script>
     {% load static %}
-<script src="{% static 'add_picture.js' %}?version=3"></script>
+<script src="{% static 'add_picture.js' %}?version=4"></script>
 </head>
 <body>
 <div align="center">
@@ -26,7 +28,7 @@
 {#<p id="suka"></p>#}
 
 
-<button class="button" onclick="window.location.href='/add_game'">Finished</button>
+<button class="button" onclick="sendTheGameData()">Finished</button>
     </div>
 <nav id="sideMenu"></nav>
 {% load static %}
