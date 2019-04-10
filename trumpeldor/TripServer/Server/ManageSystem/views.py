@@ -78,14 +78,11 @@ class Hint(generics.GenericAPIView):
 
 class FeedbackList(generics.GenericAPIView):
     serializer_class = FeedbackSerializer
-    queryset = ''
 
     def get(self, request, *args, **kwargs):
         ans = BL.get_all_feedback_questions()
         ans = FeedbackSerializer(ans, many=True)
         ans = json.loads(json.dumps(ans.data))
-        if DEBUG:
-            print("Sent:", ans, sep="\n")
         return Response(ans)
 
     def post(self, request, *args, **kwargs):
@@ -96,7 +93,7 @@ class FeedbackList(generics.GenericAPIView):
 
 
 class Feedback(generics.GenericAPIView):
-    serializer_class = AmericanQuestionSerializer
+    serializer_class = FeedbackSerializer
 
     def get(self, request, *args, **kwargs):
         ans = BL.get_feedback_question(self.kwargs['id'])

@@ -196,7 +196,7 @@ class DAL_Implementation(DAL_Abstract):
         return Hint.objects.filter(pk=id_hint, attraction=self.getAttraction(id_attraction)).first()
 
     def get_feedback_question(self, id_feedback):
-        return Feedback.objects.filter(pk=id_feedback).all()
+        return Feedback.objects.filter(pk=id_feedback).first()
 
     def get_attraction_by_x_y(self, x, y):
         return Attraction.objects.filter(x=x, y=y).first()
