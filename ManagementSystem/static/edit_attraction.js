@@ -1,5 +1,7 @@
 var attr_for_editing;
 var suki;
+var sukiVid;
+
 
 function localFileVideoPlayer() {
 	'use strict';
@@ -50,6 +52,13 @@ function doVideo(){
 
     function finishEditingAttraction() {
     let attr_after_editing;
+    let vidArr = attr_for_editing['videosURLS'];
+    if(sukiVid!=undefined)
+    {
+        vidArr=[];
+        vidArr.push(sukiVid);
+    }
+
     if(suki==undefined) {
         attr_after_editing = {
             name: document.getElementById("attr_name").value,
@@ -57,7 +66,7 @@ function doVideo(){
             y: attr_for_editing['y'],
             description: document.getElementById("desc").value,
             picturesURLS: attr_for_editing['picturesURLS'],
-            videosURLS: attr_for_editing['videosURLS']
+            videosURLS: vidArr
         };
     }
     else {
@@ -69,7 +78,7 @@ function doVideo(){
             y: attr_for_editing['y'],
             description: document.getElementById("desc").value,
             picturesURLS: picArr,
-            videosURLS: attr_for_editing['videosURLS']
+            videosURLS: vidArr
         };
     }
          editRequestAttraction(attr_after_editing,attr_for_editing['id']);
@@ -123,6 +132,8 @@ function doVideo(){
           document.getElementById("desc").value = p.description;
             var image = document.getElementById('output');
 	        image.src = attr['picturesURLS'][0];
+	        var video = document.getElementById('vid_itself');
+	        video.src = attr['videosURLS'][0];
           localStorage.setItem("name_for_add_aq", p.name);
         localStorage.setItem("desc_for_add_aq", p.description);
         }
@@ -163,6 +174,11 @@ function shit(suk) {
     // tmuna.src = suki;
 }
 
+function shitVid(suk) {
+    sukiVid=suk;
+    // var tmuna = document.getElementById("sukablat");
+    // tmuna.src = suki;
+}
 
 function encodeImageFileAsURL(element) {
     var image = document.getElementById('output');
@@ -176,6 +192,21 @@ function encodeImageFileAsURL(element) {
    //alert(reader.result)
    shit(reader.result)
   }
+
+  reader.readAsDataURL(file);
+}
+
+
+function encodeVideoFileAsURL(element) {
+
+    sukiVid="";
+
+  var file = element.files[0];
+  var reader = new FileReader();
+  reader.onloadend = function() {
+   //alert(reader.result)
+   shitVid(reader.result)
+  };
 
   reader.readAsDataURL(file);
 }

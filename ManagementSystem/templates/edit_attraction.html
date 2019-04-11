@@ -32,15 +32,15 @@
     <label for="name"><b>Upload Video: </b></label>
 
     <div id="message"></div>
-<video height="200px" width="350px" controls="" autoplay=""></video>
-    <input id="video_input" type="file" accept="video/*" style="display: none">
+<video id="vid_itself" height="200px" width="350px" controls="" autoplay=""></video>
+    <input id="video_input" type="file" accept="video/*" onchange="encodeVideoFileAsURL(this)" style="display: none">
 <button class="button" onclick="doVideo()" type="button">Upload Video</button>
 
     <p></p>
     <label for="hint"><b>Upload Image:</b></label>
 <p></p>
 <input type="file" onchange="encodeImageFileAsURL(this)"/>
-<p><img id="output" width="200" /></p>
+<p><img id="output" width="200"/></p>
 {#    <p></p>#}
 {#    <label for="hint"><b>Upload Image:</b></label>#}
 {#    <p><input type="file"  accept="image/*" name="image" id="file"  onchange="loadFile(event)" style="display: none;"></p>#}

@@ -94,6 +94,7 @@ function shit(suk) {
 
 function encodeImageFileAsURL(element) {
     var image = document.getElementById('output');
+    image.style.display="inline";
 	image.src = URL.createObjectURL(element.files[0]);
 
     suki="";
