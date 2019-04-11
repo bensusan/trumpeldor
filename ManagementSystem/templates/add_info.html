@@ -7,9 +7,11 @@
     {% load static %}
 <link rel="stylesheet" href="{% static 'just_want_background.css' %}?version=2">
     {% load static %}
+<script src="{% static 'attractions.js' %}?version=2"></script>
+    {% load static %}
 <script src="{% static 'add_info.js' %}?version=6"></script>
 {% load static %}
-<script src="{% static 'properties.js' %}?version=3"></script>
+<script src="{% static 'properties.js' %}?version=2"></script>
 </head>
 <body>
 <div align="center">
@@ -19,10 +21,10 @@
 
 <p></p>
 {#<input class="button" type="button" value="Send" onclick="sendInfo()" />#}
+    <button onclick="sendInfo()" class="button" type="button" >Send</button>
     <button class="button" type="button" onclick="clearText()">Clear</button>
 
 {#<input class="button" type="button" value="Clear" onclick="clearText()" />#}
-    <button onclick="sendInfo()" class="button" type="button" >Send</button>
 
 </div>
 
