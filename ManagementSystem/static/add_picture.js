@@ -39,7 +39,8 @@ function funcToSendGame(attractionsJSON) {
 
             if(localStorage.getItem("game_kind")=="sliding") {
                 let the_kind = "sliding_puzzle";
-                let data_send = {piecesURLS: suki, width: 4, height: 4};
+                let n_size = document.getElementById("n_size").value
+                let data_send = {piecesURLS: suki, width: n_size, height: n_size, description: document.getElementById("game_instructions_text").value};
                 let attr_id = attr['id'];
                 postRequestGame(data_send,attr_id,the_kind);
             }
@@ -54,7 +55,6 @@ function sendTheGameData() {
 }
 
 function postRequestGame(data,attr_id,game_kind){
-    //alert("aq blat");
     serverRequest("POST", function noop(dummy){}, 'http://'+ip+':12344/managementsystem/attraction/'+
         attr_id+'/'+game_kind+'/',
         JSON.stringify(data));
