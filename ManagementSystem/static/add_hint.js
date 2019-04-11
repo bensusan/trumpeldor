@@ -184,13 +184,21 @@ function postRequestHint(the_hint,attr_id){
         JSON.stringify(the_hint));
 }
 
+
 var suki;
+var sukiVid;
 
 
 function shit(suk) {
     suki=suk;
     document.getElementById("suka").innerHTML=suki;
     localStorage.setItem("url_of_img",suki);
+    // var tmuna = document.getElementById("sukablat");
+    // tmuna.src = suki;
+}
+
+function shitVid(suk) {
+    sukiVid=suk;
     // var tmuna = document.getElementById("sukablat");
     // tmuna.src = suki;
 }
@@ -212,6 +220,20 @@ function encodeImageFileAsURL(element) {
   reader.readAsDataURL(file);
 }
 
+function encodeVideoFileAsURL(element) {
+
+    sukiVid="";
+
+  var file = element.files[0];
+  var reader = new FileReader();
+  reader.onloadend = function() {
+   //alert(reader.result)
+   shitVid(reader.result)
+  };
+
+  reader.readAsDataURL(file);
+}
+
 function sendImageHint() {
     getRequestAttractions(funcToSendImage);
 }
@@ -227,6 +249,30 @@ function funcToSendImage(attractionsJSON) {
         {
 
             let the_hint = {attraction: attr, kind: "HP", data:suki};
+            let attr_id = attr['id'];
+            postRequestHint(the_hint,attr_id);
+            window.location.href='/add_hint';
+        }
+
+    });
+}
+
+
+function sendVideoHint() {
+    getRequestAttractions(funcToSendVideo);
+}
+
+function funcToSendVideo(attractionsJSON) {
+     let name = localStorage.getItem("name_for_add_aq");
+        let desc = localStorage.getItem("desc_for_add_aq");
+      // alert("in get name! "+"of the origin : " + lat + " , " + lng);
+        attractionsJSON.forEach(function (attr) {
+        let p = {name: attr['name'], description:attr['description']};
+       // alert("in get name! "+"of the origin : " + name + " , " + desc + "\n of the other: "+p.name +" , "+ p.description);
+        if(p.name===name && p.description===desc)
+        {
+
+            let the_hint = {attraction: attr, kind: "HP", data:sukiVid};
             let attr_id = attr['id'];
             postRequestHint(the_hint,attr_id);
             window.location.href='/add_hint';
