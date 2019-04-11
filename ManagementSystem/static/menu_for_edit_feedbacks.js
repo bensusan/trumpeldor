@@ -3,7 +3,7 @@
 document.getElementById("sideMenu").innerHTML = '<div class="sidenav">\n' +
     '  <h2 style="color:#818181;">Edit Feedback</h2>' +
     '  <a href="/main">Back</a>\n' +
-    '  <a onclick="wantToChangeButton()">Change Feedback</a>\n' +
+    // '  <a onclick="wantToChangeButton()">Change Feedback</a>\n' +
     '  <a onclick="wantToDeleteButton()">Delete Feedback</a>\n' +
     '  <a href="/edit_attraction">Finish</a>\n' +
     '</div>\n' +

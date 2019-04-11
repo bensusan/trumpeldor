@@ -10,7 +10,7 @@
     {% load static %}
 <script src="{% static 'attractions.js' %}?version=2"></script>
     {% load static %}
-<script src="{% static 'add_hint_edit.js' %}?version=4"></script>
+<script src="{% static 'add_hint_edit.js' %}?version=3"></script>
      {% load static %}
 <script src="{% static 'properties.js' %}?version=2"></script>
 </head>
@@ -45,10 +45,12 @@
 <p></p>
 <textarea id="pic_hint_description" placeholder="Write description..." style="display: none"></textarea>
     <p></p>
-    <p><input type="file"  accept="image/*" name="image" id="file"  onchange="loadFile(event)" style="display: none;"></p>
-    <p><label id="click_here_label" for="file" style="display: none">Click Here!</label></p>
-    <p><img id="output" width="200"  style="display: none"/></p>
-<button type="button" id="send_pic_hint" style="display: none">Send</button>
+   <label for="hint" id="upload_title" style="display: none"><b>Upload Image:</b></label>
+<p></p>
+<input type="file" id="file" onchange="encodeImageFileAsURL(this)" style="display: none"/>
+<p><img id="output" width="200" style="display: none"/></p>
+<button type="button" onclick="sendImageHint()" id="send_pic_hint" style="display: none">Send</button>
+
 
 <p></p>
 <button class="button" id="finish_add_hint" onclick="finishHint()" type="button">Finish</button>
