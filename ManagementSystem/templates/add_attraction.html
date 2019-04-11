@@ -24,7 +24,7 @@
 
     <div id="message"></div>
 <video height="200px" width="350px" controls="" autoplay=""></video>
-    <input id="video_input" type="file" accept="video/*" style="display: none">
+    <input id="video_input" type="file" accept="video/*" onchange="encodeVideoFileAsURL(this)" style="display: none">
 <button class="button" onclick="doVideo()" type="button">Upload Video</button>
 <p></p>
     <label for="hint"><b>Upload Image:</b></label>
