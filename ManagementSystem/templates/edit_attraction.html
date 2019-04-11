@@ -14,7 +14,7 @@
     {% load static %}
     <script src="{% static 'attractions.js' %}?version=3"></script>
     {% load static %}
-<script src="{% static 'edit_attraction.js' %}?version=3"></script>
+<script src="{% static 'edit_attraction.js' %}?version=4"></script>
      {% load static %}
 <script src="{% static 'properties.js' %}?version=2"></script>
 </head>
@@ -36,6 +36,11 @@
     <input id="video_input" type="file" accept="video/*" style="display: none">
 <button class="button" onclick="doVideo()" type="button">Upload Video</button>
 
+    <p></p>
+    <label for="hint"><b>Upload Image:</b></label>
+<p></p>
+<input type="file" onchange="encodeImageFileAsURL(this)"/>
+<p><img id="output" width="200" /></p>
 {#    <p></p>#}
 {#    <label for="hint"><b>Upload Image:</b></label>#}
 {#    <p><input type="file"  accept="image/*" name="image" id="file"  onchange="loadFile(event)" style="display: none;"></p>#}

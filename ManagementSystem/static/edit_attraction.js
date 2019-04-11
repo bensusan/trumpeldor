@@ -1,10 +1,5 @@
 var attr_for_editing;
-
-let loadFile = function(event) {
-	let image = document.getElementById('output');
-	image.src = URL.createObjectURL(event.target.files[0]);
-
-};
+var suki;
 
 function localFileVideoPlayer() {
 	'use strict';
@@ -54,14 +49,29 @@ function doVideo(){
 }
 
     function finishEditingAttraction() {
-        let attr_after_editing = {
-    name:  document.getElementById("attr_name").value,
-    x: attr_for_editing['x'],
-    y: attr_for_editing['y'],
-    description:  document.getElementById("desc").value,
-    picturesURLS: attr_for_editing['picturesURLS'],
-    videosURLS: attr_for_editing['videosURLS']};
-
+    let attr_after_editing;
+    if(suki==undefined) {
+        attr_after_editing = {
+            name: document.getElementById("attr_name").value,
+            x: attr_for_editing['x'],
+            y: attr_for_editing['y'],
+            description: document.getElementById("desc").value,
+            picturesURLS: attr_for_editing['picturesURLS'],
+            videosURLS: attr_for_editing['videosURLS']
+        };
+    }
+    else {
+        let picArr=[];
+        picArr.push(suki);
+        attr_after_editing = {
+            name: document.getElementById("attr_name").value,
+            x: attr_for_editing['x'],
+            y: attr_for_editing['y'],
+            description: document.getElementById("desc").value,
+            picturesURLS: picArr,
+            videosURLS: attr_for_editing['videosURLS']
+        };
+    }
          editRequestAttraction(attr_after_editing,attr_for_editing['id']);
          window.location.href='/attractions';
     }
@@ -111,7 +121,8 @@ function doVideo(){
           // name=p.name;
           document.getElementById("attr_name").value = p.name;
           document.getElementById("desc").value = p.description;
-
+            var image = document.getElementById('output');
+	        image.src = attr['picturesURLS'][0];
           localStorage.setItem("name_for_add_aq", p.name);
         localStorage.setItem("desc_for_add_aq", p.description);
         }
@@ -139,4 +150,32 @@ function doVideo(){
    // alert("edit blat hui");
     serverRequest("PUT", function noop(dummy){}, 'http://'+ip+':12344/managementsystem/attraction/'+attr_id+'/',
         JSON.stringify(attraction));
+}
+
+
+
+
+function shit(suk) {
+    suki=suk;
+    document.getElementById("suka").innerHTML=suki;
+    localStorage.setItem("url_of_img",suki);
+    // var tmuna = document.getElementById("sukablat");
+    // tmuna.src = suki;
+}
+
+
+function encodeImageFileAsURL(element) {
+    var image = document.getElementById('output');
+	image.src = URL.createObjectURL(element.files[0]);
+
+    suki="";
+
+  var file = element.files[0];
+  var reader = new FileReader();
+  reader.onloadend = function() {
+   //alert(reader.result)
+   shit(reader.result)
+  }
+
+  reader.readAsDataURL(file);
 }

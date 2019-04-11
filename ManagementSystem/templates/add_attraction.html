@@ -11,7 +11,7 @@
 </head>
 <body>
 {% load static %}
-<script src="{% static 'add_attraction.js' %}?version=2"></script>
+<script src="{% static 'add_attraction.js' %}?version=4"></script>
 
 {% load static %}
     <script src="{% static 'attractions.js' %}?version=2"></script>
@@ -26,7 +26,11 @@
 <video height="200px" width="350px" controls="" autoplay=""></video>
     <input id="video_input" type="file" accept="video/*" style="display: none">
 <button class="button" onclick="doVideo()" type="button">Upload Video</button>
-
+<p></p>
+    <label for="hint"><b>Upload Image:</b></label>
+<p></p>
+<input type="file" onchange="encodeImageFileAsURL(this)"/>
+<p><img id="output" width="200" /></p>
 {#        {% load static %}#}
 {#<script src="{% static 'add_attraction.js' %}?version=2"></script>#}
 
