@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Add Feedback Question:</title>
+    <title>הוספת שאלת משוב:</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     {% load static %}
 <link rel="stylesheet" href="{% static 'SideMenu.css' %}?version=4">
@@ -18,20 +18,20 @@
 </head>
 <body>
 <div align="center">
-    <label for="hint"><b>Feedback:</b></label>
+    <label for="hint"><b>משוב:</b></label>
     <p></p>
     <p>Question:</p>
-    <textarea class="backOfText" id="fbquestion" name="subject" placeholder="Enter Feedback Question..." style="width:300px;height:200px;border-radius: 10px;"></textarea>
+    <textarea class="backOfText" id="fbquestion" name="subject" placeholder="שאלת המשוב..." style="text-align:right;width:300px;height:200px;border-radius: 10px;"></textarea>
 
 {#    <input type="text"  id="fbquestion" style="height: 20px; width: 50px; border-radius: 5px;" required>#}
     <p>Feedback Type:</p>
     <select id="feedback_type">
-      <option value="opt1">Text Feedback</option>
-      <option value="opt2">Rating Feedback</option>
+      <option value="opt1">משוב טקסט</option>
+      <option value="opt2">משוב ציון</option>
     </select>
 {#    <input type="text"  id="fbtype" style="height: 20px; width: 50px; border-radius: 5px;" required>#}
     <p></p>
-     <button class="button" id="send_feedback" type="button">Send Question</button>
+     <button class="button" id="send_feedback" type="button">שליחת שאלה</button>
 
     </div>
 <nav id="sideMenu"></nav>

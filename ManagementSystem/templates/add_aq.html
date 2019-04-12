@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Add American Question:</title>
+    <title>הוספת שאלה אמריקאית</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     {% load static %}
 <link rel="stylesheet" href="{% static 'SideMenu.css' %}?version=4">
@@ -18,11 +18,11 @@
 </head>
 <body>
 <div align="center">
-    <label for="hint"><b>American Question:</b></label>
+    <label for="hint"><b>שאלה אמריקאית:</b></label>
     <p></p>
-    <p id="txt1">Number Of Answers:</p>
+    <p id="txt1">מספר תשובות אפשריות:</p>
     <input type="text"  id="noOfAns" style="height: 20px; width: 50px; border-radius: 5px;" required>
-    <p id="txt2">Number Of Correct Answers:</p>
+    <p id="txt2">מספר תשובות הנכונות:</p>
     <input type="text"  id="noOfCorrect" style="height: 20px; width: 50px; border-radius: 5px;" required>
     <p></p>
      <button id="ok_button_to_prepare" type="button">Ok</button>
@@ -51,7 +51,7 @@
     <p></p>
 {#window.location.href='/add_hint'#}
 
-    <button id="finish_add_aq_btn" class="button" type="button" style="display: none;">Send</button>
+    <button id="finish_add_aq_btn" class="button" type="button" style="display: none;">שליחה</button>
 {#<button class="button" id="finish_add_aq" onclick="finishAddAq()" type="button">Send</button>#}
     </div>
 <nav id="sideMenu"></nav>
