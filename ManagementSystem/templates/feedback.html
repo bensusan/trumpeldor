@@ -5,7 +5,7 @@
     <title>Add Feedback Question:</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     {% load static %}
-<link rel="stylesheet" href="{% static 'SideMenu.css' %}?version=3">
+<link rel="stylesheet" href="{% static 'SideMenu.css' %}?version=4">
 {% load static %}
 <link rel="stylesheet" href="{% static 'just_want_background.css' %}?version=2">
  {% load static %}
@@ -21,7 +21,8 @@
     <label for="hint"><b>Feedback:</b></label>
     <p></p>
     <p>Question:</p>
-    <textarea type="text" id="fbquestion" placeholder="Enter Feedback Question" style="width: 310px;height: 200px; overflow: scroll"> </textarea>
+    <textarea class="backOfText" id="fbquestion" name="subject" placeholder="Enter Feedback Question..." style="width:300px;height:200px;border-radius: 10px;"></textarea>
+
 {#    <input type="text"  id="fbquestion" style="height: 20px; width: 50px; border-radius: 5px;" required>#}
     <p>Feedback Type:</p>
     <select id="feedback_type">

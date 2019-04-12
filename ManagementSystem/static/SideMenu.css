@@ -91,9 +91,14 @@ body {
 }
 
 .exist_list {
-  background: #9acfea;
+  background-image: url("paper.jpg");
   margin: auto;
   width: 50%;
-  border: 3px solid green;
+  border: 3px solid peru;
   padding: 10px;
 }
+
+.backOfText{
+  background-image: url('paper.jpg');
+}
+
