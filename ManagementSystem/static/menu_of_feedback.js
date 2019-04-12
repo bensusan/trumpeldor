@@ -1,8 +1,8 @@
 //menu_of_edit_attractions
 
 document.getElementById("sideMenu").innerHTML = '<div class="sidenav">\n' +
-    '  <h2 style="color:#818181;">Add Feedback</h2>' +
-    '  <a href="/main">Back to Main Page</a>\n' +
+    '  <h2 style="color:#818181;">הוספת שאלת משוב</h2>' +
+    '  <a href="/main">לתפריט הראשי</a>\n' +
     '</div>\n' +
     '\n' +
     '<div class="main">\n' +
