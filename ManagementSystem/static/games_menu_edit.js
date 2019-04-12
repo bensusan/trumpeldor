@@ -1,10 +1,10 @@
 //menu_of_edit_attractions
 
 document.getElementById("sideMenu").innerHTML = '<div class="sidenav">\n' +
-    '  <h2 style="color:#818181;">Add Game</h2>' +
-    '  <a href="/edit_attraction">Back</a>\n' +
-    '  <a href="/edit_attraction">Finish</a>\n' +
-    '  <a href="/main">Back to Main Page</a>\n' +
+    '  <h2 style="color:#818181;">הוספת משחק</h2>' +
+    '  <a href="/edit_attraction">חזרה</a>\n' +
+    '  <a href="/edit_attraction">!סיימתי</a>\n' +
+    '  <a href="/main">לתפריט הראשי</a>\n' +
     '</div>\n' +
     '\n' +
     '<div class="main">\n' +
