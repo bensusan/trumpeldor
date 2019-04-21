@@ -106,7 +106,6 @@ function func_to_show(gamesJSON){
         // alert("in get name! "+"of the origin : " + lat + " , " + lng + "\n of the other: "+p.lat +" , "+ p.lng);
         if(game['id']==hint_id_that_was_picked)
         {
-            alert("ghhhhhh");
             let img = document.getElementById('output');
             img.src = game['piecesURLS'];
         }
