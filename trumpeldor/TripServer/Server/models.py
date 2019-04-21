@@ -112,6 +112,8 @@ class Hint(models.Model):
     )
 
     data = models.TextField()
+    description = models.TextField()
+
 
 
 class Message(models.Model):
