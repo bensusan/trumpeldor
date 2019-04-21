@@ -10,7 +10,7 @@ class AmericanQuestionSerializer(serializers.ModelSerializer):
 
 class HintSerializer(serializers.ModelSerializer):
     class Meta:
-        fields = ('id', 'kind', 'data',)
+        fields = ('id', 'kind', 'data', 'description',)
         model = Hint
 
 
