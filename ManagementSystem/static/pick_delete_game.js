@@ -94,7 +94,7 @@ function wantToDeleteButton(){
                  type = "";
 
                 deleteRequestGame(attractionObjToUseInHintDelete['id'],type);
-                window.location.href = 'pick_delete_game';
+                window.location.href = '/pick_delete_game';
             });
 }
 
