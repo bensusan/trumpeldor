@@ -121,3 +121,11 @@ def edit_long_path_page(request):
 
 def info_page(request):
     return render(request, "add_info.html")
+
+
+def pick_delete_game_page(request):
+    return render(request, "pick_delete_game.html")
+
+
+def delete_game_page(request):
+    return render(request, "delete_game.html")

@@ -33,6 +33,7 @@ function initMapAndAttractionss(){
           curPosClicked=m.position;
         var addToPathBTN = document.getElementById('add_reg_to_path_med');
         addToPathBTN.addEventListener('click', function() {
+
             if(pointsOfPath.indexOf(m.position)==-1 && curPosClicked==m.position)
             {
                 let point_to_push = {lat: m.position.lat(), lng: m.position.lng()};
@@ -42,10 +43,10 @@ function initMapAndAttractionss(){
                 str_of_points=str_of_points+m.position+"<br />";
             }
             // alert(str_of_points);
-            var border = document.getElementById("border_of_points");
-            border.style.display = "block";
-            document.getElementById("showing_added_points").innerHTML = str_of_points;
-            document.getElementById("showing_added_points").style.fontWeight = 'bold';
+            // var border = document.getElementById("border_of_points");
+            // border.style.display = "block";
+            // document.getElementById("showing_added_points").innerHTML = str_of_points;
+            // document.getElementById("showing_added_points").style.fontWeight = 'bold';
             getRequestAttractions(needThisToGetPointsIDs);
            // alert("point been added! now its: "+ pointsOfPath.toString());
         });
@@ -133,7 +134,7 @@ function listenerForMappo(){
 }
 
 function needThisToGetPointsIDs(attractionsJSON) {
-
+alert("ofir");
     attractionsJSON.forEach(function (attr) {
         let attr_point = {x: (attr['x']).toFixed(13) , y: (attr['y']).toFixed(13)};
         let attr_id = attr['id'];
@@ -145,7 +146,6 @@ function needThisToGetPointsIDs(attractionsJSON) {
             if ((attr_point.x == the_point.x) && (attr_point.y == the_point.y)) {
              //   alert("bazinga");
                 addPointToTrackRequest(attr_id,idOfMedium);
-
 
             }
 

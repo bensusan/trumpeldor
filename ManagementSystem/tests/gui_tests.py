@@ -513,14 +513,40 @@ def test_req_three_one(driver):
 
     first = driver.current_url  # needs to be http://10.0.0.1:12345/feedback/
 
+
+    driver.find_element(By.CSS_SELECTOR, "##sideMenu > div.sidenav > a:nth-child(3)").click()
     driver.find_element_by_id('fbquestion').send_keys("how are you today?")
-    driver.find_element(By.CSS_SELECTOR, "#feedback_type").click()
     driver.find_element(By.CSS_SELECTOR, "#feedback_type > option:nth-child(2)").click()
     driver.find_element(By.CSS_SELECTOR, "#send_feedback").click()
 
     second = driver.current_url  # needs to be http://10.0.0.1:12345/main/
 
     bool1 = first == 'http://10.0.0.1:12345/feedback/'
+    bool2 = second == 'http://10.0.0.1:12345/main/'
+
+    if bool1 and bool2:
+        print(green('--- test passed!!! ---'))
+    else:
+        print(red('--- test failed!!! ---'))
+
+    return
+
+
+def test_req_three_two(driver):
+    print("Test: Delete Feedback Question.")
+    driver.get("http://10.0.0.1:12345/main/")
+    driver.find_element(By.CSS_SELECTOR, "#sideMenu > div.sidenav > button:nth-child(7)").click()
+    driver.find_element(By.CSS_SELECTOR, "#sideMenu > div.sidenav > div:nth-child(8) > a:nth-child(2)").click()
+
+    first = driver.current_url  # needs to be http://10.0.0.1:12345/edit_feedbacks/
+
+    driver.find_element_by_id('write_fb_id_to_delete').send_keys("6")
+    driver.find_element(By.CSS_SELECTOR, "#delete_chosen_fb").click()
+    driver.find_element(By.CSS_SELECTOR, "body > div.exist_list > button:nth-child(26)").click()
+
+    second = driver.current_url  # needs to be http://10.0.0.1:12345/main/
+
+    bool1 = first == 'http://10.0.0.1:12345/edit_feedbacks/'
     bool2 = second == 'http://10.0.0.1:12345/main/'
 
     if bool1 and bool2:
