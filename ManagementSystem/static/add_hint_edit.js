@@ -124,7 +124,8 @@ function hint_funcToGetAttraction(attractionsJSON) {
             var textHintToSend = {
             attraction:attr,
             kind:'HT',
-            data:document.getElementById("text_hint_id").value
+            data:document.getElementById("text_hint_id").value,
+                description:""
             };
             postRequestHint(textHintToSend,attr['id']);
             window.location.href='/add_hint_edit';
@@ -243,7 +244,7 @@ function funcToSendImage(attractionsJSON) {
         if(p.name===name && p.description===desc)
         {
 
-            let the_hint = {attraction: attr, kind: "HP", data:suki};
+            let the_hint = {attraction: attr, kind: "HP", data:suki,description:document.getElementById("pic_hint_description")};
             let attr_id = attr['id'];
             postRequestHint(the_hint,attr_id);
             window.location.href='/add_hint_edit';
@@ -267,7 +268,7 @@ function funcToSendVideo(attractionsJSON) {
         if(p.name===name && p.description===desc)
         {
 
-            let the_hint = {attraction: attr, kind: "HP", data:sukiVid};
+            let the_hint = {attraction: attr, kind: "HV", data:sukiVid,description:document.getElementById("vid_hint_description")};
             let attr_id = attr['id'];
             postRequestHint(the_hint,attr_id);
             window.location.href='/add_hint_edit';
