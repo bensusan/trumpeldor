@@ -18,7 +18,7 @@
 <div align="center">
     <label for="hint"><b>הדרכה למשחק:</b></label>
 <p></p>
-<textarea id="game_instructions_text" placeholder="Game Instructions..." style="height:100px;width:250px"></textarea>
+<textarea id="game_instructions_text" placeholder="הוראות המשחק..." style="direction:rtl;text-align:right;height:100px;width:250px"></textarea>
     <p></p>
     <label for="hint"><b>העלאת תמונה:</b></label>
 <p></p>
@@ -29,9 +29,9 @@
 
     <label for="hint"><b>אורך ורוחב התמונה (n x n):</b></label>
 <p></p>
-    <textarea id="n_size" placeholder="Enter the n size..."></textarea>
+    <textarea id="n_size" placeholder="הכניסי את הגודל n..." style="direction:rtl;text-align:right;"></textarea>
 <p></p>
-<button class="button" onclick="sendTheGameData()">סיימתי!</button>
+<button class="button" onclick="sendTheGameData()" style="direction:rtl;text-align:right;">סיימתי!</button>
     </div>
 <nav id="sideMenu"></nav>
 {% load static %}

@@ -6,7 +6,7 @@
      {% load static %}
 <link rel="stylesheet" href="{% static 'just_want_background.css' %}?version=1">
     {% load static %}
-<link rel="stylesheet" href="{% static 'SideMenu.css' %}?version=5">
+<link rel="stylesheet" href="{% static 'SideMenu.css' %}?version=4">
     {% load static %}
 <script src="{% static 'edit_feedbacks.js' %}?version=4"></script>
     {% load static %}
@@ -17,8 +17,8 @@
 <body>
 
 
-<div class="exist_list" align="center" style="width: 400px;">
-    <label for="hint"><b>רמזים קיימים:</b></label>
+<div class="exist_list" align="center" style="width: 500px;">
+    <label for="hint"><b>:רמזים קיימים</b></label>
 <p id="existing_fbs"></p>
 <p></p>
 {#<button onclick="window.location.href='/add_aq'" type="button">Add American Question</button>#}
@@ -48,10 +48,11 @@
 <p></p>
 {#<button type="button" id="want_to_delete_aq">Delete American Question</button>#}
 <p></p>
-<textarea id="write_fb_id_to_delete" placeholder="Write Feedback ID..." style="display: none"></textarea>
-<button type="button" id="delete_chosen_fb" style="display: none">Delete</button>
+<textarea id="write_fb_id_to_delete" placeholder="...כתבי את מזהה המשוב" style="text-align:right;direction:ltr;display: none"></textarea>
+    <p></p>
+<button type="button" id="delete_chosen_fb" style="display: none">מחיקה</button>
 <p></p>
-<button class="button" onclick="doneEditingFbs()" type="button">סיימתי!</button>
+<button class="button" onclick="doneEditingFbs()" type="button">!סיימתי</button>
 
 
 </div>

@@ -37,6 +37,7 @@ function getRequestHints(funcOnHints,attr_id){
 }
 
 window.onload = function () {
+
     getRequestAttractions(funcForExistingHints);
 var textHintBTN = document.getElementById('add_text_hint');
 var textLine = document.getElementById("text_hint_id");
@@ -65,6 +66,7 @@ var sendVidHintBTN = document.getElementById('send_vid_hint');
             vidDesc.style.display = "none";
             thevidbrowse.style.display = "none";
             sendButtonVid.style.display = "none";
+            upload_pic_title.style.display = "none";
         });
 
 var picHintBTN = document.getElementById('add_pic_hint');
@@ -94,6 +96,8 @@ var vidHintBTN = document.getElementById('add_vid_hint');
             picDesc.style.display = "none";
             outpic.style.display = "none";
             sendButtonPic.style.display = "none";
+            upload_pic_title.style.display = "none";
+
         });
 
     sendTextHintBTN.addEventListener('click', function() {

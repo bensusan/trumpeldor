@@ -40,6 +40,11 @@ window.onload = function () {
 };
 
 function wantToEditButton(){
+    var writeChosenHintText = document.getElementById("write_hint_id_to_delete");
+            writeChosenHintText.style.display = "none";
+
+            var deleteChosenHintBTN = document.getElementById("delete_chosen_hint");
+            deleteChosenHintBTN.style.display = "none";
 
       var writeChosenHintTextEdit = document.getElementById("write_hint_id_to_edit");
             writeChosenHintTextEdit.style.display = "inline";
@@ -57,6 +62,12 @@ function wantToEditButton(){
 
 
 function wantToDeleteButton(){
+    var writeChosenHintTextEdit = document.getElementById("write_hint_id_to_edit");
+            writeChosenHintTextEdit.style.display = "none";
+
+            var editChosenHintBTN = document.getElementById("edit_chosen_hint");
+            editChosenHintBTN.style.display = "none";
+
         var writeChosenHintText = document.getElementById("write_hint_id_to_delete");
             writeChosenHintText.style.display = "inline";
 

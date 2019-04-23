@@ -3,7 +3,7 @@
 document.getElementById("sideMenu").innerHTML = '<div class="sidenav">\n' +
     '  <h2 style="color:#818181;">מחיקת משחק</h2>' +
     '  <a onclick="wantToDeleteButton()">מחיקת משחק</a>\n' +
-    '  <a href="/edit_attraction">סיימתי!</a>\n' +
+    '  <a href="/edit_attraction">!סיימתי</a>\n' +
     '</div>\n' +
     '\n' +
     '<div class="main">\n' +
