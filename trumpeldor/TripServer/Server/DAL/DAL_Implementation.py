@@ -291,3 +291,29 @@ class DAL_Implementation(DAL_Abstract):
     def delete_sliding_puzzle(self, id_attraction):
         self.get_all_sliding_puzzles_for_attraction(id_attraction).delete()
         return True
+
+    def get_all_puzzles_for_attraction(self, id_attraction):
+        return Puzzle.objects.filter(attraction=self.get_attraction(id_attraction)).all()
+
+    def add_puzzle(self, id_attraction, pictureURL, width, height, description):
+        puzzle = Puzzle(attraction=self.get_attraction(id_attraction), description=description,
+                        pictureURL=pictureURL, width=width, height=height)
+        puzzle.save()
+        return puzzle
+
+    def delete_puzzle(self, id_attraction):
+        self.get_all_puzzles_for_attraction(id_attraction).delete()
+        return True
+
+    def get_all_find_the_differences_for_attraction(self, id_attraction):
+        return FindTheDifferences.objects.filter(attraction=self.get_attraction(id_attraction)).all()
+
+    def add_find_the_differences(self, id_attraction, pictureURL, differences, description):
+        find_the_differences = FindTheDifferences(attraction=self.get_attraction(id_attraction), description=description,
+                        pictureURL=pictureURL, differences=differences)
+        find_the_differences.save()
+        return find_the_differences
+
+    def delete_find_the_differences(self, id_attraction):
+        self.get_all_find_the_differences_for_attraction(id_attraction).delete()
+        return True

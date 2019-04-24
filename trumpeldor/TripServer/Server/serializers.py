@@ -64,19 +64,19 @@ class TripSerializer(serializers.ModelSerializer):
 
 class FindTheDifferencesSerializer(serializers.ModelSerializer):
     class Meta:
-        fields = ('id', 'pictureURL', 'differences',)
+        fields = ('id', 'pictureURL', 'differences', 'description',)
         model = FindTheDifferences
 
 
 class PuzzleSerializer(serializers.ModelSerializer):
     class Meta:
-        fields = ('id', 'pictureURL',)
+        fields = ('id', 'pictureURL', 'width', 'height', 'description',)
         model = Puzzle
 
 
 class SlidingPuzzleSerializer(serializers.ModelSerializer):
     class Meta:
-        fields = ('id', 'piecesURLS', 'width', 'height', 'description')
+        fields = ('id', 'piecesURLS', 'width', 'height', 'description',)
         model = SlidingPuzzle
 
 
