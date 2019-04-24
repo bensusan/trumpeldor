@@ -61,8 +61,8 @@ class DAL_Implementation(DAL_Abstract):
         attraction.save()
         return attraction
 
-    def add_hint(self, id_attraction, kind, data):
-        hint = Hint(attraction=self.getAttraction(id_attraction), kind=kind, data=data)
+    def add_hint(self, id_attraction, kind, data, description):
+        hint = Hint(attraction=self.getAttraction(id_attraction), kind=kind, data=data, description=description)
         hint.save()
         return hint
 

@@ -105,7 +105,7 @@ class BL_Implementation(BL_Abstract):
                                        attraction['description'], attraction['picturesURLS'], attraction['videosURLS'])
 
     def add_hint(self, id_attraction, hint):
-        return self.DAL.add_hint(id_attraction, hint['kind'], hint['data'])
+        return self.DAL.add_hint(id_attraction, hint['kind'], hint['data'], hint['description'])
 
     def add_american_question(self, id_attraction, a_question):
         return self.DAL.add_american_question(id_attraction, a_question['question'], a_question['answers'],
