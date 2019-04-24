@@ -248,7 +248,7 @@ function funcToSendImage(attractionsJSON) {
         if(p.name===name && p.description===desc)
         {
             let diskit = document.getElementById("pic_hint_description").value;
-            alert(diskit);
+            // alert(diskit);
             let the_hint = {attraction: attr, kind: "HP", data:suki,description:diskit};
             let attr_id = attr['id'];
             postRequestHint(the_hint,attr_id);

@@ -253,7 +253,7 @@ function funcToSendImage(attractionsJSON) {
         if(p.name===name && p.description===desc)
         {
 
-            let the_hint = {attraction: attr, kind: "HP", data:suki, description:document.getElementById("pic_hint_description")};
+            let the_hint = {attraction: attr, kind: "HP", data:suki, description:document.getElementById("pic_hint_description").value};
             let attr_id = attr['id'];
             postRequestHint(the_hint,attr_id);
             window.location.href='/add_hint';
@@ -277,7 +277,7 @@ function funcToSendVideo(attractionsJSON) {
         if(p.name===name && p.description===desc)
         {
 
-            let the_hint = {attraction: attr, kind: "HV", data:sukiVid,description:document.getElementById("vid_hint_description")};
+            let the_hint = {attraction: attr, kind: "HV", data:sukiVid,description:document.getElementById("vid_hint_description").value};
             let attr_id = attr['id'];
             postRequestHint(the_hint,attr_id);
             window.location.href='/add_hint';
