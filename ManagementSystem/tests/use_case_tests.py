@@ -46,6 +46,8 @@ def main():
 def uc1p1(driver):
     print("Use Case: Add Attraction.")
     driver.get("http://"+ip+":12345/attractions/")
+    number_of_points_start = get_length_from_url('http://'+ip+':12344/managementsystem/attraction/')
+
     # first_len = driver.execute_script("return attr_arr_for_test2.length;")
     # print(first_len)
     driver.find_element_by_id('add_manually_menu').click()
@@ -75,11 +77,14 @@ def uc1p1(driver):
     # fifth = driver.current_url  # needs to be http://10.0.0.6:12345/attractions/
     #
     # print(first+second+third+fourth+fifth)
+    number_of_points_end = get_length_from_url('http://' + ip + ':12344/managementsystem/attraction/')
+
     bool1 = first == 'http://'+ip+':12345/add_attraction/'
     bool2 = second == 'http://'+ip+':12345/add_game/'
     bool3 = third == 'http://'+ip+':12345/add_aq/'
+    bool4 = number_of_points_start == number_of_points_end
 
-    if bool1 and bool2 and bool3:
+    if bool1 and bool2 and bool3 and bool4:
         print(green('--- test passed!!! ---'))
     else:
         print(red('--- test failed!!! ---'))
@@ -312,7 +317,6 @@ def uc1p8p3(driver):
         print(red('--- test failed!!! ---'))
 
     return
-
 
 
 def uc1p10p1(driver):
