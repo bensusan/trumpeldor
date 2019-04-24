@@ -44,8 +44,19 @@ function funcToSendGame(attractionsJSON) {
                 let attr_id = attr['id'];
                 postRequestGame(data_send,attr_id,the_kind);
             }
+             if(localStorage.getItem("game_kind")=="drag") {
+                let the_kind = "puzzle";
+                let n_size = document.getElementById("n_size").value;
+                let data_send = {pictureURL: suki, width: n_size, height: n_size, description: document.getElementById("game_instructions_text").value};
+                let attr_id = attr['id'];
+                postRequestGame(data_send,attr_id,the_kind);
+            }
+
             window.location.href='/'+localStorage.getItem("last_add_game_url"); ////////////////////////////change to both
         }
+
+
+
 
 
     });
