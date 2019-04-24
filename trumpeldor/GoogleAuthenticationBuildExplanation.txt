@@ -1,0 +1,6 @@
+Read me for Google authentication:
+FAIL - I tried to build the authentication on the following link and failed(I did everything they said, did not check if it worked because I didnt understand how the project goes to Native gui. It should go to gui pages in android and ios and not only for the backend - thats what i did not understand): http://timothelariviere.com/2017/09/01/authenticate-users-through-google-with-xamarin-auth/
+
+Therfore,
+I tried to build the authentication on the following link:
+https://causerexception.com/2017/12/03/google-native-login-with-xamarin-forms/

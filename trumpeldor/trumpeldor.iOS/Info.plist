@@ -36,5 +36,16 @@
 	<string>Assets.xcassets/AppIcon.appiconset</string>
 	<key>NSLocationAlwaysUsageDescription</key>
 	<string>We need a permission to use your location</string>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleURLName</key>
+			<string>Google Auth</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>com.googleusercontent.apps.416426124345-fr7pa2p2s8tcnc9mtkipcm49950vtm1m</string>
+			</array>
+		</dict>
+	</array>
 </dict>
 </plist>

@@ -5,7 +5,10 @@ using System.Linq;
 using Foundation;
 using trumpeldor.Configuration;
 using trumpeldor.iOS.Configuration;
+using trumpeldor.Services.Contracts;
 using UIKit;
+using Xamarin.Forms;
+using Google.SignIn;
 
 namespace trumpeldor.iOS
 {
@@ -25,11 +28,21 @@ namespace trumpeldor.iOS
         public override bool FinishedLaunching(UIApplication app, NSDictionary options)
         {
             global::Xamarin.Forms.Forms.Init();
+            DependencyService.Register<IGoogleManager, GoogleManager>();
+            var googleServiceDictionary = NSDictionary.FromFile("GoogleService-Info.plist");
+            SignIn.SharedInstance.ClientID = googleServiceDictionary["CLIENT_ID"].ToString();
             ConfigurationManager.Initialize(new IOSConfigurationStreamProviderFactory());
             Xamarin.FormsMaps.Init();//for maps init
             LoadApplication(new App());
 
             return base.FinishedLaunching(app, options);
         }
+
+        public override bool OpenUrl(UIApplication app, NSUrl url, NSDictionary options)
+        {
+            var openUrlOptions = new UIApplicationOpenUrlOptions(options);
+            return SignIn.SharedInstance.HandleUrl(url, openUrlOptions.SourceApplication, openUrlOptions.Annotation);
+        }
+        
     }
 }

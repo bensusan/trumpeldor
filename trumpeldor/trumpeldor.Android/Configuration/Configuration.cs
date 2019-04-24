@@ -14,8 +14,8 @@ namespace trumpeldor.Droid.Configuration
 {
     public static class Configuration
     {
-        public const string ClientId = "723962257721-ql0tki3si3s22l1lsovimivkmnrfm6rr.apps.googleusercontent.com";
+        public const string ClientId = "416426124345-igghe7dik01k4e6jrgtmikpevjm3auvm.apps.googleusercontent.com";
         public const string Scope = "email";
-        public const string RedirectUrl = "com.woodenmoose.xamarin.googleauth:/oauth2redirect";
+        public const string RedirectUrl = "com.companyname.trumpeldor:/oauth2redirect";
     }
 }
