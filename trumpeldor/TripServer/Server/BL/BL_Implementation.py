@@ -266,3 +266,23 @@ class BL_Implementation(BL_Abstract):
 
     def delete_sliding_puzzle(self, id_attraction):
         return self.DAL.delete_sliding_puzzle(id_attraction)
+
+    def get_all_puzzles_for_attraction(self, id_attraction):
+        return self.DAL.get_all_puzzles_for_attraction(id_attraction)
+
+    def add_puzzle(self, id_attraction, puzzle):
+        return self.DAL.add_puzzle(id_attraction, puzzle['pictureURL'], puzzle['width'],
+                                   puzzle['height'], puzzle['description'])
+
+    def delete_puzzle(self, id_attraction):
+        return self.DAL.delete_puzzle(id_attraction)
+
+    def get_all_find_the_differences_for_attraction(self, id_attraction):
+        return self.DAL.get_all_find_the_differences_for_attraction(id_attraction)
+
+    def add_find_the_differences(self, id_attraction, find_the_differences):
+        return self.DAL.add_find_the_differences(id_attraction, find_the_differences['pictureURL'],
+                                                 find_the_differences['differences'], find_the_differences['description'])
+
+    def delete_find_the_differences(self, id_attraction):
+        return self.DAL.delete_find_the_differences(id_attraction)

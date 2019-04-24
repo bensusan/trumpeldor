@@ -167,6 +167,24 @@ class DAL_Abstract(object):
     def delete_sliding_puzzle(self, id_attraction):
         raise NotImplementedError("Should have implemented this")
 
+    def get_all_puzzles_for_attraction(self, id_attraction):
+        raise NotImplementedError("Should have implemented this")
+
+    def add_puzzle(self, id_attraction, pictureURL, width, height, description):
+        raise NotImplementedError("Should have implemented this")
+
+    def delete_puzzle(self, id_attraction):
+        raise NotImplementedError("Should have implemented this")
+
+    def get_all_find_the_differences_for_attraction(self, id_attraction):
+        raise NotImplementedError("Should have implemented this")
+
+    def add_find_the_differences(self, id_attraction, pictureURL, differences, description):
+        raise NotImplementedError("Should have implemented this")
+
+    def delete_find_the_differences(self, id_attraction):
+        raise NotImplementedError("Should have implemented this")
+
 
 class DALProxy(DAL_Abstract):
     Implementation = None
@@ -448,3 +466,33 @@ class DALProxy(DAL_Abstract):
         if self.Implementation is None:
             raise NotImplementedError("Should have implemented this")
         return self.Implementation.delete_sliding_puzzle(id_attraction)
+
+    def get_all_puzzles_for_attraction(self, id_attraction):
+        if self.Implementation is None:
+            raise NotImplementedError("Should have implemented this")
+        return self.Implementation.get_all_puzzles_for_attraction(id_attraction)
+
+    def add_puzzle(self, id_attraction, pictureURL, width, height, description):
+        if self.Implementation is None:
+            raise NotImplementedError("Should have implemented this")
+        return self.Implementation.add_puzzle(id_attraction, pictureURL, width, height, description)
+
+    def delete_puzzle(self, id_attraction):
+        if self.Implementation is None:
+            raise NotImplementedError("Should have implemented this")
+        return self.Implementation.delete_puzzle(id_attraction)
+
+    def get_all_find_the_differences_for_attraction(self, id_attraction):
+        if self.Implementation is None:
+            raise NotImplementedError("Should have implemented this")
+        return self.Implementation.get_all_find_the_differences_for_attraction(id_attraction)
+
+    def add_find_the_differences(self, id_attraction, pictureURL, differences, description):
+        if self.Implementation is None:
+            raise NotImplementedError("Should have implemented this")
+        return self.Implementation.add_find_the_differences(id_attraction, pictureURL, differences, description)
+
+    def delete_find_the_differences(self, id_attraction):
+        if self.Implementation is None:
+            raise NotImplementedError("Should have implemented this")
+        return self.Implementation.delete_find_the_differences(id_attraction)

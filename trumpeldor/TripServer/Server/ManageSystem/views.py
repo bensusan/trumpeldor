@@ -285,6 +285,54 @@ class SlidingPuzzleList(generics.GenericAPIView):
         return Response(ans)
 
 
+class PuzzleList(generics.GenericAPIView):
+    serializer_class = PuzzleSerializer
+    queryset = ''
+
+    def get(self, request, *args, **kwargs):
+        ans = BL.get_all_puzzles_for_attraction(self.kwargs['id_attr'])
+        ans = PuzzleSerializer(ans, many=True)
+        ans = json.loads(json.dumps(ans.data))
+        return Response(ans)
+
+    def delete(self, request, *args, **kwargs):
+        ans = BL.delete_puzzle(self.kwargs['id_attr'])
+        ans = json.loads(json.dumps(ans))
+        return Response(ans)
+
+    def post(self, request, *args, **kwargs):
+        ans = BL.add_puzzle(self.kwargs['id_attr'], request.data)
+        ans = PuzzleSerializer(ans, many=False)
+        ans = json.loads(json.dumps(ans.data))
+        return Response(ans)
+
+
+class FindTheDifferencesList(generics.GenericAPIView):
+    serializer_class = FindTheDifferencesSerializer
+    queryset = ''
+
+    def get(self, request, *args, **kwargs):
+        ans = BL.get_all_find_the_differences_for_attraction(self.kwargs['id_attr'])
+        ans = FindTheDifferencesSerializer(ans, many=True)
+        ans = json.loads(json.dumps(ans.data))
+        return Response(ans)
+
+    def delete(self, request, *args, **kwargs):
+        ans = BL.delete_find_the_differences(self.kwargs['id_attr'])
+        ans = json.loads(json.dumps(ans))
+        return Response(ans)
+
+    def post(self, request, *args, **kwargs):
+        # if 'x' not in request.data:
+        #     if not isinstance(request.data['x'], (int, long, float, complex)):
+        #         return Response(False)
+        # if 'y' not in request.data:
+        #     return Response(False)
+        ans = BL.add_find_the_differences(self.kwargs['id_attr'], request.data)
+        ans = FindTheDifferencesSerializer(ans, many=False)
+        ans = json.loads(json.dumps(ans.data))
+        return Response(ans)
+
 
 
 

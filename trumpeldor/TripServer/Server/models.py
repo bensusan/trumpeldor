@@ -61,6 +61,8 @@ class FindTheDifferences(Entertainment):
 
 class Puzzle(Entertainment):
     pictureURL = models.TextField()
+    width = models.IntegerField()
+    height = models.IntegerField()
 
 
 class SlidingPuzzle(Entertainment):
