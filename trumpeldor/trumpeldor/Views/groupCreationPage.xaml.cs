@@ -104,7 +104,7 @@ namespace trumpeldor.Views
         {
             if (playerAge != null)
                 ((Entry)agesGrid.Children.ElementAt(agesGrid.Children.Count - 1)).Text = playerAge;
-            int nextRow = agesGrid.RowDefinitions.Count;
+            int nextRow = agesGrid.Children.Select(c => Grid.GetRow(c)).Max()+1;//agesGrid.RowDefinitions.Count;
             agesGrid.RowDefinitions.Add(new RowDefinition { Height = GridLength.Star });
             Label lbl = new Label { Text = nextRow + ")" };
             lbl.SetDynamicResource(VisualElement.StyleProperty, "lableStyle");
@@ -112,6 +112,11 @@ namespace trumpeldor.Views
             Entry entry = new Entry { Keyboard = Keyboard.Numeric };            
             entry.SetDynamicResource(VisualElement.StyleProperty, "entryStyle");
             agesGrid.Children.Add(entry, 1, nextRow);
+            ImageButton removeButton = new ImageButton();
+            removeButton.Clicked += removeRow_Clicked;
+            removeButton.BackgroundColor = Color.Transparent;
+            agesGrid.Children.Add(removeButton, 2, nextRow);
+            removeButton.Source = "https://cdn.pixabay.com/photo/2013/07/12/17/00/remove-151678_960_720.png";
         }
 
 
@@ -158,6 +163,24 @@ namespace trumpeldor.Views
                     (selectedPathLength == 1 || selectedPathLength == 2 || selectedPathLength == 3)))
                     DisplayAlert("Illegal Input!", "You must fill all the fields", "OK");
             }
+        }
+
+        private void removeRow_Clicked(object sender, EventArgs e)
+        {
+            int row = Grid.GetRow((ImageButton)sender);
+            foreach (var child in agesGrid.Children.ToList().Where(child => Grid.GetRow(child) == row))
+            {
+                agesGrid.Children.Remove(child);
+            }
+            foreach (var child in agesGrid.Children.ToList().Where(child => Grid.GetRow(child) > row))
+            {
+                Grid.SetRow(child, Grid.GetRow(child) - 1);
+                if(child is Label)
+                {
+                    ((Label)child).Text = Grid.GetRow(child) + ")";
+                }
+            }
+            agesGrid.RowDefinitions.RemoveAt(agesGrid.RowDefinitions.Count - 1);
         }
     }
 }
