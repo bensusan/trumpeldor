@@ -30,6 +30,22 @@ def check_json_for_uc1p3(url):
             return True
     return False
 
+
+def check_json_for_uc1p6p1(url):
+    r = requests.get(url)
+    arrJson = r.json()
+    for attr in arrJson:
+        newURL = url+str(attr['id'])+'/aquestion/'
+        r2 = requests.get(newURL)
+        arrJson2 = r2.json()
+        for aq in arrJson2:
+            if aq['question']=='this is a test':
+                return True
+
+    return False
+
+
+
 ip = '192.168.1.18'
 
 
@@ -49,7 +65,8 @@ def main():
     # uc1p1(browser)
     # uc1p2(browser)
     # uc1p1(browser)
-    uc1p3(browser)
+    # uc1p3(browser)
+    uc1p6p1(browser)
 
     return
 
@@ -163,15 +180,16 @@ def uc1p3(driver):
 def uc1p6p1(driver):
     print("Use Case: Add American Question to attraction.")
 
-    driver.get("http://"+ip+":12345/attractions/")
-    point = driver.find_element(By.XPATH, "//*[@id='map']/div/div/div[1]/div[3]/div/div[3]/div[10]/img")
-    point.click()
-    driver.find_element_by_id('edit_attraction').click()
+    driver.get("http://" + ip + ":12345/edit_attraction/")
+    # point = driver.find_element(By.XPATH, "//*[@id='map']/div/div/div[1]/div[3]/div/div[3]/div[1]/img")
+    # point.click()
+    # driver.find_element_by_id('edit_attraction').click()
+    driver.execute_script("localStorage.setItem('edited', JSON.stringify({lat:31.2625444444,lng:34.8019111199}));")
     first = driver.current_url  # needs to be http://10.0.0.6:12345/edit_attraction/
-    editAqBTN = driver.find_element(By.CSS_SELECTOR, "#sideMenu > div.sidenav > a:nth-child(4)")
+    editAqBTN = driver.find_element(By.CSS_SELECTOR, "#sideMenu > div.sidenav > a:nth-child(5)")
     editAqBTN.click()
     second = driver.current_url  # needs to be http://10.0.0.6:12345/pick_aq_edit/
-    addAqBTN = driver.find_element(By.XPATH, "//*[@id='sideMenu']/div[1]/a[1]")
+    addAqBTN = driver.find_element(By.CSS_SELECTOR, "#sideMenu > div.sidenav > a:nth-child(3)")
     addAqBTN.click()
     third = driver.current_url  # needs to be http://10.0.0.6:12345/add_aq_edit/
     driver.find_element_by_id('noOfAns').send_keys('4')
@@ -189,9 +207,10 @@ def uc1p6p1(driver):
     bool2 = second == 'http://'+ip+':12345/pick_aq_edit/'
     bool3 = third == 'http://'+ip+':12345/add_aq_edit/'
     # bool4 = fourth == 'http://10.0.0.6:12345/pick_aq_edit/'
+    bool5 = check_json_for_uc1p6p1('http://' + ip + ':12344/managementsystem/attraction/')
 
     # if bool1 and bool2 and bool3 and bool4:
-    if bool1 and bool2 and bool3:
+    if bool1 and bool2 and bool3 and bool5:
         print(green('--- test passed!!! ---'))
     else:
         print(red('--- test failed!!! ---'))
