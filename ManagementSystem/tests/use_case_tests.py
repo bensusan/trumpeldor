@@ -26,7 +26,7 @@ def check_json_for_uc1p3(url):
     r = requests.get(url)
     arrJson = r.json()
     for attr in arrJson:
-        if attr['name']=='this is a test':
+        if attr['name'] == 'this is a test':
             return True
     return False
 
@@ -44,6 +44,60 @@ def check_json_for_uc1p6p1(url):
 
     return False
 
+
+def check_json_for_uc1p6p2(url):
+    ret_id = 0
+    r = requests.get(url)
+    arrJson = r.json()
+    for attr in arrJson:
+        if attr['name'] == 'this is a test':
+            newURL = url+str(attr['id'])+'/aquestion/'
+            r2 = requests.get(newURL)
+            arrJson2 = r2.json()
+            for aq in arrJson2:
+                ret_id = aq['id']
+
+    return ret_id
+
+
+def count_json_for_uc1p6p2(url):
+    count = 0
+    r = requests.get(url)
+    arrJson = r.json()
+    for attr in arrJson:
+        if attr['name'] == 'this is a test':
+            newURL = url+str(attr['id'])+'/aquestion/'
+            r2 = requests.get(newURL)
+            arrJson2 = r2.json()
+            for aq in arrJson2:
+                count+=1
+
+    return count
+
+
+def make_check_uc1p8p1(url):
+    r = requests.get(url)
+    arrJson = r.json()
+    for attr in arrJson:
+        if attr['name'] == 'this is a test':
+            newURL = url + str(attr['id']) + '/hint/'
+            r2 = requests.get(newURL)
+            arrJson2 = r2.json()
+            for hint in arrJson2:
+                if hint['data'] == 'chiburashka':
+                    return True
+
+    return False
+
+
+def count_json_for_uc1p10p1(url):
+    count = 0
+    r = requests.get(url)
+    arrJson = r.json()
+    for info in arrJson:
+        count += 1
+
+    return count
 
 
 ip = '192.168.1.18'
@@ -66,7 +120,10 @@ def main():
     # uc1p2(browser)
     # uc1p1(browser)
     # uc1p3(browser)
-    uc1p6p1(browser)
+    # uc1p6p1(browser)
+    # uc1p6p2(browser)
+    # uc1p8p1(browser)
+    uc1p10p1(browser)
 
     return
 
@@ -159,17 +216,19 @@ def uc1p3(driver):
     driver.find_element_by_id('attr_name').send_keys('this is a test')
     driver.find_element_by_id('desc').send_keys(Keys.CONTROL, 'a')
     driver.find_element_by_id('desc').send_keys('this is a test')
-
-    # driver.execute_script("finishEditingAttraction();")
-    submitButton = driver.find_element(By.XPATH, "/html/body/div[1]/div/form/div[2]/button[1]")
-    submitButton.click()
+    driver.execute_script("document.getElementById('attr_name').value='this is a test';")
+    driver.execute_script("document.getElementById('desc').value='this is a test';")
+    driver.execute_script("getRequestAttractions(getName);"
+                          "finishEditingAttraction();")
+    # submitButton = driver.find_element(By.CSS_SELECTOR, "body > div.paging > div > form > div.container > button:nth-child(11)")
+    # submitButton.click()
     second = driver.current_url  # needs to be http://10.0.0.6:12345/attractions/
 
     bool1 = first == 'http://'+ip+':12345/edit_attraction/'
     bool2 = second == 'http://'+ip+':12345/attractions/'
     bool3 = check_json_for_uc1p3('http://' + ip + ':12344/managementsystem/attraction/')
 
-    if bool1 and bool2:
+    if bool1 and bool2 and bool3:
         print(green('--- test passed!!! ---'))
     else:
         print(red('--- test failed!!! ---'))
@@ -220,27 +279,33 @@ def uc1p6p1(driver):
 
 def uc1p6p2(driver):
     print("Use Case: Delete American Question from attraction.")
-    driver.get("http://"+ip+":12345/attractions/")
-    point = driver.find_element(By.XPATH, "//*[@id='map']/div/div/div[1]/div[3]/div/div[3]/div[10]/img")
-    point.click()
-    driver.find_element_by_id('edit_attraction').click()
+    first_count = count_json_for_uc1p6p2('http://' + ip + ':12344/managementsystem/attraction/')
+    driver.get("http://" + ip + ":12345/edit_attraction/")
+    # point = driver.find_element(By.XPATH, "//*[@id='map']/div/div/div[1]/div[3]/div/div[3]/div[1]/img")
+    # point.click()
+    # driver.find_element_by_id('edit_attraction').click()
+    driver.execute_script("localStorage.setItem('edited', JSON.stringify({lat:31.2625444444,lng:34.8019111199}));")
     first = driver.current_url  # needs to be http://10.0.0.6:12345/edit_attraction/
-    editAqBTN = driver.find_element(By.CSS_SELECTOR, "#sideMenu > div.sidenav > a:nth-child(4)")
+    editAqBTN = driver.find_element(By.CSS_SELECTOR, "#sideMenu > div.sidenav > a:nth-child(5)")
     editAqBTN.click()
     second = driver.current_url  # needs to be http://10.0.0.6:12345/pick_aq_edit/
     delAqBTN = driver.find_element(By.XPATH, "//*[@id='want_to_delete_aq']")
     delAqBTN.click()
+    the_id = check_json_for_uc1p6p2('http://' + ip + ':12344/managementsystem/attraction/')
 
-    driver.find_element_by_id('write_aq_id_to_delete').send_keys("12")
+    driver.find_element_by_id('write_aq_id_to_delete').send_keys(the_id)
     deleteBTN = driver.find_element(By.XPATH, "//*[@id='delete_chosen_aq']")
     deleteBTN.click()
     third = driver.current_url  # needs to be http://10.0.0.6:12345/pick_aq_edit/
 
+    second_count = count_json_for_uc1p6p2('http://' + ip + ':12344/managementsystem/attraction/')
+
     bool1 = first == 'http://'+ip+':12345/edit_attraction/'
     bool2 = second == 'http://'+ip+':12345/pick_aq_edit/'
     bool3 = third == 'http://'+ip+':12345/pick_aq_edit/'
+    bool4 = first_count == second_count+1
 
-    if bool1 and bool2 and bool3:
+    if bool1 and bool2 and bool3 and bool4:
         print(green('--- test passed!!! ---'))
     else:
         print(red('--- test failed!!! ---'))
@@ -252,12 +317,13 @@ def uc1p8p1(driver):
     print("Use Case: Add Hint to attraction.")
 
     # print(get_length_from_url('http://10.0.0.6:12344/managementsystem/attraction/68/hint/'))
-    driver.get("http://"+ip+":12345/attractions/")
-    point = driver.find_element(By.XPATH, "//*[@id='map']/div/div/div[1]/div[3]/div/div[3]/div[10]/img")
-    point.click()
-    driver.find_element_by_id('edit_attraction').click()
+    driver.get("http://" + ip + ":12345/edit_attraction/")
+    # point = driver.find_element(By.XPATH, "//*[@id='map']/div/div/div[1]/div[3]/div/div[3]/div[1]/img")
+    # point.click()
+    # driver.find_element_by_id('edit_attraction').click()
+    driver.execute_script("localStorage.setItem('edited', JSON.stringify({lat:31.2625444444,lng:34.8019111199}));")
     first = driver.current_url  # needs to be http://10.0.0.6:12345/edit_attraction/
-    editHintBTN = driver.find_element(By.CSS_SELECTOR, "#sideMenu > div.sidenav > a:nth-child(5)")
+    editHintBTN = driver.find_element(By.CSS_SELECTOR, "#sideMenu > div.sidenav > a:nth-child(6)")
     editHintBTN.click()
     second = driver.current_url  # needs to be http://10.0.0.6:12345/pick_hint_edit/
     edHintBTN = driver.find_element(By.CSS_SELECTOR, "#sideMenu > div.sidenav > a:nth-child(4)")
@@ -268,10 +334,13 @@ def uc1p8p1(driver):
     addTextBTN = driver.find_element(By.CSS_SELECTOR, "#add_text_hint")
     addTextBTN.click()
     fourth = driver.current_url  # needs to be http://10.0.0.6:12345/add_hint_edit/
-    driver.find_element_by_id('text_hint_id').send_keys("wahhhhhhh")
-    driver.find_element_by_id('send_text_hint').click()
+    # driver.find_element_by_id('text_hint_id').send_keys("chiburashka")
+    driver.execute_script("document.getElementById('text_hint_id').value='chiburashka';")
+    driver.execute_script("document.getElementById('send_text_hint').click();")
     fifth = driver.current_url  # needs to be http://10.0.0.6:12345/add_hint_edit/
 
+    bool6 = make_check_uc1p8p1('http://' + ip + ':12344/managementsystem/attraction/')
+    print(bool6)
     bool1 = first == 'http://'+ip+':12345/edit_attraction/'
     bool2 = second == 'http://'+ip+':12345/pick_hint_edit/'
     bool3 = third == 'http://'+ip+':12345/add_hint_edit/'
@@ -359,11 +428,14 @@ def uc1p8p3(driver):
 def uc1p10p1(driver):
     print("Use Case: Additional Info addition test.")
     driver.get("http://"+ip+":12345/main/")
+    c1 = count_json_for_uc1p10p1('http://' + ip + ':12344/managementsystem/info/')
     driver.find_element(By.CSS_SELECTOR, "#sideMenu > div.sidenav > a:nth-child(6)").click()
-    driver.find_element(By.CSS_SELECTOR, "body > div > input:nth-child(5)").click()
-    driver.find_element(By.CSS_SELECTOR, "body > div > input:nth-child(4)").click()
+    # driver.find_element(By.CSS_SELECTOR, "").click()
+    driver.find_element(By.CSS_SELECTOR, "body > div > button:nth-child(4)").click()
 
-    if driver.current_url == 'http://'+ip+':12345/main/':
+    c2 = count_json_for_uc1p10p1('http://' + ip + ':12344/managementsystem/info/')
+
+    if c1+1 == c2 and driver.current_url == 'http://'+ip+':12345/main/':
         print(green('--- test passed!!! ---'))
     else:
         print(red('--- test failed!!! ---'))

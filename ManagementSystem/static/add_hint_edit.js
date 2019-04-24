@@ -116,6 +116,7 @@ var vidHintBTN = document.getElementById('add_vid_hint');
 
 };
 
+
 function hint_funcToGetAttraction(attractionsJSON) {
         let name = localStorage.getItem("name_for_add_aq");
         let desc = localStorage.getItem("desc_for_add_aq");
