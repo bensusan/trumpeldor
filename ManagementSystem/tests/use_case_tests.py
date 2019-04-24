@@ -12,14 +12,18 @@ import urllib.request
 import json
 import requests
 
-#ip = 'http://132.73.201.223'
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.remote.webelement import WebElement
 from selenium.webdriver.support.wait import WebDriverWait
 
+
 def get_length_from_url(url):
     r = requests.get(url)
     return len(r.json())
+
+
+ip = '192.168.1.18'
+
 
 def main():
     # download_path = 'D:\_Guy\d9anime\downloaded'
@@ -34,14 +38,14 @@ def main():
     opts = Options()
     opts.set_headless()
     browser = Chrome(options=opts)
-
+    uc1p1(browser)
 
     return
 
 
 def uc1p1(driver):
     print("Use Case: Add Attraction.")
-    driver.get("http://10.0.0.6:12345/attractions/")
+    driver.get("http://"+ip+":12345/attractions/")
     # first_len = driver.execute_script("return attr_arr_for_test2.length;")
     # print(first_len)
     driver.find_element_by_id('add_manually_menu').click()
@@ -71,9 +75,9 @@ def uc1p1(driver):
     # fifth = driver.current_url  # needs to be http://10.0.0.6:12345/attractions/
     #
     # print(first+second+third+fourth+fifth)
-    bool1 = first == 'http://10.0.0.6:12345/add_attraction/'
-    bool2 = second == 'http://10.0.0.6:12345/add_game/'
-    bool3 = third == 'http://10.0.0.6:12345/add_aq/'
+    bool1 = first == 'http://'+ip+':12345/add_attraction/'
+    bool2 = second == 'http://'+ip+':12345/add_game/'
+    bool3 = third == 'http://'+ip+':12345/add_aq/'
 
     if bool1 and bool2 and bool3:
         print(green('--- test passed!!! ---'))
@@ -85,7 +89,7 @@ def uc1p1(driver):
 
 def uc1p2(driver):
     print("Use Case: Delete Attraction.")
-    driver.get("http://10.0.0.6:12345/attractions/")
+    driver.get("http://"+ip+":12345/attractions/")
     point = driver.find_element(By.XPATH, "//*[@id='map']/div/div/div[1]/div[3]/div/div[3]/div[10]/img")
     point.click()
     driver.find_element_by_id('edit_attraction').click()
@@ -94,7 +98,7 @@ def uc1p2(driver):
 
     # second = driver.current_url  # needs to be http://10.0.0.6:12345/attractions/
 
-    bool1 = first == 'http://10.0.0.6:12345/edit_attraction/'
+    bool1 = first == 'http://'+ip+':12345/edit_attraction/'
     # bool2 = second == 'http://10.0.0.6:12345/attractions/'
 
     # if bool1 and bool2:
@@ -108,7 +112,7 @@ def uc1p2(driver):
 
 def uc1p3(driver):
     print("Use Case : Edit Attraction.")
-    driver.get("http://10.0.0.6:12345/attractions/")
+    driver.get("http://"+ip+":12345/attractions/")
     point = driver.find_element(By.XPATH, "//*[@id='map']/div/div/div[1]/div[3]/div/div[3]/div[10]/img")
     point.click()
     driver.find_element_by_id('edit_attraction').click()
@@ -122,8 +126,8 @@ def uc1p3(driver):
     submitButton.click()
     second = driver.current_url  # needs to be http://10.0.0.6:12345/attractions/
 
-    bool1 = first == 'http://10.0.0.6:12345/edit_attraction/'
-    bool2 = second == 'http://10.0.0.6:12345/attractions/'
+    bool1 = first == 'http://'+ip+':12345/edit_attraction/'
+    bool2 = second == 'http://'+ip+':12345/attractions/'
 
     if bool1 and bool2:
         print(green('--- test passed!!! ---'))
@@ -136,7 +140,7 @@ def uc1p3(driver):
 def uc1p6p1(driver):
     print("Use Case: Add American Question to attraction.")
 
-    driver.get("http://10.0.0.6:12345/attractions/")
+    driver.get("http://"+ip+":12345/attractions/")
     point = driver.find_element(By.XPATH, "//*[@id='map']/div/div/div[1]/div[3]/div/div[3]/div[10]/img")
     point.click()
     driver.find_element_by_id('edit_attraction').click()
@@ -158,9 +162,9 @@ def uc1p6p1(driver):
     driver.find_element_by_id('correctAns').send_keys('0')
     driver.find_element_by_id('finish_add_aq_btn').click()
     # fourth = driver.current_url  # needs to be http://10.0.0.6:12345/pick_aq_edit/
-    bool1 = first == 'http://10.0.0.6:12345/edit_attraction/'
-    bool2 = second == 'http://10.0.0.6:12345/pick_aq_edit/'
-    bool3 = third == 'http://10.0.0.6:12345/add_aq_edit/'
+    bool1 = first == 'http://'+ip+':12345/edit_attraction/'
+    bool2 = second == 'http://'+ip+':12345/pick_aq_edit/'
+    bool3 = third == 'http://'+ip+':12345/add_aq_edit/'
     # bool4 = fourth == 'http://10.0.0.6:12345/pick_aq_edit/'
 
     # if bool1 and bool2 and bool3 and bool4:
@@ -174,7 +178,7 @@ def uc1p6p1(driver):
 
 def uc1p6p2(driver):
     print("Use Case: Delete American Question from attraction.")
-    driver.get("http://10.0.0.6:12345/attractions/")
+    driver.get("http://"+ip+":12345/attractions/")
     point = driver.find_element(By.XPATH, "//*[@id='map']/div/div/div[1]/div[3]/div/div[3]/div[10]/img")
     point.click()
     driver.find_element_by_id('edit_attraction').click()
@@ -190,9 +194,9 @@ def uc1p6p2(driver):
     deleteBTN.click()
     third = driver.current_url  # needs to be http://10.0.0.6:12345/pick_aq_edit/
 
-    bool1 = first == 'http://10.0.0.6:12345/edit_attraction/'
-    bool2 = second == 'http://10.0.0.6:12345/pick_aq_edit/'
-    bool3 = third == 'http://10.0.0.6:12345/pick_aq_edit/'
+    bool1 = first == 'http://'+ip+':12345/edit_attraction/'
+    bool2 = second == 'http://'+ip+':12345/pick_aq_edit/'
+    bool3 = third == 'http://'+ip+':12345/pick_aq_edit/'
 
     if bool1 and bool2 and bool3:
         print(green('--- test passed!!! ---'))
@@ -206,7 +210,7 @@ def uc1p8p1(driver):
     print("Use Case: Add Hint to attraction.")
 
     # print(get_length_from_url('http://10.0.0.6:12344/managementsystem/attraction/68/hint/'))
-    driver.get("http://10.0.0.6:12345/attractions/")
+    driver.get("http://"+ip+":12345/attractions/")
     point = driver.find_element(By.XPATH, "//*[@id='map']/div/div/div[1]/div[3]/div/div[3]/div[10]/img")
     point.click()
     driver.find_element_by_id('edit_attraction').click()
@@ -226,11 +230,11 @@ def uc1p8p1(driver):
     driver.find_element_by_id('send_text_hint').click()
     fifth = driver.current_url  # needs to be http://10.0.0.6:12345/add_hint_edit/
 
-    bool1 = first == 'http://10.0.0.6:12345/edit_attraction/'
-    bool2 = second == 'http://10.0.0.6:12345/pick_hint_edit/'
-    bool3 = third == 'http://10.0.0.6:12345/add_hint_edit/'
-    bool4 = fourth == 'http://10.0.0.6:12345/add_hint_edit/'
-    bool5 = fifth == 'http://10.0.0.6:12345/add_hint_edit/'
+    bool1 = first == 'http://'+ip+':12345/edit_attraction/'
+    bool2 = second == 'http://'+ip+':12345/pick_hint_edit/'
+    bool3 = third == 'http://'+ip+':12345/add_hint_edit/'
+    bool4 = fourth == 'http://'+ip+':12345/add_hint_edit/'
+    bool5 = fifth == 'http://'+ip+':12345/add_hint_edit/'
 
     if bool1 and bool2 and bool3 and bool4 and bool5:
         print(green('--- test passed!!! ---'))
@@ -244,7 +248,7 @@ def uc1p8p2(driver):
     print("Use Case: Delete Hint to attraction.")
 
     # print(get_length_from_url('http://10.0.0.6:12344/managementsystem/attraction/68/hint/'))
-    driver.get("http://10.0.0.6:12345/attractions/")
+    driver.get("http://"+ip+":12345/attractions/")
     point = driver.find_element(By.XPATH, "//*[@id='map']/div/div/div[1]/div[3]/div/div[3]/div[10]/img")
     point.click()
     driver.find_element_by_id('edit_attraction').click()
@@ -261,10 +265,10 @@ def uc1p8p2(driver):
     driver.find_element_by_id('delete_chosen_hint').click()
     fourth = driver.current_url  # needs to be http://10.0.0.6:12345/pick_hint_edit/
 
-    bool1 = first == 'http://10.0.0.6:12345/edit_attraction/'
-    bool2 = second == 'http://10.0.0.6:12345/pick_hint_edit/'
-    bool3 = third == 'http://10.0.0.6:12345/pick_hint_edit/'
-    bool4 = fourth == 'http://10.0.0.6:12345/pick_hint_edit/'
+    bool1 = first == 'http://'+ip+':12345/edit_attraction/'
+    bool2 = second == 'http://'+ip+':12345/pick_hint_edit/'
+    bool3 = third == 'http://'+ip+':12345/pick_hint_edit/'
+    bool4 = fourth == 'http://'+ip+':12345/pick_hint_edit/'
 
     if bool1 and bool2 and bool3 and bool4:
         print(green('--- test passed!!! ---'))
@@ -278,7 +282,7 @@ def uc1p8p3(driver):
     print("Use Case: Edit Hint to attraction.")
 
     # print(get_length_from_url('http://10.0.0.6:12344/managementsystem/attraction/68/hint/'))
-    driver.get("http://10.0.0.6:12345/attractions/")
+    driver.get("http://"+ip+":12345/attractions/")
     point = driver.find_element(By.XPATH, "//*[@id='map']/div/div/div[1]/div[3]/div/div[3]/div[10]/img")
     point.click()
     driver.find_element_by_id('edit_attraction').click()
@@ -296,11 +300,11 @@ def uc1p8p3(driver):
     driver.find_element_by_id('submit_to_edit_hint').click()
     fifth = driver.current_url  # needs to be http://10.0.0.6:12345/pick_hint_edit/
 
-    bool1 = first == 'http://10.0.0.6:12345/edit_attraction/'
-    bool2 = second == 'http://10.0.0.6:12345/pick_hint_edit/'
-    bool3 = third == 'http://10.0.0.6:12345/pick_hint_edit/'
-    bool4 = fourth == 'http://10.0.0.6:12345/edit_hint_edit/'
-    bool5 = fifth == 'http://10.0.0.6:12345/pick_hint_edit/'
+    bool1 = first == 'http://'+ip+':12345/edit_attraction/'
+    bool2 = second == 'http://'+ip+':12345/pick_hint_edit/'
+    bool3 = third == 'http://'+ip+':12345/pick_hint_edit/'
+    bool4 = fourth == 'http://'+ip+':12345/edit_hint_edit/'
+    bool5 = fifth == 'http://'+ip+':12345/pick_hint_edit/'
 
     if bool1 and bool2 and bool3 and bool4 and bool5:
         print(green('--- test passed!!! ---'))
@@ -310,14 +314,15 @@ def uc1p8p3(driver):
     return
 
 
+
 def uc1p10p1(driver):
     print("Use Case: Additional Info addition test.")
-    driver.get("http://10.0.0.6:12345/main/")
+    driver.get("http://"+ip+":12345/main/")
     driver.find_element(By.CSS_SELECTOR, "#sideMenu > div.sidenav > a:nth-child(6)").click()
     driver.find_element(By.CSS_SELECTOR, "body > div > input:nth-child(5)").click()
     driver.find_element(By.CSS_SELECTOR, "body > div > input:nth-child(4)").click()
 
-    if driver.current_url == 'http://10.0.0.6:12345/main/':
+    if driver.current_url == 'http://'+ip+':12345/main/':
         print(green('--- test passed!!! ---'))
     else:
         print(red('--- test failed!!! ---'))
@@ -326,12 +331,12 @@ def uc1p10p1(driver):
 
 def uc1p10p2(driver):
     print("Use Case: Additional Info deletion test.")
-    driver.get("http://10.0.0.6:12345/main/")
+    driver.get("http://"+ip+":12345/main/")
     driver.find_element(By.CSS_SELECTOR, "#sideMenu > div.sidenav > a:nth-child(6)").click()
     driver.find_element(By.CSS_SELECTOR, "body > div > input:nth-child(5)").click()
     driver.find_element(By.CSS_SELECTOR, "body > div > input:nth-child(4)").click()
 
-    if driver.current_url == 'http://10.0.0.6:12345/main/':
+    if driver.current_url == 'http://'+ip+':12345/main/':
         print(green('--- test passed!!! ---'))
     else:
         print(red('--- test failed!!! ---'))
@@ -342,7 +347,7 @@ def uc1p10p2(driver):
 def uc2p123(driver):
     print("Use Case: Add Paths.")
 
-    driver.get("http://10.0.0.6:12345/main/")
+    driver.get("http://"+ip+":12345/main/")
     driver.find_element(By.CSS_SELECTOR, "#sideMenu > div.sidenav > button").click()
     driver.find_element(By.CSS_SELECTOR, "#sideMenu > div.sidenav > div > button").click()
     driver.find_element(By.CSS_SELECTOR, "#sideMenu > div.sidenav > div > div > a:nth-child(1)").click()
@@ -360,8 +365,8 @@ def uc2p123(driver):
     driver.find_element(By.ID, "finish_reg").click()
     second = driver.current_url  # needs to be http://10.0.0.6:12345/main/
     print(second)
-    bool1 = first == 'http://10.0.0.6:12345/add_short_path/'
-    bool2 = second == 'http://10.0.0.6:12345/main/'
+    bool1 = first == 'http://'+ip+':12345/add_short_path/'
+    bool2 = second == 'http://'+ip+':12345/main/'
 
     if bool1 and bool2:
         print(green('--- test passed!!! ---'))
@@ -374,7 +379,7 @@ def uc2p123(driver):
 def uc2p4(driver):
     print("Use Case: Delete Point from Path.")
 
-    driver.get("http://10.0.0.6:12345/main/")
+    driver.get("http://"+ip+":12345/main/")
     driver.find_element(By.CSS_SELECTOR, "#sideMenu > div.sidenav > button").click()
     driver.find_element(By.CSS_SELECTOR, "#sideMenu > div.sidenav > div > a:nth-child(3)").click()
     first = driver.current_url  # needs to be http://10.0.0.6:12345/pick_path_edit/
@@ -387,9 +392,9 @@ def uc2p4(driver):
     driver.find_element(By.CSS_SELECTOR, "#finish_reg_med").click()
     third = driver.current_url  # needs to be http://10.0.0.6:12345/main/
 
-    bool1 = first == 'http://10.0.0.6:12345/pick_path_edit/'
-    bool2 = second == 'http://10.0.0.6:12345/edit_short_path/'
-    bool3 = third == 'http://10.0.0.6:12345/main/'
+    bool1 = first == 'http://'+ip+':12345/pick_path_edit/'
+    bool2 = second == 'http://'+ip+':12345/edit_short_path/'
+    bool3 = third == 'http://'+ip+':12345/main/'
 
     if bool1 and bool2 and bool3:
         print(green('--- test passed!!! ---'))
@@ -402,7 +407,7 @@ def uc2p4(driver):
 def uc2p5(driver):
     print("Use Case: Delete Paths test.")
 
-    driver.get("http://10.0.0.6:12345/main/")
+    driver.get("http://"+ip+":12345/main/")
     driver.find_element(By.CSS_SELECTOR, "#sideMenu > div.sidenav > button").click()
     driver.find_element(By.CSS_SELECTOR, "#sideMenu > div.sidenav > div > a:nth-child(4)").click()
     driver.find_element_by_id('write_path_length').send_keys("1")
@@ -410,7 +415,33 @@ def uc2p5(driver):
                           "getRequestTracks(funcToGetTrackID);"
                           "window.location.href='/main';")
     # driver.find_element(By.ID, "delete_chosen_path").click()
-    if driver.current_url == 'http://10.0.0.6:12345/main/':
+    if driver.current_url == 'http://'+ip+':12345/main/':
+        print(green('--- test passed!!! ---'))
+    else:
+        print(red('--- test failed!!! ---'))
+
+    return
+
+
+def uc3p1(driver):
+    print("Use Case: Add Feedback Question.")
+    driver.get("http://"+ip+":12345/main/")
+    driver.find_element(By.CSS_SELECTOR, "#sideMenu > div.sidenav > button:nth-child(7)").click()
+    driver.find_element(By.CSS_SELECTOR, "#sideMenu > div.sidenav > div:nth-child(8) > a:nth-child(1)").click()
+
+    first = driver.current_url  # needs to be http://10.0.0.1:12345/feedback/
+
+    driver.find_element_by_id('fbquestion').send_keys("how are you today?")
+    driver.find_element(By.CSS_SELECTOR, "#feedback_type").click()
+    driver.find_element(By.CSS_SELECTOR, "#feedback_type > option:nth-child(2)").click()
+    driver.find_element(By.CSS_SELECTOR, "#send_feedback").click()
+
+    second = driver.current_url  # needs to be http://10.0.0.1:12345/main/
+
+    bool1 = first == 'http://'+ip+':12345/feedback/'
+    bool2 = second == 'http://'+ip+':12345/main/'
+
+    if bool1 and bool2:
         print(green('--- test passed!!! ---'))
     else:
         print(red('--- test failed!!! ---'))
