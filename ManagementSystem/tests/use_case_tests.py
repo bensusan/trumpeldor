@@ -22,6 +22,14 @@ def get_length_from_url(url):
     return len(r.json())
 
 
+def check_json_for_uc1p3(url):
+    r = requests.get(url)
+    arrJson = r.json()
+    for attr in arrJson:
+        if attr['name']=='this is a test':
+            return True
+    return False
+
 ip = '192.168.1.18'
 
 
@@ -38,7 +46,10 @@ def main():
     opts = Options()
     opts.set_headless()
     browser = Chrome(options=opts)
-    uc1p1(browser)
+    # uc1p1(browser)
+    # uc1p2(browser)
+    # uc1p1(browser)
+    uc1p3(browser)
 
     return
 
@@ -82,7 +93,7 @@ def uc1p1(driver):
     bool1 = first == 'http://'+ip+':12345/add_attraction/'
     bool2 = second == 'http://'+ip+':12345/add_game/'
     bool3 = third == 'http://'+ip+':12345/add_aq/'
-    bool4 = number_of_points_start == number_of_points_end
+    bool4 = number_of_points_start + 1 == number_of_points_end
 
     if bool1 and bool2 and bool3 and bool4:
         print(green('--- test passed!!! ---'))
@@ -94,17 +105,21 @@ def uc1p1(driver):
 
 def uc1p2(driver):
     print("Use Case: Delete Attraction.")
-    driver.get("http://"+ip+":12345/attractions/")
-    point = driver.find_element(By.XPATH, "//*[@id='map']/div/div/div[1]/div[3]/div/div[3]/div[10]/img")
-    point.click()
-    driver.find_element_by_id('edit_attraction').click()
+    # number_of_points_start = get_length_from_url('http://'+ip+':12344/managementsystem/attraction/')
+    driver.get("http://"+ip+":12345/edit_attraction/")
+    # point = driver.find_element(By.XPATH, "//*[@id='map']/div/div/div[1]/div[3]/div/div[3]/div[1]/img")
+    # point.click()
+    # driver.find_element_by_id('edit_attraction').click()
+    driver.execute_script("localStorage.setItem('edited', JSON.stringify({lat:31.2625444444,lng:34.8019111199}));")
     first = driver.current_url  # needs to be http://10.0.0.6:12345/edit_attraction/
-    driver.find_element_by_id('delete_point').click()
+    # driver.find_element_by_id('delete_point').click()
+    driver.execute_script("deletePoint2();")
 
     # second = driver.current_url  # needs to be http://10.0.0.6:12345/attractions/
 
     bool1 = first == 'http://'+ip+':12345/edit_attraction/'
     # bool2 = second == 'http://10.0.0.6:12345/attractions/'
+    # number_of_points_end = get_length_from_url('http://'+ip+':12344/managementsystem/attraction/')
 
     # if bool1 and bool2:
     if bool1:
@@ -117,22 +132,25 @@ def uc1p2(driver):
 
 def uc1p3(driver):
     print("Use Case : Edit Attraction.")
-    driver.get("http://"+ip+":12345/attractions/")
-    point = driver.find_element(By.XPATH, "//*[@id='map']/div/div/div[1]/div[3]/div/div[3]/div[10]/img")
-    point.click()
-    driver.find_element_by_id('edit_attraction').click()
+    driver.get("http://" + ip + ":12345/edit_attraction/")
+    # point = driver.find_element(By.XPATH, "//*[@id='map']/div/div/div[1]/div[3]/div/div[3]/div[1]/img")
+    # point.click()
+    # driver.find_element_by_id('edit_attraction').click()
+    driver.execute_script("localStorage.setItem('edited', JSON.stringify({lat:31.2625444444,lng:34.8019111199}));")
     first = driver.current_url  # needs to be http://10.0.0.6:12345/edit_attraction/
     driver.find_element_by_id('attr_name').send_keys(Keys.CONTROL, 'a')
     driver.find_element_by_id('attr_name').send_keys('this is a test')
     driver.find_element_by_id('desc').send_keys(Keys.CONTROL, 'a')
     driver.find_element_by_id('desc').send_keys('this is a test')
 
+    # driver.execute_script("finishEditingAttraction();")
     submitButton = driver.find_element(By.XPATH, "/html/body/div[1]/div/form/div[2]/button[1]")
     submitButton.click()
     second = driver.current_url  # needs to be http://10.0.0.6:12345/attractions/
 
     bool1 = first == 'http://'+ip+':12345/edit_attraction/'
     bool2 = second == 'http://'+ip+':12345/attractions/'
+    bool3 = check_json_for_uc1p3('http://' + ip + ':12344/managementsystem/attraction/')
 
     if bool1 and bool2:
         print(green('--- test passed!!! ---'))

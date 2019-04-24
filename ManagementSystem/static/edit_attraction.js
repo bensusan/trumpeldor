@@ -90,6 +90,10 @@ function doVideo(){
         getRequestAttractions(functionOfDelete);
     }
 
+    function deletePoint2() {
+        getRequestAttractions(functionOfDelete2);
+    }
+
     function functionOfDelete(attractionsJSON) {
 
         let editedPoint = JSON.parse(localStorage.getItem("edited"));
@@ -107,6 +111,27 @@ function doVideo(){
            // deleteRequestAttraction(attr,attr['id']);
             deleteRequestAttraction(attr['id']);
             window.location.href='/attractions';
+        }
+      });
+        // alert("cant believe this is happenning!");
+    }
+
+    function functionOfDelete2(attractionsJSON) {
+
+        let editedPoint = JSON.parse(localStorage.getItem("edited"));
+      let lat = editedPoint.lat;
+      let lng = editedPoint.lng;
+      //let name = "didn't found!!!";
+      // alert("in get name! "+"of the origin : " + lat + " , " + lng);
+      attractionsJSON.forEach(function (attr) {
+          // alert("the id is: "+attr['id']);
+        let p = {name: attr['name'], description:attr['description'], lat: attr['x'], lng: attr['y']};
+        // alert("in get name! "+"of the origin : " + lat + " , " + lng + "\n of the other: "+p.lat +" , "+ p.lng);
+        if((p.lat).toFixed(8)==lat.toFixed(8)&&(p.lng).toFixed(8)==lng.toFixed(8))
+        {
+            // alert("s");
+           // deleteRequestAttraction(attr,attr['id']);
+            deleteRequestAttraction(attr['id']);
         }
       });
         // alert("cant believe this is happenning!");
@@ -191,7 +216,7 @@ function encodeImageFileAsURL(element) {
   reader.onloadend = function() {
    //alert(reader.result)
    shit(reader.result)
-  }
+  };
 
   reader.readAsDataURL(file);
 }
