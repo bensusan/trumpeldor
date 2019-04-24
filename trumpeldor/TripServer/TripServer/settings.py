@@ -83,7 +83,7 @@ WSGI_APPLICATION = 'TripServer.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'ProjectNew1'
+        'NAME': 'ProjectNew'
                 '',
         'USER': 'postgres',
         'PASSWORD': 'trumpeldor',
