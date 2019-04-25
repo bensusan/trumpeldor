@@ -124,8 +124,10 @@ def main():
     # uc1p6p2(browser)
     # uc1p8p1(browser)
     # uc1p10p1(browser)
-    uc2p123(browser)
+    # uc2p123(browser)
     # uc2p4(browser)
+    # uc2p5(browser)
+    # uc3p1(browser)
 
     return
 
@@ -548,7 +550,7 @@ def uc2p4(driver):
 
 def uc2p5(driver):
     print("Use Case: Delete Paths test.")
-
+    c1 = make_check_uc2p123('http://' + ip + ':12344/managementsystem/track/')
     driver.get("http://"+ip+":12345/main/")
     driver.find_element(By.CSS_SELECTOR, "#sideMenu > div.sidenav > button").click()
     driver.find_element(By.CSS_SELECTOR, "#sideMenu > div.sidenav > div > a:nth-child(4)").click()
@@ -556,8 +558,10 @@ def uc2p5(driver):
     driver.execute_script("the_length=1;"
                           "getRequestTracks(funcToGetTrackID);"
                           "window.location.href='/main';")
+    c2 = make_check_uc2p123('http://' + ip + ':12344/managementsystem/track/')
+
     # driver.find_element(By.ID, "delete_chosen_path").click()
-    if driver.current_url == 'http://'+ip+':12345/main/':
+    if c1 > c2 and driver.current_url == 'http://'+ip+':12345/main/':
         print(green('--- test passed!!! ---'))
     else:
         print(red('--- test failed!!! ---'))
@@ -568,6 +572,8 @@ def uc2p5(driver):
 def uc3p1(driver):
     print("Use Case: Add Feedback Question.")
     driver.get("http://"+ip+":12345/main/")
+    c1 = make_check_uc2p123('http://' + ip + ':12344/managementsystem/feedback/')
+
     driver.find_element(By.CSS_SELECTOR, "#sideMenu > div.sidenav > button:nth-child(7)").click()
     driver.find_element(By.CSS_SELECTOR, "#sideMenu > div.sidenav > div:nth-child(8) > a:nth-child(1)").click()
 
@@ -580,10 +586,13 @@ def uc3p1(driver):
 
     second = driver.current_url  # needs to be http://10.0.0.1:12345/main/
 
+    c2 = make_check_uc2p123('http://' + ip + ':12344/managementsystem/feedback/')
+
     bool1 = first == 'http://'+ip+':12345/feedback/'
     bool2 = second == 'http://'+ip+':12345/main/'
+    bool3 = c1 + 1 == c2
 
-    if bool1 and bool2:
+    if bool1 and bool2 and bool3:
         print(green('--- test passed!!! ---'))
     else:
         print(red('--- test failed!!! ---'))
