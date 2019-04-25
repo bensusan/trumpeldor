@@ -55,7 +55,7 @@ namespace trumpeldor.Views
         string ExtractAccessTokenFromUrl(string url)
         {
             if (url.Contains("access_token") && url.Contains("&expires_in="))
-                return url.Substring(url.IndexOf("access_token") + 13);
+                return url.Substring(url.IndexOf("accetoken") + 13);
             return string.Empty;
         }
 
