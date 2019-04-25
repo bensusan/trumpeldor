@@ -39,7 +39,7 @@ class BL_Abstract(object):
     def getHints(self, attraction):
         raise NotImplementedError("Should have implemented this")
 
-    def getFeedbacks(self, trip):
+    def getFeedbackInstances(self, trip):
         raise NotImplementedError("Should have implemented this")
 
     def getAmericanQuestion(self, attraction):
@@ -195,10 +195,10 @@ class BLProxy(BL_Abstract):
             raise NotImplementedError("Should have implemented this")
         return self.Implementation.getHints(attraction)
 
-    def getFeedbacks(self, trip):
+    def getFeedbackInstances(self, trip):
         if self.Implementation is None:
             raise NotImplementedError("Should have implemented this")
-        return self.Implementation.getFeedbacks(trip)
+        return self.Implementation.getFeedbackInstances(trip)
 
     def getAmericanQuestion(self, attraction):
         if self.Implementation is None:

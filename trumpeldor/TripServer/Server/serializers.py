@@ -27,18 +27,18 @@ class UserSerializer(serializers.ModelSerializer):
 
 
 class TrackSerializer(serializers.ModelSerializer):
-    #subTrack = serializers.SerializerMethodField()
+    subTrack = serializers.SerializerMethodField()
     points = AttractionSerializer(many=True)
 
     class Meta:
-        fields = ('id', 'points', 'length',)
+        fields = ('id', 'subTrack', 'points', 'length',)
         model = Track
 
-    # def get_subTrack(self, obj):
-    #     if obj.subTrack is not None:
-    #         return TrackSerializer(obj.subTrack).data
-    #     else:
-    #         return None
+    def get_subTrack(self, obj):
+        if obj.subTrack is not None:
+            return TrackSerializer(obj.subTrack).data
+        else:
+            return None
 
 
 class GetExtendedTrackSerializer(serializers.Serializer):

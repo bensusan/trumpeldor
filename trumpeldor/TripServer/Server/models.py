@@ -25,7 +25,7 @@ class User(models.Model):
 
 
 class Track(models.Model):
-    #subTrack = models.ForeignKey('self', on_delete=models.CASCADE, blank=True, null=True)
+    subTrack = models.ForeignKey('self', on_delete=models.CASCADE, blank=True, null=True)
     points = models.ManyToManyField(Attraction)
     length = models.IntegerField()
 

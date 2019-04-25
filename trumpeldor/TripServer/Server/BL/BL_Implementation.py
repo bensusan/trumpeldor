@@ -90,7 +90,7 @@ class BL_Implementation(BL_Abstract):
         return self.DAL.getFeedbackInstances(trip)
 
     def getAmericanQuestion(self, id_attraction):
-        attr = self.get_attraction(id_attraction)
+        attr = self.get_attraction(id_attraction['id'])
         return self.DAL.getAmericanQuestion(attr)
 
     def getAttraction(self, attraction):
