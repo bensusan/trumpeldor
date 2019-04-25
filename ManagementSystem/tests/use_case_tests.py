@@ -364,9 +364,11 @@ def uc1p8p2(driver):
 
     # print(get_length_from_url('http://10.0.0.6:12344/managementsystem/attraction/68/hint/'))
     driver.get("http://"+ip+":12345/attractions/")
-    point = driver.find_element(By.XPATH, "//*[@id='map']/div/div/div[1]/div[3]/div/div[3]/div[10]/img")
-    point.click()
-    driver.find_element_by_id('edit_attraction').click()
+    driver.get("http://" + ip + ":12345/edit_attraction/")
+    # point = driver.find_element(By.XPATH, "//*[@id='map']/div/div/div[1]/div[3]/div/div[3]/div[1]/img")
+    # point.click()
+    # driver.find_element_by_id('edit_attraction').click()
+    driver.execute_script("localStorage.setItem('edited', JSON.stringify({lat:31.2625444444,lng:34.8019111199}));")
     first = driver.current_url  # needs to be http://10.0.0.6:12345/edit_attraction/
     editHintBTN = driver.find_element(By.CSS_SELECTOR, "#sideMenu > div.sidenav > a:nth-child(5)")
     editHintBTN.click()
@@ -398,9 +400,11 @@ def uc1p8p3(driver):
 
     # print(get_length_from_url('http://10.0.0.6:12344/managementsystem/attraction/68/hint/'))
     driver.get("http://"+ip+":12345/attractions/")
-    point = driver.find_element(By.XPATH, "//*[@id='map']/div/div/div[1]/div[3]/div/div[3]/div[10]/img")
-    point.click()
-    driver.find_element_by_id('edit_attraction').click()
+    driver.get("http://" + ip + ":12345/edit_attraction/")
+    # point = driver.find_element(By.XPATH, "//*[@id='map']/div/div/div[1]/div[3]/div/div[3]/div[1]/img")
+    # point.click()
+    # driver.find_element_by_id('edit_attraction').click()
+    driver.execute_script("localStorage.setItem('edited', JSON.stringify({lat:31.2625444444,lng:34.8019111199}));")
     first = driver.current_url  # needs to be http://10.0.0.6:12345/edit_attraction/
     editHintBTN = driver.find_element(By.CSS_SELECTOR, "#sideMenu > div.sidenav > a:nth-child(5)")
     editHintBTN.click()

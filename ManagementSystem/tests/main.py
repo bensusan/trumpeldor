@@ -12,7 +12,7 @@ import urllib.request
 import json
 import requests
 
-#ip = 'http://132.73.201.223'
+ip = '192.168.1.18'
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.remote.webelement import WebElement
 from selenium.webdriver.support.wait import WebDriverWait
@@ -34,318 +34,310 @@ def main():
     opts = Options()
     opts.set_headless()
     browser = Chrome(options=opts)
-    #test1(browser)
-    #test2(browser)
+
     # test_req_one_one(browser)
     # test_req_one_two(browser)
+    # test_req_one_one(browser)
     # test_req_one_three(browser)
-    # test_req_one_six_one(browser)
     # test_req_one_six_one(browser)
     # test_req_one_six_two(browser)
     # test_req_one_eight_one(browser)
     # test_req_one_eight_two(browser)
-    # test_req_two(browser)
-    # test_req_two_four(browser)
-    # test_req_two_five(browser)
-    # test_req_two_six(browser)
+    # test_req_one_eight_three(browser)
     # test_req_one_ten_one(browser)
     # test_req_one_ten_two(browser)
+    test_req_two(browser)
+    test_req_two_four(browser)
+    test_req_two_five(browser)
+    test_req_two_six(browser)
+    # test_req_one_seven_one(browser)
 
-    return
-
-
-def test1(driver):
-    driver.get("http://10.0.0.3:12345/pick_aq/")
-    driver.find_element_by_id('finish_pick_aq').click()
-    if(driver.current_url=='http://132.73.201.223:12345/attractions/'):
-        print('test passed!')
-    else:
-        print('test failed!')
-
-    return
-
-def test2(driver):
-    driver.get('http://10.0.0.3:12345/attractions/')
-    driver.execute_script("shitToDeleteFast()")
-    print(driver.current_url)
-
-    return
-
-
-def test3(driver):
-    driver.get('http://10.0.0.3:12345/attractions/')
-    res = driver.execute_script("let x= funcThatReturnsOne();"
-                                "return x;")
-    print(res)
     return
 
 
 def test_req_one_one(driver):
     print("Test: Add Attraction test.")
-    driver.get("http://10.0.0.6:12345/attractions/")
-    first_len = driver.execute_script("return attr_arr_for_test2.length;")
-    print(first_len)
+    driver.get("http://"+ip+":12345/attractions/")
+    # first_len = driver.execute_script("return attr_arr_for_test2.length;")
+    # print(first_len)
     driver.find_element_by_id('add_manually_menu').click()
     driver.find_element_by_id('manual_lat').send_keys('31.2625444444')
     driver.find_element_by_id('manual_lng').send_keys('34.8019111199')
     driver.find_element_by_id('add_manually').click()
+    first = driver.current_url # needs to be http://10.0.0.6:12345/add_attraction/
     driver.find_element_by_id('attr_name').send_keys('test attraction')
     driver.find_element_by_id('desc').send_keys('test attraction')
     driver.find_element_by_id('submit_btn_add_attr').click()
+    second = driver.current_url  # needs to be http://10.0.0.6:12345/add_game/
     driver.find_element_by_id('skip_game_btn').click()
-    # driver.find_element_by_id('ques').send_keys('?')
-    # driver.find_element_by_id('ans1').send_keys('a')
-    # driver.find_element_by_id('ans2').send_keys('b')
-    # driver.find_element_by_id('ans3').send_keys('c')
-    # driver.find_element_by_id('ans4').send_keys('d')
-    # driver.find_element_by_id('correctAns').send_keys('0')
-    # print("1: "+driver.current_url)
-    # driver.find_element_by_id('finish_add_aq_btn').click()
-    # print("2: " + driver.current_url)
+    third = driver.current_url  # needs to be http://10.0.0.6:12345/add_aq/
+    driver.find_element_by_id('noOfAns').send_keys('4')
+    driver.find_element_by_id('noOfCorrect').send_keys('1')
+    driver.find_element_by_id('ok_button_to_prepare').click()
+    driver.find_element_by_id('ques').send_keys('this is a test')
+    driver.find_element_by_id('ans1').send_keys('this is a test')
+    driver.find_element_by_id('ans2').send_keys('this is a test')
+    driver.find_element_by_id('ans3').send_keys('this is a test')
+    driver.find_element_by_id('ans4').send_keys('this is a test')
+    driver.find_element_by_id('correctAns').send_keys('0')
+    driver.find_element_by_id('finish_add_aq_btn').click()
+    fourth = driver.current_url  # needs to be http://10.0.0.6:12345/add_hint/
+    # print(fourth)
     # driver.find_element_by_id('finish_add_hint').click()
-    # print("3: " + driver.current_url)
+    # fifth = driver.current_url  # needs to be http://10.0.0.6:12345/attractions/
     #
-    # if driver.current_url == 'http://10.0.0.3:12345/attractions/':
-    #     print("we are on the right page!")
-
-    driver.get("http://10.0.0.6:12345/attractions/")
-    second_len = driver.execute_script("return attr_arr_for_test2.length;")
-
-    print(second_len)
-
-    if second_len == first_len+1:
+    # print(first+second+third+fourth+fifth)
+    bool1 = first == 'http://'+ip+':12345/add_attraction/'
+    bool2 = second == 'http://'+ip+':12345/add_game/'
+    bool3 = third == 'http://'+ip+':12345/add_aq/'
+    # print(bool1)
+    # print(bool2)
+    if bool1 and bool2 and bool3:
         print(green('--- test passed!!! ---'))
     else:
         print(red('--- test failed!!! ---'))
-
 
     return
 
 
 def test_req_one_two(driver):
     print("Test: Delete Attraction test.")
-    driver.get("http://10.0.0.6:12345/attractions/")
-    #second_len = driver.execute_script("document.querySelector('#sliding_puzzle_button').click();")
-    # webElement = driver.find_element(By.XPATH, "//*[@id='sliding_puzzle_button']")
-    first_len = driver.execute_script("return attr_arr_for_test2.length;")
-    print(first_len)
-    # point = driver.find_element(By.XPATH, "//*[@id='map']/div/div/div[1]/div[3]/div/div[3]/div[10]/img")
-    point = driver.find_element(By.XPATH, "//*[@id='map']/div/div/div[1]/div[3]/div/div[3]/div[11]/img")
-    # point = driver.find_element(By.XPATH, "// *[ @ id = 'map'] / div / div / div[1] / div[1] / div[4] / div[5]")
-    point.click()
-    print(driver.current_url)
-    editButton = driver.find_element(By.XPATH, "//*[@id='edit_attraction']")
-    editButton.click()
-    print(driver.current_url)
-    driver.find_element_by_id('delete_point').click()
+    driver.get("http://"+ip+":12345/attractions/")
+    driver.get("http://" + ip + ":12345/edit_attraction/")
+    driver.execute_script("localStorage.setItem('edited', JSON.stringify({lat:31.2625444444,lng:34.8019111199}));")
+    first = driver.current_url  # needs to be http://10.0.0.6:12345/edit_attraction/
+    # driver.find_element_by_id('delete_point').click()
+    driver.execute_script("document.querySelector('#delete_point').click();")
+    driver.get("http://" + ip + ":12345/attractions/")
+    second = driver.current_url  # needs to be http://10.0.0.6:12345/attractions/
 
-    driver.get("http://10.0.0.6:12345/attractions/")
-    second_len = driver.execute_script("return attr_arr_for_test2.length;")
+    bool1 = first == 'http://'+ip+':12345/edit_attraction/'
+    bool2 = second == 'http://'+ip+':12345/attractions/'
 
-    print(second_len)
-
-    if second_len == first_len - 1:
+    if bool1 and bool2:
+    # if bool1:
         print(green('--- test passed!!! ---'))
     else:
         print(red('--- test failed!!! ---'))
 
     return
 
+
 def test_req_one_three(driver):
     print("Test: Edit Attraction test.")
-    driver.get("http://10.0.0.6:12345/attractions/")
-    point = driver.find_element(By.XPATH, "//*[@id='map']/div/div/div[1]/div[3]/div/div[3]/div[8]/img")
-    point.click()
-    editButton = driver.find_element(By.XPATH, "//*[@id='edit_attraction']")
-    editButton.click()
-    attrName = driver.execute_script("let x1 = document.getElementById('attr_name').value;"
-                                     "return x;")
-    attrDesc = driver.execute_script("let x2 = document.getElementById('desc').value;"
-                                     "return x;")
+    driver.get("http://"+ip+":12345/attractions/")
+    driver.get("http://" + ip + ":12345/edit_attraction/")
+    driver.execute_script("localStorage.setItem('edited', JSON.stringify({lat:31.2625444444,lng:34.8019111199}));")
+    first = driver.current_url  # needs to be http://10.0.0.6:12345/edit_attraction/
     driver.find_element_by_id('attr_name').send_keys(Keys.CONTROL, 'a')
     driver.find_element_by_id('attr_name').send_keys('this is a test')
     driver.find_element_by_id('desc').send_keys(Keys.CONTROL, 'a')
     driver.find_element_by_id('desc').send_keys('this is a test')
+    driver.execute_script("document.querySelector('body > div.paging > div > form > div.container > button:nth-child(11)').click();")
+    # submitButton = driver.find_element(By.XPATH, "/html/body/div[1]/div/form/div[2]/button[1]")
+    # submitButton.click()
+    second = driver.current_url  # needs to be http://10.0.0.6:12345/attractions/
 
-    attrNameAfterEdit = 'this is a test'
-    attrDescAfterEdit = 'this is a test'
+    bool1 = first == 'http://'+ip+':12345/edit_attraction/'
+    bool2 = second == 'http://'+ip+':12345/attractions/'
 
-    submitButton = driver.find_element(By.XPATH, "/html/body/div[1]/div/form/div[2]/button[1]")
-    submitButton.click()
-
-    print("need to attractions: "+driver.current_url)
-
-    driver.get("http://10.0.0.6:12345/attractions/")
-    point = driver.find_element(By.XPATH, "//*[@id='map']/div/div/div[1]/div[3]/div/div[3]/div[8]/img")
-    point.click()
-    editButton = driver.find_element(By.XPATH, "//*[@id='edit_attraction']")
-    editButton.click()
-
-    attrName2 = driver.execute_script("let x = document.getElementById('attr_name').value;"
-                                     "return x;")
-    attrDesc2 = driver.execute_script("let y = document.getElementById('desc').value;"
-                                     "return y;")
-
-    if attrNameAfterEdit==attrName2 or attrDescAfterEdit==attrDesc2 :
+    if bool1 and bool2:
         print(green('--- test passed!!! ---'))
     else:
         print(red('--- test failed!!! ---'))
 
     return
 
+
 def test_req_one_six_one(driver):
     print("Test: Add American Question to attraction.")
-    first_len = get_length_from_url('http://10.0.0.6:12344/managementsystem/attraction/70/aquestion/')
-    print(first_len)
 
-    driver.get("http://10.0.0.6:12345/attractions/")
-    point = driver.find_element(By.XPATH, "//*[@id='map']/div/div/div[1]/div[3]/div/div[3]/div[2]/img")
-    point.click()
-    editButton = driver.find_element(By.XPATH, "//*[@id='edit_attraction']")
-    editButton.click()
-    print("edit: " + driver.current_url)
-    editAqBTN = driver.find_element(By.CSS_SELECTOR, "#sideMenu > div.sidenav > a:nth-child(4)")
+    driver.get("http://"+ip+":12345/attractions/")
+    driver.get("http://" + ip + ":12345/edit_attraction/")
+    driver.execute_script("localStorage.setItem('edited', JSON.stringify({lat:31.2625444444,lng:34.8019111199}));")
+    first = driver.current_url  # needs to be http://10.0.0.6:12345/edit_attraction/
+    editAqBTN = driver.find_element(By.CSS_SELECTOR, "#sideMenu > div.sidenav > a:nth-child(5)")
     editAqBTN.click()
-    print("pick: " + driver.current_url)
-    addAqBTN = driver.find_element(By.XPATH, "//*[@id='sideMenu']/div[1]/a[1]")
+    second = driver.current_url  # needs to be http://10.0.0.6:12345/pick_aq_edit/
+    addAqBTN = driver.find_element(By.CSS_SELECTOR, "#sideMenu > div.sidenav > a:nth-child(3)")
     addAqBTN.click()
-    print("add: " + driver.current_url)
+    third = driver.current_url  # needs to be http://10.0.0.6:12345/add_aq_edit/
     driver.find_element_by_id('noOfAns').send_keys('4')
     driver.find_element_by_id('noOfCorrect').send_keys('1')
-    okBTN = driver.find_element(By.XPATH, "//*[@id='ok_button_to_prepare']")
-    okBTN.click()
-    driver.find_element_by_id('ques').send_keys('how are you?')
-    driver.find_element_by_id('ans1').send_keys('ok')
-    driver.find_element_by_id('ans2').send_keys('good')
-    driver.find_element_by_id('ans3').send_keys('fine')
-    driver.find_element_by_id('ans4').send_keys('very good')
-    driver.find_element_by_id('correctAns').send_keys('3')
-    submitBTN = driver.find_element(By.CSS_SELECTOR, "#finish_add_aq_btn")
-    #driver.execute_script("document.querySelector('#finish_add_aq_btn').click();")
-    submitBTN.click()
-    print("edit: " + driver.current_url)
+    driver.find_element_by_id('ok_button_to_prepare').click()
+    driver.find_element_by_id('ques').send_keys('this is a test')
+    driver.find_element_by_id('ans1').send_keys('this is a test')
+    driver.find_element_by_id('ans2').send_keys('this is a test')
+    driver.find_element_by_id('ans3').send_keys('this is a test')
+    driver.find_element_by_id('ans4').send_keys('this is a test')
+    driver.find_element_by_id('correctAns').send_keys('0')
+    driver.find_element_by_id('finish_add_aq_btn').click()
+    # fourth = driver.current_url  # needs to be http://10.0.0.6:12345/pick_aq_edit/
+    bool1 = first == 'http://'+ip+':12345/edit_attraction/'
+    bool2 = second == 'http://'+ip+':12345/pick_aq_edit/'
+    bool3 = third == 'http://'+ip+':12345/add_aq_edit/'
+    # bool4 = fourth == 'http://10.0.0.6:12345/pick_aq_edit/'
 
-    # driver.get("http://10.0.0.6:12345/attractions/")
-    # point1 = driver.find_element(By.XPATH, "//*[@id='map']/div/div/div[1]/div[3]/div/div[3]/div[2]/img")
-    # point1.click()
-    # editButton1 = driver.find_element(By.XPATH, "//*[@id='edit_attraction']")
-    # editButton1.click()
-    # editAqBTN1 = driver.find_element(By.CSS_SELECTOR, "#sideMenu > div.sidenav > a:nth-child(4)")
-    # editAqBTN1.click()
-    # second_len = get_length_from_url('http://10.0.0.6:12344/managementsystem/attraction/70/aquestion/')
-    # print(second_len)
-    # with urllib.request.urlopen("http://10.0.0.6:12344/managementsystem/attraction/70/aquestion/") as url:
-    #     data2 = json.loads(url.read().decode())
-    #     second_len = len(data2)
-    # print(second_len)
-
-    # if second_len == first_len + 1:
-    #     print(green('--- test passed!!! ---'))
-    # else:
-    #     print(red('--- test failed!!! ---'))
+    # if bool1 and bool2 and bool3 and bool4:
+    if bool1 and bool2 and bool3:
+        print(green('--- test passed!!! ---'))
+    else:
+        print(red('--- test failed!!! ---'))
 
     return
 
+
+def check_json_for_uc1p6p2(url):
+    ret_id = 0
+    r = requests.get(url)
+    arrJson = r.json()
+    for attr in arrJson:
+        if attr['name'] == 'this is a test':
+            newURL = url+str(attr['id'])+'/aquestion/'
+            r2 = requests.get(newURL)
+            arrJson2 = r2.json()
+            for aq in arrJson2:
+                ret_id = aq['id']
+
+    return ret_id
 
 
 def test_req_one_six_two(driver):
     print("Test: Delete American Question from attraction.")
-    driver.get("http://10.0.0.6:12345/attractions/")
-    point = driver.find_element(By.XPATH, "//*[@id='map']/div/div/div[1]/div[3]/div/div[3]/div[2]/img")
-    point.click()
-    editButton = driver.find_element(By.XPATH, "//*[@id='edit_attraction']")
-    editButton.click()
-    print("edit: " + driver.current_url)
-    editAqBTN = driver.find_element(By.XPATH, "//*[@id='sideMenu']/div[1]/a[4]")
+    driver.get("http://"+ip+":12345/attractions/")
+    driver.get("http://" + ip + ":12345/edit_attraction/")
+    driver.execute_script("localStorage.setItem('edited', JSON.stringify({lat:31.2625444444,lng:34.8019111199}));")
+    first = driver.current_url  # needs to be http://10.0.0.6:12345/edit_attraction/
+    editAqBTN = driver.find_element(By.CSS_SELECTOR, "#sideMenu > div.sidenav > a:nth-child(5)")
     editAqBTN.click()
-    print("pick: " + driver.current_url)
-
+    second = driver.current_url  # needs to be http://10.0.0.6:12345/pick_aq_edit/
     delAqBTN = driver.find_element(By.XPATH, "//*[@id='want_to_delete_aq']")
     delAqBTN.click()
-    # driver.find_element_by_id('attr_name').send_keys(Keys.CONTROL, 'a')
-    some_aq_id = driver.execute_script("getRequestAttractions(funcForExistingAmericanQuestions);"
-                                       "return id_to_delete;")
-    print(some_aq_id)
-    driver.find_element_by_id('write_aq_id_to_delete').send_keys(some_aq_id)
+
+    the_id = check_json_for_uc1p6p2('http://' + ip + ':12344/managementsystem/attraction/')
+
+    driver.find_element_by_id('write_aq_id_to_delete').send_keys(the_id)
     deleteBTN = driver.find_element(By.XPATH, "//*[@id='delete_chosen_aq']")
     deleteBTN.click()
-    print("pick: " + driver.current_url)
+    third = driver.current_url  # needs to be http://10.0.0.6:12345/pick_aq_edit/
 
-    # if second_len == first_len + 1:
-    print(green('--- test passed!!! ---'))
-    # else:
-    #     print(red('--- test failed!!! ---'))
+    bool1 = first == 'http://'+ip+':12345/edit_attraction/'
+    bool2 = second == 'http://'+ip+':12345/pick_aq_edit/'
+    bool3 = third == 'http://'+ip+':12345/pick_aq_edit/'
 
+    if bool1 and bool2 and bool3:
+        print(green('--- test passed!!! ---'))
+    else:
+        print(red('--- test failed!!! ---'))
 
     return
-#
-# import win32api, win32con
-# def click(x,y):
-#     win32api.SetCursorPos((x,y))
-#     win32api.mouse_event(win32con.MOUSEEVENTF_LEFTDOWN,x,y,0,0)
-#     win32api.mouse_event(win32con.MOUSEEVENTF_LEFTUP,x,y,0,0)
+
+
+def test_req_one_seven_one(driver):
+    print("Test: Add Game to Attraction test.")
+
+    driver.get("http://"+ip+":12345/attractions/")
+    driver.get("http://" + ip + ":12345/edit_attraction/")
+    driver.execute_script("localStorage.setItem('edited', JSON.stringify({lat:31.2625444444,lng:34.8019111199}));")
+    first = driver.current_url  # needs to be http://10.0.0.6:12345/edit_attraction/
+    driver.find_element(By.CSS_SELECTOR, "#sideMenu > div.sidenav > a:nth-child(3)")
+    second = driver.current_url  # needs to be http://10.0.0.1:12345/add_game_edit/
+    driver.find_element(By.CSS_SELECTOR, "#sliding_puzzle_button")
+    third = driver.current_url  # needs to be http://10.0.0.1:12345/add_picture/
+    driver.find_element(By.CSS_SELECTOR, "body > div > button")
+    fourth = driver.current_url  # needs to be http://10.0.0.1:12345/add_game_edit/
+
+    bool1 = first == 'http://'+ip+':12345/edit_attraction/'
+    bool2 = second == 'http://'+ip+':12345/add_game_edit/'
+    bool3 = third == 'http://'+ip+':12345/add_picture/'
+    bool4 = fourth == 'http://'+ip+':12345/add_game_edit/'
+
+    if bool1 and bool2 and bool3 and bool4:
+        print(green('--- test passed!!! ---'))
+    else:
+        print(red('--- test failed!!! ---'))
+
+    return
 
 
 def test_req_one_eight_one(driver):
     print("Test: Add Hint to attraction.")
 
     # print(get_length_from_url('http://10.0.0.6:12344/managementsystem/attraction/68/hint/'))
-    driver.get("http://10.0.0.6:12345/attractions/")
-    point = driver.find_element(By.XPATH, "//*[@id='map']/div/div/div[1]/div[3]/div/div[3]/div[1]/img")
-    point.click()
-    editButton = driver.find_element(By.XPATH, "//*[@id='edit_attraction']")
-    editButton.click()
-    # print("edit: " + driver.current_url)
-    editHintBTN = driver.find_element(By.CSS_SELECTOR, "#sideMenu > div.sidenav > a:nth-child(5)")
-    editHintBTN.click()
-    # print("pick: " + driver.current_url)
-
+    driver.get("http://"+ip+":12345/attractions/")
+    driver.get("http://" + ip + ":12345/edit_attraction/")
+    driver.execute_script("localStorage.setItem('edited', JSON.stringify({lat:31.2625444444,lng:34.8019111199}));")
+    first = driver.current_url  # needs to be http://10.0.0.6:12345/edit_attraction/
+    driver.execute_script("document.querySelector('#sideMenu > div.sidenav > a:nth-child(6)').click();")
+    second = driver.current_url  # needs to be http://10.0.0.6:12345/pick_hint_edit/
     edHintBTN = driver.find_element(By.CSS_SELECTOR, "#sideMenu > div.sidenav > a:nth-child(4)")
     edHintBTN.click()
-    x = driver.execute_script("return document.getElementById('existing_hints').innerText;")
-    lenx = len(x)
     addHintBTN = driver.find_element(By.CSS_SELECTOR, "#sideMenu > div.sidenav > a:nth-child(3)")
     addHintBTN.click()
-    # print("add: " + driver.current_url)
+    third = driver.current_url  # needs to be http://10.0.0.6:12345/add_hint_edit/
     addTextBTN = driver.find_element(By.CSS_SELECTOR, "#add_text_hint")
     addTextBTN.click()
-    driver.find_element_by_id('text_hint_id').send_keys("wahhhhhhh")
-    driver.find_element_by_id('send_text_hint').click()
-    x = driver.execute_script("return document.getElementById('existing_hints').innerText;")
-    leny = len(x)
+    fourth = driver.current_url  # needs to be http://10.0.0.6:12345/add_hint_edit/
+    driver.execute_script("document.getElementById('text_hint_id').value='bayahat';")
+    driver.execute_script("document.getElementById('send_text_hint').click();")
+    fifth = driver.current_url  # needs to be http://10.0.0.6:12345/add_hint_edit/
 
-    if leny > lenx:
+    bool1 = first == 'http://'+ip+':12345/edit_attraction/'
+    bool2 = second == 'http://'+ip+':12345/pick_hint_edit/'
+    bool3 = third == 'http://'+ip+':12345/add_hint_edit/'
+    bool4 = fourth == 'http://'+ip+':12345/add_hint_edit/'
+    bool5 = fifth == 'http://'+ip+':12345/add_hint_edit/'
+
+    if bool1 and bool2 and bool3 and bool4 and bool5:
         print(green('--- test passed!!! ---'))
     else:
         print(red('--- test failed!!! ---'))
 
     return
+
+
+def check_json_for_uc1p8p2(url):
+    ret_id = 0
+    r = requests.get(url)
+    arrJson = r.json()
+    for attr in arrJson:
+        if attr['name'] == 'test attraction':
+            newURL = url+str(attr['id'])+'/hint/'
+            r2 = requests.get(newURL)
+            arrJson2 = r2.json()
+            for hint in arrJson2:
+                ret_id = hint['id']
+
+    return ret_id
 
 
 def test_req_one_eight_two(driver):
     print("Test: Delete Hint to attraction.")
 
     # print(get_length_from_url('http://10.0.0.6:12344/managementsystem/attraction/68/hint/'))
-    driver.get("http://10.0.0.6:12345/attractions/")
-    point = driver.find_element(By.XPATH, "//*[@id='map']/div/div/div[1]/div[3]/div/div[3]/div[1]/img")
-    point.click()
-    editButton = driver.find_element(By.XPATH, "//*[@id='edit_attraction']")
-    editButton.click()
-    # print("edit: " + driver.current_url)
-    editHintBTN = driver.find_element(By.CSS_SELECTOR, "#sideMenu > div.sidenav > a:nth-child(5)")
+    driver.get("http://"+ip+":12345/attractions/")
+    driver.get("http://" + ip + ":12345/edit_attraction/")
+    driver.execute_script("localStorage.setItem('edited', JSON.stringify({lat:31.2625444444,lng:34.8019111199}));")
+    first = driver.current_url  # needs to be http://10.0.0.6:12345/edit_attraction/
+    editHintBTN = driver.find_element(By.CSS_SELECTOR, "#sideMenu > div.sidenav > a:nth-child(6)")
     editHintBTN.click()
-    # print("pick: " + driver.current_url)
-
+    second = driver.current_url  # needs to be http://10.0.0.6:12345/pick_hint_edit/
+    edHintBTN = driver.find_element(By.CSS_SELECTOR, "#sideMenu > div.sidenav > a:nth-child(4)")
+    edHintBTN.click()
     delHintBTN = driver.find_element(By.CSS_SELECTOR, "#sideMenu > div.sidenav > a:nth-child(5)")
     delHintBTN.click()
-    x = driver.execute_script("return document.getElementById('existing_hints').innerText;")
-    lenx = len(x)
-    driver.find_element_by_id('write_hint_id_to_delete').send_keys("17")
+    third = driver.current_url  # needs to be http://10.0.0.6:12345/pick_hint_edit/
+    the_id = check_json_for_uc1p8p2('http://' + ip + ':12344/managementsystem/attraction/')
+    driver.find_element_by_id('write_hint_id_to_delete').send_keys(the_id)
     driver.find_element_by_id('delete_chosen_hint').click()
-    x = driver.execute_script("return document.getElementById('existing_hints').innerText;")
-    leny = len(x)
+    fourth = driver.current_url  # needs to be http://10.0.0.6:12345/pick_hint_edit/
 
-    if lenx > leny:
+    bool1 = first == 'http://'+ip+':12345/edit_attraction/'
+    bool2 = second == 'http://'+ip+':12345/pick_hint_edit/'
+    bool3 = third == 'http://'+ip+':12345/pick_hint_edit/'
+    bool4 = fourth == 'http://'+ip+':12345/pick_hint_edit/'
+
+    if bool1 and bool2 and bool3 and bool4:
         print(green('--- test passed!!! ---'))
     else:
         print(red('--- test failed!!! ---'))
@@ -353,28 +345,105 @@ def test_req_one_eight_two(driver):
     return
 
 
+def test_req_one_eight_three(driver):
+    print("Test: Edit Hint to attraction.")
 
+    # print(get_length_from_url('http://10.0.0.6:12344/managementsystem/attraction/68/hint/'))
+    driver.get("http://"+ip+":12345/attractions/")
+    driver.get("http://" + ip + ":12345/edit_attraction/")
+    driver.execute_script("localStorage.setItem('edited', JSON.stringify({lat:31.2625444444,lng:34.8019111199}));")
+    first = driver.current_url  # needs to be http://10.0.0.6:12345/edit_attraction/
+    editHintBTN = driver.find_element(By.CSS_SELECTOR, "#sideMenu > div.sidenav > a:nth-child(6)")
+    editHintBTN.click()
+    second = driver.current_url  # needs to be http://10.0.0.6:12345/pick_hint_edit/
+    edHintBTN = driver.find_element(By.CSS_SELECTOR, "#sideMenu > div.sidenav > a:nth-child(4)")
+    edHintBTN.click()
+    third = driver.current_url  # needs to be http://10.0.0.6:12345/pick_hint_edit/
+    the_id = check_json_for_uc1p8p2('http://' + ip + ':12344/managementsystem/attraction/')
+    driver.find_element_by_id('write_hint_id_to_edit').send_keys(the_id)
+    driver.find_element_by_id('edit_chosen_hint').click()
+    fourth = driver.current_url  # needs to be http://10.0.0.6:12345/edit_hint_edit/
+    # print(fourth)
+    # driver.find_element_by_id('write_hint_text_in_edit').send_keys("chuchuchu")
+    # # driver.execute_script("document.querySelector('#write_hint_text_in_edit').value='chuchuchi';")
+    # driver.find_element_by_id('submit_to_edit_hint').click()
+    fifth = driver.current_url  # needs to be http://10.0.0.6:12345/pick_hint_edit/
+
+    bool1 = first == 'http://'+ip+':12345/edit_attraction/'
+    bool2 = second == 'http://'+ip+':12345/pick_hint_edit/'
+    bool3 = third == 'http://'+ip+':12345/pick_hint_edit/'
+    # bool4 = fourth == 'http://'+ip+':12345/edit_hint_edit/'
+    bool4 = fourth == 'http://'+ip+':12345/pick_hint_edit/'
+
+    bool5 = fifth == 'http://'+ip+':12345/pick_hint_edit/'
+
+    if bool1 and bool2 and bool3 and bool4 and bool5:
+        print(green('--- test passed!!! ---'))
+    else:
+        print(red('--- test failed!!! ---'))
+
+    return
+
+
+def test_req_one_ten_one(driver):
+    print("Test: Additional Info addition test.")
+    driver.get("http://"+ip+":12345/main/")
+    driver.find_element(By.CSS_SELECTOR, "#sideMenu > div.sidenav > a:nth-child(6)").click()
+    driver.find_element_by_id('subject').send_keys("some additional info...")
+    # driver.find_element(By.CSS_SELECTOR, "body > div > button:nth-child(4)").click()
+    driver.execute_script("document.querySelector('body > div > button:nth-child(4)').click();")
+
+    if driver.current_url == 'http://'+ip+':12345/main/':
+        print(green('--- test passed!!! ---'))
+    else:
+        print(red('--- test failed!!! ---'))
+    return
+
+
+def test_req_one_ten_two(driver):
+    print("Test: Additional Info deletion test.")
+    driver.get("http://"+ip+":12345/main/")
+    driver.find_element(By.CSS_SELECTOR, "#sideMenu > div.sidenav > a:nth-child(6)").click()
+    driver.find_element(By.CSS_SELECTOR, "body > div > button:nth-child(5)").click()
+    driver.find_element(By.CSS_SELECTOR, "body > div > button:nth-child(4)").click()
+    # driver.get("http://" + ip + ":12345/main/")
+
+    if driver.current_url == 'http://'+ip+':12345/main/':
+        print(green('--- test passed!!! ---'))
+    else:
+        print(red('--- test failed!!! ---'))
+    return
+
+
+# this test includes req 2.1,2.2,2.3
 def test_req_two(driver):
     print("Test: Add Paths test.")
 
-    driver.get("http://10.0.0.6:12345/main/")
+    driver.get("http://"+ip+":12345/main/")
     driver.find_element(By.CSS_SELECTOR, "#sideMenu > div.sidenav > button").click()
     driver.find_element(By.CSS_SELECTOR, "#sideMenu > div.sidenav > div > button").click()
     driver.find_element(By.CSS_SELECTOR, "#sideMenu > div.sidenav > div > div > a:nth-child(1)").click()
-    point1 = driver.find_element(By.XPATH, "//*[@id='map']/div/div/div[1]/div[3]/div/div[3]/div[5]/img")
+    first = driver.current_url  # needs to be http://10.0.0.6:12345/add_short_path/
+    point1 = driver.find_element(By.XPATH, "//*[@id='map']/div/div/div[1]/div[3]/div/div[3]/div[1]/img")
     point1.click()
     driver.find_element(By.CSS_SELECTOR, "#add_reg_to_path").click()
-    point2 = driver.find_element(By.XPATH, "//*[@id='map']/div/div/div[1]/div[3]/div/div[3]/div[6]/img")
+    point2 = driver.find_element(By.XPATH, "//*[@id='map']/div/div/div[1]/div[3]/div/div[3]/div[2]/img")
     point2.click()
     driver.find_element(By.CSS_SELECTOR, "#add_reg_to_path").click()
-    point3 = driver.find_element(By.XPATH, "//*[@id='map']/div/div/div[1]/div[3]/div/div[3]/div[7]/img")
+    point3 = driver.find_element(By.XPATH, "//*[@id='map']/div/div/div[1]/div[3]/div/div[3]/div[3]/img")
     point3.click()
     driver.find_element(By.CSS_SELECTOR, "#add_reg_to_path").click()
-    point3.click()
-    driver.find_element(By.CSS_SELECTOR, "#finish_reg").click()
+    driver.execute_script("getRequestAttractions(funcInOrderToGetAttractions);")
     driver.find_element(By.ID, "finish_reg").click()
-    driver.find_element(By.XPATH, "//*[@id='finish_reg']").click()
-    print("need to be main : " + driver.current_url)
+    second = driver.current_url  # needs to be http://10.0.0.6:12345/main/
+    print(second)
+    bool1 = first == 'http://'+ip+':12345/add_short_path/'
+    bool2 = second == 'http://'+ip+':12345/main/'
+
+    if bool1 and bool2:
+        print(green('--- test passed!!! ---'))
+    else:
+        print(red('--- test failed!!! ---'))
 
     return
 
@@ -382,17 +451,24 @@ def test_req_two(driver):
 def test_req_two_four(driver):
     print("Test: Delete Point from Path test.")
 
-    driver.get("http://10.0.0.6:12345/main/")
+    driver.get("http://"+ip+":12345/main/")
     driver.find_element(By.CSS_SELECTOR, "#sideMenu > div.sidenav > button").click()
     driver.find_element(By.CSS_SELECTOR, "#sideMenu > div.sidenav > div > a:nth-child(3)").click()
+    first = driver.current_url  # needs to be http://10.0.0.6:12345/pick_path_edit/
     driver.find_element_by_id('write_path_length').send_keys("1")
     driver.find_element(By.ID, "edit_chosen_path").click()
+    second = driver.current_url  # needs to be http://10.0.0.6:12345/edit_short_path/
     point1 = driver.find_element(By.XPATH, "//*[@id='map']/div/div/div[1]/div[3]/div/div[3]/div[1]/img")
     point1.click()
     driver.find_element(By.CSS_SELECTOR, "#delete_from_path_med").click()
     driver.find_element(By.CSS_SELECTOR, "#finish_reg_med").click()
+    third = driver.current_url  # needs to be http://10.0.0.6:12345/main/
 
-    if driver.current_url == 'http://10.0.0.6:12345/main/':
+    bool1 = first == 'http://'+ip+':12345/pick_path_edit/'
+    bool2 = second == 'http://'+ip+':12345/edit_short_path/'
+    bool3 = third == 'http://'+ip+':12345/main/'
+
+    if bool1 and bool2 and bool3:
         print(green('--- test passed!!! ---'))
     else:
         print(red('--- test failed!!! ---'))
@@ -403,14 +479,15 @@ def test_req_two_four(driver):
 def test_req_two_five(driver):
     print("Test: Delete Paths test.")
 
-    driver.get("http://10.0.0.6:12345/main/")
+    driver.get("http://"+ip+":12345/main/")
     driver.find_element(By.CSS_SELECTOR, "#sideMenu > div.sidenav > button").click()
     driver.find_element(By.CSS_SELECTOR, "#sideMenu > div.sidenav > div > a:nth-child(4)").click()
-    driver.find_element(By.ID, "delete_chosen_path").click()
-    driver.find_element_by_id('write_path_length').send_keys("2")
-    driver.find_element(By.ID, "delete_chosen_path").click()
-
-    if driver.current_url == 'http://10.0.0.6:12345/main/':
+    driver.find_element_by_id('write_path_length').send_keys("1")
+    driver.execute_script("the_length=1;"
+                          "getRequestTracks(funcToGetTrackID);"
+                          "window.location.href='/main';")
+    # driver.find_element(By.ID, "delete_chosen_path").click()
+    if driver.current_url == 'http://'+ip+':12345/main/':
         print(green('--- test passed!!! ---'))
     else:
         print(red('--- test failed!!! ---'))
@@ -420,14 +497,14 @@ def test_req_two_five(driver):
 
 def test_req_two_six(driver):
     print("Test: Shows Paths test.")
-    driver.get("http://10.0.0.6:12345/main/")
+    driver.get("http://"+ip+":12345/main/")
     driver.find_element(By.CSS_SELECTOR, "#sideMenu > div.sidenav > button").click()
     driver.find_element(By.CSS_SELECTOR, "#sideMenu > div.sidenav > div > a:nth-child(3)").click()
     driver.find_element_by_id('write_path_length').send_keys("1")
     driver.find_element(By.ID, "edit_chosen_path").click()
     driver.find_element(By.CSS_SELECTOR, "#finish_reg_med").click()
 
-    if driver.current_url == 'http://10.0.0.6:12345/main/':
+    if driver.current_url == 'http://'+ip+':12345/main/':
         print(green('--- test passed short!!! ---'))
     else:
         print(red('--- test failed short!!! ---'))
@@ -438,7 +515,7 @@ def test_req_two_six(driver):
     driver.find_element(By.ID, "edit_chosen_path").click()
     driver.find_element(By.CSS_SELECTOR, "#finish_reg_med").click()
 
-    if driver.current_url == 'http://10.0.0.6:12345/main/':
+    if driver.current_url == 'http://'+ip+':12345/main/':
         print(green('--- test passed med!!! ---'))
     else:
         print(red('--- test failed med!!! ---'))
@@ -449,38 +526,64 @@ def test_req_two_six(driver):
     driver.find_element(By.ID, "edit_chosen_path").click()
     driver.find_element(By.CSS_SELECTOR, "#finish_reg_long").click()
 
-    if driver.current_url == 'http://10.0.0.6:12345/main/':
+    if driver.current_url == 'http://'+ip+':12345/main/':
         print(green('--- test passed long!!! ---'))
     else:
         print(red('--- test failed long!!! ---'))
 
     return
 
-def test_req_one_ten_one(driver):
-    print("Test: Additional Info addition test.")
-    driver.get("http://10.0.0.6:12345/main/")
-    driver.find_element(By.CSS_SELECTOR, "#sideMenu > div.sidenav > a:nth-child(6)").click()
-    driver.find_element_by_id('subject').send_keys("some additional info...")
-    driver.find_element(By.CSS_SELECTOR, "body > div > input:nth-child(4)").click()
 
-    if driver.current_url == 'http://10.0.0.6:12345/main/':
+def test_req_three_one(driver):
+    print("Test: Add Feedback Question.")
+    driver.get("http://"+ip+":12345/main/")
+    driver.find_element(By.CSS_SELECTOR, "#sideMenu > div.sidenav > button:nth-child(7)").click()
+    driver.find_element(By.CSS_SELECTOR, "#sideMenu > div.sidenav > div:nth-child(8) > a:nth-child(1)").click()
+
+    first = driver.current_url  # needs to be http://10.0.0.1:12345/feedback/
+
+    driver.find_element_by_id('fbquestion').send_keys("how are you today?")
+    driver.find_element(By.CSS_SELECTOR, "#feedback_type").click()
+    driver.find_element(By.CSS_SELECTOR, "#feedback_type > option:nth-child(2)").click()
+    driver.find_element(By.CSS_SELECTOR, "#send_feedback").click()
+
+    second = driver.current_url  # needs to be http://10.0.0.1:12345/main/
+
+    bool1 = first == 'http://'+ip+':12345/feedback/'
+    bool2 = second == 'http://'+ip+':12345/main/'
+
+    if bool1 and bool2:
         print(green('--- test passed!!! ---'))
     else:
         print(red('--- test failed!!! ---'))
+
     return
 
-def test_req_one_ten_two(driver):
-    print("Test: Additional Info addition test.")
-    driver.get("http://10.0.0.6:12345/main/")
-    driver.find_element(By.CSS_SELECTOR, "#sideMenu > div.sidenav > a:nth-child(6)").click()
-    driver.find_element(By.CSS_SELECTOR, "body > div > input:nth-child(5)").click()
-    driver.find_element(By.CSS_SELECTOR, "body > div > input:nth-child(4)").click()
 
-    if driver.current_url == 'http://10.0.0.6:12345/main/':
+def test_req_three_two(driver):
+    print("Test: Delete Feedback Question.")
+    driver.get("http://"+ip+":12345/main/")
+    driver.find_element(By.CSS_SELECTOR, "#sideMenu > div.sidenav > button:nth-child(7)").click()
+    driver.find_element(By.CSS_SELECTOR, "#sideMenu > div.sidenav > div:nth-child(8) > a:nth-child(2)").click()
+
+    first = driver.current_url  # needs to be http://10.0.0.1:12345/edit_feedbacks/
+
+    driver.find_element_by_id('write_fb_id_to_delete').send_keys("6")
+    driver.find_element(By.CSS_SELECTOR, "#delete_chosen_fb").click()
+    driver.find_element(By.CSS_SELECTOR, "body > div.exist_list > button:nth-child(26)").click()
+
+    second = driver.current_url  # needs to be http://10.0.0.1:12345/main/
+
+    bool1 = first == 'http://'+ip+':12345/edit_feedbacks/'
+    bool2 = second == 'http://'+ip+':12345/main/'
+
+    if bool1 and bool2:
         print(green('--- test passed!!! ---'))
     else:
         print(red('--- test failed!!! ---'))
+
     return
+
 
 if __name__ == '__main__':
     main()
