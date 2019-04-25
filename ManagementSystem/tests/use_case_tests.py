@@ -123,7 +123,9 @@ def main():
     # uc1p6p1(browser)
     # uc1p6p2(browser)
     # uc1p8p1(browser)
-    uc1p10p1(browser)
+    # uc1p10p1(browser)
+    uc2p123(browser)
+    # uc2p4(browser)
 
     return
 
@@ -456,32 +458,44 @@ def uc1p10p2(driver):
     return
 
 
+def make_check_uc2p123(url):
+    count = 0
+    r = requests.get(url)
+    arrJson = r.json()
+    for track in arrJson:
+        count += 1
+
+    return count
+
+
 # this test includes req 2.1,2.2,2.3
 def uc2p123(driver):
     print("Use Case: Add Paths.")
-
+    c1 = make_check_uc2p123('http://' + ip + ':12344/managementsystem/track/')
     driver.get("http://"+ip+":12345/main/")
-    driver.find_element(By.CSS_SELECTOR, "#sideMenu > div.sidenav > button").click()
-    driver.find_element(By.CSS_SELECTOR, "#sideMenu > div.sidenav > div > button").click()
-    driver.find_element(By.CSS_SELECTOR, "#sideMenu > div.sidenav > div > div > a:nth-child(1)").click()
+    driver.find_element(By.CSS_SELECTOR, "#sideMenu > div.sidenav > button:nth-child(3)").click()
+    driver.find_element(By.CSS_SELECTOR, "#sideMenu > div.sidenav > div:nth-child(4) > button").click()
+    driver.find_element(By.CSS_SELECTOR, "#sideMenu > div.sidenav > div:nth-child(4) > div > a:nth-child(1)").click()
     first = driver.current_url  # needs to be http://10.0.0.6:12345/add_short_path/
     point1 = driver.find_element(By.XPATH, "//*[@id='map']/div/div/div[1]/div[3]/div/div[3]/div[1]/img")
     point1.click()
     driver.find_element(By.CSS_SELECTOR, "#add_reg_to_path").click()
-    point2 = driver.find_element(By.XPATH, "//*[@id='map']/div/div/div[1]/div[3]/div/div[3]/div[2]/img")
-    point2.click()
-    driver.find_element(By.CSS_SELECTOR, "#add_reg_to_path").click()
-    point3 = driver.find_element(By.XPATH, "//*[@id='map']/div/div/div[1]/div[3]/div/div[3]/div[3]/img")
-    point3.click()
-    driver.find_element(By.CSS_SELECTOR, "#add_reg_to_path").click()
+    # point2 = driver.find_element(By.XPATH, "//*[@id='map']/div/div/div[1]/div[3]/div/div[3]/div[2]/img")
+    # point2.click()
+    # driver.find_element(By.CSS_SELECTOR, "#add_reg_to_path").click()
+    # point3 = driver.find_element(By.XPATH, "//*[@id='map']/div/div/div[1]/div[3]/div/div[3]/div[3]/img")
+    # point3.click()
+    # driver.find_element(By.CSS_SELECTOR, "#add_reg_to_path").click()
     driver.execute_script("getRequestAttractions(funcInOrderToGetAttractions);")
     driver.find_element(By.ID, "finish_reg").click()
     second = driver.current_url  # needs to be http://10.0.0.6:12345/main/
     print(second)
     bool1 = first == 'http://'+ip+':12345/add_short_path/'
     bool2 = second == 'http://'+ip+':12345/main/'
+    c2 = make_check_uc2p123('http://' + ip + ':12344/managementsystem/track/')
+    bool3 = c2 > c1
 
-    if bool1 and bool2:
+    if bool1 and bool2 and bool3:
         print(green('--- test passed!!! ---'))
     else:
         print(red('--- test failed!!! ---'))
@@ -489,9 +503,22 @@ def uc2p123(driver):
     return
 
 
+def make_check_uc2p4(url):
+    count = 0
+    r = requests.get(url)
+    arrJson = r.json()
+    for track in arrJson:
+        if track['length'] == 1:
+            for point in track['points']:
+                count += 1
+
+    return count
+
+
 def uc2p4(driver):
     print("Use Case: Delete Point from Path.")
 
+    c1 = make_check_uc2p4('http://' + ip + ':12344/managementsystem/track/')
     driver.get("http://"+ip+":12345/main/")
     driver.find_element(By.CSS_SELECTOR, "#sideMenu > div.sidenav > button").click()
     driver.find_element(By.CSS_SELECTOR, "#sideMenu > div.sidenav > div > a:nth-child(3)").click()
@@ -508,8 +535,10 @@ def uc2p4(driver):
     bool1 = first == 'http://'+ip+':12345/pick_path_edit/'
     bool2 = second == 'http://'+ip+':12345/edit_short_path/'
     bool3 = third == 'http://'+ip+':12345/main/'
+    c2 = make_check_uc2p4('http://' + ip + ':12344/managementsystem/track/')
+    bool4 = c1 - 1 == c2
 
-    if bool1 and bool2 and bool3:
+    if bool1 and bool2 and bool3 and bool4:
         print(green('--- test passed!!! ---'))
     else:
         print(red('--- test failed!!! ---'))
