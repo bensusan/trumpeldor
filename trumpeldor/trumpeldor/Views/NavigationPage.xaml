@@ -5,16 +5,19 @@
              xmlns:translator="clr-namespace:trumpeldor.Helpers">
     <ContentPage.Content>
         <StackLayout Style="{DynamicResource mainStackLayout}">
-
+            
             <Label x:Name="scoreLabel" Style="{DynamicResource lableStyle}" AutomationId="scoreLbl"/>
             <StackLayout x:Name="hintsLayout" Style="{DynamicResource mainorStackLayout}">
                <!-- <Label Text="{translator:Translate hints}" Style="{DynamicResource lableStyle}"/> -->
                <!-- <Button x:Name= "a" Clicked="DynamicBtn_Clicked"/> -->
             </StackLayout>
             <Button x:Name="hintBtn" Text="{translator:Translate add_hint}" Clicked="Get_Hint_Button_Clicked" Style="{StaticResource largeButtonStyle}" AutomationId="AddHintBtn"/>
+            <Image Source="https://static.thenounproject.com/png/7669-200.png"/>
+            <Slider x:Name="odometer" IsEnabled="False" Rotation="-90"/>
             <Button Text="{translator:Translate You_have_Reached_Your_Destionation}" Clicked="Next_Destination_Button_Clicked" Style="{StaticResource largeButtonStyle}" />
             <Label Text="{translator:Translate map}" Style="{DynamicResource lableStyle}"/>
             <Button x:Name="mapImage" Clicked="mapImage_Clicked"/>
+            
             <!--<Image x:Name="mapImage" Style="{DynamicResource smallImageStyle}"/>-->
         </StackLayout>
     </ContentPage.Content>

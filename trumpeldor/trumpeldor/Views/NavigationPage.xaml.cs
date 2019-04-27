@@ -18,6 +18,7 @@ namespace trumpeldor.Views
         private const double DESIRED_DISTANCE = 20;
         private const double DESIRED_SECONDS = 10;
         public static bool isFirst = true;
+        public static bool firstTimeLocationUpdate = true;
         //        gc.currentTrip.GetCurrentAttraction();//-for the hint
         public Attraction nextAttraction;
         public static int hintsIndex = 0;
@@ -26,17 +27,26 @@ namespace trumpeldor.Views
         public LocationController lc;
         trumpeldor.SheredClasses.Point p;
         public double currLat = 0, currLong = 0;
+        private double startDistanceToDestination;
+
         public NavigationPage ()
 		{
 			InitializeComponent ();
             nextAttraction = gc.currentTrip.GetCurrentAttraction();
             mapImage.Text = AppResources.map;
+            odometer.Maximum = 1;
+            odometer.Minimum = 0;
+            odometer.MinimumTrackColor = Color.FromHex("#0066ff");
+            odometer.MaximumTrackColor = Color.FromHex("#0066ff");
+            odometer.Value = 0;
 
             lc = LocationController.GetInstance();
             p = new trumpeldor.SheredClasses.Point(nextAttraction.x, nextAttraction.y);
             if (isFirst)
             {
                 isFirst = false;
+                
+                
                 Task.Run(async () =>
                 {
                     await TimerCheck();
@@ -128,11 +138,31 @@ namespace trumpeldor.Views
             {
                 try
                 {
-                    LocationCheck();
+                    LocationUpdate();
                     lc.AddToPositionsHistory(new Plugin.Geolocator.Abstractions.Position(currLat, currLong));
-                    if (lc.DistanceBetween(currLat, currLong, p.x, p.y) > DESIRED_DISTANCE)
+                    double currentDistanceToDestination = lc.DistanceBetween(currLat, currLong, p.x, p.y);
+                    if (currentDistanceToDestination > DESIRED_DISTANCE)
                     {
-                        DisplayAlert(AppResources.not_arrived, lc.DistanceBetween(currLat, currLong, p.x, p.y).ToString() + "curr lat: " + currLat.ToString() + "curr long: " + currLong.ToString() + "x: " + p.x + "y: " + p.y + " point info: " + nextAttraction.name, AppResources.close);
+                        double percentApproachingTarget = Math.Max(0, Math.Min(1, (1 - (currentDistanceToDestination / startDistanceToDestination))));
+                        odometer.Value = percentApproachingTarget;
+                        if (percentApproachingTarget < 0.3)
+                        {
+                            odometer.MinimumTrackColor = Color.FromHex("#0066ff");
+                            odometer.MaximumTrackColor = Color.FromHex("#0066ff");
+                        }
+                        else
+                        {
+                            if (percentApproachingTarget < 0.7)
+                            {
+                                odometer.MinimumTrackColor = Color.FromHex("#b21f4c");
+                                odometer.MaximumTrackColor = Color.FromHex("#b21f4c");
+                            }
+                            else
+                            {
+                                odometer.MinimumTrackColor = Color.FromHex("#ff0000");
+                                odometer.MaximumTrackColor = Color.FromHex("#ff0000");
+                            }
+                        }
                         return true;
                     }
                     else
@@ -151,12 +181,17 @@ namespace trumpeldor.Views
             });
         }
 
-        private async Task LocationCheck()
+        private async Task LocationUpdate()
         {
             var locator = CrossGeolocator.Current;
             Plugin.Geolocator.Abstractions.Position position = await locator.GetPositionAsync(TimeSpan.FromSeconds(5));
             currLat = position.Latitude;
             currLong = position.Longitude;
+            if (firstTimeLocationUpdate)
+            {
+                firstTimeLocationUpdate = false;
+                startDistanceToDestination = lc.DistanceBetween(currLat, currLong, p.x, p.y);
+            }
         }
     }
 }
