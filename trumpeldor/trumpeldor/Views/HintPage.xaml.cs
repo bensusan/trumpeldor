@@ -23,55 +23,44 @@ namespace trumpeldor.Views
             Hint.kind2String.TryGetValue(Hint.Kinds.HintPicture, out hintPictureString);
             string hintVideoString;
             Hint.kind2String.TryGetValue(Hint.Kinds.HintVideo, out hintVideoString);
-            if(hintStr.Equals(hintPictureString) || hintStr.Equals(hintVideoString))
-            //if (hintStr.Equals( "HP" ) || hintStr=="HV")//case picture or video
-            {
+            if(hintStr.Equals(hintPictureString) || hintStr.Equals(hintVideoString)){
                 webView.IsVisible = true;
                 string tmp = hint.data.Substring(1, hint.data.Length - 2);
-
-                try
-                {
-                    string dt = hint.data;
-                    webView.Source = urlPref + dt;
-                }
-                catch(Exception e)
-                {
-                    Alert(e.Message);
-                }
-            
+                string dt = hint.data;
+                webView.Source = urlPref + dt;
             }
             else //case text
-            {
+            { 
                 webView.IsVisible = false;
                 textualHint.Text = hint.data;
             }
 		}
 
-        private void Alert(string s)
-        {
-            Device.BeginInvokeOnMainThread(async () => { await DisplayAlert(AppResources.error, s, AppResources.ok); });
-        }
-        private void CallToMapPage(string hintStr)
-        {
-            char[] seperate = new char[] { ',', ' ' };
-            string[] coordinates = new string[2];
-            if (hintStr.Split(seperate).Length == coordinates.Length)
-            {
-                coordinates = hintStr.Split(seperate);
-                try
-                {
-                    lat = Convert.ToDouble(coordinates[0]);
-                    lon = Convert.ToDouble(coordinates[1]);
-                    trumpeldor.SheredClasses.Point p = new trumpeldor.SheredClasses.Point(lat, lon);
-                    Device.BeginInvokeOnMainThread(async () => await DisplayAlert(AppResources.final_hint, AppResources.click_ok_to_view_the_next_point_on_the_map, AppResources.ok));
-                        //.ContinueWith((a) =>
-                   // Application.Current.MainPage = new MapPage(p));
-                }
-                catch (Exception e)
-                {
-                    Device.BeginInvokeOnMainThread(async () => await DisplayAlert(AppResources.error, e.Message, AppResources.close));
-                }
-            }
-        }
+        //private void Alert(string s)
+        //{
+        //    Device.BeginInvokeOnMainThread(async () => { await DisplayAlert(AppResources.error, s, AppResources.ok); });
+        //}
+        //private void CallToMapPage(string hintStr)
+        //{
+        //    char[] seperate = new char[] { ',', ' ' };
+        //    string[] coordinates = new string[2];
+        //    if (hintStr.Split(seperate).Length == coordinates.Length)
+        //    {
+        //        coordinates = hintStr.Split(seperate);
+        //        try
+        //        {
+        //            lat = Convert.ToDouble(coordinates[0]);
+        //            lon = Convert.ToDouble(coordinates[1]);
+        //            trumpeldor.SheredClasses.Point p = new trumpeldor.SheredClasses.Point(lat, lon);
+        //            Device.BeginInvokeOnMainThread(async () => await DisplayAlert(AppResources.final_hint, AppResources.click_ok_to_view_the_next_point_on_the_map, AppResources.ok));
+        //                //.ContinueWith((a) =>
+        //           // Application.Current.MainPage = new MapPage(p));
+        //        }
+        //        catch (Exception e)
+        //        {
+        //            Device.BeginInvokeOnMainThread(async () => await DisplayAlert(AppResources.error, e.Message, AppResources.close));
+        //        }
+        //    }
+        //}
     }
 }

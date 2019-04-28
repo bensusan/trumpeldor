@@ -23,7 +23,7 @@ namespace trumpeldor
         public static string IP;
         public static string PORT;
         public static int DEBUG;
-        
+        public static string URL_MEDIA;
         private string urlPrefix;
 
         private static int MAX_TRIES_POST = 1;
@@ -41,9 +41,9 @@ namespace trumpeldor
                     IP = config.IP;
                     PORT = config.PORT;
                     DEBUG = config.DEBUG;
+                    URL_MEDIA = "http://" + ServerConection.IP + ":" + ServerConection.PORT + "/media/";
                 }
                 instance = new ServerConection();
-                
             }
             return instance;
         }

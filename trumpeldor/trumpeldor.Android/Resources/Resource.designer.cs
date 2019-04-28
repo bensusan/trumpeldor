@@ -26,6 +26,7 @@ namespace trumpeldor.Droid
 		
 		public static void UpdateIdValues()
 		{
+			global::NGraphics.Android.Custom.Resource.String.library_name = global::trumpeldor.Droid.Resource.String.library_name;
 			global::Xamarin.Auth.Resource.Animation.slide_in_right = global::trumpeldor.Droid.Resource.Animation.slide_in_right;
 			global::Xamarin.Auth.Resource.Animation.slide_out_left = global::trumpeldor.Droid.Resource.Animation.slide_out_left;
 			global::Xamarin.Auth.Resource.Attribute.font = global::trumpeldor.Droid.Resource.Attribute.font;
@@ -127,6 +128,7 @@ namespace trumpeldor.Droid
 			global::Xamarin.Auth.Resource.Layout.notification_template_media_custom = global::trumpeldor.Droid.Resource.Layout.notification_template_media_custom;
 			global::Xamarin.Auth.Resource.Layout.notification_template_part_chronometer = global::trumpeldor.Droid.Resource.Layout.notification_template_part_chronometer;
 			global::Xamarin.Auth.Resource.Layout.notification_template_part_time = global::trumpeldor.Droid.Resource.Layout.notification_template_part_time;
+			global::Xamarin.Auth.Resource.String.library_name = global::trumpeldor.Droid.Resource.String.library_name;
 			global::Xamarin.Auth.Resource.String.status_bar_notification_info_overflow = global::trumpeldor.Droid.Resource.String.status_bar_notification_info_overflow;
 			global::Xamarin.Auth.Resource.String.title_activity_webview = global::trumpeldor.Droid.Resource.String.title_activity_webview;
 			global::Xamarin.Auth.Resource.Style.TextAppearance_Compat_Notification = global::trumpeldor.Droid.Resource.Style.TextAppearance_Compat_Notification;
@@ -6513,6 +6515,9 @@ namespace trumpeldor.Droid
 			
 			// aapt resource value: 0x7f090010
 			public const int common_signin_button_text_long = 2131296272;
+			
+			// aapt resource value: 0x7f09004e
+			public const int library_name = 2131296334;
 			
 			// aapt resource value: 0x7f090012
 			public const int mr_button_content_description = 2131296274;

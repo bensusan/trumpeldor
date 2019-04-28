@@ -124,7 +124,7 @@
     <value>add player</value>
   </data>
   <data name="age" xml:space="preserve">
-    <value>age</value>
+    <value>Age</value>
   </data>
   <data name="arrived" xml:space="preserve">
     <value>arrived</value>
@@ -157,7 +157,7 @@
     <value>First Attraction</value>
   </data>
   <data name="group_name" xml:space="preserve">
-    <value>group name</value>
+    <value>Group name:</value>
   </data>
   <data name="Hey" xml:space="preserve">
     <value>Hey</value>
@@ -178,13 +178,13 @@
     <value>Login with Facebook</value>
   </data>
   <data name="long_path" xml:space="preserve">
-    <value>long</value>
+    <value>Long</value>
   </data>
   <data name="map" xml:space="preserve">
     <value>map</value>
   </data>
   <data name="medium_path" xml:space="preserve">
-    <value>medium</value>
+    <value>Medium</value>
   </data>
   <data name="mission" xml:space="preserve">
     <value>mission</value>
@@ -199,16 +199,16 @@
     <value>ok</value>
   </data>
   <data name="path_length" xml:space="preserve">
-    <value>path length</value>
+    <value>Track length:</value>
   </data>
   <data name="play" xml:space="preserve">
     <value>play</value>
   </data>
   <data name="player" xml:space="preserve">
-    <value>player</value>
+    <value>No. player</value>
   </data>
   <data name="Players_Ages" xml:space="preserve">
-    <value>PlayersAges</value>
+    <value>Age</value>
   </data>
   <data name="points" xml:space="preserve">
     <value>points</value>
@@ -223,7 +223,7 @@
     <value>share</value>
   </data>
   <data name="short_path" xml:space="preserve">
-    <value>short</value>
+    <value>Short</value>
   </data>
   <data name="start_trip" xml:space="preserve">
     <value>start trip</value>
@@ -277,7 +277,7 @@
     <value>Last Hint!</value>
   </data>
   <data name="login_as_anonymous" xml:space="preserve">
-    <value>Anonymous</value>
+    <value>Skip</value>
   </data>
   <data name="Out_Of_Valid_Sector_Message" xml:space="preserve">
     <value>You may use basic parts of the application</value>
@@ -308,5 +308,17 @@
   </data>
   <data name="sliding_puzzle" xml:space="preserve">
     <value>Sliding puzzle</value>
+  </data>
+  <data name="Create_your_group" xml:space="preserve">
+    <value>Create your group</value>
+  </data>
+  <data name="error_in_google_login" xml:space="preserve">
+    <value>Something went wrong in google sign in</value>
+  </data>
+  <data name="error_in_group_creation" xml:space="preserve">
+    <value>Can't start the trip. Please fill all the details.</value>
+  </data>
+  <data name="Sign_in" xml:space="preserve">
+    <value>Sign in</value>
   </data>
 </root>

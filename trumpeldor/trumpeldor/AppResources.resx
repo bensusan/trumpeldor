@@ -157,7 +157,7 @@
     <value>יעד ראשון</value>
   </data>
   <data name="group_name" xml:space="preserve">
-    <value>קבוצה</value>
+    <value>שם קבוצה:</value>
   </data>
   <data name="Hey" xml:space="preserve">
     <value>היי</value>
@@ -199,16 +199,16 @@
     <value>המשך</value>
   </data>
   <data name="path_length" xml:space="preserve">
-    <value>אורך מסלול</value>
+    <value>אורך מסלול:</value>
   </data>
   <data name="play" xml:space="preserve">
     <value>שחק</value>
   </data>
   <data name="player" xml:space="preserve">
-    <value>שחקן</value>
+    <value>מס' שחקן</value>
   </data>
   <data name="Players_Ages" xml:space="preserve">
-    <value>גילאי שחקנים</value>
+    <value>גיל</value>
   </data>
   <data name="points" xml:space="preserve">
     <value>נקודות</value>
@@ -280,7 +280,7 @@
     <value>הרמז האחרון!</value>
   </data>
   <data name="login_as_anonymous" xml:space="preserve">
-    <value>אנונימי</value>
+    <value>דלג</value>
   </data>
   <data name="Out_Of_Valid_Sector_Message" xml:space="preserve">
     <value>תוכל להשתמש בחלקים בסיסיים מהאפליקציה</value>
@@ -311,5 +311,17 @@
   </data>
   <data name="sliding_puzzle" xml:space="preserve">
     <value>פאזל הזזה</value>
+  </data>
+  <data name="Create_your_group" xml:space="preserve">
+    <value>צרו את הקבוצה שלכם</value>
+  </data>
+  <data name="error_in_google_login" xml:space="preserve">
+    <value>תקלה בכניסה לחשבון גוגל</value>
+  </data>
+  <data name="error_in_group_creation" xml:space="preserve">
+    <value>לא ניתן להתחיל את הטיול. יש למלא את כל הפרטים.</value>
+  </data>
+  <data name="Sign_in" xml:space="preserve">
+    <value>התחברו</value>
   </data>
 </root>

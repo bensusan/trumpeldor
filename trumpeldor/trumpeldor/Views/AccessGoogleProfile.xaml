@@ -5,8 +5,6 @@
              xmlns:translator="clr-namespace:trumpeldor.Helpers">
     <ContentPage.Content>
         <StackLayout Style="{DynamicResource mainStackLayout}">
-            <!--<Button Text="{translator:Translate login_with_google}" x:Name="googleLoginButton" x:Uid="googleLoginButton" Style="{StaticResource largeButtonStyle}"/>-->
-            <!--<Button Text="{translator:Translate login_with_google}" x:Name="aaaaaa" x:Uid="aaaaaa" Style="{StaticResource largeButtonStyle}"/>-->
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
