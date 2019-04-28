@@ -5,3 +5,17 @@ body {
     /*background-size: cover;*/
     background-attachment: fixed;
 }
+
+.button {
+  background-color: blue;
+  border: none;
+    border-radius: 12px;
+  color: white;
+  padding: 10px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+}

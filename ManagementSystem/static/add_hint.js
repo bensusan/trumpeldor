@@ -39,57 +39,75 @@ function getRequestHints(funcOnHints,attr_id){
 window.onload = function () {
     getRequestAttractions(funcForExistingHints);
 var textHintBTN = document.getElementById('add_text_hint');
+var textLine = document.getElementById("text_hint_id");
+var sendButtonTxt = document.getElementById("send_text_hint");
+var upload_pic_title = document.getElementById("upload_title");
+var clickHere = document.getElementById("file");
+var picDesc = document.getElementById("pic_hint_description");
+var outpic = document.getElementById("output");
+var sendButtonPic = document.getElementById("send_pic_hint");
+var thevid = document.getElementById("vid_hint_id");
+var vidDesc = document.getElementById("vid_hint_description");
+var thevidbrowse = document.getElementById("vid_hint_browse_id");
+var sendButtonVid = document.getElementById("send_vid_hint");
+var sendTextHintBTN = document.getElementById('send_text_hint');
+var sendPicHintBTN = document.getElementById('send_pic_hint');
+var sendVidHintBTN = document.getElementById('send_vid_hint');
+
         textHintBTN.addEventListener('click', function() {
-
-            var textLine = document.getElementById("text_hint_id");
             textLine.style.display = "inline";
-
-            var sendButton = document.getElementById("send_text_hint");
-            sendButton.style.display = "inline";
+            sendButtonTxt.style.display = "inline";
+             clickHere.style.display = "none";
+            picDesc.style.display = "none";
+            outpic.style.display = "none";
+            sendButtonPic.style.display = "none";
+            thevid.style.display = "none";
+            vidDesc.style.display = "none";
+            thevidbrowse.style.display = "none";
+            sendButtonVid.style.display = "none";
+            upload_pic_title.style.display = "none";
 
         });
 
 var picHintBTN = document.getElementById('add_pic_hint');
         picHintBTN.addEventListener('click', function() {
-            var clickHere = document.getElementById("click_here_label");
             clickHere.style.display = "inline";
-
-            var picDesc = document.getElementById("pic_hint_description");
             picDesc.style.display = "inline";
-
-            var outpic = document.getElementById("output");
             outpic.style.display = "inline";
-
-            var sendButton = document.getElementById("send_pic_hint");
-            sendButton.style.display = "inline";
+            upload_pic_title.style.display = "inline";
+            sendButtonPic.style.display = "inline";
+             textLine.style.display = "none";
+            sendButtonTxt.style.display = "none";
+            thevid.style.display = "none";
+            vidDesc.style.display = "none";
+            thevidbrowse.style.display = "none";
+            sendButtonVid.style.display = "none";
         });
 
 var vidHintBTN = document.getElementById('add_vid_hint');
         vidHintBTN.addEventListener('click', function() {
-            var thevid = document.getElementById("vid_hint_id");
             thevid.style.display = "inline";
-
-            var vidDesc = document.getElementById("vid_hint_description");
             vidDesc.style.display = "inline";
-
-            var thevidbrowse = document.getElementById("vid_hint_browse_id");
             thevidbrowse.style.display = "inline";
+            sendButtonVid.style.display = "inline";
+            textLine.style.display = "none";
+            sendButtonTxt.style.display = "none";
+             clickHere.style.display = "none";
+            picDesc.style.display = "none";
+            outpic.style.display = "none";
+            sendButtonPic.style.display = "none";
+            upload_pic_title.style.display = "none";
 
-            var sendButton = document.getElementById("send_vid_hint");
-            sendButton.style.display = "inline";
         });
 
-var sendTextHintBTN = document.getElementById('send_text_hint');
     sendTextHintBTN.addEventListener('click', function() {
         getRequestAttractions(hint_funcToGetAttraction);
     });
 
-var sendPicHintBTN = document.getElementById('send_pic_hint');
     sendPicHintBTN.addEventListener('click', function() {
 
     });
 
-var sendVidHintBTN = document.getElementById('send_vid_hint');
     sendVidHintBTN.addEventListener('click', function() {
 
     });
@@ -110,7 +128,8 @@ function hint_funcToGetAttraction(attractionsJSON) {
             var textHintToSend = {
             attraction:attr,
             kind:'HT',
-            data:document.getElementById("text_hint_id").value
+            data:document.getElementById("text_hint_id").value,
+                description:""
             };
             postRequestHint(textHintToSend,attr['id']);
             window.location.href='/add_hint';
@@ -168,4 +187,101 @@ function postRequestHint(the_hint,attr_id){
     serverRequest("POST", function noop(dummy){}, 'http://'+ip+':12344/managementsystem/attraction/'+
         attr_id+'/hint/',
         JSON.stringify(the_hint));
+}
+
+
+var suki;
+var sukiVid;
+
+
+function shit(suk) {
+    suki=suk;
+    document.getElementById("suka").innerHTML=suki;
+    localStorage.setItem("url_of_img",suki);
+    // var tmuna = document.getElementById("sukablat");
+    // tmuna.src = suki;
+}
+
+function shitVid(suk) {
+    sukiVid=suk;
+    // var tmuna = document.getElementById("sukablat");
+    // tmuna.src = suki;
+}
+
+
+function encodeImageFileAsURL(element) {
+    var image = document.getElementById('output');
+	image.src = URL.createObjectURL(element.files[0]);
+
+    suki="";
+
+  var file = element.files[0];
+  var reader = new FileReader();
+  reader.onloadend = function() {
+   //alert(reader.result)
+   shit(reader.result)
+  }
+
+  reader.readAsDataURL(file);
+}
+
+function encodeVideoFileAsURL(element) {
+
+    sukiVid="";
+
+  var file = element.files[0];
+  var reader = new FileReader();
+  reader.onloadend = function() {
+   //alert(reader.result)
+   shitVid(reader.result)
+  };
+
+  reader.readAsDataURL(file);
+}
+
+function sendImageHint() {
+    getRequestAttractions(funcToSendImage);
+}
+
+function funcToSendImage(attractionsJSON) {
+     let name = localStorage.getItem("name_for_add_aq");
+        let desc = localStorage.getItem("desc_for_add_aq");
+      // alert("in get name! "+"of the origin : " + lat + " , " + lng);
+        attractionsJSON.forEach(function (attr) {
+        let p = {name: attr['name'], description:attr['description']};
+       // alert("in get name! "+"of the origin : " + name + " , " + desc + "\n of the other: "+p.name +" , "+ p.description);
+        if(p.name===name && p.description===desc)
+        {
+
+            let the_hint = {attraction: attr, kind: "HP", data:suki, description:document.getElementById("pic_hint_description").value};
+            let attr_id = attr['id'];
+            postRequestHint(the_hint,attr_id);
+            window.location.href='/add_hint';
+        }
+
+    });
+}
+
+
+function sendVideoHint() {
+    getRequestAttractions(funcToSendVideo);
+}
+
+function funcToSendVideo(attractionsJSON) {
+     let name = localStorage.getItem("name_for_add_aq");
+        let desc = localStorage.getItem("desc_for_add_aq");
+      // alert("in get name! "+"of the origin : " + lat + " , " + lng);
+        attractionsJSON.forEach(function (attr) {
+        let p = {name: attr['name'], description:attr['description']};
+       // alert("in get name! "+"of the origin : " + name + " , " + desc + "\n of the other: "+p.name +" , "+ p.description);
+        if(p.name===name && p.description===desc)
+        {
+
+            let the_hint = {attraction: attr, kind: "HV", data:sukiVid,description:document.getElementById("vid_hint_description").value};
+            let attr_id = attr['id'];
+            postRequestHint(the_hint,attr_id);
+            window.location.href='/add_hint';
+        }
+
+    });
 }

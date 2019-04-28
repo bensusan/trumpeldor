@@ -3,6 +3,7 @@ const Http = new XMLHttpRequest();
 let marker_arr = [];
 let attr_arr_for_test=[];
 let attr_arr_for_test2=[];
+
 function serverRequest(getOrPost, functionOnReady, url, post=null){
     Http.onreadystatechange = function(){
         if(Http.readyState === 4 && Http.status === 200){
@@ -28,7 +29,8 @@ function funcThatReturnsOne(){
 }
 
 function markAttractions(attractionsJSON){
-     attr_arr_for_test2 = [];
+    //alert(window.innerHeight + " "+ window.innerWidth);
+
     attractionsJSON.forEach(function (attr) {
        attr_arr_for_test2.push(attr);
 
@@ -48,6 +50,7 @@ function markAttractions(attractionsJSON){
 
 }
 
+
 function markAttraction(pos){
     let the_title=localStorage.getItem("title"+pos);
         let marker = new google.maps.Marker({
@@ -58,15 +61,21 @@ function markAttraction(pos){
                 url: "http://maps.google.com/mapfiles/ms/icons/red-dot.png"
                 }
         });
-
         // marker_arr.push(marker);
         marker.setMap(map);
         addEditListener(marker);
         return marker;
 }
 
+function getRequestAttractionsTest(funcOnAttractions){
+    // the server port and my ip
+    serverRequest("GET", funcOnAttractions, 'http://'+ip+':12344/managementsystem/attraction/?format=json');
+    //alert("need to remove this alert and fix funcToGetAttraction()!");
+    return attr_arr_for_test;
+}
+
+
 function funcForTest(attractionsJSON){
-    attr_arr_for_test=[];
     attractionsJSON.forEach(function (attr) {
         attr_arr_for_test.push(attr);
     });
@@ -78,6 +87,7 @@ function getRequestAttractions(funcOnAttractions){
     serverRequest("GET", funcOnAttractions, 'http://'+ip+':12344/managementsystem/attraction/?format=json');
     //alert("need to remove this alert and fix funcToGetAttraction()!");
 }
+
 
 function initAttractionsMarkers() {
     getRequestAttractions(markAttractions);

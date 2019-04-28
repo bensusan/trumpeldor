@@ -4,18 +4,19 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Edit Long Path</title>
     {% load static %}
-<link rel="stylesheet" href="{% static 'paths_style.css' %}?version=1">
+<link rel="stylesheet" href="{% static 'SideMenu.css' %}?version=4">
+    {% load static %}
+<link rel="stylesheet" href="{% static 'paths_style.css' %}?version=4">
 {% load static %}
 <link rel="stylesheet" href="{% static 'Map.css' %}?version=3">
 {% load static %}
 <script src="{% static 'attractions.js' %}?version=5"></script>
     {% load static %}
-<script src="{% static 'edit_long_path.js' %}?version=2"></script>
+<script src="{% static 'edit_long_path.js' %}?version=3"></script>
      {% load static %}
-<script src="{% static 'properties.js' %}?version=1"></script>
+<script src="{% static 'properties.js' %}?version=2"></script>
 </head>
 <body>
-<button onclick="window.location.href='/main'" type="button">Back to menu</button>
 {#<meta name="viewport" content="width=device-width, initial-scale=1">#}
 {#{% load static %}#}
 {#<link rel="stylesheet" href="{% static 'Map.css' %}?version=1">#}
@@ -34,15 +35,26 @@
 </div>
 
     <div align="center">
-<button class="button" id="add_reg_to_path_long" type="button">Add To Path</button>
-<button class="button" id="delete_from_path_long" type="button">Delete Point</button>
-<button class="button" id="finish_reg_long" type="button">Finish!</button>
+<button class="button" id="add_reg_to_path_long" type="button">הוספה למסלול</button>
+<button class="button" id="delete_from_path_long" type="button">מחיקת נקודה</button>
+<button class="button" id="finish_reg_long" type="button">!סיימתי</button>
+
+             <p></p>
+<p></p>
+{#<div id="border_of_points" class="pointsBorder"  style="display: none" align="center">#}
+{#    <div align="center">#}
+{#        <p><b>Added Points:</b></p>#}
+{#    </div>#}
+{#<p id="showing_added_points"></p>#}
+{#    </div>#}
+
+    </div>
     </div>
 </div>
-</body>
-<p></p>
-<p></p>
-<p id="things_to_fix_long"> </p>
 
-<p id="showing_added_points_long"></p>
+<nav id="sideMenu"></nav>
+{% load static %}
+<script src="{% static 'menu_for_paths.js' %}?version=2"></script>
+</body>
+
 </html>

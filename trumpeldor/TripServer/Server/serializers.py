@@ -10,7 +10,7 @@ class AmericanQuestionSerializer(serializers.ModelSerializer):
 
 class HintSerializer(serializers.ModelSerializer):
     class Meta:
-        fields = ('id', 'kind', 'data',)
+        fields = ('id', 'kind', 'data', 'description',)
         model = Hint
 
 
@@ -64,19 +64,19 @@ class TripSerializer(serializers.ModelSerializer):
 
 class FindTheDifferencesSerializer(serializers.ModelSerializer):
     class Meta:
-        fields = ('id', 'pictureURL', 'differences',)
+        fields = ('id', 'pictureURL', 'differences', 'description',)
         model = FindTheDifferences
 
 
 class PuzzleSerializer(serializers.ModelSerializer):
     class Meta:
-        fields = ('id', 'pictureURL',)
+        fields = ('id', 'pictureURL', 'width', 'height', 'description',)
         model = Puzzle
 
 
 class SlidingPuzzleSerializer(serializers.ModelSerializer):
     class Meta:
-        fields = ('id', 'piecesURLS', 'width', 'height',)
+        fields = ('id', 'piecesURLS', 'width', 'height', 'description',)
         model = SlidingPuzzle
 
 
@@ -148,3 +148,9 @@ class ScoreSerializer(serializers.ModelSerializer):
     class Meta:
         fields = ('groupName', 'score')
         model = Trip
+
+
+class InfoSerializer(serializers.ModelSerializer):
+    class Meta:
+        fields = ('id', 'info',)
+        model = Info

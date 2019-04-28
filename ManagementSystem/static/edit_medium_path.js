@@ -20,11 +20,14 @@ function initMapAndAttractionss(){
 
   function addEditListenerr(m) {
       m.addListener('click', function() {
-          if(prev_m!=1) {
-              prev_m.setIcon("http://maps.google.com/mapfiles/ms/icons/red-dot.png");
+            if(prev_m!=1) {
+
+              prev_m.setIcon(prev_icon);
           }
           //alert("sda");
+          prev_icon=m.icon;
           m.setIcon("http://maps.google.com/mapfiles/ms/icons/pink-dot.png");
+
           prev_m=m;
           curPosClicked=m.position;
         var addToPathBTN = document.getElementById('add_reg_to_path_med');
@@ -38,7 +41,11 @@ function initMapAndAttractionss(){
                 str_of_points=str_of_points+m.position+"<br />";
             }
             // alert(str_of_points);
-            document.getElementById("showing_added_points_med").innerHTML = str_of_points ;
+            // var border = document.getElementById("border_of_points");
+            // border.style.display = "block";
+            // document.getElementById("showing_added_points").innerHTML = str_of_points;
+            // document.getElementById("showing_added_points").style.fontWeight = 'bold';
+            getRequestAttractions(needThisToGetPointsIDs);
            // alert("point been added! now its: "+ pointsOfPath.toString());
         });
 
@@ -81,14 +88,18 @@ function markAttractionsOfMediumPaths(tracksJSON){
             idOfMedium = track['id'];
 
             let points_of_track = track['points'];
-            points_of_track.forEach(function (attr) {
+            let points_of_subtrack = track['subTrack']['points'];
+            let children = [].concat(points_of_subtrack,points_of_track);
+
+            children.forEach(function (attr) {
                     let pos = {lat: attr['x'], lng: attr['y']};
                     let pos2 = {lat: (attr['x']).toFixed(8), lng: (attr['y']).toFixed(8)};
                     fullMedPoints.push(attr);
                     pointsOfMedium.push(pos2);
                     localStorage.setItem("title" + pos, "attraction ID: " + attr['id'] + "\nattraction name: " + attr['name'] + "\nposition: (" + attr['x'] + "," + attr['y'] + ")");
                     markAttractionOfMediumPath(pos);
-            })
+            });
+
         }
 
         if(track['length']==1)
@@ -108,6 +119,7 @@ function markAttractionsOfMediumPaths(tracksJSON){
     getRequestAttractions(markAttractionsOfMediumPath_left);
 
 }
+
 
 function markAttractionsOfMediumPath_left(attractionsJSON){
 
@@ -132,8 +144,8 @@ function markAttractionsOfMediumPath_left(attractionsJSON){
 function listenerForMappo(){
         var finishBTN = document.getElementById('finish_reg_med');
         finishBTN.addEventListener('click', function() {
-
-            getRequestAttractions(needThisToGetPointsIDs);
+window.location.href='/main'
+            //getRequestAttractions(needThisToGetPointsIDs);
 
         });
 }

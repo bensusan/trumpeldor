@@ -20,12 +20,15 @@ function initMapAndAttractionss(){
 }
 
   function addEditListenerr(m) {
-      m.addListener('click', function() {
+       m.addListener('click', function() {
             if(prev_m!=1) {
-              prev_m.setIcon("http://maps.google.com/mapfiles/ms/icons/red-dot.png");
+
+              prev_m.setIcon(prev_icon);
           }
           //alert("sda");
+          prev_icon=m.icon;
           m.setIcon("http://maps.google.com/mapfiles/ms/icons/pink-dot.png");
+
           prev_m=m;
           curPosClicked=m.position;
         var addToPathBTN = document.getElementById('add_reg_to_path_med');
@@ -39,7 +42,11 @@ function initMapAndAttractionss(){
                 str_of_points=str_of_points+m.position+"<br />";
             }
             // alert(str_of_points);
-            document.getElementById("showing_added_points_med").innerHTML = str_of_points ;
+            // var border = document.getElementById("border_of_points");
+            // border.style.display = "block";
+            // document.getElementById("showing_added_points").innerHTML = str_of_points;
+            // document.getElementById("showing_added_points").style.fontWeight = 'bold';
+            getRequestAttractions(needThisToGetPointsIDs);
            // alert("point been added! now its: "+ pointsOfPath.toString());
         });
 
@@ -139,7 +146,8 @@ function listenerForMappo(){
         var finishBTN = document.getElementById('finish_reg_med');
         finishBTN.addEventListener('click', function() {
 
-            getRequestAttractions(needThisToGetPointsIDs);
+            window.location.href='/main'
+           // getRequestAttractions(needThisToGetPointsIDs);
 
         });
 }

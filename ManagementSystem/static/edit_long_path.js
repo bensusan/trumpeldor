@@ -25,12 +25,15 @@ function initMapAndAttractionss(){
 }
 
   function addEditListenerr(m) {
-      m.addListener('click', function() {
+       m.addListener('click', function() {
             if(prev_m!=1) {
-              prev_m.setIcon("http://maps.google.com/mapfiles/ms/icons/red-dot.png");
+
+              prev_m.setIcon(prev_icon);
           }
           //alert("sda");
+          prev_icon=m.icon;
           m.setIcon("http://maps.google.com/mapfiles/ms/icons/pink-dot.png");
+
           prev_m=m;
           curPosClicked=m.position;
         var addToPathBTN = document.getElementById('add_reg_to_path_long');
@@ -44,7 +47,11 @@ function initMapAndAttractionss(){
                 str_of_points=str_of_points+m.position+"<br />";
             }
             // alert(str_of_points);
-            document.getElementById("showing_added_points_long").innerHTML = str_of_points ;
+            // var border = document.getElementById("border_of_points");
+            // border.style.display = "block";
+            // document.getElementById("showing_added_points").innerHTML = str_of_points;
+            // document.getElementById("showing_added_points").style.fontWeight = 'bold';
+            getRequestAttractions(needThisToGetPointsIDs);
            // alert("point been added! now its: "+ pointsOfPath.toString());
         });
 
@@ -87,10 +94,13 @@ function markAttractionsOfLongPaths(tracksJSON){
             idOfLong = track['id'];
 
             let points_of_track = track['points'];
-            points_of_track.forEach(function (attr) {
-                    fullLongPoints.push(attr);
-                let pos2 = {lat: (attr['x']).toFixed(8), lng: (attr['y']).toFixed(8)}; // change to 13 instead of 8!!!
+            let points_of_subtrack = track['subTrack']['points'];
+            let points_of_subsubtrack = track['subTrack']['subTrack']['points'];
+            let children = [].concat(points_of_subtrack,points_of_track,points_of_subsubtrack);
 
+            children.forEach(function (attr) {
+                    fullLongPoints.push(attr);
+                    let pos2 = {lat: (attr['x']).toFixed(8), lng: (attr['y']).toFixed(8)}; // change to 13 instead of 8!!!
                     let pos = {lat: attr['x'], lng: attr['y']};
                     pointsOfMedium.push(pos2);
                     localStorage.setItem("title" + pos, "attraction ID: " + attr['id'] + "\nattraction name: " + attr['name'] + "\nposition: (" + attr['x'] + "," + attr['y'] + ")");
@@ -127,8 +137,9 @@ function markAttractionsOfLongPath_left(attractionsJSON){
 function listenerForMappo(){
         var finishBTN = document.getElementById('finish_reg_long');
         finishBTN.addEventListener('click', function() {
+            window.location.href='/main'
 
-            getRequestAttractions(needThisToGetPointsIDs);
+            //getRequestAttractions(needThisToGetPointsIDs);
 
         });
 }
@@ -143,7 +154,7 @@ function needThisToGetPointsIDs(attractionsJSON) {
                 // let bolia = attr_point == the_point;
                 // alert("attr: "+ attr_point.x +","+ attr_point.y +"\npont: "+the_point.x +","+the_point.y+"\n"+bolia);
                 if((attr_point.x == the_point.x)  &&  (attr_point.y == the_point.y) ){
-                    alert("bazinga!");
+                    //alert("bazinga!");
                     addPointToTrackRequest(attr_id,idOfLong);
                     //addPointToTrackRequest(attr_id,idOfLong);
                 }

@@ -21,7 +21,7 @@ function initMapAndAttractionss(){
 
   function addEditListenerr(m) {
       m.addListener('click', function() {
-          if(prev_m!=1) {
+            if(prev_m!=1) {
 
               prev_m.setIcon(prev_icon);
           }
@@ -33,6 +33,7 @@ function initMapAndAttractionss(){
           curPosClicked=m.position;
         var addToPathBTN = document.getElementById('add_reg_to_path_med');
         addToPathBTN.addEventListener('click', function() {
+
             if(pointsOfPath.indexOf(m.position)==-1 && curPosClicked==m.position)
             {
                 let point_to_push = {lat: m.position.lat(), lng: m.position.lng()};
@@ -42,7 +43,11 @@ function initMapAndAttractionss(){
                 str_of_points=str_of_points+m.position+"<br />";
             }
             // alert(str_of_points);
-            document.getElementById("showing_added_points_med").innerHTML = str_of_points ;
+            // var border = document.getElementById("border_of_points");
+            // border.style.display = "block";
+            // document.getElementById("showing_added_points").innerHTML = str_of_points;
+            // document.getElementById("showing_added_points").style.fontWeight = 'bold';
+            getRequestAttractions(needThisToGetPointsIDs);
            // alert("point been added! now its: "+ pointsOfPath.toString());
         });
   });
@@ -69,7 +74,10 @@ function markAttractionsOfMediumPaths(tracksJSON){
             idOfMedium = track['id'];
 
             let points_of_track = track['points'];
-            points_of_track.forEach(function (attr) {
+            let points_of_subtrack = track['subTrack']['points'];
+            let children = [].concat(points_of_subtrack,points_of_track);
+
+            children.forEach(function (attr) {
                     let pos = {lat: attr['x'], lng: attr['y']};
                     let pos2 = {lat: (attr['x']).toFixed(8), lng: (attr['y']).toFixed(8)};
                     pointsOfMedium.push(pos2);
@@ -126,7 +134,7 @@ function listenerForMappo(){
 }
 
 function needThisToGetPointsIDs(attractionsJSON) {
-
+alert("ofir");
     attractionsJSON.forEach(function (attr) {
         let attr_point = {x: (attr['x']).toFixed(13) , y: (attr['y']).toFixed(13)};
         let attr_id = attr['id'];
@@ -138,7 +146,6 @@ function needThisToGetPointsIDs(attractionsJSON) {
             if ((attr_point.x == the_point.x) && (attr_point.y == the_point.y)) {
              //   alert("bazinga");
                 addPointToTrackRequest(attr_id,idOfMedium);
-
 
             }
 

@@ -1,12 +1,11 @@
 //menu_of_edit_attractions
 
 document.getElementById("sideMenu").innerHTML = '<div class="sidenav">\n' +
-    '  <h2 style="color:#818181;">Edit Hints</h2>' +
-    '  <a href="/main">Back</a>\n' +
-    '  <a href="/add_hint">Add Hint</a>\n' +
-    '  <a onclick="wantToEditButton()">Edit Hint</a>\n' +
-    '  <a onclick="wantToDeleteButton()">Delete Hint</a>\n' +
-    '  <a href="/pick_hint">Edit Hints</a>\n' +
+    '  <h2 style="color:#818181;">עריכת רמזים</h2>' +
+    '  <a href="/main">לתפריט הראשי</a>\n' +
+    '  <a href="/add_hint">הוספת רמז</a>\n' +
+    '  <a onclick="wantToEditButton()">עריכת רמז</a>\n' +
+    '  <a onclick="wantToDeleteButton()">מחיקת רמז</a>\n' +
     '</div>\n' +
     '\n' +
     '<div class="main">\n' +

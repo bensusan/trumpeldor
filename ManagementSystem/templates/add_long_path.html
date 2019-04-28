@@ -4,20 +4,21 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
     {% load static %}
 <link rel="stylesheet" href="{% static 'attractions_style.css' %}?version=1">
-    <title>Add Long Path</title>
+    <title>הוספת מסלול ארוך</title>
     {% load static %}
-<link rel="stylesheet" href="{% static 'paths_style.css' %}?version=1">
+<link rel="stylesheet" href="{% static 'SideMenu.css' %}?version=5">
+    {% load static %}
+<link rel="stylesheet" href="{% static 'paths_style.css' %}?version=4">
 {% load static %}
 <link rel="stylesheet" href="{% static 'Map.css' %}?version=3">
 {% load static %}
 <script src="{% static 'attractions.js' %}?version=5"></script>
     {% load static %}
-<script src="{% static 'add_long_path.js' %}?version=5"></script>
+<script src="{% static 'add_long_path.js' %}?version=3"></script>
      {% load static %}
-<script src="{% static 'properties.js' %}?version=2"></script>
+<script src="{% static 'properties.js' %}?version=3"></script>
 </head>
 <body>
-<button onclick="window.location.href='/main'" type="button">Back to menu</button>
 {#<meta name="viewport" content="width=device-width, initial-scale=1">#}
 {#{% load static %}#}
 {#<link rel="stylesheet" href="{% static 'Map.css' %}?version=1">#}
@@ -32,19 +33,29 @@
     async defer>
     </script>
 
-   <div align="center">
-<div class="buttonStyle">
 
-<button class="button" id="add_reg_to_path_long" type="button">Add To Path</button>
-<button class="button" id="finish_reg_long" type="button">Finish!</button>
 
 
 </div>
-    </div>
-</body>
-<p></p>
-<p></p>
-<p id="things_to_fix_long"> </p>
 
-<p id="showing_added_points_long"></p>
+<button class="button" id="add_reg_to_path_long" type="button">הוספה למסלול</button>
+{#<button class="button" id="finish_reg_long" type="button">Finish!</button>#}
+
+
+<p></p>
+<p></p>
+{#<div id="border_of_points" class="pointsBorder"  style="display: none" align="center">#}
+{#    <div align="center">#}
+{#        <p><b>Added Points:</b></p>#}
+{#    </div>#}
+{#<p id="showing_added_points"></p>#}
+{#    </div>#}
+</div>
+
+
+<nav id="sideMenu"></nav>
+{% load static %}
+<script src="{% static 'menu_for_paths.js' %}?version=2"></script>
+
+</body>
 </html>

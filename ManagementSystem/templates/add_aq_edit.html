@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>הוספת שאלה אמריקאית</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    {% load static %}
+<link rel="stylesheet" href="{% static 'SideMenu.css' %}?version=4">
+{% load static %}
+<link rel="stylesheet" href="{% static 'just_want_background.css' %}?version=2">
+ {% load static %}
+<script src="{% static 'properties.js' %}?version=3"></script>
+    {% load static %}
+    <script src="{% static 'attractions.js' %}?version=5"></script>
+    {% load static %}
+<script src="{% static 'add_aq_edit.js' %}?version=4"></script>
+
+</head>
+<body>
+<div align="center">
+    <label for="hint"><b>:שאלה אמריקאית</b></label>
+    <p></p>
+    <p id="txt1">:מספר תשובות אפשריות</p>
+    <input type="text"  id="noOfAns" style="height: 20px; width: 50px; border-radius: 5px;" required>
+    <p id="txt2">:מספר תשובות נכונות</p>
+    <input type="text"  id="noOfCorrect" style="height: 20px; width: 50px; border-radius: 5px;" required>
+    <p></p>
+     <button id="ok_button_to_prepare" type="button">Ok</button>
+    <p></p>
+    <input type="text" id="ques" placeholder="Enter Question" name="attr_desc" style="display: none;height: 100px;width: 200px; border-radius: 5px;" required>
+    <p></p>
+      <input type="text"  id="ans1" placeholder="ans1" name="a1" style="display: none;height: 40px; width: 200px; border-radius: 5px;" required>
+    <p></p>
+      <input type="text" id="ans2" placeholder="ans2" name="a2" style="display: none;height: 40px;width: 200px; border-radius: 5px;" required>
+    <p></p>
+      <input type="text" id="ans3" placeholder="ans3" name="a3" style="display: none;height: 40px;width: 200px; border-radius: 5px;" required>
+    <p></p>
+      <input  type="text" id="ans4" placeholder="ans4" name="a4" style="display: none;height: 40px;width: 200px; border-radius: 5px;" required>
+    <p></p>
+      <input  type="text" id="ans5" placeholder="ans5" name="a5" style="display: none; height: 40px;width: 200px; border-radius: 5px;" required>
+    <p></p>
+      <input  type="text" id="ans6" placeholder="ans6" name="a6" style="display:none;height: 40px;width: 200px; border-radius: 5px;" required>
+    <p></p>
+      <input  type="text" id="ans7" placeholder="ans7" name="a7" style="display: none;height: 40px;width: 200px; border-radius: 5px;" required>
+    <p></p>
+      <input  type="text" id="ans8" placeholder="ans8" name="a8" style="display:none;height: 40px;width: 200px; border-radius: 5px;" required>
+    <p></p>
+<input  type="text" id="correctAns" placeholder="correctAns_index" name="correctAns" style="display: none; height: 15px;width: 150px; border-radius: 5px;" required>
+   <input  type="text" id="correctAns2" placeholder="correctAns_index" name="correctAns" style="display:none;height: 15px;width: 150px; border-radius: 5px;" required>
+    <input  type="text" id="correctAns3" placeholder="correctAns_index" name="correctAns" style="display:none;height: 15px;width: 150px; border-radius: 5px;" required>
+    <p></p>
+{#window.location.href='/add_hint'#}
+
+    <button class="button" id="finish_add_aq_btn" type="button" style="display: none;">שליחה</button>
+{#<button class="button" id="finish_add_aq" onclick="finishAddAq()" type="button">Send</button>#}
+    </div>
+<nav id="sideMenu"></nav>
+{% load static %}
+<script src="{% static 'menu_of_add_aq.js' %}?version=4"></script>
+
+</body>
+</html>

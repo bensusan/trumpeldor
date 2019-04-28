@@ -2,34 +2,37 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Delete Path</title>
+    <title>מחיקת מסלול</title>
     {% load static %}
-<link rel="stylesheet" href="{% static 'SideMenu.css' %}?version=3">
+<link rel="stylesheet" href="{% static 'just_want_background.css' %}?version=2">
+    {% load static %}
+<link rel="stylesheet" href="{% static 'SideMenu.css' %}?version=4">
      {% load static %}
 <script src="{% static 'attractions.js' %}?version=3"></script>
     {% load static %}
 <script src="{% static 'pick_path_delete.js' %}?version=4"></script>
      {% load static %}
-<script src="{% static 'properties.js' %}?version=1"></script>
+<script src="{% static 'properties.js' %}?version=2"></script>
 </head>
 <body>
 
 <div>
 <nav id="sideMenu"></nav>
 {% load static %}
-<script src="{% static 'mimicOfSide.js' %}?version=1"></script>
+<script src="{% static 'menu_for_paths.js' %}?version=2"></script>
 
 </div>
 
-<div class="moveRight">
-    <label for="hint"><b>Delete Path:</b></label>
+<div align="center">
+    <label for="hint"><b>:בחר מסלול למחוק</b></label>
 <p></p>
 <textarea id="write_path_length" placeholder="Write path length:
 1 - short
 2 - medium
-3 - long " style="height:100px;width: 100px;"></textarea>
-<button type="button" id="delete_chosen_path">Delete</button>
-<p></p>
+3 - long " style="height:100px;width: 200px;"></textarea>
+    <p></p>
+<button type="button" id="delete_chosen_path">מחיקה</button>
+
 
 
 </div>

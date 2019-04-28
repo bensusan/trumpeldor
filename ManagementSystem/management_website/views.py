@@ -27,20 +27,52 @@ def add_game_page(request):
     return render(request, "add_game.html")
 
 
+def add_game_edit_page(request):
+    return render(request, "add_game_edit.html")
+
+
 def add_hint_page(request):
     return render(request, "add_hint.html")
+
+
+def add_hint_edit_page(request):
+    return render(request, "add_hint_edit.html")
 
 
 def add_aq_page(request):
     return render(request, "add_aq.html")
 
 
+def add_aq_edit_page(request):
+    return render(request, "add_aq_edit.html")
+
+
 def pick_hint_page(request):
     return render(request, "pick_hint.html")
 
 
+def pick_hint_edit_page(request):
+    return render(request, "pick_hint_edit.html")
+
+
+def pick_aq_edit_page(request):
+    return render(request, "pick_aq_edit.html")
+
+
 def edit_hint_page(request):
     return render(request, "edit_hint.html")
+
+
+def edit_hint_edit_page(request):
+    return render(request, "edit_hint_edit.html")
+
+
+def edit_feedbacks_page(request):
+    return render(request, "edit_feedbacks.html")
+
+
+def feedback_page(request):
+    return render(request, "feedback.html")
 
 
 def add_picture_page(request):
@@ -89,3 +121,11 @@ def edit_long_path_page(request):
 
 def info_page(request):
     return render(request, "add_info.html")
+
+
+def pick_delete_game_page(request):
+    return render(request, "pick_delete_game.html")
+
+
+def delete_game_page(request):
+    return render(request, "delete_game.html")

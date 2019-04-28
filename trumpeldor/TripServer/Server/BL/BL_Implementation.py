@@ -105,7 +105,7 @@ class BL_Implementation(BL_Abstract):
                                        attraction['description'], attraction['picturesURLS'], attraction['videosURLS'])
 
     def add_hint(self, id_attraction, hint):
-        return self.DAL.add_hint(id_attraction, hint['kind'], hint['data'])
+        return self.DAL.add_hint(id_attraction, hint['kind'], hint['data'], hint['description'])
 
     def add_american_question(self, id_attraction, a_question):
         return self.DAL.add_american_question(id_attraction, a_question['question'], a_question['answers'],
@@ -113,10 +113,12 @@ class BL_Implementation(BL_Abstract):
 
     def add_track(self, track):
         if self.get_track_by_length(track['length']) is None:
-            return self.DAL.add_track(track['points'], track['length'])
+            return self.DAL.add_track(track['subTrack'], track['points'], track['length'])
 
-    def add_feedback_question(self, question, kind):#question, kind
-        return self.DAL.add_feedback_question(question, kind)
+    def add_feedback_question(self, feedback):#question, kind
+        print(feedback)
+        print(feedback['question'])
+        return self.DAL.add_feedback_question(feedback['question'], feedback['kind'])
 
     def get_track(self, id):
         return self.DAL.get_track(id)
@@ -239,3 +241,48 @@ class BL_Implementation(BL_Abstract):
 
     def get_track_by_length(self, len):
         return self.DAL.get_track_by_length(len)
+
+    def edit_track(self, id_track, points):
+        return self.DAL.edit_track(id_track, points)
+
+    def get_all_feedback_questions(self):
+        return self.DAL.get_all_feedback_questions()
+
+    def add_info(self, info):
+        return self.DAL.add_info(info['info'])
+
+    def get_info(self):
+        return self.DAL.get_info()
+
+    def delete_info(self, id):
+        return self.DAL.delete_info(id)
+
+    def get_all_sliding_puzzles_for_attraction(self, id_attraction):
+        return self.DAL.get_all_sliding_puzzles_for_attraction(id_attraction)
+
+    def add_sliding_puzzle(self, id_attraction, sliding_puzzle):
+        return self.DAL.add_sliding_puzzle(id_attraction, sliding_puzzle['piecesURLS'], sliding_puzzle['width'],
+                                           sliding_puzzle['height'], sliding_puzzle['description'])
+
+    def delete_sliding_puzzle(self, id_attraction):
+        return self.DAL.delete_sliding_puzzle(id_attraction)
+
+    def get_all_puzzles_for_attraction(self, id_attraction):
+        return self.DAL.get_all_puzzles_for_attraction(id_attraction)
+
+    def add_puzzle(self, id_attraction, puzzle):
+        return self.DAL.add_puzzle(id_attraction, puzzle['pictureURL'], puzzle['width'],
+                                   puzzle['height'], puzzle['description'])
+
+    def delete_puzzle(self, id_attraction):
+        return self.DAL.delete_puzzle(id_attraction)
+
+    def get_all_find_the_differences_for_attraction(self, id_attraction):
+        return self.DAL.get_all_find_the_differences_for_attraction(id_attraction)
+
+    def add_find_the_differences(self, id_attraction, find_the_differences):
+        return self.DAL.add_find_the_differences(id_attraction, find_the_differences['pictureURL'],
+                                                 find_the_differences['differences'], find_the_differences['description'])
+
+    def delete_find_the_differences(self, id_attraction):
+        return self.DAL.delete_find_the_differences(id_attraction)

@@ -2,7 +2,9 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Edit Hint</title>
+    <title>עריכת רמז</title>
+    {% load static %}
+<link rel="stylesheet" href="{% static 'SideMenu.css' %}?version=4">
     {% load static %}
     <script src="{% static 'attractions.js' %}?version=1"></script>
     {% load static %}
@@ -10,18 +12,21 @@
     {% load static %}
     <script src="{% static 'edit_hint.js' %}?version=1"></script>
      {% load static %}
-<script src="{% static 'properties.js' %}?version=1"></script>
+<script src="{% static 'properties.js' %}?version=2"></script>
 </head>
 <body>
 
 
-<label for="hint"><b>Edit Hint:</b></label>
-<p>Hint id:</p>
+<label for="hint"><b>עריכת רמז:</b></label>
+<p>מספר הרמז:</p>
 <p id="hints_id_in_edit"></p>
 <p></p>
 <textarea id="write_hint_text_in_edit" placeholder="Write Text Of Hint..."></textarea>
-<button type="button" id="submit_to_edit_hint">Submit</button>
+<button type="button" id="submit_to_edit_hint">סיום</button>
 <p></p>
+<nav id="sideMenu"></nav>
+{% load static %}
+<script src="{% static 'menu_of_edit_hint.js' %}?version=2"></script>
 
 
 </body>

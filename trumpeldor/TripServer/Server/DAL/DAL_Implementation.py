@@ -1,3 +1,5 @@
+from re import sub
+
 import null
 import datetime
 from Server.models import *
@@ -59,8 +61,8 @@ class DAL_Implementation(DAL_Abstract):
         attraction.save()
         return attraction
 
-    def add_hint(self, id_attraction, kind, data):
-        hint = Hint(attraction=self.getAttraction(id_attraction), kind=kind, data=data)
+    def add_hint(self, id_attraction, kind, data, description):
+        hint = Hint(attraction=self.getAttraction(id_attraction), kind=kind, data=data, description=description)
         hint.save()
         return hint
 
@@ -70,14 +72,29 @@ class DAL_Implementation(DAL_Abstract):
         aq.save()
         return aq
 
-    def add_track(self, points, length):
-        for i in range(4-length):
-            track = Track(length=length+i)
+    def add_track(self, subTrack, points, length):
+        # for i in range(4-length):
+        #     track = Track(length=length+i)
+        #     track.save()
+        #     for p in points:
+        #         attr = self.get_attraction(p['id'])
+        #         track.points.add(attr)
+        #         track.save()
+        # return True
+        for i in range(4 - length):
+            track = None
+            if subTrack is None:
+                track = Track(length=length)
+            else:
+                # sub_track = self.get_track(subTrack['id'])
+                track = Track(subTrack=subTrack, length=length+i)
             track.save()
-            for p in points:
-                attr = self.get_attraction(p['id'])
-                track.points.add(attr)
-                track.save()
+            if i == 0:
+                for p in points:
+                    attr = self.get_attraction(p['id'])
+                    track.points.add(attr)
+                    track.save()
+            subTrack = track
         return True
 
     def add_feedback_question(self, question, kind):
@@ -179,7 +196,7 @@ class DAL_Implementation(DAL_Abstract):
         return Hint.objects.filter(pk=id_hint, attraction=self.getAttraction(id_attraction)).first()
 
     def get_feedback_question(self, id_feedback):
-        return Feedback.objects.filter(pk=id_feedback).all()
+        return Feedback.objects.filter(pk=id_feedback).first()
 
     def get_attraction_by_x_y(self, x, y):
         return Attraction.objects.filter(x=x, y=y).first()
@@ -191,26 +208,47 @@ class DAL_Implementation(DAL_Abstract):
         return Hint.objects.filter(attraction=self.get_attraction(id_attraction)).all()
 
     def add_attraction_to_track(self, id_track, id_attraction):
+        # attr = self.getAttraction(id_attraction)
+        # if attr is not None:
+        #     track = self.get_track(id_track)
+        #     len = track.length
+        #     for i in range(len, 4):
+        #         track = self.get_track_by_length(i)
+        #         track.points.add(attr)
+        #         track.save()
+        #     return True
         attr = self.getAttraction(id_attraction)
         if attr is not None:
             track = self.get_track(id_track)
-            len = track.length
-            for i in range(len, 4):
-                track = self.get_track_by_length(i)
-                track.points.add(attr)
-                track.save()
+            track.points.add(attr)
+            track.save()
             return True
 
     def delete_attraction_from_track(self, id_track, id_attraction):
+        # attr = self.getAttraction(id_attraction)
+        # if attr is not None:
+        #     track = self.get_track(id_track)
+        #     len = track.length
+        #     for i in range(1, len+1):
+        #         track = self.get_track_by_length(i)
+        #         track.points.remove(attr)
+        #         track.save()
+        #     return True
         attr = self.getAttraction(id_attraction)
+        track = self.get_track(id_track)
         if attr is not None:
-            track = self.get_track(id_track)
-            len = track.length
-            for i in range(1, len+1):
-                track = self.get_track_by_length(i)
-                track.points.remove(attr)
-                track.save()
+            for i in range(1, track.length):
+                track_smaller = self.get_track_by_length(i)
+                print(i)
+                print(track_smaller)
+                print(track_smaller.points.all())
+                print(attr)
+                if attr in track_smaller.points.all():
+                    return False
+            track.points.remove(attr)
+            track.save()
             return True
+
 
     def delete_track(self, id_track):
         track = self.get_track(id_track).delete()
@@ -218,3 +256,64 @@ class DAL_Implementation(DAL_Abstract):
 
     def get_track_by_length(self, len):
         return Track.objects.filter(length=len).first()
+
+    def edit_track(self, id_track, points):
+        track = self.get_track(id_track)
+        track.points.set(null)
+        for p in points:
+            attr = self.getAttraction(p['id'])
+            track.points.add(attr)
+        track.save()
+        return track
+
+    def get_all_feedback_questions(self):
+        return Feedback.objects.all()
+
+    def add_info(self, info):
+        info = Info(info=info)
+        info.save()
+        return info
+
+    def get_info(self):
+        return Info.objects.all()
+
+    def delete_info(self, id):
+        return Info.objects.filter(id=id).first().delete()
+
+    def get_all_sliding_puzzles_for_attraction(self, id_attraction):
+        return SlidingPuzzle.objects.filter(attraction=self.get_attraction(id_attraction)).all()
+
+    def add_sliding_puzzle(self, id_attraction, piecesURLS, width, height, description):
+        sliding_puzzle = SlidingPuzzle(attraction=self.get_attraction(id_attraction), description=description, piecesURLS=piecesURLS, width=width, height=height)
+        sliding_puzzle.save()
+        return sliding_puzzle
+
+    def delete_sliding_puzzle(self, id_attraction):
+        self.get_all_sliding_puzzles_for_attraction(id_attraction).delete()
+        return True
+
+    def get_all_puzzles_for_attraction(self, id_attraction):
+        return Puzzle.objects.filter(attraction=self.get_attraction(id_attraction)).all()
+
+    def add_puzzle(self, id_attraction, pictureURL, width, height, description):
+        puzzle = Puzzle(attraction=self.get_attraction(id_attraction), description=description,
+                        pictureURL=pictureURL, width=width, height=height)
+        puzzle.save()
+        return puzzle
+
+    def delete_puzzle(self, id_attraction):
+        self.get_all_puzzles_for_attraction(id_attraction).delete()
+        return True
+
+    def get_all_find_the_differences_for_attraction(self, id_attraction):
+        return FindTheDifferences.objects.filter(attraction=self.get_attraction(id_attraction)).all()
+
+    def add_find_the_differences(self, id_attraction, pictureURL, differences, description):
+        find_the_differences = FindTheDifferences(attraction=self.get_attraction(id_attraction), description=description,
+                        pictureURL=pictureURL, differences=differences)
+        find_the_differences.save()
+        return find_the_differences
+
+    def delete_find_the_differences(self, id_attraction):
+        self.get_all_find_the_differences_for_attraction(id_attraction).delete()
+        return True

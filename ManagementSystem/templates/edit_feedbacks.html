@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>עריכת משוב</title>
+     {% load static %}
+<link rel="stylesheet" href="{% static 'just_want_background.css' %}?version=1">
+    {% load static %}
+<link rel="stylesheet" href="{% static 'SideMenu.css' %}?version=4">
+    {% load static %}
+<script src="{% static 'edit_feedbacks.js' %}?version=4"></script>
+    {% load static %}
+<script src="{% static 'attractions.js' %}?version=3"></script>
+     {% load static %}
+<script src="{% static 'properties.js' %}?version=3"></script>
+</head>
+<body>
+
+
+<div class="exist_list" align="center" style="width: 500px;">
+    <label for="hint"><b>:רמזים קיימים</b></label>
+<p id="existing_fbs"></p>
+<p></p>
+{#<button onclick="window.location.href='/add_aq'" type="button">Add American Question</button>#}
+<p></p>
+{#<button type="button" id="want_to_edit_aq">Edit American Question</button>#}
+<p></p>
+<textarea id="write_fb_to_change" placeholder="Write Feedback ID..." style="display: none"></textarea>
+<button type="button" id="edit_chosen_fb" style="display: none">עריכה</button>
+    <textarea id="write_fb_txt" placeholder="Write Feedback Question here..." style="display: none"></textarea>
+<p></p>
+    <p></p>
+    <p id="first" style="display: none">שאלה:</p>
+     <p></p>
+    <textarea type="text" id="fbquestion" placeholder="Enter Feedback Question" style="width: 310px;height: 200px; overflow: scroll;display: none"> </textarea>
+{#    <input type="text"  id="fbquestion" style="height: 20px; width: 50px; border-radius: 5px;" required>#}
+    <p></p>
+    <p id="second" style="display: none">סוג המשוב:</p>
+     <p></p>
+    <select id="feedback_type" style="display: none">
+      <option value="opt1">משוב טקסט</option>
+      <option value="opt2">משוב ציון</option>
+    </select>
+{#    <input type="text"  id="fbtype" style="height: 20px; width: 50px; border-radius: 5px;" required>#}
+    <p></p>
+     <button class="button" id="send_feedback" type="button" style="display: none">שליחת השאלה</button>
+<p></p>
+<p></p>
+{#<button type="button" id="want_to_delete_aq">Delete American Question</button>#}
+<p></p>
+<textarea id="write_fb_id_to_delete" placeholder="...כתבי את מזהה המשוב" style="text-align:right;direction:ltr;display: none"></textarea>
+    <p></p>
+<button type="button" id="delete_chosen_fb" style="display: none">מחיקה</button>
+<p></p>
+<button class="button" onclick="doneEditingFbs()" type="button">!סיימתי</button>
+
+
+</div>
+<div>
+<nav id="sideMenu"></nav>
+{% load static %}
+<script src="{% static 'menu_for_edit_feedbacks.js' %}?version=4"></script>
+
+</div>
+
+{#style="display:none"#}
+</body>
+</html>

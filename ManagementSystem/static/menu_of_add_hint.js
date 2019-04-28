@@ -1,0 +1,30 @@
+//menu_of_edit_attractions
+
+document.getElementById("sideMenu").innerHTML = '<div class="sidenav">\n' +
+    '  <h2 style="color:#818181;">הוספת רמז</h2>' +
+    '  <a id="add_text_hint">רמז מסוג טקסט</a>\n' +
+    '  <a id="add_vid_hint">רמז מסוג סרטון</a>\n' +
+    '  <a id="add_pic_hint">רמז מסוג תמונה</a>\n' +
+    '  <a href="/main">לתפריט הראשי</a>\n' +
+    '</div>\n' +
+    '\n' +
+    '<div class="main">\n' +
+    '</div>';
+
+/* Loop through all dropdown buttons to toggle between hiding and showing its dropdown content - This allows the user to have multiple dropdowns without any conflict */
+var dropdown = document.getElementsByClassName("dropdown-btn");
+var i;
+
+for (i = 0; i < dropdown.length; i++) {
+  dropdown[i].addEventListener("click", function() {
+  this.classList.toggle("active");
+  var dropdownContent = this.nextElementSibling;
+  if (dropdownContent.style.display === "block") {
+  dropdownContent.style.display = "none";
+  } else {
+  dropdownContent.style.display = "block";
+  }
+  });
+}
+
+

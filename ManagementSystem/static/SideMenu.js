@@ -1,23 +1,30 @@
 document.getElementById("sideMenu").innerHTML = '<div class="sidenav">\n' +
-    '  <h2 style="color:#818181;">Welcome, Yael!</h2>' +
-    '  <a href="/attractions" name="manage_attr_page">Manage Attractions</a>\n' +
-    '  <button class="dropdown-btn">Paths\n' +
+    '  <h2 style="color:#818181;">!שלום, יעל</h2>' +
+    '  <a href="/attractions" name="manage_attr_page">ניהול אטרקציות</a>\n' +
+    '  <button class="dropdown-btn">מסלולים\n' +
     '    <i class="fa fa-caret-down"></i>\n' +
     '  </button>\n' +
     '  <div class="dropdown-container">\n' +
-    '  <button class="dropdown-btn">Add Path\n' +
+    '  <button class="dropdown-btn">הוספת מסלול\n' +
     '    <i class="fa fa-caret-down"></i>\n' +
     '  </button>\n' +
     '  <div class="dropdown-container">\n' +
-    '    <a href="/add_short_path">Short</a>\n' +
-    '    <a href="/add_medium_path">Medium</a>\n' +
-    '    <a href="/add_long_path">Long</a>\n' +
+    '    <a href="/add_short_path">קצר</a>\n' +
+    '    <a href="/add_medium_path">בינוני</a>\n' +
+    '    <a href="/add_long_path">ארוך</a>\n' +
     '  </div>\n' +
-    '    <a href="/pick_path_edit">Edit Path</a>\n' +
-    '    <a href="/pick_path_delete">Delete Path</a>\n' +
+    '    <a href="/pick_path_edit">עריכת מסלול</a>\n' +
+    '    <a href="/pick_path_delete">מחיקת מסלול</a>\n' +
     '  </div>\n' +
-    '  <a href="#services">Statistics</a>\n' +
-    '  <a href="/additional_info">Additional Info</a>\n' +
+    '  <a href="#services">סטטיסטיקות</a>\n' +
+    '  <a href="/additional_info">מידע נוסף</a>\n' +
+    '  <button class="dropdown-btn">משוב\n' +
+    '    <i class="fa fa-caret-down"></i>\n' +
+    '  </button>\n' +
+    '  <div class="dropdown-container">\n' +
+    '    <a href="/feedback">הוסף משוב</a>\n' +
+    '    <a href="/edit_feedbacks">מחק משוב</a>\n' +
+    '  </div>\n' +
     '</div>\n' +
     '\n' +
     '<div class="main">\n' +

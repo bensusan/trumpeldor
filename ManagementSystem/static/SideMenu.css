@@ -23,15 +23,17 @@ body {
   position: fixed;
   z-index: 1;
   top: 0;
-  left: 0;
+  right: 0;
+  text-align: right;
   background-color: #111;
   overflow-x: hidden;
   padding-top: 20px;
+  padding-right: 5px;
 }
 
 /* Style the sidenav links and the dropdown button */
 .sidenav a, .dropdown-btn {
-  padding: 6px 8px 6px 16px;
+  padding: 6px 4px 6px 0px;
   text-decoration: none;
   font-size: 20px;
   color: #818181;
@@ -39,7 +41,7 @@ body {
   border: none;
   background: none;
   width: 100%;
-  text-align: left;
+  text-align: right;
   cursor: pointer;
   outline: none;
 }
@@ -87,3 +89,16 @@ body {
   position: fixed;
   left: 300px;
 }
+
+.exist_list {
+  background-image: url("paper.jpg");
+  margin: auto;
+  width: 50%;
+  border: 3px solid peru;
+  padding: 10px;
+}
+
+.backOfText{
+  background-image: url('paper.jpg');
+}
+

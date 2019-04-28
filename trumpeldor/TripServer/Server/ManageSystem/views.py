@@ -76,24 +76,35 @@ class Hint(generics.GenericAPIView):
         return Response(ans)
 
 
-class Feedback(generics.GenericAPIView):
-    serializer_class = TripSerializer
+class FeedbackList(generics.GenericAPIView):
+    serializer_class = FeedbackSerializer
 
     def get(self, request, *args, **kwargs):
-        return general_post_or_get(
-            request,
-            "Feedbacks",
-            BL.getFeedbacks,
-            FeedbackInstanceSerializer,
-            True)
+        ans = BL.get_all_feedback_questions()
+        ans = FeedbackSerializer(ans, many=True)
+        ans = json.loads(json.dumps(ans.data))
+        return Response(ans)
 
     def post(self, request, *args, **kwargs):
-        return general_post_or_get(
-            request,
-            "GetFeedbacks",
-            BL.getFeedbacks,
-            FeedbackInstanceSerializer,
-            True)
+        ans = BL.add_feedback_question(request.data)
+        ans = FeedbackSerializer(ans, many=False)
+        ans = json.loads(json.dumps(ans.data))
+        return Response(ans)
+
+
+class Feedback(generics.GenericAPIView):
+    serializer_class = FeedbackSerializer
+
+    def get(self, request, *args, **kwargs):
+        ans = BL.get_feedback_question(self.kwargs['id'])
+        ans = FeedbackSerializer(ans, many=False)
+        ans = json.loads(json.dumps(ans.data))
+        return Response(ans)
+
+    def delete(self, request, *args, **kwargs):
+        ans = BL.delete_feedback_question(self.kwargs['id'])
+        ans = json.loads(json.dumps(ans))
+        return Response(ans)
 
 
 class AmericanQuestionsList(generics.GenericAPIView):
@@ -224,66 +235,143 @@ class Attraction(generics.GenericAPIView):
         ans = json.loads(json.dumps(ans.data))
         return Response(ans)
 
+class Info(generics.GenericAPIView):
+    serializer_class = InfoSerializer
+    queryset = ''
 
-# class EntertainmentsList(generics.GenericAPIView):
-#     serializer_class = EntertainmentSerializer
-#     queryset = ''
-#
-#     def get(self, request, *args, **kwargs):
-#         return general_post_or_get(
-#             None,
-#             "AddAttraction",
-#             BL.get_attractions,
-#             AttractionSerializer,
-#             True)
-#
-#     def post(self, request, *args, **kwargs):
-#         return general_post_or_get(
-#             request,
-#             "AddAttraction",
-#             BL.add_attraction,
-#             AttractionSerializer)
+    def get(self, request, *args, **kwargs):
+        ans = BL.get_info()
+        ans = InfoSerializer(ans, many=True)
+        ans = json.loads(json.dumps(ans.data))
+        return Response(ans)
 
-def sign_in_page(request):
-    return render(request, "signIn.html")
-
-def manage_attractions_page(request):
-    return render(request, "attractions.html")
-
-def addFeedback(question, kind):
-    feedback = Feedback(question=question, kind=kind)
-    feedback.save()
-    return feedback
+    def post(self, request, *args, **kwargs):
+        return general_post_or_get(
+            request,
+            "AddAttraction",
+            BL.add_info,
+            InfoSerializer)
 
 
-def addHint(attraction, kind, data):
-    hint = Hint(attraction=attraction, kind=kind, data=data)
-    hint.save()
-    return hint
+class InfoSpecific(generics.GenericAPIView):
+    serializer_class = InfoSerializer
+
+    def delete(self, request, *args, **kwargs):
+        ans = BL.delete_info(self.kwargs['id'])
+        ans = json.loads(json.dumps(ans))
+        return Response(ans)
 
 
-def addAmericanQuestion(question, answers, indexOfCorrectAnswer, attraction):
-    aq = AmericanQuestion(question=question, answers=answers, indexOfCorrectAnswer=indexOfCorrectAnswer, attraction=attraction)
-    aq.save()
-    return aq
+class SlidingPuzzleList(generics.GenericAPIView):
+    serializer_class = SlidingPuzzleSerializer
+    queryset = ''
+
+    def get(self, request, *args, **kwargs):
+        ans = BL.get_all_sliding_puzzles_for_attraction(self.kwargs['id_attr'])
+        ans = SlidingPuzzleSerializer(ans, many=True)
+        ans = json.loads(json.dumps(ans.data))
+        return Response(ans)
+
+    def delete(self, request, *args, **kwargs):
+        ans = BL.delete_sliding_puzzle(self.kwargs['id_attr'])
+        ans = json.loads(json.dumps(ans))
+        return Response(ans)
+
+    def post(self, request, *args, **kwargs):
+        ans = BL.add_sliding_puzzle(self.kwargs['id_attr'], request.data)
+        ans = SlidingPuzzleSerializer(ans, many=False)
+        ans = json.loads(json.dumps(ans.data))
+        return Response(ans)
 
 
-def addTrack(subTrack, points, length):
-    track = None
-    if subTrack == null:
-        track = Track(length=length)
-    else:
-        track = Track(subTrack=subTrack, length=length)
-    track.save()
-    for p in points:
-        track.points.add(p)
-    return track
+class PuzzleList(generics.GenericAPIView):
+    serializer_class = PuzzleSerializer
+    queryset = ''
+
+    def get(self, request, *args, **kwargs):
+        ans = BL.get_all_puzzles_for_attraction(self.kwargs['id_attr'])
+        ans = PuzzleSerializer(ans, many=True)
+        ans = json.loads(json.dumps(ans.data))
+        return Response(ans)
+
+    def delete(self, request, *args, **kwargs):
+        ans = BL.delete_puzzle(self.kwargs['id_attr'])
+        ans = json.loads(json.dumps(ans))
+        return Response(ans)
+
+    def post(self, request, *args, **kwargs):
+        ans = BL.add_puzzle(self.kwargs['id_attr'], request.data)
+        ans = PuzzleSerializer(ans, many=False)
+        ans = json.loads(json.dumps(ans.data))
+        return Response(ans)
 
 
-def addAttraction(name, x, y, description, picturesURLS, videosURLS):
-    attraction = Attraction(name=name, x=x, y=y, description=description, picturesURLS=picturesURLS, videosURLS=videosURLS)
-    attraction.save()
-    return attraction
+class FindTheDifferencesList(generics.GenericAPIView):
+    serializer_class = FindTheDifferencesSerializer
+    queryset = ''
+
+    def get(self, request, *args, **kwargs):
+        ans = BL.get_all_find_the_differences_for_attraction(self.kwargs['id_attr'])
+        ans = FindTheDifferencesSerializer(ans, many=True)
+        ans = json.loads(json.dumps(ans.data))
+        return Response(ans)
+
+    def delete(self, request, *args, **kwargs):
+        ans = BL.delete_find_the_differences(self.kwargs['id_attr'])
+        ans = json.loads(json.dumps(ans))
+        return Response(ans)
+
+    def post(self, request, *args, **kwargs):
+        # if 'x' not in request.data:
+        #     if not isinstance(request.data['x'], (int, long, float, complex)):
+        #         return Response(False)
+        # if 'y' not in request.data:
+        #     return Response(False)
+        ans = BL.add_find_the_differences(self.kwargs['id_attr'], request.data)
+        ans = FindTheDifferencesSerializer(ans, many=False)
+        ans = json.loads(json.dumps(ans.data))
+        return Response(ans)
+
+# def sign_in_page(request):
+#     return render(request, "signIn.html")
+
+# def manage_attractions_page(request):
+#     return render(request, "attractions.html")
+
+# def addFeedback(question, kind):
+#     feedback = Feedback(question=question, kind=kind)
+#     feedback.save()
+#     return feedback
+
+
+# def addHint(attraction, kind, data):
+#     hint = Hint(attraction=attraction, kind=kind, data=data)
+#     hint.save()
+#     return hint
+
+
+# def addAmericanQuestion(question, answers, indexOfCorrectAnswer, attraction):
+#     aq = AmericanQuestion(question=question, answers=answers, indexOfCorrectAnswer=indexOfCorrectAnswer, attraction=attraction)
+#     aq.save()
+#     return aq
+
+
+# def addTrack(subTrack, points, length):
+#     track = None
+#     if subTrack == null:
+#         track = Track(length=length)
+#     else:
+#         track = Track(subTrack=subTrack, length=length)
+#     track.save()
+#     for p in points:
+#         track.points.add(p)
+#     return track
+
+
+# def addAttraction(name, x, y, description, picturesURLS, videosURLS):
+#     attraction = Attraction(name=name, x=x, y=y, description=description, picturesURLS=picturesURLS, videosURLS=videosURLS)
+#     attraction.save()
+#     return attraction
 
 
 

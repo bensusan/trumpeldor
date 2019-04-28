@@ -2,29 +2,29 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Hints of attraction</title>
+    <title>עריכת רמזים</title>
     {% load static %}
 <link rel="stylesheet" href="{% static 'just_want_background.css' %}?version=1">
     {% load static %}
-<link rel="stylesheet" href="{% static 'SideMenu.css' %}?version=2">
+<link rel="stylesheet" href="{% static 'SideMenu.css' %}?version=4">
     {% load static %}
 <script src="{% static 'attractions.js' %}?version=1"></script>
     {% load static %}
 <script src="{% static 'pick_hint.js' %}?version=3"></script>
      {% load static %}
-<script src="{% static 'properties.js' %}?version=1"></script>
+<script src="{% static 'properties.js' %}?version=2"></script>
 </head>
 <body>
 
 <div>
 <nav id="sideMenu"></nav>
 {% load static %}
-<script src="{% static 'menu_of_pick_hint.js' %}?version=1"></script>
+<script src="{% static 'menu_of_pick_hint.js' %}?version=2"></script>
 
 </div>
 
 <div align="center">
-    <label for="hint" style="font-size: 36px;"><b>Existing Hints:</b></label>
+    <label for="hint" style="font-size: 36px;"><b>רמזים קיימים:</b></label>
 <p id="existing_hints"></p>
 <p></p>
 {#<button class="button" onclick="window.location.href='/add_hint'" type="button" style="width: 100px;">Add Hint</button>#}
@@ -33,14 +33,14 @@
 {#<p></p>#}
 <textarea id="write_hint_id_to_edit" placeholder="Write Hint ID..." style="height:100px;border-radius:5px;display: none"></textarea>
     <p></p>
-<button class="button" type="button" id="edit_chosen_hint" style="display: none">Edit</button>
+<button class="button" type="button" id="edit_chosen_hint" style="display: none">עריכה</button>
      <p></p>
 {#<p></p>#}
 {#<button class="button" type="button" id="want_to_delete_hint" style="width: 100px;">Delete Hint</button>#}
 {#<p></p>#}
 <textarea id="write_hint_id_to_delete" placeholder="Write Hint ID..." style="height:100px;border-radius:5px;display: none"></textarea>
      <p></p>
-<button class="button" type="button" id="delete_chosen_hint" style="display: none">Delete</button>
+<button class="button" type="button" id="delete_chosen_hint" style="display: none">מחיקה</button>
 <p></p>
 {#<button class="button" onclick="donePickingHints()" type="button" style="width: 100px;">Finish</button>#}
 
