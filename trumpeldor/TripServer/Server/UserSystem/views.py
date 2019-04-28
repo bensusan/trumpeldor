@@ -189,8 +189,8 @@ def addFeedback(question, kind):
     return feedback
 
 
-def addHint(attraction, kind, data):
-    hint = Hint(attraction=attraction, kind=kind, data=data)
+def addHint(attraction, kind, data, description):
+    hint = Hint(attraction=attraction, kind=kind, data=data, description=description)
     hint.save()
     return hint
 
@@ -256,15 +256,15 @@ def insertDebugData():
     aq1 = addAmericanQuestion("AQ1: Some question here ?", ["Correct answer",
                                                             "Incorrect answer",
                                                             "Incorrect answer",
-                                                            "Incorrect answer"], 0, a1)
+                                                            "Incorrect answer"], [0], a1)
     aq2 = addAmericanQuestion("AQ2: Some question here ?", ["Incorrect answer",
                                                             "Correct answer",
                                                             "Incorrect answer",
-                                                            "Incorrect answer"], 1, a2)
+                                                            "Incorrect answer"], [1], a2)
     aq3 = addAmericanQuestion("AQ3: Some question here ?", ["Incorrect answer",
                                                             "Incorrect answer",
                                                             "Correct answer",
-                                                            "Incorrect answer"], 2, a3)
+                                                            "Incorrect answer"], [2], a3)
 
     sp1 = addSlidingPuzzle(a1, 3, 3,addPrefixUrl(["example00.jpg",
                                                   "example01.jpg",
@@ -296,17 +296,17 @@ def insertDebugData():
                                                    "example21.jpg",
                                                    "example22.jpg"]))
 
-    h11 = addHint(a1, Hint.HINT_TEXT, "This is text hint for Attraction 1")
-    h12 = addHint(a1, Hint.HINT_PICTURE, addPrefixUrlToSpecificName("meonot_dalet_1.jpg"))
-    h13 = addHint(a1, Hint.HINT_VIDEO, addPrefixUrlToSpecificName("shnizale_video.mp4"))
+    h11 = addHint(a1, Hint.HINT_TEXT, "This is text hint for Attraction 1", "description")
+    h12 = addHint(a1, Hint.HINT_PICTURE, addPrefixUrlToSpecificName("meonot_dalet_1.jpg"), "description")
+    h13 = addHint(a1, Hint.HINT_VIDEO, addPrefixUrlToSpecificName("shnizale_video.mp4"), "description")
 
-    h21 = addHint(a2, Hint.HINT_TEXT, "This is text hint for Attraction 2")
-    h22 = addHint(a2, Hint.HINT_PICTURE, addPrefixUrlToSpecificName("96_1.jpg"))
-    h23 = addHint(a2, Hint.HINT_VIDEO, addPrefixUrlToSpecificName("shnizale_video.mp4"))
+    h21 = addHint(a2, Hint.HINT_TEXT, "This is text hint for Attraction 2", "description")
+    h22 = addHint(a2, Hint.HINT_PICTURE, addPrefixUrlToSpecificName("96_1.jpg"), "description")
+    h23 = addHint(a2, Hint.HINT_VIDEO, addPrefixUrlToSpecificName("shnizale_video.mp4"), "description")
 
-    h31 = addHint(a3, Hint.HINT_TEXT, "This is text hint for Attraction 3")
-    h32 = addHint(a3, Hint.HINT_PICTURE, addPrefixUrlToSpecificName("shnizale_1.jpg"))
-    h33 = addHint(a3, Hint.HINT_VIDEO, addPrefixUrlToSpecificName("shnizale_video.mp4"))
+    h31 = addHint(a3, Hint.HINT_TEXT, "This is text hint for Attraction 3", "description")
+    h32 = addHint(a3, Hint.HINT_PICTURE, addPrefixUrlToSpecificName("shnizale_1.jpg"), "description")
+    h33 = addHint(a3, Hint.HINT_VIDEO, addPrefixUrlToSpecificName("shnizale_video.mp4"), "description")
 
     track1 = addTrack(null, [a1], 1)
     track2 = addTrack(null, [a2], 1)

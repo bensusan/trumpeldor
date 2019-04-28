@@ -10,6 +10,7 @@ namespace trumpeldor.SheredClasses
         public int id { get; set; }
         public string kind { get; set; }
         public string data { get; set; }
+        public string description { get; set; }
 
         //not for use
         public enum Kinds { HintPicture, HintText, HintVideo };

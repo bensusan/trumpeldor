@@ -15,10 +15,10 @@ class BL_Abstract(object):
     def getUser(self, user):
         raise NotImplementedError("Should have implemented this")
 
-    def getPreviousUserTrip(self, user):
+    def getPreviousUserTrip(self, dataUser):
         raise NotImplementedError("Should have implemented this")
 
-    def getRelevantPreviousTripInformation(self, user):
+    def getRelevantPreviousTripInformation(self, dataUser):
         raise NotImplementedError("Should have implemented this")
 
     def getAllAttractionsFromTrack(self, track):
@@ -42,7 +42,7 @@ class BL_Abstract(object):
     def getFeedbackInstances(self, trip):
         raise NotImplementedError("Should have implemented this")
 
-    def getAmericanQuestion(self, attraction):
+    def getAmericanQuestion(self, id_attraction):
         raise NotImplementedError("Should have implemented this")
 
     def getAttraction(self, attraction):
@@ -194,15 +194,15 @@ class BLProxy(BL_Abstract):
             raise NotImplementedError("Should have implemented this")
         return self.Implementation.getUser(user)
 
-    def getPreviousUserTrip(self, user):
+    def getPreviousUserTrip(self, dataUser):
         if self.Implementation is None:
             raise NotImplementedError("Should have implemented this")
-        return self.Implementation.getPreviousUserTrip(user)
+        return self.Implementation.getPreviousUserTrip(dataUser)
 
-    def getRelevantPreviousTripInformation(self, user):
+    def getRelevantPreviousTripInformation(self, dataUser):
         if self.Implementation is None:
             raise NotImplementedError("Should have implemented this")
-        return self.Implementation.getRelevantPreviousTripInformation(user)
+        return self.Implementation.getRelevantPreviousTripInformation(dataUser)
 
     def getAllAttractionsFromTrack(self, track):
         if self.Implementation is None:
@@ -239,10 +239,10 @@ class BLProxy(BL_Abstract):
             raise NotImplementedError("Should have implemented this")
         return self.Implementation.getFeedbackInstances(trip)
 
-    def getAmericanQuestion(self, attraction):
+    def getAmericanQuestion(self, id_attraction):
         if self.Implementation is None:
             raise NotImplementedError("Should have implemented this")
-        return self.Implementation.getAmericanQuestion(attraction)
+        return self.Implementation.getAmericanQuestion(id_attraction)
 
     def getAttraction(self, attraction):
         if self.Implementation is None:

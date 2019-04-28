@@ -64,7 +64,7 @@ namespace trumpeldor.Views
         private void answersInitialize()
         {
             List<string> answers = new List<string>(aq.answers);
-            int correctAnswerIndex = Shuffle(answers, aq.indexOfCorrectAnswer);
+            int correctAnswerIndex = Shuffle(answers, aq.indexOfCorrectAnswer[0]); //TODO change to all correct indexes
             for (int i = 0; i < answers.Count; i++)
             {
                 Button answerButton = new Button();
