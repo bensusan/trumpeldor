@@ -41,7 +41,8 @@ window.onload = function () {
 var textHintBTN = document.getElementById('add_text_hint');
 var textLine = document.getElementById("text_hint_id");
 var sendButtonTxt = document.getElementById("send_text_hint");
-var clickHere = document.getElementById("click_here_label");
+var upload_pic_title = document.getElementById("upload_title");
+var clickHere = document.getElementById("file");
 var picDesc = document.getElementById("pic_hint_description");
 var outpic = document.getElementById("output");
 var sendButtonPic = document.getElementById("send_pic_hint");
@@ -64,6 +65,8 @@ var sendVidHintBTN = document.getElementById('send_vid_hint');
             vidDesc.style.display = "none";
             thevidbrowse.style.display = "none";
             sendButtonVid.style.display = "none";
+            upload_pic_title.style.display = "none";
+
         });
 
 var picHintBTN = document.getElementById('add_pic_hint');
@@ -71,6 +74,7 @@ var picHintBTN = document.getElementById('add_pic_hint');
             clickHere.style.display = "inline";
             picDesc.style.display = "inline";
             outpic.style.display = "inline";
+            upload_pic_title.style.display = "inline";
             sendButtonPic.style.display = "inline";
              textLine.style.display = "none";
             sendButtonTxt.style.display = "none";
@@ -92,6 +96,8 @@ var vidHintBTN = document.getElementById('add_vid_hint');
             picDesc.style.display = "none";
             outpic.style.display = "none";
             sendButtonPic.style.display = "none";
+            upload_pic_title.style.display = "none";
+
         });
 
     sendTextHintBTN.addEventListener('click', function() {
@@ -122,7 +128,8 @@ function hint_funcToGetAttraction(attractionsJSON) {
             var textHintToSend = {
             attraction:attr,
             kind:'HT',
-            data:document.getElementById("text_hint_id").value
+            data:document.getElementById("text_hint_id").value,
+                description:""
             };
             postRequestHint(textHintToSend,attr['id']);
             window.location.href='/add_hint';
@@ -180,4 +187,101 @@ function postRequestHint(the_hint,attr_id){
     serverRequest("POST", function noop(dummy){}, 'http://'+ip+':12344/managementsystem/attraction/'+
         attr_id+'/hint/',
         JSON.stringify(the_hint));
+}
+
+
+var suki;
+var sukiVid;
+
+
+function shit(suk) {
+    suki=suk;
+    document.getElementById("suka").innerHTML=suki;
+    localStorage.setItem("url_of_img",suki);
+    // var tmuna = document.getElementById("sukablat");
+    // tmuna.src = suki;
+}
+
+function shitVid(suk) {
+    sukiVid=suk;
+    // var tmuna = document.getElementById("sukablat");
+    // tmuna.src = suki;
+}
+
+
+function encodeImageFileAsURL(element) {
+    var image = document.getElementById('output');
+	image.src = URL.createObjectURL(element.files[0]);
+
+    suki="";
+
+  var file = element.files[0];
+  var reader = new FileReader();
+  reader.onloadend = function() {
+   //alert(reader.result)
+   shit(reader.result)
+  }
+
+  reader.readAsDataURL(file);
+}
+
+function encodeVideoFileAsURL(element) {
+
+    sukiVid="";
+
+  var file = element.files[0];
+  var reader = new FileReader();
+  reader.onloadend = function() {
+   //alert(reader.result)
+   shitVid(reader.result)
+  };
+
+  reader.readAsDataURL(file);
+}
+
+function sendImageHint() {
+    getRequestAttractions(funcToSendImage);
+}
+
+function funcToSendImage(attractionsJSON) {
+     let name = localStorage.getItem("name_for_add_aq");
+        let desc = localStorage.getItem("desc_for_add_aq");
+      // alert("in get name! "+"of the origin : " + lat + " , " + lng);
+        attractionsJSON.forEach(function (attr) {
+        let p = {name: attr['name'], description:attr['description']};
+       // alert("in get name! "+"of the origin : " + name + " , " + desc + "\n of the other: "+p.name +" , "+ p.description);
+        if(p.name===name && p.description===desc)
+        {
+
+            let the_hint = {attraction: attr, kind: "HP", data:suki, description:document.getElementById("pic_hint_description").value};
+            let attr_id = attr['id'];
+            postRequestHint(the_hint,attr_id);
+            window.location.href='/add_hint';
+        }
+
+    });
+}
+
+
+function sendVideoHint() {
+    getRequestAttractions(funcToSendVideo);
+}
+
+function funcToSendVideo(attractionsJSON) {
+     let name = localStorage.getItem("name_for_add_aq");
+        let desc = localStorage.getItem("desc_for_add_aq");
+      // alert("in get name! "+"of the origin : " + lat + " , " + lng);
+        attractionsJSON.forEach(function (attr) {
+        let p = {name: attr['name'], description:attr['description']};
+       // alert("in get name! "+"of the origin : " + name + " , " + desc + "\n of the other: "+p.name +" , "+ p.description);
+        if(p.name===name && p.description===desc)
+        {
+
+            let the_hint = {attraction: attr, kind: "HV", data:sukiVid,description:document.getElementById("vid_hint_description").value};
+            let attr_id = attr['id'];
+            postRequestHint(the_hint,attr_id);
+            window.location.href='/add_hint';
+        }
+
+    });
 }

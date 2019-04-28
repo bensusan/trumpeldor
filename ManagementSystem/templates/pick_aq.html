@@ -2,11 +2,11 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Edit American Question</title>
+    <title>עריכת שאלה אמריקאית</title>
      {% load static %}
 <link rel="stylesheet" href="{% static 'just_want_background.css' %}?version=1">
     {% load static %}
-<link rel="stylesheet" href="{% static 'SideMenu.css' %}?version=3">
+<link rel="stylesheet" href="{% static 'SideMenu.css' %}?version=4">
     {% load static %}
 <script src="{% static 'pick_aq.js' %}?version=3"></script>
     {% load static %}
@@ -18,7 +18,7 @@
 
 
 <div align="center">
-    <label for="hint"><b>Existing American Questions:</b></label>
+    <label for="hint"><b>שאלות אמריקאיות קיימות:</b></label>
 <p id="existing_aqs"></p>
 <p></p>
 {#<button onclick="window.location.href='/add_aq'" type="button">Add American Question</button>#}
@@ -26,22 +26,22 @@
 {#<button type="button" id="want_to_edit_aq">Edit American Question</button>#}
 <p></p>
 <textarea id="write_aq_id_to_edit" placeholder="Write American Question ID..." style="display: none"></textarea>
-<button type="button" id="edit_chosen_aq" style="display: none">Edit</button>
+<button type="button" id="edit_chosen_aq" style="display: none">עריכה</button>
 <p></p>
 <p></p>
 {#<button type="button" id="want_to_delete_aq">Delete American Question</button>#}
 <p></p>
 <textarea id="write_aq_id_to_delete" placeholder="Write American Question ID..." style="display: none"></textarea>
-<button type="button" id="delete_chosen_aq" style="display: none">Delete</button>
+<button type="button" id="delete_chosen_aq" style="display: none">מחיקה</button>
 <p></p>
-<button class="button" onclick="donePickingAqs()" type="button" id="finish_pick_aq">Finish</button>
+<button class="button" onclick="donePickingAqs()" type="button" id="finish_pick_aq">סיימתי!</button>
 
 
 </div>
 <div>
 <nav id="sideMenu"></nav>
 {% load static %}
-<script src="{% static 'menu_for_edit_aq.js' %}?version=2"></script>
+<script src="{% static 'menu_for_edit_aq.js' %}?version=3"></script>
 
 </div>
 

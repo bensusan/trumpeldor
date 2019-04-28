@@ -5,7 +5,7 @@
     {% load static %}
 <link rel="stylesheet" href="{% static 'edit_attr_style.css' %}?version=3">
     {% load static %}
-<link rel="stylesheet" href="{% static 'SideMenu.css' %}?version=3">
+<link rel="stylesheet" href="{% static 'SideMenu.css' %}?version=4">
 {% load static %}
 <link rel="stylesheet" href="{% static 'signInForm.css' %}?version=2">
 
@@ -26,16 +26,21 @@
 
 <div class="paging">
 <div align="center">
-<h2>Edit Attraction</h2>
+<h2>עריכת אטרקציה</h2>
 <form>
 
-    <label for="name"><b>Upload Video: </b></label>
+    <label for="name"><b>העלאת סרטון:</b></label>
 
     <div id="message"></div>
-<video height="200px" width="350px" controls="" autoplay=""></video>
-    <input id="video_input" type="file" accept="video/*" style="display: none">
+<video id="vid_itself" height="200px" width="350px" controls="" autoplay=""></video>
+    <input id="video_input" type="file" accept="video/*" onchange="encodeVideoFileAsURL(this)" style="display: none">
 <button class="button" onclick="doVideo()" type="button">Upload Video</button>
 
+    <p></p>
+    <label for="hint"><b>העלאת תמונה למידע על אטרקציה:</b></label>
+<p></p>
+<input type="file" onchange="encodeImageFileAsURL(this)"/>
+<p><img id="output" width="200"/></p>
 {#    <p></p>#}
 {#    <label for="hint"><b>Upload Image:</b></label>#}
 {#    <p><input type="file"  accept="image/*" name="image" id="file"  onchange="loadFile(event)" style="display: none;"></p>#}
@@ -44,22 +49,24 @@
 
 
   <div class="container">
-    <label for="name"><b>Name of attraction: </b></label>
-    <input  type="text" id="attr_name" placeholder="Enter name" name="attr_name" required>
+    <label for="name"><b>שם האטרקציה</b></label>
+    <input  type="text" id="attr_name" placeholder="שם האטרקציה" name="attr_name" style="text-align:right;" required>
 
-    <label for="desc"><b>Description</b></label>
-    <input  type="text" id="desc" placeholder="Enter description" name="attr_desc" required>
+    <label for="desc"><b>תיאור</b></label>
+      <p></p>
+{#    <input type="text" id="desc" placeholder="Enter description" name="attr_desc" required>#}
+      <textarea id="desc" name="attr_desc" placeholder="הכניסי תיאור אטרקציה" style="direction:rtl;text-align:right;width:310px;height:200px"></textarea>
+<p></p>
+      <label for="pop"><b>הודעת פופ-אפ בהגעה לנקודה</b></label>
+    <input  type="text" id="pop" placeholder="הקלידי הודעה..." name="attr_pop" style="direction:rtl;text-align:right;" required>
 
-      <label for="pop"><b>Pop-Up Message at arrival</b></label>
-    <input  type="text" id="pop" placeholder="Enter Message" name="attr_pop" required>
-
-      <label for="subt"><b>Subtitles</b></label>
+      <label for="subt" style="text-align: right"><b>כתוביות</b></label>
 {#    <input  type="text" id="subt" placeholder="Enter Subtitles" name="attr_subt" style="height: 200px; overflow: scroll" required>#}
-      <textarea type="text" id="subt" placeholder="Enter Subtitles..." name="attr_subt" style="width: 310px;height: 200px; overflow: scroll"> </textarea>
+      <textarea type="text" id="subt" placeholder="הכנסי כתוביות..." name="attr_subt" style="direction:rtl;text-align:right;width: 310px;height: 200px; overflow: scroll"> </textarea>
 
 
-    <button onclick="finishEditingAttraction()" type="button">Submit</button>
-    <button onclick="deletePoint()" id='delete_point' type="button">Delete Point</button>
+    <button onclick="finishEditingAttraction()" type="button">שליחה</button>
+    <button onclick="deletePoint()" id='delete_point' type="button">מחיקת נקודה</button>
 {#    <button id="delete_point" type="button">Delete Point</button>#}
 
   </div>

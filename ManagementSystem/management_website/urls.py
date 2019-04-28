@@ -31,6 +31,8 @@ urlpatterns = [
     path('pick_aq_edit/', views.pick_aq_edit_page),
     path('pick_hint_edit/', views.pick_hint_edit_page),
     path('pick_path_edit/', views.pick_path_edit_page),
+    path('pick_delete_game/', views.pick_delete_game_page),
+    path('delete_game/', views.delete_game_page),
     path('pick_path_delete/', views.pick_path_delete_page),
     path('edit_short_path/', views.edit_short_path_page),
     path('edit_medium_path/', views.edit_medium_path_page),

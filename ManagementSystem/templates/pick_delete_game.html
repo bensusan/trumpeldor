@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>עריכת רמזים</title>
+    <title>בחירת משחק למחיקה</title>
     {% load static %}
 <link rel="stylesheet" href="{% static 'just_want_background.css' %}?version=1">
     {% load static %}
@@ -10,7 +10,7 @@
     {% load static %}
 <script src="{% static 'attractions.js' %}?version=1"></script>
     {% load static %}
-<script src="{% static 'pick_hint_edit.js' %}?version=3"></script>
+<script src="{% static 'pick_delete_game.js' %}?version=3"></script>
      {% load static %}
 <script src="{% static 'properties.js' %}?version=2"></script>
 </head>
@@ -19,27 +19,34 @@
 <div>
 <nav id="sideMenu"></nav>
 {% load static %}
-<script src="{% static 'menu_of_pick_hint_edit.js' %}?version=2"></script>
+<script src="{% static 'menu_for_pick_delete_game.js' %}?version=2"></script>
 
 </div>
 
 <div align="center">
-    <label for="hint" style="font-size: 36px;"><b>:רמזים קיימים</b></label>
+    <label for="hint" style="font-size: 36px;"><b>:משחקים קיימים</b></label>
 <p id="existing_hints"></p>
 <p></p>
 {#<button class="button" onclick="window.location.href='/add_hint'" type="button" style="width: 100px;">Add Hint</button>#}
 {#<p></p>#}
 {#<button class="button" type="button" id="want_to_edit_hint" style="width: 100px;">Edit Hint</button>#}
 {#<p></p>#}
-<textarea id="write_hint_id_to_edit" placeholder="...כתבי את מזהה הרמז" style="text-align:right;direction:ltr;height:100px;border-radius:5px;display: none"></textarea>
-    <p></p>
-<button class="button" type="button" id="edit_chosen_hint" style="display: none">עריכה</button>
-     <p></p>
 {#<p></p>#}
 {#<button class="button" type="button" id="want_to_delete_hint" style="width: 100px;">Delete Hint</button>#}
 {#<p></p>#}
-<textarea id="write_hint_id_to_delete" placeholder="...כתבי את מזהה הרמז" style="text-align:right;direction:ltr;height:100px;border-radius:5px;display: none"></textarea>
+    <p><img id="output" width="200"/></p>
+    <p></p>
+
+    <select id="game_type" style="display: none;">
+      <option value="opt1">פאזל גרירה</option>
+      <option value="opt2">פאזל הזזה</option>
+        <option value="opt3">מצא את ההבדלים</option>
+    </select>
+    <p id="title_type" style="display: none;">:סוג משחק</p>
+    <p></p>
+<textarea id="write_hint_id_to_delete" placeholder="Write Game ID..." style="height:100px;border-radius:5px;display: none"></textarea>
      <p></p>
+    <button class="button" type="button" id="show_chosen_game" style="display: none">הצג</button>
 <button class="button" type="button" id="delete_chosen_hint" style="display: none">מחיקה</button>
 <p></p>
 {#<button class="button" onclick="donePickingHints()" type="button" style="width: 100px;">Finish</button>#}

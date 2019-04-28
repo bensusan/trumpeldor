@@ -2,21 +2,21 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Add Hint</title>
+    <title>הוספת רמז</title>
       {% load static %}
 <link rel="stylesheet" href="{% static 'just_want_background.css' %}?version=1">
     {% load static %}
-<link rel="stylesheet" href="{% static 'SideMenu.css' %}?version=2">
+<link rel="stylesheet" href="{% static 'SideMenu.css' %}?version=4">
     {% load static %}
 <script src="{% static 'attractions.js' %}?version=2"></script>
     {% load static %}
-<script src="{% static 'add_hint.js' %}?version=1"></script>
+<script src="{% static 'add_hint.js' %}?version=5"></script>
      {% load static %}
 <script src="{% static 'properties.js' %}?version=2"></script>
 </head>
 <body>
 <div align="center">
-<label for="hint"><b>Existing Hints:</b></label>
+<label for="hint"><b>:רמזים קיימים</b></label>
 <p id="existing_hints"></p>
 
 {#<label for="hint"><b>Add Hint:</b></label>#}
@@ -26,36 +26,41 @@
 <p></p>
 {#<button type="button" id="add_text_hint">add text</button>#}
 <p></p>
-<textarea id="text_hint_id" name="subject" placeholder="Write something..." style="display: none"></textarea>
-<button type="button" id="send_text_hint" style="display: none">Send</button>
+<textarea id="text_hint_id" name="subject" placeholder="...כתבי את הרמז" style="direction:ltr;text-align:right;display: none;width:300px;height:200px;border-radius: 10px;"></textarea>
+<p></p>
+<button type="button" id="send_text_hint" style="display: none">שליחה</button>
 <p></p>
 
 {#<button type="button" id="add_vid_hint">add video</button>#}
 <p></p>
-<textarea id="vid_hint_description" placeholder="Write description..." style="display: none"></textarea>
+<textarea id="vid_hint_description" placeholder="...כתבי תיאור" style="direction:ltr;text-align:right;display: none"></textarea>
 <p></p>
     <div id="message"></div>
 <video id="vid_hint_id" height="200px" width="350px" controls="" autoplay="" style="display: none"></video>
 <p></p>
-    <input type="file" id="vid_hint_browse_id" accept="video/*" style="display: none">
-<button type="button" id="send_vid_hint" style="display: none">Send</button>
+    <input type="file" id="vid_hint_browse_id" accept="video/*" onchange="encodeVideoFileAsURL(this)" style="display: none">
+    <p></p>
+<button onclick="sendVideoHint()" type="button" id="send_vid_hint" style="display: none">שליחה</button>
 <p></p>
 
 {#<button type="button" id="add_pic_hint">add picture</button>#}
 <p></p>
-<textarea id="pic_hint_description" placeholder="Write description..." style="display: none"></textarea>
+<textarea id="pic_hint_description" placeholder="...כתבי תיאור" style="direction:ltr;text-align:right;display: none"></textarea>
     <p></p>
-    <p><input type="file"  accept="image/*" name="image" id="file"  onchange="loadFile(event)" style="display: none;"></p>
-    <p><label id="click_here_label" for="file" style="display: none">Click Here!</label></p>
-    <p><img id="output" width="200"  style="display: none"/></p>
-<button type="button" id="send_pic_hint" style="display: none">Send</button>
+<p></p>
+<label for="hint" id="upload_title" style="display: none"><b>:העלאת התמונה</b></label>
+<p></p>
+<input type="file" id="file" onchange="encodeImageFileAsURL(this)" style="display: none"/>
+<p><img id="output" width="200" style="display: none"/></p>
+    <p></p>
+<button type="button" onclick="sendImageHint()" id="send_pic_hint" style="display: none">שליחה</button>
 
 <p></p>
-<button class="button" id="finish_add_hint" onclick="finishHint()" type="button">Finish</button>
+<button class="button" id="finish_add_hint" onclick="finishHint()" type="button" style="direction:rtl;text-align:right;">סיימתי!</button>
 </div>
 <nav id="sideMenu"></nav>
 {% load static %}
-<script src="{% static 'menu_of_add_hint.js' %}?version=1"></script>
+<script src="{% static 'menu_of_add_hint.js' %}?version=2"></script>
 {#style="display:none"#}
 </body>
 </html>

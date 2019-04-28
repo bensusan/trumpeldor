@@ -2,9 +2,9 @@
 <html lang="en">
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Add Medium Path</title>
+    <title>עריכת מסלול קצר</title>
     {% load static %}
-<link rel="stylesheet" href="{% static 'SideMenu.css' %}?version=3">
+<link rel="stylesheet" href="{% static 'SideMenu.css' %}?version=4">
     {% load static %}
 <link rel="stylesheet" href="{% static 'paths_style.css' %}?version=4">
 {% load static %}
@@ -12,12 +12,11 @@
 {% load static %}
 <script src="{% static 'attractions.js' %}?version=5"></script>
     {% load static %}
-<script src="{% static 'edit_short_path.js' %}?version=3"></script>
+<script src="{% static 'edit_short_path.js' %}?version=2"></script>
      {% load static %}
 <script src="{% static 'properties.js' %}?version=2"></script>
 </head>
 <body>
-<button onclick="window.location.href='/main'" type="button">Back to menu</button>
 {#<meta name="viewport" content="width=device-width, initial-scale=1">#}
 {#{% load static %}#}
 {#<link rel="stylesheet" href="{% static 'Map.css' %}?version=1">#}
@@ -34,23 +33,23 @@
 </div>
 
    <div align="center">
-<button class="button" id="add_reg_to_path_med" type="button">Add To Path</button>
-<button class="button" id="delete_from_path_med" type="button">Delete Point</button>
-<button class="button" id="finish_reg_med" type="button">Finish!</button>
+<button class="button" id="add_reg_to_path_med" type="button">הוספה למסלול</button>
+<button class="button" id="delete_from_path_med" type="button">מחיקת נקודה</button>
+<button class="button" id="finish_reg_med" type="button">!סיימתי</button>
 
 <p></p>
 <p></p>
-<div id="border_of_points" class="pointsBorder"  style="display: none" align="center">
-    <div align="center">
-        <p><b>Added Points:</b></p>
-    </div>
-<p id="showing_added_points"></p>
-    </div>
+{#<div id="border_of_points" class="pointsBorder"  style="display: none" align="center">#}
+{#    <div align="center">#}
+{#        <p><b>Added Points:</b></p>#}
+{#    </div>#}
+{#<p id="showing_added_points"></p>#}
+{#    </div>#}
     </div>
 </div>
 
 <nav id="sideMenu"></nav>
 {% load static %}
-<script src="{% static 'menu_for_paths.js' %}?version=1"></script>
+<script src="{% static 'menu_for_paths.js' %}?version=2"></script>
 </body>
 </html>

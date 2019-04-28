@@ -1,11 +1,11 @@
 //menu_of_edit_attractions
 
 document.getElementById("sideMenu").innerHTML = '<div class="sidenav">\n' +
-    '  <h2 style="color:#818181;">Add Hints</h2>' +
-    '  <a id="add_text_hint">Add Text Hint</a>\n' +
-    '  <a id="add_vid_hint">Add Video Hint</a>\n' +
-    '  <a id="add_pic_hint">Add Image Hint</a>\n' +
-    '  <a href="/main">Back to Main Page</a>\n' +
+    '  <h2 style="color:#818181;">הוספת רמז</h2>' +
+    '  <a id="add_text_hint">רמז מסוג טקסט</a>\n' +
+    '  <a id="add_vid_hint">רמז מסוג סרטון</a>\n' +
+    '  <a id="add_pic_hint">רמז מסוג תמונה</a>\n' +
+    '  <a href="/main">לתפריט הראשי</a>\n' +
     '</div>\n' +
     '\n' +
     '<div class="main">\n' +

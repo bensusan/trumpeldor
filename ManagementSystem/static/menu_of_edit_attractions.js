@@ -1,12 +1,18 @@
 //menu_of_edit_attractions
 
 document.getElementById("sideMenu").innerHTML = '<div class="sidenav">\n' +
-    '  <h2 style="color:#818181;">Edit Attraction</h2>' +
-    '  <a href="/attractions">Back</a>\n' +
-    '  <a href="/add_game_edit">Add Game</a>\n' +
-    '  <a href="/pick_aq_edit">Edit American Questions</a>\n' +
-    '  <a href="/pick_hint_edit">Edit Hints</a>\n' +
-     '  <a href="/main">Back to Main Page</a>\n' +
+    '  <h2 style="color:#818181;">עריכת אטרקציה</h2>' +
+    '  <a href="/attractions">חזור</a>\n' +
+    '  <button class="dropdown-btn">משחקים\n' +
+    '    <i class="fa fa-caret-down"></i>\n' +
+    '  </button>\n' +
+    '  <div class="dropdown-container">\n' +
+    '    <a href="/add_game_edit">הוספת משחק</a>\n' +
+    '    <a href="/pick_delete_game">מחיקת משחק</a>\n' +
+    '  </div>\n' +
+    '  <a href="/pick_aq_edit">עריכת שאלות אמריקאיות</a>\n' +
+    '  <a href="/pick_hint_edit">עריכת רמזים</a>\n' +
+     '  <a href="/main">לתפריט הראשי</a>\n' +
     '</div>\n' +
     '\n' +
     '<div class="main">\n' +

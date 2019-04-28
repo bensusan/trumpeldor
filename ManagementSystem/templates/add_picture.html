@@ -2,9 +2,9 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Add Picture:</title>
+    <title>הוספת תמונה למשחק</title>
      {% load static %}
-<link rel="stylesheet" href="{% static 'SideMenu.css' %}?version=3">
+<link rel="stylesheet" href="{% static 'SideMenu.css' %}?version=4">
 {% load static %}
 <link rel="stylesheet" href="{% static 'just_want_background.css' %}?version=2">
      {% load static %}
@@ -16,25 +16,25 @@
 </head>
 <body>
 <div align="center">
-    <label for="hint"><b>Write Game Instructions:</b></label>
+    <label for="hint"><b>:הדרכה למשחק</b></label>
 <p></p>
-<textarea id="game_instructions_text" placeholder="Game Instructions..." style="height:100px;width:250px"></textarea>
+<textarea id="game_instructions_text" placeholder="הוראות המשחק..." style="direction:rtl;text-align:right;height:100px;width:250px"></textarea>
     <p></p>
-    <label for="hint"><b>Upload Image:</b></label>
+    <label for="hint"><b>:העלאת תמונה</b></label>
 <p></p>
 <input type="file" onchange="encodeImageFileAsURL(this)"/>
 <p><img id="output" width="200" /></p>
 {#<p>This Is The URL:</p>#}
 {#<p id="suka"></p>#}
 
-    <label for="hint"><b>Width and height of image (n x n) :</b></label>
+    <label for="hint"><b>:אורך ורוחב התמונה (n x n)</b></label>
 <p></p>
-    <textarea id="n_size" placeholder="Enter the n size..."></textarea>
+    <textarea id="n_size" placeholder="הכניסי את הגודל n..." style="direction:rtl;text-align:right;"></textarea>
 <p></p>
-<button class="button" onclick="sendTheGameData()">Finished</button>
+<button class="button" onclick="sendTheGameData()" style="direction:rtl;text-align:right;">סיימתי!</button>
     </div>
 <nav id="sideMenu"></nav>
 {% load static %}
-<script src="{% static 'menu_add_pic.js' %}?version=1"></script>
+<script src="{% static 'menu_add_pic.js' %}?version=3"></script>
 </body>
 </html>

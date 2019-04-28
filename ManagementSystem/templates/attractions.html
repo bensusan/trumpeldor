@@ -5,7 +5,7 @@
     {% load static %}
 <link rel="stylesheet" href="{% static 'attractions_style.css' %}?version=1">
       {% load static %}
-<link rel="stylesheet" href="{% static 'SideMenu.css' %}?version=3">
+<link rel="stylesheet" href="{% static 'SideMenu.css' %}?version=4">
 
 {% load static %}
 <link rel="stylesheet" href="{% static 'Map.css' %}?version=1">
@@ -29,14 +29,20 @@
 <div align="center">
 <div class="buttonStyle">
 
-<button class="button" id="add_attraction" type="button">Add Attraction</button>
-<button class="button" id="edit_attraction" type="button">Edit Attraction</button>
+<button class="button" id="edit_attraction" type="button">עריכת הנקודה</button>
+    <button class="button" id="add_attraction" type="button">הוספת הנקודה</button>
+<p></p>
+
 </div>
     </div>
 <p></p>
-<input type="text" id="manual_lat" placeholder="Enter latitude" style="display: none" required>
+    <div align="center">
 <input type="text" id="manual_lng" placeholder="Enter longitude" style="display: none" required>
-<button id="add_manually" type="button" style="display: none">Add Manually</button>
+<input type="text" id="manual_lat" placeholder="Enter latitude" style="display: none" required>
+    </div>
+    <p></p>
+<div align="center">    <button id="add_manually" type="button" style="display: none">הוסיפי</button>
+</div>
     <textarea id="points_arr_for_test" style="display: none"></textarea>
 
 </div>
@@ -45,7 +51,7 @@
 
 <nav id="sideMenu"></nav>
 {% load static %}
-<script src="{% static 'menu_of_attractions.js' %}?version=2"></script>
+<script src="{% static 'menu_of_attractions.js' %}?version=3"></script>
 
 </div>
 </body>

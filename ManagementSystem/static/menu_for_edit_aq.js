@@ -1,12 +1,11 @@
 //menu_of_edit_attractions
 
 document.getElementById("sideMenu").innerHTML = '<div class="sidenav">\n' +
-    '  <h2 style="color:#818181;">Edit American Questions</h2>' +
-    '  <a href="/main">Back</a>\n' +
-    '  <a href="/add_aq">Add American Question</a>\n' +
-    '  <a id="want_to_edit_aq">Edit American Question</a>\n' +
-    '  <a id="want_to_delete_aq">Delete American Question</a>\n' +
-    '  <a href="/pick_hint">Edit Hints</a>\n' +
+    '  <h2 style="color:#818181;">עריכת שאלה אמריקאית</h2>' +
+    '  <a href="/main">לתפריט הראשי</a>\n' +
+    '  <a href="/add_aq">הוספת שאלה אמריקאית</a>\n' +
+    '  <a id="want_to_edit_aq">עריכת שאלה אמריקאית</a>\n' +
+    '  <a id="want_to_delete_aq">מחיקת שאלה אמריקאית</a>\n' +
     '</div>\n' +
     '\n' +
     '<div class="main">\n' +

@@ -5,7 +5,7 @@
 {% load static %}
 <link rel="stylesheet" href="{% static 'signInForm.css' %}?version=1">
       {% load static %}
-<link rel="stylesheet" href="{% static 'SideMenu.css' %}?version=3">
+<link rel="stylesheet" href="{% static 'SideMenu.css' %}?version=4">
 
     {% load static %}
 <link rel="stylesheet" href="{% static 'add_game.css' %}?version=1">
@@ -17,16 +17,16 @@
 <body>
 {#<button onclick="window.location.href='/main'" type="button">Back to menu</button>#}
 <div align="center">
-<h2>Add Game</h2>
+<h2>הוספת משחק</h2>
 <form>
   <div class="container">
 
 
 {#      <p><a href="JavaScript:newPopup('/add_picture');">Open a popup window</a></p>#}
-      <button type="button" id="sliding_puzzle_button">Sliding Puzzle</button>
-      <button type="button" id="drag_puzzle_button">Drag Puzzle</button>
+      <button type="button" id="sliding_puzzle_button">פאזל הזזה</button>
+      <button type="button" id="drag_puzzle_button">פאזל גרירה</button>
 {#      <button type="button">Take A Picture</button>#}
-      <button type="button" id="find_the_diff">Find The Differences</button>
+      <button type="button" id="find_the_diff">מצא את ההבדלים</button>
 
   </div>
 
@@ -35,7 +35,7 @@
 </div>
 <nav id="sideMenu"></nav>
 {% load static %}
-<script src="{% static 'games_menu_edit.js' %}?version=2"></script>
+<script src="{% static 'games_menu_edit.js' %}?version=3"></script>
 
 {#<button onclick="window.location.href='/add_aq'" type="button">Skip</button>#}
 {#<button onclick="addGames()" type="button">Finish</button>#}
