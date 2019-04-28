@@ -20,18 +20,19 @@ namespace trumpeldor.Views
         public static bool isFirst = true;
         //        gc.currentTrip.GetCurrentAttraction();//-for the hint
         public Attraction nextAttraction;
-        public static int hintsIndex = 0;
+        public /*static*/ int hintsIndex = 0;
         //trumpeldor.SheredClasses.Point p;
         public GameController gc = ((App)Application.Current).getGameController();
         public LocationController lc;
         trumpeldor.SheredClasses.Point p;
         public double currLat = 0, currLong = 0;
+        MapPage myMap = null;
         public NavigationPage ()
 		{
 			InitializeComponent ();
             nextAttraction = gc.currentTrip.GetCurrentAttraction();
             mapImage.Text = AppResources.map;
-
+            myMap = new MapPage();
             lc = LocationController.GetInstance();
             p = new trumpeldor.SheredClasses.Point(nextAttraction.x, nextAttraction.y);
             if (isFirst)
@@ -52,6 +53,14 @@ namespace trumpeldor.Views
 
         private async void Get_Hint_Button_Clicked(object sender, EventArgs e)
         {
+            //disable all other dynamic buttons
+            try {
+                Button clicked = (Button)sender;
+                clicked.IsEnabled = false;
+                DynamicButtonsEnable(false);
+            }
+            catch { }
+
             ContentPage temp = this;
             if (nextAttraction.IsThisLastHint(hintsIndex))
             {
@@ -62,7 +71,9 @@ namespace trumpeldor.Views
                     AppResources.No);
                 if (!dialogAnswer)
                     return;
-                temp = new MapPage(new SheredClasses.Point(nextAttraction.x, nextAttraction.y));
+                //temp = new MapPage(new SheredClasses.Point(nextAttraction.x, nextAttraction.y));
+                myMap.AddPointToMap(myMap.map, new SheredClasses.Point(nextAttraction.x, nextAttraction.y));
+                temp = myMap;
                 Button hintBtn = (Button)FindByName("hintBtn");
                 if (hintBtn != null)
                     hintBtn.IsEnabled = false;
@@ -71,12 +82,21 @@ namespace trumpeldor.Views
             {
                 temp = new HintPage(nextAttraction.hints[hintsIndex]);
             }
-            addToLayout(hintsLayout);
+            
             hintsIndex++;
             if (hintsIndex >= 3)
                 scoreLabel.Text = AppResources.score + ": " + gc.EditScore(GameController.SCORE_VALUE.Hints_More_Than_Three);
             if(temp != this)
                 await Navigation.PushModalAsync(temp);
+            addToLayout(hintsLayout);
+
+            //enable all other dynamic buttons
+            try {
+                Button clicked = (Button)sender;
+                clicked.IsEnabled = true;
+                DynamicButtonsEnable(true);
+            }
+            catch { }
         }
 
         private void Next_Destination_Button_Clicked(object sender, EventArgs e)
@@ -92,29 +112,45 @@ namespace trumpeldor.Views
 
         private async void mapImage_Clicked(object sender, EventArgs e)
         {
-            await Navigation.PushModalAsync(new MapPage());
+            await Navigation.PushModalAsync(myMap);
         }
 
         private async void DynamicBtn_Clicked(object sender, EventArgs e)
         {
+            //disable all other dynamic buttons
+            try { DynamicButtonsEnable(false); }
+            catch { }
+
             Button clicked = (Button)sender;
             string strIdx = clicked.Text.Substring(5, clicked.Text.Length - 5);
             int currIdx = Int32.Parse(strIdx) -1;
-            if (nextAttraction.IsThisLastHint(hintsIndex))//hint map
+            if (nextAttraction.IsThisLastHint(currIdx))//hint map
             {
-                await Navigation.PushModalAsync(new MapPage(new SheredClasses.Point(nextAttraction.x, nextAttraction.y)));
+                //await Navigation.PushModalAsync(new MapPage(new SheredClasses.Point(nextAttraction.x, nextAttraction.y)));
+                await Navigation.PushModalAsync(myMap);
             }
             else
             {
                 await Navigation.PushModalAsync(new HintPage(nextAttraction.hints[currIdx]));
             }
+
+            //enable all other dynamic buttons
+            try { DynamicButtonsEnable(true); }
+            catch { }
         }
         
+        private void DynamicButtonsEnable(bool toEnable)
+        {
+            foreach (Button btn in hintsLayout.Children)
+            {
+                btn.IsEnabled = toEnable;
+            }
+        }
 
         private void addToLayout(StackLayout layout)
         {
             Button btn = new Button();
-            string strIndex = (hintsIndex + 1).ToString();
+            string strIndex = (hintsIndex).ToString();
             btn.Text = "Hint " + strIndex;
             btn.AutomationId = "savedHint" + strIndex;
             btn.Clicked += DynamicBtn_Clicked;

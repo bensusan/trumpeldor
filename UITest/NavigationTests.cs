@@ -1,21 +1,24 @@
 ﻿using System;
-using System.IO;
+using System.Collections.Generic;
 using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.IO;
 using NUnit.Framework;
 using Xamarin.UITest;
 using Xamarin.UITest.Queries;
 using trumpeldor;
 
+
 namespace UITest
 {
     [TestFixture(Platform.Android)]
-    //[TestFixture(Platform.iOS)]
-    public class Tests
+    public class NavigationTests //Tests for requirement 5
     {
         IApp app;
         Platform platform;
 
-        public Tests(Platform platform)
+        public NavigationTests(Platform platform)
         {
             this.platform = platform;
         }
@@ -24,104 +27,70 @@ namespace UITest
         public void BeforeEachTest()
         {
             app = AppInitializer.StartApp(platform);
+            app.Device.SetLocation(0, 0);
+
         }
 
-       /* [Test]
-        public void AppLaunches()
-        {
-            app.Screenshot("First screen.");
-        }*/
-
-       /* [Test]
-        public void GroupCreation()
+        [Test]
+        public void PastLocationsDrawTest()// 5.1
         {
             //Arrange
-            app.EnterText("EnterGroupName", "abc");
-            app.Tap("Btn1Clicked");
-            app.EnterText("EnterAge", "8");
-
-            //Act
-            app.Tap("BtnStartTripClicked");
-
-            //Assert
-           // Assert.IsTrue(trumpeldor.Views.groupCreationPage.canProcceed == true);
-            //var appResult = app.Query("HintDisplay").First(result => result.Text == "this is a text hint");
-            //Assert.IsTrue(appResult != null, "label is not displaying the right result");
-        }*/
-        [Test]
-        public void ViewInfoWhenOutOfRange() //requirement 2.2
-        {
-            var outOfRange= app.Query("PlayBtn").FirstOrDefault(x => x.Enabled == false);
-            if(outOfRange != null)
-            {
-                var canViewInfo= app.Query("InfoBtn").FirstOrDefault(x => x.Enabled == true);
-                Assert.IsTrue(canViewInfo != null, "problem");
-            }
-            else
-            {
-                Assert.IsTrue(true);
-            }
-        }
-
-        [Test]
-        public void ViewInfoBeforeGame() //requirement 2.3
-        {
-
-            //Act
-            app.Tap("EnglishBtn");
-            app.Tap("InfoBtn");
-
-            //Assert
-            var tst = app.Query("InfoTxt").FirstOrDefault(res => res.Text != "");
-            Assert.IsTrue(tst != null, "problem");
-        }
-
-        [Test]
-        public void UserInfoAtSignIn() //requirement 4.2
-        {
-            // all grop fields are empty
             app.Tap("EnglishBtn");
             app.Tap("PlayBtn");
             app.Tap("FacebookLoginBtn");
             app.WaitFor(() => app.Query("EnterGroupName").FirstOrDefault().Enabled, timeout: TimeSpan.FromSeconds(1200));
-            app.Tap("BtnStartTripClicked");
-
-            var stayed = app.Query(x => x.Marked("EnterGroupName"));/*stayed at group creation page*/
-            var moved = app.Query(x => x.Marked("AddHintBtn")); /* moved to next page (navigation page)*/
-            Assert.IsTrue(stayed.Length != 0);//stayed
-            Assert.IsFalse(moved.Length != 0);//not moved
-
-            //some of the fields are empty
-            app.EnterText("EnterAge", "8");
-            app.EnterText("EnterGroupName", "");
-            
-            app.Tap("BtnStartTripClicked");
-
-            var stayed1 = app.Query(x => x.Marked("EnterGroupName"));/*stayed at group creation page*/
-            var moved1 = app.Query(x => x.Marked("AddHintBtn")); /* moved to next page (navigation page)*/
-            Assert.IsTrue(stayed1.Length != 0);//stayed
-            Assert.IsFalse(moved1.Length != 0);//not moved
-
-            //some of the fields are empty
-            app.Tap("Btn1Clicked");
-            app.Tap("BtnStartTripClicked");
-
-            var stayed2 = app.Query(x => x.Marked("EnterGroupName"));/*stayed at group creation page*/
-            var moved2 = app.Query(x => x.Marked("AddHintBtn")); /* moved to next page (navigation page)*/
-            Assert.IsTrue(stayed2.Length != 0);//stayed
-            Assert.IsFalse(moved2.Length != 0);//not moved
-
-            //all fields are full
-            app.Tap("Btn1Clicked");
             app.EnterText("EnterGroupName", "abc");
-            
-            app.EnterText("EnterAge", "9");
+            app.Tap("Btn1Clicked");
+            app.EnterText("EnterAge", "8");
             app.Tap("BtnStartTripClicked");
+            app.WaitFor(() => app.Query("AddHintBtn").FirstOrDefault().Enabled, timeout: TimeSpan.FromSeconds(1200));
 
-            var stayed3 = app.Query(x => x.Marked("EnterGroupName"));/*stayed at group creation page*/
-            var moved3 = app.Query(x => x.Marked("AddHintBtn")); /* moved to next page (navigation page)*/
-            Assert.IsTrue(moved3.Length != 0);//moved
 
+            //Act
+            System.Threading.Thread.Sleep(20000);
+            bool flag = true;
+            LocationController lc = LocationController.GetInstance();
+            foreach(KeyValuePair<double, double> loc in lc.GetStoredPositionsAsPairs())
+            {
+                if (!(-0.1 <= loc.Key && loc.Key <= 0.1 && -0.1 <= loc.Value && loc.Value <= 0.1))
+                    flag = false;
+            }
+
+            //Assert
+            Assert.IsTrue(flag);
+        }
+
+        [Test]
+        public void ShowScoreOnTrackFinish() //requirement 5.2
+        {
+            //Arrange
+            app.Tap("EnglishBtn");
+            app.Tap("PlayBtn");
+            app.Tap("AnonymusLoginBtn");
+            app.WaitFor(() => app.Query("EnterGroupName").FirstOrDefault().Enabled, timeout: TimeSpan.FromSeconds(1200));
+            app.EnterText("EnterGroupName", "abc");
+            app.Tap("Btn1Clicked");
+            app.EnterText("EnterAge", "8");
+            app.Tap("BtnStartTripClicked");
+            app.WaitFor(() => app.Query("AddHintBtn").FirstOrDefault().Enabled, timeout: TimeSpan.FromSeconds(1200));
+            app.Tap("DestinationBtn");
+            //if continueTrack is available-click it
+            // else click on mission -> american question -> correct ans
+            // click continue track
+            //if continue to longer track is available:
+                //assert if the label contains score
+                //else repeat
+            
+            app.Tap("MissionBtn");
+            //american question
+            //correct answer
+            //continue track
+            //assert
+
+
+            //Act
+
+            //Assert
         }
 
         [Test]
@@ -137,7 +106,7 @@ namespace UITest
             app.Tap("BtnStartTripClicked");
             app.WaitFor(() => app.Query("AddHintBtn").FirstOrDefault().Enabled, timeout: TimeSpan.FromSeconds(1200));
             app.Tap("AddHintBtn");
-            
+
             var tst = app.Query("HintDisplay").FirstOrDefault(res => res.Text != "");
             Assert.IsTrue(tst != null, "problem");
         }
@@ -160,7 +129,7 @@ namespace UITest
             app.Back();
             //try to view the saved first hint
             app.Tap("Hint 1");
-            var tst = app.Query("HintDisplay").FirstOrDefault(res => res.Text == "This is text hint for Attraction 1") ;
+            var tst = app.Query("HintDisplay").FirstOrDefault(res => res.Text == "This is text hint for Attraction 1");
             Assert.IsTrue(tst != null, "problem");
             app.Back();
             //add another hint
@@ -182,7 +151,7 @@ namespace UITest
         }
 
         [Test]
-        public void ContinueToLongerTrack()
+        public void ContinueToLongerTrack() //requirement 5.13
         {
             app.Tap("EnglishBtn");
             app.Tap("PlayBtn");
@@ -197,4 +166,3 @@ namespace UITest
         }
     }
 }
-

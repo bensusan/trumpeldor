@@ -6,6 +6,7 @@ using Foundation;
 using trumpeldor.Configuration;
 using trumpeldor.iOS.Configuration;
 using UIKit;
+using Xamarin.Forms;
 
 namespace trumpeldor.iOS
 {
@@ -26,6 +27,7 @@ namespace trumpeldor.iOS
         {
             global::Xamarin.Forms.Forms.Init();
             ConfigurationManager.Initialize(new IOSConfigurationStreamProviderFactory());
+            DependencyService.Register<IShare, ShareImplementation>();
             Xamarin.FormsMaps.Init();//for maps init
             LoadApplication(new App());
 

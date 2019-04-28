@@ -36,5 +36,9 @@
 	<string>Assets.xcassets/AppIcon.appiconset</string>
 	<key>NSLocationAlwaysUsageDescription</key>
 	<string>We need a permission to use your location</string>
+  <key>NSCameraUsageDescription</key>
+  <string>This app needs access to the camera to take photos.</string>
+  <key>NSPhotoLibraryUsageDescription</key>
+  <string>This app needs access to the gallery.</string>
 </dict>
 </plist>

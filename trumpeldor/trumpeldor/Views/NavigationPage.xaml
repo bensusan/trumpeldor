@@ -12,7 +12,7 @@
                <!-- <Button x:Name= "a" Clicked="DynamicBtn_Clicked"/> -->
             </StackLayout>
             <Button x:Name="hintBtn" Text="{translator:Translate add_hint}" Clicked="Get_Hint_Button_Clicked" Style="{StaticResource largeButtonStyle}" AutomationId="AddHintBtn"/>
-            <Button Text="{translator:Translate You_have_Reached_Your_Destionation}" Clicked="Next_Destination_Button_Clicked" Style="{StaticResource largeButtonStyle}" />
+            <Button Text="{translator:Translate You_have_Reached_Your_Destionation}" Clicked="Next_Destination_Button_Clicked" Style="{StaticResource largeButtonStyle}" AutomationId="DestinationBtn" />
             <Label Text="{translator:Translate map}" Style="{DynamicResource lableStyle}"/>
             <Button x:Name="mapImage" Clicked="mapImage_Clicked"/>
             <!--<Image x:Name="mapImage" Style="{DynamicResource smallImageStyle}"/>-->

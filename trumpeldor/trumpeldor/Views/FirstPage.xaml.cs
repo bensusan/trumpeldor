@@ -19,8 +19,8 @@ namespace trumpeldor.Views
     public partial class FirstPage : ContentPage
     {
         private GameController gc;
-		public FirstPage ()
-		{
+        public FirstPage()
+        {
             InitializeComponent();
             gc = GameController.getInstance();
         }
@@ -29,19 +29,21 @@ namespace trumpeldor.Views
         {
             base.OnAppearing();
             ShowRelevantFunctionalitiesAccordingToLocation();
-    }
+        }
 
         private void ShowRelevantFunctionalitiesAccordingToLocation()
         {
             Task.Run(() =>
-            { 
+            {
                 if (!gc.IsUserInValidSector())
                 {
-                    Device.BeginInvokeOnMainThread(async () => {
+                    Device.BeginInvokeOnMainThread(async () =>
+                    {
                         await DisplayAlert(AppResources.Out_Of_Valid_Sector_Title, AppResources.Out_Of_Valid_Sector_Message, AppResources.ok);
                     });
                     if (ServerConection.DEBUG == 1)
-                        Device.BeginInvokeOnMainThread(async() => {
+                        Device.BeginInvokeOnMainThread(async () =>
+                        {
                             await DisplayAlert("Debug Mode", "This functionality does not work in debug mode", "ok");
                         });
                     else
@@ -92,6 +94,11 @@ namespace trumpeldor.Views
         private async void Info_Button_Clicked(object sender, EventArgs e)
         {
             await Navigation.PushModalAsync(new informationPage());
+        }
+
+        private async void Shotrcut_Button_Clicked(object sender, EventArgs e)
+        {
+            await Navigation.PushModalAsync(new TakingPicturePage());
         }
     }
 }
