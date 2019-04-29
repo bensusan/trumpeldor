@@ -24,14 +24,12 @@ namespace trumpeldor.Views
         string aPpath;
         string path;
         ImageSource imgSrc;
-        private ContentPage nextPage;
         private GameController gc;
 
-        public TakingPicturePage (TakingPicture tp, ContentPage nextPage)
+        public TakingPicturePage (TakingPicture tp)
 		{
 			InitializeComponent ();
             pc = PhotosController.GetInstance();
-            this.nextPage = nextPage;
             CameraButton.Clicked += CameraButton_Clicked;
         }
 
@@ -84,7 +82,7 @@ namespace trumpeldor.Views
                     pc.AddToPhotosSourcesList(path);
 
                     //back to previous page
-                    Navigation.PopModalAsync();
+                    await Navigation.PopModalAsync();
 
                 }
 

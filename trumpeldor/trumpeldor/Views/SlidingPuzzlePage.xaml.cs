@@ -18,13 +18,11 @@ namespace trumpeldor.Views
         private double tileSize;
         private bool isBusy;
         private SlidingPuzzle sp;
-        private ContentPage nextPage;
         private GameController gc;
 
-        public SlidingPuzzlePage (SlidingPuzzle sp, ContentPage nextPage)
+        public SlidingPuzzlePage (SlidingPuzzle sp)
 		{
             InitializeComponent ();
-            this.nextPage = nextPage;
             this.gc = GameController.getInstance();
             this.sp = sp;
             tiles = new SlidingPuzzleTile[sp.width, sp.height];

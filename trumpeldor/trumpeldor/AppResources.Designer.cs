@@ -511,6 +511,15 @@ namespace trumpeldor {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to פאזל.
+        /// </summary>
+        public static string puzzle {
+            get {
+                return ResourceManager.GetString("puzzle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to שאלה.
         /// </summary>
         public static string question {

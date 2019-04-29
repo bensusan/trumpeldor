@@ -237,6 +237,18 @@ def addSlidingPuzzle(attraction, width, height, listOfPicturesNames, description
     return sp
 
 
+def addPuzzle(attraction, width, height, listOfPicturesNames, description):
+    puzzle = Puzzle(description=description, attraction=attraction, width=width, height=height, piecesURLS=listOfPicturesNames)
+    puzzle.save()
+    return puzzle
+
+
+def addTakingPicture(attraction, description):
+    tp = TakingPicture(description=description, attraction=attraction)
+    tp.save()
+    return tp
+
+
 URL_PREFIX_MEDIA = "http://" + sys.argv[-1] + "/media/"
 
 
@@ -278,25 +290,17 @@ def insertDebugData():
                                                   "example21.jpg",
                                                   "example22.jpg"]), "description")
 
-    sp2 = addSlidingPuzzle(a2, 3, 3, addPrefixUrl(["example00.jpg",
-                                                   "example01.pg",
-                                                   "example02.jpg",
-                                                   "example10.jpg",
-                                                   "example11.jpg",
-                                                   "example12.jpg",
-                                                   "example20.jpg",
-                                                   "example21.jpg",
-                                                   "example22.jpg"]), "description")
+    sp2 = addPuzzle(a2, 3, 3, addPrefixUrl(["example00.jpg",
+                                            "example01.jpg",
+                                            "example02.jpg",
+                                            "example10.jpg",
+                                            "example11.jpg",
+                                            "example12.jpg",
+                                            "example20.jpg",
+                                            "example21.jpg",
+                                            "example22.jpg"]), "description")
 
-    sp3 = addSlidingPuzzle(a3, 3, 3, addPrefixUrl(["example00.jpg",
-                                                   "example01.jpg",
-                                                   "example02.jpg",
-                                                   "example10.jpg",
-                                                   "example11.jpg",
-                                                   "example12.jpg",
-                                                   "example20.jpg",
-                                                   "example21.jpg",
-                                                   "example22.jpg"]), "description")
+    sp3 = addTakingPicture(a3, "description")
 
     h11 = addHint(a1, Hint.HINT_TEXT, "This is text hint for Attraction 1", "description")
     h12 = addHint(a1, Hint.HINT_PICTURE, addPrefixUrlToSpecificName("meonot_dalet_1.jpg"), "description")

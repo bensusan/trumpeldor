@@ -76,7 +76,7 @@ class FindTheDifferencesSerializer(serializers.ModelSerializer):
 
 class PuzzleSerializer(serializers.ModelSerializer):
     class Meta:
-        fields = ('id', 'description' 'pictureURL', 'width', 'height',)
+        fields = ('id', 'description', 'piecesURLS', 'width', 'height',)
         model = Puzzle
 
 

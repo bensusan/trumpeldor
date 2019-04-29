@@ -187,6 +187,7 @@
     </PackageReference>
     <PackageReference Include="Xamarin.Auth">
       <Version>1.6.0.4</Version>
+    </PackageReference>
     <PackageReference Include="Xam.Plugin.Media">
       <Version>4.0.1.5</Version>
     </PackageReference>

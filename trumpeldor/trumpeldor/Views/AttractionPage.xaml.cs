@@ -51,7 +51,7 @@ namespace trumpeldor.Views
 
         private async void Mission_Button_Clicked(object sender, EventArgs e)
         {
-            await Navigation.PushModalAsync(gc.currentTrip.GetCurrentAttraction().entertainment.EntertainmentPageInstance(this));
+            await Navigation.PushModalAsync(gc.currentTrip.GetCurrentAttraction().entertainment.EntertainmentPageInstance());
         }
 
         private void Watch_Again_Button_Clicked(object sender, EventArgs e)

@@ -14,17 +14,17 @@ namespace trumpeldor.SheredClasses
 
         public override string EntertainmentName()
         {
-            return AppResources.sliding_puzzle;
+            return AppResources.puzzle;
         }
 
-        public override ContentPage EntertainmentPageInstance(ContentPage nextPage)
+        public override ContentPage EntertainmentPageInstance()
         {
-            return new JigsawPuzzlePage(this, nextPage);
+            return new JigsawPuzzlePage(this);
         }
 
         public static bool isMyClassName(string className)
         {
-            return "SlidingPuzzle".Equals(className);
+            return "Puzzle".Equals(className);
         }
     }
 }

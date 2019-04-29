@@ -172,9 +172,11 @@ class BL_Implementation(BL_Abstract):
             className = 'Puzzle'
             if entertainment is None:
                 entertainment = self.DAL.getTakingPicture(attr)
-                classSerializer = TakingPicture
+                classSerializer = TakingPictureSerializer
                 className = 'TakingPicture'
+        print(entertainment)
         entertainment = classSerializer(entertainment)
+        print(entertainment)
         entertainment = json.loads(json.dumps(entertainment.data))
         # entertainmentWrapper = '{"className":' + className + ',"object":' + entertainment + '}'
         entertainmentWrapper = {'className': className, 'object': entertainment}

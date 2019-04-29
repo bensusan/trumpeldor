@@ -24,12 +24,6 @@ namespace trumpeldor.Views
         public GameController gc;
         public LocationController lc;
         trumpeldor.SheredClasses.Point p, currLoc;
-
-        public /*static*/ int hintsIndex = 0;
-        //trumpeldor.SheredClasses.Point p;
-        public GameController gc = ((App)Application.Current).getGameController();
-        public LocationController lc;
-        trumpeldor.SheredClasses.Point p;
         public double currLat = 0, currLong = 0;
         MapPage myMap = null;
 
@@ -42,10 +36,10 @@ namespace trumpeldor.Views
             temperature.Source = ServerConection.URL_MEDIA + "temperature.png";
             v.Source = ServerConection.URL_MEDIA + "v.png";
             nextAttraction = gc.currentTrip.GetCurrentAttraction();
-            mapBtn = mapInstance.map;
-            AttachHint(0);
-
             myMap = new MapPage();
+            mapBtn = myMap.map;
+            AttachHint(0);
+            
             lc = LocationController.GetInstance();
             p = new trumpeldor.SheredClasses.Point(nextAttraction.x, nextAttraction.y);
             if (isFirst)

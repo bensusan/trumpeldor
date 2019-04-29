@@ -64,7 +64,7 @@ class FindTheDifferences(Entertainment):
 
 
 class Puzzle(Entertainment):
-    pictureURL = models.TextField()
+    piecesURLS = JSONField()# Should be list of paths
     width = models.IntegerField()
     height = models.IntegerField()
 

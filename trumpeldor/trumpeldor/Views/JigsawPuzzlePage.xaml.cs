@@ -17,13 +17,11 @@ namespace trumpeldor.Views
         private double tileSize;
         //private int width = 4;
         private List<JigsawTile> tiles;
-        private ContentPage nextPage;
         private Puzzle puzzle;
 
-        public JigsawPuzzlePage(Puzzle puzzle, ContentPage nextPage)
+        public JigsawPuzzlePage(Puzzle puzzle)
         {
             InitializeComponent();
-            this.nextPage = nextPage;
             this.puzzle = puzzle;
             tiles = new List<JigsawTile>();
 
@@ -101,11 +99,11 @@ namespace trumpeldor.Views
                 tileView.TranslationY = tileSize * tile.correctRow - tileView.Y;
                 absoluteLayout.LowerChild(tileView);
                 tile.isSetOnPossition = true;
-                isPuzzleSolved();
+                isPuzzleSolvedAsync();
             }
         }
 
-        private void isPuzzleSolved()
+        private async Task isPuzzleSolvedAsync()
         {
             foreach (JigsawTile tile in tiles)
             {
@@ -115,7 +113,7 @@ namespace trumpeldor.Views
                 }
             }
             //TODO puzzle solve
-            DisplayAlert("", "puzzle solved", "OK");
+            await Navigation.PopModalAsync();
         }
 
         private static double getYPositionOfTile(PanUpdatedEventArgs e, View tileView)

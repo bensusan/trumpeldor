@@ -323,6 +323,7 @@
   </data>
   <data name="Sign_in" xml:space="preserve">
     <value>התחברו</value>
+  </data>
   <data name="taking_picture" xml:space="preserve">
     <value>צלם תמונה</value>
   </data>
@@ -331,5 +332,8 @@
   </data>
   <data name="take_picture" xml:space="preserve">
     <value>צלמו תמונה</value>
+  </data>
+  <data name="puzzle" xml:space="preserve">
+    <value>פאזל</value>
   </data>
 </root>

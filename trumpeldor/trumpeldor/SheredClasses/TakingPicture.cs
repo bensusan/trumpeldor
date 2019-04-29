@@ -13,9 +13,9 @@ namespace trumpeldor.SheredClasses
             return AppResources.taking_picture;
         }
 
-        public override ContentPage EntertainmentPageInstance(ContentPage nextPage)
+        public override ContentPage EntertainmentPageInstance()
         {
-            return new TakingPicturePage(this, nextPage);
+            return new TakingPicturePage(this);
         }
 
         public static bool isMyClassName(string className)

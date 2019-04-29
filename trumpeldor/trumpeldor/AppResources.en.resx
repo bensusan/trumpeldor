@@ -320,6 +320,7 @@
   </data>
   <data name="Sign_in" xml:space="preserve">
     <value>Sign in</value>
+  </data>
   <data name="taking_picture" xml:space="preserve">
     <value>Take Picture</value>
   </data>
@@ -328,5 +329,8 @@
   </data>
   <data name="take_picture" xml:space="preserve">
     <value>Take Picture</value>
+  </data>
+  <data name="puzzle" xml:space="preserve">
+    <value>Puzzle</value>
   </data>
 </root>
