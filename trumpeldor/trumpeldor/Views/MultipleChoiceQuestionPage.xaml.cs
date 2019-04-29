@@ -42,9 +42,10 @@ namespace trumpeldor.Views
 
         private static Random rng = new Random();
 
-        public static int Shuffle(IList<string> list, int correctAnswerIndex)
+        public static int[] Shuffle(IList<string> list, int[] correctAnswerIndex)
         {
-            int ans = correctAnswerIndex;
+            int[] ans = new int[correctAnswerIndex.Length];
+            correctAnswerIndex.CopyTo(ans, 0);
             int n = list.Count;
             while (n > 1)
             {
@@ -53,10 +54,12 @@ namespace trumpeldor.Views
                 string value = list[k];
                 list[k] = list[n];
                 list[n] = value;
-                if (ans == k)
-                    ans = n;
-                else if (ans == n)
-                    ans = k;
+                for(int i = 0; i < ans.Length; i++){
+                    if (ans[i] == k)
+                        ans[i] = n;
+                    else if (ans[i] == n)
+                        ans[i] = k;
+                }
             }
             return ans;
         }
@@ -64,20 +67,23 @@ namespace trumpeldor.Views
         private void answersInitialize()
         {
             List<string> answers = new List<string>(aq.answers);
-            int correctAnswerIndex = Shuffle(answers, aq.indexOfCorrectAnswer[0]); //TODO change to all correct indexes
+            int[] correctAnswerIndex = Shuffle(answers, aq.indexOfCorrectAnswer); //TODO change to all correct indexes
             for (int i = 0; i < answers.Count; i++)
             {
                 Button answerButton = new Button();
                 answerButton.Text = answers.ElementAt(i);
                 answerButton.Style = (Style)Application.Current.Resources["largeButtonStyle"];
-                if (i == correctAnswerIndex)
-                {
+                bool isFound = false;
+                for(int j= 0; j<correctAnswerIndex.Length; j++){
+                    if (i == correctAnswerIndex[j]){
+                        isFound = true;
+                        break;
+                    }
+                }
+                if (isFound)
                     answerButton.Clicked += Correct_Answer_Button_Clicked;
-                }
                 else
-                {
                     answerButton.Clicked += Wrong_Answer_Button_Clicked;
-                }
                 answersLayout.Children.Add(answerButton);
             }
         }

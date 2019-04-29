@@ -57,6 +57,15 @@ class BL_Abstract(object):
             user = self.createUser(data)
         return user
 
+    def getOpenMessages(self):
+        raise NotImplementedError("Should have implemented this")
+
+    def updateTrip(self, dataTrip):
+        raise NotImplementedError("Should have implemented this")
+
+    def getBestScores(self):
+        raise NotImplementedError("Should have implemented this")
+
     def getEntertainment(self, attraction):
         raise NotImplementedError("Should have implemented this")
 
@@ -253,6 +262,21 @@ class BLProxy(BL_Abstract):
         if self.Implementation is None:
             raise NotImplementedError("Should have implemented this")
         return self.Implementation.getTrip(trip)
+
+    def getOpenMessages(self):
+        if self.Implementation is None:
+            raise NotImplementedError("Should have implemented this")
+        return self.Implementation.getOpenMessages()
+
+    def updateTrip(self, dataTrip):
+        if self.Implementation is None:
+            raise NotImplementedError("Should have implemented this")
+        return self.Implementation.updateTrip(dataTrip)
+
+    def getBestScores(self):
+        if self.Implementation is None:
+            raise NotImplementedError("Should have implemented this")
+        return self.Implementation.getBestScores()
 
     def getEntertainment(self, attraction):
         if self.Implementation is None:

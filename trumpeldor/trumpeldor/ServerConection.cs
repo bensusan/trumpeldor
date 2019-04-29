@@ -99,14 +99,24 @@ namespace trumpeldor
             JObject obj = (JObject)json["object"];
             if (SlidingPuzzle.isMyClassName(className)) {
                 //SlidingPuzzle sp = JsonConvert.DeserializeObject<SlidingPuzzle>((string)json["object"]);
-                SlidingPuzzle sp = new SlidingPuzzle
+                return new SlidingPuzzle
                 {
                     id = (int)obj["id"],
+                    description = (string)obj["description"],
                     piecesURLS = ((JArray)obj["piecesURLS"]).ToObject<List<string>>(),
                     width = (int)obj["width"],
                     height = (int)obj["height"]
                 };
-                return sp;
+            }
+            else if (Puzzle.isMyClassName(className)){
+                return new Puzzle
+                {
+                    id = (int)obj["id"],
+                    description = (string)obj["description"],
+                    piecesURLS = ((JArray)obj["piecesURLS"]).ToObject<List<string>>(),
+                    width = (int)obj["width"],
+                    height = (int)obj["height"]
+                };
             }
             return null;
         }

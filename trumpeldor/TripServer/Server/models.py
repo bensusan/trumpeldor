@@ -54,6 +54,10 @@ class Entertainment(models.Model):
     description = models.TextField()
 
 
+class TakingPicture(Entertainment):
+    pass
+
+
 class FindTheDifferences(Entertainment):
     pictureURL = models.TextField()
     differences = JSONField()  # Should be list of x's and y's (Location of each difference)

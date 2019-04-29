@@ -98,6 +98,16 @@
                 <Setter Property="VerticalOptions" Value="StartAndExpand"/>
             </Style>
 
+            <Style x:Key="baseImageStyle" TargetType="Image" BasedOn="{StaticResource baseViewStyle}">
+                <Setter Property="HorizontalOptions" Value="CenterAndExpand"/>
+                <Setter Property="VerticalOptions" Value="CenterAndExpand"/>
+            </Style>
+
+            <Style x:Key="largeImageStyle" TargetType="Image" BasedOn="{StaticResource baseImageStyle}">
+                <Setter Property="WidthRequest" Value="200"/>
+                <Setter Property="HeightRequest" Value="200"/>
+            </Style>
+
         </ResourceDictionary>
     </Application.Resources>
 </Application>

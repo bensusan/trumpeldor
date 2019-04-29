@@ -231,10 +231,11 @@ def addUser(userName, socialNetwork):
     return user
 
 
-def addSlidingPuzzle(attraction, width, height, listOfPicturesNames):
-    sp = SlidingPuzzle(attraction=attraction, width=width, height=height, piecesURLS=listOfPicturesNames)
+def addSlidingPuzzle(attraction, width, height, listOfPicturesNames, description):
+    sp = SlidingPuzzle(description=description, attraction=attraction, width=width, height=height, piecesURLS=listOfPicturesNames)
     sp.save()
     return sp
+
 
 URL_PREFIX_MEDIA = "http://" + sys.argv[-1] + "/media/"
 
@@ -248,6 +249,7 @@ def addPrefixUrl(lst):
     for name in lst:
         newLst += [addPrefixUrlToSpecificName(name)]
     return newLst
+
 
 def insertDebugData():
     a1 = addAttraction("Meonot dalet", "31.263913", "34.796959", "We Are in Attraction 1", addPrefixUrl(["meonot_dalet_1.jpg", "meonot_dalet_2.jpg"]), [])
@@ -274,7 +276,7 @@ def insertDebugData():
                                                   "example12.jpg",
                                                   "example20.jpg",
                                                   "example21.jpg",
-                                                  "example22.jpg"]))
+                                                  "example22.jpg"]), "description")
 
     sp2 = addSlidingPuzzle(a2, 3, 3, addPrefixUrl(["example00.jpg",
                                                    "example01.pg",
@@ -284,7 +286,7 @@ def insertDebugData():
                                                    "example12.jpg",
                                                    "example20.jpg",
                                                    "example21.jpg",
-                                                   "example22.jpg"]))
+                                                   "example22.jpg"]), "description")
 
     sp3 = addSlidingPuzzle(a3, 3, 3, addPrefixUrl(["example00.jpg",
                                                    "example01.jpg",
@@ -294,7 +296,7 @@ def insertDebugData():
                                                    "example12.jpg",
                                                    "example20.jpg",
                                                    "example21.jpg",
-                                                   "example22.jpg"]))
+                                                   "example22.jpg"]), "description")
 
     h11 = addHint(a1, Hint.HINT_TEXT, "This is text hint for Attraction 1", "description")
     h12 = addHint(a1, Hint.HINT_PICTURE, addPrefixUrlToSpecificName("meonot_dalet_1.jpg"), "description")
