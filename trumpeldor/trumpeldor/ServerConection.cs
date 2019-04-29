@@ -118,6 +118,14 @@ namespace trumpeldor
                     height = (int)obj["height"]
                 };
             }
+            else if(TakingPicture.isMyClassName(className))
+            {
+                TakingPicture tp = new TakingPicture
+                {
+                    id = (int)obj["id"]
+                };
+                return tp;
+            }
             return null;
         }
 

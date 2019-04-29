@@ -19,9 +19,8 @@ namespace trumpeldor.Views
     public partial class FirstPage : ContentPage
     {
         private GameController gc;
-
-        public FirstPage ()
-		{
+        public FirstPage()
+        {
             InitializeComponent();
             israelButton.Source = ServerConection.URL_MEDIA + "israel.png";
             englandButton.Source = ServerConection.URL_MEDIA + "united-kingdom.png";

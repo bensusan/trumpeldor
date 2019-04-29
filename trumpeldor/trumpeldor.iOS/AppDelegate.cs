@@ -10,6 +10,7 @@ using UIKit;
 using Xamarin.Forms;
 using Google.SignIn;
 
+
 namespace trumpeldor.iOS
 {
     // The UIApplicationDelegate for the application. This class is responsible for launching the 
@@ -32,6 +33,7 @@ namespace trumpeldor.iOS
             var googleServiceDictionary = NSDictionary.FromFile("GoogleService-Info.plist");
             SignIn.SharedInstance.ClientID = googleServiceDictionary["CLIENT_ID"].ToString();
             ConfigurationManager.Initialize(new IOSConfigurationStreamProviderFactory());
+            DependencyService.Register<IShare, ShareImplementation>();
             Xamarin.FormsMaps.Init();//for maps init
             LoadApplication(new App());
 

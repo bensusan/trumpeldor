@@ -24,7 +24,14 @@ namespace trumpeldor.Views
         public GameController gc;
         public LocationController lc;
         trumpeldor.SheredClasses.Point p, currLoc;
-        MapPage mapInstance = null;
+
+        public /*static*/ int hintsIndex = 0;
+        //trumpeldor.SheredClasses.Point p;
+        public GameController gc = ((App)Application.Current).getGameController();
+        public LocationController lc;
+        trumpeldor.SheredClasses.Point p;
+        public double currLat = 0, currLong = 0;
+        MapPage myMap = null;
 
         public NavigationPage ()
 		{
@@ -35,10 +42,10 @@ namespace trumpeldor.Views
             temperature.Source = ServerConection.URL_MEDIA + "temperature.png";
             v.Source = ServerConection.URL_MEDIA + "v.png";
             nextAttraction = gc.currentTrip.GetCurrentAttraction();
-            mapInstance = new MapPage();
             mapBtn = mapInstance.map;
             AttachHint(0);
 
+            myMap = new MapPage();
             lc = LocationController.GetInstance();
             p = new trumpeldor.SheredClasses.Point(nextAttraction.x, nextAttraction.y);
             if (isFirst)
@@ -86,10 +93,11 @@ namespace trumpeldor.Views
             if (nextAttraction.IsThisLastHint(hintIndex))
             {
                 //TODO change when shahar will finish
-                mapInstance = new MapPage(new SheredClasses.Point(nextAttraction.x, nextAttraction.y));
+                // mapInstance = new MapPage(new SheredClasses.Point(nextAttraction.x, nextAttraction.y));
+                myMap.AddPointToMap(myMap.map, new SheredClasses.Point(nextAttraction.x, nextAttraction.y));
                 hintWebView.IsVisible = false;
                 hintText.IsVisible = false;
-                hintMap = mapInstance.map;
+                hintMap = myMap.map;
                 hintMap.IsVisible = true;
             }
             else
@@ -121,11 +129,6 @@ namespace trumpeldor.Views
             Application.Current.MainPage = new AttractionPage();
         }
 
-        //private async void mapImage_Clicked(object sender, EventArgs e)
-        //{
-        //    await Navigation.PushModalAsync(new MapPage());
-        //}
-
         private void LeftArrow_Clicked(object sender, EventArgs e)
         {
             currIndex--;
@@ -137,7 +140,7 @@ namespace trumpeldor.Views
 
         private async void Map_Focused(object sender, FocusEventArgs e)
         {
-            await Navigation.PushModalAsync(mapInstance);
+            await Navigation.PushModalAsync(myMap);
         }
 
         private void RightArrow_Clicked(object sender, EventArgs e)
@@ -148,33 +151,6 @@ namespace trumpeldor.Views
                 rightArrow.IsEnabled = false;
             leftArrow.IsEnabled = true;
         }
-
-        //private async void DynamicBtn_Clicked(object sender, EventArgs e)
-        //{
-        //    Button clicked = (Button)sender;
-        //    string strIdx = clicked.Text.Substring(5, clicked.Text.Length - 5);
-        //    int currIdx = Int32.Parse(strIdx) -1;
-        //    if (nextAttraction.IsThisLastHint(hintsIndex))//hint map
-        //    {
-        //        await Navigation.PushModalAsync(new MapPage(new SheredClasses.Point(nextAttraction.x, nextAttraction.y)));
-        //    }
-        //    else
-        //    {
-        //        await Navigation.PushModalAsync(new HintPage(nextAttraction.hints[currIdx]));
-        //    }
-        //}
-
-
-        //private void addToLayout(StackLayout layout)
-        //{
-        //    Button btn = new Button();
-        //    string strIndex = (hintsIndex + 1).ToString();
-        //    btn.Text = "Hint " + strIndex;
-        //    btn.AutomationId = "savedHint" + strIndex;
-        //    btn.Clicked += DynamicBtn_Clicked;
-        //    layout.Children.Add(btn);
-        //}
-
 
         public async Task TimerCheck()
         {

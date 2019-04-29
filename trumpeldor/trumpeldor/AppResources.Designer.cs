@@ -529,6 +529,15 @@ namespace trumpeldor {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to שמור והמשך.
+        /// </summary>
+        public static string save_and_continue {
+            get {
+                return ResourceManager.GetString("save_and_continue", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to ניקוד.
         /// </summary>
         public static string score {
@@ -615,6 +624,24 @@ namespace trumpeldor {
         public static string success {
             get {
                 return ResourceManager.GetString("success", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to צלמו תמונה.
+        /// </summary>
+        public static string take_picture {
+            get {
+                return ResourceManager.GetString("take_picture", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to צלם תמונה.
+        /// </summary>
+        public static string taking_picture {
+            get {
+                return ResourceManager.GetString("taking_picture", resourceCulture);
             }
         }
         

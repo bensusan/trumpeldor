@@ -39,6 +39,16 @@ namespace trumpeldor
             return allPositions;
         }
 
+        public List<KeyValuePair<double, double>> GetStoredPositionsAsPairs()
+        {
+            List<KeyValuePair<double, double>> res = new List<KeyValuePair<double, double>>();
+            foreach(Position p in allPositions)
+            {
+                res.Add(new KeyValuePair<double, double>(p.Latitude, p.Longitude));
+            }
+            return res;
+        }
+
         public double DistanceBetween(double lat1, double lon1, double lat2, double lon2)//distance in meters
         {
             double R = 6371000; // Radius of the earth in meters

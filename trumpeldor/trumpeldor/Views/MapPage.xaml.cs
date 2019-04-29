@@ -32,31 +32,7 @@ namespace trumpeldor.Views
         public GameController gc;
         public LocationController lc;
         public Attraction nextAttraction;
-        public MapPage(trumpeldor.SheredClasses.Point p)
-        {
-            InitializeComponent();
-            gc = GameController.getInstance();
-            lc = LocationController.GetInstance();
-            nextAttraction = gc.currentTrip.GetCurrentAttraction();
-            if (firstListInit)
-            {
-                traveledPins = new List<Position>();
-                firstListInit = false;
-            }
-            //-------------------------------------------------------------------
-            map = new CustomMap
-            {
-                MapType = MapType.Street,
-                WidthRequest = 100,
-                HeightRequest = 960,
-                VerticalOptions = LayoutOptions.FillAndExpand
-            };
-            map.MoveToRegion(MapSpan.FromCenterAndRadius(new Position(31.262820, 34.802352), Distance.FromKilometers(3)).WithZoom(10));
-            AddCurrlocationToMap(map);
-            AddCurrlocationToMap(map);
-            AddPointToMap(map, p);
-            Content = map;
-        }
+
 
         public MapPage()
         {
@@ -94,37 +70,34 @@ namespace trumpeldor.Views
             map.MoveToRegion(MapSpan.FromCenterAndRadius(new Position(31.262820, 34.802352), Distance.FromKilometers(3)).WithZoom(10));
         }
         
-
-        //public async Task TimerCheck(CustomMap map)
-        //{
-        //    Device.StartTimer(TimeSpan.FromSeconds(DESIRED_SECONDS), () =>
-        //    {
-        //        try
-        //        {
-        //            OnLocationCheck(map);
-        //            lc.AddToPositionsHistory(new Plugin.Geolocator.Abstractions.Position(currLat, currLong));
-        //            if (DistanceBetween(currLat, currLong, p.x, p.y) > DESIRED_DISTANCE)
-        //            {
-        //                if(ServerConection.DEBUG == 1)
-        //                    DisplayAlert(AppResources.not_arrived, DistanceBetween(currLat, currLong, p.x, p.y).ToString()+"curr lat: "+ currLat.ToString() +"curr long: "+ currLong.ToString() +"x: "+p.x + "y: " + p.y+" point info: "+nextAttraction.name, AppResources.close);
-        //                return true;
-        //            }
-        //            else
-        //            {
-        //                gc.EditScore(GameController.SCORE_VALUE.Attraction_Arrive);
-        //                DisplayAlert(AppResources.arrived, AppResources.arrived+"!  " + DistanceBetween(currLat, currLong, p.x, p.y).ToString(), AppResources.close);
-        //                Application.Current.MainPage = new AttractionPage();
-        //                return false;
-        //            }
-        //            // True = Repeat again, False = Stop the timer
-        //        }
-        //        catch (Exception e)
-        //        {
-        //            return false;
-        //        }
-        //    });
-        //}
-
+        public async Task TimerCheck(CustomMap map)
+        {
+            Device.StartTimer(TimeSpan.FromSeconds(DESIRED_SECONDS), () =>
+            {
+                try
+                {
+                    OnLocationCheck(map);
+                    lc.AddToPositionsHistory(new Plugin.Geolocator.Abstractions.Position(currLat, currLong));
+                    if (DistanceBetween(currLat, currLong, p.x, p.y) > DESIRED_DISTANCE)
+                    {
+                        DisplayAlert(AppResources.not_arrived, DistanceBetween(currLat, currLong, p.x, p.y).ToString()+"curr lat: "+ currLat.ToString() +"curr long: "+ currLong.ToString() +"x: "+p.x + "y: " + p.y+" point info: "+nextAttraction.name, AppResources.close);
+                        return true;
+                    }
+                    else
+                    {
+                        gc.EditScore(GameController.SCORE_VALUE.Attraction_Arrive);
+                        DisplayAlert(AppResources.arrived, AppResources.arrived+"!  " + DistanceBetween(currLat, currLong, p.x, p.y).ToString(), AppResources.close);
+                        Application.Current.MainPage = new AttractionPage();
+                        return false;
+                    }
+                    // True = Repeat again, False = Stop the timer
+                }
+                catch (Exception e)
+                {
+                    return false;
+                }
+            });
+        }
 
         private void AddCurrlocationToMap (Map map)
         {
@@ -145,7 +118,7 @@ namespace trumpeldor.Views
 
 
 
-        private void AddPointToMap(Map map, trumpeldor.SheredClasses.Point p)
+        public void AddPointToMap(Map map, trumpeldor.SheredClasses.Point p)
         {
             Pin toAdd = new Pin
             {

@@ -323,5 +323,13 @@
   </data>
   <data name="Sign_in" xml:space="preserve">
     <value>התחברו</value>
+  <data name="taking_picture" xml:space="preserve">
+    <value>צלם תמונה</value>
+  </data>
+  <data name="save_and_continue" xml:space="preserve">
+    <value>שמור והמשך</value>
+  </data>
+  <data name="take_picture" xml:space="preserve">
+    <value>צלמו תמונה</value>
   </data>
 </root>

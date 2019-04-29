@@ -12,7 +12,7 @@ using trumpeldor;
 namespace UITest
 {
     [TestFixture(Platform.Android)]
-    public class HintsTests
+    public class HintsTests //Tests for requirement 6.9
     {
         IApp app;
         Platform platform;
@@ -42,7 +42,7 @@ namespace UITest
         }
 
         [Test]
-        public void LessScoreAfterThreeHints()
+        public void LessScoreAfterThreeHints() //requirement 6.9.6
         {
             //Arrange
             ArrangeStart();
@@ -70,7 +70,7 @@ namespace UITest
 
             //Assert
             Assert.IsTrue(numericScoreAfter < numericScoreBefore);
-        }
+        } 
 
         [Test]
         public void LastHintIsMapTest()
