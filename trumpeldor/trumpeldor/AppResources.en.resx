@@ -309,4 +309,13 @@
   <data name="sliding_puzzle" xml:space="preserve">
     <value>Sliding puzzle</value>
   </data>
+  <data name="taking_picture" xml:space="preserve">
+    <value>Take Picture</value>
+  </data>
+  <data name="save_and_continue" xml:space="preserve">
+    <value>Save and Continue</value>
+  </data>
+  <data name="take_picture" xml:space="preserve">
+    <value>Take Picture</value>
+  </data>
 </root>

@@ -96,9 +96,11 @@ namespace trumpeldor.Views
             await Navigation.PushModalAsync(new informationPage());
         }
 
+        /*
         private async void Shotrcut_Button_Clicked(object sender, EventArgs e)
         {
             await Navigation.PushModalAsync(new TakingPicturePage());
         }
+        */
     }
 }

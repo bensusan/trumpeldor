@@ -312,4 +312,13 @@
   <data name="sliding_puzzle" xml:space="preserve">
     <value>פאזל הזזה</value>
   </data>
+  <data name="taking_picture" xml:space="preserve">
+    <value>צלם תמונה</value>
+  </data>
+  <data name="save_and_continue" xml:space="preserve">
+    <value>שמור והמשך</value>
+  </data>
+  <data name="take_picture" xml:space="preserve">
+    <value>צלמו תמונה</value>
+  </data>
 </root>

@@ -108,6 +108,14 @@ namespace trumpeldor
                 };
                 return sp;
             }
+            else if(TakingPicture.isMyClassName(className))
+            {
+                TakingPicture tp = new TakingPicture
+                {
+                    id = (int)obj["id"]
+                };
+                return tp;
+            }
             return null;
         }
 

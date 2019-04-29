@@ -7,7 +7,7 @@ using Plugin;
 using Plugin.Media;
 using Plugin.Media.Abstractions;
 using trumpeldor;
-
+using trumpeldor.SheredClasses;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -24,11 +24,14 @@ namespace trumpeldor.Views
         string aPpath;
         string path;
         ImageSource imgSrc;
+        private ContentPage nextPage;
+        private GameController gc;
 
-        public TakingPicturePage ()
+        public TakingPicturePage (TakingPicture tp, ContentPage nextPage)
 		{
 			InitializeComponent ();
             pc = PhotosController.GetInstance();
+            this.nextPage = nextPage;
             CameraButton.Clicked += CameraButton_Clicked;
         }
 
@@ -47,7 +50,6 @@ namespace trumpeldor.Views
                     SaveToAlbum = true,
                     Directory = "trumpeldor",
                     Name = "photo" + count.ToString()
-                    
                 });
                 count++;
                 //save btn
@@ -66,8 +68,8 @@ namespace trumpeldor.Views
                     //Get private path
                     path = photo.Path;
                 }
-                CameraButton.Text = "Save and Continue";
-                AddToLayout(BtnLayout, "ShareBtn", ShareButton_Clicked);
+                CameraButton.Text = AppResources.save_and_continue;
+                AddToLayout(BtnLayout,AppResources.share, ShareButton_Clicked);
 
 
                 clicked.IsEnabled = true;//enable button

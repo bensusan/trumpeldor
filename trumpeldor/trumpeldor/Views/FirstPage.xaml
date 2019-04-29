@@ -10,7 +10,7 @@
             <Button x:Name="playButton" Text="{translator:Translate play}" Clicked="Play_Button_Clicked" Style="{StaticResource largeButtonStyle}" AutomationId="PlayBtn"/>
             <Button Text="{translator:Translate how_to_play}" Clicked="HowToPlay_Button_Clicked" Style="{StaticResource largeButtonStyle}" />
             <Button Text="{translator:Translate information}" Clicked="Info_Button_Clicked" Style="{StaticResource largeButtonStyle}" AutomationId="InfoBtn"/>
-            <Button Text="Shortcut" Clicked="Shotrcut_Button_Clicked" Style="{StaticResource largeButtonStyle}" />
+            <!--<Button Text="Shortcut" Clicked="Shotrcut_Button_Clicked" Style="{StaticResource largeButtonStyle}" />-->
             <Image x:Name="tryImg" Style="{DynamicResource largeImageStyle}"/>
         </StackLayout>
     </ContentPage.Content>
