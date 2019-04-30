@@ -18,10 +18,14 @@ namespace trumpeldor.Views
         //private int width = 4;
         private List<JigsawTile> tiles;
         private Puzzle puzzle;
+        private GameController gc;
 
         public JigsawPuzzlePage(Puzzle puzzle)
         {
             InitializeComponent();
+            gc = GameController.getInstance();
+            scoreLabel.Text = AppResources.score + ": " + gc.GetScore();
+            how.Source = ServerConection.URL_MEDIA + "how.png";
             this.puzzle = puzzle;
             tiles = new List<JigsawTile>();
 
@@ -113,6 +117,8 @@ namespace trumpeldor.Views
                 }
             }
             //TODO puzzle solve
+            scoreLabel.Text = AppResources.score + ": " + gc.EditScore(GameController.SCORE_VALUE.Puzzle_Solved);
+            gc.FinishAttraction();
             await Navigation.PopModalAsync();
         }
 
@@ -124,6 +130,11 @@ namespace trumpeldor.Views
         private static double getXPositionOfTile(PanUpdatedEventArgs e, View tileView)
         {
             return tileView.X + tileView.TranslationX + e.TotalX;
+        }
+
+        private async void HowToPlay_Button_Clicked(object sender, EventArgs e)
+        {
+            await Navigation.PushModalAsync(new instructionsPage(puzzle));
         }
     }
 }

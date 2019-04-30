@@ -16,7 +16,7 @@
             </StackLayout>
             <Label Text="Trumpeldor" Style="{StaticResource titleStyle}"/>
             <ImageButton x:Name="playButton" Source="http://icons.iconarchive.com/icons/custom-icon-design/flatastic-9/512/Start-icon.png" Clicked="Play_Button_Clicked" Style="{StaticResource largeImageButtonStyle}" AutomationId="PlayBtn"/>
-            <Label x:Name="errorMessage" Style="{StaticResource labelStyle}"/>
+            <Label x:Name="errorMessage" Text="" Style="{StaticResource labelStyle}"/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

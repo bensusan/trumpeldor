@@ -97,6 +97,15 @@ namespace trumpeldor {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to טעיתם מספר פעמים. תאלצו המתין:.
+        /// </summary>
+        public static string aq_explanation {
+            get {
+                return ResourceManager.GetString("aq_explanation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to הגעת.
         /// </summary>
         public static string arrived {
@@ -133,7 +142,7 @@ namespace trumpeldor {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to המשך למסלול ארוך יותר.
+        ///   Looks up a localized string similar to הרחיבו את המסלול.
         /// </summary>
         public static string continue_to_longer_track {
             get {
@@ -241,11 +250,29 @@ namespace trumpeldor {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to תנו לנו משוב.
+        /// </summary>
+        public static string FeedbackPageTitle {
+            get {
+                return ResourceManager.GetString("FeedbackPageTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to רמז אחרון.
         /// </summary>
         public static string final_hint {
             get {
                 return ResourceManager.GetString("final_hint", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to סיימתם מסלול.
+        /// </summary>
+        public static string FinishTrackPageTitle {
+            get {
+                return ResourceManager.GetString("FinishTrackPageTitle", resourceCulture);
             }
         }
         
@@ -259,11 +286,29 @@ namespace trumpeldor {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to קבוצה.
+        /// </summary>
+        public static string group {
+            get {
+                return ResourceManager.GetString("group", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to שם קבוצה:.
         /// </summary>
         public static string group_name {
             get {
                 return ResourceManager.GetString("group_name", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to צרו קבוצה.
+        /// </summary>
+        public static string GroupCreationPageTitle {
+            get {
+                return ResourceManager.GetString("GroupCreationPageTitle", resourceCulture);
             }
         }
         
@@ -304,6 +349,33 @@ namespace trumpeldor {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to מידע.
+        /// </summary>
+        public static string InformationPageTitle {
+            get {
+                return ResourceManager.GetString("InformationPageTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to הנחיות.
+        /// </summary>
+        public static string InstructionsPageTitle {
+            get {
+                return ResourceManager.GetString("InstructionsPageTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to פתרו את הפאזל.
+        /// </summary>
+        public static string JigsawPuzzlePageTitle {
+            get {
+                return ResourceManager.GetString("JigsawPuzzlePageTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to הרמז האחרון חושף את המיקום של האטרקצייה על המפה, האם אתה בטוח שברצונך להשתמש ברמז זה?.
         /// </summary>
         public static string Last_Hint_Alert_Message {
@@ -331,6 +403,15 @@ namespace trumpeldor {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to טבלת מובילים.
+        /// </summary>
+        public static string LeadingTablePageTitle {
+            get {
+                return ResourceManager.GetString("LeadingTablePageTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to דלג.
         /// </summary>
         public static string login_as_anonymous {
@@ -354,6 +435,15 @@ namespace trumpeldor {
         public static string login_with_google {
             get {
                 return ResourceManager.GetString("login_with_google", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to התחברו.
+        /// </summary>
+        public static string LoginsPageTitle {
+            get {
+                return ResourceManager.GetString("LoginsPageTitle", resourceCulture);
             }
         }
         
@@ -390,6 +480,15 @@ namespace trumpeldor {
         public static string mission {
             get {
                 return ResourceManager.GetString("mission", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ענו על השאלה.
+        /// </summary>
+        public static string MultipleChoiceQuestionPageTitle {
+            get {
+                return ResourceManager.GetString("MultipleChoiceQuestionPageTitle", resourceCulture);
             }
         }
         
@@ -619,6 +718,15 @@ namespace trumpeldor {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to פתרו את הפאזל.
+        /// </summary>
+        public static string SlidingPuzzlePageTitle {
+            get {
+                return ResourceManager.GetString("SlidingPuzzlePageTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to התחל מסלול.
         /// </summary>
         public static string start_trip {
@@ -651,6 +759,15 @@ namespace trumpeldor {
         public static string taking_picture {
             get {
                 return ResourceManager.GetString("taking_picture", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to צלמו תמונה.
+        /// </summary>
+        public static string TakingPicturePageTitle {
+            get {
+                return ResourceManager.GetString("TakingPicturePageTitle", resourceCulture);
             }
         }
         

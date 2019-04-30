@@ -1,16 +1,18 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="trumpeldor.Views.informationPage">
+             x:Class="trumpeldor.Views.informationPage"
+             xmlns:translator="clr-namespace:trumpeldor.Helpers">
     <ContentPage.Content>
         <StackLayout Style="{DynamicResource mainStackLayout}">
-            <Label x:Name="generalInformation" AutomationId="InfoTxt" />
-            <ScrollView x:Name="galleryImages" Orientation="Horizontal">
-                <StackLayout x:Name="stackGalleryImages" Orientation="Horizontal">
+            <Label Text="{translator:Translate InformationPageTitle}" Style="{StaticResource titleStyle}"/>
+            <Label x:Name="generalInformation" AutomationId="InfoTxt" Style="{StaticResource labelStyle}"/>
+            <ScrollView x:Name="galleryImages" Orientation="Horizontal" Style="{StaticResource scrollView}" HorizontalOptions="StartAndExpand">
+                <StackLayout x:Name="stackGalleryImages" Orientation="Horizontal" Style="{StaticResource mainStackLayout}">
                 </StackLayout>
             </ScrollView>
-            <ScrollView x:Name="galleryVideos" Orientation="Horizontal">
-                <StackLayout x:Name="stackGalleryVideos" Orientation="Horizontal">
+            <ScrollView x:Name="galleryVideos" Orientation="Horizontal" Style="{StaticResource scrollView}" HorizontalOptions="StartAndExpand">
+                <StackLayout x:Name="stackGalleryVideos" Orientation="Horizontal" Style="{StaticResource mainStackLayout}">
                 </StackLayout>
             </ScrollView>
         </StackLayout>

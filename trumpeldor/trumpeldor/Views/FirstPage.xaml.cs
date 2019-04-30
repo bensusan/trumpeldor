@@ -19,6 +19,9 @@ namespace trumpeldor.Views
     public partial class FirstPage : ContentPage
     {
         private GameController gc;
+        private CultureInfo hebrew = new CultureInfo("he");
+        private CultureInfo english = new CultureInfo("en");
+
         public FirstPage()
         {
             InitializeComponent();
@@ -26,8 +29,25 @@ namespace trumpeldor.Views
             englandButton.Source = ServerConection.URL_MEDIA + "united-kingdom.png";
             info.Source = ServerConection.URL_MEDIA + "information.png";
             how.Source = ServerConection.URL_MEDIA + "how.png";
-            CrossMultilingual.Current.CurrentCultureInfo = new CultureInfo("he");
+            CrossMultilingual.Current.CurrentCultureInfo = hebrew;
             gc = GameController.getInstance();
+        }
+
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+            DeleteBordersToCountries();
+            if (CrossMultilingual.Current.CurrentCultureInfo.Equals(hebrew))
+            {
+                israelButton.BorderWidth = 1;
+                israelButton.BorderColor = Color.Black;
+            }
+            else if (CrossMultilingual.Current.CurrentCultureInfo.Equals(english))
+            {
+                englandButton.BorderWidth = 1;
+                englandButton.BorderColor = Color.Black;
+            }
+
         }
 
         private async Task<bool> CanUserPlay()
@@ -74,18 +94,22 @@ namespace trumpeldor.Views
 
         private void English_Button_Clicked(object sender, EventArgs e)
         {
-            CrossMultilingual.Current.CurrentCultureInfo = new CultureInfo("en");
+            CrossMultilingual.Current.CurrentCultureInfo = english;
             DeleteBordersToCountries();
             englandButton.BorderWidth = 1;
             englandButton.BorderColor = Color.Black;
+            if(errorMessage.Text != "")
+                errorMessage.Text = AppResources.Out_Of_Valid_Sector_Title + "\n" + AppResources.Out_Of_Valid_Sector_Message;
         }
 
         private void Hebrew_Button_Clicked(object sender, EventArgs e)
         {
-            CrossMultilingual.Current.CurrentCultureInfo = new CultureInfo("he");
+            CrossMultilingual.Current.CurrentCultureInfo = hebrew;
             DeleteBordersToCountries();
             israelButton.BorderWidth = 1;
             israelButton.BorderColor = Color.Black;
+            if (errorMessage.Text != "")
+                errorMessage.Text = AppResources.Out_Of_Valid_Sector_Title + "\n" + AppResources.Out_Of_Valid_Sector_Message;
         }
 
         private void DeleteBordersToCountries()

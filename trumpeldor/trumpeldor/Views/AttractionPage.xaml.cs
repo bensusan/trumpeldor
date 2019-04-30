@@ -73,7 +73,7 @@ namespace trumpeldor.Views
 
         private async void QuestionButton_Clicked(object sender, EventArgs e)
         {
-            await Navigation.PushModalAsync(new MultipleChoiceQuestionPage(this));
+            await Navigation.PushModalAsync(new MultipleChoiceQuestionPage());
         }
     }
 }
