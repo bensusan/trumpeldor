@@ -21,12 +21,10 @@ namespace trumpeldor.Views
 
         bool doneWaiting = false;
         int numOfSecondsLeft = 5;
-        private ContentPage nextPage;
 
-        public MultipleChoiceQuestionPage (ContentPage nextPage)
+        public MultipleChoiceQuestionPage ()
 		{
 			InitializeComponent ();
-            this.nextPage = nextPage;
             this.mistakes = 0;
             gc = GameController.getInstance();
             this.aq = gc.currentTrip.GetCurrentAttraction().americanQuestion;
@@ -89,78 +87,47 @@ namespace trumpeldor.Views
         }
         private async void Correct_Answer_Button_Clicked(object sender, EventArgs e)
         {
-            scoreLabel.Text = AppResources.score + ": " + gc.EditScore(GameController.SCORE_VALUE.AQ_Correct);
-            foreach (Button answer in answersLayout.Children)
-            {
-                //answer.BackgroundColor = Color.Default;
-                answer.Style = (Style)Application.Current.Resources["largeButtonStyle"];
-            }
-            Color regular = ((Button)sender).BackgroundColor;
+            //foreach (Button answer in answersLayout.Children)
+            //    answer.Style = (Style)Application.Current.Resources["largeButtonStyle"];
             ((Button)sender).BackgroundColor = Color.Green;
             await Task.Delay(100);
+            scoreLabel.Text = AppResources.score + ": " + gc.EditScore(GameController.SCORE_VALUE.AQ_Correct);
             gc.FinishAttraction();
 
-            ((Button)sender).BackgroundColor = regular;
-
             await Navigation.PopModalAsync();
-            //await Navigation.PopModalAsync();
-            //await Navigation.PopModalAsync();
-            //var existingPages = Navigation.NavigationStack.ToList();
-            //foreach (var page in existingPages)
-            //{
-            //    Navigation.RemovePage(page);
-            //}
-            //Application.Current.MainPage = nextPage;
-
         }
         private async void Wrong_Answer_Button_Clicked(object sender, EventArgs e)
         {
             scoreLabel.Text = AppResources.score + ": " + gc.EditScore(GameController.SCORE_VALUE.AQ_Mistake);
-            foreach (Button answer in answersLayout.Children)
-            {
-                //answer.BackgroundColor = Color.Default;
-                answer.Style = (Style)Application.Current.Resources["largeButtonStyle"];
-            }
+            //foreach (Button answer in answersLayout.Children)
+            //    answer.Style = (Style)Application.Current.Resources["largeButtonStyle"];
             Color regular = ((Button)sender).BackgroundColor;
             ((Button)sender).BackgroundColor = Color.Red;
-            await Task.Delay(100);
+            await Task.Delay(50);
             mistakes += 1;
             if (mistakes >= DESIRED_MISTAKES)
             {
-                await DisplayAlert(
-                    AppResources.Too_Much_Mistakes_In_AQ_title,
-                    AppResources.Too_Much_Mistakes_In_AQ_Message_Part1
-                    + " " + DESIRED_MISTAKES + " "
-                    + AppResources.Too_Much_Mistakes_In_AQ_Message_Part2
-                    + " " + DESIRED_SECONDS_TO_WAIT + " "
-                    + AppResources.Too_Much_Mistakes_In_AQ_Message_Part3,
-                    AppResources.ok);
+                //await DisplayAlert(
+                //    AppResources.Too_Much_Mistakes_In_AQ_title,
+                //    AppResources.Too_Much_Mistakes_In_AQ_Message_Part1
+                //    + " " + DESIRED_MISTAKES + " "
+                //    + AppResources.Too_Much_Mistakes_In_AQ_Message_Part2
+                //    + " " + DESIRED_SECONDS_TO_WAIT + " "
+                //    + AppResources.Too_Much_Mistakes_In_AQ_Message_Part3,
+                //    AppResources.ok);
 
-                //Device.StartTimer(TimeSpan.FromSeconds(1), () => callBack());
-                //while (!doneWaiting) ;
-                //doneWaiting = false;
-                for (int i = 0; i < DESIRED_SECONDS_TO_WAIT; i++)
-                {
-                    //await DisplayAlert("" + i, "", AppResources.ok);
-                    var t = Task.Delay(1000);
-                    t.Wait();
+                explanation.IsVisible = true;
+                numToWait.IsVisible = true;
+                for (int i = DESIRED_SECONDS_TO_WAIT; i >= 0; i--){
+                    numToWait.Text = i + "";
+                    await Task.Delay(1000);
                 }
-                await DisplayAlert("You are good to go", "", AppResources.ok);
+                numToWait.IsVisible = false;
+                explanation.IsVisible = false;
             }
+            else
+                await Task.Delay(100);
             ((Button)sender).BackgroundColor = regular;
-        }
-        
-        bool callBack()
-        {
-            Device.BeginInvokeOnMainThread(() => DisplayAlert("" + numOfSecondsLeft, "", AppResources.ok));
-            if (numOfSecondsLeft == 1)
-            {
-                numOfSecondsLeft = 5;
-                doneWaiting = true;
-                return false;
-            }
-            numOfSecondsLeft--;
-            return true;
         }
     }
 }

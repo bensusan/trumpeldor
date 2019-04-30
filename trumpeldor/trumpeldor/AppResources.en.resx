@@ -139,7 +139,7 @@
     <value>congrdulation you finish the track with</value>
   </data>
   <data name="continue_to_longer_track" xml:space="preserve">
-    <value>continue to longer track</value>
+    <value>Extend Your Track</value>
   </data>
   <data name="Do_you_want_to_continue_last_trip" xml:space="preserve">
     <value>Do you want to continue last trip?</value>
@@ -332,5 +332,44 @@
   </data>
   <data name="puzzle" xml:space="preserve">
     <value>Puzzle</value>
+  </data>
+  <data name="aq_explanation" xml:space="preserve">
+    <value>Too many mistakes. You should wait:</value>
+  </data>
+  <data name="FeedbackPageTitle" xml:space="preserve">
+    <value>Give Us Feedbacks</value>
+  </data>
+  <data name="FinishTrackPageTitle" xml:space="preserve">
+    <value>Finished Your Track</value>
+  </data>
+  <data name="group" xml:space="preserve">
+    <value>Group</value>
+  </data>
+  <data name="GroupCreationPageTitle" xml:space="preserve">
+    <value>Create Your Group</value>
+  </data>
+  <data name="InformationPageTitle" xml:space="preserve">
+    <value>Information</value>
+  </data>
+  <data name="InstructionsPageTitle" xml:space="preserve">
+    <value>Instructions</value>
+  </data>
+  <data name="JigsawPuzzlePageTitle" xml:space="preserve">
+    <value>Solve the Puzzle</value>
+  </data>
+  <data name="LeadingTablePageTitle" xml:space="preserve">
+    <value>Leading Table</value>
+  </data>
+  <data name="LoginsPageTitle" xml:space="preserve">
+    <value>Sign In</value>
+  </data>
+  <data name="MultipleChoiceQuestionPageTitle" xml:space="preserve">
+    <value>Answer the Question</value>
+  </data>
+  <data name="SlidingPuzzlePageTitle" xml:space="preserve">
+    <value>Solve the Puzzle</value>
+  </data>
+  <data name="TakingPicturePageTitle" xml:space="preserve">
+    <value>Take a Picture</value>
   </data>
 </root>

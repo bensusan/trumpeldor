@@ -5,12 +5,17 @@
              xmlns:translator="clr-namespace:trumpeldor.Helpers">
     <ContentPage.Content>
         <StackLayout Style="{DynamicResource mainStackLayout}">
-            <Button x:Name="CameraButton" Text="{translator:Translate take_picture}" Grid.Row="1" />
-            <StackLayout x:Name="BtnLayout" Style="{DynamicResource mainorStackLayout}">
-
+            <StackLayout Style="{StaticResource mainStackLayout}" Orientation="Horizontal">
+                <StackLayout x:Name="buttonsTopLayout" Orientation="Horizontal" HorizontalOptions="StartAndExpand">
+                    <ImageButton x:Name="how" Clicked="HowToPlay_Button_Clicked" Style="{StaticResource smallCircleImageButtonStyle}"/>
+                </StackLayout>
+                <Label x:Name = "scoreLabel" Style="{DynamicResource labelStyle}" HorizontalOptions="EndAndExpand"/>
             </StackLayout>
-            <Image x:Name="PhotoImage" />
-            
+            <Label Text="{translator:Translate TakingPicturePageTitle}" Style="{StaticResource titleStyle}"/>
+            <Image x:Name="PhotoImage" Style="{StaticResource baseImageStyle}"/>
+            <Button x:Name="CameraButton" Text="{translator:Translate take_picture}" Grid.Row="1" Style="{StaticResource largeButtonStyle}" />
+            <StackLayout x:Name="BtnLayout" Style="{DynamicResource mainStackLayout}">
+            </StackLayout>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

@@ -25,12 +25,17 @@ namespace trumpeldor.Views
         string path;
         ImageSource imgSrc;
         private GameController gc;
+        private TakingPicture tp;
 
         public TakingPicturePage (TakingPicture tp)
 		{
 			InitializeComponent ();
             pc = PhotosController.GetInstance();
+            gc = GameController.getInstance();
+            scoreLabel.Text = AppResources.score + ": " + gc.GetScore();
             CameraButton.Clicked += CameraButton_Clicked;
+            how.Source = ServerConection.URL_MEDIA + "how.png";
+            this.tp = tp;
         }
 
         private async void CameraButton_Clicked(object sender, EventArgs e)
@@ -82,6 +87,8 @@ namespace trumpeldor.Views
                     pc.AddToPhotosSourcesList(path);
 
                     //back to previous page
+                    scoreLabel.Text = AppResources.score + ": " + gc.EditScore(GameController.SCORE_VALUE.Taking_Picture_Done);
+                    gc.FinishAttraction();
                     await Navigation.PopModalAsync();
 
                 }
@@ -111,6 +118,7 @@ namespace trumpeldor.Views
             Button btn = new Button();
             btn.Text = btnName;
             btn.Clicked += e;
+            btn.Style = (Style)Application.Current.Resources["largeButtonStyle"];
             layout.Children.Add(btn);
         }
 
@@ -120,6 +128,11 @@ namespace trumpeldor.Views
             {
                 btn.IsEnabled = toEnable;
             }
+        }
+
+        private async void HowToPlay_Button_Clicked(object sender, EventArgs e)
+        {
+            await Navigation.PushModalAsync(new instructionsPage(tp));
         }
     }
 }

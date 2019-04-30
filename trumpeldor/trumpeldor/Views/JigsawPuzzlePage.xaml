@@ -1,7 +1,8 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="trumpeldor.Views.JigsawPuzzlePage">
+             x:Class="trumpeldor.Views.JigsawPuzzlePage"
+             xmlns:translator="clr-namespace:trumpeldor.Helpers">
 
     <ContentPage.Padding>
         <OnPlatform x:TypeArguments="Thickness"
@@ -10,7 +11,13 @@
 
     <ContentView SizeChanged="OnContainerSizeChanged">
         <StackLayout x:Name="stackLayout">
-
+            <StackLayout Style="{StaticResource mainStackLayout}" Orientation="Horizontal">
+                <StackLayout x:Name="buttonsTopLayout" Orientation="Horizontal" HorizontalOptions="StartAndExpand">
+                    <ImageButton x:Name="how" Clicked="HowToPlay_Button_Clicked" Style="{StaticResource smallCircleImageButtonStyle}"/>
+                </StackLayout>
+                <Label x:Name = "scoreLabel" Style="{DynamicResource labelStyle}" HorizontalOptions="EndAndExpand"/>
+            </StackLayout>
+            <Label Text="{translator:Translate JigsawPuzzlePageTitle}" Style="{StaticResource titleStyle}"/>
             <Button Opacity="0"
                     HorizontalOptions="CenterAndExpand"
                     VerticalOptions="CenterAndExpand" />

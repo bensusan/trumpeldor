@@ -1,12 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="trumpeldor.Views.instructionsPage">
+             x:Class="trumpeldor.Views.instructionsPage"
+             xmlns:translator="clr-namespace:trumpeldor.Helpers">
     <ContentPage.Content>
         <StackLayout Style="{DynamicResource mainStackLayout}">
-            <Label Text="Welcome to instructions"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
+            <Label Text="{translator:Translate InstructionsPageTitle}" Style="{StaticResource titleStyle}"/>
+            <Label x:Name="details" Text="Details about how the application works" Style="{StaticResource labelStyle}"/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

@@ -23,7 +23,7 @@ namespace trumpeldor.Views
         protected override void OnAppearing()
         {
             base.OnAppearing();
-            titleLabel.Text = AppResources.congrdulation_you_finish_the_track_with + " " + gc.GetScore() + " " + AppResources.points + " .";
+            scoreLabel.Text = AppResources.score + ": " + gc.GetScore();
         }
 
         private async Task<bool> GetFeedback()

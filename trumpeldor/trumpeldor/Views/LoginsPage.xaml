@@ -6,7 +6,7 @@
              BackgroundColor="White">
     <ContentPage.Content>
         <StackLayout Style="{DynamicResource mainStackLayout}" VerticalOptions="CenterAndExpand" Spacing="120">
-            <Label Text="{translator:Translate Sign_in}" Style="{StaticResource titleStyle}"/>
+            <Label Text="{translator:Translate LoginsPageTitle}" Style="{StaticResource titleStyle}"/>
             <!--<Button Text="{translator:Translate login_with_facebook}" Clicked="FacebookLogin_Clicked" Style="{StaticResource largeButtonStyle}" AutomationId="FacebookLoginBtn"/>
             <Button Text="{translator:Translate login_with_google}" Clicked="GoogleLogin_Clicked" Style="{StaticResource largeButtonStyle}"/>-->
             <StackLayout Style="{DynamicResource mainStackLayout}">

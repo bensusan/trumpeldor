@@ -5,7 +5,7 @@
              xmlns:translator="clr-namespace:trumpeldor.Helpers">
     <ContentPage.Content>
         <StackLayout x:Name="mainStack" Style="{DynamicResource mainStackLayout}">
-            <Label Text="{translator:Translate Create_your_group}" Style="{StaticResource titleStyle}"/>
+            <Label Text="{translator:Translate GroupCreationPageTitle}" Style="{StaticResource titleStyle}"/>
             <StackLayout Style="{DynamicResource mainStackLayout}" Orientation="Horizontal">
                 <Label x:Name="groupNameLabel" Text="{translator:Translate group_name}" Style="{StaticResource labelStyle}" WidthRequest="200"/>
                 <Entry x:Name="groupNameEntry" Style="{StaticResource entryStyle}" AutomationId="EnterGroupName" WidthRequest="200"/>
