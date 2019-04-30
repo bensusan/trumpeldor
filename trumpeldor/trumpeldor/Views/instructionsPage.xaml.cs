@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using trumpeldor.SheredClasses;
 
 namespace trumpeldor.Views
 {
@@ -16,8 +17,13 @@ namespace trumpeldor.Views
 		public instructionsPage ()
 		{
             InitializeComponent ();
-            //w.Source = "http://" + ServerConection.IP + ":" + ServerConection.PORT + "/media/y.png";
-            //w.Source = "https://www.xamarin.com/content/images/pages/forms/example-app.png";
         }
-	}
+
+        public instructionsPage(Entertainment entertainment)
+        {
+            InitializeComponent();
+            details.Text = entertainment.description;
+        }
+
+    }
 }

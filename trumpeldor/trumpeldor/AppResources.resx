@@ -139,7 +139,7 @@
     <value>ברכות סיימת את המסלול עם </value>
   </data>
   <data name="continue_to_longer_track" xml:space="preserve">
-    <value>המשך למסלול ארוך יותר</value>
+    <value>הרחיבו את המסלול</value>
   </data>
   <data name="Do_you_want_to_continue_last_trip" xml:space="preserve">
     <value>רוצה להמשיך את המסלול הקודם שלך?</value>
@@ -335,5 +335,44 @@
   </data>
   <data name="puzzle" xml:space="preserve">
     <value>פאזל</value>
+  </data>
+  <data name="aq_explanation" xml:space="preserve">
+    <value>טעיתם מספר פעמים. תאלצו המתין:</value>
+  </data>
+  <data name="FeedbackPageTitle" xml:space="preserve">
+    <value>תנו לנו משוב</value>
+  </data>
+  <data name="FinishTrackPageTitle" xml:space="preserve">
+    <value>סיימתם מסלול</value>
+  </data>
+  <data name="group" xml:space="preserve">
+    <value>קבוצה</value>
+  </data>
+  <data name="GroupCreationPageTitle" xml:space="preserve">
+    <value>צרו קבוצה</value>
+  </data>
+  <data name="InformationPageTitle" xml:space="preserve">
+    <value>מידע</value>
+  </data>
+  <data name="InstructionsPageTitle" xml:space="preserve">
+    <value>הנחיות</value>
+  </data>
+  <data name="JigsawPuzzlePageTitle" xml:space="preserve">
+    <value>פתרו את הפאזל</value>
+  </data>
+  <data name="LeadingTablePageTitle" xml:space="preserve">
+    <value>טבלת מובילים</value>
+  </data>
+  <data name="LoginsPageTitle" xml:space="preserve">
+    <value>התחברו</value>
+  </data>
+  <data name="MultipleChoiceQuestionPageTitle" xml:space="preserve">
+    <value>ענו על השאלה</value>
+  </data>
+  <data name="SlidingPuzzlePageTitle" xml:space="preserve">
+    <value>פתרו את הפאזל</value>
+  </data>
+  <data name="TakingPicturePageTitle" xml:space="preserve">
+    <value>צלמו תמונה</value>
   </data>
 </root>

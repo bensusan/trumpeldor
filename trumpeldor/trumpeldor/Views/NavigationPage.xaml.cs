@@ -20,7 +20,7 @@ namespace trumpeldor.Views
         private const double DESIRED_SECONDS = 10;
         public static bool isFirst = true;
         public Attraction nextAttraction;
-        public static int hintsIndex = 1, currIndex = 0;
+        public int hintsIndex = 1, currIndex = 0;
         public GameController gc;
         public LocationController lc;
         trumpeldor.SheredClasses.Point p, currLoc;
@@ -114,7 +114,7 @@ namespace trumpeldor.Views
 
         private void Next_Destination_Button_Clicked(object sender, EventArgs e)
         {
-            Device.BeginInvokeOnMainThread(async () => await DisplayAlert(AppResources.success, AppResources.You_have_Reached_Your_Destionation, AppResources.ok));
+            //Device.BeginInvokeOnMainThread(async () => await DisplayAlert(AppResources.success, AppResources.You_have_Reached_Your_Destionation, AppResources.ok));
             var existingPages = Navigation.NavigationStack.ToList();
             foreach (var page in existingPages)
             {

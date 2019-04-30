@@ -24,6 +24,7 @@ namespace trumpeldor.Views
 		{
             InitializeComponent ();
             this.gc = GameController.getInstance();
+            how.Source = ServerConection.URL_MEDIA + "how.png";
             this.sp = sp;
             tiles = new SlidingPuzzleTile[sp.width, sp.height];
             emptyRow = sp.width - 1;
@@ -121,7 +122,7 @@ namespace trumpeldor.Views
                 Console.WriteLine(e.StackTrace);
             }
 
-            scoreLabel.Text = "" + gc.EditScore(GameController.SCORE_VALUE.Sliding_Puzzle_Solved);
+            scoreLabel.Text = AppResources.score + ": " + gc.EditScore(GameController.SCORE_VALUE.Sliding_Puzzle_Solved);
             gc.FinishAttraction();
 
             await Navigation.PopModalAsync();
@@ -204,7 +205,13 @@ namespace trumpeldor.Views
             }
             isBusy = false;
         }
-    
+
+        private async void HowToPlay_Button_Clicked(object sender, EventArgs args)
+        {
+            await Navigation.PushModalAsync(new instructionsPage(sp));
+        }
+
+
 
     }
 }

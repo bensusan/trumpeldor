@@ -5,11 +5,8 @@
     <ContentPage.Content>
         <StackLayout Style="{DynamicResource mainStackLayout}">
             <Label x:Name="noPhotosLbl"/>
-            <ScrollView Content="ImgLayout">
-                <StackLayout x:Name="ImgLayout" Style="{DynamicResource mainorStackLayout}">
-
-
-                </StackLayout>
+            <ScrollView >
+                <StackLayout x:Name="ImgLayout" Style="{DynamicResource mainorStackLayout}"></StackLayout>
             </ScrollView>
 
             <!--<Image x:Name="PhotoImage" />-->

@@ -16,7 +16,9 @@ namespace trumpeldor
             AQ_Mistake = -2,
             AQ_Correct = 10,
             Attraction_Arrive = 50,
-            Sliding_Puzzle_Solved = 10
+            Sliding_Puzzle_Solved = 10,
+            Taking_Picture_Done = 10,
+            Puzzle_Solved = 10
         }
 
         private static GameController instance = null;
@@ -161,15 +163,10 @@ namespace trumpeldor
         }
 
         //get y.png for example return http://IP:PORT/media/y.png
-        public string GetMediaURLFromName(string pictureName)
-        {
-            return "http://" + ServerConection.IP + ":" + ServerConection.PORT + "/media/" + pictureName;
-        }
-
-        public String GetGeneralInformation()
-        {
-            return "some general information";
-        }
+        //public string GetMediaURLFromName(string pictureName)
+        //{
+        //    return "http://" + ServerConection.IP + ":" + ServerConection.PORT + "/media/" + pictureName;
+        //}
 
         public bool CanContinueToLongerTrack()
         {

@@ -34,19 +34,20 @@ namespace trumpeldor.Views
             int nextRow = feedbacks.RowDefinitions.Count;
             feedbacks.RowDefinitions.Add(new RowDefinition { Height = GridLength.Star });
             Label lbl = new Label { Text = fi.feedback.question };
-            lbl.SetDynamicResource(VisualElement.StyleProperty, "lableStyle");
+            lbl.SetDynamicResource(VisualElement.StyleProperty, "labelStyle");
             feedbacks.Children.Add(lbl, 0, nextRow);
             Feedback.Kinds kind;
             Feedback.kindToEnum.TryGetValue(fi.feedback.kind, out kind);
             Entry entry = null;
             if (kind == Feedback.Kinds.FeedBackText)
-                entry = new Entry { Keyboard = Keyboard.Text };
+                entry = new Entry { Keyboard = Keyboard.Text }; 
             else if (kind == Feedback.Kinds.FeedBackRating)
-                entry = new Entry { Keyboard = Keyboard.Numeric };
-            if(fi.answer != null)
+                entry = new Entry { Keyboard = Keyboard.Numeric };  //TODO - change to stars according to link
+            if (fi.answer != null)
                 entry.Text = fi.answer;
+            feedbacks.RowDefinitions.Add(new RowDefinition { Height = GridLength.Star });
             entry.SetDynamicResource(VisualElement.StyleProperty, "entryStyle");
-            feedbacks.Children.Add(entry, 1, nextRow);
+            feedbacks.Children.Add(entry, 0, nextRow+1);
         }
 
         private void Reply_Button_Clicked(object sender, EventArgs e)

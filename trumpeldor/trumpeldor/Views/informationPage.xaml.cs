@@ -15,18 +15,24 @@ namespace trumpeldor.Views
 	{
         GameController gc;
         bool isGeneral;
+        string generalInfoTextStart = "";
+
 		public informationPage ()
 		{
 			InitializeComponent ();
             gc = GameController.getInstance();
-            generalInformation.Text = gc.GetGeneralInformation();
+            generalInfoTextStart = "General information, links, ...";
+            generalInformation.FormattedText = new FormattedString();
+            generalInformation.FormattedText.Spans.Add(new Span { Text = generalInfoTextStart, Style = (Style)Application.Current.Resources["labelStyle"] });
             isGeneral = true;
             SetScrollViews(gc.GetMainImages(), gc.GetMainVideos());
         }
 
         public informationPage(Attraction attraction) : this()
         {
-            generalInformation.Text = attraction.description;
+            generalInfoTextStart = attraction.description;
+            generalInformation.FormattedText = new FormattedString();
+            generalInformation.FormattedText.Spans.Add(new Span { Text = generalInfoTextStart, Style = (Style)Application.Current.Resources["labelStyle"] });
             isGeneral = false;
             SetScrollViews(attraction.picturesURLS, attraction.videosURLS);
         }
@@ -37,7 +43,7 @@ namespace trumpeldor.Views
             {
                 stackGalleryImages.Children.Add(new Image
                 {
-                    Source = gc.GetMediaURLFromName(pictureURL),
+                    Source = pictureURL,
                     HeightRequest = gc.GetHeightSizeOfPage() / 3,
                     WidthRequest = gc.GetWidthSizeOfPage()*3/4
                 });
@@ -46,7 +52,7 @@ namespace trumpeldor.Views
             {
                 stackGalleryVideos.Children.Add(new WebView
                 {
-                    Source = gc.GetMediaURLFromName(videoURL),
+                    Source = videoURL,
                     HeightRequest = gc.GetHeightSizeOfPage()/3,
                     WidthRequest = gc.GetWidthSizeOfPage() * 3 / 4
                 });
@@ -55,16 +61,14 @@ namespace trumpeldor.Views
 
         private void ShowMessagesInStart()
         {
-            Task.Run(() =>
-            {
-                List<OpenMessage> messagesToShow = gc.GetOpenMessages();
-                foreach (OpenMessage om in messagesToShow)
-                {
-                    Device.BeginInvokeOnMainThread(async () => {
-                        await DisplayAlert(om.title, om.data, AppResources.ok);
-                    });
-                }
-            });
+            List<OpenMessage> messagesToShow = gc.GetOpenMessages();
+            foreach (OpenMessage om in messagesToShow) {
+                generalInformation.FormattedText.Spans.Add(new Span { Text = "\n\n" + om.title + ":", FontSize = 26, TextColor = Color.Black, FontAttributes = FontAttributes.Bold });
+                generalInformation.FormattedText.Spans.Add(new Span { Text = "\n" + om.data, FontSize = 20, TextColor = Color.Black });
+                //Device.BeginInvokeOnMainThread(async () => {
+                //    await DisplayAlert(om.title, om.data, AppResources.ok);
+                //});
+            }
         }
 
         protected override void OnAppearing()

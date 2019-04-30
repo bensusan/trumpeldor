@@ -16,6 +16,5 @@ namespace trumpeldor.SheredClasses
                 {"FT", Kinds.FeedBackText },
                 {"FR", Kinds.FeedBackRating }
             };
-
     }
 }
