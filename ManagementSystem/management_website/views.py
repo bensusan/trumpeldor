@@ -3,6 +3,10 @@ from django.shortcuts import render
 # Create your views here.
 
 
+def images_page(request):
+    return render(request, "aaaaa_example.html")
+
+
 def sign_in_page(request):
     return render(request, "sign_in.html")
 
@@ -129,3 +133,26 @@ def pick_delete_game_page(request):
 
 def delete_game_page(request):
     return render(request, "delete_game.html")
+
+
+from django.http import HttpResponse
+from django.shortcuts import render, redirect
+from .forms import *
+
+# Create your views here.
+
+def hotel_image_view(request):
+
+    if request.method == 'POST':
+        form = ImagesForm(request.POST, request.FILES)
+
+        if form.is_valid():
+            form.save()
+            return redirect('success')
+    else:
+        form = ImagesForm()
+    return render(request, 'hotel_image_form.html', {'form' : form})
+
+
+def success(request):
+	return HttpResponse('successfuly uploaded')
