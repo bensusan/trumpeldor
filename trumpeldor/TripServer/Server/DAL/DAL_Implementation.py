@@ -4,6 +4,7 @@ import null
 import datetime
 from Server.models import *
 from .DAL import DAL_Abstract
+import base64
 
 
 class DAL_Implementation(DAL_Abstract):
@@ -56,6 +57,8 @@ class DAL_Implementation(DAL_Abstract):
         return Trip.objects.filter(id=tripId).first()
 
     def add_attraction(self, name, x, y, description, picturesURLS, videosURLS):
+        with open("imageToSave.png", "wb") as fh:
+            fh.write(base64.decodebytes(picturesURLS))
         attraction = Attraction(name=name, x=x, y=y, description=description, picturesURLS=picturesURLS,
                                 videosURLS=videosURLS)
         attraction.save()
