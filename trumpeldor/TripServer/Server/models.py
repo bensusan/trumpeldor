@@ -54,13 +54,17 @@ class Entertainment(models.Model):
     description = models.TextField()
 
 
+class TakingPicture(Entertainment):
+    pass
+
+
 class FindTheDifferences(Entertainment):
     pictureURL = models.TextField()
     differences = JSONField()  # Should be list of x's and y's (Location of each difference)
 
 
 class Puzzle(Entertainment):
-    pictureURL = models.TextField()
+    piecesURLS = JSONField()# Should be list of paths
     width = models.IntegerField()
     height = models.IntegerField()
 
@@ -115,7 +119,6 @@ class Hint(models.Model):
 
     data = models.TextField()
     description = models.TextField()
-
 
 
 class Message(models.Model):

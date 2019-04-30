@@ -7,25 +7,29 @@ using System.Threading.Tasks;
 using trumpeldor.ViewModels;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using trumpeldor.SheredClasses;
+
 
 namespace trumpeldor.Views
 {
     public partial class JigsawPuzzlePage : ContentPage
     {
         private double tileSize;
-        private int width = 4;
+        //private int width = 4;
         private List<JigsawTile> tiles;
+        private Puzzle puzzle;
 
-        public JigsawPuzzlePage()
+        public JigsawPuzzlePage(Puzzle puzzle)
         {
             InitializeComponent();
+            this.puzzle = puzzle;
             tiles = new List<JigsawTile>();
 
-            for (int row = 0; row < width; row++)
+            for (int row = 0; row < puzzle.width; row++)
             {
-                for (int col = 0; col < width; col++)
+                for (int col = 0; col < puzzle.height; col++)
                 {
-                    JigsawTile tile = new JigsawTile(row, col);
+                    JigsawTile tile = new JigsawTile(row, col, puzzle.piecesURLS[row * puzzle.width + col]);
 
                     PanGestureRecognizer panGestureRecognizer = new PanGestureRecognizer();
                     panGestureRecognizer.PanUpdated += OnTilePanUpdated;
@@ -51,17 +55,17 @@ namespace trumpeldor.Views
                                                          StackOrientation.Horizontal;
 
             // Calculate tile size and position based on ContentView size.
-            tileSize = Math.Min(width, height) / this.width;
-            absoluteLayout.WidthRequest = this.width * tileSize;
-            absoluteLayout.HeightRequest = this.width * tileSize;
+            tileSize = Math.Min(width, height) / this.puzzle.width;
+            absoluteLayout.WidthRequest = this.puzzle.width * tileSize;
+            absoluteLayout.HeightRequest = this.puzzle.width * tileSize;
 
             Random random = new Random();
             foreach (View fileView in absoluteLayout.Children)
             {
                 JigsawTile tile = JigsawTile.Dictionary[fileView];
 
-                AbsoluteLayout.SetLayoutBounds(fileView, new Rectangle(random.NextDouble() * ((this.width - 1) * tileSize),
-                                        random.NextDouble() * ((this.width - 1) * tileSize), tileSize, tileSize));
+                AbsoluteLayout.SetLayoutBounds(fileView, new Rectangle(random.NextDouble() * ((this.puzzle.width - 1) * tileSize),
+                                        random.NextDouble() * ((this.puzzle.width - 1) * tileSize), tileSize, tileSize));
             }
         }
 
@@ -95,11 +99,11 @@ namespace trumpeldor.Views
                 tileView.TranslationY = tileSize * tile.correctRow - tileView.Y;
                 absoluteLayout.LowerChild(tileView);
                 tile.isSetOnPossition = true;
-                isPuzzleSolved();
+                isPuzzleSolvedAsync();
             }
         }
 
-        private void isPuzzleSolved()
+        private async Task isPuzzleSolvedAsync()
         {
             foreach (JigsawTile tile in tiles)
             {
@@ -109,7 +113,7 @@ namespace trumpeldor.Views
                 }
             }
             //TODO puzzle solve
-            DisplayAlert("", "puzzle solved", "OK");
+            await Navigation.PopModalAsync();
         }
 
         private static double getYPositionOfTile(PanUpdatedEventArgs e, View tileView)

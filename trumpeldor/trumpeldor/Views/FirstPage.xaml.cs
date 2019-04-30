@@ -19,57 +19,34 @@ namespace trumpeldor.Views
     public partial class FirstPage : ContentPage
     {
         private GameController gc;
-		public FirstPage ()
-		{
+        public FirstPage()
+        {
             InitializeComponent();
+            israelButton.Source = ServerConection.URL_MEDIA + "israel.png";
+            englandButton.Source = ServerConection.URL_MEDIA + "united-kingdom.png";
+            info.Source = ServerConection.URL_MEDIA + "information.png";
+            how.Source = ServerConection.URL_MEDIA + "how.png";
+            CrossMultilingual.Current.CurrentCultureInfo = new CultureInfo("he");
             gc = GameController.getInstance();
         }
 
-        protected override void OnAppearing()
+        private async Task<bool> CanUserPlay()
         {
-            base.OnAppearing();
-            ShowRelevantFunctionalitiesAccordingToLocation();
-    }
-
-        private void ShowRelevantFunctionalitiesAccordingToLocation()
-        {
-            Task.Run(() =>
-            { 
-                if (!gc.IsUserInValidSector())
-                {
-                    Device.BeginInvokeOnMainThread(async () => {
-                        await DisplayAlert(AppResources.Out_Of_Valid_Sector_Title, AppResources.Out_Of_Valid_Sector_Message, AppResources.ok);
-                    });
-                    if (ServerConection.DEBUG == 1)
-                        Device.BeginInvokeOnMainThread(async() => {
-                            await DisplayAlert("Debug Mode", "This functionality does not work in debug mode", "ok");
-                        });
-                    else
-                        playButton.IsVisible = false;
-                }
-            });
+            if (!gc.IsUserInValidSector()){
+                errorMessage.Text = AppResources.Out_Of_Valid_Sector_Title + "\n" + AppResources.Out_Of_Valid_Sector_Message;
+                if (ServerConection.DEBUG == 1)
+                    return await DisplayAlert("Debug Mode", "Do you want to continue", "yes", "no");
+                return false;
+            }
+            return true;
         }
 
         private Task<bool> AskPermissionToUseLocation()
         {
-
-            //Task.Run(async () =>
-            //{
-            //    Permission permission = Permission.Location;
-            //    var permissionStatus = await CrossPermissions.Current.CheckPermissionStatusAsync(permission);
-            //    while (permissionStatus != PermissionStatus.Granted)
-            //    {
-            //        var response = await CrossPermissions.Current.RequestPermissionsAsync(permission);
-            //        permissionStatus = response[permission];
-            //    }
-            //});
-
-            var task = Task.Run(async () =>
-            {
+            var task = Task.Run(async () =>{
                 Permission permission = Permission.Location;
                 var permissionStatus = await CrossPermissions.Current.CheckPermissionStatusAsync(permission);
-                if (permissionStatus != PermissionStatus.Granted)
-                {
+                if (permissionStatus != PermissionStatus.Granted){
                     var response = await CrossPermissions.Current.RequestPermissionsAsync(permission);
                     return response[permission] == PermissionStatus.Granted;
                 }
@@ -81,7 +58,8 @@ namespace trumpeldor.Views
         private async void Play_Button_Clicked(object sender, EventArgs e)
         {
             while (!await AskPermissionToUseLocation()) ;
-            await Navigation.PushModalAsync(new LoginsPage());
+            if(await CanUserPlay())
+                await Navigation.PushModalAsync(new LoginsPage());
         }
 
         private async void HowToPlay_Button_Clicked(object sender, EventArgs e)
@@ -92,6 +70,30 @@ namespace trumpeldor.Views
         private async void Info_Button_Clicked(object sender, EventArgs e)
         {
             await Navigation.PushModalAsync(new informationPage());
+        }
+
+        private void English_Button_Clicked(object sender, EventArgs e)
+        {
+            CrossMultilingual.Current.CurrentCultureInfo = new CultureInfo("en");
+            DeleteBordersToCountries();
+            englandButton.BorderWidth = 1;
+            englandButton.BorderColor = Color.Black;
+        }
+
+        private void Hebrew_Button_Clicked(object sender, EventArgs e)
+        {
+            CrossMultilingual.Current.CurrentCultureInfo = new CultureInfo("he");
+            DeleteBordersToCountries();
+            israelButton.BorderWidth = 1;
+            israelButton.BorderColor = Color.Black;
+        }
+
+        private void DeleteBordersToCountries()
+        {
+            foreach (View child in countriesStackLayout.Children){
+                ((ImageButton)child).BorderColor = countriesStackLayout.BackgroundColor;
+                ((ImageButton)child).BorderWidth = 0;
+            }
         }
     }
 }

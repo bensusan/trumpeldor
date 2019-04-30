@@ -151,6 +151,15 @@ namespace trumpeldor {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to צרו את הקבוצה שלכם.
+        /// </summary>
+        public static string Create_your_group {
+            get {
+                return ResourceManager.GetString("Create_your_group", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to סיימת יעד!.
         /// </summary>
         public static string Destionation_Complete {
@@ -205,6 +214,24 @@ namespace trumpeldor {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to תקלה בכניסה לחשבון גוגל.
+        /// </summary>
+        public static string error_in_google_login {
+            get {
+                return ResourceManager.GetString("error_in_google_login", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to לא ניתן להתחיל את הטיול. יש למלא את כל הפרטים..
+        /// </summary>
+        public static string error_in_group_creation {
+            get {
+                return ResourceManager.GetString("error_in_group_creation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to תגובה.
         /// </summary>
         public static string feedback {
@@ -232,7 +259,7 @@ namespace trumpeldor {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to קבוצה.
+        ///   Looks up a localized string similar to שם קבוצה:.
         /// </summary>
         public static string group_name {
             get {
@@ -304,7 +331,7 @@ namespace trumpeldor {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to אנונימי.
+        ///   Looks up a localized string similar to דלג.
         /// </summary>
         public static string login_as_anonymous {
             get {
@@ -430,7 +457,7 @@ namespace trumpeldor {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to אורך מסלול.
+        ///   Looks up a localized string similar to אורך מסלול:.
         /// </summary>
         public static string path_length {
             get {
@@ -448,7 +475,7 @@ namespace trumpeldor {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to שחקן.
+        ///   Looks up a localized string similar to מס&apos; שחקן.
         /// </summary>
         public static string player {
             get {
@@ -457,7 +484,7 @@ namespace trumpeldor {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to גילאי שחקנים.
+        ///   Looks up a localized string similar to גיל.
         /// </summary>
         public static string Players_Ages {
             get {
@@ -484,6 +511,15 @@ namespace trumpeldor {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to פאזל.
+        /// </summary>
+        public static string puzzle {
+            get {
+                return ResourceManager.GetString("puzzle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to שאלה.
         /// </summary>
         public static string question {
@@ -498,6 +534,15 @@ namespace trumpeldor {
         public static string Reply {
             get {
                 return ResourceManager.GetString("Reply", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to שמור והמשך.
+        /// </summary>
+        public static string save_and_continue {
+            get {
+                return ResourceManager.GetString("save_and_continue", resourceCulture);
             }
         }
         
@@ -556,6 +601,15 @@ namespace trumpeldor {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to התחברו.
+        /// </summary>
+        public static string Sign_in {
+            get {
+                return ResourceManager.GetString("Sign_in", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to פאזל הזזה.
         /// </summary>
         public static string sliding_puzzle {
@@ -579,6 +633,24 @@ namespace trumpeldor {
         public static string success {
             get {
                 return ResourceManager.GetString("success", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to צלמו תמונה.
+        /// </summary>
+        public static string take_picture {
+            get {
+                return ResourceManager.GetString("take_picture", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to צלם תמונה.
+        /// </summary>
+        public static string taking_picture {
+            get {
+                return ResourceManager.GetString("taking_picture", resourceCulture);
             }
         }
         

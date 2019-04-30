@@ -7,7 +7,7 @@ namespace trumpeldor.ViewModels
 {
     class JigsawTile
     {
-        const string UrlPrefix = "http://xamarin.github.io/xamarin-forms-book-samples/XamagonXuzzle/";
+        //const string UrlPrefix = "http://xamarin.github.io/xamarin-forms-book-samples/XamagonXuzzle/";
 
         public static Dictionary<View, JigsawTile> Dictionary { get; } = new Dictionary<View, JigsawTile>();
 
@@ -23,7 +23,7 @@ namespace trumpeldor.ViewModels
 
         public double lastKnownY { get; set; }
 
-        public JigsawTile(int row, int col)
+        public JigsawTile(int row, int col, string pictureName)
         {
             correctRow = row;
             correctCol = col;
@@ -31,19 +31,19 @@ namespace trumpeldor.ViewModels
             TileView = new ContentView
             {
                 Padding = new Thickness(1),
-                Content = getTileImage(row, col)
+                Content = new Image { Source = ImageSource.FromUri(new Uri(pictureName)) }
             };
 
             Dictionary.Add(TileView, this);
         }
 
-        private Image getTileImage(int row, int col)
-        {
-            //TODO get image from our server
-            return new Image
-            {
-                Source = ImageSource.FromUri(new Uri(UrlPrefix + "Bitmap" + row + col + ".png"))
-            };
-        }
+        //private Image getTileImage(int row, int col)
+        //{
+        //    //TODO get image from our server
+        //    return new Image
+        //    {
+        //        Source = ImageSource.FromUri(new Uri("Bitmap" + row + col + ".png"))
+        //    };
+        //}
     }
 }

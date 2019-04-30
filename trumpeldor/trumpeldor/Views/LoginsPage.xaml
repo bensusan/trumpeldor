@@ -2,12 +2,18 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="trumpeldor.Views.LoginsPage"
-             xmlns:translator="clr-namespace:trumpeldor.Helpers">
+             xmlns:translator="clr-namespace:trumpeldor.Helpers"
+             BackgroundColor="White">
     <ContentPage.Content>
-        <StackLayout Style="{DynamicResource mainStackLayout}">
-            <Button Text="{translator:Translate login_with_facebook}" Clicked="FacebookLogin_Clicked" Style="{StaticResource largeButtonStyle}" AutomationId="FacebookLoginBtn"/>
-            <!--<Button Text="{translator:Translate login_with_google}" Clicked="GoogleLogin_Clicked" Style="{StaticResource largeButtonStyle}"/>-->
-            <Button Text="{translator:Translate login_as_anonymous}" Clicked="Anonymus_Clicked" Style="{StaticResource largeButtonStyle}" AutomationId="AnonymusLoginBtn"/>
+        <StackLayout Style="{DynamicResource mainStackLayout}" VerticalOptions="CenterAndExpand" Spacing="120">
+            <Label Text="{translator:Translate Sign_in}" Style="{StaticResource titleStyle}"/>
+            <!--<Button Text="{translator:Translate login_with_facebook}" Clicked="FacebookLogin_Clicked" Style="{StaticResource largeButtonStyle}" AutomationId="FacebookLoginBtn"/>
+            <Button Text="{translator:Translate login_with_google}" Clicked="GoogleLogin_Clicked" Style="{StaticResource largeButtonStyle}"/>-->
+            <StackLayout Style="{DynamicResource mainStackLayout}">
+                <ImageButton x:Name="facebook" Clicked="FacebookLogin_Clicked" Style="{StaticResource regularImageButtonStyle}" AutomationId="FacebookLoginBtn"/>
+                <ImageButton x:Name="google" Clicked="GoogleLogin_Clicked" Style="{StaticResource regularImageButtonStyle}"/>
+                <Button Text="{translator:Translate login_as_anonymous}" Clicked="Anonymus_Clicked" Style="{StaticResource largeButtonStyle}" AutomationId="AnonymusLoginBtn"/>
+            </StackLayout>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

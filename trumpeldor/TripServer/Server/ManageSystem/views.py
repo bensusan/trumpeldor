@@ -236,7 +236,6 @@ class Attraction(generics.GenericAPIView):
         ans = json.loads(json.dumps(ans.data))
         return Response(ans)
 
-
 class Info(generics.GenericAPIView):
     serializer_class = InfoSerializer
     queryset = ''
@@ -334,6 +333,9 @@ class FindTheDifferencesList(generics.GenericAPIView):
         ans = json.loads(json.dumps(ans.data))
         return Response(ans)
 
+# def sign_in_page(request):
+#     return render(request, "signIn.html")
+
 
 # Create your views here.
 def images_view(request):
@@ -356,4 +358,3 @@ def success(request):
 
 def failure(request):
     return HttpResponse('failed :(')
-

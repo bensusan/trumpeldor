@@ -2,20 +2,33 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="trumpeldor.Views.NavigationPage"
+             xmlns:maps="clr-namespace:Xamarin.Forms.Maps;assembly=Xamarin.Forms.Maps"
              xmlns:translator="clr-namespace:trumpeldor.Helpers">
     <ContentPage.Content>
         <StackLayout Style="{DynamicResource mainStackLayout}">
-
-            <Label x:Name="scoreLabel" Style="{DynamicResource lableStyle}" AutomationId="scoreLbl"/>
-            <StackLayout x:Name="hintsLayout" Style="{DynamicResource mainorStackLayout}">
-               <!-- <Label Text="{translator:Translate hints}" Style="{DynamicResource lableStyle}"/> -->
-               <!-- <Button x:Name= "a" Clicked="DynamicBtn_Clicked"/> -->
+            <StackLayout Style="{StaticResource mainStackLayout}" Orientation="Horizontal">
+                <StackLayout x:Name="buttonsTopLayout" Orientation="Horizontal" HorizontalOptions="StartAndExpand">
+                    <ImageButton x:Name="v" Clicked="Next_Destination_Button_Clicked" Style="{StaticResource smallCircleImageButtonStyle}"/>
+                </StackLayout>
+                <Label x:Name="scoreLabel" Style="{DynamicResource labelStyle}" AutomationId="scoreLbl" HorizontalOptions="EndAndExpand"/>
             </StackLayout>
-            <Button x:Name="hintBtn" Text="{translator:Translate add_hint}" Clicked="Get_Hint_Button_Clicked" Style="{StaticResource largeButtonStyle}" AutomationId="AddHintBtn"/>
-            <Button Text="{translator:Translate You_have_Reached_Your_Destionation}" Clicked="Next_Destination_Button_Clicked" Style="{StaticResource largeButtonStyle}" />
-            <Label Text="{translator:Translate map}" Style="{DynamicResource lableStyle}"/>
-            <Button x:Name="mapImage" Clicked="mapImage_Clicked"/>
-            <!--<Image x:Name="mapImage" Style="{DynamicResource smallImageStyle}"/>-->
+            <Label Text="Trumpeldor" Style="{StaticResource titleStyle}"/>
+            <StackLayout Style="{StaticResource mainStackLayout}" Orientation="Horizontal" HorizontalOptions="Fill" Spacing="0" VerticalOptions="StartAndExpand">
+                <ImageButton x:Name="leftArrow" Clicked="LeftArrow_Clicked" HorizontalOptions="End" IsEnabled="False" Style="{StaticResource baseViewStyle}"/>
+                <Frame BorderColor="Black" CornerRadius="20" WidthRequest="200" HeightRequest="500" Padding="5" Margin="0">
+                    <StackLayout x:Name="hintStack" Style="{StaticResource mainStackLayout}" Orientation="Vertical" WidthRequest="200" HeightRequest="500" HorizontalOptions="Fill" VerticalOptions="Fill" Margin="1" Padding="1">
+                        <Label x:Name="hintText" Style="{StaticResource labelStyle}" IsVisible="False" WidthRequest="200" HeightRequest="500" HorizontalOptions="Fill" VerticalOptions="Fill"/>
+                        <WebView x:Name="hintWebView" IsVisible="False" WidthRequest="200" HeightRequest="500" HorizontalOptions="Fill" VerticalOptions="Fill"/>
+                        <maps:Map x:Name="hintMap" Focused="Map_Focused" WidthRequest="200" HeightRequest="500" IsVisible="False"/>
+                    </StackLayout>
+                </Frame>
+                <ImageButton x:Name="rightArrow" Clicked="RightArrow_Clicked" HorizontalOptions="Start" IsEnabled="False" Style="{StaticResource baseViewStyle}"/>
+                <Image x:Name="temperature" WidthRequest="70" HorizontalOptions="End" Style="{StaticResource baseViewStyle}"/>
+            </StackLayout>
+            <StackLayout x:Name="downStack" Style="{StaticResource mainStackLayout}" Orientation="Horizontal" HorizontalOptions="FillAndExpand" Margin="0" Padding="0">
+                <Button x:Name="hintBtn" Text="{translator:Translate add_hint}" Clicked="Get_Hint_Button_Clicked" Style="{StaticResource largeButtonStyle}" AutomationId="AddHintBtn" Margin="37,10,30,10"/>
+                <maps:Map x:Name="mapBtn" Focused="Map_Focused" WidthRequest="70" HeightRequest="140" Margin="0"/>
+            </StackLayout>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "416426124345",
+    "firebase_url": "https://trumpeldor.firebaseio.com",
+    "project_id": "trumpeldor",
+    "storage_bucket": "trumpeldor.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:416426124345:android:cee71a700629ab2f",
+        "android_client_info": {
+          "package_name": "com.companyname.trumpeldor"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "416426124345-igghe7dik01k4e6jrgtmikpevjm3auvm.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.companyname.trumpeldor",
+            "certificate_hash": "09d1a48856d1dcbc04ae4e4121df634faa057a2a"
+          }
+        },
+        {
+          "client_id": "416426124345-idohr96f8jhsjdnubf6k1r83pkco7gsr.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDFkzeLTjYlFzjZ-tnnHfqNu3Q8MUfzLxw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "416426124345-idohr96f8jhsjdnubf6k1r83pkco7gsr.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "416426124345-fr7pa2p2s8tcnc9mtkipcm49950vtm1m.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.companyname.trumpeldor"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

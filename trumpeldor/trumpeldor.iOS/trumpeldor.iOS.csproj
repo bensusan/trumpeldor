@@ -96,13 +96,23 @@
   <ItemGroup>
     <Compile Include="CustomMapRenderer.cs" />
     <Compile Include="AudioRender.cs" />
+    <Compile Include="Configuration\Configuration.cs" />
     <Compile Include="Configuration\IOSConfigurationStreamProvider.cs" />
     <Compile Include="Configuration\IOSConfigurationStreamProviderFactory.cs" />
+    <Compile Include="GoogleManager.cs" />
     <Compile Include="Main.cs" />
     <Compile Include="AppDelegate.cs" />
     <BundleResource Include="Assets\config.json" />
+    <Compile Include="ShareImplementation.cs" />
     <None Include="Entitlements.plist" />
-    <None Include="Info.plist" />
+    <None Include="GoogleService-Info.plist" />
+    <None Include="Info.plist">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Info.plist">
+      <SubType>Designer</SubType>
+    </None>
+    <Compile Include="PicturePickerImplementation.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -172,9 +182,21 @@
     <PackageReference Include="Xam.Plugin.Geolocator">
       <Version>4.5.0.6</Version>
     </PackageReference>
+    <PackageReference Include="Xam.Plugins.Forms.Svg">
+      <Version>1.0.0.27</Version>
+    </PackageReference>
+    <PackageReference Include="Xamarin.Auth">
+      <Version>1.6.0.4</Version>
+    </PackageReference>
+    <PackageReference Include="Xam.Plugin.Media">
+      <Version>4.0.1.5</Version>
+    </PackageReference>
     <PackageReference Include="Xamarin.Forms" Version="3.6.0.220655" />
     <PackageReference Include="Xamarin.Forms.Maps">
       <Version>3.6.0.220655</Version>
+    </PackageReference>
+    <PackageReference Include="Xamarin.Google.iOS.SignIn">
+      <Version>4.4.0</Version>
     </PackageReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
@@ -185,6 +207,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\israel.png" />
     <Content Include="TaDa.mp3" />
   </ItemGroup>
 </Project>

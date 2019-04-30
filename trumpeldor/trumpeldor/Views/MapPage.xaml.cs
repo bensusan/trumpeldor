@@ -32,32 +32,7 @@ namespace trumpeldor.Views
         public GameController gc;
         public LocationController lc;
         public Attraction nextAttraction;
-        public MapPage(trumpeldor.SheredClasses.Point p)
-        {
-            InitializeComponent();
-            gc = GameController.getInstance();
-            lc = LocationController.GetInstance();
-            nextAttraction = gc.currentTrip.GetCurrentAttraction();
-            if (firstListInit)
-            {
-                traveledPins = new List<Position>();
-                firstListInit = false;
-            }
-            //-------------------------------------------------------------------
-            var map = new CustomMap
-            {
-                MapType = MapType.Street,
-                WidthRequest = 100,
-                HeightRequest = 960,
-                VerticalOptions = LayoutOptions.FillAndExpand
-            };
-            map.MoveToRegion(MapSpan.FromCenterAndRadius(new Position(31.262820, 34.802352), Distance.FromKilometers(3)).WithZoom(10));
-            //List<SheredClasses.Attraction> visitedTrackPoints = ((App)(Application.Current)).getGameController().GetVisitedAttractions();
-            AddCurrlocationToMap(map);
-            AddPointToMap(map, p);
-            
-            Content = map;
-        }
+
 
         public MapPage()
         {
@@ -67,7 +42,7 @@ namespace trumpeldor.Views
             nextAttraction = gc.currentTrip.GetCurrentAttraction();
             p = new trumpeldor.SheredClasses.Point(nextAttraction.x, nextAttraction.y);
             //-------------------------------------------------------------------
-            /*var*/ map = new CustomMap
+            map = new CustomMap
             {
                 MapType = MapType.Street,
                 WidthRequest = 100,
@@ -75,8 +50,6 @@ namespace trumpeldor.Views
                 VerticalOptions = LayoutOptions.FillAndExpand
             };
             //-------------------------------------------------------------------
-            //gc.currentTrip.GetCurrentAttraction().x
-            //map.MoveToRegion(MapSpan.FromCenterAndRadius(new Position(31.262820, 34.802352), Distance.FromKilometers(3)).WithZoom(10));
             List<SheredClasses.Attraction> visitedTrackPoints = gc.GetVisitedAttractions();
             foreach (SheredClasses.Attraction attraction in visitedTrackPoints)
             {
@@ -95,18 +68,8 @@ namespace trumpeldor.Views
             Content = map;
             DrawPastPath(map);
             map.MoveToRegion(MapSpan.FromCenterAndRadius(new Position(31.262820, 34.802352), Distance.FromKilometers(3)).WithZoom(10));
-            /*
-            Task.Run(async () =>
-            {
-                await TimerCheck(map);
-            }).ConfigureAwait(false);
-            */
-
-            //TimerCheck(map);
-
         }
         
-
         public async Task TimerCheck(CustomMap map)
         {
             Device.StartTimer(TimeSpan.FromSeconds(DESIRED_SECONDS), () =>
@@ -115,9 +78,6 @@ namespace trumpeldor.Views
                 {
                     OnLocationCheck(map);
                     lc.AddToPositionsHistory(new Plugin.Geolocator.Abstractions.Position(currLat, currLong));
-                    //DrawPastPath(map);
-                    //if (traveledPins != null)
-                       // traveledPins.Add(new Position(currLat, currLong));
                     if (DistanceBetween(currLat, currLong, p.x, p.y) > DESIRED_DISTANCE)
                     {
                         DisplayAlert(AppResources.not_arrived, DistanceBetween(currLat, currLong, p.x, p.y).ToString()+"curr lat: "+ currLat.ToString() +"curr long: "+ currLong.ToString() +"x: "+p.x + "y: " + p.y+" point info: "+nextAttraction.name, AppResources.close);
@@ -139,7 +99,6 @@ namespace trumpeldor.Views
             });
         }
 
-
         private void AddCurrlocationToMap (Map map)
         {
             //var locator = CrossGeolocator.Current;
@@ -159,7 +118,7 @@ namespace trumpeldor.Views
 
 
 
-        private void AddPointToMap(Map map, trumpeldor.SheredClasses.Point p)
+        public void AddPointToMap(Map map, trumpeldor.SheredClasses.Point p)
         {
             Pin toAdd = new Pin
             {

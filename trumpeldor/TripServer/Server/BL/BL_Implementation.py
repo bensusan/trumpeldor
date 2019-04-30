@@ -90,7 +90,7 @@ class BL_Implementation(BL_Abstract):
         return self.DAL.getFeedbackInstances(trip)
 
     def getAmericanQuestion(self, id_attraction):
-        attr = self.get_attraction(id_attraction)
+        attr = self.get_attraction(id_attraction['id'])
         return self.DAL.getAmericanQuestion(attr)
 
     def getAttraction(self, attraction):
@@ -166,16 +166,17 @@ class BL_Implementation(BL_Abstract):
         entertainment = self.DAL.getSlidingPuzzle(attr)
         classSerializer = SlidingPuzzleSerializer
         className = 'SlidingPuzzle'
-        # TODO - Other entertainments
-        # if entertainment is None:
-        #     entertainment = self.DAL.getPuzzle(attr)
-        #     classSerializer = PuzzleSerializer
-        #     className = 'Puzzle'
-        #     if entertainment is None:
-        #         entertainment = self.DAL.getFindTheDifferences(attr)
-        #         classSerializer = FindTheDifferencesSerializer
-        #         className = 'FindTheDifferences'
+        if entertainment is None:
+            entertainment = self.DAL.getPuzzle(attr)
+            classSerializer = PuzzleSerializer
+            className = 'Puzzle'
+            if entertainment is None:
+                entertainment = self.DAL.getTakingPicture(attr)
+                classSerializer = TakingPictureSerializer
+                className = 'TakingPicture'
+        print(entertainment)
         entertainment = classSerializer(entertainment)
+        print(entertainment)
         entertainment = json.loads(json.dumps(entertainment.data))
         # entertainmentWrapper = '{"className":' + className + ',"object":' + entertainment + '}'
         entertainmentWrapper = {'className': className, 'object': entertainment}

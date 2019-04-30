@@ -10,7 +10,7 @@ namespace trumpeldor.ViewModels
 	public class SlidingPuzzleTile 
 	{
         //const string UrlPrefix = "http://xamarin.github.io/xamarin-forms-book-samples/XamagonXuzzle/";
-        string urlPrefix = "http://" + ServerConection.IP + ":" + ServerConection.PORT + "/media/";
+        //string urlPrefix = "http://" + ServerConection.IP + ":" + ServerConection.PORT + "/media/";
 
         public static Dictionary<View, SlidingPuzzleTile> Dictionary { get; } = new Dictionary<View, SlidingPuzzleTile>();
 
@@ -35,7 +35,7 @@ namespace trumpeldor.ViewModels
             {
                 Padding = new Thickness(1),
                 //Content = getTileImage(row, col)
-                Content = new Image { Source = ImageSource.FromUri(new Uri(urlPrefix + pictureName)) }
+                Content = new Image { Source = ImageSource.FromUri(new Uri(pictureName)) }
             };
 
             Dictionary.Add(TileView, this);

@@ -15,17 +15,27 @@ namespace trumpeldor.Views
     public partial class groupCreationPage : ContentPage
     {
         private GameController gc;
-        //private GameController.PathLength selectedPathLength;
         private int selectedPathLength;
+        private static int DELETE_PLAYER_COLUMN = 0, PLAYER_NUMBER_COLUMN = 1, PLAYER_AGE_COLUMN = 2; 
 
         public groupCreationPage() : this("", User.SOCIAL_NETWORK.Anonymous){}
 
         public groupCreationPage(string userName, User.SOCIAL_NETWORK socialNetwork){
             InitializeComponent();
+            InitPicker();
+            addButton.Source = ServerConection.URL_MEDIA + "plus.png";
+            removeButton.Source = ServerConection.URL_MEDIA + "delete.png";
             gc = GameController.getInstance();
             string socialnetworkString;
             User.SocialNetwork2string.TryGetValue(socialNetwork, out socialnetworkString);
             gc.SignUp(userName, socialnetworkString);
+        }
+
+        private void InitPicker()
+        {
+            picker.Items.Add(AppResources.short_path);
+            picker.Items.Add(AppResources.medium_path);
+            picker.Items.Add(AppResources.long_path);
         }
 
         protected override async void OnAppearing()
@@ -51,9 +61,7 @@ namespace trumpeldor.Views
                     else
                         dialogAns = 2;
                     
-                    
-                    if (dialogAns == 1)
-                    {
+                    if (dialogAns == 1){
                         gc.ContinuePreviousTrip();
                         Application.Current.MainPage = new NavigationPage();
                         return;
@@ -67,51 +75,29 @@ namespace trumpeldor.Views
                         AddRowToPlayersGrid(ans.playersAges[i].ToString());
             }
         }
-
-        private void Select_Short_Path_Button_Clicked(object sender, EventArgs e)
-        {
-            Select_Path_Button_Clicked(sender, e);
-            //selectedPathLength = GameController.PathLength.shortPath;
-            selectedPathLength = 1;
-        }
-        private void Select_Medium_Path_Button_Clicked(object sender, EventArgs e)
-        {
-            Select_Path_Button_Clicked(sender, e);
-            //selectedPathLength = GameController.PathLength.mediumPath;
-            selectedPathLength = 2;
-        }
-        private void Select_Long_Path_Button_Clicked(object sender, EventArgs e)
-        {
-            Select_Path_Button_Clicked(sender, e);
-            //selectedPathLength = GameController.PathLength.longPath;
-            selectedPathLength = 3;
-        }
-
-        private void Select_Path_Button_Clicked(object sender, EventArgs e)
-        {
-            StartTripButton.IsEnabled = true;
-            int count = lengthButtonGroup.Children.Count;
-            View v = null;
-            for (int i = 0; i < count; i++)
-            {
-                v = lengthButtonGroup.Children.ElementAt(i);
-                v.IsEnabled = true;
-            }
-            ((Button)sender).IsEnabled = false;
-        }
         
         private void AddRowToPlayersGrid(String playerAge)
         {
             if (playerAge != null)
                 ((Entry)agesGrid.Children.ElementAt(agesGrid.Children.Count - 1)).Text = playerAge;
-            int nextRow = agesGrid.RowDefinitions.Count;
+            int nextRow = agesGrid.Children.Select(c => Grid.GetRow(c)).Max()+1;//agesGrid.RowDefinitions.Count;
             agesGrid.RowDefinitions.Add(new RowDefinition { Height = GridLength.Star });
+
+            //Delete imageButton addition
+            ImageButton removeButton = new ImageButton { Source = ServerConection.URL_MEDIA + "delete.png" };
+            removeButton.Clicked += removeRow_Clicked;
+            removeButton.SetDynamicResource(VisualElement.StyleProperty, "regularCircleImageButtonStyle");
+            agesGrid.Children.Add(removeButton, DELETE_PLAYER_COLUMN, nextRow);
+
+            //Player number addition
             Label lbl = new Label { Text = nextRow + ")" };
-            lbl.SetDynamicResource(VisualElement.StyleProperty, "lableStyle");
-            agesGrid.Children.Add(lbl, 0, nextRow);
+            lbl.SetDynamicResource(VisualElement.StyleProperty, "labelStyle");
+            agesGrid.Children.Add(lbl, PLAYER_NUMBER_COLUMN, nextRow);
+
+            //Player's age addition
             Entry entry = new Entry { Keyboard = Keyboard.Numeric };            
             entry.SetDynamicResource(VisualElement.StyleProperty, "entryStyle");
-            agesGrid.Children.Add(entry, 1, nextRow);
+            agesGrid.Children.Add(entry, PLAYER_AGE_COLUMN, nextRow);
         }
 
 
@@ -124,40 +110,35 @@ namespace trumpeldor.Views
         {
             String groupName = groupNameEntry.Text;
             List<int> agesList = new List<int>();
-            try
-            {
-                foreach (View child in agesGrid.Children)
-                {
-                    if (child is Entry)
-                    {
-                        string age = ((Entry)child).Text;
-                        if (age != "" && age != null)
-                            agesList.Add(Int32.Parse(age));
-                    }
+            foreach (View child in agesGrid.Children){
+                if (child is Entry){
+                    string age = ((Entry)child).Text;
+                    if (age != "" && age != null)
+                        agesList.Add(Int32.Parse(age));
                 }
-
+            }
+            if (groupName != "" && agesList.Count != 0 && picker.SelectedIndex != -1){
+                gc.CreateTrip(groupName, agesList, picker.SelectedIndex + 1);
                 var existingPages = Navigation.NavigationStack.ToList();
                 foreach (var page in existingPages)
-                {
                     Navigation.RemovePage(page);
-                }
-                if (groupName != "" && agesList.Count != 0 &&
-                    (selectedPathLength == 1 || selectedPathLength == 2 || selectedPathLength == 3))
-                {
-                    gc.CreateTrip(groupName, agesList, selectedPathLength);
-                    Application.Current.MainPage = new NavigationPage();
-                }
-                else
-                {
-                    DisplayAlert("Illegal Input!", "You must fill all the fields", "OK");
-                }
+                Application.Current.MainPage = new NavigationPage();
             }
-            catch (Exception ex)
-            {
-                if (!(groupName != null && agesList.Count != 0 &&
-                    (selectedPathLength == 1 || selectedPathLength == 2 || selectedPathLength == 3)))
-                    DisplayAlert("Illegal Input!", "You must fill all the fields", "OK");
+            else
+                DisplayAlert(AppResources.error, AppResources.error_in_group_creation, AppResources.ok);
+        }
+
+        private void removeRow_Clicked(object sender, EventArgs e)
+        {
+            int row = Grid.GetRow((ImageButton)sender);
+            foreach (var child in agesGrid.Children.ToList().Where(child => Grid.GetRow(child) == row))
+                agesGrid.Children.Remove(child);
+            foreach (var child in agesGrid.Children.ToList().Where(child => Grid.GetRow(child) > row)){
+                Grid.SetRow(child, Grid.GetRow(child) - 1);
+                if(child is Label)
+                    ((Label)child).Text = Grid.GetRow(child) + ")";
             }
+            agesGrid.RowDefinitions.RemoveAt(agesGrid.RowDefinitions.Count - 1);
         }
     }
 }

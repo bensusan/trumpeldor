@@ -4,36 +4,36 @@
              x:Class="trumpeldor.Views.groupCreationPage"
              xmlns:translator="clr-namespace:trumpeldor.Helpers">
     <ContentPage.Content>
-        <StackLayout Style="{DynamicResource mainStackLayout}">
-            <Label Text="{translator:Translate group_name}" Style="{StaticResource lableStyle}"/>
-            <Entry Placeholder="{translator:Translate group_name}" x:Name="groupNameEntry" Style="{StaticResource entryStyle}" AutomationId="EnterGroupName" />
-            <Label Text="{translator:Translate path_length}" Style="{StaticResource lableStyle}"/>
-            <StackLayout x:Name="lengthButtonGroup" Orientation="Vertical" Style="{DynamicResource mainorStackLayout}">
-                <Button Text="{translator:Translate short_path}" CommandParameter="1" Clicked="Select_Short_Path_Button_Clicked" Style="{DynamicResource smallButtonStyle}" AutomationId="Btn1Clicked" />
-                <Button Text="{translator:Translate medium_path}" CommandParameter="2" Clicked="Select_Medium_Path_Button_Clicked" Style="{DynamicResource smallButtonStyle}" AutomationId="Btn2Clicked"/>
-                <Button Text="{translator:Translate long_path}" CommandParameter="3" Clicked="Select_Long_Path_Button_Clicked" Style="{DynamicResource smallButtonStyle}" AutomationId="Btn3Clicked"/>
+        <StackLayout x:Name="mainStack" Style="{DynamicResource mainStackLayout}">
+            <Label Text="{translator:Translate Create_your_group}" Style="{StaticResource titleStyle}"/>
+            <StackLayout Style="{DynamicResource mainStackLayout}" Orientation="Horizontal">
+                <Label x:Name="groupNameLabel" Text="{translator:Translate group_name}" Style="{StaticResource labelStyle}" WidthRequest="200"/>
+                <Entry x:Name="groupNameEntry" Style="{StaticResource entryStyle}" AutomationId="EnterGroupName" WidthRequest="200"/>
             </StackLayout>
-
-            <Grid x:Name="agesGrid" VerticalOptions="CenterAndExpand" Style="{DynamicResource gridStyle}">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="*"></RowDefinition>
-                    <RowDefinition Height="*"></RowDefinition>
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"></ColumnDefinition>
-                    <ColumnDefinition Width="*"></ColumnDefinition>
-                </Grid.ColumnDefinitions>
-                <Label Text="{translator:Translate player}" Grid.Column="0" Grid.Row="0" Style="{DynamicResource lableStyle}"/>
-                <Label Text="{translator:Translate age}" Grid.Column="1" Grid.Row="0" Style="{DynamicResource lableStyle}"/>
-                <Label Text="1)" Grid.Column="0" Grid.Row="1" Style="{DynamicResource lableStyle}"/>
-                <Entry Keyboard="Numeric" Grid.Column="1" Grid.Row="1" Style="{DynamicResource entryStyle}" AutomationId="EnterAge"/>
-            </Grid>
-
-            <Button Text="{translator:Translate add_player}" Clicked="Add_Player_Button_Clicked" Style="{StaticResource largeButtonStyle}" AutomationId="BtnAddPlayerClicked"/>
-            <Button Text="{translator:Translate start_trip}" Clicked="Start_Trip_Button_Clicked" x:Name="StartTripButton" Style="{StaticResource largeButtonStyle}" AutomationId="BtnStartTripClicked"/>
-            
-            
-            
+            <StackLayout Style="{DynamicResource mainStackLayout}" Orientation="Horizontal">
+                <Label x:Name="pathLengthLabel" Text="{translator:Translate path_length}" Style="{StaticResource labelStyle}" WidthRequest="200"/>
+                <Picker x:Name="picker" Style="{StaticResource picker}" WidthRequest="200"/>
+            </StackLayout>    
+            <ScrollView VerticalOptions="StartAndExpand" Orientation="Vertical" Style="{StaticResource scrollView}">
+                <Grid x:Name="agesGrid" Style="{DynamicResource gridStyle}">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"></RowDefinition>
+                        <RowDefinition Height="*"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <ImageButton x:Name="addButton" Grid.Column="0" Grid.Row="0" Clicked="Add_Player_Button_Clicked" Style="{StaticResource regularCircleImageButtonStyle}"/>
+                    <Label Text="{translator:Translate player}" Grid.Column="1" Grid.Row="0" Style="{DynamicResource labelStyle}"/>
+                    <Label Text="{translator:Translate age}" Grid.Column="2" Grid.Row="0" Style="{DynamicResource labelStyle}"/>
+                    <ImageButton x:Name="removeButton" Grid.Column="0" Grid.Row="1" Clicked="removeRow_Clicked" Style="{StaticResource regularCircleImageButtonStyle}"/>
+                    <Label Text="1)" Grid.Column="1" Grid.Row="1" Style="{DynamicResource labelStyle}"/>
+                    <Entry Keyboard="Numeric" Grid.Column="2" Grid.Row="1" Style="{DynamicResource entryStyle}" AutomationId="EnterAge"/>
+                </Grid>
+            </ScrollView>
+            <ImageButton x:Name="StartTripButton" Source="http://icons.iconarchive.com/icons/custom-icon-design/flatastic-9/512/Start-icon.png" Clicked="Start_Trip_Button_Clicked" Style="{StaticResource largeImageButtonStyle}" AutomationId="BtnStartTripClicked" VerticalOptions="EndAndExpand"/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

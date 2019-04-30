@@ -19,7 +19,8 @@ namespace trumpeldor
             InitializeComponent();
             gameController = GameController.getInstance();
             //MainPage = new Views.FirstPage();
-            MainPage = new Xamarin.Forms.NavigationPage(new OpenPage());
+            Xamarin.Forms.NavigationPage.SetHasNavigationBar(this, false);
+            MainPage = new Xamarin.Forms.NavigationPage(new FirstPage());
             
 
             //MainPage = new Xamarin.Forms.NavigationPage(new FirstPage());

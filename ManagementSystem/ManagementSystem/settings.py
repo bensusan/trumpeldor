@@ -128,6 +128,6 @@ STATICFILES_DIRS = (
 )
 
 
-attractionsURL = 'http://192.168.1.12:12344/managementsystem/attraction/?format=json' #'http://132.72.23.64:12345/attractions/'
+attractionsURL = 'http://192.168.1.13:12345/managementsystem/attraction/?format=json' #'http://132.72.23.64:12345/attractions/'
 
 

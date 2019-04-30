@@ -23,7 +23,7 @@ namespace trumpeldor
         public static string IP;
         public static string PORT;
         public static int DEBUG;
-        
+        public static string URL_MEDIA;
         private string urlPrefix;
 
         private static int MAX_TRIES_POST = 1;
@@ -41,9 +41,9 @@ namespace trumpeldor
                     IP = config.IP;
                     PORT = config.PORT;
                     DEBUG = config.DEBUG;
+                    URL_MEDIA = "http://" + ServerConection.IP + ":" + ServerConection.PORT + "/media/";
                 }
                 instance = new ServerConection();
-                
             }
             return instance;
         }
@@ -99,14 +99,32 @@ namespace trumpeldor
             JObject obj = (JObject)json["object"];
             if (SlidingPuzzle.isMyClassName(className)) {
                 //SlidingPuzzle sp = JsonConvert.DeserializeObject<SlidingPuzzle>((string)json["object"]);
-                SlidingPuzzle sp = new SlidingPuzzle
+                return new SlidingPuzzle
                 {
                     id = (int)obj["id"],
+                    description = (string)obj["description"],
                     piecesURLS = ((JArray)obj["piecesURLS"]).ToObject<List<string>>(),
                     width = (int)obj["width"],
                     height = (int)obj["height"]
                 };
-                return sp;
+            }
+            else if (Puzzle.isMyClassName(className)){
+                return new Puzzle
+                {
+                    id = (int)obj["id"],
+                    description = (string)obj["description"],
+                    piecesURLS = ((JArray)obj["piecesURLS"]).ToObject<List<string>>(),
+                    width = (int)obj["width"],
+                    height = (int)obj["height"]
+                };
+            }
+            else if(TakingPicture.isMyClassName(className))
+            {
+                return new TakingPicture
+                {
+                    id = (int)obj["id"],
+                    description = (string)obj["description"]
+                };
             }
             return null;
         }

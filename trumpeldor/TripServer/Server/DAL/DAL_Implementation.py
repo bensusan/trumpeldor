@@ -152,6 +152,12 @@ class DAL_Implementation(DAL_Abstract):
     def getSlidingPuzzle(self, attraction):
         return SlidingPuzzle.objects.filter(attraction=attraction).first()
 
+    def getPuzzle(self, attraction):
+        return Puzzle.objects.filter(attraction=attraction).first()
+
+    def getTakingPicture(self, attraction):
+        return TakingPicture.objects.filter(attraction=attraction).first()
+
     def delete_attraction(self, id):
         delt=self.getAttraction(id).delete()
         return True

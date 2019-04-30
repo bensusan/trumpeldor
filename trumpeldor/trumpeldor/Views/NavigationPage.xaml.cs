@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 using Xamarin.Forms;
+using Xamarin.Forms.Maps;
 using Xamarin.Forms.Xaml;
 using trumpeldor.SheredClasses;
 using trumpeldor;
@@ -18,20 +19,27 @@ namespace trumpeldor.Views
         private const double DESIRED_DISTANCE = 20;
         private const double DESIRED_SECONDS = 10;
         public static bool isFirst = true;
-        //        gc.currentTrip.GetCurrentAttraction();//-for the hint
         public Attraction nextAttraction;
-        public static int hintsIndex = 0;
-        //trumpeldor.SheredClasses.Point p;
-        public GameController gc = ((App)Application.Current).getGameController();
+        public static int hintsIndex = 1, currIndex = 0;
+        public GameController gc;
         public LocationController lc;
-        trumpeldor.SheredClasses.Point p;
+        trumpeldor.SheredClasses.Point p, currLoc;
         public double currLat = 0, currLong = 0;
+        MapPage myMap = null;
+
         public NavigationPage ()
 		{
 			InitializeComponent ();
+            gc = GameController.getInstance();
+            leftArrow.Source = ServerConection.URL_MEDIA + "leftArrow.png";
+            rightArrow.Source = ServerConection.URL_MEDIA + "rightArrow.png";
+            temperature.Source = ServerConection.URL_MEDIA + "temperature.png";
+            v.Source = ServerConection.URL_MEDIA + "v.png";
             nextAttraction = gc.currentTrip.GetCurrentAttraction();
-            mapImage.Text = AppResources.map;
-
+            myMap = new MapPage();
+            mapBtn = myMap.map;
+            AttachHint(0);
+            
             lc = LocationController.GetInstance();
             p = new trumpeldor.SheredClasses.Point(nextAttraction.x, nextAttraction.y);
             if (isFirst)
@@ -53,30 +61,55 @@ namespace trumpeldor.Views
         private async void Get_Hint_Button_Clicked(object sender, EventArgs e)
         {
             ContentPage temp = this;
-            if (nextAttraction.IsThisLastHint(hintsIndex))
-            {
-                bool dialogAnswer = await DisplayAlert(
+            bool dialogAnswer = false;
+            if (nextAttraction.IsThisLastHint(hintsIndex)){
+                dialogAnswer = await DisplayAlert(
                     AppResources.Last_Hint_Alert_Title,
                     AppResources.Last_Hint_Alert_Message,
                     AppResources.Yes,
                     AppResources.No);
                 if (!dialogAnswer)
                     return;
-                temp = new MapPage(new SheredClasses.Point(nextAttraction.x, nextAttraction.y));
-                Button hintBtn = (Button)FindByName("hintBtn");
-                if (hintBtn != null)
-                    hintBtn.IsEnabled = false;
+                hintBtn.IsVisible = false;
             }
-            else
-            {
-                temp = new HintPage(nextAttraction.hints[hintsIndex]);
-            }
-            addToLayout(hintsLayout);
+            //else
+            AttachHint(hintsIndex);
+            rightArrow.IsEnabled = false;
+            leftArrow.IsEnabled = true;
+            currIndex = hintsIndex;
             hintsIndex++;
             if (hintsIndex >= 3)
                 scoreLabel.Text = AppResources.score + ": " + gc.EditScore(GameController.SCORE_VALUE.Hints_More_Than_Three);
-            if(temp != this)
-                await Navigation.PushModalAsync(temp);
+        }
+
+        private void AttachHint(int hintIndex)
+        {
+            if (nextAttraction.IsThisLastHint(hintIndex))
+            {
+                //TODO change when shahar will finish
+                // mapInstance = new MapPage(new SheredClasses.Point(nextAttraction.x, nextAttraction.y));
+                myMap.AddPointToMap(myMap.map, new SheredClasses.Point(nextAttraction.x, nextAttraction.y));
+                hintWebView.IsVisible = false;
+                hintText.IsVisible = false;
+                hintMap = myMap.map;
+                hintMap.IsVisible = true;
+            }
+            else
+            {
+                hintMap.IsVisible = false;
+                Hint currentHint = nextAttraction.hints[hintIndex];
+                if (currentHint.GetKindHint() == Hint.Kinds.HintPicture || currentHint.GetKindHint() == Hint.Kinds.HintVideo){
+                    hintText.IsVisible = false;
+                    hintWebView.IsVisible = true;
+                    hintWebView.Source = currentHint.data;
+                }
+                else //case text
+                {
+                    hintWebView.IsVisible = false;
+                    hintText.IsVisible = true;
+                    hintText.Text = currentHint.data;
+                }
+            }
         }
 
         private void Next_Destination_Button_Clicked(object sender, EventArgs e)
@@ -90,73 +123,57 @@ namespace trumpeldor.Views
             Application.Current.MainPage = new AttractionPage();
         }
 
-        private async void mapImage_Clicked(object sender, EventArgs e)
+        private void LeftArrow_Clicked(object sender, EventArgs e)
         {
-            await Navigation.PushModalAsync(new MapPage());
+            currIndex--;
+            AttachHint(currIndex);
+            if (currIndex == 0)
+                leftArrow.IsEnabled = false;
+            rightArrow.IsEnabled = true;
         }
 
-        private async void DynamicBtn_Clicked(object sender, EventArgs e)
+        private async void Map_Focused(object sender, FocusEventArgs e)
         {
-            Button clicked = (Button)sender;
-            string strIdx = clicked.Text.Substring(5, clicked.Text.Length - 5);
-            int currIdx = Int32.Parse(strIdx) -1;
-            if (nextAttraction.IsThisLastHint(hintsIndex))//hint map
-            {
-                await Navigation.PushModalAsync(new MapPage(new SheredClasses.Point(nextAttraction.x, nextAttraction.y)));
-            }
-            else
-            {
-                await Navigation.PushModalAsync(new HintPage(nextAttraction.hints[currIdx]));
-            }
-        }
-        
-
-        private void addToLayout(StackLayout layout)
-        {
-            Button btn = new Button();
-            string strIndex = (hintsIndex + 1).ToString();
-            btn.Text = "Hint " + strIndex;
-            btn.AutomationId = "savedHint" + strIndex;
-            btn.Clicked += DynamicBtn_Clicked;
-            layout.Children.Add(btn);
+            await Navigation.PushModalAsync(myMap);
         }
 
+        private void RightArrow_Clicked(object sender, EventArgs e)
+        {
+            currIndex++;
+            AttachHint(currIndex);
+            if (currIndex == hintsIndex - 1)
+                rightArrow.IsEnabled = false;
+            leftArrow.IsEnabled = true;
+        }
 
         public async Task TimerCheck()
         {
             Device.StartTimer(TimeSpan.FromSeconds(DESIRED_SECONDS), () =>
             {
-                try
-                {
-                    LocationCheck();
-                    lc.AddToPositionsHistory(new Plugin.Geolocator.Abstractions.Position(currLat, currLong));
-                    if (lc.DistanceBetween(currLat, currLong, p.x, p.y) > DESIRED_DISTANCE)
-                    {
-                        DisplayAlert(AppResources.not_arrived, lc.DistanceBetween(currLat, currLong, p.x, p.y).ToString() + "curr lat: " + currLat.ToString() + "curr long: " + currLong.ToString() + "x: " + p.x + "y: " + p.y + " point info: " + nextAttraction.name, AppResources.close);
-                        return true;
-                    }
-                    else
-                    {
-                        gc.EditScore(GameController.SCORE_VALUE.Attraction_Arrive);
-                        DisplayAlert(AppResources.arrived, AppResources.arrived + "!  " + lc.DistanceBetween(currLat, currLong, p.x, p.y).ToString(), AppResources.close);
-                        Application.Current.MainPage = new AttractionPage();
-                        return false;
-                    }
-                    // True = Repeat again, False = Stop the timer
+                //LocationCheck();
+                currLoc = gc.GetUserLocation();
+                lc.AddToPositionsHistory(new Plugin.Geolocator.Abstractions.Position(currLoc.x, currLoc.y));
+                if (lc.DistanceBetween(currLoc.x, currLoc.y, p.x, p.y) > DESIRED_DISTANCE){
+                    if(ServerConection.DEBUG == 1)
+                        DisplayAlert(AppResources.not_arrived, lc.DistanceBetween(currLoc.x, currLoc.y, p.x, p.y).ToString() + "curr lat: " + currLoc.x + "curr long: " + currLoc.y + "x: " + p.x + "y: " + p.y + " point info: " + nextAttraction.name, AppResources.close);
+                    return true;
                 }
-                catch (Exception e)
-                {
+                else{
+                    gc.EditScore(GameController.SCORE_VALUE.Attraction_Arrive);
+                    if (ServerConection.DEBUG == 1)
+                        DisplayAlert(AppResources.arrived, AppResources.arrived + "! " + lc.DistanceBetween(currLoc.x, currLoc.y, p.x, p.y).ToString(), AppResources.close);
+                    Application.Current.MainPage = new AttractionPage();
                     return false;
                 }
             });
         }
 
-        private async Task LocationCheck()
-        {
-            var locator = CrossGeolocator.Current;
-            Plugin.Geolocator.Abstractions.Position position = await locator.GetPositionAsync(TimeSpan.FromSeconds(5));
-            currLat = position.Latitude;
-            currLong = position.Longitude;
-        }
+        //private async Task LocationCheck()
+        //{
+        //    var locator = CrossGeolocator.Current;
+        //    Plugin.Geolocator.Abstractions.Position position = await locator.GetPositionAsync(TimeSpan.FromSeconds(5));
+        //    currLat = position.Latitude;
+        //    currLong = position.Longitude;
+        //}
     }
 }
