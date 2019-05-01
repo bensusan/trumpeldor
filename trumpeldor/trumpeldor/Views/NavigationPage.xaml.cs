@@ -72,7 +72,7 @@ namespace trumpeldor.Views
                     AppResources.No);
                 if (!dialogAnswer)
                     return;
-                hintBtn.IsVisible = false;
+                hintBtn.IsEnabled = false;
             }
             //else
             AttachHint(hintsIndex);
@@ -137,7 +137,7 @@ namespace trumpeldor.Views
             rightArrow.IsEnabled = true;
         }
 
-        private async void Map_Focused(object sender, FocusEventArgs e)
+        private async void Map_Clicked(object sender, EventArgs e)
         {
             await Navigation.PushModalAsync(myMap);
         }
