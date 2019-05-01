@@ -7,7 +7,7 @@
             <StackLayout Style="{DynamicResource mainStackLayout}" Orientation="Horizontal" HorizontalOptions="FillAndExpand">
                 <StackLayout Style="{DynamicResource mainStackLayout}" Orientation="Horizontal" HorizontalOptions="StartAndExpand">
                     <ImageButton x:Name="info" Clicked="Info_Button_Clicked" Style="{StaticResource smallCircleImageButtonStyle}" AutomationId="InfoBtn"/>
-                    <ImageButton x:Name="how" Clicked="HowToPlay_Button_Clicked" Style="{StaticResource smallCircleImageButtonStyle}" />
+                    <ImageButton x:Name="how" Clicked="HowToPlay_Button_Clicked" Style="{StaticResource smallCircleImageButtonStyle}" AutomationId="HowToPlayBtn"/>
                 </StackLayout>
                 <StackLayout x:Name="countriesStackLayout" Style="{DynamicResource mainStackLayout}" Orientation="Horizontal" HorizontalOptions="EndAndExpand">
                     <ImageButton x:Name="englandButton" Clicked="English_Button_Clicked" Style="{StaticResource smallCircleImageButtonStyle}" AutomationId="EnglishBtn"/>

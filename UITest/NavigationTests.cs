@@ -31,20 +31,24 @@ namespace UITest
 
         }
 
-        [Test]
-        public void PastLocationsDrawTest()// 5.1
+        public void TestsInit()
         {
-            //Arrange
             app.Tap("EnglishBtn");
             app.Tap("PlayBtn");
-            app.Tap("FacebookLoginBtn");
+            app.Tap("AnonymusLoginBtn");
             app.WaitFor(() => app.Query("EnterGroupName").FirstOrDefault().Enabled, timeout: TimeSpan.FromSeconds(1200));
             app.EnterText("EnterGroupName", "abc");
             app.Tap("Btn1Clicked");
             app.EnterText("EnterAge", "8");
             app.Tap("BtnStartTripClicked");
             app.WaitFor(() => app.Query("AddHintBtn").FirstOrDefault().Enabled, timeout: TimeSpan.FromSeconds(1200));
+        }
 
+        [Test]
+        public void PastLocationsDrawTest()// 5.1
+        {
+            //Arrange
+            TestsInit();
 
             //Act
             System.Threading.Thread.Sleep(20000);
@@ -64,16 +68,8 @@ namespace UITest
         public void ShowScoreOnTrackFinish() //requirement 5.2
         {
             //Arrange
-            app.Tap("EnglishBtn");
-            app.Tap("PlayBtn");
-            app.Tap("AnonymusLoginBtn");
-            app.WaitFor(() => app.Query("EnterGroupName").FirstOrDefault().Enabled, timeout: TimeSpan.FromSeconds(1200));
-            app.EnterText("EnterGroupName", "abc");
-            app.Tap("Btn1Clicked");
-            app.EnterText("EnterAge", "8");
-            app.Tap("BtnStartTripClicked");
-            app.WaitFor(() => app.Query("AddHintBtn").FirstOrDefault().Enabled, timeout: TimeSpan.FromSeconds(1200));
-            app.Tap("DestinationBtn");
+            TestsInit();
+             app.Tap("DestinationBtn");
             //if continueTrack is available-click it
             // else click on mission -> american question -> correct ans
             // click continue track
@@ -96,15 +92,7 @@ namespace UITest
         [Test]
         public void CanViewHint() //requirement 5.6
         {
-            app.Tap("EnglishBtn");
-            app.Tap("PlayBtn");
-            app.Tap("FacebookLoginBtn");
-            app.WaitFor(() => app.Query("EnterGroupName").FirstOrDefault().Enabled, timeout: TimeSpan.FromSeconds(1200));
-            app.EnterText("EnterGroupName", "abc");
-            app.Tap("Btn1Clicked");
-            app.EnterText("EnterAge", "8");
-            app.Tap("BtnStartTripClicked");
-            app.WaitFor(() => app.Query("AddHintBtn").FirstOrDefault().Enabled, timeout: TimeSpan.FromSeconds(1200));
+            TestsInit();
             app.Tap("AddHintBtn");
 
             var tst = app.Query("HintDisplay").FirstOrDefault(res => res.Text != "");
@@ -115,16 +103,7 @@ namespace UITest
         public void CanViewHintsHistory() //requirement 5.9
         {
             //Arrange
-            app.Tap("EnglishBtn");
-            app.Tap("PlayBtn");
-            app.Tap("FacebookLoginBtn");
-            app.WaitFor(() => app.Query("EnterGroupName").FirstOrDefault().Enabled, timeout: TimeSpan.FromSeconds(1200));
-            app.EnterText("EnterGroupName", "abc");
-            app.Tap("Btn1Clicked");
-            app.EnterText("EnterAge", "8");
-            app.Tap("BtnStartTripClicked");
-            //add hint for first time
-            app.WaitFor(() => app.Query("AddHintBtn").FirstOrDefault().Enabled, timeout: TimeSpan.FromSeconds(1200));
+            TestsInit();
             app.Tap("AddHintBtn");
             app.Back();
             //try to view the saved first hint
@@ -153,16 +132,7 @@ namespace UITest
         [Test]
         public void ContinueToLongerTrack() //requirement 5.13
         {
-            app.Tap("EnglishBtn");
-            app.Tap("PlayBtn");
-            app.Tap("AnonymusLoginBtn");
-            app.WaitFor(() => app.Query("EnterGroupName").FirstOrDefault().Enabled, timeout: TimeSpan.FromSeconds(1200));
-            app.EnterText("EnterGroupName", "abc");
-            app.Tap("Btn1Clicked");
-            app.EnterText("EnterAge", "8");
-            app.Tap("BtnStartTripClicked");
-            app.WaitFor(() => app.Query("AddHintBtn").FirstOrDefault().Enabled, timeout: TimeSpan.FromSeconds(1200));
-
+            TestsInit();
         }
     }
 }

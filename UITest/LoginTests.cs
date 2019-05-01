@@ -50,7 +50,7 @@ namespace UITest
             // all grop fields are empty
             app.Tap("EnglishBtn");
             app.Tap("PlayBtn");
-            app.Tap("FacebookLoginBtn");
+            app.Tap("AnonymusLoginBtn");
             app.WaitFor(() => app.Query("EnterGroupName").FirstOrDefault().Enabled, timeout: TimeSpan.FromSeconds(1200));
             app.Tap("BtnStartTripClicked");
 
@@ -70,17 +70,19 @@ namespace UITest
             Assert.IsTrue(stayed1.Length != 0);//stayed
             Assert.IsFalse(moved1.Length != 0);//not moved
 
+            /*
             //some of the fields are empty
             app.Tap("Btn1Clicked");
             app.Tap("BtnStartTripClicked");
 
-            var stayed2 = app.Query(x => x.Marked("EnterGroupName"));/*stayed at group creation page*/
-            var moved2 = app.Query(x => x.Marked("AddHintBtn")); /* moved to next page (navigation page)*/
+            var stayed2 = app.Query(x => x.Marked("EnterGroupName"));//stayed at group creation page
+            var moved2 = app.Query(x => x.Marked("AddHintBtn")); // moved to next page (navigation page)
             Assert.IsTrue(stayed2.Length != 0);//stayed
             Assert.IsFalse(moved2.Length != 0);//not moved
+            */
 
             //all fields are full
-            app.Tap("Btn1Clicked");
+           // app.Tap("Btn1Clicked");
             app.EnterText("EnterGroupName", "abc");
 
             app.EnterText("EnterAge", "9");
