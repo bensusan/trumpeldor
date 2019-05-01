@@ -26,6 +26,7 @@ namespace trumpeldor.Views
         trumpeldor.SheredClasses.Point p, currLoc;
         public double currLat = 0, currLong = 0;
         MapPage myMap = null;
+        private bool firstAttachOfHintMap = true;
 
         public NavigationPage ()
 		{
@@ -37,7 +38,8 @@ namespace trumpeldor.Views
             v.Source = ServerConection.URL_MEDIA + "v.png";
             nextAttraction = gc.currentTrip.GetCurrentAttraction();
             myMap = new MapPage();
-            mapBtn = myMap.map;
+            mapBtn.Source = ServerConection.URL_MEDIA + "googleMaps.png";
+            //mapBtn = myMap.map;
             AttachHint(0);
             
             lc = LocationController.GetInstance();
@@ -82,21 +84,24 @@ namespace trumpeldor.Views
                 scoreLabel.Text = AppResources.score + ": " + gc.EditScore(GameController.SCORE_VALUE.Hints_More_Than_Three);
         }
 
-        private void AttachHint(int hintIndex)
+        private async void AttachHint(int hintIndex)
         {
             if (nextAttraction.IsThisLastHint(hintIndex))
             {
                 //TODO change when shahar will finish
                 // mapInstance = new MapPage(new SheredClasses.Point(nextAttraction.x, nextAttraction.y));
-                myMap.AddPointToMap(myMap.map, new SheredClasses.Point(nextAttraction.x, nextAttraction.y));
+                if(firstAttachOfHintMap)
+                    myMap.AddPointToMap(myMap.map, new SheredClasses.Point(nextAttraction.x, nextAttraction.y));
                 hintWebView.IsVisible = false;
                 hintText.IsVisible = false;
-                hintMap = myMap.map;
-                hintMap.IsVisible = true;
+                await Navigation.PushModalAsync(myMap);
+                firstAttachOfHintMap = false;
+                //hintMap = myMap.map;
+                //hintMap.IsVisible = true;
             }
             else
             {
-                hintMap.IsVisible = false;
+                //hintMap.IsVisible = false;
                 Hint currentHint = nextAttraction.hints[hintIndex];
                 if (currentHint.GetKindHint() == Hint.Kinds.HintPicture || currentHint.GetKindHint() == Hint.Kinds.HintVideo){
                     hintText.IsVisible = false;

@@ -12,7 +12,7 @@
                 <Label x:Name = "scoreLabel" Style="{StaticResource labelStyle}" HorizontalOptions="EndAndExpand"/>
             </StackLayout>
             <Label x:Name = "attractionName" Style="{StaticResource titleStyle}"/>
-            <Image x:Name = "attractionImage" Style="{StaticResource largeImageStyle}"/>
+            <WebView x:Name = "attractionImage" Style="{StaticResource largeImageStyle}"/>
             <Button x:Name = "missionButton" Clicked="Mission_Button_Clicked" Style="{StaticResource largeButtonStyle}"/>
             <Button x:Name = "questionButton" Text="{translator:Translate question}" Clicked="QuestionButton_Clicked" Style="{StaticResource largeButtonStyle}"/>
             <Button x:Name = "continueButton" Text="{translator:Translate continue_trip}" Clicked="Continue_Button_Clicked" Style="{StaticResource largeButtonStyle}"/>

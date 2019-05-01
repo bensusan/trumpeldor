@@ -19,7 +19,7 @@
                     <StackLayout x:Name="hintStack" Style="{StaticResource mainStackLayout}" Orientation="Vertical" WidthRequest="200" HeightRequest="500" HorizontalOptions="Fill" VerticalOptions="Fill" Margin="1" Padding="1">
                         <Label x:Name="hintText" Style="{StaticResource labelStyle}" IsVisible="False" WidthRequest="200" HeightRequest="500" HorizontalOptions="Fill" VerticalOptions="Fill"/>
                         <WebView x:Name="hintWebView" IsVisible="False" WidthRequest="200" HeightRequest="500" HorizontalOptions="Fill" VerticalOptions="Fill"/>
-                        <maps:Map x:Name="hintMap" Focused="Map_Focused" WidthRequest="200" HeightRequest="500" IsVisible="False"/>
+                        <!--<maps:Map x:Name="hintMap" Focused="Map_Focused" WidthRequest="200" HeightRequest="500" IsVisible="False"/>-->
                     </StackLayout>
                 </Frame>
                 <ImageButton x:Name="rightArrow" Clicked="RightArrow_Clicked" HorizontalOptions="Start" IsEnabled="False" Style="{StaticResource baseViewStyle}"/>
@@ -27,7 +27,8 @@
             </StackLayout>
             <StackLayout x:Name="downStack" Style="{StaticResource mainStackLayout}" Orientation="Horizontal" HorizontalOptions="FillAndExpand" Margin="0" Padding="0">
                 <Button x:Name="hintBtn" Text="{translator:Translate add_hint}" Clicked="Get_Hint_Button_Clicked" Style="{StaticResource largeButtonStyle}" AutomationId="AddHintBtn" Margin="37,10,30,10"/>
-                <maps:Map x:Name="mapBtn" Focused="Map_Focused" WidthRequest="70" HeightRequest="140" Margin="0"/>
+                <!--<maps:Map x:Name="mapBtn" Focused="Map_Focused" WidthRequest="70" HeightRequest="140" Margin="0"/>-->
+                <ImageButton x:Name="mapBtn" Style="{StaticResource smallImageButtonStyle}" Clicked="Map_clicked"/>
             </StackLayout>
         </StackLayout>
     </ContentPage.Content>
