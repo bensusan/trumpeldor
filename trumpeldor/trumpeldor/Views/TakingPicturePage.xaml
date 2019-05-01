@@ -12,7 +12,7 @@
                 <Label x:Name = "scoreLabel" Style="{DynamicResource labelStyle}" HorizontalOptions="EndAndExpand"/>
             </StackLayout>
             <Label Text="{translator:Translate TakingPicturePageTitle}" Style="{StaticResource titleStyle}"/>
-            <Image x:Name="PhotoImage" Style="{StaticResource baseImageStyle}"/>
+            <Image x:Name="PhotoImage" Style="{StaticResource baseImageStyle}" HeightRequest="350" WidthRequest="400"/>
             <Button x:Name="CameraButton" Text="{translator:Translate take_picture}" Grid.Row="1" Style="{StaticResource largeButtonStyle}" />
             <StackLayout x:Name="BtnLayout" Style="{DynamicResource mainStackLayout}">
             </StackLayout>

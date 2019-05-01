@@ -71,6 +71,7 @@ namespace trumpeldor.Views
                     //Get private path
                     path = photo.Path;
                 }
+
                 CameraButton.Text = AppResources.save_and_continue;
                 AddToLayout(BtnLayout,AppResources.share, ShareButton_Clicked);
 

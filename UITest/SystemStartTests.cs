@@ -27,5 +27,16 @@ namespace UITest
         {
             app = AppInitializer.StartApp(platform);
         }
+
+        [Test]
+        public void InfoOnStartTest()// requirement 1.1
+        {
+            //Act
+            app.Tap("EnglishBtn");
+            app.Tap("InfoBtn");
+
+            //Assert
+            Assert.IsTrue(true);
+        }
     }
 }
