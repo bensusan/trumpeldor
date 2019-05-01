@@ -65,9 +65,12 @@ class DALUnitTestsOnAttraction(DALUnitTests):
         attr1 = Attraction.objects.get(name='de', x=1, y=2, description='dsfre', picturesURLS=[], videosURLS=[])
         attr2 = Attraction.objects.get(name='be', x=3, y=2, description='bla', picturesURLS=[], videosURLS=[])
         attr3 = Attraction.objects.get(name='ae', x=3, y=3, description='fds', picturesURLS=[], videosURLS=[])
-        points = [attr1, attr2, attr3]
+        p1={'id': attr1.id,'name':'de', 'x':1, 'y':2, 'description':'dsfre', 'picturesURLS': [], 'videosURLS':[]}
+        p2 = {'id': attr2.id,'name': 'be', 'x': 3, 'y': 2, 'description': 'bla', 'picturesURLS': [], 'videosURLS': []}
+        p3 = {'id': attr3.id,'name': 'ae', 'x': 3, 'y': 3, 'description': 'fds', 'picturesURLS': [], 'videosURLS': []}
+        points = [p1,p2,p3]
         self.dal.add_track(None, points, 1)
-        self.assertTrue(Track.objects.filter(subTrack=None, points=points, length=1).exists())
+        self.assertTrue(Track.objects.filter(subTrack=None, points=[attr1,attr2,attr3], length=1).exists())
 
 
 
