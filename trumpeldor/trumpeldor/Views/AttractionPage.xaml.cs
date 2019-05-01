@@ -21,8 +21,8 @@ namespace trumpeldor.Views
         public AttractionPage()
 		{
 			InitializeComponent ();
-            attractionImage.HeightRequest = Content.Height * 3 / 4;
-            attractionImage.WidthRequest = Content.Width;
+            //attractionImage.HeightRequest = Content.Height * 3 / 4;
+            //attractionImage.WidthRequest = Content.Width;
             gc = GameController.getInstance();
             this.attraction = gc.currentTrip.GetCurrentAttraction();
             attractionName.Text = this.attraction.name;
