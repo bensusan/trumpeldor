@@ -100,8 +100,8 @@ namespace trumpeldor.Views
 
         private async void ShareButton_Clicked(object sender, EventArgs e)
         {
-            int index = path.IndexOf("photo");
-            string imgName = path.Substring(index, path.Length - index );
+            int index = aPpath.IndexOf("photo");
+            string imgName = aPpath.Substring(index, aPpath.Length - index );
             if (Device.RuntimePlatform == Device.iOS)
             {
                 DependencyService.Get<IShare>().ShareOnSocialMedia("Trumpeldor App", imgSrc);

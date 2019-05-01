@@ -20,13 +20,6 @@ function serverRequest(getOrPost, functionOnReady, url, post=null){
     Http.send();
 }
 
-function shitToDeleteFast(){
-    window.location.href='/main';
-}
-
-function funcThatReturnsOne(){
-    return 1;
-}
 
 function markAttractions(attractionsJSON){
     //alert(window.innerHeight + " "+ window.innerWidth);
@@ -95,7 +88,6 @@ function initAttractionsMarkers() {
 
 
 function postRequestAttraction(attraction){
-   // alert("blat");
     serverRequest("POST", function noop(dummy){}, 'http://'+ip+':12344/managementsystem/attraction/',
         JSON.stringify(attraction));
 }

@@ -174,6 +174,8 @@ class BL_Implementation(BL_Abstract):
                 entertainment = self.DAL.getTakingPicture(attr)
                 classSerializer = TakingPictureSerializer
                 className = 'TakingPicture'
+                if entertainment is None:
+                    return entertainment
         print(entertainment)
         entertainment = classSerializer(entertainment)
         print(entertainment)

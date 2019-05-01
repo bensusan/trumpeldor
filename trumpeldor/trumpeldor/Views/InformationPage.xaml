@@ -4,17 +4,19 @@
              x:Class="trumpeldor.Views.informationPage"
              xmlns:translator="clr-namespace:trumpeldor.Helpers">
     <ContentPage.Content>
-        <StackLayout Style="{DynamicResource mainStackLayout}">
-            <Label Text="{translator:Translate InformationPageTitle}" Style="{StaticResource titleStyle}"/>
-            <Label x:Name="generalInformation" AutomationId="InfoTxt" Style="{StaticResource labelStyle}"/>
-            <ScrollView x:Name="galleryImages" Orientation="Horizontal" Style="{StaticResource scrollView}" HorizontalOptions="StartAndExpand">
-                <StackLayout x:Name="stackGalleryImages" Orientation="Horizontal" Style="{StaticResource mainStackLayout}">
-                </StackLayout>
-            </ScrollView>
-            <ScrollView x:Name="galleryVideos" Orientation="Horizontal" Style="{StaticResource scrollView}" HorizontalOptions="StartAndExpand">
-                <StackLayout x:Name="stackGalleryVideos" Orientation="Horizontal" Style="{StaticResource mainStackLayout}">
-                </StackLayout>
-            </ScrollView>
-        </StackLayout>
+        <ScrollView Style="{StaticResource scrollView}">
+            <StackLayout Style="{DynamicResource mainStackLayout}">
+                <Label Text="{translator:Translate InformationPageTitle}" Style="{StaticResource titleStyle}"/>
+                <Label x:Name="generalInformation" AutomationId="InfoTxt" Style="{StaticResource labelStyle}"/>
+                <ScrollView x:Name="galleryImages" Orientation="Horizontal" Style="{StaticResource scrollView}" HorizontalOptions="StartAndExpand">
+                    <StackLayout x:Name="stackGalleryImages" Orientation="Horizontal" Style="{StaticResource mainStackLayout}">
+                    </StackLayout>
+                </ScrollView>
+                <ScrollView x:Name="galleryVideos" Orientation="Horizontal" Style="{StaticResource scrollView}" HorizontalOptions="StartAndExpand">
+                    <StackLayout x:Name="stackGalleryVideos" Orientation="Horizontal" Style="{StaticResource mainStackLayout}">
+                    </StackLayout>
+                </ScrollView>
+            </StackLayout>
+        </ScrollView>
     </ContentPage.Content>
 </ContentPage>

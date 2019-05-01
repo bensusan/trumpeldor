@@ -1,3 +1,4 @@
+import sys
 from re import sub
 
 import null
@@ -293,7 +294,16 @@ class DAL_Implementation(DAL_Abstract):
         return SlidingPuzzle.objects.filter(attraction=self.get_attraction(id_attraction)).all()
 
     def add_sliding_puzzle(self, id_attraction, piecesURLS, width, height, description):
-        sliding_puzzle = SlidingPuzzle(attraction=self.get_attraction(id_attraction), description=description, piecesURLS=piecesURLS, width=width, height=height)
+        piceseURL = addPrefixUrl(   ["example00.jpg",
+                                    "example01.jpg",
+                                    "example02.jpg",
+                                    "example10.jpg",
+                                    "example11.jpg",
+                                    "example12.jpg",
+                                    "example20.jpg",
+                                    "example21.jpg",
+                                    "example22.jpg"])
+        sliding_puzzle = SlidingPuzzle(attraction=self.get_attraction(id_attraction), description=description, piecesURLS=piceseURL, width=width, height=height)
         sliding_puzzle.save()
         return sliding_puzzle
 
@@ -305,8 +315,17 @@ class DAL_Implementation(DAL_Abstract):
         return Puzzle.objects.filter(attraction=self.get_attraction(id_attraction)).all()
 
     def add_puzzle(self, id_attraction, pictureURL, width, height, description):
+        piceseURL = addPrefixUrl(["example00.jpg",
+                                  "example01.jpg",
+                                  "example02.jpg",
+                                  "example10.jpg",
+                                  "example11.jpg",
+                                  "example12.jpg",
+                                  "example20.jpg",
+                                  "example21.jpg",
+                                  "example22.jpg"])
         puzzle = Puzzle(attraction=self.get_attraction(id_attraction), description=description,
-                        pictureURL=pictureURL, width=width, height=height)
+                        pictureURL=piceseURL, width=width, height=height)
         puzzle.save()
         return puzzle
 
@@ -326,3 +345,16 @@ class DAL_Implementation(DAL_Abstract):
     def delete_find_the_differences(self, id_attraction):
         self.get_all_find_the_differences_for_attraction(id_attraction).delete()
         return True
+
+URL_PREFIX_MEDIA = "http://" + sys.argv[-1] + "/media/"
+
+
+def addPrefixUrlToSpecificName(name):
+    return URL_PREFIX_MEDIA + name
+
+
+def addPrefixUrl(lst):
+    newLst = []
+    for name in lst:
+        newLst += [addPrefixUrlToSpecificName(name)]
+    return newLst

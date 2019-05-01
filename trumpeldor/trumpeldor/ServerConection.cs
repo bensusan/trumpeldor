@@ -94,6 +94,8 @@ namespace trumpeldor
             string jsonResponse = SendToServerAndGetResponseBack(new { id = attraction.id, }, "getEntertainment/");
             //if (jsonResponse.Equals("{\"question\":\"\",\"answers\":null,\"indexOfCorrectAnswer\":null}"))
             //    return null;
+            if (jsonResponse.Equals(""))
+                return null;
             JObject json = JObject.Parse(jsonResponse);
             string className = (string)json["className"];
             JObject obj = (JObject)json["object"];

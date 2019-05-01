@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using trumpeldor.SheredClasses;
+using System.IO;
 
 namespace trumpeldor.Views
 {
@@ -41,8 +42,9 @@ namespace trumpeldor.Views
         {
             foreach (string pictureURL in imagesNames)
             {
-                stackGalleryImages.Children.Add(new Image
+                stackGalleryImages.Children.Add(new WebView
                 {
+                    //Source = ImageSource.FromStream(() => new MemoryStream(Convert.FromBase64String(pictureURL))),
                     Source = pictureURL,
                     HeightRequest = gc.GetHeightSizeOfPage() / 3,
                     WidthRequest = gc.GetWidthSizeOfPage()*3/4

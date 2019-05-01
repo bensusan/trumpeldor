@@ -26,8 +26,9 @@ namespace trumpeldor.Views
             scoreLabel.Text = AppResources.score + ": " + gc.GetScore();
         }
 
-        private async Task<bool> GetFeedback()
-        {
+        private async Task<bool> GetFeedback() {
+            if (gc.currentTrip.feedbacks == null)
+                return false;
             int answer = 0;
             bool ans = await DisplayAlert(AppResources.Done_Trip_Title, AppResources.Done_Trip_Message, AppResources.Yes, AppResources.No);
             if (ans)

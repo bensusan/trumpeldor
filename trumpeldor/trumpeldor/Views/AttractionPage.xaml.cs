@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using trumpeldor.SheredClasses;
+using System.IO;
 
 namespace trumpeldor.Views
 {
@@ -16,17 +17,26 @@ namespace trumpeldor.Views
         private GameController gc;
         private Attraction attraction;
         private bool isFirstAppear;
+        private Entertainment entertainment = null;
         public AttractionPage()
 		{
 			InitializeComponent ();
+            attractionImage.HeightRequest = Content.Height * 3 / 4;
+            attractionImage.WidthRequest = Content.Width;
             gc = GameController.getInstance();
             this.attraction = gc.currentTrip.GetCurrentAttraction();
             attractionName.Text = this.attraction.name;
             string mainPictureUrl = this.attraction.GetMainPictureUrl();
+            //attractionImage.Source = ImageSource.FromStream(
+            //() => new MemoryStream(Convert.FromBase64String(mainPictureUrl)));
             attractionImage.Source = mainPictureUrl;
             attractionImage.IsVisible = !mainPictureUrl.Equals("");
             //watchAgainButton.IsVisible = !this.attraction.GetARURL().Equals("");
-            missionButton.Text = gc.currentTrip.GetCurrentAttraction().entertainment.EntertainmentName();
+            entertainment = gc.currentTrip.GetCurrentAttraction().entertainment;
+            if (entertainment != null)
+                missionButton.Text = entertainment.EntertainmentName();
+            else
+                missionButton.IsVisible = false;
             informationButton.Source = ServerConection.URL_MEDIA + "information.png";
             isFirstAppear = true;
         }
@@ -34,7 +44,7 @@ namespace trumpeldor.Views
         protected override void OnAppearing()
         {
             base.OnAppearing();
-            missionButton.IsVisible = !gc.isAttractionDone;
+            missionButton.IsVisible = entertainment != null && !gc.isAttractionDone;
             questionButton.IsVisible = !gc.isAttractionDone;
             continueButton.IsVisible = gc.isAttractionDone;
             scoreLabel.Text = AppResources.score + ": " + gc.GetScore();
