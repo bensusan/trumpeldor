@@ -1,5 +1,5 @@
 document.getElementById("sideMenu").innerHTML = '<div class="sidenav">\n' +
-    '  <h2 style="color:#818181;">!שלום, יעל</h2>' +
+    '  <h2 style="color:#818181;">!שלום, יהל</h2>' +
     '  <a href="/attractions" name="manage_attr_page">ניהול אטרקציות</a>\n' +
     '  <button class="dropdown-btn">מסלולים\n' +
     '    <i class="fa fa-caret-down"></i>\n' +
