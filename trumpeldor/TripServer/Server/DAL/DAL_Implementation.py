@@ -66,8 +66,15 @@ class DAL_Implementation(DAL_Abstract):
             with open("media/" + name_of_pic + ".png", "wb") as fh:
                 fh.write(base64.decodebytes(img_data_bytes))
             names_of_pics += name_of_pic
-        attraction = Attraction(name=name, x=x, y=y, description=description, picturesURLS=addPrefixUrl(name_of_pic),
-                                videosURLS=videosURLS)
+        names_of_vids = []
+        for vid in videosURLS:
+            vid_data_bytes = str.encode(pic)
+            name_of_vid = str(random.randint(0, 10000000))
+            with open("media/" + name_of_vid + ".png", "wb") as fh:
+                fh.write(base64.decodebytes(vid_data_bytes))
+            names_of_vids += name_of_vid
+        attraction = Attraction(name=name, x=x, y=y, description=description, picturesURLS=addPrefixUrl(names_of_pics),
+                                videosURLS=addPrefixUrl(names_of_vids))
         attraction.save()
         return attraction
 
