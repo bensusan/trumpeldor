@@ -216,13 +216,14 @@ function encodeImageFileAsURL(element) {
     suki="";
 
   var file = element.files[0];
+    var blob = file.slice();
   var reader = new FileReader();
   reader.onloadend = function() {
    //alert(reader.result)
    shit(reader.result)
   }
 
-  reader.readAsDataURL(file);
+  reader.readAsDataURL(blob);       //file instead of blob
 }
 
 function encodeVideoFileAsURL(element) {

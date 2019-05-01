@@ -83,7 +83,7 @@ WSGI_APPLICATION = 'TripServer.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'Project',
+        'NAME': 'Project2',
         'USER': 'postgres',
         'PASSWORD': 'trumpeldor',
         'HOST': '127.0.0.1',
@@ -133,6 +133,7 @@ STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'Management System/static'),
     '/static',
 )
+
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')

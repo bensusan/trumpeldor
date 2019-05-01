@@ -5,7 +5,9 @@ import null
 import datetime
 from Server.models import *
 from .DAL import DAL_Abstract
-
+import base64
+import os.path
+import random
 
 class DAL_Implementation(DAL_Abstract):
 
@@ -57,8 +59,22 @@ class DAL_Implementation(DAL_Abstract):
         return Trip.objects.filter(id=tripId).first()
 
     def add_attraction(self, name, x, y, description, picturesURLS, videosURLS):
-        attraction = Attraction(name=name, x=x, y=y, description=description, picturesURLS=picturesURLS,
-                                videosURLS=videosURLS)
+        names_of_pics=[]
+        for pic in picturesURLS:
+            img_data_bytes = str.encode(pic)
+            name_of_pic = str(random.randint(0, 10000000))
+            with open("media/" + name_of_pic + ".png", "wb") as fh:
+                fh.write(base64.decodebytes(img_data_bytes))
+            names_of_pics += name_of_pic
+        names_of_vids = []
+        for vid in videosURLS:
+            vid_data_bytes = str.encode(pic)
+            name_of_vid = str(random.randint(0, 10000000))
+            with open("media/" + name_of_vid + ".png", "wb") as fh:
+                fh.write(base64.decodebytes(vid_data_bytes))
+            names_of_vids += name_of_vid
+        attraction = Attraction(name=name, x=x, y=y, description=description, picturesURLS=addPrefixUrl(names_of_pics),
+                                videosURLS=addPrefixUrl(names_of_vids))
         attraction.save()
         return attraction
 
@@ -68,7 +84,11 @@ class DAL_Implementation(DAL_Abstract):
         return hint
 
     def add_american_question(self, id_attraction, question, answers, indexOfCorrectAnswer):
-        aq = AmericanQuestion(question=question, answers=answers, indexOfCorrectAnswer=indexOfCorrectAnswer,
+        arr_correct_answers=[]
+        for ind in indexOfCorrectAnswer:
+            index = int(ind)-1
+            arr_correct_answers.append(index)
+        aq = AmericanQuestion(question=question, answers=answers, indexOfCorrectAnswer=arr_correct_answers,
                               attraction=self.getAttraction(id_attraction))
         aq.save()
         return aq
@@ -355,3 +375,11 @@ def addPrefixUrl(lst):
     for name in lst:
         newLst += [addPrefixUrlToSpecificName(name)]
     return newLst
+
+
+def num_of_media_files():
+    path = os.getenv('media')
+    print(path)
+    num_files = len([f for f in os.listdir(path) if os.path.isfile(os.path.join(path, f))])
+    print(num_files)
+    return num_files

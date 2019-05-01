@@ -41,14 +41,14 @@ class DALUnitTestsOnAttraction(DALUnitTests):
 
     def test_add_hint(self):
         attr = Attraction.objects.get(name='de', x=1, y=2, description='dsfre', picturesURLS=[], videosURLS=[])
-        self.dal.add_hint(attr.id, 'HT', 'some hint in text')
-        self.assertTrue(Hint.objects.filter(attraction=attr, kind='HT', data='some hint in text').exists())
+        self.dal.add_hint(attr.id, 'HT', 'some hint in text', "")
+        self.assertTrue(Hint.objects.filter(attraction=attr, kind='HT', data='some hint in text', description="").exists())
 
     def test_add_american_question(self):
         attr = Attraction.objects.get(name='de', x=1, y=2, description='dsfre', picturesURLS=[], videosURLS=[])
-        self.dal.add_american_question(attr.id, 'are you?', ['yes', 'no'],  1)
+        self.dal.add_american_question(attr.id, 'are you?', ['yes', 'no'],  [1])
         self.assertTrue(AmericanQuestion.objects.filter(attraction=attr, question='are you?', answers=['yes', 'no'],
-                                                        indexOfCorrectAnswer=1).exists())
+                                                        indexOfCorrectAnswer=[1]).exists())
 
     def test_get_attraction(self):
         attr_expected = Attraction.objects.get(name='de', x=1, y=2, description='dsfre', picturesURLS=[], videosURLS=[])
@@ -56,8 +56,8 @@ class DALUnitTestsOnAttraction(DALUnitTests):
         self.assertEquals(attr_expected, attr_actual)
 
     def test_edit_attraction(self):
-        Attraction.objects.get(name='de', x=1, y=2, description='dsfre', picturesURLS=[], videosURLS=[])
-        self.dal.edit_attraction('de', 2, 2, 'dsfre', [], [])
+        attr = Attraction.objects.get(name='de', x=1, y=2, description='dsfre', picturesURLS=[], videosURLS=[])
+        self.dal.edit_attraction(attr.id, 'de', 2, 2, 'dsfre', [], [])
         self.assertTrue(Attraction.objects.filter(name='de', x=2, y=2,
                                                   description='dsfre', picturesURLS=[], videosURLS=[]).exists())
 
@@ -65,9 +65,12 @@ class DALUnitTestsOnAttraction(DALUnitTests):
         attr1 = Attraction.objects.get(name='de', x=1, y=2, description='dsfre', picturesURLS=[], videosURLS=[])
         attr2 = Attraction.objects.get(name='be', x=3, y=2, description='bla', picturesURLS=[], videosURLS=[])
         attr3 = Attraction.objects.get(name='ae', x=3, y=3, description='fds', picturesURLS=[], videosURLS=[])
-        points = list(attr1, attr2, attr3)
+        p1={'id': attr1.id,'name':'de', 'x':1, 'y':2, 'description':'dsfre', 'picturesURLS': [], 'videosURLS':[]}
+        p2 = {'id': attr2.id,'name': 'be', 'x': 3, 'y': 2, 'description': 'bla', 'picturesURLS': [], 'videosURLS': []}
+        p3 = {'id': attr3.id,'name': 'ae', 'x': 3, 'y': 3, 'description': 'fds', 'picturesURLS': [], 'videosURLS': []}
+        points = [p1,p2,p3]
         self.dal.add_track(None, points, 1)
-        self.assertTrue(Track.objects.filter(subTrack=None, points=points, length=1).exists())
+        self.assertTrue(Track.objects.filter(subTrack=None, points=[attr1,attr2,attr3], length=1).exists())
 
 
 
@@ -103,22 +106,22 @@ class DALUnitTestsOnAmericanQuestions(DALUnitTests):
         Attraction.objects.create(name='de', x=1, y=2, description='dsfre', picturesURLS=[], videosURLS=[])
         attr = Attraction.objects.get(name='de', x=1, y=2, description='dsfre', picturesURLS=[], videosURLS=[])
         AmericanQuestion.objects.create(attraction=attr, question='are you?',
-                                        answers=['yes', 'no'], indexOfCorrectAnswer=1)
+                                        answers=['yes', 'no'], indexOfCorrectAnswer=[1])
         AmericanQuestion.objects.create(attraction=attr, question='are you2?',
-                                        answers=['yes', 'no'], indexOfCorrectAnswer=2)
+                                        answers=['yes', 'no'], indexOfCorrectAnswer=[2])
 
     def test_delete_american_question(self):
         attr = Attraction.objects.get(name='de', x=1, y=2, description='dsfre', picturesURLS=[], videosURLS=[])
         aquestion = AmericanQuestion.objects.get(attraction=attr, question='are you?',
-                                        answers=['yes', 'no'], indexOfCorrectAnswer=1)
+                                        answers=['yes', 'no'], indexOfCorrectAnswer=[1])
         self.dal.delete_american_question(attr.id, aquestion.id)
         self.assertFalse(AmericanQuestion.objects.filter(attraction=attr, question='are you?',
-                                        answers=['yes', 'no'], indexOfCorrectAnswer=1).exists())
+                                        answers=['yes', 'no'], indexOfCorrectAnswer=[1]).exists())
 
     def test_get_american_question(self):
         attr = Attraction.objects.get(name='de', x=1, y=2, description='dsfre', picturesURLS=[], videosURLS=[])
         aquestion = AmericanQuestion.objects.get(attraction=attr, question='are you?',
-                                        answers=['yes', 'no'], indexOfCorrectAnswer=1)
+                                        answers=['yes', 'no'], indexOfCorrectAnswer=[1])
         self.assertEqual(aquestion, self.dal.get_american_question(attr.id, aquestion.id))
 
     # def test_get_all_aquestions_for_attraction(self):
