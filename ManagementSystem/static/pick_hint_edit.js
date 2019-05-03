@@ -36,7 +36,7 @@ function hints_func(hintsJSON) {
             document.getElementById(d_opt_id).value = hint['id'];
             document.getElementById(d_opt_id).style.display='inline';
             i=i+1;
-            str=str+"id: "+hint['id'] +", data: "+ hint['data']+"<br />";
+            str=str+" data: "+ hint['data']+"<br />";
             // alert(str);
         });
         document.getElementById("existing_hints").innerHTML = str ;
@@ -52,8 +52,8 @@ window.onload = function () {
 };
 
 function wantToEditButton(){
-    // var writeChosenHintText = document.getElementById("write_hint_id_to_delete");
-    //         writeChosenHintText.style.display = "none";
+    var delTitle = document.getElementById("deleteTitle");
+            delTitle.style.display = "none";
 
             var deleteChosenHintBTN = document.getElementById("delete_chosen_hint");
             deleteChosenHintBTN.style.display = "none";
@@ -61,8 +61,8 @@ function wantToEditButton(){
             var comboDelete = document.getElementById("delete_cb");
             comboDelete.style.display = "none";
 
-      // var writeChosenHintTextEdit = document.getElementById("write_hint_id_to_edit");
-      //       writeChosenHintTextEdit.style.display = "inline";
+      var edTitle = document.getElementById("editTitle");
+            edTitle.style.display = "inline";
 
             var comboEdit = document.getElementById("edit_cb");
             comboEdit.style.display = "inline";
@@ -81,16 +81,17 @@ function wantToEditButton(){
 
 
 function wantToDeleteButton(){
-    // var writeChosenHintTextEdit = document.getElementById("write_hint_id_to_edit");
-    //         writeChosenHintTextEdit.style.display = "none";
+    var delTitle = document.getElementById("deleteTitle");
+            delTitle.style.display = "inline";
 
             var editChosenHintBTN = document.getElementById("edit_chosen_hint");
             editChosenHintBTN.style.display = "none";
 
             var comboEdit = document.getElementById("edit_cb");
             comboEdit.style.display = "none";
-        // var writeChosenHintText = document.getElementById("write_hint_id_to_delete");
-        //     writeChosenHintText.style.display = "inline";
+
+        var edTitle = document.getElementById("editTitle");
+            edTitle.style.display = "none";
 
 
             var deleteChosenHintBTN = document.getElementById("delete_chosen_hint");
