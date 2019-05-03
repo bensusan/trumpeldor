@@ -1,13 +1,14 @@
+
 function checkPassword() {
     var username=document.getElementById("user_name").value;
     var password=document.getElementById("password").value;
         if(username=="admin"&& password=="1234") {
-            is_connected = true;
+            localStorage.setItem("is_connected","true");
             window.location.href = "/main";
         }
         else {
             document.getElementById("errorMsg").innerHTML = "wrong password or username!";
-            is_connected = false;
+            localStorage.setItem("is_connected","false");
         }
 }
 
