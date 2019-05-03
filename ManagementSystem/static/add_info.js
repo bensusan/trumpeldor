@@ -1,5 +1,4 @@
 window.onload = function () {
-    createEditableSelect(document.forms[0].myText);
     getRequestInfo(func_to_show_info);
 };
 
