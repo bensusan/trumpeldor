@@ -39,6 +39,7 @@ urlpatterns = [
     path('edit_long_path/', views.edit_long_path_page),
     path('feedback/', views.feedback_page),
     path('edit_feedbacks/', views.edit_feedbacks_page),
+    path('error_page/', views.error_page),
 
 ]
 
