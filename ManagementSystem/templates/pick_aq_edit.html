@@ -8,7 +8,7 @@
     {% load static %}
 <link rel="stylesheet" href="{% static 'SideMenu.css' %}?version=4">
     {% load static %}
-<script src="{% static 'pick_aq_edit.js' %}?version=3"></script>
+<script src="{% static 'pick_aq_edit.js' %}?version=5"></script>
     {% load static %}
 <script src="{% static 'attractions.js' %}?version=3"></script>
      {% load static %}
@@ -24,16 +24,39 @@
 {#<button onclick="window.location.href='/add_aq'" type="button">Add American Question</button>#}
 <p></p>
 {#<button type="button" id="want_to_edit_aq">Edit American Question</button>#}
-<p></p>
-<textarea id="write_aq_id_to_edit" placeholder="Write American Question ID..." style="display: none"></textarea>
+<label id="editTitle" for="hint" style="display:none;font-size: 26px;"><b>בחירת שאלה לעריכה</b></label>
+    <p></p>
+    <select id="edit_cb" style="display: none">
+  <option id="ecb1" value="1" style="display: none;">1</option>
+  <option id="ecb2" value="2" style="display: none;">2</option>
+  <option id="ecb3" value="3" style="display: none;">3</option>
+  <option id="ecb4" value="4" style="display: none;">4</option>
+  <option id="ecb5" value="5" style="display: none;">5</option>
+  <option id="ecb6" value="6" style="display: none;">6</option>
+  <option id="ecb7" value="7" style="display: none;">7</option>
+  <option id="ecb8" value="8" style="display: none;">8</option>
+  <option id="ecb9" value="9" style="display: none;">9</option>
+  <option id="ecb10" value="10" style="display: none;">10</option>
+</select>
     <p></p>
 <button type="button" id="edit_chosen_aq" style="display: none">עריכה</button>
 <p></p>
 <p></p>
 {#<button type="button" id="want_to_delete_aq">Delete American Question</button>#}
-<p></p>
-<textarea id="write_aq_id_to_delete" placeholder="Write American Question ID..." style="display: none"></textarea>
+<label id="deleteTitle" for="hint" style="display:none;font-size: 26px;"><b>בחירת שאלה למחיקה</b></label>
     <p></p>
+    <select id="delete_cb" style="display: none">
+  <option id="dcb1" value="1" style="display: none;">1</option>
+  <option id="dcb2" value="2" style="display: none;">2</option>
+  <option id="dcb3" value="3" style="display: none;">3</option>
+  <option id="dcb4" value="4" style="display: none;">4</option>
+  <option id="dcb5" value="5" style="display: none;">5</option>
+  <option id="dcb6" value="6" style="display: none;">6</option>
+  <option id="dcb7" value="7" style="display: none;">7</option>
+  <option id="dcb8" value="8" style="display: none;">8</option>
+  <option id="dcb9" value="9" style="display: none;">9</option>
+  <option id="dcb10" value="10" style="display: none;">10</option>
+</select>    <p></p>
 <button type="button" id="delete_chosen_aq" style="display: none">מחיקה</button>
 <p></p>
 <button class="button" onclick="donePickingAqs()" type="button" style="direction:rtl;text-align:right;">סיימתי!</button>

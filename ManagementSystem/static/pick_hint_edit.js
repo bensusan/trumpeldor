@@ -81,8 +81,6 @@ function wantToEditButton(){
 
 
 function wantToDeleteButton(){
-    var delTitle = document.getElementById("deleteTitle");
-            delTitle.style.display = "inline";
 
             var editChosenHintBTN = document.getElementById("edit_chosen_hint");
             editChosenHintBTN.style.display = "none";
@@ -90,15 +88,17 @@ function wantToDeleteButton(){
             var comboEdit = document.getElementById("edit_cb");
             comboEdit.style.display = "none";
 
+            var delTitle = document.getElementById("deleteTitle");
+            delTitle.style.display = "inline";
+
         var edTitle = document.getElementById("editTitle");
             edTitle.style.display = "none";
 
+            var comboDelete = document.getElementById("delete_cb");
+            comboDelete.style.display = "inline";
 
             var deleteChosenHintBTN = document.getElementById("delete_chosen_hint");
             deleteChosenHintBTN.style.display = "inline";
-
-            var comboDelete = document.getElementById("delete_cb");
-            comboDelete.style.display = "inline";
 
             deleteChosenHintBTN.addEventListener('click', function() {
                 getRequestHints(funcInOrderToDeleteHint,attractionObjToUseInHintDelete['id']);
