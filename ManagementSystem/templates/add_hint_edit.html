@@ -28,35 +28,35 @@
 <p></p>
 <textarea id="text_hint_id" name="subject" placeholder="כתבי את הרמז..." style="direction:rtl;text-align:right;display: none;width:300px;height:200px;border-radius: 10px;"></textarea>
 <p></p>
-    <button type="button" id="send_text_hint" style="display: none">שליחה</button>
+    <button class="button" type="button" id="send_text_hint" style="display: none">שליחה</button>
 <p></p>
 
 {#<button type="button" id="add_vid_hint">add video</button>#}
 <p></p>
-<textarea id="vid_hint_description" placeholder="כתבי תיאור..." style="direction:rtl;text-align:right;display: none"></textarea>
+<textarea id="vid_hint_description" placeholder="כתבי תיאור..." style="direction:rtl;text-align:right;width:340px;height:80px;display: none"></textarea>
 <p></p>
     <div id="message"></div>
 <video id="vid_hint_id" height="200px" width="350px" controls="" autoplay="" style="display: none"></video>
 <p></p>
     <input type="file" id="vid_hint_browse_id" accept="video/*" onchange="encodeVideoFileAsURL(this)" style="display: none">
     <p></p>
-<button onclick="sendVideoHint()" type="button" id="send_vid_hint" style="display: none">שליחה</button>
+<button class="button" onclick="sendVideoHint()" type="button" id="send_vid_hint" style="display: none">שליחה</button>
 <p></p>
 
 {#<button type="button" id="add_pic_hint">add picture</button>#}
 <p></p>
-<textarea id="pic_hint_description" placeholder="כתבי תיאור..." style="direction:rtl;text-align:right;display: none"></textarea>
+<textarea id="pic_hint_description" placeholder="כתבי תיאור..." style="direction:rtl;text-align:right;width:340px;height:80px;display: none"></textarea>
     <p></p>
    <label for="hint" id="upload_title" style="display: none"><b>העלאת תמונה</b></label>
 <p></p>
 <input type="file" id="file" onchange="encodeImageFileAsURL(this)" style="display: none"/>
 <p><img id="output" width="200" style="display: none"/></p>
     <p></p>
-<button type="button" onclick="sendImageHint()" id="send_pic_hint" style="display: none">שליחה</button>
+<button class="button" type="button" onclick="sendImageHint()" id="send_pic_hint" style="display: none">שליחה</button>
 
 
 <p></p>
-<button class="button" id="finish_add_hint" onclick="finishHint()" type="button">!סיימתי</button>
+{#<button class="button" id="finish_add_hint" onclick="finishHint()" type="button">!סיימתי</button>#}
 </div>
 <nav id="sideMenu"></nav>
 {% load static %}
