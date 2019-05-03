@@ -15,7 +15,14 @@ document.getElementById("sideMenu").innerHTML = '<div class="sidenav">\n' +
     '    <a href="/add_medium_path">בינוני</a>\n' +
     '    <a href="/add_long_path">ארוך</a>\n' +
     '  </div>\n' +
-    '    <a href="/pick_path_edit">עריכת מסלול</a>\n' +
+'  <button class="dropdown-btn">עריכת מסלול\n' +
+    '    <i class="fa fa-caret-down"></i>\n' +
+    '  </button>\n' +
+    '  <div class="dropdown-container">\n' +
+    '    <a href="/edit_short_path">קצר</a>\n' +
+    '    <a href="/edit_medium_path">בינוני</a>\n' +
+    '    <a href="/edit_long_path">ארוך</a>\n' +
+    '  </div>\n' +
     '    <a href="/pick_path_delete">מחיקת מסלול</a>\n' +
     '  </div>\n' +
     '  <a href="#services">סטטיסטיקות</a>\n' +
