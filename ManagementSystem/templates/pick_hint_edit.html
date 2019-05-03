@@ -10,7 +10,7 @@
     {% load static %}
 <script src="{% static 'attractions.js' %}?version=1"></script>
     {% load static %}
-<script src="{% static 'pick_hint_edit.js' %}?version=3"></script>
+<script src="{% static 'pick_hint_edit.js' %}?version=4"></script>
      {% load static %}
 <script src="{% static 'properties.js' %}?version=2"></script>
 </head>
@@ -27,11 +27,25 @@
     <label for="hint" style="font-size: 36px;"><b>:רמזים קיימים</b></label>
 <p id="existing_hints"></p>
 <p></p>
+
+
 {#<button class="button" onclick="window.location.href='/add_hint'" type="button" style="width: 100px;">Add Hint</button>#}
 {#<p></p>#}
 {#<button class="button" type="button" id="want_to_edit_hint" style="width: 100px;">Edit Hint</button>#}
 {#<p></p>#}
-<textarea id="write_hint_id_to_edit" placeholder="...כתבי את מזהה הרמז" style="text-align:right;direction:ltr;width:320px;height:100px;border-radius:5px;display: none"></textarea>
+{#<textarea id="write_hint_id_to_edit" placeholder="...כתבי את מזהה הרמז" style="text-align:right;direction:ltr;width:320px;height:100px;border-radius:5px;display: none"></textarea>#}
+  <select id="edit_cb" style="display: none">
+  <option id="cb1" value="בחר כאן" style="display: none;">בחרי כאן</option>
+  <option id="cb2" value="saab" style="display: none;">Saab</option>
+  <option id="cb3" value="mercedes" style="display: none;">Mercedes</option>
+  <option id="cb4" value="audi" style="display: none;">Audi</option>
+  <option id="cb5" value="audi" style="display: none;">Audi</option>
+  <option id="cb6" value="בחר כאן" style="display: none;">בחרי כאן</option>
+  <option id="cb7" value="saab" style="display: none;">Saab</option>
+  <option id="cb8" value="mercedes" style="display: none;">Mercedes</option>
+  <option id="cb9" value="audi" style="display: none;">Audi</option>
+  <option id="cb10" value="audi" style="display: none;">Audi</option>
+</select>
     <p></p>
 <button class="button" type="button" id="edit_chosen_hint" style="display: none">עריכה</button>
      <p></p>

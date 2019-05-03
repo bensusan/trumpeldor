@@ -1,8 +1,10 @@
 window.onload = function () {
+    createEditableSelect(document.forms[0].myText);
     getRequestInfo(func_to_show_info);
 };
 
 let info_txt;
+
 
 function func_to_show_info(infoJSON) {
     infoJSON.forEach(function (info) {
