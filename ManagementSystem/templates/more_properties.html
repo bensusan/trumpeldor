@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>הגדרות אפליקציה</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    {% load static %}
+<link rel="stylesheet" href="{% static 'SideMenu.css' %}?version=4">
+{% load static %}
+<link rel="stylesheet" href="{% static 'just_want_background.css' %}?version=2">
+ {% load static %}
+<script src="{% static 'properties.js' %}?version=3"></script>
+    {% load static %}
+    <script src="{% static 'attractions.js' %}?version=5"></script>
+    {% load static %}
+<script src="{% static 'more_properties.js' %}?version=3"></script>
+
+</head>
+<body>
+<div align="center">
+    <label for="hint" style="font-size: 44px"><b>הגדרות</b></label>
+    <p></p>
+    <p>:שאלת המשוב</p>
+    <textarea class="backOfText" id="fbquestion" name="subject" placeholder="...שאלת המשוב" style="text-align:right;width:300px;height:200px;border-radius: 10px;"></textarea>
+
+{#    <input type="text"  id="fbquestion" style="height: 20px; width: 50px; border-radius: 5px;" required>#}
+    <p>:סוג המשוב</p>
+    <select id="feedback_type">
+      <option value="opt1">משוב טקסט</option>
+      <option value="opt2">משוב ציון</option>
+    </select>
+{#    <input type="text"  id="fbtype" style="height: 20px; width: 50px; border-radius: 5px;" required>#}
+    <p></p>
+     <button class="button" id="send_feedback" type="button">שליחת שאלה</button>
+
+    </div>
+<nav id="sideMenu"></nav>
+{% load static %}
+<script src="{% static 'menu_of_feedback.js' %}?version=3"></script>
+
+</body>
+</html>

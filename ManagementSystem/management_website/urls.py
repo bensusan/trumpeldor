@@ -40,6 +40,7 @@ urlpatterns = [
     path('feedback/', views.feedback_page),
     path('edit_feedbacks/', views.edit_feedbacks_page),
     path('error_page/', views.error_page),
+    path('more_properties/', views.more_properties_page),
 
 ]
 
