@@ -85,7 +85,7 @@ label, input, textarea{
 	display: block;
 }
 input, textarea{
-	width: 500px;
+	width: 300px;
 	border: none;
 	border-radius: 20px;
 	outline: none;
