@@ -19,6 +19,7 @@ namespace trumpeldor.Views
         private const double DESIRED_DISTANCE = 20;
         private const double DESIRED_SECONDS = 10;
         public static bool isFirst = true;
+        public static bool firstTimeLocationUpdate = true;
         public Attraction nextAttraction;
         public int hintsIndex = 1, currIndex = 0;
         public GameController gc;
@@ -26,7 +27,11 @@ namespace trumpeldor.Views
         trumpeldor.SheredClasses.Point p, currLoc;
         public double currLat = 0, currLong = 0;
         MapPage myMap = null;
+<<<<<<< HEAD
         private bool firstAttachOfHintMap = true;
+=======
+        private double startDistanceToDestination;
+>>>>>>> odometer2
 
         public NavigationPage ()
 		{
@@ -36,6 +41,11 @@ namespace trumpeldor.Views
             rightArrow.Source = ServerConection.URL_MEDIA + "rightArrow.png";
             temperature.Source = ServerConection.URL_MEDIA + "temperature.png";
             v.Source = ServerConection.URL_MEDIA + "v.png";
+            odometer.Maximum = 1;
+            odometer.Minimum = 0;
+            odometer.MinimumTrackColor = Color.FromHex("#0066ff");
+            odometer.MaximumTrackColor = Color.FromHex("#0066ff");
+            odometer.Value = 0;
             nextAttraction = gc.currentTrip.GetCurrentAttraction();
             myMap = new MapPage();
             mapBtn.Source = ServerConection.URL_MEDIA + "googleMaps.png";
@@ -157,10 +167,36 @@ namespace trumpeldor.Views
             {
                 //LocationCheck();
                 currLoc = gc.GetUserLocation();
+                if (firstTimeLocationUpdate)
+                {
+                    firstTimeLocationUpdate = false;
+                    startDistanceToDestination = lc.DistanceBetween(currLoc.x, currLoc.y, p.x, p.y);
+                }
                 lc.AddToPositionsHistory(new Plugin.Geolocator.Abstractions.Position(currLoc.x, currLoc.y));
-                if (lc.DistanceBetween(currLoc.x, currLoc.y, p.x, p.y) > DESIRED_DISTANCE){
+                double currentDistanceToDestination = lc.DistanceBetween(currLoc.x, currLoc.y, p.x, p.y);
+                if (currentDistanceToDestination > DESIRED_DISTANCE){
                     if(ServerConection.DEBUG == 1)
                         DisplayAlert(AppResources.not_arrived, lc.DistanceBetween(currLoc.x, currLoc.y, p.x, p.y).ToString() + "curr lat: " + currLoc.x + "curr long: " + currLoc.y + "x: " + p.x + "y: " + p.y + " point info: " + nextAttraction.name, AppResources.close);
+                    double percentApproachingTarget = Math.Max(0, Math.Min(1, (1 - (currentDistanceToDestination / startDistanceToDestination))));
+                    odometer.Value = percentApproachingTarget;
+                    if (percentApproachingTarget < 0.3)
+                    {
+                        odometer.MinimumTrackColor = Color.FromHex("#0066ff");
+                        odometer.MaximumTrackColor = Color.FromHex("#0066ff");
+                    }
+                    else
+                    {
+                        if (percentApproachingTarget < 0.7)
+                        {
+                            odometer.MinimumTrackColor = Color.FromHex("#b21f4c");
+                            odometer.MaximumTrackColor = Color.FromHex("#b21f4c");
+                        }
+                        else
+                        {
+                            odometer.MinimumTrackColor = Color.FromHex("#ff0000");
+                            odometer.MaximumTrackColor = Color.FromHex("#ff0000");
+                        }
+                    }
                     return true;
                 }
                 else{
