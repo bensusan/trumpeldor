@@ -26,8 +26,8 @@
 <video height="200px" width="350px" controls="" autoplay=""></video>
     <input id="video_input" type="file" accept="video/*" onchange="encodeVideoFileAsURL(this)" style="display: none">
 <button class="button" onclick="doVideo()" type="button">Upload Video</button>
-<p></p>
-    <label for="hint"><b>:העלאת תמונה</b></label>
+   <p></p>
+    <label for="hint"><b>:העלאת תמונה למידע על אטרקציה</b></label>
 <p></p>
 <input type="file" onchange="encodeImageFileAsURL(this)"/>
 <p><img id="output" width="200"  style="display: none"/></p>
@@ -45,37 +45,19 @@
   <div class="container">
     <label for="name"><b>:שם האטרקציה</b></label>
     <input  type="text" id="attr_name" placeholder="שם האטרקציה" name="attr_name" style="text-align:right;" required>
-
-    <label for="desc"><b>:תיאור</b></label>
 <p></p>
+    <label for="desc"><b>:תיאור</b></label>
 {#    <input type="text" id="desc" placeholder="Enter description" name="attr_desc" required>#}
       <textarea id="desc" name="attr_desc" placeholder="הכניסי תיאור אטרקציה" style="text-align:right;width:310px;height:200px"></textarea>
 <p></p>
        <label for="pop"><b>הודעת פופ-אפ בהגעה לנקודה</b></label>
     <input  type="text" id="pop" placeholder="הקלידי הודעה..." name="attr_pop" style="direction:rtl;text-align:right;" required>
-
+<p></p>
       <label for="subt" style="text-align: right"><b>כתוביות</b></label>
 {#    <input  type="text" id="subt" placeholder="Enter Subtitles" name="attr_subt" style="height: 200px; overflow: scroll" required>#}
       <textarea type="text" id="subt" placeholder="הכנסי כתוביות..." name="attr_subt" style="direction:rtl;text-align:right;width: 310px;height: 200px; overflow: scroll"> </textarea>
 
-{#        <label for="desc"><b>Add American Question:</b></label>#}
-{#    <input type="text" id="ques" placeholder="Enter Question" name="attr_desc" required>#}
-{#      <input  type="text" id="ans1" placeholder="ans1" name="a1" required>#}
-{#      <input type="text" id="ans2" placeholder="ans2" name="a2" required>#}
-{#      <input type="text" id="ans3" placeholder="ans3" name="a3" required>#}
-{#      <input  type="text" id="ans4" placeholder="ans4" name="a4" required>#}
-
-{#      <label for="desc"><b>Choose path length:</b></label>#}
-{#      <select id="path_len">#}
-{#      <option value="short">Short</option>#}
-{#      <option value="medium">Medium</option>#}
-{#      <option value="long">Long</option>#}
-{#      </select>#}
-
-
-{#    {% load static %}#}
-{#    <script src="{% static 'attractions.js' %}?version=1"></script>#}
-
+<p></p>
     <button id="submit_btn_add_attr" onclick="showDataCollected()" type="button">שליחה</button>
     <button onclick="check()" type="button">ניקוי</button>
 
