@@ -23,7 +23,10 @@
                     </StackLayout>
                 </Frame>
                 <ImageButton x:Name="rightArrow" Clicked="RightArrow_Clicked" HorizontalOptions="Start" IsEnabled="False" Style="{StaticResource baseViewStyle}"/>
-                <Image x:Name="temperature" WidthRequest="70" HorizontalOptions="End" Style="{StaticResource baseViewStyle}"/>
+                <Grid>
+                    <Image x:Name="temperature"  WidthRequest="200" Style="{StaticResource baseViewStyle}"/>
+                    <Slider x:Name="odometer" IsEnabled="False" WidthRequest="180" Rotation="-90" />
+                </Grid>
             </StackLayout>
             <StackLayout x:Name="downStack" Style="{StaticResource mainStackLayout}" Orientation="Horizontal" HorizontalOptions="FillAndExpand" Margin="0" Padding="0">
                 <Button x:Name="hintBtn" Text="{translator:Translate add_hint}" Clicked="Get_Hint_Button_Clicked" Style="{StaticResource largeButtonStyle}" AutomationId="AddHintBtn" Margin="37,10,30,10"/>
