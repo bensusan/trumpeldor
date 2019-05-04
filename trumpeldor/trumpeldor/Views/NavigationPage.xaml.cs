@@ -27,11 +27,8 @@ namespace trumpeldor.Views
         trumpeldor.SheredClasses.Point p, currLoc;
         public double currLat = 0, currLong = 0;
         MapPage myMap = null;
-<<<<<<< HEAD
         private bool firstAttachOfHintMap = true;
-=======
         private double startDistanceToDestination;
->>>>>>> odometer2
 
         public NavigationPage ()
 		{
