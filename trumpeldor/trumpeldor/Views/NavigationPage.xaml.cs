@@ -29,6 +29,7 @@ namespace trumpeldor.Views
         MapPage myMap = null;
         private bool firstAttachOfHintMap = true;
         private double startDistanceToDestination;
+        private bool stopDestinationCheck = false;
 
         public NavigationPage ()
 		{
@@ -126,6 +127,7 @@ namespace trumpeldor.Views
 
         private void Next_Destination_Button_Clicked(object sender, EventArgs e)
         {
+            stopDestinationCheck = true;
             //Device.BeginInvokeOnMainThread(async () => await DisplayAlert(AppResources.success, AppResources.You_have_Reached_Your_Destionation, AppResources.ok));
             var existingPages = Navigation.NavigationStack.ToList();
             foreach (var page in existingPages)
@@ -163,6 +165,10 @@ namespace trumpeldor.Views
             Device.StartTimer(TimeSpan.FromSeconds(DESIRED_SECONDS), () =>
             {
                 //LocationCheck();
+                if (stopDestinationCheck)
+                {
+                    return false;
+                }
                 currLoc = gc.GetUserLocation();
                 if (firstTimeLocationUpdate)
                 {

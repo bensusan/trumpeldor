@@ -104,8 +104,6 @@ namespace trumpeldor.Views
         {
             try
             {
-
-
                 for (int row = 0; row < sp.width; row++)
                 {
                     for (int col = 0; col < sp.height; col++)
