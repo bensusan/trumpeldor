@@ -10,7 +10,7 @@
     {% load static %}
 <script src="{% static 'attractions.js' %}?version=1"></script>
     {% load static %}
-<script src="{% static 'pick_delete_game.js' %}?version=3"></script>
+<script src="{% static 'pick_delete_game.js' %}?version=5"></script>
      {% load static %}
 <script src="{% static 'properties.js' %}?version=2"></script>
 </head>
@@ -25,7 +25,9 @@
 
 <div align="center">
     <label for="hint" style="font-size: 36px;"><b>:משחקים קיימים</b></label>
-<p id="existing_hints"></p>
+{#<p id="existing_hints"></p>#}
+{#    <p id="existing_hints_drag"></p>#}
+
 <p></p>
 {#<button class="button" onclick="window.location.href='/add_hint'" type="button" style="width: 100px;">Add Hint</button>#}
 {#<p></p>#}
@@ -37,11 +39,29 @@
     <p><img id="output" width="200"/></p>
     <p></p>
 
-    <select id="game_type" style="display: none;">
+    <select id="game_type" onchange="showingSelectOfType()">
       <option value="opt1">פאזל גרירה</option>
       <option value="opt2">פאזל הזזה</option>
         <option value="opt3">מצא את ההבדלים</option>
     </select>
+
+        <p></p>
+    <select id="delete_cb" style="display: none">
+  <option id="dcb1" value="1" style="display: none;">1</option>
+  <option id="dcb2" value="2" style="display: none;">2</option>
+  <option id="dcb3" value="3" style="display: none;">3</option>
+  <option id="dcb4" value="4" style="display: none;">4</option>
+  <option id="dcb5" value="5" style="display: none;">5</option>
+  <option id="dcb6" value="6" style="display: none;">6</option>
+  <option id="dcb7" value="7" style="display: none;">7</option>
+  <option id="dcb8" value="8" style="display: none;">8</option>
+  <option id="dcb9" value="9" style="display: none;">9</option>
+  <option id="dcb10" value="10" style="display: none;">10</option>
+</select>
+    <p></p>
+<button class="button" type="button" id="delete_chosen_hint" style="display: none">מחיקה</button>
+
+
     <p id="title_type" style="display: none;">:סוג משחק</p>
     <p></p>
 <textarea id="write_hint_id_to_delete" placeholder="Write Game ID..." style="height:100px;border-radius:5px;display: none"></textarea>

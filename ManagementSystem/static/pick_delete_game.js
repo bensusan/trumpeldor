@@ -7,6 +7,41 @@ var str;
 var str2;
 var attractionObjToUseInHintDelete;
 
+
+function showingSelectOfType(){
+
+    let game_type = document.getElementById("game_type");
+    let type = "sliding_puzzle";
+
+    if(game_type.value == 'opt1')
+                type = "puzzle";
+
+    if(game_type.value == 'opt')
+                type = "";
+
+    getRequestGames(showOpts,type,attractionObjToUseInHintDelete['id']);
+}
+
+
+function showOpts(gamesJSON) {
+
+    let opts = document.getElementById("delete_cb");
+    opts.style.display='';
+
+    let i=1;
+        gamesJSON.forEach(function (game) {
+            let d_opt_id = "dcb"+i;
+
+            document.getElementById(d_opt_id).innerText = game['description'];
+            document.getElementById(d_opt_id).value = game['id'];
+            document.getElementById(d_opt_id).style.display='inline';
+            i=i+1;
+
+        });
+
+
+}
+
 function funcForExistingHints(attractionsJSON){
         let name = localStorage.getItem("name_for_add_aq");
         let desc = localStorage.getItem("desc_for_add_aq");
@@ -16,7 +51,7 @@ function funcForExistingHints(attractionsJSON){
         if(p.name===name && p.description===desc)
         {
             getRequestGames(games_func_sliding,"sliding_puzzle",attr['id']);
-            // getRequestGamesDrag(games_func,attr['id']);
+            // getRequestGames(games_func_drag,"puzzle",attr['id']);
             attractionObjToUseInHintDelete=attr;
         }
         });
@@ -29,10 +64,10 @@ function games_func_sliding(gamesJSON) {
             str=str+"id: "+game['id'] +", instructions: "+ game['description']+"<br />";
             // alert(str);
         });
-        document.getElementById("existing_hints").innerHTML = str ;
-        document.getElementById("existing_hints").style.fontWeight = 'bold';
-        document.getElementById("existing_hints").style.fontFamily='david';
-        document.getElementById("existing_hints").style.fontSize='24px';
+        // document.getElementById("existing_hints").innerHTML = str;
+        // document.getElementById("existing_hints").style.fontWeight = 'bold';
+        // document.getElementById("existing_hints").style.fontFamily='david';
+        // document.getElementById("existing_hints").style.fontSize='24px';
 }
 
 function games_func_drag(gamesJSON) {
@@ -41,10 +76,10 @@ function games_func_drag(gamesJSON) {
             str2=str2+"id: "+game['id'] +", instructions: "+ game['description']+"<br />";
             // alert(str);
         });
-        document.getElementById("existing_hints").innerHTML = str + str2;
-        document.getElementById("existing_hints").style.fontWeight = 'bold';
-        document.getElementById("existing_hints").style.fontFamily='david';
-        document.getElementById("existing_hints").style.fontSize='24px';
+        // document.getElementById("existing_hints_drag").innerHTML = str2;
+        // document.getElementById("existing_hints_drag").style.fontWeight = 'bold';
+        // document.getElementById("existing_hints_drag").style.fontFamily='david';
+        // document.getElementById("existing_hints_drag").style.fontSize='24px';
 }
 
 window.onload = function () {
@@ -77,7 +112,7 @@ function wantToDeleteButton(){
             showChosenHintBTN.addEventListener('click', function() {
 
             if(game_type.value == 'opt1')
-                type = "drag_puzzle";
+                type = "puzzle";
 
             if(game_type.value == 'opt3')
                 type = "";
@@ -88,7 +123,7 @@ function wantToDeleteButton(){
 
             deleteChosenHintBTN.addEventListener('click', function() {
                 if(game_type.value == 'opt1')
-                type = "drag_puzzle";
+                type = "puzzle";
 
                 if(game_type.value == 'opt3')
                  type = "";
@@ -182,6 +217,7 @@ function getRequestGames(funcOnHints,game_type,attr_id){
     // the server port and my ip
     serverRequest("GET", funcOnHints, 'http://'+ip+':12344/managementsystem/attraction/'+ attr_id+
         '/'+game_type+'/?format=json');
+
     //alert("need to remove this alert and fix funcToGetAttraction()!");
 }
 
