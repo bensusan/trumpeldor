@@ -30,7 +30,7 @@
     <div id="message"></div>
 <video height="200px" width="350px" controls="" autoplay=""></video>
     <input id="video_input" type="file" accept="video/*" onchange="encodeVideoFileAsURL(this)" style="display: none">
-<button class='button blogger' onclick="doVideo()" type="button">Upload Video</button>
+<button class='button blogger' onclick="doVideo()" type="button" style="width: 320px;">Upload Video</button>
    <p></p>
     <label for="hint" style="font-size: 20px;"><b>:העלאת תמונה למידע על אטרקציה</b></label>
 <p></p>
@@ -62,9 +62,9 @@
 {#    <input  type="text" id="subt" placeholder="Enter Subtitles" name="attr_subt" style="height: 200px; overflow: scroll" required>#}
       <textarea type="text" id="subt" placeholder="הכנסי כתוביות..." name="attr_subt" style="direction:rtl;text-align:right;width: 310px;height: 200px; overflow: scroll"> </textarea>
 
-<p></p>
-    <button class='button google-blue' id="submit_btn_add_attr" onclick="showDataCollected()" type="button">שליחה</button>
-    <button class='button google-blue' onclick="check()" type="button">ניקוי</button>
+<p><br/></p>
+    <button class='button google-blue' id="submit_btn_add_attr" onclick="showDataCollected()" type="button" style="width: 220px;">שליחה</button>
+    <button class='button google-blue' onclick="check()" type="button" style="width: 220px;">ניקוי</button>
 
   </div>
 
