@@ -6,12 +6,13 @@ var loadFile = function(event) {
 var str;
 var str2;
 var attractionObjToUseInHintDelete;
-
+let type = "sliding_puzzle";
+let game_id_that_was_picked = 0;
 
 function showingSelectOfType(){
 
     let game_type = document.getElementById("game_type");
-    let type = "sliding_puzzle";
+
 
     if(game_type.value == 'opt1')
                 type = "puzzle";
@@ -39,7 +40,32 @@ function showOpts(gamesJSON) {
 
         });
 
+    var showChosenGameBTN = document.getElementById("show_chosen_game");
+            showChosenGameBTN.style.display = '';
 
+    showChosenGameBTN.addEventListener('click',function () {
+         game_id_that_was_picked = opts.options[opts.selectedIndex].value;
+         getRequestGames(doSome,type,attractionObjToUseInHintDelete['id']);
+    });
+
+
+}
+
+function doSome(gamesJSON){
+    let namepic = "";
+
+    if(type == "sliding_puzzle")
+    { namepic = "piecesURLS"; }
+    else
+    { namepic = "pictureURL"; }
+
+    gamesJSON.forEach(function (game) {
+        if(game['id'] == game_id_that_was_picked)
+        {
+            var image = document.getElementById('output');
+            image.src = game[namepic];
+        }
+    });
 }
 
 function funcForExistingHints(attractionsJSON){
