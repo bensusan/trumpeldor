@@ -4,15 +4,19 @@
     <meta charset="UTF-8">
     <title>בחירת משחק למחיקה</title>
     {% load static %}
+<link rel="stylesheet" href="{% static 'buttoni.css' %}?version=4">
+    {% load static %}
 <link rel="stylesheet" href="{% static 'just_want_background.css' %}?version=1">
+
     {% load static %}
 <link rel="stylesheet" href="{% static 'SideMenu.css' %}?version=4">
     {% load static %}
 <script src="{% static 'attractions.js' %}?version=1"></script>
     {% load static %}
-<script src="{% static 'pick_delete_game.js' %}?version=5"></script>
+<script src="{% static 'pick_delete_game.js' %}?version=6"></script>
      {% load static %}
 <script src="{% static 'properties.js' %}?version=2"></script>
+
 </head>
 <body>
 
@@ -36,18 +40,18 @@
 {#<p></p>#}
 {#<button class="button" type="button" id="want_to_delete_hint" style="width: 100px;">Delete Hint</button>#}
 {#<p></p>#}
-    <p><img id="output" width="200"/></p>
-    <p></p>
+    <p> בחרי משחק למחוק</p>
 
-    <select id="game_type" onchange="showingSelectOfType()">
+    <select id="game_type" onchange="showingSelectOfType()" style="height:80px;width:300px;font-size: 20px;">
+        <option value="choose">בחרי סוג פאזל...</option>
       <option value="opt1">פאזל גרירה</option>
       <option value="opt2">פאזל הזזה</option>
         <option value="opt3">מצא את ההבדלים</option>
     </select>
 
         <p></p>
-    <select id="delete_cb" style="display: none">
-  <option id="dcb1" value="1" style="display: none;">1</option>
+    <select id="delete_cb" style="height:80px;width:300px;display:none;font-size: 20px;">
+  <option id="dcb1" value="1" style="display: none;">ריק</option>
   <option id="dcb2" value="2" style="display: none;">2</option>
   <option id="dcb3" value="3" style="display: none;">3</option>
   <option id="dcb4" value="4" style="display: none;">4</option>
@@ -58,16 +62,10 @@
   <option id="dcb9" value="9" style="display: none;">9</option>
   <option id="dcb10" value="10" style="display: none;">10</option>
 </select>
-    <p></p>
-<button class="button" type="button" id="delete_chosen_hint" style="display: none">מחיקה</button>
+        <p><img id="output" width="200"/></p>
 
-
-    <p id="title_type" style="display: none;">:סוג משחק</p>
-    <p></p>
-<textarea id="write_hint_id_to_delete" placeholder="Write Game ID..." style="height:100px;border-radius:5px;display: none"></textarea>
-     <p></p>
-    <button class="button" type="button" id="show_chosen_game" style="display: none">הצג</button>
-<button class="button" type="button" id="delete_chosen_hint" style="display: none">מחיקה</button>
+    <button class="yahoo" type="button" id="show_chosen_game" style="width:80px;height:30px;display: none">הצג</button>
+<button class="yahoo" type="button" id="delete_chosen_hint" style="width:90px;height:30px;display: none">מחיקה</button>
 <p></p>
 {#<button class="button" onclick="donePickingHints()" type="button" style="width: 100px;">Finish</button>#}
 

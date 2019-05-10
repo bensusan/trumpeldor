@@ -17,7 +17,7 @@ function showingSelectOfType(){
     if(game_type.value == 'opt1')
                 type = "puzzle";
 
-    if(game_type.value == 'opt')
+    if(game_type.value == 'opt3')
                 type = "";
 
     getRequestGames(showOpts,type,attractionObjToUseInHintDelete['id']);
@@ -35,7 +35,7 @@ function showOpts(gamesJSON) {
 
             document.getElementById(d_opt_id).innerText = game['description'];
             document.getElementById(d_opt_id).value = game['id'];
-            document.getElementById(d_opt_id).style.display='inline';
+            document.getElementById(d_opt_id).style.display='';
             i=i+1;
 
         });
@@ -46,6 +46,14 @@ function showOpts(gamesJSON) {
     showChosenGameBTN.addEventListener('click',function () {
          game_id_that_was_picked = opts.options[opts.selectedIndex].value;
          getRequestGames(doSome,type,attractionObjToUseInHintDelete['id']);
+    });
+
+    var deleteChosenHintBTN = document.getElementById("delete_chosen_hint");
+            deleteChosenHintBTN.style.display = "";
+
+    deleteChosenHintBTN.addEventListener('click', function() {
+        deleteRequestGame(attractionObjToUseInHintDelete['id'],type);
+        window.location.href = '/pick_delete_game';
     });
 
 
@@ -69,6 +77,7 @@ function doSome(gamesJSON){
 }
 
 function funcForExistingHints(attractionsJSON){
+
         let name = localStorage.getItem("name_for_add_aq");
         let desc = localStorage.getItem("desc_for_add_aq");
       // alert("in get name! "+"of the origin : " + lat + " , " + lng);
@@ -109,6 +118,10 @@ function games_func_drag(gamesJSON) {
 }
 
 window.onload = function () {
+    let cb = document.getElementById("delete_cb");
+    cb.onchange = function(){
+        showingSelectOfType();
+    };
     getRequestAttractions(funcForExistingHints);
     localFileVideoPlayer();
 
@@ -125,8 +138,6 @@ function wantToDeleteButton(){
             game_type.style.display = "inline";
 
             let type = "sliding_puzzle";
-
-
 
 
          var showChosenHintBTN = document.getElementById("show_chosen_game");
