@@ -78,6 +78,7 @@ namespace trumpeldor.Views
         private async void Play_Button_Clicked(object sender, EventArgs e)
         {
             while (!await AskPermissionToUseLocation()) ;
+            gc.StartTaskLocation();
             if(await CanUserPlay())
                 await Navigation.PushModalAsync(new LoginsPage());
         }

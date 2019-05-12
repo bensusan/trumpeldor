@@ -10,6 +10,7 @@ using Xamarin.Forms.Xaml;
 using trumpeldor.SheredClasses;
 using trumpeldor;
 using Plugin.Geolocator;
+using System.Timers;
 
 namespace trumpeldor.Views
 {
@@ -23,10 +24,11 @@ namespace trumpeldor.Views
         public int hintsIndex = 1, currIndex = 0;
         public GameController gc;
         public LocationController lc;
-        trumpeldor.SheredClasses.Point p, currLoc;
+        trumpeldor.SheredClasses.Point attractionLoc, currLoc;
         public double currLat = 0, currLong = 0;
         MapPage myMap = null;
         private bool firstAttachOfHintMap = true;
+        private bool done = false;
 
         public NavigationPage ()
 		{
@@ -43,14 +45,12 @@ namespace trumpeldor.Views
             AttachHint(0);
             
             lc = LocationController.GetInstance();
-            p = new trumpeldor.SheredClasses.Point(nextAttraction.x, nextAttraction.y);
+            attractionLoc = new trumpeldor.SheredClasses.Point(nextAttraction.x, nextAttraction.y);
             if (isFirst)
             {
                 isFirst = false;
-                Task.Run(async () =>
-                {
-                    await TimerCheck();
-                }).ConfigureAwait(false);
+                //Task.Run(() => TimerCheck()).ConfigureAwait(false);
+                TimerCheck();
             }
         }
 
@@ -119,12 +119,17 @@ namespace trumpeldor.Views
 
         private void Next_Destination_Button_Clicked(object sender, EventArgs e)
         {
-            //Device.BeginInvokeOnMainThread(async () => await DisplayAlert(AppResources.success, AppResources.You_have_Reached_Your_Destionation, AppResources.ok));
+            Arrived();
+            //Device.BeginInvokeOnMainThread(async () => await DisplayAlert(AppResources.success, AppResources.You_have_Reached_Your_Destionation, AppResources.ok));   
+        }
+
+        private void Arrived()
+        {
+            done = true;
+            gc.EditScore(GameController.SCORE_VALUE.Attraction_Arrive);
             var existingPages = Navigation.NavigationStack.ToList();
             foreach (var page in existingPages)
-            {
                 Navigation.RemovePage(page);
-            }
             Application.Current.MainPage = new AttractionPage();
         }
 
@@ -151,26 +156,26 @@ namespace trumpeldor.Views
             leftArrow.IsEnabled = true;
         }
 
-        public async Task TimerCheck()
+        public void TimerCheck()
         {
-            Device.StartTimer(TimeSpan.FromSeconds(DESIRED_SECONDS), () =>
+            Timer arrivedTimer = new Timer();
+            arrivedTimer.Interval = DESIRED_SECONDS * 1000;
+            arrivedTimer.Elapsed += (o, e) =>
             {
-                //LocationCheck();
+                if (done)
+                    arrivedTimer.Stop();
                 currLoc = gc.GetUserLocation();
                 lc.AddToPositionsHistory(new Plugin.Geolocator.Abstractions.Position(currLoc.x, currLoc.y));
-                if (lc.DistanceBetween(currLoc.x, currLoc.y, p.x, p.y) > DESIRED_DISTANCE){
-                    if(ServerConection.DEBUG == 1)
-                        DisplayAlert(AppResources.not_arrived, lc.DistanceBetween(currLoc.x, currLoc.y, p.x, p.y).ToString() + "curr lat: " + currLoc.x + "curr long: " + currLoc.y + "x: " + p.x + "y: " + p.y + " point info: " + nextAttraction.name, AppResources.close);
-                    return true;
-                }
-                else{
-                    gc.EditScore(GameController.SCORE_VALUE.Attraction_Arrive);
+                if (lc.DistanceBetween(currLoc.x, currLoc.y, attractionLoc.x, attractionLoc.y) > DESIRED_DISTANCE){
                     if (ServerConection.DEBUG == 1)
-                        DisplayAlert(AppResources.arrived, AppResources.arrived + "! " + lc.DistanceBetween(currLoc.x, currLoc.y, p.x, p.y).ToString(), AppResources.close);
-                    Application.Current.MainPage = new AttractionPage();
-                    return false;
+                        Device.BeginInvokeOnMainThread (() => {
+                            DisplayAlert("Must come closer", lc.DistanceBetween(currLoc.x, currLoc.y, attractionLoc.x, attractionLoc.y).ToString() + "\ncurr lat: " + currLoc.x + "\ncurr long: " + currLoc.y + "\nattractionLoc x: " + attractionLoc.x + "\nattractionLoc y: " + attractionLoc.y + "\npoint info: " + nextAttraction.name, "close");
+                        });                      
                 }
-            });
+                else
+                    Device.BeginInvokeOnMainThread(() => Arrived());
+            };
+            arrivedTimer.Start();
         }
 
         //private async Task LocationCheck()

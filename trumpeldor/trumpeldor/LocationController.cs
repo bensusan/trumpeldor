@@ -9,10 +9,12 @@ namespace trumpeldor
     {
         private static LocationController instance = null;
         private List<Position> allPositions = null;
+        public Position LastPoint { get; set; }
 
         private LocationController()
         {
             allPositions = new List<Position>();
+            LastPoint = null;
         }
 
         public static LocationController GetInstance()
@@ -27,6 +29,7 @@ namespace trumpeldor
         public void AddToPositionsHistory(Position p)
         {
             allPositions.Add(p);
+            LastPoint = p;
         }
 
         public int GetListCount()
@@ -68,5 +71,7 @@ namespace trumpeldor
         {
             return deg * (Math.PI / 180);
         }
+
+
     }
 }
