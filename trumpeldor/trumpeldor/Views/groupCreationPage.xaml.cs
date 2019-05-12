@@ -41,10 +41,12 @@ namespace trumpeldor.Views
         protected override async void OnAppearing()
         {
             base.OnAppearing();
-            await ShowPastDetails();
+            if(!await ShowPastDetails())
+                Application.Current.MainPage = new NavigationPage();
+
         }
 
-        public async Task ShowPastDetails()
+        public async Task<bool> ShowPastDetails()
         {
             if (!gc.IsNewUser()){
                 if (gc.IsUserConnectedRecently()){
@@ -63,10 +65,9 @@ namespace trumpeldor.Views
                     
                     if (dialogAns == 1){
                         gc.ContinuePreviousTrip();
-                        Application.Current.MainPage = new NavigationPage();
-                        return;
+                        //Application.Current.MainPage = new NavigationPage();
+                        return false;
                     }
-
                 }
                 RelevantInformation ans = gc.LoadRelevantInformationFromLastTrip();
                 groupNameEntry.Text = ans.groupName;
@@ -74,6 +75,7 @@ namespace trumpeldor.Views
                     for (int i = 0; i < ans.playersAges.Count; i++)
                         AddRowToPlayersGrid(ans.playersAges[i].ToString());
             }
+            return true;
         }
         
         private void AddRowToPlayersGrid(String playerAge)

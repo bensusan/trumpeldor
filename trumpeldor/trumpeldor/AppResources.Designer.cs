@@ -637,7 +637,7 @@ namespace trumpeldor {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to שמור והמשך.
+        ///   Looks up a localized string similar to המשך.
         /// </summary>
         public static string save_and_continue {
             get {
