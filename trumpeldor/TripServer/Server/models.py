@@ -136,10 +136,15 @@ class Admin(models.Model):
 
 
 class Images(models.Model):
-    name = models.CharField(max_length=50)
+    description = models.CharField(max_length=50)
     img = models.ImageField(upload_to='images/')
 
 
 class Videos(models.Model):
-    name = models.CharField(max_length=50)
+    description = models.CharField(max_length=50)
     vid = models.ImageField(upload_to='videos/')
+
+
+class Settings(models.Model):
+    logo = models.ImageField(upload_to='images/')
+

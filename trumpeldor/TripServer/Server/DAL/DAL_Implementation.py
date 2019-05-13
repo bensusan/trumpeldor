@@ -68,7 +68,7 @@ class DAL_Implementation(DAL_Abstract):
             names_of_pics += name_of_pic
         names_of_vids = []
         for vid in videosURLS:
-            vid_data_bytes = str.encode(pic)
+            vid_data_bytes = str.encode(vid)
             name_of_vid = str(random.randint(0, 10000000))
             with open("media/" + name_of_vid + ".png", "wb") as fh:
                 fh.write(base64.decodebytes(vid_data_bytes))
@@ -362,6 +362,20 @@ class DAL_Implementation(DAL_Abstract):
     def delete_find_the_differences(self, id_attraction):
         self.get_all_find_the_differences_for_attraction(id_attraction).delete()
         return True
+
+
+    def add_media(self, media_urls, folder): #folder => images or videos
+        names_of_vids = []
+        for vid in media_urls:
+            vid_data_bytes = str.encode(vid)
+            name_of_vid = str(random.randint(0, 10000000))
+            with open("media/" + name_of_vid + ".png", "wb") as fh:
+                fh.write(base64.decodebytes(vid_data_bytes))
+            names_of_vids += name_of_vid
+        media = Attraction(name=name, x=x, y=y, description=description, picturesURLS=addPrefixUrl(names_of_pics),
+                                videosURLS=addPrefixUrl(names_of_vids))
+
+
 
 URL_PREFIX_MEDIA = "http://" + sys.argv[-1] + "/media/"
 

@@ -11,7 +11,6 @@ from Server.BL.BL import BLProxy
 from Server.BL.BL_Implementation import BL_Implementation
 from Server.DAL.DAL_Implementation import DAL_Implementation
 import json
-from ..forms import *
 
 DAL_Impl = DAL_Implementation()
 BL_Impl = BL_Implementation()
@@ -337,24 +336,3 @@ class FindTheDifferencesList(generics.GenericAPIView):
 #     return render(request, "signIn.html")
 
 
-# Create your views here.
-def images_view(request):
-    if request.method == 'POST':
-        form = ImagesForm(request.POST, request.FILES)
-        print(request.FILES)
-        print(request.POST)
-        if form.is_valid():
-            print('1111')
-            form.save()
-            return redirect('success')
-    # else:
-    #     form = ImagesForm()
-    return render(request, 'Images_Form.html', {'form': form})
-
-
-def success(request):
-    return HttpResponse('successfuly uploaded')
-
-
-def failure(request):
-    return HttpResponse('failed :(')
