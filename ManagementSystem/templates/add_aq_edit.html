@@ -5,6 +5,10 @@
     <title>הוספת שאלה אמריקאית</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     {% load static %}
+<link rel="stylesheet" href="{% static 'beauty.css' %}?version=2">
+       {% load static %}
+<link rel="stylesheet" href="{% static 'buttoni.css' %}?version=2">
+    {% load static %}
 <link rel="stylesheet" href="{% static 'SideMenu.css' %}?version=4">
 {% load static %}
 <link rel="stylesheet" href="{% static 'just_want_background.css' %}?version=2">
@@ -51,7 +55,7 @@
     <p></p>
 {#window.location.href='/add_hint'#}
 
-    <button class="button" id="finish_add_aq_btn" type="button" style="display: none;">שליחה</button>
+    <button class='button blogger' id="finish_add_aq_btn" type="button" style="display: none;">שליחה</button>
 {#<button class="button" id="finish_add_aq" onclick="finishAddAq()" type="button">Send</button>#}
     </div>
 <nav id="sideMenu"></nav>

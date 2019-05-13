@@ -6,11 +6,12 @@
 <link rel="stylesheet" href="{% static 'signInForm.css' %}?version=1">
       {% load static %}
 <link rel="stylesheet" href="{% static 'SideMenu.css' %}?version=4">
-
+ {% load static %}
+<link rel="stylesheet" href="{% static 'buttoni.css' %}?version=2">
     {% load static %}
 <link rel="stylesheet" href="{% static 'add_game.css' %}?version=1">
     {% load static %}
-<script src="{% static 'add_game.js' %}?version=6"></script>
+<script src="{% static 'add_game.js' %}?version=4"></script>
      {% load static %}
 <script src="{% static 'properties.js' %}?version=1"></script>
 </head>
@@ -23,10 +24,21 @@
 
 
 {#      <p><a href="JavaScript:newPopup('/add_picture');">Open a popup window</a></p>#}
-      <button type="button" id="sliding_puzzle_button">פאזל הזזה</button>
-      <button type="button" id="drag_puzzle_button">פאזל גרירה</button>
-{#      <button type="button">Take A Picture</button>#}
-      <button type="button" id="find_the_diff">מצא את ההבדלים</button>
+      <button class='yahoo' type="button" id="sliding_puzzle_button">פאזל הזזה</button>
+      <button class='yahoo'type="button" id="drag_puzzle_button">פאזל גרירה</button>
+      <button class='yahoo' type="button" id="capture_task">משימת צילום</button>
+
+      <p id="p1" style="display: none"></p>
+      <label id="sureLBL" for="message"  style="text-align: right; display: none">?האם את בטוחה</label>
+      <p id="p2" style="display: none"></p>
+      <button class='yahoo' type="button" id="noBTN" style="width: 100px; display: none">לא</button>
+      <button class='yahoo' type="button" id="yesBTN" style="width: 100px; display: none">כן</button>
+      <p id="p3" style="display: none"></p>
+
+      <button class='yahoo' type="button" id="find_the_diff">מצא את ההבדלים</button>
+
+
+
 
   </div>
 

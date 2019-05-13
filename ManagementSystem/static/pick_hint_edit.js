@@ -23,8 +23,20 @@ function funcForExistingHints(attractionsJSON){
 
 function hints_func(hintsJSON) {
         str="";
+        let i=1;
         hintsJSON.forEach(function (hint) {
-            str=str+"id: "+hint['id'] +", data: "+ hint['data']+"<br />";
+            let e_opt_id = "ecb"+i;
+            let d_opt_id = "dcb"+i;
+
+            document.getElementById(e_opt_id).innerText = hint['data'];
+            document.getElementById(e_opt_id).value = hint['id'];
+            document.getElementById(e_opt_id).style.display='inline';
+
+            document.getElementById(d_opt_id).innerText = hint['data'];
+            document.getElementById(d_opt_id).value = hint['id'];
+            document.getElementById(d_opt_id).style.display='inline';
+            i=i+1;
+            str=str+" data: "+ hint['data']+"<br />";
             // alert(str);
         });
         document.getElementById("existing_hints").innerHTML = str ;
@@ -40,21 +52,28 @@ window.onload = function () {
 };
 
 function wantToEditButton(){
-    var writeChosenHintText = document.getElementById("write_hint_id_to_delete");
-            writeChosenHintText.style.display = "none";
+    var delTitle = document.getElementById("deleteTitle");
+            delTitle.style.display = "none";
 
             var deleteChosenHintBTN = document.getElementById("delete_chosen_hint");
             deleteChosenHintBTN.style.display = "none";
 
-      var writeChosenHintTextEdit = document.getElementById("write_hint_id_to_edit");
-            writeChosenHintTextEdit.style.display = "inline";
+            var comboDelete = document.getElementById("delete_cb");
+            comboDelete.style.display = "none";
+
+      var edTitle = document.getElementById("editTitle");
+            edTitle.style.display = "inline";
+
+            var comboEdit = document.getElementById("edit_cb");
+            comboEdit.style.display = "inline";
 
             var editChosenHintBTN = document.getElementById("edit_chosen_hint");
             editChosenHintBTN.style.display = "inline";
 
             editChosenHintBTN.addEventListener('click', function() {
-                let hint_id_that_was_picked = document.getElementById("write_hint_id_to_edit").value;
-                localStorage.setItem("hint_id_to_edit", hint_id_that_was_picked);
+                let chosen_hint_id = comboEdit.options[comboEdit.selectedIndex].value;
+                // let hint_id_that_was_picked = document.getElementById("write_hint_id_to_edit").value;
+                localStorage.setItem("hint_id_to_edit", chosen_hint_id);
                 localStorage.setItem("attr_id_for_hint_edit", attractionObjToUseInHintDelete['id']);
                 window.location.href='/edit_hint_edit';
             });
@@ -62,14 +81,21 @@ function wantToEditButton(){
 
 
 function wantToDeleteButton(){
-    var writeChosenHintTextEdit = document.getElementById("write_hint_id_to_edit");
-            writeChosenHintTextEdit.style.display = "none";
 
             var editChosenHintBTN = document.getElementById("edit_chosen_hint");
             editChosenHintBTN.style.display = "none";
 
-        var writeChosenHintText = document.getElementById("write_hint_id_to_delete");
-            writeChosenHintText.style.display = "inline";
+            var comboEdit = document.getElementById("edit_cb");
+            comboEdit.style.display = "none";
+
+            var delTitle = document.getElementById("deleteTitle");
+            delTitle.style.display = "inline";
+
+        var edTitle = document.getElementById("editTitle");
+            edTitle.style.display = "none";
+
+            var comboDelete = document.getElementById("delete_cb");
+            comboDelete.style.display = "inline";
 
             var deleteChosenHintBTN = document.getElementById("delete_chosen_hint");
             deleteChosenHintBTN.style.display = "inline";
@@ -80,7 +106,8 @@ function wantToDeleteButton(){
 }
 
 function funcInOrderToDeleteHint(hintsJSON) {
-    let hint_id_that_was_picked = document.getElementById("write_hint_id_to_delete").value;
+    var comboDelete = document.getElementById("delete_cb");
+    let hint_id_that_was_picked = comboDelete.options[comboDelete.selectedIndex].value;
    // let number_hint_id = Number(hint_id_that_was_picked);
       hintsJSON.forEach(function (hint) {
           // alert("the id is: "+attr['id']);

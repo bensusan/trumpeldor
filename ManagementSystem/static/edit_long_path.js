@@ -1,6 +1,6 @@
 
 let curPosClicked;
-
+let points_of_longTrack = [];
 var str_of_points="";
 let pointsOfPath = [];
 let pointsOfMedium = [];
@@ -58,13 +58,30 @@ function initMapAndAttractionss(){
            var deleteFromPathBTN = document.getElementById('delete_from_path_long');
         deleteFromPathBTN.addEventListener('click', function() {
                 //let point_to_delete = {lat: m.position.lat(), lng: m.position.lng()};
+            let t=1;
                 let point_to_delete2 = {lat: m.position.lat().toFixed(10), lng: m.position.lng().toFixed(10)};
                 fullLongPoints.forEach(function (long_point) {
                    // alert(med_point['x'] +","+med_point['y'] +"\n"+point_to_delete2.lat+","+point_to_delete2.lng);
                      if((long_point['x'].toFixed(10) == point_to_delete2.lat)  &&
                          (long_point['y'].toFixed(10) == point_to_delete2.lng))
                      {
-                         deletePointFromTrackRequest(long_point['id'],idOfLong);
+
+                         points_of_longTrack.forEach(function (the_point) {
+                             if((the_point['x'].toFixed(10) == point_to_delete2.lat)  &&
+                         (the_point['y'].toFixed(10) == point_to_delete2.lng))
+                                 {if(t==1) {
+                                     t=122;
+                                    deletePointFromTrackRequest(long_point['id'],idOfLong);
+                                 }}
+                             else{
+                                 if(t==1) {
+                                     t=122;
+                                     alert("אין אפשרות למחוק נקודה ממסלול שאינו ארוך.");
+                                 }
+                             }
+
+                         });
+
                     }
                 });
             window.location.href='/edit_long_path';
@@ -92,7 +109,7 @@ function markAttractionsOfLongPaths(tracksJSON){
 
         if(track['length']==3) {
             idOfLong = track['id'];
-
+            points_of_longTrack = track['points'];
             let points_of_track = track['points'];
             let points_of_subtrack = track['subTrack']['points'];
             let points_of_subsubtrack = track['subTrack']['subTrack']['points'];

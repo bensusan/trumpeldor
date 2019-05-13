@@ -6,8 +6,78 @@ var loadFile = function(event) {
 var str;
 var str2;
 var attractionObjToUseInHintDelete;
+let type = "sliding_puzzle";
+let game_id_that_was_picked = 0;
+
+function showingSelectOfType(){
+
+    let game_type = document.getElementById("game_type");
+
+
+    if(game_type.value == 'opt1')
+                type = "puzzle";
+
+    if(game_type.value == 'opt3')
+                type = "";
+
+    getRequestGames(showOpts,type,attractionObjToUseInHintDelete['id']);
+}
+
+
+function showOpts(gamesJSON) {
+
+    let opts = document.getElementById("delete_cb");
+    opts.style.display='';
+
+    let i=1;
+        gamesJSON.forEach(function (game) {
+            let d_opt_id = "dcb"+i;
+
+            document.getElementById(d_opt_id).innerText = game['description'];
+            document.getElementById(d_opt_id).value = game['id'];
+            document.getElementById(d_opt_id).style.display='';
+            i=i+1;
+
+        });
+
+    var showChosenGameBTN = document.getElementById("show_chosen_game");
+            showChosenGameBTN.style.display = '';
+
+    showChosenGameBTN.addEventListener('click',function () {
+         game_id_that_was_picked = opts.options[opts.selectedIndex].value;
+         getRequestGames(doSome,type,attractionObjToUseInHintDelete['id']);
+    });
+
+    var deleteChosenHintBTN = document.getElementById("delete_chosen_hint");
+            deleteChosenHintBTN.style.display = "";
+
+    deleteChosenHintBTN.addEventListener('click', function() {
+        deleteRequestGame(attractionObjToUseInHintDelete['id'],type);
+        window.location.href = '/pick_delete_game';
+    });
+
+
+}
+
+function doSome(gamesJSON){
+    let namepic = "";
+
+    if(type == "sliding_puzzle")
+    { namepic = "piecesURLS"; }
+    else
+    { namepic = "pictureURL"; }
+
+    gamesJSON.forEach(function (game) {
+        if(game['id'] == game_id_that_was_picked)
+        {
+            var image = document.getElementById('output');
+            image.src = game[namepic];
+        }
+    });
+}
 
 function funcForExistingHints(attractionsJSON){
+
         let name = localStorage.getItem("name_for_add_aq");
         let desc = localStorage.getItem("desc_for_add_aq");
       // alert("in get name! "+"of the origin : " + lat + " , " + lng);
@@ -16,7 +86,7 @@ function funcForExistingHints(attractionsJSON){
         if(p.name===name && p.description===desc)
         {
             getRequestGames(games_func_sliding,"sliding_puzzle",attr['id']);
-            // getRequestGamesDrag(games_func,attr['id']);
+            // getRequestGames(games_func_drag,"puzzle",attr['id']);
             attractionObjToUseInHintDelete=attr;
         }
         });
@@ -29,10 +99,10 @@ function games_func_sliding(gamesJSON) {
             str=str+"id: "+game['id'] +", instructions: "+ game['description']+"<br />";
             // alert(str);
         });
-        document.getElementById("existing_hints").innerHTML = str ;
-        document.getElementById("existing_hints").style.fontWeight = 'bold';
-        document.getElementById("existing_hints").style.fontFamily='david';
-        document.getElementById("existing_hints").style.fontSize='24px';
+        // document.getElementById("existing_hints").innerHTML = str;
+        // document.getElementById("existing_hints").style.fontWeight = 'bold';
+        // document.getElementById("existing_hints").style.fontFamily='david';
+        // document.getElementById("existing_hints").style.fontSize='24px';
 }
 
 function games_func_drag(gamesJSON) {
@@ -41,13 +111,17 @@ function games_func_drag(gamesJSON) {
             str2=str2+"id: "+game['id'] +", instructions: "+ game['description']+"<br />";
             // alert(str);
         });
-        document.getElementById("existing_hints").innerHTML = str + str2;
-        document.getElementById("existing_hints").style.fontWeight = 'bold';
-        document.getElementById("existing_hints").style.fontFamily='david';
-        document.getElementById("existing_hints").style.fontSize='24px';
+        // document.getElementById("existing_hints_drag").innerHTML = str2;
+        // document.getElementById("existing_hints_drag").style.fontWeight = 'bold';
+        // document.getElementById("existing_hints_drag").style.fontFamily='david';
+        // document.getElementById("existing_hints_drag").style.fontSize='24px';
 }
 
 window.onload = function () {
+    let cb = document.getElementById("delete_cb");
+    cb.onchange = function(){
+        showingSelectOfType();
+    };
     getRequestAttractions(funcForExistingHints);
     localFileVideoPlayer();
 
@@ -66,8 +140,6 @@ function wantToDeleteButton(){
             let type = "sliding_puzzle";
 
 
-
-
          var showChosenHintBTN = document.getElementById("show_chosen_game");
             showChosenHintBTN.style.display = "inline";
 
@@ -77,7 +149,7 @@ function wantToDeleteButton(){
             showChosenHintBTN.addEventListener('click', function() {
 
             if(game_type.value == 'opt1')
-                type = "drag_puzzle";
+                type = "puzzle";
 
             if(game_type.value == 'opt3')
                 type = "";
@@ -88,7 +160,7 @@ function wantToDeleteButton(){
 
             deleteChosenHintBTN.addEventListener('click', function() {
                 if(game_type.value == 'opt1')
-                type = "drag_puzzle";
+                type = "puzzle";
 
                 if(game_type.value == 'opt3')
                  type = "";
@@ -182,6 +254,7 @@ function getRequestGames(funcOnHints,game_type,attr_id){
     // the server port and my ip
     serverRequest("GET", funcOnHints, 'http://'+ip+':12344/managementsystem/attraction/'+ attr_id+
         '/'+game_type+'/?format=json');
+
     //alert("need to remove this alert and fix funcToGetAttraction()!");
 }
 

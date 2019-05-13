@@ -44,19 +44,37 @@ function initMap() {
                 // alert("only once!");
                 let point_to_push = {lat: m.position.lat().toFixed(8), lng: m.position.lng().toFixed(8)};
                 pointsOfPath.push(point_to_push);
-                str_of_points=str_of_points+m.position+"<br />";
+                getRequestAttractions(functionToGetNames)
+
             }
             // alert(str_of_points);
-            var border = document.getElementById("border_of_points");
-            border.style.display = "block";
-            document.getElementById("showing_added_points").innerHTML = str_of_points;
-            document.getElementById("showing_added_points").style.fontWeight = 'bold';
+
 
            // alert("point been added! now its: "+ pointsOfPath.toString());
         });
   });
   }
 
+function functionToGetNames(attractionsJSON) {
+    let added_to_path_point = pointsOfPath[pointsOfPath.length-1];
+    let lat = added_to_path_point.lat;
+    let lng = added_to_path_point.lng;
+      //let name = "didn't found!!!";
+      // alert("in get name! "+"of the origin : " + lat + " , " + lng);
+      attractionsJSON.forEach(function (attr) {
+          // alert("the id is: "+attr['id']);
+        let p = {name: attr['name'], description:attr['description'], lat: attr['x'], lng: attr['y']};
+        // alert("in get name! "+"of the origin : " + lat + " , " + lng + "\n of the other: "+p.lat +" , "+ p.lng);
+        if((p.lat).toFixed(8)==lat&&(p.lng).toFixed(8)==lng)
+        {
+            str_of_points=str_of_points+attr['name']+"<br />";
+             var border = document.getElementById("border_of_points");
+            border.style.display = "block";
+            document.getElementById("showing_added_points").innerHTML = str_of_points;
+            document.getElementById("showing_added_points").style.fontWeight = 'bold';
+        }
+      });
+}
 
 function listenerForMap(){
         var finishBTN = document.getElementById('finish_reg');
