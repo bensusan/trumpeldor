@@ -332,7 +332,26 @@ class FindTheDifferencesList(generics.GenericAPIView):
         ans = json.loads(json.dumps(ans.data))
         return Response(ans)
 
-# def sign_in_page(request):
-#     return render(request, "signIn.html")
+
+class MediaList(generics.GenericAPIView):
+    serializer_class = MediaSerializer
+    queryset = ''
+
+    def get(self, request, *args, **kwargs):
+        ans = BL.get_all_find_the_differences_for_attraction(self.kwargs['id_attr'])
+        ans = FindTheDifferencesSerializer(ans, many=True)
+        ans = json.loads(json.dumps(ans.data))
+        return Response(ans)
+
+    def delete(self, request, *args, **kwargs):
+        ans = BL.delete_find_the_differences(self.kwargs['id_attr'])
+        ans = json.loads(json.dumps(ans))
+        return Response(ans)
+
+    def post(self, request, *args, **kwargs):
+        ans = (request.data)
+        ans = FindTheDifferencesSerializer(ans, many=False)
+        ans = json.loads(json.dumps(ans.data))
+        return Response(ans)
 
 

@@ -135,16 +135,11 @@ class Admin(models.Model):
     password = models.TextField()
 
 
-class Images(models.Model):
+class Media(models.Model):
     description = models.CharField(max_length=50)
-    img = models.ImageField(upload_to='images/')
-
-
-class Videos(models.Model):
-    description = models.CharField(max_length=50)
-    vid = models.ImageField(upload_to='videos/')
+    fileURL = JSONField()
 
 
 class Settings(models.Model):
-    logo = models.ImageField(upload_to='images/')
+    logo = JSONField()
 

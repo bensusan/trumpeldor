@@ -162,13 +162,7 @@ class InfoSerializer(serializers.ModelSerializer):
         model = Info
 
 
-class ImagesSerializer(serializers.ModelSerializer):
+class MediaSerializer(serializers.ModelSerializer):
     class Meta:
-        fields = ('description', 'img',)
-        model = Images
-
-
-class VideosSerializer(serializers.ModelSerializer):
-    class Meta:
-        fields = ('description', 'vid',)
-        model = Videos
+        fields = ('description', 'fileURL',)
+        model = Media
