@@ -1,11 +1,11 @@
 import sys
-from re import sub
 
 import null
 import datetime
 from Server.models import *
 from .DAL import DAL_Abstract
 import base64
+import uuid
 import os.path
 import random
 
@@ -59,20 +59,20 @@ class DAL_Implementation(DAL_Abstract):
         return Trip.objects.filter(id=tripId).first()
 
     def add_attraction(self, name, x, y, description, picturesURLS, videosURLS):
-        names_of_pics=[]
-        for pic in picturesURLS:
-            img_data_bytes = str.encode(pic)
-            name_of_pic = str(random.randint(0, 10000000))
-            with open("media/" + name_of_pic + ".png", "wb") as fh:
-                fh.write(base64.decodebytes(img_data_bytes))
-            names_of_pics += name_of_pic
-        names_of_vids = []
-        for vid in videosURLS:
-            vid_data_bytes = str.encode(pic)
-            name_of_vid = str(random.randint(0, 10000000))
-            with open("media/" + name_of_vid + ".png", "wb") as fh:
-                fh.write(base64.decodebytes(vid_data_bytes))
-            names_of_vids += name_of_vid
+        # names_of_pics=[]
+        # for pic in picturesURLS:
+        #     #img_data_bytes = str.encode(pic)
+        #     name_of_pic = str(random.randint(0, 10000000))
+        #     # with open("media/" + name_of_pic + ".jpg", "wb") as fh:
+        #     #     fh.write(base64.decodebytes(img_data_bytes))
+        #     pic = pic.replace('data:image/jpeg;base64,', '')
+        #     imgdata = base64.b64decode(pic)
+        #     filename = 'media/' + name_of_pic + '.png'  # I assume you have a way of picking unique filenames
+        #     with open(filename, 'wb') as f:
+        #         f.write(imgdata)
+        #     names_of_pics += name_of_pic
+        names_of_pics = add_media(picturesURLS)
+        names_of_vids = add_media(videosURLS)
         attraction = Attraction(name=name, x=x, y=y, description=description, picturesURLS=addPrefixUrl(names_of_pics),
                                 videosURLS=addPrefixUrl(names_of_vids))
         attraction.save()
@@ -189,8 +189,8 @@ class DAL_Implementation(DAL_Abstract):
         attraction.x=x
         attraction.y=y
         attraction.description=description
-        attraction.picturesURLS=picturesURLS
-        attraction.videosURLS=videosURLS
+        attraction.picturesURLS=addPrefixUrl(add_media(picturesURLS))
+        attraction.videosURLS=addPrefixUrl(add_media(videosURLS))
         attraction.save()
         return attraction
 
@@ -362,6 +362,22 @@ class DAL_Implementation(DAL_Abstract):
     def delete_find_the_differences(self, id_attraction):
         self.get_all_find_the_differences_for_attraction(id_attraction).delete()
         return True
+
+
+#returns array of names of the media files saved in the media folder
+def add_media(media_urls):
+    names_of_files = []
+    for file in media_urls:
+        file = file.replace('data:image/jpeg;base64,', '')
+        imgdata = base64.b64decode(file)
+        filename = str(uuid.uuid4()) + '.png'
+        with open('media/' + filename, 'wb') as f:
+            f.write(imgdata)
+        names_of_files += filename
+    print(names_of_files)
+    return names_of_files
+
+
 
 URL_PREFIX_MEDIA = "http://" + sys.argv[-1] + "/media/"
 

@@ -11,7 +11,6 @@ from Server.BL.BL import BLProxy
 from Server.BL.BL_Implementation import BL_Implementation
 from Server.DAL.DAL_Implementation import DAL_Implementation
 import json
-from ..forms import *
 
 DAL_Impl = DAL_Implementation()
 BL_Impl = BL_Implementation()
@@ -333,28 +332,26 @@ class FindTheDifferencesList(generics.GenericAPIView):
         ans = json.loads(json.dumps(ans.data))
         return Response(ans)
 
-# def sign_in_page(request):
-#     return render(request, "signIn.html")
+
+class MediaList(generics.GenericAPIView):
+    serializer_class = MediaSerializer
+    queryset = ''
+
+    def get(self, request, *args, **kwargs):
+        ans = BL.get_all_find_the_differences_for_attraction(self.kwargs['id_attr'])
+        ans = FindTheDifferencesSerializer(ans, many=True)
+        ans = json.loads(json.dumps(ans.data))
+        return Response(ans)
+
+    def delete(self, request, *args, **kwargs):
+        ans = BL.delete_find_the_differences(self.kwargs['id_attr'])
+        ans = json.loads(json.dumps(ans))
+        return Response(ans)
+
+    def post(self, request, *args, **kwargs):
+        ans = (request.data)
+        ans = FindTheDifferencesSerializer(ans, many=False)
+        ans = json.loads(json.dumps(ans.data))
+        return Response(ans)
 
 
-# Create your views here.
-def images_view(request):
-    if request.method == 'POST':
-        form = ImagesForm(request.POST, request.FILES)
-        print(request.FILES)
-        print(request.POST)
-        if form.is_valid():
-            print('1111')
-            form.save()
-            return redirect('success')
-    # else:
-    #     form = ImagesForm()
-    return render(request, 'Images_Form.html', {'form': form})
-
-
-def success(request):
-    return HttpResponse('successfuly uploaded')
-
-
-def failure(request):
-    return HttpResponse('failed :(')

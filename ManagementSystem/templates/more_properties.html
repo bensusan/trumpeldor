@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>הגדרות אפליקציה</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    {% load static %}
+<link rel="stylesheet" href="{% static 'SideMenu.css' %}?version=4">
+{% load static %}
+<link rel="stylesheet" href="{% static 'just_want_background.css' %}?version=2">
+ {% load static %}
+<script src="{% static 'properties.js' %}?version=3"></script>
+    {% load static %}
+    <script src="{% static 'attractions.js' %}?version=5"></script>
+    {% load static %}
+<script src="{% static 'more_properties.js' %}?version=4"></script>
+
+</head>
+<body>
+<div align="center">
+    <label for="hint" style="font-size: 44px"><b>הגדרות</b></label>
+    <p><br /></p>
+    <p><b>:(גבולות הגזרה (בחרי ארבע נקודות שיתחמו את גבולות המשחק</b></p>
+    <input id="lat1" name="subject" placeholder="lat" style="width:50px;height:20px;">
+    <input id="lng1" name="subject" placeholder="lng" style="width:50px;height:20px;">
+ <label for="hint" style="font-size: 16px"><b> :  נקודה 1</b></label>
+    <p></p>
+<input id="lat2" name="subject" placeholder="lat" style="width:50px;height:20px;">
+    <input id="lng2" name="subject" placeholder="lng" style="width:50px;height:20px;">
+ <label for="hint" style="font-size: 16px"><b> :  נקודה 2</b></label>
+    <p></p>
+<input id="lat3" name="subject" placeholder="lat" style="width:50px;height:20px;">
+    <input id="lng3" name="subject" placeholder="lng" style="width:50px;height:20px;">
+ <label for="hint" style="font-size: 16px"><b> :  נקודה 3</b></label>
+    <p></p>
+<input id="lat4" name="subject" placeholder="lat" style="width:50px;height:20px;">
+    <input id="lng4" name="subject" placeholder="lng" style="width:50px;height:20px;">
+ <label for="hint" style="font-size: 16px"><b> :  נקודה 4</b></label>
+
+    <p><br /></p>
+      <input id="info_ttl" name="subject" placeholder="הקלידי את תשובתך בחודשים" style="width:160px;height:20px;">
+    <label for="hint" style="font-size: 20px"><b>?כמה זמן תהיי מעוניינת לשמור מידע על משתמש רשום</b></label>
+<p></p>
+    <input type="file" name="file" id="inpi" onchange="func(this)" accept=".mp3"/>
+        <label for="hint" style="font-size: 20px"><b>:הוספת צליל הגעה לאטרקציה</b></label>
+    <p></p>
+<audio controls autoplay id="audio_controls" style="display: none">
+  <source id="attr_sound" src="" type="audio/mpeg">
+</audio>
+
+    <p><br /></p>
+     <button class="button" id="save_props" type="button">שמירת הגדרות</button>
+
+    </div>
+<nav id="sideMenu"></nav>
+{% load static %}
+<script src="{% static 'menu_of_feedback.js' %}?version=3"></script>
+
+</body>
+</html>

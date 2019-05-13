@@ -3,6 +3,8 @@
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Edit Long Path</title>
+     {% load static %}
+<link rel="stylesheet" href="{% static 'buttoni.css' %}?version=4">
     {% load static %}
 <link rel="stylesheet" href="{% static 'SideMenu.css' %}?version=4">
     {% load static %}
@@ -12,7 +14,7 @@
 {% load static %}
 <script src="{% static 'attractions.js' %}?version=5"></script>
     {% load static %}
-<script src="{% static 'edit_long_path.js' %}?version=3"></script>
+<script src="{% static 'edit_long_path.js' %}?version=6"></script>
      {% load static %}
 <script src="{% static 'properties.js' %}?version=2"></script>
 </head>
@@ -35,9 +37,9 @@
 </div>
 
     <div align="center">
-<button class="button" id="add_reg_to_path_long" type="button">הוספה למסלול</button>
-<button class="button" id="delete_from_path_long" type="button">מחיקת נקודה</button>
-<button class="button" id="finish_reg_long" type="button">!סיימתי</button>
+<button class="yahoo" id="add_reg_to_path_long" type="button">הוספה למסלול</button>
+<button class="yahoo" id="delete_from_path_long" type="button">מחיקת נקודה</button>
+<button class="yahoo" id="finish_reg_long" type="button">!סיימתי</button>
 
              <p></p>
 <p></p>

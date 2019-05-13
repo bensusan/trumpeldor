@@ -134,7 +134,6 @@ function listenerForMappo(){
 }
 
 function needThisToGetPointsIDs(attractionsJSON) {
-alert("ofir");
     attractionsJSON.forEach(function (attr) {
         let attr_point = {x: (attr['x']).toFixed(13) , y: (attr['y']).toFixed(13)};
         let attr_id = attr['id'];

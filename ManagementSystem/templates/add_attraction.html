@@ -2,10 +2,15 @@
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
+
     {% load static %}
+<link rel="stylesheet" href="{% static 'beauty.css' %}?version=3">
+       {% load static %}
+<link rel="stylesheet" href="{% static 'buttoni.css' %}?version=3">
+     {% load static %}
 <link rel="stylesheet" href="{% static 'SideMenu.css' %}?version=4">
 {% load static %}
-<link rel="stylesheet" href="{% static 'signInForm.css' %}?version=1">
+<link rel="stylesheet" href="{% static 'signInForm.css' %}?version=2">
      {% load static %}
 <script src="{% static 'properties.js' %}?version=4"></script>
 </head>
@@ -20,14 +25,14 @@
 <h2>הוספת אטרקציה</h2>
 <form>
 
-    <label for="name"><b>:העלאת סרטון</b></label>
+    <label for="name" style="font-size: 24px;"><b>:העלאת סרטון</b></label>
 
     <div id="message"></div>
 <video height="200px" width="350px" controls="" autoplay=""></video>
     <input id="video_input" type="file" accept="video/*" onchange="encodeVideoFileAsURL(this)" style="display: none">
-<button class="button" onclick="doVideo()" type="button">Upload Video</button>
-<p></p>
-    <label for="hint"><b>:העלאת תמונה</b></label>
+<button class='button blogger' onclick="doVideo()" type="button" style="width: 320px;">Upload Video</button>
+   <p></p>
+    <label for="hint" style="font-size: 20px;"><b>:העלאת תמונה למידע על אטרקציה</b></label>
 <p></p>
 <input type="file" onchange="encodeImageFileAsURL(this)"/>
 <p><img id="output" width="200"  style="display: none"/></p>
@@ -43,41 +48,24 @@
 {#    style="display:none"#}
 
   <div class="container">
-    <label for="name"><b>:שם האטרקציה</b></label>
+    <label for="name" style="font-size: 24px;"><b>:שם האטרקציה</b></label>
     <input  type="text" id="attr_name" placeholder="שם האטרקציה" name="attr_name" style="text-align:right;" required>
-
-    <label for="desc"><b>:תיאור</b></label>
 <p></p>
+    <label for="desc" style="font-size: 24px;"><b>:תיאור</b></label>
 {#    <input type="text" id="desc" placeholder="Enter description" name="attr_desc" required>#}
       <textarea id="desc" name="attr_desc" placeholder="הכניסי תיאור אטרקציה" style="text-align:right;width:310px;height:200px"></textarea>
 <p></p>
-       <!--<label for="pop"><b>הודעת פופ-אפ בהגעה לנקודה</b></label>-->
-    <!--<input  type="text" id="pop" placeholder="הקלידי הודעה..." name="attr_pop" style="direction:rtl;text-align:right;" required>-->
 
-      <!--<label for="subt" style="text-align: right"><b>כתוביות</b></label>-->
-<!--{#    <input  type="text" id="subt" placeholder="Enter Subtitles" name="attr_subt" style="height: 200px; overflow: scroll" required>#}-->
-      <!--<textarea type="text" id="subt" placeholder="הכנסי כתוביות..." name="attr_subt" style="direction:rtl;text-align:right;width: 310px;height: 200px; overflow: scroll"> </textarea>-->
+       <label for="pop" style="font-size: 24px;"><b>הודעת פופ-אפ בהגעה לנקודה</b></label>
+    <input  type="text" id="pop" placeholder="הקלידי הודעה..." name="attr_pop" style="direction:rtl;text-align:right;" required>
+<p></p>
+      <label for="subt" style="font-size: 24px;text-align: right"><b>כתוביות</b></label>
+{#    <input  type="text" id="subt" placeholder="Enter Subtitles" name="attr_subt" style="height: 200px; overflow: scroll" required>#}
+      <textarea type="text" id="subt" placeholder="הכנסי כתוביות..." name="attr_subt" style="direction:rtl;text-align:right;width: 310px;height: 200px; overflow: scroll"> </textarea>
 
-{#        <label for="desc"><b>Add American Question:</b></label>#}
-{#    <input type="text" id="ques" placeholder="Enter Question" name="attr_desc" required>#}
-{#      <input  type="text" id="ans1" placeholder="ans1" name="a1" required>#}
-{#      <input type="text" id="ans2" placeholder="ans2" name="a2" required>#}
-{#      <input type="text" id="ans3" placeholder="ans3" name="a3" required>#}
-{#      <input  type="text" id="ans4" placeholder="ans4" name="a4" required>#}
-
-{#      <label for="desc"><b>Choose path length:</b></label>#}
-{#      <select id="path_len">#}
-{#      <option value="short">Short</option>#}
-{#      <option value="medium">Medium</option>#}
-{#      <option value="long">Long</option>#}
-{#      </select>#}
-
-
-{#    {% load static %}#}
-{#    <script src="{% static 'attractions.js' %}?version=1"></script>#}
-
-    <button id="submit_btn_add_attr" onclick="showDataCollected()" type="button">שליחה</button>
-    <button onclick="check()" type="button">ניקוי</button>
+<p><br/></p>
+    <button class='button google-blue' id="submit_btn_add_attr" onclick="showDataCollected()" type="button" style="width: 220px;">שליחה</button>
+    <button class='button google-blue' onclick="check()" type="button" style="width: 220px;">ניקוי</button>
 
   </div>
 

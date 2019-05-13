@@ -6,17 +6,25 @@ window.onload = function () {
     getRequestAttractions(funcForExistingAmericanQuestions);
 
     var wantToEditBTN = document.getElementById('want_to_edit_aq');
-    var writeChosenHintTextEdit = document.getElementById("write_aq_id_to_edit");
+    // var writeChosenHintTextEdit = document.getElementById("write_aq_id_to_edit");
     var editChosenHintBTN = document.getElementById("edit_chosen_aq");
     var wantToDeleteBTN = document.getElementById('want_to_delete_aq');
-    var writeChosenHintText = document.getElementById("write_aq_id_to_delete");
+    // var writeChosenHintText = document.getElementById("write_aq_id_to_delete");
     var deleteChosenHintBTN = document.getElementById("delete_chosen_aq");
+    var comboEdit = document.getElementById("edit_cb");
+    var delTitle = document.getElementById("deleteTitle");
+    var edTitle = document.getElementById("editTitle");
+    var comboDelete = document.getElementById("delete_cb");
 
         wantToEditBTN.addEventListener('click', function() {
-            writeChosenHintTextEdit.style.display = "inline";
+            comboEdit.style.display = "inline";
+            edTitle.style.display = "inline";
             editChosenHintBTN.style.display = "inline";
-             writeChosenHintText.style.display = "none";
+            comboDelete.style.display = "none";
+            delTitle.style.display = "none";
             deleteChosenHintBTN.style.display = "none";
+
+
             editChosenHintBTN.addEventListener('click', function() {
                 let hint_id_that_was_picked = document.getElementById("write_aq_id_to_edit").value;
                 localStorage.setItem("aq_id_to_edit", hint_id_that_was_picked);
@@ -26,10 +34,13 @@ window.onload = function () {
         });
 
         wantToDeleteBTN.addEventListener('click', function() {
-            writeChosenHintText.style.display = "inline";
+            comboDelete.style.display = "inline";
+            delTitle.style.display = "inline";
             deleteChosenHintBTN.style.display = "inline";
-            writeChosenHintTextEdit.style.display = "none";
             editChosenHintBTN.style.display = "none";
+            comboEdit.style.display = "none";
+            edTitle.style.display = "none";
+
             deleteChosenHintBTN.addEventListener('click', function() {
                 getRequestAmericanQuestions(funcInOrderToDeleteAmericanQuestion,attractionObjToUseInHintDelete['id']);
             });
@@ -65,7 +76,19 @@ function funcForExistingAmericanQuestions(attractionsJSON){
 
 function AmericanQuestions_func(AmericanQuestionsJSON) {
         str="";
+        let i=1;
         AmericanQuestionsJSON.forEach(function (aq) {
+            let e_opt_id = "ecb"+i;
+            let d_opt_id = "dcb"+i;
+
+            document.getElementById(e_opt_id).innerText = aq['id'];
+            document.getElementById(e_opt_id).value = aq['id'];
+            document.getElementById(e_opt_id).style.display='inline';
+
+            document.getElementById(d_opt_id).innerText = aq['id'];
+            document.getElementById(d_opt_id).value = aq['id'];
+            document.getElementById(d_opt_id).style.display='inline';
+            i=i+1;
             str=str+"id: "+aq['id'] +", question: "+ aq['question']+", answers: "+ aq['answers']+", indexOfCorrectAnswer: "+ aq['indexOfCorrectAnswer']+"<br />";
             // alert(str);
             aq_arr_for_test.push(aq);
