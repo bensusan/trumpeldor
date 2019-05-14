@@ -355,3 +355,25 @@ class MediaList(generics.GenericAPIView):
         return Response(ans)
 
 
+class TakingPictureList(generics.GenericAPIView):
+    serializer_class = TakingPictureSerializer
+    queryset = ''
+
+    def get(self, request, *args, **kwargs):
+        ans = BL.taking_pic_exists(self.kwargs['id_attr'])
+        ans = TakingPictureSerializer(ans, many=True)
+        ans = json.loads(json.dumps(ans.data))
+        return Response(ans)
+
+    def delete(self, request, *args, **kwargs):
+        ans = BL.delete_taking_pic(self.kwargs['id_attr'])
+        ans = json.loads(json.dumps(ans))
+        return Response(ans)
+
+    def post(self, request, *args, **kwargs):
+        ans = BL.add_taking_pic(self.kwargs['id_attr'], request.data)
+        ans = TakingPictureSerializer(ans, many=False)
+        ans = json.loads(json.dumps(ans.data))
+        return Response(ans)
+
+

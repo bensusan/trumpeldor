@@ -271,7 +271,7 @@ class BL_Implementation(BL_Abstract):
         return self.DAL.get_all_puzzles_for_attraction(id_attraction)
 
     def add_puzzle(self, id_attraction, puzzle):
-        return self.DAL.add_puzzle(id_attraction, puzzle['pictureURL'], puzzle['width'],
+        return self.DAL.add_puzzle(id_attraction, puzzle['piecesURLS'], puzzle['width'],
                                    puzzle['height'], puzzle['description'])
 
     def delete_puzzle(self, id_attraction):
@@ -286,3 +286,12 @@ class BL_Implementation(BL_Abstract):
 
     def delete_find_the_differences(self, id_attraction):
         return self.DAL.delete_find_the_differences(id_attraction)
+
+    def taking_pic_exists(self, id_attraction):
+        return self.DAL.taking_pic_exists(id_attraction)
+
+    def delete_taking_pic(self, id_attraction):
+        return self.DAL.delete_taking_pic(id_attraction)
+
+    def add_taking_pic(self, id_attraction, description):
+        return self.DAL.add_taking_pic(id_attraction, description)
