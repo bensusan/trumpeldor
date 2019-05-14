@@ -39,13 +39,21 @@ namespace trumpeldor.Views
             gc = GameController.getInstance();
             leftArrow.Source = ServerConection.URL_MEDIA + "leftArrow.png";
             rightArrow.Source = ServerConection.URL_MEDIA + "rightArrow.png";
-            temperature.Source = ServerConection.URL_MEDIA + "temperature.png";
+            temperature.Source = ServerConection.URL_MEDIA + "temperature2.png";
             v.Source = ServerConection.URL_MEDIA + "v.png";
             odometer.Maximum = 1;
             odometer.Minimum = 0;
             odometer.MinimumTrackColor = Color.FromHex("#0066ff");
             odometer.MaximumTrackColor = Color.FromHex("#0066ff");
             odometer.Value = 0;
+            //odometer.WidthRequest = temperature.Height/10 * 9;
+            hintBtn.Padding = 0;
+            //hintBtn.WidthRequest = hintFrame.Width;
+            hintBtn.Margin = new Thickness(
+                leftArrow.Width + hintFrame.Margin.Left + hintFrame.Padding.Left - 5,
+                10,
+                hintFrame.Margin.Right + hintFrame.Padding.Right,
+                10);
             nextAttraction = gc.currentTrip.GetCurrentAttraction();
             myMap = new MapPage();
             mapBtn.Source = ServerConection.URL_MEDIA + "googleMaps.png";
