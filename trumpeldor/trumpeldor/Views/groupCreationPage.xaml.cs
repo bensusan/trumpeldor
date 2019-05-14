@@ -67,6 +67,7 @@ namespace trumpeldor.Views
                         gc.ContinuePreviousTrip();
                         //Application.Current.MainPage = new NavigationPage();
                         return false;
+
                     }
                 }
                 RelevantInformation ans = gc.LoadRelevantInformationFromLastTrip();
