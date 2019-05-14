@@ -1,11 +1,15 @@
+
 function checkPassword() {
     var username=document.getElementById("user_name").value;
     var password=document.getElementById("password").value;
         if(username=="admin"&& password=="1234") {
+            localStorage.setItem("is_connected","true");
             window.location.href = "/main";
         }
-        else
-           document.getElementById("errorMsg").innerHTML = "wrong password or username!";
+        else {
+            document.getElementById("errorMsg").innerHTML = "wrong password or username!";
+            localStorage.setItem("is_connected","false");
+        }
 }
 
 // function addMore(x,y){

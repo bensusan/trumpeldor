@@ -4,6 +4,10 @@
     <meta charset="UTF-8">
     <title>הוספת שאלה אמריקאית</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+           {% load static %}
+<link rel="stylesheet" href="{% static 'beauty.css' %}?version=2">
+       {% load static %}
+<link rel="stylesheet" href="{% static 'buttoni.css' %}?version=2">
     {% load static %}
 <link rel="stylesheet" href="{% static 'SideMenu.css' %}?version=4">
 {% load static %}
@@ -25,7 +29,7 @@
     <p id="txt2">:מספר תשובות הנכונות</p>
     <input type="text"  id="noOfCorrect" style="height: 20px; width: 50px; border-radius: 5px;" required>
     <p></p>
-     <button id="ok_button_to_prepare" type="button">Ok</button>
+     <button class='button google-blue' id="ok_button_to_prepare" type="button">Ok</button>
     <p></p>
     <input type="text" id="ques" placeholder="Enter Question" name="attr_desc" style="display: none;height: 100px;width: 200px; border-radius: 5px;" required>
     <p></p>
@@ -51,7 +55,7 @@
     <p></p>
 {#window.location.href='/add_hint'#}
 
-    <button id="finish_add_aq_btn" class="button" type="button" style="display: none;">שליחה</button>
+    <button class='button google-blue' id="finish_add_aq_btn" type="button" style="display: none;">שליחה</button>
 {#<button class="button" id="finish_add_aq" onclick="finishAddAq()" type="button">Send</button>#}
     </div>
 <nav id="sideMenu"></nav>

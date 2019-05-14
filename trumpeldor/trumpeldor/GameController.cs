@@ -7,11 +7,15 @@ using Xamarin.Forms.Maps;
 using System.Threading.Tasks;
 using System.IO;
 using Xamarin.Forms;
+using System.Runtime.CompilerServices;
+using System.Timers;
+
 namespace trumpeldor
 {
     public class GameController
     {
-        public enum SCORE_VALUE {
+        public enum SCORE_VALUE
+        {
             Hints_More_Than_Three = -10,
             AQ_Mistake = -2,
             AQ_Correct = 10,
@@ -30,6 +34,11 @@ namespace trumpeldor
         const int LOGIN_RECENETLY_DIFFERENCE_HOURS = 36; //TODO - Very specific for now
         public Track extendTrack = null;
         public bool isAttractionDone = false;
+        public SheredClasses.Point myLocation;
+        //public DateTime? timeOfLocation = null;
+        private static double DESIRED_SECONDS = 1;
+        private static bool firstTime = true;
+        private readonly System.Threading.EventWaitHandle waitHandle = new System.Threading.AutoResetEvent(false);
 
         public static GameController getInstance()
         {
@@ -43,7 +52,7 @@ namespace trumpeldor
 
         internal bool IsUserInValidSector()
         {
-            SheredClasses.Point userLocation = GetUserLocation();
+            SheredClasses.Point currLoc = GetUserLocation();
             //Very specific to BGU!!! TODO CHANGE
             List<SheredClasses.Point> points = new List<SheredClasses.Point>()
             {
@@ -58,10 +67,10 @@ namespace trumpeldor
             double[] relevantValues = GetRelevantValuesFromPolygonSector(points);
 
             if (
-                userLocation.x > relevantValues[0] &&
-                userLocation.x < relevantValues[1] &&
-                userLocation.y > relevantValues[2] &&
-                userLocation.y < relevantValues[3])
+                currLoc.x > relevantValues[0] &&
+                currLoc.x < relevantValues[1] &&
+                currLoc.y > relevantValues[2] &&
+                currLoc.y < relevantValues[3])
                 return true;
             return false;
         }
@@ -69,7 +78,7 @@ namespace trumpeldor
         private double[] GetRelevantValuesFromPolygonSector(List<SheredClasses.Point> points)
         {
             double[] ans = new double[4]; //xMin, xMax, yMin, yMax
-            foreach(SheredClasses.Point p in points)
+            foreach (SheredClasses.Point p in points)
             {
                 if (p.x < ans[0]) ans[0] = p.x;
                 if (p.x > ans[1]) ans[1] = p.x;
@@ -77,6 +86,14 @@ namespace trumpeldor
                 if (p.y > ans[3]) ans[3] = p.y;
             }
             return ans;
+        }
+
+        internal void StartTaskLocation()
+        {
+            if (firstTime)
+                FindUserLocation();
+                //Task.Run(() => FindUserLocation()).ConfigureAwait(false);
+            firstTime = false;
         }
 
         internal List<Attraction> GetVisitedAttractions()
@@ -106,7 +123,7 @@ namespace trumpeldor
 
         public bool IsUserConnectedRecently()
         {
-            return !this.IsNewUser() && 
+            return !this.IsNewUser() &&
                 (DateTime.Now - (DateTime)currentUser.lastSeen).TotalHours <= LOGIN_RECENETLY_DIFFERENCE_HOURS;
         }
 
@@ -128,8 +145,8 @@ namespace trumpeldor
         internal void FinishAttraction()
         {
             isAttractionDone = true;
-            SheredClasses.Point userLocation = GetUserLocation();
-            isFinishTrip = this.currentTrip.DoneMyAttraction(userLocation.x, userLocation.y);
+            SheredClasses.Point currLoc = GetUserLocation();
+            isFinishTrip = this.currentTrip.DoneMyAttraction(currLoc.x, currLoc.y);
             UpdateTrip();
         }
 
@@ -145,22 +162,44 @@ namespace trumpeldor
 
         public void CreateTrip(string groupName, List<int> playersAges, int trackLength)
         {
-            SheredClasses.Point userLocation = GetUserLocation();
-            currentTrip = conn.CreateTrip(currentUser, groupName, playersAges, trackLength, userLocation.x, userLocation.y);
+            SheredClasses.Point currLoc = GetUserLocation();
+            currentTrip = conn.CreateTrip(currentUser, groupName, playersAges, trackLength, currLoc.x, currLoc.y);
         }
 
         public SheredClasses.Point GetUserLocation()
         {
-            trumpeldor.SheredClasses.Point p = null;
-            var t = Task.Run(async () =>
-            {
-                var locator = CrossGeolocator.Current;
-                Plugin.Geolocator.Abstractions.Position position = await locator.GetPositionAsync(TimeSpan.FromSeconds(5));
-                p = new SheredClasses.Point(position.Latitude, position.Longitude);
-            });
-            t.Wait();
-            return p;
+            waitHandle.WaitOne();
+            return myLocation;
         }
+
+        private void FindUserLocation()
+        {
+            //Task.Run(async () =>
+            //{
+            Timer locationTimer = new Timer();
+            locationTimer.Interval = DESIRED_SECONDS * 1000;
+            locationTimer.Elapsed += async (o, e) =>
+            {
+                waitHandle.Reset();
+                //Task.Run(async () =>
+                //{
+                var locator = CrossGeolocator.Current;
+                Plugin.Geolocator.Abstractions.Position position = await locator.GetPositionAsync(TimeSpan.FromSeconds(DESIRED_SECONDS));
+                myLocation = new SheredClasses.Point(position.Latitude, position.Longitude);
+                waitHandle.Set();
+                //});
+            };
+            locationTimer.Start();
+
+            //timeOfLocation = DateTime.Now;
+            //});
+        }
+
+        //public bool isCurrentLocation()
+        //{
+        //    return timeOfLocation != null && 
+        //        DateTime.Now.Subtract((DateTime)timeOfLocation).TotalSeconds < DESIRED_SECONDS;
+        //}
 
         //get y.png for example return http://IP:PORT/media/y.png
         //public string GetMediaURLFromName(string pictureName)
@@ -170,19 +209,19 @@ namespace trumpeldor
 
         public bool CanContinueToLongerTrack()
         {
-            trumpeldor.SheredClasses.Point userLocation = GetUserLocation();
-            this.extendTrack = conn.GetExtendedTrack(this.currentTrip.track, userLocation);
+            SheredClasses.Point currLoc = GetUserLocation();
+            this.extendTrack = conn.GetExtendedTrack(this.currentTrip.track, currLoc);
             return this.extendTrack != null;
         }
 
         public void ContinueToLongerTrack()
         {
             currentTrip.track = extendTrack;
-            trumpeldor.SheredClasses.Point p = GetUserLocation();
-            isFinishTrip = currentTrip.DoneMyAttraction(p.x, p.y);
+            SheredClasses.Point currLoc = GetUserLocation();
+            isFinishTrip = currentTrip.DoneMyAttraction(currLoc.x, currLoc.y);
             UpdateTrip();
         }
-        
+
         public void SignUp(string name, string socialNetwork)
         {
             this.currentUser = conn.SignUp(name, socialNetwork);

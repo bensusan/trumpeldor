@@ -1,6 +1,6 @@
 
 let curPosClicked;
-
+let points_of_medTrack = [];
 var str_of_points="";
 let pointsOfPath = [];
 let pointsOfShort = [];
@@ -52,13 +52,29 @@ function initMapAndAttractionss(){
         var deleteFromPathBTN = document.getElementById('delete_from_path_med');
         deleteFromPathBTN.addEventListener('click', function() {
                 //let point_to_delete = {lat: m.position.lat(), lng: m.position.lng()};
+            let t=1;
                 let point_to_delete2 = {lat: m.position.lat().toFixed(10), lng: m.position.lng().toFixed(10)};
                 fullMedPoints.forEach(function (med_point) {
                    // alert(med_point['x'] +","+med_point['y'] +"\n"+point_to_delete2.lat+","+point_to_delete2.lng);
                      if((med_point['x'].toFixed(10) == point_to_delete2.lat)  &&
                          (med_point['y'].toFixed(10) == point_to_delete2.lng))
                      {
-                         deletePointFromTrackRequest(med_point['id'],idOfMedium);
+                         points_of_medTrack.forEach(function (the_point) {
+                             if ((the_point['x'].toFixed(10) == point_to_delete2.lat) &&
+                                 (the_point['y'].toFixed(10) == point_to_delete2.lng))
+                             {if(t==1) {
+                                     t=122;
+                                    deletePointFromTrackRequest(med_point['id'],idOfMedium);
+                                 }}
+                             else{
+                                 if(t==1) {
+                                     t=122;
+                                     alert("אין אפשרות למחוק נקודה ממסלול שאינו בינוני.");
+                                 }
+                             }
+
+                         });
+
                     }
                 });
             window.location.href='/edit_medium_path';
@@ -86,7 +102,7 @@ function markAttractionsOfMediumPaths(tracksJSON){
 
         if(track['length']==2) {
             idOfMedium = track['id'];
-
+            points_of_medTrack = track['points'];
             let points_of_track = track['points'];
             let points_of_subtrack = track['subTrack']['points'];
             let children = [].concat(points_of_subtrack,points_of_track);

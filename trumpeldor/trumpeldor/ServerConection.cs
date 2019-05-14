@@ -84,23 +84,33 @@ namespace trumpeldor
 
         internal void GetFullAttraction(Attraction attraction)
         {
-            attraction.hints = GetHintsByAttraction(attraction);
-            attraction.americanQuestion = GetAmericanQuestionByAttraction(attraction);
-            attraction.entertainment = GetEntertainmentByAttraction(attraction);
+            var t1 = Task.Run(() =>
+            {
+                attraction.hints = GetHintsByAttraction(attraction);
+            });
+            var t2 = Task.Run(() =>
+            {
+                attraction.americanQuestion = GetAmericanQuestionByAttraction(attraction);
+            });
+            var t3 = Task.Run(() =>
+            {
+                attraction.entertainment = GetEntertainmentByAttraction(attraction);
+            });
+            t1.Wait(); t2.Wait(); t3.Wait();
+            //attraction.hints = GetHintsByAttraction(attraction);
+            //attraction.americanQuestion = GetAmericanQuestionByAttraction(attraction);
+            //attraction.entertainment = GetEntertainmentByAttraction(attraction);
         }
 
         private Entertainment GetEntertainmentByAttraction(Attraction attraction)
         {
             string jsonResponse = SendToServerAndGetResponseBack(new { id = attraction.id, }, "getEntertainment/");
-            //if (jsonResponse.Equals("{\"question\":\"\",\"answers\":null,\"indexOfCorrectAnswer\":null}"))
-            //    return null;
             if (jsonResponse.Equals(""))
                 return null;
             JObject json = JObject.Parse(jsonResponse);
             string className = (string)json["className"];
             JObject obj = (JObject)json["object"];
             if (SlidingPuzzle.isMyClassName(className)) {
-                //SlidingPuzzle sp = JsonConvert.DeserializeObject<SlidingPuzzle>((string)json["object"]);
                 return new SlidingPuzzle
                 {
                     id = (int)obj["id"],
@@ -169,9 +179,13 @@ namespace trumpeldor
             var toSend = new { user = currentUser, groupName = groupName, playersAges = playersAges, trackLength = trackLength, x = xUser, y = yUser, };
             string jsonResponse = SendToServerAndGetResponseBack(toSend, "createTrip/");
             Trip trip = JsonConvert.DeserializeObject<Trip>(jsonResponse);
-            trip.attractionsDone = GetFullAttractions(trip.attractionsDone);
-            trip.track = GetFullTrack(trip.track);
-            trip.feedbacks = GetFeedbacks(trip);            
+            var t1 = Task.Run(() => { trip.attractionsDone = GetFullAttractions(trip.attractionsDone); });
+            var t2 = Task.Run(() => { trip.track = GetFullTrack(trip.track); });
+            var t3 = Task.Run(() => { trip.feedbacks = GetFeedbacks(trip); });
+            t1.Wait(); t2.Wait(); t3.Wait();
+            //trip.attractionsDone = GetFullAttractions(trip.attractionsDone);
+            //trip.track = GetFullTrack(trip.track);
+            //trip.feedbacks = GetFeedbacks(trip);
             return trip;
         }
 
@@ -185,16 +199,22 @@ namespace trumpeldor
         {
             if (track == null)
                 return null;
+            Task t = null;
             if (track.subTrack != null)
-                track.subTrack = GetFullTrack(track.subTrack);
+                t = Task.Run(() => { track.subTrack = GetFullTrack(track.subTrack); });
             track.points = GetFullAttractions(track.points);
+            if (track.subTrack != null)
+                t.Wait();
             return track;
         }
 
         internal List<Attraction> GetFullAttractions(List<Attraction> attractions)
         {
+            List<Task> tasks = new List<Task>();
             foreach (Attraction attraction in attractions)
-                GetFullAttraction(attraction);
+                tasks.Add(Task.Run(() => { GetFullAttraction(attraction); }));
+            foreach (Task t in tasks)
+                t.Wait();
             return attractions;
         }
 
@@ -252,12 +272,19 @@ namespace trumpeldor
                 {
                     try
                     {
-                        var t1 = Task.Run(async () => await client.PostAsync(uri, content));
-                        t1.Wait();
-                        var response = t1.Result;
-                        response.EnsureSuccessStatusCode();
-                        var t2 = Task.Run(async () => await response.Content.ReadAsStringAsync());
-                        ans = t2.Result;
+                        //var t1 = Task.Run(async () => await client.PostAsync(uri, content));
+                        //t1.Wait();
+                        //var response = t1.Result;
+                        //response.EnsureSuccessStatusCode();
+                        //var t2 = Task.Run(async () => await response.Content.ReadAsStringAsync());
+                        //ans = t2.Result;
+                        Task.Run(async () =>
+                        {
+                            var response = await client.PostAsync(uri, content);
+                            response.EnsureSuccessStatusCode();
+                            ans = await response.Content.ReadAsStringAsync();
+                        }).Wait();
+                        
                         error = false;
                     }
                     catch (Exception e)
@@ -287,9 +314,10 @@ namespace trumpeldor
                 {
                     try
                     {
-                        var t = Task.Run(async () => await client.GetStringAsync(uri));
-                        t.Wait();
-                        ans = t.Result;
+                        //var t = Task.Run(async () => await client.GetStringAsync(uri));
+                        //t.Wait();
+                        //ans = t.Result;
+                        Task.Run(async () => { ans = await client.GetStringAsync(uri); }).Wait();
                         error = false;
                     }
                     catch (Exception e)

@@ -11,6 +11,8 @@ let idOfMedium = 0;
 let idOfLong = 0;
 
 function initMapAndAttractionss(){
+    allowOnlyConnectedUsers();
+
     str_of_points="";
     pointsOfPath = [];
 

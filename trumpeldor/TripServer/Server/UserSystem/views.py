@@ -16,7 +16,7 @@ BL_Impl.setDAL(DAL_Impl)
 BL = BLProxy()
 BL.setImplementation(BL_Impl)
 
-DEBUG = True
+DEBUG = False
 
 
 # General post for all the posts here

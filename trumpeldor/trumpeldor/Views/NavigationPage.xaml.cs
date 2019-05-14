@@ -10,6 +10,7 @@ using Xamarin.Forms.Xaml;
 using trumpeldor.SheredClasses;
 using trumpeldor;
 using Plugin.Geolocator;
+using System.Timers;
 
 namespace trumpeldor.Views
 {
@@ -19,14 +20,18 @@ namespace trumpeldor.Views
         private const double DESIRED_DISTANCE = 20;
         private const double DESIRED_SECONDS = 10;
         public static bool isFirst = true;
+        public static bool firstTimeLocationUpdate = true;
         public Attraction nextAttraction;
         public int hintsIndex = 1, currIndex = 0;
         public GameController gc;
         public LocationController lc;
-        trumpeldor.SheredClasses.Point p, currLoc;
+        trumpeldor.SheredClasses.Point attractionLoc, currLoc;
         public double currLat = 0, currLong = 0;
         MapPage myMap = null;
         private bool firstAttachOfHintMap = true;
+        private double startDistanceToDestination;
+        //private bool stopDestinationCheck = false;
+        private bool done = false;
 
         public NavigationPage ()
 		{
@@ -34,8 +39,21 @@ namespace trumpeldor.Views
             gc = GameController.getInstance();
             leftArrow.Source = ServerConection.URL_MEDIA + "leftArrow.png";
             rightArrow.Source = ServerConection.URL_MEDIA + "rightArrow.png";
-            temperature.Source = ServerConection.URL_MEDIA + "temperature.png";
+            temperature.Source = ServerConection.URL_MEDIA + "temperature2.png";
             v.Source = ServerConection.URL_MEDIA + "v.png";
+            odometer.Maximum = 1;
+            odometer.Minimum = 0;
+            odometer.MinimumTrackColor = Color.FromHex("#0066ff");
+            odometer.MaximumTrackColor = Color.FromHex("#0066ff");
+            odometer.Value = 0;
+            //odometer.WidthRequest = temperature.Height/10 * 9;
+            hintBtn.Padding = 0;
+            //hintBtn.WidthRequest = hintFrame.Width;
+            hintBtn.Margin = new Thickness(
+                leftArrow.Width + hintFrame.Margin.Left + hintFrame.Padding.Left - 5,
+                10,
+                hintFrame.Margin.Right + hintFrame.Padding.Right,
+                10);
             nextAttraction = gc.currentTrip.GetCurrentAttraction();
             myMap = new MapPage();
             mapBtn.Source = ServerConection.URL_MEDIA + "googleMaps.png";
@@ -43,14 +61,12 @@ namespace trumpeldor.Views
             AttachHint(0);
             
             lc = LocationController.GetInstance();
-            p = new trumpeldor.SheredClasses.Point(nextAttraction.x, nextAttraction.y);
+            attractionLoc = new trumpeldor.SheredClasses.Point(nextAttraction.x, nextAttraction.y);
             if (isFirst)
             {
                 isFirst = false;
-                Task.Run(async () =>
-                {
-                    await TimerCheck();
-                }).ConfigureAwait(false);
+                //Task.Run(() => TimerCheck()).ConfigureAwait(false);
+                TimerCheck();
             }
         }
 
@@ -119,12 +135,16 @@ namespace trumpeldor.Views
 
         private void Next_Destination_Button_Clicked(object sender, EventArgs e)
         {
-            //Device.BeginInvokeOnMainThread(async () => await DisplayAlert(AppResources.success, AppResources.You_have_Reached_Your_Destionation, AppResources.ok));
+            Arrived();
+        }
+
+        private void Arrived()
+        {
+            done = true;
+            gc.EditScore(GameController.SCORE_VALUE.Attraction_Arrive);
             var existingPages = Navigation.NavigationStack.ToList();
             foreach (var page in existingPages)
-            {
                 Navigation.RemovePage(page);
-            }
             Application.Current.MainPage = new AttractionPage();
         }
 
@@ -151,26 +171,48 @@ namespace trumpeldor.Views
             leftArrow.IsEnabled = true;
         }
 
-        public async Task TimerCheck()
+        public void TimerCheck()
         {
-            Device.StartTimer(TimeSpan.FromSeconds(DESIRED_SECONDS), () =>
+            Timer arrivedTimer = new Timer();
+            arrivedTimer.Interval = DESIRED_SECONDS * 1000;
+            arrivedTimer.Elapsed += (o, e) =>
             {
-                //LocationCheck();
+                if (done)
+                    arrivedTimer.Stop();
                 currLoc = gc.GetUserLocation();
+                if (firstTimeLocationUpdate)
+                {
+                    firstTimeLocationUpdate = false;
+                    startDistanceToDestination = lc.DistanceBetween(currLoc.x, currLoc.y, attractionLoc.x, attractionLoc.y);
+                }
                 lc.AddToPositionsHistory(new Plugin.Geolocator.Abstractions.Position(currLoc.x, currLoc.y));
-                if (lc.DistanceBetween(currLoc.x, currLoc.y, p.x, p.y) > DESIRED_DISTANCE){
-                    if(ServerConection.DEBUG == 1)
-                        DisplayAlert(AppResources.not_arrived, lc.DistanceBetween(currLoc.x, currLoc.y, p.x, p.y).ToString() + "curr lat: " + currLoc.x + "curr long: " + currLoc.y + "x: " + p.x + "y: " + p.y + " point info: " + nextAttraction.name, AppResources.close);
-                    return true;
-                }
-                else{
-                    gc.EditScore(GameController.SCORE_VALUE.Attraction_Arrive);
+                double currentDistanceToDestination = lc.DistanceBetween(currLoc.x, currLoc.y, attractionLoc.x, attractionLoc.y);
+                if (currentDistanceToDestination > DESIRED_DISTANCE){
                     if (ServerConection.DEBUG == 1)
-                        DisplayAlert(AppResources.arrived, AppResources.arrived + "! " + lc.DistanceBetween(currLoc.x, currLoc.y, p.x, p.y).ToString(), AppResources.close);
-                    Application.Current.MainPage = new AttractionPage();
-                    return false;
+                        Device.BeginInvokeOnMainThread (() => {
+                            DisplayAlert("Must come closer", lc.DistanceBetween(currLoc.x, currLoc.y, attractionLoc.x, attractionLoc.y).ToString() + "\ncurr lat: " + currLoc.x + "\ncurr long: " + currLoc.y + "\nattractionLoc x: " + attractionLoc.x + "\nattractionLoc y: " + attractionLoc.y + "\npoint info: " + nextAttraction.name, "close");
+                        });
+                    double percentApproachingTarget = Math.Max(0, Math.Min(1, (1 - (currentDistanceToDestination / startDistanceToDestination))));
+                    odometer.Value = percentApproachingTarget;
+                    if (percentApproachingTarget < 0.3){
+                        odometer.MinimumTrackColor = Color.FromHex("#0066ff");
+                        odometer.MaximumTrackColor = Color.FromHex("#0066ff");
+                    }
+                    else{
+                        if (percentApproachingTarget < 0.7){
+                            odometer.MinimumTrackColor = Color.FromHex("#b21f4c");
+                            odometer.MaximumTrackColor = Color.FromHex("#b21f4c");
+                        }
+                        else{
+                            odometer.MinimumTrackColor = Color.FromHex("#ff0000");
+                            odometer.MaximumTrackColor = Color.FromHex("#ff0000");
+                        }
+                    }
                 }
-            });
+                else
+                    Device.BeginInvokeOnMainThread(() => Arrived());
+            };
+            arrivedTimer.Start();
         }
 
         //private async Task LocationCheck()

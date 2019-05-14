@@ -176,11 +176,8 @@ class BL_Implementation(BL_Abstract):
                 className = 'TakingPicture'
                 if entertainment is None:
                     return entertainment
-        print(entertainment)
         entertainment = classSerializer(entertainment)
-        print(entertainment)
         entertainment = json.loads(json.dumps(entertainment.data))
-        # entertainmentWrapper = '{"className":' + className + ',"object":' + entertainment + '}'
         entertainmentWrapper = {'className': className, 'object': entertainment}
         return entertainmentWrapper
 

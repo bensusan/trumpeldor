@@ -160,3 +160,9 @@ class InfoSerializer(serializers.ModelSerializer):
     class Meta:
         fields = ('id', 'info',)
         model = Info
+
+
+class MediaSerializer(serializers.ModelSerializer):
+    class Meta:
+        fields = ('description', 'fileURL',)
+        model = Media

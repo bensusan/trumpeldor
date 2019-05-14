@@ -5,7 +5,8 @@ document.getElementById("sideMenu").innerHTML = '<div class="sidenav">\n' +
     '  <a id="add_text_hint">רמז מסוג טקסט</a>\n' +
     '  <a id="add_vid_hint">רמז מסוג סרטון</a>\n' +
     '  <a id="add_pic_hint">רמז מסוג תמונה</a>\n' +
-    '  <a id="skip_hint_btn" onclick="finishHint()">דלגי</a>\n' +
+
+    '  <a id="finish_add_hint" onclick="finishHint()">דלגי</a>\n' +
     '  <a href="/main">לתפריט הראשי</a>\n' +
     '</div>\n' +
     '\n' +

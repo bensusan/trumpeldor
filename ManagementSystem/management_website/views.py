@@ -23,12 +23,20 @@ def add_attraction_page(request):
     return render(request, "add_attraction.html")
 
 
+def error_page(request):
+    return render(request, "error_page.html")
+
+
 def edit_attraction_page(request):
     return render(request, "edit_attraction.html")
 
 
 def add_game_page(request):
     return render(request, "add_game.html")
+
+
+def more_properties_page(request):
+    return render(request, "more_properties.html")
 
 
 def add_game_edit_page(request):
