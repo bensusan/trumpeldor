@@ -7,7 +7,7 @@ from .DAL import DAL_Abstract
 import base64
 import uuid
 import os.path
-import random
+import image_slicer
 
 class DAL_Implementation(DAL_Abstract):
 
@@ -59,18 +59,6 @@ class DAL_Implementation(DAL_Abstract):
         return Trip.objects.filter(id=tripId).first()
 
     def add_attraction(self, name, x, y, description, picturesURLS, videosURLS):
-        # names_of_pics=[]
-        # for pic in picturesURLS:
-        #     #img_data_bytes = str.encode(pic)
-        #     name_of_pic = str(random.randint(0, 10000000))
-        #     # with open("media/" + name_of_pic + ".jpg", "wb") as fh:
-        #     #     fh.write(base64.decodebytes(img_data_bytes))
-        #     pic = pic.replace('data:image/jpeg;base64,', '')
-        #     imgdata = base64.b64decode(pic)
-        #     filename = 'media/' + name_of_pic + '.png'  # I assume you have a way of picking unique filenames
-        #     with open(filename, 'wb') as f:
-        #         f.write(imgdata)
-        #     names_of_pics += name_of_pic
         names_of_pics = add_media(picturesURLS)
         names_of_vids = add_media(videosURLS)
         attraction = Attraction(name=name, x=x, y=y, description=description, picturesURLS=addPrefixUrl(names_of_pics),
@@ -311,16 +299,16 @@ class DAL_Implementation(DAL_Abstract):
         return SlidingPuzzle.objects.filter(attraction=self.get_attraction(id_attraction)).all()
 
     def add_sliding_puzzle(self, id_attraction, piecesURLS, width, height, description):
-        piceseURL = addPrefixUrl(   ["example00.jpg",
-                                    "example01.jpg",
-                                    "example02.jpg",
-                                    "example10.jpg",
-                                    "example11.jpg",
-                                    "example12.jpg",
-                                    "example20.jpg",
-                                    "example21.jpg",
-                                    "example22.jpg"])
-        sliding_puzzle = SlidingPuzzle(attraction=self.get_attraction(id_attraction), description=description, piecesURLS=piceseURL, width=width, height=height)
+        sliding_puzzle_pic = add_media([piecesURLS])
+        wid = int(width)
+        hei = int(height)
+        slicers = image_slicer.slice('media/' + sliding_puzzle_pic[0], wid*hei)
+        tiles = []
+        for tile in slicers:
+            tile.filename = tile.filename.replace('media\\', '')
+            tiles += [tile.filename]
+        piceseURL = addPrefixUrl(tiles)
+        sliding_puzzle = SlidingPuzzle(attraction=self.get_attraction(id_attraction), description=description, piecesURLS=piceseURL, width=wid, height=hei)
         sliding_puzzle.save()
         return sliding_puzzle
 
@@ -331,18 +319,18 @@ class DAL_Implementation(DAL_Abstract):
     def get_all_puzzles_for_attraction(self, id_attraction):
         return Puzzle.objects.filter(attraction=self.get_attraction(id_attraction)).all()
 
-    def add_puzzle(self, id_attraction, pictureURL, width, height, description):
-        piceseURL = addPrefixUrl(["example00.jpg",
-                                  "example01.jpg",
-                                  "example02.jpg",
-                                  "example10.jpg",
-                                  "example11.jpg",
-                                  "example12.jpg",
-                                  "example20.jpg",
-                                  "example21.jpg",
-                                  "example22.jpg"])
+    def add_puzzle(self, id_attraction, piecesURLS, width, height, description):
+        puzzle_pic = add_media([piecesURLS])
+        wid = int(width)
+        hei = int(height)
+        slicers = image_slicer.slice('media/' + puzzle_pic[0], wid * hei)
+        tiles = []
+        for tile in slicers:
+            tile.filename = tile.filename.replace('media\\', '')
+            tiles += [tile.filename]
+        piecesURLS = addPrefixUrl(tiles)
         puzzle = Puzzle(attraction=self.get_attraction(id_attraction), description=description,
-                        pictureURL=piceseURL, width=width, height=height)
+                        piecesURLS=piecesURLS, width=width, height=height)
         puzzle.save()
         return puzzle
 
@@ -363,18 +351,30 @@ class DAL_Implementation(DAL_Abstract):
         self.get_all_find_the_differences_for_attraction(id_attraction).delete()
         return True
 
+    def taking_pic_exists(self, id_attraction):
+        return TakingPicture.objects.filter(attraction=self.get_attraction(id_attraction)).all()
+
+    def delete_taking_pic(self, id_attraction):
+        self.taking_pic_exists(id_attraction).delete()
+        return True
+
+    def add_taking_pic(self, id_attraction, description):
+        taking_pic = TakingPicture(attraction=self.get_attraction(id_attraction),description=description)
+        taking_pic.save()
+        return taking_pic
+
 
 #returns array of names of the media files saved in the media folder
 def add_media(media_urls):
     names_of_files = []
     for file in media_urls:
         file = file.replace('data:image/jpeg;base64,', '')
+        #print(file)
         imgdata = base64.b64decode(file)
         filename = str(uuid.uuid4()) + '.png'
         with open('media/' + filename, 'wb') as f:
             f.write(imgdata)
-        names_of_files += filename
-    print(names_of_files)
+        names_of_files += [filename]
     return names_of_files
 
 

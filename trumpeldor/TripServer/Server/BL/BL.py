@@ -1,3 +1,5 @@
+from abc import ABC
+
 from Server.DAL.DAL import DAL_Abstract
 
 
@@ -190,8 +192,17 @@ class BL_Abstract(object):
     def delete_find_the_differences(self, id_attraction):
         raise NotImplementedError("Should have implemented this")
 
+    def taking_pic_exists(self, id_attraction):
+        raise NotImplementedError("Should have implemented this")
 
-class BLProxy(BL_Abstract):
+    def delete_taking_pic(self, id_attraction):
+        raise NotImplementedError("Should have implemented this")
+
+    def add_taking_pic(self, id_attraction, description):
+        raise NotImplementedError("Should have implemented this")
+
+
+class BLProxy(BL_Abstract, ABC):
 
     Implementation = None
 
@@ -482,3 +493,18 @@ class BLProxy(BL_Abstract):
         if self.Implementation is None:
             raise NotImplementedError("Should have implemented this")
         return self.Implementation.delete_find_the_differences(id_attraction)
+
+    def taking_pic_exists(self, id_attraction):
+        if self.Implementation is None:
+            raise NotImplementedError("Should have implemented this")
+        return self.Implementation.taking_pic_exists(id_attraction)
+
+    def delete_taking_pic(self, id_attraction):
+        if self.Implementation is None:
+            raise NotImplementedError("Should have implemented this")
+        return self.Implementation.delete_taking_pic(id_attraction)
+
+    def add_taking_pic(self, id_attraction, description):
+        if self.Implementation is None:
+            raise NotImplementedError("Should have implemented this")
+        return self.Implementation.add_taking_pic(id_attraction, description)
