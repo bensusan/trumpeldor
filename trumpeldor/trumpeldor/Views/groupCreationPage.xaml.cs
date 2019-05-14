@@ -63,8 +63,13 @@ namespace trumpeldor.Views
                     
                     if (dialogAns == 1){
                         gc.ContinuePreviousTrip();
-                        await Navigation.PushModalAsync(new NavigationPage());
+                        //await Navigation.PushModalAsync(new NavigationPage());
                         //Application.Current.MainPage = new NavigationPage();
+                        var existingPages = Navigation.NavigationStack.ToList();
+                        foreach (var page in existingPages)
+                            Navigation.RemovePage(page);
+                        //await Navigation.PushModalAsync(new NavigationPage());
+                        Application.Current.MainPage = new NavigationPage();
                         return;
                     }
 

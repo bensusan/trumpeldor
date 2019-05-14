@@ -11,7 +11,8 @@ namespace trumpeldor
 {
     public class GameController
     {
-        public enum SCORE_VALUE {
+        public enum SCORE_VALUE
+        {
             Hints_More_Than_Three = -10,
             AQ_Mistake = -2,
             AQ_Correct = 10,
@@ -69,7 +70,7 @@ namespace trumpeldor
         private double[] GetRelevantValuesFromPolygonSector(List<SheredClasses.Point> points)
         {
             double[] ans = new double[4]; //xMin, xMax, yMin, yMax
-            foreach(SheredClasses.Point p in points)
+            foreach (SheredClasses.Point p in points)
             {
                 if (p.x < ans[0]) ans[0] = p.x;
                 if (p.x > ans[1]) ans[1] = p.x;
@@ -106,7 +107,7 @@ namespace trumpeldor
 
         public bool IsUserConnectedRecently()
         {
-            return !this.IsNewUser() && 
+            return !this.IsNewUser() &&
                 (DateTime.Now - (DateTime)currentUser.lastSeen).TotalHours <= LOGIN_RECENETLY_DIFFERENCE_HOURS;
         }
 
@@ -182,7 +183,7 @@ namespace trumpeldor
             isFinishTrip = currentTrip.DoneMyAttraction(p.x, p.y);
             UpdateTrip();
         }
-        
+
         public void SignUp(string name, string socialNetwork)
         {
             this.currentUser = conn.SignUp(name, socialNetwork);
