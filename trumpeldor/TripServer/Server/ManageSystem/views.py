@@ -11,7 +11,7 @@ from Server.BL.BL import BLProxy
 from Server.BL.BL_Implementation import BL_Implementation
 from Server.DAL.DAL_Implementation import DAL_Implementation
 import json
-from ..forms import *
+# from ..forms import *
 
 DAL_Impl = DAL_Implementation()
 BL_Impl = BL_Implementation()
