@@ -25,6 +25,8 @@ urlpatterns = {
     path('attraction/<int:id_attr>/puzzle/', PuzzleList.as_view()),
     path('attraction/<int:id_attr>/find_the_differences/', FindTheDifferencesList.as_view()),
     path('attraction/<int:id_attr>/taking_pic/', TakingPictureList.as_view()),
+    path('settings/', SettingsList.as_view()),
+
 }
 
 urlpatterns = format_suffix_patterns(urlpatterns)

@@ -3,7 +3,7 @@ from rest_framework.utils import json
 
 import null
 from rest_framework.response import Response
-from django.http import Http404, HttpResponse
+from django.http import Http404, HttpResponse, JsonResponse
 
 from rest_framework import generics
 from ..serializers import *
@@ -375,5 +375,69 @@ class TakingPictureList(generics.GenericAPIView):
         ans = TakingPictureSerializer(ans, many=False)
         ans = json.loads(json.dumps(ans.data))
         return Response(ans)
+
+
+class SettingsList(generics.GenericAPIView):
+    serializer_class = SettingsSerializer
+    queryset = ''
+
+    def get(self, request, *args, **kwargs):
+        ans = BL.get_settings()
+        ans = SettingsSerializer(ans, many=False)
+        ans = json.loads(json.dumps(ans.data))
+        return Response(ans)
+
+    def put(self, request, *args, **kwargs):
+        ans = BL.edit_settings(request.data)
+        ans = SettingsSerializer(ans, many=False)
+        ans = json.loads(json.dumps(ans.data))
+        return Response(ans)
+
+    def post(self, request, *args, **kwargs):
+        ans = BL.create_settings(request.data)
+        ans = SettingsSerializer(ans, many=False)
+        ans = json.loads(json.dumps(ans.data))
+        return Response(ans)
+
+
+########################FOR SETTINGS#####################
+def numberOfLine(x):
+    return {
+        'Boundaries': 0,
+        'Logo': 1,
+        'LoginHours': 2,
+        'SuccessAudio': 3,
+        'FailureAudio': 4
+    }.get(x, False)
+
+def editSettingsFile(lineNumber, value):
+    settings_file_path = 'Server/ManageSystem/Settings'
+    with open(settings_file_path) as fp:
+        lines = fp.read().splitlines()
+    with open(settings_file_path, "w") as fp:
+        i = 0
+        for line in lines:
+            if i == lineNumber:
+                index_of_equal = line.index('=')
+                line = line[0:index_of_equal+1]
+                print(line + str(value), file=fp)
+            else:
+                print(line, file=fp)
+            i += 1
+        return lines
+
+
+def settings(request):
+    if request.method == 'PUT':
+        for key in request.data.keys():
+            editSettingsFile(numberOfLine(key), request.data[key])
+        ans = json.loads(json.dumps(True))
+        return Response(ans)
+    elif request.method == 'GET':
+            settings_lines = editSettingsFile(-1, -1)
+            ans = json.loads(json.dumps(settings_lines))
+            return Response(ans)
+
+
 
 

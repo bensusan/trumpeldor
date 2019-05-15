@@ -200,6 +200,15 @@ class DAL_Abstract(object):
     def add_taking_pic(self, id_attraction, description):
         raise NotImplementedError("Should have implemented this")
 
+    def get_settings(self):
+        raise NotImplementedError("Should have implemented this")
+
+    def edit_settings(self, boundaries, logo, loginHours, successAudio, failureAudio):
+        raise NotImplementedError("Should have implemented this")
+
+    def create_settings(self, boundaries, logo, loginHours, successAudio, failureAudio):
+        raise NotImplementedError("Should have implemented this")
+
 
 class DALProxy(DAL_Abstract):
     Implementation = None
@@ -536,3 +545,18 @@ class DALProxy(DAL_Abstract):
         if self.Implementation is None:
             raise NotImplementedError("Should have implemented this")
         return self.Implementation.add_taking_pic(id_attraction, description)
+
+    def get_settings(self):
+        if self.Implementation is None:
+            raise NotImplementedError("Should have implemented this")
+        return self.Implementation.get_settings()
+
+    def edit_settings(self, boundaries, logo, loginHours, successAudio, failureAudio):
+        if self.Implementation is None:
+            raise NotImplementedError("Should have implemented this")
+        return self.Implementation.edit_settings(boundaries, logo, loginHours, successAudio, failureAudio)
+
+    def create_settings(self, boundaries, logo, loginHours, successAudio, failureAudio):
+        if self.Implementation is None:
+            raise NotImplementedError("Should have implemented this")
+        return self.Implementation.create_settings(boundaries, logo, loginHours, successAudio, failureAudio)

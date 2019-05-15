@@ -166,3 +166,9 @@ class MediaSerializer(serializers.ModelSerializer):
     class Meta:
         fields = ('description', 'fileURL',)
         model = Media
+
+
+class SettingsSerializer(serializers.ModelSerializer):
+    class Meta:
+        fields = ('boundaries', 'logo', 'loginHours', 'successAudio', 'failureAudio',)
+        model = Settings

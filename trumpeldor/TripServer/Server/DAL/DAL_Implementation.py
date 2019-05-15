@@ -59,8 +59,12 @@ class DAL_Implementation(DAL_Abstract):
         return Trip.objects.filter(id=tripId).first()
 
     def add_attraction(self, name, x, y, description, picturesURLS, videosURLS):
-        names_of_pics = add_media(picturesURLS)
-        names_of_vids = add_media(videosURLS)
+        names_of_pics=[]
+        names_of_vids=[]
+        if picturesURLS != 'null':
+            names_of_pics = add_media(picturesURLS)
+        if videosURLS != 'null':
+            names_of_vids = add_media(videosURLS)
         attraction = Attraction(name=name, x=x, y=y, description=description, picturesURLS=addPrefixUrl(names_of_pics),
                                 videosURLS=addPrefixUrl(names_of_vids))
         attraction.save()
@@ -177,8 +181,10 @@ class DAL_Implementation(DAL_Abstract):
         attraction.x=x
         attraction.y=y
         attraction.description=description
-        attraction.picturesURLS=addPrefixUrl(add_media(picturesURLS))
-        attraction.videosURLS=addPrefixUrl(add_media(videosURLS))
+        if picturesURLS is not None:
+            attraction.picturesURLS=addPrefixUrl(add_media(picturesURLS))
+        if videosURLS is not None:
+            attraction.videosURLS=addPrefixUrl(add_media(videosURLS))
         attraction.save()
         return attraction
 
@@ -359,10 +365,23 @@ class DAL_Implementation(DAL_Abstract):
         return True
 
     def add_taking_pic(self, id_attraction, description):
-        taking_pic = TakingPicture(attraction=self.get_attraction(id_attraction),description=description)
+        taking_pic = TakingPicture(attraction=self.get_attraction(id_attraction) ,description=description)
         taking_pic.save()
         return taking_pic
 
+    def get_settings(self):
+        return Settings.objects.last()
+
+    def edit_settings(self, boundaries, logo, loginHours, successAudio, failureAudio):
+        raise NotImplementedError("Should have implemented this")
+
+    def create_settings(self, boundaries, logo, loginHours, successAudio, failureAudio):
+        settings = Settings(boundaries=boundaries , logo=logo, loginHours=loginHours, successAudio=successAudio,
+                            failureAudio=failureAudio)
+        settings.save()
+        if Settings.objects.all().count() > 1:
+            Settings.objects.first().delete()
+        return settings
 
 #returns array of names of the media files saved in the media folder
 def add_media(media_urls):

@@ -295,3 +295,13 @@ class BL_Implementation(BL_Abstract):
 
     def add_taking_pic(self, id_attraction, description):
         return self.DAL.add_taking_pic(id_attraction, description)
+
+    def get_settings(self):
+        return self.DAL.get_settings()
+
+    def edit_settings(self, settings):
+        return self.DAL.edit_settings(settings)
+
+    def create_settings(self, settings):
+        return self.DAL.create_settings(settings['boundaries'],settings['logo'], settings['loginHours'],
+                                        settings['successAudio'], settings['failureAudio'])
