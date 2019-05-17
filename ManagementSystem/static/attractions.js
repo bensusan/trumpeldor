@@ -23,7 +23,6 @@ function serverRequest(getOrPost, functionOnReady, url, post=null){
 
 function markAttractions(attractionsJSON){
     //alert(window.innerHeight + " "+ window.innerWidth);
-
     attractionsJSON.forEach(function (attr) {
        attr_arr_for_test2.push(attr);
 
