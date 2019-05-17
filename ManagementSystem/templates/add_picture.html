@@ -12,7 +12,7 @@
         {% load static %}
 <script src="{% static 'attractions.js' %}?version=4"></script>
     {% load static %}
-<script src="{% static 'add_picture.js' %}?version=4"></script>
+<script src="{% static 'add_picture.js' %}?version=6"></script>
 </head>
 <body>
 <div align="center">
@@ -22,8 +22,16 @@
     <p></p>
     <label for="hint"><b>:העלאת תמונה</b></label>
 <p></p>
-<input type="file" onchange="encodeImageFileAsURL(this)"/>
+<input type="file" onchange="encodeImageFileAsURL(this)" multiple/>
 <p><img id="output" width="200" /></p>
+
+    <article>
+        <label for="files">Select multiple files: </label>
+        <input id="files" type="file" multiple/>
+        <output id="result" />
+    </article>
+
+
 {#<p>This Is The URL:</p>#}
 {#<p id="suka"></p>#}
 
@@ -36,5 +44,8 @@
 <nav id="sideMenu"></nav>
 {% load static %}
 <script src="{% static 'menu_add_pic.js' %}?version=3"></script>
+
+
+
 </body>
 </html>
