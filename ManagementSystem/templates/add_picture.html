@@ -3,6 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <title>הוספת תמונה למשחק</title>
+    {% load static %}
+<link rel="stylesheet" href="{% static 'withImages.css' %}?version=1">
      {% load static %}
 <link rel="stylesheet" href="{% static 'SideMenu.css' %}?version=4">
 {% load static %}
@@ -26,7 +28,7 @@
 <p><img id="output" width="200" /></p>
 
     <article>
-        <label for="files">Select multiple files: </label>
+{#        <label for="files">Select multiple files: </label>#}
         <input id="files" type="file" multiple/>
         <output id="result" />
     </article>
