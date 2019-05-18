@@ -1,5 +1,4 @@
-let numberOfAns;
-let numberOfCorrectAns;
+
 let arrOfAnswers = [];
 let correctAnswersIndexes = [];
 
@@ -107,20 +106,10 @@ function postRequestAmericanQuestion(aq,attr_id){
         if(p.name===name && p.description===desc)
         {
 
-            let ansNum = numberOfAns;
-            let correct = numberOfCorrectAns;
-            let answers = fillWithText(1,ansNum);
-            let correctArr = fillWithText(2,correct);
-            // let ans1=document.getElementById("ans1").value;
-            // let ans2=document.getElementById("ans2").value;
-            // let ans3=document.getElementById("ans3").value;
-            // let ans4=document.getElementById("ans4").value;
-            // let answers = [ans1,ans2,ans3,ans4]; // might need to be a list(if theres a way) and not an array
-
             let american_question_to_send = {
                     question :document.getElementById("ques").value
-                    ,answers: answers
-                    ,indexOfCorrectAnswer: correctArr
+                    ,answers: arrOfAnswers
+                    ,indexOfCorrectAnswer: correctAnswersIndexes
                     ,attraction:attr['id'] //atraction id needs to be here
             };
             postRequestAmericanQuestion(american_question_to_send,attr['id']);
@@ -131,56 +120,6 @@ function postRequestAmericanQuestion(aq,attr_id){
     window.location.href='/pick_aq_edit';
     }
 
-
-    function pushTds(iter){
-
-    let retArr = [];
-    let i=1;
-
-    if(what==1){
-        while(i<=iter){
-            retArr.push(document.getElementById("ans"+""+i).value);
-            i++;
-        }
-    }
-
-    if(what==2){
-        i=2;
-        retArr.push(document.getElementById("correctAns").value);
-        while(i<=iter){
-            retArr.push(document.getElementById("correctAns"+i).value);
-            i++;
-        }
-    }
-
-    return retArr;
-
-    }
-
-    function fillWithText(what,iter){
-
-    let retArr = [];
-    let i=1;
-
-    if(what==1){
-        while(i<=iter){
-            retArr.push(document.getElementById("ans"+""+i).value);
-            i++;
-        }
-    }
-
-    if(what==2){
-        i=2;
-        retArr.push(document.getElementById("correctAns").value);
-        while(i<=iter){
-            retArr.push(document.getElementById("correctAns"+i).value);
-            i++;
-        }
-    }
-
-    return retArr;
-
-    }
 
 
 
