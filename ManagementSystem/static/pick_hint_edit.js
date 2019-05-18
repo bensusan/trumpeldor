@@ -36,8 +36,27 @@ function hints_func(hintsJSON) {
             document.getElementById(d_opt_id).value = hint['id'];
             document.getElementById(d_opt_id).style.display='inline';
             i=i+1;
-            str=str+" data: "+ hint['data']+"<br />";
+            //data:application
+            let dataOfHint = hint['data'];
+            if(dataOfHint.substring(0,16) == 'data:application')
+                str=str+" data: "+ "media<br />";
+            else
+                str=str+" data: "+ hint['data']+"<br />";
             // alert(str);
+
+            var output = document.getElementById("result");
+
+            if(dataOfHint.substring(0,16) == 'data:application') {
+                var img = document.createElement("img");
+                img.src = dataOfHint;
+                img.className = 'thumbnail';
+                var div = document.createElement("div");
+                div.appendChild(img);
+
+
+                  output.insertBefore(div,null);
+            }
+
         });
         document.getElementById("existing_hints").innerHTML = str ;
         document.getElementById("existing_hints").style.fontWeight = 'bold';

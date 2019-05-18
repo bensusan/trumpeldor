@@ -4,13 +4,15 @@
     <meta charset="UTF-8">
     <title>עריכת רמזים</title>
     {% load static %}
+<link rel="stylesheet" href="{% static 'withImages.css' %}?version=1">
+    {% load static %}
 <link rel="stylesheet" href="{% static 'just_want_background.css' %}?version=1">
     {% load static %}
 <link rel="stylesheet" href="{% static 'SideMenu.css' %}?version=4">
     {% load static %}
 <script src="{% static 'attractions.js' %}?version=1"></script>
     {% load static %}
-<script src="{% static 'pick_hint_edit.js' %}?version=5"></script>
+<script src="{% static 'pick_hint_edit.js' %}?version=4"></script>
      {% load static %}
 <script src="{% static 'properties.js' %}?version=2"></script>
 </head>
@@ -26,6 +28,9 @@
 <div align="center">
     <label for="hint" style="font-size: 36px;"><b>:רמזים קיימים</b></label>
 <p id="existing_hints"></p>
+    <article>
+        <output id="result"/>
+    </article>
    <p><br /></p>
 
 
