@@ -17,12 +17,14 @@
     {% load static %}
     <script src="{% static 'attractions.js' %}?version=5"></script>
     {% load static %}
-<script src="{% static 'add_aq_edit.js' %}?version=5"></script>
+<script src="{% static 'add_aq_edit.js' %}?version=8"></script>
 
 </head>
 <body>
 <div align="center">
     <label for="hint"><b>:שאלה אמריקאית</b></label>
+    <p></p>
+
 {#    <p></p>#}
 {#    <p id="txt1">:מספר תשובות אפשריות</p>#}
 {#    <input type="text"  id="noOfAns" style="height: 20px; width: 50px; border-radius: 5px;" required>#}
@@ -64,10 +66,18 @@
 			<TD><INPUT type="checkbox" name="chk" style="width: 50px;"/></TD>
 			<TD><INPUT type="text" name="txt" style="width: 660px;"/></TD>
 		</TR>
+        <TR>
+			<TD><INPUT type="checkbox" name="chk" style="width: 50px;"/></TD>
+			<TD><INPUT type="text" name="txt" style="width: 660px;"/></TD>
+		</TR>
+        <TR>
+			<TD><INPUT type="checkbox" name="chk" style="width: 50px;"/></TD>
+			<TD><INPUT type="text" name="txt" style="width: 660px;"/></TD>
+		</TR>
 	</TABLE>
-
-
-    <button class='button blogger' id="finish_add_aq_btn" type="button" style="display: none;">שליחה</button>
+<p></p>
+    <button class='button blogger' id="finish_add_aq_btn" type="button">שליחה</button>
+{#    <button class='button blogger' id="finish_add_aq_btn" type="button" style="display: none;">שליחה</button>#}
 {#<button class="button" id="finish_add_aq" onclick="finishAddAq()" type="button">Send</button>#}
     </div>
 <nav id="sideMenu"></nav>
