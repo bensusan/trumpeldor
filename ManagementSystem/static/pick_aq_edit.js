@@ -89,7 +89,7 @@ function AmericanQuestions_func(AmericanQuestionsJSON) {
             document.getElementById(d_opt_id).value = aq['id'];
             document.getElementById(d_opt_id).style.display='inline';
             i=i+1;
-            str=str+"id: "+aq['id'] +", question: "+ aq['question']+", answers: "+ aq['answers']+", indexOfCorrectAnswer: "+ aq['indexOfCorrectAnswer']+"<br />";
+            str=str+aq['id']+".</br>" +"question: "+ aq['question']+"</br> answers: "+ aq['answers']+"</br> indexOfCorrectAnswer: "+ aq['indexOfCorrectAnswer']+"<br />";
             // alert(str);
             aq_arr_for_test.push(aq);
         });
