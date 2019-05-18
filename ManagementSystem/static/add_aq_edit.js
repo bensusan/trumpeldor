@@ -26,7 +26,7 @@ window.onload = function() {
             }
         }
 
-        alert("ans: "+arrOfAnswers +" indexes: "+correctAnswersIndexes);
+        // alert("ans: "+arrOfAnswers +" indexes: "+correctAnswersIndexes);
 
     getRequestAttractions(funcToGetAttraction);
     });
