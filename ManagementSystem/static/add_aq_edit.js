@@ -1,6 +1,7 @@
 let numberOfAns;
 let numberOfCorrectAns;
 let arrOfAnswers = [];
+let correctAnswersIndexes = [];
 
 window.onload = function() {
 
@@ -16,8 +17,16 @@ window.onload = function() {
         for(rowIteratorIndex=0; rowIteratorIndex<numberOfRowsInTable; rowIteratorIndex++)
         {
             let answer = rowsOfTable[rowIteratorIndex].cells[1].childNodes[0].value;
+            let isChecked = rowsOfTable[rowIteratorIndex].cells[0].childNodes[0].checked;
             arrOfAnswers.push(answer);
+
+            if(isChecked == true)
+            {
+                correctAnswersIndexes.push(rowIteratorIndex);
+            }
         }
+
+        alert("ans: "+arrOfAnswers +" indexes: "+correctAnswersIndexes);
 
     getRequestAttractions(funcToGetAttraction);
     });
