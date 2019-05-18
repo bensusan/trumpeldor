@@ -11,7 +11,7 @@
     {% load static %}
 <link rel="stylesheet" href="{% static 'add_game.css' %}?version=1">
     {% load static %}
-<script src="{% static 'add_game.js' %}?version=4"></script>
+<script src="{% static 'add_game.js' %}?version=34"></script>
      {% load static %}
 <script src="{% static 'properties.js' %}?version=1"></script>
 </head>
@@ -34,6 +34,9 @@
       <button class='yahoo' type="button" id="noBTN" style="width: 100px; display: none">לא</button>
       <button class='yahoo' type="button" id="yesBTN" style="width: 100px; display: none">כן</button>
       <p id="p3" style="display: none"></p>
+
+      <textarea id="game_instructions_text" placeholder="כתבי את הוראות המשחק..." style="display: none;direction:rtl;text-align:right;height:100px;width:250px"></textarea>
+      <button class='yahoo' type="button" id="sendPhotoGame" style="width: 100px; display: none">שליחה</button>
 
       <button class='yahoo' type="button" id="find_the_diff">מצא את ההבדלים</button>
 

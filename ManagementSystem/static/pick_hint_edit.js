@@ -29,11 +29,19 @@ function hints_func(hintsJSON) {
             let e_opt_id = "ecb"+i;
             let d_opt_id = "dcb"+i;
 
-            document.getElementById(e_opt_id).innerText = hint['data'];
+            if(hint['data'].substring(0,16) == 'data:application')
+            {
+                document.getElementById(d_opt_id).innerText = "media"+imageCounter;
+                document.getElementById(e_opt_id).innerText = "media"+imageCounter;
+            }
+            else
+            {
+                document.getElementById(d_opt_id).innerText = hint['data'];
+                document.getElementById(e_opt_id).innerText = hint['data'];
+            }
+
             document.getElementById(e_opt_id).value = hint['id'];
             document.getElementById(e_opt_id).style.display='inline';
-
-            document.getElementById(d_opt_id).innerText = hint['data'];
             document.getElementById(d_opt_id).value = hint['id'];
             document.getElementById(d_opt_id).style.display='inline';
             i=i+1;
