@@ -24,6 +24,7 @@ function funcForExistingHints(attractionsJSON){
 function hints_func(hintsJSON) {
         str="";
         let i=1;
+        let imageCounter = 1;
         hintsJSON.forEach(function (hint) {
             let e_opt_id = "ecb"+i;
             let d_opt_id = "dcb"+i;
@@ -39,7 +40,7 @@ function hints_func(hintsJSON) {
             //data:application
             let dataOfHint = hint['data'];
             if(dataOfHint.substring(0,16) == 'data:application')
-                str=str+" data: "+ "media<br />";
+                str=str+" data: "+ "media"+imageCounter+"<br />";
             else
                 str=str+" data: "+ hint['data']+"<br />";
             // alert(str);
@@ -47,6 +48,7 @@ function hints_func(hintsJSON) {
             var output = document.getElementById("result");
 
             if(dataOfHint.substring(0,16) == 'data:application') {
+                imageCounter++;
                 var img = document.createElement("img");
                 img.src = dataOfHint;
                 img.className = 'thumbnail';
