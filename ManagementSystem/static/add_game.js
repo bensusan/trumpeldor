@@ -10,9 +10,7 @@ window.onload=function () {
     let noBTN = document.getElementById('noBTN');
     let photoGameInstructions = document.getElementById('game_instructions_text');
     let sendPhotoGameBTN = document.getElementById('sendPhotoGame');
-
-    alert("dsas");
-
+    
 	    let slidingPuzzleBTN = document.getElementById('sliding_puzzle_button');
         slidingPuzzleBTN.addEventListener('click', function() {
             localStorage.setItem("game_kind","sliding");
@@ -93,8 +91,6 @@ function postRequestPhotoGame(desc,attr_id){
 
 
  function funcToGetID(attractionsJSON) {
-        alert("dsas");
-
         let name = localStorage.getItem("name_for_add_aq");
         let desc = localStorage.getItem("desc_for_add_aq");
       // alert("in get name! "+"of the origin : " + lat + " , " + lng);
