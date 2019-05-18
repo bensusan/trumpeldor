@@ -1,10 +1,13 @@
 let arrOfAnswers = [];
 let correctAnswersIndexes = [];
+let idOfQuestion = localStorage.getItem("aq_id_to_edit");
+let idOfAttraction = localStorage.getItem("attr_id_for_aq_edit");
+
 
 window.onload = function() {
 
     let addAqBTN = document.getElementById('finish_add_aq_btn');
-
+    getRequestAmericanQuestion(decideFunc,idOfAttraction,idOfQuestion);
     addAqBTN.addEventListener('click', function() {
 
         let tableOfAnswers = document.getElementById('dataTable');
@@ -31,6 +34,38 @@ window.onload = function() {
 
 };
 
+function decideFunc(aqJSON) {
+    let question = aqJSON['question'];
+    let answersArr = aqJSON['answers'];
+    let indexesArr = aqJSON['indexOfCorrectAnswer'];
+    let currentNumberOfRows = 3;
+    let howMuchRowsToAdd = answersArr.length - currentNumberOfRows;
+
+    while (howMuchRowsToAdd>0){
+        addRow('dataTable');
+        howMuchRowsToAdd--;
+    }
+
+    let questionElement = document.getElementById('ques');
+    questionElement.value = question;
+
+    let tableOfAnswers = document.getElementById('dataTable');
+    let rowsOfTable = tableOfAnswers.rows;
+    let numberOfRowsInTable = rowsOfTable.length;
+    let rowIteratorIndex;
+
+    for(rowIteratorIndex=0; rowIteratorIndex<numberOfRowsInTable; rowIteratorIndex++)
+    {
+        rowsOfTable[rowIteratorIndex].cells[1].childNodes[0].value = answersArr[rowIteratorIndex];
+
+        if(indexesArr.includes(rowIteratorIndex))
+        {
+            rowsOfTable[rowIteratorIndex].cells[0].childNodes[0].checked = true;
+        }
+    }
+
+
+}
 
 function addRow(tableID) {
 
@@ -67,6 +102,14 @@ function postRequestAmericanQuestion(aq,attr_id){
     serverRequest("POST", function noop(dummy){}, 'http://'+ip+':12344/managementsystem/attraction/'+
         attr_id+'/aquestion/',
         JSON.stringify(aq));
+}
+
+function getRequestAmericanQuestion(funcOnAq,attr_id,aq_id){
+    // serverRequest("GET", funcOnAttractions, 'http://192.168.1.12:12344/managementsystem/attraction/?format=json');
+    // the server port and my ip
+    serverRequest("GET", funcOnAq, 'http://'+ip+':12344/managementsystem/attraction/'+ attr_id+
+        '/aquestion/'+aq_id+'/'+'?format=json');
+    //alert("need to remove this alert and fix funcToGetAttraction()!");
 }
 
  function funcToGetAttraction(attractionsJSON) {
