@@ -89,7 +89,11 @@ function AmericanQuestions_func(AmericanQuestionsJSON) {
             document.getElementById(d_opt_id).value = aq['id'];
             document.getElementById(d_opt_id).style.display='inline';
             i=i+1;
-            str=str+aq['id']+".</br>" +"question: "+ aq['question']+"</br> answers: "+ aq['answers']+"</br> indexOfCorrectAnswer: "+ aq['indexOfCorrectAnswer']+"<br />";
+            let ansString = "";
+            aq['answers'].forEach(function (ans) {
+                ansString += "&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;"+ans+"</br>";
+            });
+            str=str+"<pre>"+aq['id']+".</br>" +"question:"+ aq['question']+"</br>answers: </br>"+ ansString+"indexOfCorrectAnswer: "+ aq['indexOfCorrectAnswer']+"</pre>";
             // alert(str);
             aq_arr_for_test.push(aq);
         });
