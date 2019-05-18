@@ -1,4 +1,5 @@
 let idOfAttraction = -22;
+let curr_url = window.location;
 
 window.onload=function () {
     getRequestAttractions(funcToGetID);
@@ -10,13 +11,13 @@ window.onload=function () {
     let noBTN = document.getElementById('noBTN');
     let photoGameInstructions = document.getElementById('game_instructions_text');
     let sendPhotoGameBTN = document.getElementById('sendPhotoGame');
-    
+
 	    let slidingPuzzleBTN = document.getElementById('sliding_puzzle_button');
         slidingPuzzleBTN.addEventListener('click', function() {
             localStorage.setItem("game_kind","sliding");
             let ref = window.location.href;
             let the_href = ref.split('/')[3];
-            localStorage.setItem("last_add_game_url",the_href)
+            localStorage.setItem("last_add_game_url",the_href);
 			window.location.href='/add_picture';
         });
 
@@ -25,7 +26,7 @@ window.onload=function () {
             localStorage.setItem("game_kind","drag");
             let ref = window.location.href;
             let the_href = ref.split('/')[3];
-            localStorage.setItem("last_add_game_url",the_href)
+            localStorage.setItem("last_add_game_url",the_href);
 			window.location.href='/add_picture';
         });
 
@@ -55,9 +56,11 @@ window.onload=function () {
 
                 sendPhotoGameBTN.addEventListener('click',function () {
                     if(idOfAttraction == -22)
-                        alert("zain");
-                    else
+                        alert(curr_url);
+                    else {
                         postRequestPhotoGame(photoGameInstructions.value, idOfAttraction);
+                        window.location = curr_url;
+                    }
                 });
 
              });
