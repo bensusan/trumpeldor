@@ -8,12 +8,16 @@
 <link rel="stylesheet" href="{% static 'SideMenu.css' %}?version=4">
 {% load static %}
 <link rel="stylesheet" href="{% static 'just_want_background.css' %}?version=2">
+    {% load static %}
+<link rel="stylesheet" href="{% static 'Map.css' %}?version=1">
  {% load static %}
 <script src="{% static 'properties.js' %}?version=3"></script>
-    {% load static %}
-    <script src="{% static 'attractions.js' %}?version=5"></script>
+{#    {% load static %}#}
+{#    <script src="{% static 'attractions.js' %}?version=5"></script>#}
     {% load static %}
 <script src="{% static 'more_properties.js' %}?version=4"></script>
+    {% load static %}
+<script src="{% static 'prop_map.js' %}?version=6"></script>
 
 </head>
 <body>
@@ -37,8 +41,18 @@
     <input id="lng4" name="subject" placeholder="lng" style="width:50px;height:20px;">
  <label for="hint" style="font-size: 16px"><b> :  נקודה 4</b></label>
 
+
+<div id="map">
+{% load static %}
+<script src="{% static 'prop_map.js' %}?version=6"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD7rvXqYArUeu8hVHETM6g9w-ek0RqusZ4&callback=initMapAndAttractionsprop&language=he&region=UK"
+    async defer>
+    </script>
+</div>
+
     <p><br /></p>
-      <input id="info_ttl" name="subject" placeholder="הקלידי את תשובתך בחודשים" style="width:160px;height:20px;">
+
+      <input type="number" id="info_ttl" name="subject" placeholder="הקלידי את תשובתך בשעות" style="width:160px;height:20px;">
     <label for="hint" style="font-size: 20px"><b>?כמה זמן תהיי מעוניינת לשמור מידע על משתמש רשום</b></label>
 <p></p>
     <input type="file" name="file" id="inpi" onchange="func(this)" accept=".mp3"/>
