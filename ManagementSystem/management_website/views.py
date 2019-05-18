@@ -55,6 +55,10 @@ def add_aq_page(request):
     return render(request, "add_aq.html")
 
 
+def edit_aq_page(request):
+    return render(request, "edit_aq.html")
+
+
 def add_aq_edit_page(request):
     return render(request, "add_aq_edit.html")
 

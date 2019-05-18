@@ -20,6 +20,7 @@ urlpatterns = [
     path('add_path/', views.add_path_page),
     path('add_picture/', views.add_picture_page),
     path('add_aq/', views.add_aq_page),
+    path('edit_aq/', views.edit_aq_page),
     path('add_aq_edit/', views.add_aq_edit_page),
     path('add_hint_edit/', views.add_hint_edit_page),
     path('add_game_edit/', views.add_game_edit_page),

@@ -1,4 +1,5 @@
-
+let aq_id_that_was_picked_del;
+let aq_id_that_was_picked_edit;
 let aq_arr_for_test = [];
 let id_to_delete=100;
 
@@ -26,8 +27,9 @@ window.onload = function () {
 
 
             editChosenHintBTN.addEventListener('click', function() {
-                let hint_id_that_was_picked = document.getElementById("write_aq_id_to_edit").value;
-                localStorage.setItem("aq_id_to_edit", hint_id_that_was_picked);
+                let opts = document.getElementById('edit_cb');
+                aq_id_that_was_picked_edit = opts.options[opts.selectedIndex].value;
+                localStorage.setItem("aq_id_to_edit", aq_id_that_was_picked_edit);
                 localStorage.setItem("attr_id_for_aq_edit", attractionObjToUseInHintDelete['id']);
                 window.location.href='/edit_aq';
             });
@@ -102,12 +104,12 @@ function AmericanQuestions_func(AmericanQuestionsJSON) {
 
 
 function funcInOrderToDeleteAmericanQuestion(AmericanQuestionsJSON) {
-    let aq_id_that_was_picked = document.getElementById("write_aq_id_to_delete").value;
+    aq_id_that_was_picked_del = document.getElementById("write_aq_id_to_delete").value;
    // let number_hint_id = Number(hint_id_that_was_picked);
       AmericanQuestionsJSON.forEach(function (aq) {
           // alert("the id is: "+attr['id']);
         // alert("in get name! "+"of the origin : " + lat + " , " + lng + "\n of the other: "+p.lat +" , "+ p.lng);
-        if(aq['id']==aq_id_that_was_picked)
+        if(aq['id']==aq_id_that_was_picked_del)
         {
             //alert("before delete aq!");
             deleteRequestAmericanQuestion(attractionObjToUseInHintDelete['id'],aq['id']);
