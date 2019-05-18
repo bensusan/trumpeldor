@@ -21,7 +21,7 @@ window.onload = function() {
 
             if(isChecked == true)
             {
-                correctAnswersIndexes.push(rowIteratorIndex);
+                correctAnswersIndexes.push(rowIteratorIndex+1);
             }
         }
 
