@@ -103,7 +103,7 @@ function listenerForMappo(){
         var finishBTN = document.getElementById('finish_reg_long');
         finishBTN.addEventListener('click', function() {
             localStorage.setItem("the_points_of_the_long_path", JSON.stringify(pointsOfPath));
-            let arrShow = shitFuncToDelete(the_path_points_for_long,pointsOfPath);
+            let arrShow = dothatFuncToDelete(the_path_points_for_long,pointsOfPath);
             localStorage.setItem("the_points_of_the_finish_path", JSON.stringify(arrShow));
             // let short_to_send = {length:1,points:pointsOfPath};
             // let medium_to_send = {length:2,points:pointsOfPath};
@@ -150,7 +150,7 @@ function initAttractionsMarkersOfLongPath() {
     getRequestAttractions(markAttractionsOfLongPath);
 }
 
-function shitFuncToDelete(arr1,arr2) {
+function dothatFuncToDelete(arr1,arr2) {
     let j;
     for(j=0;j<arr1.length;j++)
     {

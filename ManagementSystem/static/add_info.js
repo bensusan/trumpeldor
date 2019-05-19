@@ -71,7 +71,7 @@ function encodeImageFileAsURL(element) {
   var reader = new FileReader();
   reader.onloadend = function() {
    //alert(reader.result)
-   shit(reader.result)
+   dothat(reader.result)
   };
 
   reader.readAsDataURL(file);

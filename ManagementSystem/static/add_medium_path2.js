@@ -83,7 +83,7 @@ function listenerForMappo(){
         var finishBTN = document.getElementById('finish_reg_med');
         finishBTN.addEventListener('click', function() {
             localStorage.setItem("the_points_of_the_medium_path", JSON.stringify(pointsOfPath));
-            let arrShow = shitFuncToDelete(short_path_points_for_medium,pointsOfPath);
+            let arrShow = dothatFuncToDelete(short_path_points_for_medium,pointsOfPath);
             alert(arrShow.length);
             localStorage.setItem("the_points_of_the_finish_path", JSON.stringify(arrShow));
 
@@ -132,7 +132,7 @@ function initAttractionsMarkersOfMediumPath() {
     getRequestAttractions(markAttractionsOfMediumPath);
 }
 
-function shitFuncToDelete(arr1,arr2) {
+function dothatFuncToDelete(arr1,arr2) {
     let j;
     for(j=0;j<arr1.length;j++)
     {
