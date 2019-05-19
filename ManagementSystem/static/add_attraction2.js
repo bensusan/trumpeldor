@@ -48,7 +48,9 @@ function localFileVideoPlayer() {
 window.onload=function(){
     localFileVideoPlayer();
     }
-function showDataCollectedWithout() {
+
+    function showDataCollected() {
+
 
         let addedPoint = JSON.parse(localStorage.getItem("addedPoint"));
         // alert("is what: "+ addedPoint.lat +", " + addedPoint.lng + ", "+ (typeof addedPoint.lng));
@@ -64,40 +66,12 @@ function showDataCollectedWithout() {
             name:document.getElementById("attr_name").value
             //,x:31.262860,y:34.801753
             ,x:lat ,y:lang
-            ,description:""
-            ,picturesURLS:[] ,videosURLS:vidArr};
+            ,description:document.getElementById("desc").value
+            ,picturesURLS:picArr ,videosURLS:vidArr};
         postRequestAttraction(attraction_to_send);
         localStorage.setItem("name_for_add_aq", attraction_to_send.name);
         localStorage.setItem("desc_for_add_aq", attraction_to_send.description);
         window.location.href='/add_game';
-        // window.location.href='/attractions';
-        // alert("point:"+localStorage.getItem("addedPoint")+"\n"+
-        //     "name:"+document.getElementById("attr_name").value);
-}
-
-    function showDataCollected() {
-
-
-        let addedPoint = JSON.parse(localStorage.getItem("addedPoint"));
-        // alert("is what: "+ addedPoint.lat +", " + addedPoint.lng + ", "+ (typeof addedPoint.lng));
-        // alert("2!");
-        // currPoints.push(addedPoint);
-        let lat = addedPoint.lat;
-        let picArr=[];
-        let vidArr=[];
-        if(helperVar!=undefined){picArr.push(helperVar);}
-        if(helperVarVid!=undefined){vidArr.push(helperVarVid);}
-        let lang = addedPoint.lng;
-        let name = document.getElementById("attr_name").value;
-        let x = lat;
-        let y = lang;
-        localStorage.setItem("nameo", name);
-        localStorage.setItem("x",JSON.stringify(x));
-        localStorage.setItem("y",JSON.stringify(y));
-        localStorage.setItem("vidArr",JSON.stringify(vidArr));
-        localStorage.setItem("name_for_add_aq", name);
-        localStorage.setItem("desc_for_add_aq", "");
-        window.location.href='/attr_info';
         // window.location.href='/attractions';
         // alert("point:"+localStorage.getItem("addedPoint")+"\n"+
         //     "name:"+document.getElementById("attr_name").value);
