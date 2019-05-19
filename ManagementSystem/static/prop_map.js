@@ -1,5 +1,5 @@
 //from django.conf import settings
-
+let countOfPoints = 1;
 let curPosClicked;
 let curMarker;
 let coordinates_of_last_click;
@@ -10,14 +10,44 @@ let coordinates_of_last_click;
 //     {lat: 31.262773527283052, lng: 34.802075028419495}
 // ];
 
-
+//
 window.onload=function () {
 
+    let ok1 = document.getElementById('ok1');
+    let ok2 = document.getElementById('ok2');
+    let ok3 = document.getElementById('ok3');
+    let ok4 = document.getElementById('ok4');
+
+    ok2.style.display = 'none';
+    ok3.style.display = 'none';
+    ok4.style.display = 'none';
+
+    ok1.addEventListener('click',function () {
+        ok2.style.display = '';
+        ok1.style.display = 'none';
+        countOfPoints++;
+    });
+
+    ok2.addEventListener('click',function () {
+        ok3.style.display = '';
+        ok2.style.display = 'none';
+        countOfPoints++;
+    });
+
+    ok3.addEventListener('click',function () {
+        ok4.style.display = '';
+        ok3.style.display = 'none';
+        countOfPoints++;
+    });
+
+    ok4.addEventListener('click',function () {
+        ok4.style.display = 'none';
+        countOfPoints++;
+    });
 
 };
 
 function initMapAndAttractionsprop(){
-        //alert("dasmaps");
     initMap();
     initAttractionsMarkers();
 }
@@ -27,7 +57,7 @@ function initMap() {
         zoom: 18,
         center: {lat: 31.262860, lng: 34.801753}
     });
-    initAttractionsMarkers();
+    // initAttractionsMarkers();
     listenerForMap(map);
     initPoints();
     // alert("the number of points is now :" + points.length)
@@ -53,10 +83,13 @@ function initMap() {
 function listenerForMap(map){
     google.maps.event.addListener(map, 'click', (function(event) {
         coordinates_of_last_click=event.latLng;
-        // alert(coordinates_of_last_click.lat()+","+coordinates_of_last_click.lng())
-        // alert(coordinates_of_last_click);
-        if(curPosClicked) {
 
+        let x = document.getElementById('lat'+countOfPoints);
+        let y = document.getElementById('lng'+countOfPoints);
+        x.value = coordinates_of_last_click.lat();
+        y.value = coordinates_of_last_click.lng();
+
+        if(curPosClicked) {
             curMarker.setMap(null);
         }
 
@@ -69,6 +102,7 @@ function listenerForMap(map){
 function initAttractionsMarkers() {
     getRequestAttractions(markAttractions);
 }
+
 function getRequestAttractions(funcOnAttractions){
     // the server port and my ip
     serverRequest("GET", funcOnAttractions, 'http://'+ip+':12344/managementsystem/attraction/?format=json');

@@ -65,7 +65,7 @@ function doSome(gamesJSON){
     if(type == "sliding_puzzle")
     { namepic = "piecesURLS"; }
     else
-    { namepic = "pictureURL"; }
+    { namepic = "piecesURLS"; }
 
     gamesJSON.forEach(function (game) {
         if(game['id'] == game_id_that_was_picked)
