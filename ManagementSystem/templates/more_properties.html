@@ -15,9 +15,9 @@
 {#    {% load static %}#}
 {#    <script src="{% static 'attractions.js' %}?version=5"></script>#}
     {% load static %}
-<script src="{% static 'more_properties.js' %}?version=4"></script>
+<script src="{% static 'more_properties.js' %}?version=22"></script>
     {% load static %}
-<script src="{% static 'prop_map.js' %}?version=5"></script>
+<script src="{% static 'prop_map.js' %}?version=6"></script>
 
 </head>
 <body>
@@ -68,7 +68,7 @@
 </audio>
 
     <p><br /></p>
-     <button class="button" id="save_props" type="button">שמירת הגדרות</button>
+     <button class="button" id="save_props" onclick="sendThis()" type="button">שמירת הגדרות</button>
 
     </div>
 <nav id="sideMenu"></nav>

@@ -1,8 +1,8 @@
 // alert(localStorage.getItem("addedPoint"));
 
 
-var suki;
-var sukiVid;
+var helperVar;
+var helperVarVid;
 
 var loadFile = function(event) {
 	var image = document.getElementById('output');
@@ -59,8 +59,8 @@ window.onload=function(){
         let lat = addedPoint.lat;
         let picArr=[];
         let vidArr=[];
-        if(suki!=undefined){picArr.push(suki);}
-        if(sukiVid!=undefined){vidArr.push(sukiVid);}
+        if(helperVar!=undefined){picArr.push(helperVar);}
+        if(helperVarVid!=undefined){vidArr.push(helperVarVid);}
         let lang = addedPoint.lng;
         let attraction_to_send = {
             name:document.getElementById("attr_name").value
@@ -87,18 +87,18 @@ window.onload=function(){
 
 
 function shit(suk) {
-    suki=suk;
-    document.getElementById("suka").innerHTML=suki;
-    localStorage.setItem("url_of_img",suki);
+    helperVar=suk;
+    document.getElementById("suka").innerHTML=helperVar;
+    localStorage.setItem("url_of_img",helperVar);
     // var tmuna = document.getElementById("sukablat");
-    // tmuna.src = suki;
+    // tmuna.src = helperVar;
 }
 
 
 function shitVid(suk) {
-    sukiVid=suk;
+    helperVarVid=suk;
     // var tmuna = document.getElementById("sukablat");
-    // tmuna.src = suki;
+    // tmuna.src = helperVar;
 }
 
 function encodeImageFileAsURL(element) {
@@ -106,7 +106,7 @@ function encodeImageFileAsURL(element) {
     image.style.display="inline";
 	image.src = URL.createObjectURL(element.files[0]);
 
-    suki="";
+    helperVar="";
 
   var file = element.files[0];
   var reader = new FileReader();
@@ -121,7 +121,7 @@ function encodeImageFileAsURL(element) {
 
 function encodeVideoFileAsURL(element) {
 
-    sukiVid="";
+    helperVarVid="";
 
   var file = element.files[0];
   var reader = new FileReader();

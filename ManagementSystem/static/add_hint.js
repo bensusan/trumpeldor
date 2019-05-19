@@ -190,22 +190,22 @@ function postRequestHint(the_hint,attr_id){
 }
 
 
-var suki;
-var sukiVid;
+var helperVar;
+var helperVarVid;
 
 
 function shit(suk) {
-    suki=suk;
-    document.getElementById("suka").innerHTML=suki;
-    localStorage.setItem("url_of_img",suki);
+    helperVar=suk;
+    document.getElementById("suka").innerHTML=helperVar;
+    localStorage.setItem("url_of_img",helperVar);
     // var tmuna = document.getElementById("sukablat");
-    // tmuna.src = suki;
+    // tmuna.src = helperVar;
 }
 
 function shitVid(suk) {
-    sukiVid=suk;
+    helperVarVid=suk;
     // var tmuna = document.getElementById("sukablat");
-    // tmuna.src = suki;
+    // tmuna.src = helperVar;
 }
 
 
@@ -213,7 +213,7 @@ function encodeImageFileAsURL(element) {
     var image = document.getElementById('output');
 	image.src = URL.createObjectURL(element.files[0]);
 
-    suki="";
+    helperVar="";
 
   var file = element.files[0];
     var blob = file.slice();
@@ -228,7 +228,7 @@ function encodeImageFileAsURL(element) {
 
 function encodeVideoFileAsURL(element) {
 
-    sukiVid="";
+    helperVarVid="";
 
   var file = element.files[0];
   var reader = new FileReader();
@@ -254,7 +254,7 @@ function funcToSendImage(attractionsJSON) {
         if(p.name===name && p.description===desc)
         {
 
-            let the_hint = {attraction: attr, kind: "HP", data:suki, description:document.getElementById("pic_hint_description").value};
+            let the_hint = {attraction: attr, kind: "HP", data:helperVar, description:document.getElementById("pic_hint_description").value};
             let attr_id = attr['id'];
             postRequestHint(the_hint,attr_id);
             window.location.href='/add_hint';
@@ -278,7 +278,7 @@ function funcToSendVideo(attractionsJSON) {
         if(p.name===name && p.description===desc)
         {
 
-            let the_hint = {attraction: attr, kind: "HV", data:sukiVid,description:document.getElementById("vid_hint_description").value};
+            let the_hint = {attraction: attr, kind: "HV", data:helperVarVid,description:document.getElementById("vid_hint_description").value};
             let attr_id = attr['id'];
             postRequestHint(the_hint,attr_id);
             window.location.href='/add_hint';

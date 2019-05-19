@@ -1,5 +1,5 @@
 
-var suki;
+var helperVar;
 
 window.onload = function(){
 
@@ -50,11 +50,11 @@ window.onload = function(){
 
 
 function shit(suk) {
-    suki=suk;
-    document.getElementById("suka").innerHTML=suki;
-    localStorage.setItem("url_of_img",suki);
+    helperVar=suk;
+    document.getElementById("suka").innerHTML=helperVar;
+    localStorage.setItem("url_of_img",helperVar);
     // var tmuna = document.getElementById("sukablat");
-    // tmuna.src = suki;
+    // tmuna.src = helperVar;
 }
 
 
@@ -62,7 +62,7 @@ function encodeImageFileAsURL(element) {
     var image = document.getElementById('output');
 	image.src = URL.createObjectURL(element.files[0]);
 
-    suki="";
+    helperVar="";
 
   var file = element.files[0];
   var reader = new FileReader();
@@ -88,7 +88,7 @@ function funcToSendGame(attractionsJSON) {
                 let the_kind = "sliding_puzzle";
                 let n_size = document.getElementById("n_size").value;
                 let data_send = {description: document.getElementById("game_instructions_text").value,
-                    piecesURLS: suki, width: n_size, height: n_size};
+                    piecesURLS: helperVar, width: n_size, height: n_size};
                 let attr_id = attr['id'];
                 postRequestGame(data_send,attr_id,the_kind);
             }
@@ -96,7 +96,7 @@ function funcToSendGame(attractionsJSON) {
                 let the_kind = "puzzle";
                 let n_size = document.getElementById("n_size").value;
                 let data_send = {description: document.getElementById("game_instructions_text").value,
-                    piecesURLS: suki, width: n_size, height: n_size};
+                    piecesURLS: helperVar, width: n_size, height: n_size};
                 let attr_id = attr['id'];
                 postRequestGame(data_send,attr_id,the_kind);
             }

@@ -1,6 +1,6 @@
 var attr_for_editing;
-var suki;
-var sukiVid;
+var helperVar;
+var helperVarVid;
 
 
 function localFileVideoPlayer() {
@@ -53,13 +53,13 @@ function doVideo(){
     function finishEditingAttraction() {
     let attr_after_editing;
     let vidArr = attr_for_editing['videosURLS'];
-    if(sukiVid!=undefined)
+    if(helperVarVid!=undefined)
     {
         vidArr=[];
-        vidArr.push(sukiVid);
+        vidArr.push(helperVarVid);
     }
 
-    if(suki==undefined) {
+    if(helperVar==undefined) {
         attr_after_editing = {
             name: document.getElementById("attr_name").value,
             x: attr_for_editing['x'],
@@ -71,7 +71,7 @@ function doVideo(){
     }
     else {
         let picArr=[];
-        picArr.push(suki);
+        picArr.push(helperVar);
         attr_after_editing = {
             name: document.getElementById("attr_name").value,
             x: attr_for_editing['x'],
@@ -192,24 +192,24 @@ function doVideo(){
 
 
 function shit(suk) {
-    suki=suk;
-    document.getElementById("suka").innerHTML=suki;
-    localStorage.setItem("url_of_img",suki);
+    helperVar=suk;
+    document.getElementById("suka").innerHTML=helperVar;
+    localStorage.setItem("url_of_img",helperVar);
     // var tmuna = document.getElementById("sukablat");
-    // tmuna.src = suki;
+    // tmuna.src = helperVar;
 }
 
 function shitVid(suk) {
-    sukiVid=suk;
+    helperVarVid=suk;
     // var tmuna = document.getElementById("sukablat");
-    // tmuna.src = suki;
+    // tmuna.src = helperVar;
 }
 
 function encodeImageFileAsURL(element) {
     var image = document.getElementById('output');
 	image.src = URL.createObjectURL(element.files[0]);
 
-    suki="";
+    helperVar="";
 
   var file = element.files[0];
   var reader = new FileReader();
@@ -224,7 +224,7 @@ function encodeImageFileAsURL(element) {
 
 function encodeVideoFileAsURL(element) {
 
-    sukiVid="";
+    helperVarVid="";
 
   var file = element.files[0];
   var reader = new FileReader();
