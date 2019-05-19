@@ -49,8 +49,8 @@ window.onload = function(){
 }
 
 
-function shit(suk) {
-    helperVar=suk;
+function thefunc(the) {
+    helperVar=the;
     document.getElementById("suka").innerHTML=helperVar;
     localStorage.setItem("url_of_img",helperVar);
     // var tmuna = document.getElementById("sukablat");
@@ -68,7 +68,7 @@ function encodeImageFileAsURL(element) {
   var reader = new FileReader();
   reader.onloadend = function() {
    //alert(reader.result)
-   shit(reader.result)
+   thefunc(reader.result)
   }
 
   reader.readAsDataURL(file);

@@ -188,18 +188,16 @@ var helperVar;
 var helperVarVid;
 
 
-function shit(suk) {
-    helperVar=suk;
-    document.getElementById("suka").innerHTML=helperVar;
+function dothat(the) {
+    helperVar=the;
+    document.getElementById("helpervar").innerHTML=helperVar;
     localStorage.setItem("url_of_img",helperVar);
     // var tmuna = document.getElementById("sukablat");
     // tmuna.src = helperVar;
 }
 
-function shitVid(suk) {
-    helperVarVid=suk;
-    // var tmuna = document.getElementById("sukablat");
-    // tmuna.src = helperVar;
+function dothatVid(the) {
+    helperVarVid=the;
 }
 
 
@@ -215,7 +213,7 @@ function encodeImageFileAsURL(element) {
   var reader = new FileReader();
   reader.onloadend = function() {
    //alert(reader.result)
-   shit(reader.result)
+   dothat(reader.result)
   }
 
   reader.readAsDataURL(blob);           //file insetead of blob
@@ -230,7 +228,7 @@ function encodeVideoFileAsURL(element) {
   var reader = new FileReader();
   reader.onloadend = function() {
    //alert(reader.result)
-   shitVid(reader.result)
+   dothatVid(reader.result)
   };
 
   reader.readAsDataURL(file);

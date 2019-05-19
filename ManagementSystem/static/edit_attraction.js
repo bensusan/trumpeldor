@@ -191,16 +191,16 @@ function doVideo(){
 
 
 
-function shit(suk) {
-    helperVar=suk;
-    document.getElementById("suka").innerHTML=helperVar;
+function dothat(the) {
+    helperVar=the;
+    document.getElementById("helpervar").innerHTML=helperVar;
     localStorage.setItem("url_of_img",helperVar);
     // var tmuna = document.getElementById("sukablat");
     // tmuna.src = helperVar;
 }
 
-function shitVid(suk) {
-    helperVarVid=suk;
+function dothatVid(the) {
+    helperVarVid=the;
     // var tmuna = document.getElementById("sukablat");
     // tmuna.src = helperVar;
 }
@@ -215,7 +215,7 @@ function encodeImageFileAsURL(element) {
   var reader = new FileReader();
   reader.onloadend = function() {
    //alert(reader.result)
-   shit(reader.result)
+   dothat(reader.result)
   };
 
   reader.readAsDataURL(file);
@@ -230,7 +230,7 @@ function encodeVideoFileAsURL(element) {
   var reader = new FileReader();
   reader.onloadend = function() {
    //alert(reader.result)
-   shitVid(reader.result)
+   dothatVid(reader.result)
   };
 
   reader.readAsDataURL(file);
