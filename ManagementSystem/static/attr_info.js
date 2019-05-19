@@ -56,23 +56,22 @@ window.onload = function(){
 
 
     function sendAll() {
-        alert("sda2231");
-        let name = JSON.parse(localStorage.getItem("nameo"));
-        let x = JSON.parse(localStorage.getItem("x"));
-        let y = JSON.parse(localStorage.getItem("y"));
-        alert(name);
-        // let vidArr = JSON.parse(localStorage.getItem("vidArr"));
+        let namee = localStorage.getItem("name_for_add_aq");
+        let xx = JSON.parse(localStorage.getItem("x"));
+        let yy = JSON.parse(localStorage.getItem("y"));
+        let vidArr = JSON.parse(localStorage.getItem("vidArr"));
         // alert("is what: "+ addedPoint.lat +", " + addedPoint.lng + ", "+ (typeof addedPoint.lng));
         // alert("2!");
         // currPoints.push(addedPoint);
 
+        alert(arrOfPicsData.length);
 
         let attraction_to_send = {
-            name:name
+            name:namee
             //,x:31.262860,y:34.801753
-            ,x:x ,y:y
+            ,x:xx ,y:yy
             ,description:document.getElementById("desc").value
-            ,picturesURLS:[] ,videosURLS:[]};
+            ,picturesURLS:arrOfPicsData ,videosURLS:[]};
         postRequestAttractionn(attraction_to_send);
         localStorage.setItem("name_for_add_aq", attraction_to_send.name);
         localStorage.setItem("desc_for_add_aq", attraction_to_send.description);

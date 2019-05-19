@@ -91,7 +91,6 @@ function showDataCollectedWithout() {
         let name = document.getElementById("attr_name").value;
         let x = lat;
         let y = lang;
-        localStorage.setItem("nameo", name);
         localStorage.setItem("x",JSON.stringify(x));
         localStorage.setItem("y",JSON.stringify(y));
         localStorage.setItem("vidArr",JSON.stringify(vidArr));
