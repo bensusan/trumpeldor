@@ -3,13 +3,14 @@ let countOfPoints = 1;
 let curPosClicked;
 let curMarker;
 let coordinates_of_last_click;
+let arrOfPoints = [];
 // let points= [
 //     {lat: 31.263465932844372, lng: 34.801946282386783},
 //     {lat: 31.263065932844372, lng: 34.801146282386783},
 //     {lat: 31.263865932844372, lng: 34.802146282386783},
 //     {lat: 31.262773527283052, lng: 34.802075028419495}
 // ];
-
+let map;
 //
 window.onload=function () {
 
@@ -25,7 +26,15 @@ window.onload=function () {
     ok1.addEventListener('click',function () {
         ok2.style.display = '';
         ok1.style.display = 'none';
+
+
+        let x = document.getElementById('lat'+countOfPoints);
+        let y = document.getElementById('lng'+countOfPoints);
+        let pointToMark = positionInMap(x.value, y.value);
+        arrOfPoints.push(pointToMark);
+        let theMark = markAttraction(pointToMark);
         countOfPoints++;
+        markArr();
     });
 
     ok2.addEventListener('click',function () {
@@ -84,15 +93,17 @@ function listenerForMap(map){
     google.maps.event.addListener(map, 'click', (function(event) {
         coordinates_of_last_click=event.latLng;
 
-        let x = document.getElementById('lat'+countOfPoints);
-        let y = document.getElementById('lng'+countOfPoints);
-        x.value = coordinates_of_last_click.lat();
-        y.value = coordinates_of_last_click.lng();
+        if(countOfPoints<5) {
+            let x = document.getElementById('lat' + countOfPoints);
+            let y = document.getElementById('lng' + countOfPoints);
+            x.value = coordinates_of_last_click.lat();
+            y.value = coordinates_of_last_click.lng();
+        }
 
         if(curPosClicked) {
             curMarker.setMap(null);
         }
-
+        markArr();
         curPosClicked = positionInMap(event.latLng.lat(), event.latLng.lng());
         curMarker = markAttraction(curPosClicked);
     }));
@@ -144,3 +155,10 @@ function positionInMap(lat, lng){
           return {lat: lat, lng: lng};
       }
 
+
+function markArr() {
+  for(let i=0;i<arrOfPoints.length;i++){
+      let p = arrOfPoints[i];
+      markAttraction(p);
+  }
+}
