@@ -16,7 +16,7 @@ BL_Impl.setDAL(DAL_Impl)
 BL = BLProxy()
 BL.setImplementation(BL_Impl)
 
-DEBUG = False
+DEBUG = True
 
 
 # General post for all the posts here
@@ -33,12 +33,13 @@ def generalPost(request, className, blFunction, classSerializer=None, many=False
     return Response(ans)
 
 
-def generalGet(className, blFunction, classSerializer, many=False):
+def generalGet(className, blFunction, classSerializer=None, many=False):
     if DEBUG:
         print(className + ":")
     ans = blFunction()
-    ans = classSerializer(ans, many=many)
-    ans = json.loads(json.dumps(ans.data))
+    if (ans is not None) and (classSerializer is not None):
+        ans = classSerializer(ans, many=many)
+        ans = json.loads(json.dumps(ans.data))
     if DEBUG:
         print("Sent:", ans, sep="\n")
     return Response(ans)
@@ -178,6 +179,23 @@ class GetEntertainment(generics.GenericAPIView):
             request,
             "GetEntertainment",
             BL.getEntertainment)
+
+
+class IsAdmin(generics.GenericAPIView):
+    serializer_class = IsAdminSerializer
+
+    def post(self, request, *args, **kwargs):
+        return generalPost(
+            request,
+            "GetAdmin",
+            BL.isAdmin)
+
+
+class GetSettings(views.APIView):
+    def get(self, request):
+        return generalGet(
+            "GetSettings",
+            BL.getSettings)
 ######################################################################################################
 # ----------------------------------------Add Manual Data Part----------------------------------------
 ######################################################################################################
@@ -213,8 +231,8 @@ def addTrack(subTrack, points, length):
     return track
 
 
-def addAttraction(name, x, y, description, picturesURLS, videosURLS):
-    attraction = Attraction(name=name, x=x, y=y, description=description, picturesURLS=picturesURLS, videosURLS=videosURLS)
+def addAttraction(name, x, y, description, picturesURLS, videosURLS, visible):
+    attraction = Attraction(name=name, x=x, y=y, description=description, picturesURLS=picturesURLS, videosURLS=videosURLS, visible=visible)
     attraction.save()
     return attraction
 
@@ -264,9 +282,9 @@ def addPrefixUrl(lst):
 
 
 def insertDebugData():
-    a1 = addAttraction("Meonot dalet", "31.263913", "34.796959", "We Are in Attraction 1", addPrefixUrl(["meonot_dalet_1.jpg", "meonot_dalet_2.jpg"]), [])
-    a2 = addAttraction("96 building", "31.264934", "34.802062", "We Are in Attraction 2", addPrefixUrl(["96_1.jpg"]), [])
-    a3 = addAttraction("Shnizale", "31.265129", "34.801575", "We Are in Attraction 3", addPrefixUrl(["shnizale_1.jpg", "shnizale_2.jpg"]), addPrefixUrl(["shnizale_video.mp4"]))
+    a1 = addAttraction("Meonot dalet", "31.263913", "34.796959", "We Are in Attraction 1", addPrefixUrl(["meonot_dalet_1.jpg", "meonot_dalet_2.jpg"]), [], True)
+    a2 = addAttraction("96 building", "31.264934", "34.802062", "We Are in Attraction 2", addPrefixUrl(["96_1.jpg"]), [], True)
+    a3 = addAttraction("Shnizale", "31.265129", "34.801575", "We Are in Attraction 3", addPrefixUrl(["shnizale_1.jpg", "shnizale_2.jpg"]), addPrefixUrl(["shnizale_video.mp4"]), True)
     aq1 = addAmericanQuestion("AQ1: Some question here ?", ["Correct answer",
                                                             "Incorrect answer",
                                                             "Incorrect answer",
@@ -280,25 +298,25 @@ def insertDebugData():
                                                             "Correct answer",
                                                             "Incorrect answer"], [2], a3)
 
-    sp1 = addSlidingPuzzle(a1, 3, 3,addPrefixUrl(["example00.jpg",
-                                                  "example01.jpg",
-                                                  "example02.jpg",
-                                                  "example10.jpg",
-                                                  "example11.jpg",
-                                                  "example12.jpg",
-                                                  "example20.jpg",
-                                                  "example21.jpg",
-                                                  "example22.jpg"]), "description")
+    sp1 = addSlidingPuzzle(a1, 3, 3,addPrefixUrl(["example00.jpeg",
+                                                  "example01.jpeg",
+                                                  "example02.jpeg",
+                                                  "example10.jpeg",
+                                                  "example11.jpeg",
+                                                  "example12.jpeg",
+                                                  "example20.jpeg",
+                                                  "example21.jpeg",
+                                                  "example22.jpeg"]), "description")
 
-    sp2 = addPuzzle(a2, 3, 3, addPrefixUrl(["example00.jpg",
-                                            "example01.jpg",
-                                            "example02.jpg",
-                                            "example10.jpg",
-                                            "example11.jpg",
-                                            "example12.jpg",
-                                            "example20.jpg",
-                                            "example21.jpg",
-                                            "example22.jpg"]), "description")
+    sp2 = addPuzzle(a2, 3, 3, addPrefixUrl(["example00.jpeg",
+                                            "example01.jpeg",
+                                            "example02.jpeg",
+                                            "example10.jpeg",
+                                            "example11.jpeg",
+                                            "example12.jpeg",
+                                            "example20.jpeg",
+                                            "example21.jpeg",
+                                            "example22.jpeg"]), "description")
 
     sp3 = addTakingPicture(a3, "description")
 

@@ -69,6 +69,12 @@ class BL_Abstract(object):
     def getEntertainment(self, attraction):
         raise NotImplementedError("Should have implemented this")
 
+    def isAdmin(self, data):
+        raise NotImplementedError("Should have implemented this")
+
+    def getSettings(self):
+        raise NotImplementedError("Should have implemented this")
+
     def add_attraction(self, attraction):
         raise NotImplementedError("Should have implemented this")
 
@@ -282,6 +288,16 @@ class BLProxy(BL_Abstract):
         if self.Implementation is None:
             raise NotImplementedError("Should have implemented this")
         return self.Implementation.getEntertainment(attraction)
+
+    def isAdmin(self, data):
+        if self.Implementation is None:
+            raise NotImplementedError("Should have implemented this")
+        return self.Implementation.isAdmin(data)
+
+    def getSettings(self):
+        if self.Implementation is None:
+            raise NotImplementedError("Should have implemented this")
+        return self.Implementation.getSettings()
 
     def add_attraction(self, attraction):
         if self.Implementation is None:

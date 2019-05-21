@@ -15,6 +15,7 @@ class Attraction(models.Model):
     description = models.TextField()
     picturesURLS = JSONField(blank=True, null=True)
     videosURLS = JSONField(blank=True, null=True)
+    visible = models.BooleanField()
 
 
 class User(models.Model):

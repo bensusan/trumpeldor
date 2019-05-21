@@ -13,6 +13,7 @@ namespace trumpeldor.SheredClasses
         public String description { get; set; }
         public List<string> picturesURLS { get; set; }
         public List<string> videosURLS { get; set; }
+        public bool visible { get; set; }
         public List<Hint> hints { get; set; }
         public AmericanQuestion americanQuestion { get; set; }
         public Entertainment entertainment { get; set; }

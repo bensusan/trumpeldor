@@ -19,9 +19,7 @@ namespace trumpeldor.Views
         private static int DESIRED_MISTAKES = 2;
         private static int DESIRED_SECONDS_TO_WAIT = 5;
 
-        bool doneWaiting = false;
-        int numOfSecondsLeft = 5;
-
+        private int numOfCorrectTries = 0;
         public MultipleChoiceQuestionPage ()
 		{
 			InitializeComponent ();
@@ -90,15 +88,20 @@ namespace trumpeldor.Views
             //foreach (Button answer in answersLayout.Children)
             //    answer.Style = (Style)Application.Current.Resources["largeButtonStyle"];
             ((Button)sender).BackgroundColor = Color.Green;
-            await Task.Delay(100);
-            scoreLabel.Text = AppResources.score + ": " + gc.EditScore(GameController.SCORE_VALUE.AQ_Correct);
-            gc.FinishAttraction();
+            if (aq.indexOfCorrectAnswer.Length == numOfCorrectTries + 1)
+            {
+                await Task.Delay(100);
+                scoreLabel.Text = AppResources.score + ": " + gc.EditScore(ScoreRule.Kinds.AQ_Correct);
+                gc.FinishAttraction();
 
-            await Navigation.PopModalAsync();
+                await Navigation.PopModalAsync();
+            }
+            else
+                numOfCorrectTries++;
         }
         private async void Wrong_Answer_Button_Clicked(object sender, EventArgs e)
         {
-            scoreLabel.Text = AppResources.score + ": " + gc.EditScore(GameController.SCORE_VALUE.AQ_Mistake);
+            scoreLabel.Text = AppResources.score + ": " + gc.EditScore(ScoreRule.Kinds.AQ_Mistake);
             //foreach (Button answer in answersLayout.Children)
             //    answer.Style = (Style)Application.Current.Resources["largeButtonStyle"];
             Color regular = ((Button)sender).BackgroundColor;

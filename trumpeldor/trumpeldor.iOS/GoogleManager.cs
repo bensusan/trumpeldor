@@ -47,7 +47,7 @@ namespace trumpeldor.iOS
                 {
                     ID = user.UserID,
                     Name = user.Profile.Name,
-                    //Email = user.Profile.Email,
+                    Email = user.Profile.Email,
                     //Picture = user.Profile.HasImage ? new Uri(user.Profile.GetImageUrl(500).ToString()) : new Uri(string.Empty)
                 }, string.Empty);
             else

@@ -11,6 +11,6 @@ namespace trumpeldor.Services.Contracts
     {
         void Login(Action<GoogleUser, string> OnLoginComplete);
 
-        //void Logout();
+        void Logout();
     }
 }

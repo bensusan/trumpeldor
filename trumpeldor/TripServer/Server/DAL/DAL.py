@@ -98,6 +98,12 @@ class DAL_Abstract(object):
     def getTakingPicture(self, attraction):
         raise NotImplementedError("Should have implemented this")
 
+    def getAdmins(self):
+        raise NotImplementedError("Should have implemented this")
+
+    def getSettings(self):
+        raise NotImplementedError("Should have implemented this")
+
     def delete_attraction(self, id):
         raise NotImplementedError("Should have implemented this")
 
@@ -357,6 +363,16 @@ class DALProxy(DAL_Abstract):
         if self.Implementation is None:
             raise NotImplementedError("Should have implemented this")
         return self.Implementation.getTakingPicture(attraction)
+
+    def getAdmins(self):
+        if self.Implementation is None:
+            raise NotImplementedError("Should have implemented this")
+        return self.Implementation.getAdmins()
+
+    def getSettings(self):
+        if self.Implementation is None:
+            raise NotImplementedError("Should have implemented this")
+        return self.Implementation.getSettings()
 
     def delete_attraction(self, id):
         if self.Implementation is None:

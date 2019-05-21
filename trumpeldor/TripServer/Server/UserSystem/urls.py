@@ -19,7 +19,9 @@ urlpatterns = [
     path('getOpenMessages/', GetOpenMessages.as_view()),
     path('updateTrip/', UpdateTrip.as_view()),
     path('getBestScores/', GetBestScores.as_view()),
-    path('getEntertainment/', GetEntertainment.as_view())
+    path('getEntertainment/', GetEntertainment.as_view()),
+    path('isAdmin/', IsAdmin.as_view()),
+    path('getSettings/', GetSettings.as_view())
 
 ]
 

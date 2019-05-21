@@ -97,7 +97,7 @@ namespace trumpeldor.Views
             currIndex = hintsIndex;
             hintsIndex++;
             if (hintsIndex >= 3)
-                scoreLabel.Text = AppResources.score + ": " + gc.EditScore(GameController.SCORE_VALUE.Hints_More_Than_Three);
+                scoreLabel.Text = AppResources.score + ": " + gc.EditScore(ScoreRule.Kinds.Hints_More_Than_Three);
         }
 
         private async void AttachHint(int hintIndex)
@@ -141,7 +141,7 @@ namespace trumpeldor.Views
         private void Arrived()
         {
             done = true;
-            gc.EditScore(GameController.SCORE_VALUE.Attraction_Arrive);
+            gc.EditScore(ScoreRule.Kinds.Attraction_Arrive);
             var existingPages = Navigation.NavigationStack.ToList();
             foreach (var page in existingPages)
                 Navigation.RemovePage(page);
