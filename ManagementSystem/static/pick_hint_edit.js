@@ -24,20 +24,49 @@ function funcForExistingHints(attractionsJSON){
 function hints_func(hintsJSON) {
         str="";
         let i=1;
+        let imageCounter = 1;
         hintsJSON.forEach(function (hint) {
             let e_opt_id = "ecb"+i;
             let d_opt_id = "dcb"+i;
 
-            document.getElementById(e_opt_id).innerText = hint['data'];
+            if(hint['data'].substring(0,16) == 'data:application')
+            {
+                document.getElementById(d_opt_id).innerText = "media"+imageCounter;
+                document.getElementById(e_opt_id).innerText = "media"+imageCounter;
+            }
+            else
+            {
+                document.getElementById(d_opt_id).innerText = hint['data'];
+                document.getElementById(e_opt_id).innerText = hint['data'];
+            }
+
             document.getElementById(e_opt_id).value = hint['id'];
             document.getElementById(e_opt_id).style.display='inline';
-
-            document.getElementById(d_opt_id).innerText = hint['data'];
             document.getElementById(d_opt_id).value = hint['id'];
             document.getElementById(d_opt_id).style.display='inline';
             i=i+1;
-            str=str+" data: "+ hint['data']+"<br />";
+            //data:application
+            let dataOfHint = hint['data'];
+            if(dataOfHint.substring(0,16) == 'data:application')
+                str=str+" data: "+ "media"+imageCounter+"<br />";
+            else
+                str=str+" data: "+ hint['data']+"<br />";
             // alert(str);
+
+            var output = document.getElementById("result");
+
+            if(dataOfHint.substring(0,16) == 'data:application') {
+                imageCounter++;
+                var img = document.createElement("img");
+                img.src = dataOfHint;
+                img.className = 'thumbnail';
+                var div = document.createElement("div");
+                div.appendChild(img);
+
+
+                  output.insertBefore(div,null);
+            }
+
         });
         document.getElementById("existing_hints").innerHTML = str ;
         document.getElementById("existing_hints").style.fontWeight = 'bold';

@@ -168,7 +168,7 @@ class BL_Abstract(object):
     def get_info(self):
         raise NotImplementedError("Should have implemented this")
 
-    def delete_info(self, id):
+    def delete_info(self):
         raise NotImplementedError("Should have implemented this")
 
     def get_all_sliding_puzzles_for_attraction(self, id_attraction):
@@ -205,6 +205,15 @@ class BL_Abstract(object):
         raise NotImplementedError("Should have implemented this")
 
     def add_taking_pic(self, id_attraction, description):
+        raise NotImplementedError("Should have implemented this")
+
+    def get_settings(self):
+        raise NotImplementedError("Should have implemented this")
+
+    def edit_settings(self, settings):
+        raise NotImplementedError("Should have implemented this")
+
+    def create_settings(self, settings):
         raise NotImplementedError("Should have implemented this")
 
 
@@ -460,10 +469,10 @@ class BLProxy(BL_Abstract, ABC):
             raise NotImplementedError("Should have implemented this")
         return self.Implementation.get_info()
 
-    def delete_info(self, id):
+    def delete_info(self):
         if self.Implementation is None:
             raise NotImplementedError("Should have implemented this")
-        return self.Implementation.delete_info(id)
+        return self.Implementation.delete_info()
 
     def get_all_sliding_puzzles_for_attraction(self, id_attraction):
         if self.Implementation is None:
@@ -524,3 +533,18 @@ class BLProxy(BL_Abstract, ABC):
         if self.Implementation is None:
             raise NotImplementedError("Should have implemented this")
         return self.Implementation.add_taking_pic(id_attraction, description)
+
+    def get_settings(self):
+        if self.Implementation is None:
+            raise NotImplementedError("Should have implemented this")
+        return self.Implementation.get_settings()
+
+    def edit_settings(self, settings):
+        if self.Implementation is None:
+            raise NotImplementedError("Should have implemented this")
+        return self.Implementation.edit_settings(settings)
+
+    def create_settings(self, settings):
+        if self.Implementation is None:
+            raise NotImplementedError("Should have implemented this")
+        return self.Implementation.create_settings(settings)

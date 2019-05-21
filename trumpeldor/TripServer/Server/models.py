@@ -128,7 +128,9 @@ class Message(models.Model):
 
 
 class Info(models.Model):
-    info = models.TextField()
+    app_name = models.TextField()
+    about_app = models.TextField()
+    how_to_play = models.TextField()
 
 
 class Admin(models.Model):
@@ -142,5 +144,9 @@ class Media(models.Model):
 
 
 class Settings(models.Model):
+    boundaries = JSONField()
     logo = JSONField()
+    loginHours = models.IntegerField(default=36)
+    successAudio = JSONField()
+    failureAudio = JSONField()
 

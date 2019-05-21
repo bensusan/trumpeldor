@@ -23,7 +23,6 @@ function serverRequest(getOrPost, functionOnReady, url, post=null){
 
 function markAttractions(attractionsJSON){
     //alert(window.innerHeight + " "+ window.innerWidth);
-
     attractionsJSON.forEach(function (attr) {
        attr_arr_for_test2.push(attr);
 
@@ -60,21 +59,6 @@ function markAttraction(pos){
         return marker;
 }
 
-function getRequestAttractionsTest(funcOnAttractions){
-    // the server port and my ip
-    serverRequest("GET", funcOnAttractions, 'http://'+ip+':12344/managementsystem/attraction/?format=json');
-    //alert("need to remove this alert and fix funcToGetAttraction()!");
-    return attr_arr_for_test;
-}
-
-
-function funcForTest(attractionsJSON){
-    attractionsJSON.forEach(function (attr) {
-        attr_arr_for_test.push(attr);
-    });
-
-}
-
 function getRequestAttractions(funcOnAttractions){
     // the server port and my ip
     serverRequest("GET", funcOnAttractions, 'http://'+ip+':12344/managementsystem/attraction/?format=json');
@@ -97,11 +81,5 @@ function deleteRequestAttraction(id){
    // alert("blich");
     serverRequest("DELETE", function noop(dummy){}, 'http://'+ip+':12344/managementsystem/attraction/'+id+'/');
 }
-
-// function deleteRequestAttraction(attraction,id){
-//     alert("blin");
-//     serverRequest("DELETE", function noop(dummy){}, 'http://10.0.0.7:12344/managementsystem/attraction/'+id,
-//         JSON.stringify(attraction));
-// }
 
 

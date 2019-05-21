@@ -158,7 +158,7 @@ class ScoreSerializer(serializers.ModelSerializer):
 
 class InfoSerializer(serializers.ModelSerializer):
     class Meta:
-        fields = ('id', 'info',)
+        fields = ('id', 'app_name', 'about_app', 'how_to_play',)
         model = Info
 
 
@@ -172,9 +172,8 @@ class IsAdminSerializer(serializers.Serializer):
     email = serializers.EmailField()
 
 
-class SettingsSerializer(serializers.Serializer):
-    boundaries = serializers.JSONField()
-    logo = serializers.CharField(max_length=50)
-    loginHours = serializers.IntegerField()
-    scoreRules = serializers.JSONField()
 
+class SettingsSerializer(serializers.ModelSerializer):
+    class Meta:
+        fields = ('boundaries', 'logo', 'loginHours', 'successAudio', 'failureAudio',)
+        model = Settings

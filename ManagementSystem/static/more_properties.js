@@ -1,3 +1,23 @@
+let theurl = "";
+
+function sendThis(){
+    let sendAll = document.getElementById('save_props');
+
+    sendAll.addEventListener('click',function(){
+
+
+        let toSend = {
+            boundaries:{},
+            logo:{},
+            loginHours:document.getElementById('info_ttl').value,
+            successAudio:{},
+            failureAudio:{}
+        };
+
+        postRequestSettings(toSend);
+    });
+}
+
 function func(element) {
     var aud = document.getElementById('audio_controls');
     var mp = document.getElementById('attr_sound');
@@ -7,6 +27,26 @@ function func(element) {
 	mp.src = URL.createObjectURL(element.files[0]);
 	aud.load();
 	inpi.style.display="none";
+	
+	
+	theurl="";
+
+  var file = element.files[0];
+  var reader = new FileReader();
+  reader.onloadend = function() {
+   //alert(reader.result)
+   doSomething(reader.result)
+  }
+
+  reader.readAsDataURL(file);
 
 }
 
+function doSomething(thing) {
+    theurl=thing;
+}
+
+function postRequestSettings(data){
+    serverRequest("POST", function noop(dummy){}, 'http://'+ip+':12344/managementsystem/settings/',
+        JSON.stringify(data));
+}

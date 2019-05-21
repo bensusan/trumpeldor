@@ -66,7 +66,7 @@ def test1(driver):
 
 def test2(driver):
     driver.get('http://10.0.0.3:12345/attractions/')
-    driver.execute_script("shitToDeleteFast()")
+    driver.execute_script("dothatToDeleteFast()")
     print(driver.current_url)
 
     return

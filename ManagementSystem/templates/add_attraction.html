@@ -12,14 +12,15 @@
 {% load static %}
 <link rel="stylesheet" href="{% static 'signInForm.css' %}?version=2">
      {% load static %}
-<script src="{% static 'properties.js' %}?version=4"></script>
+<script src="{% static 'properties.js' %}?version=5"></script>
+    {% load static %}
+<script src="{% static 'attractions.js' %}?version=19"></script>
+    {% load static %}
+<script src="{% static 'add_attraction.js' %}?version=19"></script>
 </head>
 <body>
-{% load static %}
-<script src="{% static 'add_attraction.js' %}?version=4"></script>
 
-{% load static %}
-    <script src="{% static 'attractions.js' %}?version=2"></script>
+
 
 <div align="center">
 <h2>הוספת אטרקציה</h2>
@@ -31,11 +32,11 @@
 <video height="200px" width="350px" controls="" autoplay=""></video>
     <input id="video_input" type="file" accept="video/*" onchange="encodeVideoFileAsURL(this)" style="display: none">
 <button class='button blogger' onclick="doVideo()" type="button" style="width: 320px;">Upload Video</button>
-   <p></p>
-    <label for="hint" style="font-size: 20px;"><b>:העלאת תמונה למידע על אטרקציה</b></label>
-<p></p>
-<input type="file" onchange="encodeImageFileAsURL(this)"/>
-<p><img id="output" width="200"  style="display: none"/></p>
+{#   <p></p>#}
+{#    <label for="hint" style="font-size: 20px;"><b>:העלאת תמונה למידע על אטרקציה</b></label>#}
+{#<p></p>#}
+{#<input type="file" onchange="encodeImageFileAsURL(this)"/>#}
+{#<p><img id="output" width="200"  style="display: none"/></p>#}
 {#        {% load static %}#}
 {#<script src="{% static 'add_attraction.js' %}?version=2"></script>#}
 
@@ -51,10 +52,10 @@
     <label for="name" style="font-size: 24px;"><b>:שם האטרקציה</b></label>
     <input  type="text" id="attr_name" placeholder="שם האטרקציה" name="attr_name" style="text-align:right;" required>
 <p></p>
-    <label for="desc" style="font-size: 24px;"><b>:תיאור</b></label>
+{#    <label for="desc" style="font-size: 24px;"><b>:תיאור</b></label>#}
 {#    <input type="text" id="desc" placeholder="Enter description" name="attr_desc" required>#}
-      <textarea id="desc" name="attr_desc" placeholder="הכניסי תיאור אטרקציה" style="text-align:right;width:310px;height:200px"></textarea>
-<p></p>
+{#      <textarea id="desc" name="attr_desc" placeholder="הכניסי תיאור אטרקציה" style="text-align:right;width:310px;height:200px"></textarea>#}
+{#<p></p>#}
 
        <label for="pop" style="font-size: 24px;"><b>הודעת פופ-אפ בהגעה לנקודה</b></label>
     <input  type="text" id="pop" placeholder="הקלידי הודעה..." name="attr_pop" style="direction:rtl;text-align:right;" required>
@@ -65,6 +66,7 @@
 
 <p><br/></p>
     <button class='button google-blue' id="submit_btn_add_attr" onclick="showDataCollected()" type="button" style="width: 220px;">שליחה</button>
+      <button class='button google-blue' id="submit_btn_add_attr" onclick="showDataCollectedWithout()" type="button" style="width: 220px;">שליחה ללא מידע נוסף</button>
     <button class='button google-blue' onclick="check()" type="button" style="width: 220px;">ניקוי</button>
 
   </div>
