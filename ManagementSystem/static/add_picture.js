@@ -1,13 +1,60 @@
 
-var suki;
+var helperVar;
+
+window.onload = function(){
+
+    //Check File API support
+    if(window.File && window.FileList && window.FileReader)
+    {
+        var filesInput = document.getElementById("files");
+
+        filesInput.addEventListener("change", function(event){
+
+            var files = event.target.files; //FileList object
+            var output = document.getElementById("result");
+
+            for(var i = 0; i< files.length; i++)
+            {
+                var file = files[i];
+
+                //Only pics
+                if(!file.type.match('image'))
+                  continue;
+
+                var picReader = new FileReader();
+
+                picReader.addEventListener("load",function(event){
+
+                    var picFile = event.target;
+
+                    var div = document.createElement("div");
+
+                    div.innerHTML = "<img class='thumbnail' src='" + picFile.result + "'" +
+                            "title='" + picFile.name + "'/>";
+
+                    output.insertBefore(div,null);
+
+                });
+
+                 //Read the image
+                picReader.readAsDataURL(file);
+            }
+
+        });
+    }
+    else
+    {
+        console.log("Your browser does not support File API");
+    }
+};
 
 
-function shit(suk) {
-    suki=suk;
-    document.getElementById("suka").innerHTML=suki;
-    localStorage.setItem("url_of_img",suki);
+function thefunc(the) {
+    helperVar=the;
+    document.getElementById("suka").innerHTML=helperVar;
+    localStorage.setItem("url_of_img",helperVar);
     // var tmuna = document.getElementById("sukablat");
-    // tmuna.src = suki;
+    // tmuna.src = helperVar;
 }
 
 
@@ -15,13 +62,13 @@ function encodeImageFileAsURL(element) {
     var image = document.getElementById('output');
 	image.src = URL.createObjectURL(element.files[0]);
 
-    suki="";
+    helperVar="";
 
   var file = element.files[0];
   var reader = new FileReader();
   reader.onloadend = function() {
    //alert(reader.result)
-   shit(reader.result)
+   thefunc(reader.result)
   }
 
   reader.readAsDataURL(file);
@@ -40,14 +87,16 @@ function funcToSendGame(attractionsJSON) {
             if(localStorage.getItem("game_kind")=="sliding") {
                 let the_kind = "sliding_puzzle";
                 let n_size = document.getElementById("n_size").value;
-                let data_send = {piecesURLS: suki, width: n_size, height: n_size, description: document.getElementById("game_instructions_text").value};
+                let data_send = {description: document.getElementById("game_instructions_text").value,
+                    piecesURLS: helperVar, width: n_size, height: n_size};
                 let attr_id = attr['id'];
                 postRequestGame(data_send,attr_id,the_kind);
             }
              if(localStorage.getItem("game_kind")=="drag") {
                 let the_kind = "puzzle";
                 let n_size = document.getElementById("n_size").value;
-                let data_send = {pictureURL: suki, width: n_size, height: n_size, description: document.getElementById("game_instructions_text").value};
+                let data_send = {description: document.getElementById("game_instructions_text").value,
+                    piecesURLS: helperVar, width: n_size, height: n_size};
                 let attr_id = attr['id'];
                 postRequestGame(data_send,attr_id,the_kind);
             }

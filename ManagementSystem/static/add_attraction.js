@@ -1,8 +1,8 @@
 // alert(localStorage.getItem("addedPoint"));
 
 
-var suki;
-var sukiVid;
+var helperVar;
+var helperVarVid;
 
 var loadFile = function(event) {
 	var image = document.getElementById('output');
@@ -48,6 +48,32 @@ function localFileVideoPlayer() {
 window.onload=function(){
     localFileVideoPlayer();
     }
+function showDataCollectedWithout() {
+
+        let addedPoint = JSON.parse(localStorage.getItem("addedPoint"));
+        // alert("is what: "+ addedPoint.lat +", " + addedPoint.lng + ", "+ (typeof addedPoint.lng));
+        // alert("2!");
+        // currPoints.push(addedPoint);
+        let lat = addedPoint.lat;
+        let picArr=[];
+        let vidArr=[];
+        if(helperVar!=undefined){picArr.push(helperVar);}
+        if(helperVarVid!=undefined){vidArr.push(helperVarVid);}
+        let lang = addedPoint.lng;
+        let attraction_to_send = {
+            name:document.getElementById("attr_name").value
+            //,x:31.262860,y:34.801753
+            ,x:lat ,y:lang
+            ,description:""
+            ,picturesURLS:[] ,videosURLS:vidArr};
+        postRequestAttraction(attraction_to_send);
+        localStorage.setItem("name_for_add_aq", attraction_to_send.name);
+        localStorage.setItem("desc_for_add_aq", attraction_to_send.description);
+        window.location.href='/add_game';
+        // window.location.href='/attractions';
+        // alert("point:"+localStorage.getItem("addedPoint")+"\n"+
+        //     "name:"+document.getElementById("attr_name").value);
+}
 
     function showDataCollected() {
 
@@ -59,19 +85,18 @@ window.onload=function(){
         let lat = addedPoint.lat;
         let picArr=[];
         let vidArr=[];
-        if(suki!=undefined){picArr.push(suki);}
-        if(sukiVid!=undefined){vidArr.push(sukiVid);}
+        if(helperVar!=undefined){picArr.push(helperVar);}
+        if(helperVarVid!=undefined){vidArr.push(helperVarVid);}
         let lang = addedPoint.lng;
-        let attraction_to_send = {
-            name:document.getElementById("attr_name").value
-            //,x:31.262860,y:34.801753
-            ,x:lat ,y:lang
-            ,description:document.getElementById("desc").value
-            ,picturesURLS:picArr ,videosURLS:vidArr};
-        postRequestAttraction(attraction_to_send);
-        localStorage.setItem("name_for_add_aq", attraction_to_send.name);
-        localStorage.setItem("desc_for_add_aq", attraction_to_send.description);
-        window.location.href='/add_game';
+        let name = document.getElementById("attr_name").value;
+        let x = lat;
+        let y = lang;
+        localStorage.setItem("x",JSON.stringify(x));
+        localStorage.setItem("y",JSON.stringify(y));
+        localStorage.setItem("vidArr",JSON.stringify(vidArr));
+        localStorage.setItem("name_for_add_aq", name);
+        localStorage.setItem("desc_for_add_aq", "");
+        window.location.href='/attr_info';
         // window.location.href='/attractions';
         // alert("point:"+localStorage.getItem("addedPoint")+"\n"+
         //     "name:"+document.getElementById("attr_name").value);
@@ -86,19 +111,19 @@ window.onload=function(){
 
 
 
-function shit(suk) {
-    suki=suk;
-    document.getElementById("suka").innerHTML=suki;
-    localStorage.setItem("url_of_img",suki);
+function dothat(the) {
+    helperVar=the;
+    document.getElementById("helpervar").innerHTML=helperVar;
+    localStorage.setItem("url_of_img",helperVar);
     // var tmuna = document.getElementById("sukablat");
-    // tmuna.src = suki;
+    // tmuna.src = helperVar;
 }
 
 
-function shitVid(suk) {
-    sukiVid=suk;
+function dothatVid(the) {
+    helperVarVid=the;
     // var tmuna = document.getElementById("sukablat");
-    // tmuna.src = suki;
+    // tmuna.src = helperVar;
 }
 
 function encodeImageFileAsURL(element) {
@@ -106,13 +131,13 @@ function encodeImageFileAsURL(element) {
     image.style.display="inline";
 	image.src = URL.createObjectURL(element.files[0]);
 
-    suki="";
+    helperVar="";
 
   var file = element.files[0];
   var reader = new FileReader();
   reader.onloadend = function() {
    //alert(reader.result)
-   shit(reader.result)
+   dothat(reader.result)
   }
 
   reader.readAsDataURL(file);
@@ -121,13 +146,13 @@ function encodeImageFileAsURL(element) {
 
 function encodeVideoFileAsURL(element) {
 
-    sukiVid="";
+    helperVarVid="";
 
   var file = element.files[0];
   var reader = new FileReader();
   reader.onloadend = function() {
    //alert(reader.result)
-   shitVid(reader.result)
+   dothatVid(reader.result)
   };
 
   reader.readAsDataURL(file);

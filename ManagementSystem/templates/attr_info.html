@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+    {% load static %}
+<link rel="stylesheet" href="{% static 'withImages.css' %}?version=1">
+    {% load static %}
+<link rel="stylesheet" href="{% static 'beauty.css' %}?version=3">
+       {% load static %}
+<link rel="stylesheet" href="{% static 'buttoni.css' %}?version=3">
+     {% load static %}
+<link rel="stylesheet" href="{% static 'SideMenu.css' %}?version=4">
+{% load static %}
+<link rel="stylesheet" href="{% static 'signInForm.css' %}?version=2">
+    {% load static %}
+<script src="{% static 'attractions.js' %}?version=6"></script>
+     {% load static %}
+<script src="{% static 'properties.js' %}?version=5"></script>
+    {% load static %}
+<script src="{% static 'attr_info.js' %}?version=18"></script>
+</head>
+<body>
+
+
+
+<div align="center">
+<h2>הוספת אטרקציה</h2>
+<form>
+{##}
+{#    <label for="hint" style="font-size: 20px;"><b>:העלאת תמונה למידע על אטרקציה</b></label>#}
+{#<p></p>#}
+{#<input type="file" onchange="encodeImageFileAsURL(this)"/>#}
+{#<p><img id="output" width="200"  style="display: none"/></p>#}
+
+{#        {% load static %}#}
+{#<script src="{% static 'add_attraction.js' %}?version=2"></script>#}
+
+    <article>
+        <label for="files">Select multiple files: </label>
+        <input id="files" type="file" multiple/>
+        <output id="result" />
+    </article>
+
+  <div class="container">
+
+    <label for="desc" style="font-size: 24px;"><b>:תיאור</b></label>
+{#    <input type="text" id="desc" placeholder="Enter description" name="attr_desc" required>#}
+      <textarea id="desc" name="attr_desc" placeholder="הכניסי תיאור אטרקציה" style="text-align:right;width:310px;height:200px"></textarea>
+
+
+<p><br/></p>
+    <button class='button google-blue' id="submit_btn_add_attr" onclick="sendAll()" type="button" style="width: 220px;">שליחה</button>
+
+  </div>
+
+</form>
+
+
+</div>
+
+
+<div>
+
+<nav id="sideMenu"></nav>
+{% load static %}
+<script src="{% static 'menu_of_add_attractions.js' %}?version=2"></script>
+
+</div>
+
+</body>
+</html>

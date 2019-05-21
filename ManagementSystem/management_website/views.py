@@ -47,12 +47,20 @@ def add_hint_page(request):
     return render(request, "add_hint.html")
 
 
+def attr_info_page(request):
+    return render(request, "attr_info.html")
+
+
 def add_hint_edit_page(request):
     return render(request, "add_hint_edit.html")
 
 
 def add_aq_page(request):
     return render(request, "add_aq.html")
+
+
+def edit_aq_page(request):
+    return render(request, "edit_aq.html")
 
 
 def add_aq_edit_page(request):

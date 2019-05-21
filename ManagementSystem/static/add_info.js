@@ -40,8 +40,8 @@ window.onload = function () {
 
 let info_txt;
 var attr_for_editing;
-var suki;
-var sukiVid;
+var helperVar;
+var helperVarVid;
 
 function doVideo(){
     	let vid_input = document.getElementById('video_input');
@@ -65,13 +65,13 @@ function encodeImageFileAsURL(element) {
     var image = document.getElementById('output');
 	image.src = URL.createObjectURL(element.files[0]);
 
-    suki="";
+    helperVar="";
 
   var file = element.files[0];
   var reader = new FileReader();
   reader.onloadend = function() {
    //alert(reader.result)
-   shit(reader.result)
+   dothat(reader.result)
   };
 
   reader.readAsDataURL(file);

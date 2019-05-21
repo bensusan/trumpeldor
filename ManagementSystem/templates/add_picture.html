@@ -3,16 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <title>הוספת תמונה למשחק</title>
+    {% load static %}
+<link rel="stylesheet" href="{% static 'withImages.css' %}?version=1">
      {% load static %}
 <link rel="stylesheet" href="{% static 'SideMenu.css' %}?version=4">
 {% load static %}
-<link rel="stylesheet" href="{% static 'just_want_background.css' %}?version=2">
+<link rel="stylesheet" href="{% static 'just_want_background.css' %}?version=3">
      {% load static %}
-<script src="{% static 'properties.js' %}?version=2"></script>
+<script src="{% static 'properties.js' %}?version=4"></script>
         {% load static %}
 <script src="{% static 'attractions.js' %}?version=4"></script>
     {% load static %}
-<script src="{% static 'add_picture.js' %}?version=3"></script>
+<script src="{% static 'add_picture.js' %}?version=6"></script>
 </head>
 <body>
 <div align="center">
@@ -24,8 +26,15 @@
 <p></p>
 <input type="file" onchange="encodeImageFileAsURL(this)"/>
 <p><img id="output" width="200" /></p>
-{#<p>This Is The URL:</p>#}
-{#<p id="suka"></p>#}
+
+{#    <article>#}
+{#        <label for="files">Select multiple files: </label>#}
+{#        <input id="files" type="file" multiple/>#}
+{#        <output id="result" />#}
+{#    </article>#}
+
+
+
 
     <label for="hint"><b>:אורך ורוחב התמונה (n x n)</b></label>
 <p></p>
@@ -36,5 +45,8 @@
 <nav id="sideMenu"></nav>
 {% load static %}
 <script src="{% static 'menu_add_pic.js' %}?version=3"></script>
+
+
+
 </body>
 </html>
