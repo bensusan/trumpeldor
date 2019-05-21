@@ -117,7 +117,7 @@ namespace trumpeldor.Views
                 }
             }
             //TODO puzzle solve
-            scoreLabel.Text = AppResources.score + ": " + gc.EditScore(GameController.SCORE_VALUE.Puzzle_Solved);
+            scoreLabel.Text = AppResources.score + ": " + gc.EditScore(ScoreRule.Kinds.Puzzle_Solved);
             gc.FinishAttraction();
             await Navigation.PopModalAsync();
         }

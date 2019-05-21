@@ -63,7 +63,7 @@ namespace trumpeldor.Droid
                 {
                     ID = accountt.Id,
                     Name = accountt.DisplayName,
-                    //Email = accountt.Email,
+                    Email = accountt.Email,
                     //Picture = new Uri((accountt.PhotoUrl != null ? $"{accountt.PhotoUrl}" : $"https://autisticdating.net/imgs/profile-placeholder.jpg"))
                 }, string.Empty);
             }

@@ -88,7 +88,7 @@ namespace trumpeldor.Views
                     pc.AddToPhotosSourcesList(path);
 
                     //back to previous page
-                    scoreLabel.Text = AppResources.score + ": " + gc.EditScore(GameController.SCORE_VALUE.Taking_Picture_Done);
+                    scoreLabel.Text = AppResources.score + ": " + gc.EditScore(ScoreRule.Kinds.Taking_Picture_Done);
                     gc.FinishAttraction();
                     await Navigation.PopModalAsync();
 

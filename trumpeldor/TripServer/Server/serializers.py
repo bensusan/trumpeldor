@@ -16,7 +16,7 @@ class HintSerializer(serializers.ModelSerializer):
 
 class AttractionSerializer(serializers.ModelSerializer):
     class Meta:
-        fields = ('id', 'name', 'x', 'y', 'description', 'picturesURLS', 'videosURLS',)
+        fields = ('id', 'name', 'x', 'y', 'description', 'picturesURLS', 'videosURLS', 'visible')
         model = Attraction
 
 
@@ -166,3 +166,15 @@ class MediaSerializer(serializers.ModelSerializer):
     class Meta:
         fields = ('description', 'fileURL',)
         model = Media
+
+
+class IsAdminSerializer(serializers.Serializer):
+    email = serializers.EmailField()
+
+
+class SettingsSerializer(serializers.Serializer):
+    boundaries = serializers.JSONField()
+    logo = serializers.CharField(max_length=50)
+    loginHours = serializers.IntegerField()
+    scoreRules = serializers.JSONField()
+

@@ -120,7 +120,7 @@ namespace trumpeldor.Views
                 Console.WriteLine(e.StackTrace);
             }
 
-            scoreLabel.Text = AppResources.score + ": " + gc.EditScore(GameController.SCORE_VALUE.Sliding_Puzzle_Solved);
+            scoreLabel.Text = AppResources.score + ": " + gc.EditScore(ScoreRule.Kinds.Sliding_Puzzle_Solved);
             gc.FinishAttraction();
 
             await Navigation.PopModalAsync();

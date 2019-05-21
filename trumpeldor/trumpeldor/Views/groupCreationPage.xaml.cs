@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using trumpeldor.Models;
 using trumpeldor.SheredClasses;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -15,9 +16,7 @@ namespace trumpeldor.Views
     public partial class groupCreationPage : ContentPage
     {
         private GameController gc;
-        private int selectedPathLength;
-        private static int DELETE_PLAYER_COLUMN = 0, PLAYER_NUMBER_COLUMN = 1, PLAYER_AGE_COLUMN = 2; 
-
+        private static int DELETE_PLAYER_COLUMN = 0, PLAYER_NUMBER_COLUMN = 1, PLAYER_AGE_COLUMN = 2;
         public groupCreationPage() : this("", User.SOCIAL_NETWORK.Anonymous){}
 
         public groupCreationPage(string userName, User.SOCIAL_NETWORK socialNetwork){

@@ -53,6 +53,12 @@ namespace trumpeldor
             urlPrefix = "http://" + IP + ":" + PORT + "/usersystem/";
         }
 
+        internal bool IsAdmin(string email)
+        {
+            string jsonResponse = SendToServerAndGetResponseBack(new { email=email,}, "IsAdmin/");
+            return jsonResponse.Equals("True");
+        }
+
         public User SignUp(String name, String socialNetwork) {
             var newUser = new
             {
@@ -139,6 +145,12 @@ namespace trumpeldor
                 };
             }
             return null;
+        }
+
+        internal Setttings GetSettings()
+        {
+            string jsonResponse = GetFromServer("getSettings/");
+            return JsonConvert.DeserializeObject<Setttings>(jsonResponse);
         }
 
         private class HelpHints

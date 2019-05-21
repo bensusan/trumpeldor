@@ -181,6 +181,17 @@ class BL_Implementation(BL_Abstract):
         entertainmentWrapper = {'className': className, 'object': entertainment}
         return entertainmentWrapper
 
+    def isAdmin(self, data):
+        # TODO change
+        lstOfAllAdmins = self.DAL.getAdmins()
+        for admin in lstOfAllAdmins:
+            if data['email'] == admin:
+                return True
+        return False
+
+    def getSettings(self):
+        return self.DAL.getSettings()
+
     def delete_attraction(self, id):
         if self.get_attraction(id) is not None:
             return self.DAL.delete_attraction(id)

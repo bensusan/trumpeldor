@@ -8,7 +8,7 @@ namespace trumpeldor.Models
     {
         public string ID { get; set; }
         public string Name { get; set; }
-        //public string Email { get; set; }
+        public string Email { get; set; }
         //public Uri Picture { get; set; }
     }
 }
