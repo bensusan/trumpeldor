@@ -155,13 +155,13 @@ class DAL_Abstract(object):
     def get_all_feedback_questions(self):
         raise NotImplementedError("Should have implemented this")
 
-    def add_info(self, info):
+    def add_info(self, app_name, about_app, how_to_play):
         raise NotImplementedError("Should have implemented this")
 
     def get_info(self):
         raise NotImplementedError("Should have implemented this")
 
-    def delete_info(self, id):
+    def delete_info(self):
         raise NotImplementedError("Should have implemented this")
 
     def get_all_sliding_puzzles_for_attraction(self, id_attraction):
@@ -471,20 +471,20 @@ class DALProxy(DAL_Abstract):
             raise NotImplementedError("Should have implemented this")
         return self.Implementation.get_all_feedback_questions()
 
-    def add_info(self, info):
+    def add_info(self, app_name, about_app, how_to_play):
         if self.Implementation is None:
             raise NotImplementedError("Should have implemented this")
-        return self.Implementation.add_info(info)
+        return self.Implementation.add_info(app_name, about_app, how_to_play)
 
     def get_info(self):
         if self.Implementation is None:
             raise NotImplementedError("Should have implemented this")
         return self.Implementation.get_info()
 
-    def delete_info(self, id):
+    def delete_info(self):
         if self.Implementation is None:
             raise NotImplementedError("Should have implemented this")
-        return self.Implementation.delete_info(id)
+        return self.Implementation.delete_info()
 
     def get_all_sliding_puzzles_for_attraction(self, id_attraction):
         if self.Implementation is None:

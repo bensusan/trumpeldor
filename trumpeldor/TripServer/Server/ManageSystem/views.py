@@ -410,6 +410,7 @@ def numberOfLine(x):
         'FailureAudio': 4
     }.get(x, False)
 
+
 def editSettingsFile(lineNumber, value):
     settings_file_path = 'Server/ManageSystem/Settings'
     with open(settings_file_path) as fp:

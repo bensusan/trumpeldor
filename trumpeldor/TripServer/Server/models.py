@@ -127,7 +127,9 @@ class Message(models.Model):
 
 
 class Info(models.Model):
-    info = models.TextField()
+    app_name = models.TextField()
+    about_app = models.TextField()
+    how_to_play = models.TextField()
 
 
 class Admin(models.Model):

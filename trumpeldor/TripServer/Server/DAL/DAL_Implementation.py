@@ -290,16 +290,18 @@ class DAL_Implementation(DAL_Abstract):
     def get_all_feedback_questions(self):
         return Feedback.objects.all()
 
-    def add_info(self, info):
-        info = Info(info=info)
+    def add_info(self, app_name, about_app, how_to_play):
+        info = Info(app_name=app_name, about_app=about_app,  how_to_play=how_to_play)
         info.save()
+        if Info.objects.all().count() > 1:
+            Info.objects.first().delete()
         return info
 
     def get_info(self):
-        return Info.objects.all()
+        return Info.objects.last()
 
-    def delete_info(self, id):
-        return Info.objects.filter(id=id).first().delete()
+    def delete_info(self):
+        return False
 
     def get_all_sliding_puzzles_for_attraction(self, id_attraction):
         return SlidingPuzzle.objects.filter(attraction=self.get_attraction(id_attraction)).all()

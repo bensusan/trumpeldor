@@ -158,7 +158,7 @@ class ScoreSerializer(serializers.ModelSerializer):
 
 class InfoSerializer(serializers.ModelSerializer):
     class Meta:
-        fields = ('id', 'info',)
+        fields = ('id', 'app_name', 'about_app', 'how_to_play',)
         model = Info
 
 
