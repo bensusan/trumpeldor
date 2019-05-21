@@ -103,6 +103,7 @@
     <Compile Include="Main.cs" />
     <Compile Include="AppDelegate.cs" />
     <BundleResource Include="Assets\config.json" />
+    <Compile Include="PhotosCombiner.cs" />
     <Compile Include="ShareImplementation.cs" />
     <None Include="Entitlements.plist" />
     <None Include="GoogleService-Info.plist" />

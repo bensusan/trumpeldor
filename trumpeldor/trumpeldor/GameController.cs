@@ -160,6 +160,19 @@ namespace trumpeldor
         internal void ContinuePreviousTrip()
         {
             this.currentTrip = conn.GetPreviousTrip(currentUser);
+            /*
+            currentTrip.feedbacks = new List<FeedbackInstance>();
+            currentTrip.feedbacks.Add(new FeedbackInstance { feedback = new Feedback { id = 1, kind = "l", question = "MMM" }, answer = "KK" });
+            foreach(var a in currentTrip.attractionsDone)
+            {
+                a.americanQuestion = new AmericanQuestion { id = 5, question = "A", answers = new List<string>(), indexOfCorrectAnswer = new int[1] };
+                a.americanQuestion.answers.Add("1");
+                a.americanQuestion.answers.Add("2");
+                a.americanQuestion.indexOfCorrectAnswer[0] = 1;
+                a.hints = new List<Hint>();
+                a.hints.Add(new Hint { kind="V", id=1, data="iiiiii", description="....." });
+            }
+            */
         }
 
         private GameController(ServerConection serverConnection)

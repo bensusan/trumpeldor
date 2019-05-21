@@ -6,6 +6,7 @@
              xmlns:translator="clr-namespace:trumpeldor.Helpers">
     <ContentPage.Content>
         <StackLayout Style="{DynamicResource mainStackLayout}">
+            
             <StackLayout Style="{StaticResource mainStackLayout}" Orientation="Horizontal">
                 <StackLayout x:Name="buttonsTopLayout" Orientation="Horizontal" HorizontalOptions="StartAndExpand">
                     <ImageButton x:Name="v" Clicked="Next_Destination_Button_Clicked" Style="{StaticResource smallCircleImageButtonStyle}"/>
