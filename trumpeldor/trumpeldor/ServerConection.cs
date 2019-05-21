@@ -220,8 +220,15 @@ namespace trumpeldor
 
         internal Trip GetPreviousTrip(User currentUser)
         {
+            //string jsonResponse = SendToServerAndGetResponseBack(currentUser, "previousTrip/");
+            //return JsonConvert.DeserializeObject<Trip>(jsonResponse);
             string jsonResponse = SendToServerAndGetResponseBack(currentUser, "previousTrip/");
-            return JsonConvert.DeserializeObject<Trip>(jsonResponse);
+            Trip trip = JsonConvert.DeserializeObject<Trip>(jsonResponse);
+            var t1 = Task.Run(() => { trip.attractionsDone = GetFullAttractions(trip.attractionsDone); });
+            var t2 = Task.Run(() => { trip.track = GetFullTrack(trip.track); });
+            var t3 = Task.Run(() => { trip.feedbacks = GetFeedbacks(trip); });
+            t1.Wait(); t2.Wait(); t3.Wait();
+            return trip;
         }
 
         class HelpOpenMessages

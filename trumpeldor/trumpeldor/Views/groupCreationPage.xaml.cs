@@ -41,8 +41,17 @@ namespace trumpeldor.Views
         protected override async void OnAppearing()
         {
             base.OnAppearing();
-            if(!await ShowPastDetails())
+            if (!await ShowPastDetails())
+            {
+                var existingPages = Navigation.NavigationStack.ToList();
+                foreach (var page in existingPages)
+                    Navigation.RemovePage(page);
                 Application.Current.MainPage = new NavigationPage();
+                //var page= new Xamarin.Forms.NavigationPage(new trumpeldor.Views.NavigationPage());
+                //var r = Xamarin.Forms.NavigationPage.RootPageProperty;
+                //var r1 = page.RootPage;
+                //Application.Current.MainPage = page;
+            }
 
         }
 
