@@ -86,9 +86,10 @@ function funcToSendGame(attractionsJSON) {
 
             if(localStorage.getItem("game_kind")=="sliding") {
                 let the_kind = "sliding_puzzle";
-                let n_size = document.getElementById("n_size").value;
+                let n_size = document.getElementById("n_size");
+                let n_size_val = n_size.options[n_size.selectedIndex].value
                 let data_send = {description: document.getElementById("game_instructions_text").value,
-                    piecesURLS: helperVar, width: n_size, height: n_size};
+                    piecesURLS: helperVar, width: n_size_val, height: n_size_val};
                 let attr_id = attr['id'];
                 postRequestGame(data_send,attr_id,the_kind);
             }
