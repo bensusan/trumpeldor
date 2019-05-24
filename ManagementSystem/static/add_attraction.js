@@ -44,26 +44,30 @@ function localFileVideoPlayer() {
 
 
 window.onload=function(){
-    let continueBTN = document.getElementById('continueBTN');
-    continueBTN.addEventListener('click',function () {
-        showDataCollected();
-    });
-
-    let submitBTN = document.getElementById('submit_btn_add_attr');
-    submitBTN.addEventListener('click',function () {
-        showDataCollectedWithout();
-    });
+    initializingButtonsWithFunctionality();
 
     localFileVideoPlayer();
 
     };
 
-function showDataCollectedWithout() {
+function initializingButtonsWithFunctionality() {
+
+    let continueBTN = document.getElementById('continueBTN');
+    continueBTN.addEventListener('click',function () {
+        saveAndProceedToAttractionInfo();
+    });
+
+    let submitBTN = document.getElementById('submit_btn_add_attr');
+    submitBTN.addEventListener('click',function () {
+        submitAttractionWithoutInfo();
+    });
+}
+
+
+function submitAttractionWithoutInfo() {
 
         let addedPoint = JSON.parse(localStorage.getItem("addedPoint"));
-        // alert("is what: "+ addedPoint.lat +", " + addedPoint.lng + ", "+ (typeof addedPoint.lng));
-        // alert("2!");
-        // currPoints.push(addedPoint);
+
         let lat = addedPoint.lat;
         let vidArr=[];
         if(helperVarVid!=undefined){vidArr.push(helperVarVid);}
@@ -83,13 +87,10 @@ function showDataCollectedWithout() {
         //     "name:"+document.getElementById("attr_name").value);
 }
 
-    function showDataCollected() {
+function saveAndProceedToAttractionInfo() {
 
 
         let addedPoint = JSON.parse(localStorage.getItem("addedPoint"));
-        // alert("is what: "+ addedPoint.lat +", " + addedPoint.lng + ", "+ (typeof addedPoint.lng));
-        // alert("2!");
-        // currPoints.push(addedPoint);
         let lat = addedPoint.lat;
         let vidArr=[];
         if(helperVarVid!=undefined){vidArr.push(helperVarVid);}
