@@ -269,6 +269,7 @@ function encodeVideoFileAsURL(element) {
    helperVarVid = reader.result
   };
 
+
   reader.readAsDataURL(file);
 }
 

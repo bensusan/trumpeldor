@@ -31,16 +31,26 @@ function hints_func(hintsJSON) {
             let e_opt_id = "ecb"+i;
             let d_opt_id = "dcb"+i;
 
-            if(hint['data'].substring(0,16) == 'data:application' || hint['data'].substring(0,10) == 'data:video')
+            if(hint['data'].substring(0,16) == 'data:application')
             {
                 document.getElementById(d_opt_id).innerText = "media"+imageCounter;
                 document.getElementById(e_opt_id).innerText = "media"+imageCounter;
             }
             else
             {
+                 if(hint['data'].substring(0,10) == 'data:video')
+            {
+                document.getElementById(d_opt_id).innerText = "VideoMedia"+videoCounter;
+                document.getElementById(e_opt_id).innerText = "VideoMedia"+videoCounter;
+            }
+            else
+            {
                 document.getElementById(d_opt_id).innerText = hint['data'];
                 document.getElementById(e_opt_id).innerText = hint['data'];
             }
+            }
+
+
 
             document.getElementById(e_opt_id).value = hint['id'];
             document.getElementById(e_opt_id).style.display='inline';
@@ -77,6 +87,7 @@ function hints_func(hintsJSON) {
                   output.insertBefore(div,null);
             }
 
+
             if(hint['data'].substring(0,10) == 'data:video')
             {
                 videoCounter++;
@@ -102,6 +113,34 @@ window.onload = function () {
     localFileVideoPlayer();
 
 };
+
+
+function b64ToUint6 (nChr) {
+
+  return nChr > 64 && nChr < 91 ?
+      nChr - 65
+    : nChr > 96 && nChr < 123 ?
+      nChr - 71
+    : nChr > 47 && nChr < 58 ?
+      nChr + 4
+    : nChr === 43 ?
+      62
+    : nChr === 47 ?
+      63
+    :
+      0;
+
+}
+
+
+function fileToString (sBase64) {
+
+	var sBinaryString = atob(sBase64), aBinaryView = new Uint8Array(sBinaryString.length);
+	Array.prototype.forEach.call(aBinaryView, function (el, idx, arr) { arr[idx] = sBinaryString.charCodeAt(idx); });
+	return String.fromCharCode.apply(null, new Uint16Array(aBinaryView.buffer));
+
+}
+
 
 function wantToEditButton(){
     var delTitle = document.getElementById("deleteTitle");
