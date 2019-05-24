@@ -8,7 +8,7 @@
     {% load static %}
 <link rel="stylesheet" href="{% static 'SideMenu.css' %}?version=4">
     {% load static %}
-<script src="{% static 'edit_feedbacks.js' %}?version=4"></script>
+<script src="{% static 'edit_feedbacks.js' %}?version=6"></script>
     {% load static %}
 <script src="{% static 'attractions.js' %}?version=3"></script>
      {% load static %}
@@ -18,7 +18,7 @@
 
 
 <div class="exist_list" align="center" style="width: 500px;">
-    <label for="hint"><b>:רמזים קיימים</b></label>
+    <label for="hint"><b>:שאלות משוב קיימות</b></label>
 <p id="existing_fbs"></p>
 <p></p>
 {#<button onclick="window.location.href='/add_aq'" type="button">Add American Question</button>#}
@@ -48,7 +48,19 @@
 <p></p>
 {#<button type="button" id="want_to_delete_aq">Delete American Question</button>#}
 <p></p>
-<textarea id="write_fb_id_to_delete" placeholder="...כתבי את מזהה המשוב" style="text-align:right;direction:ltr;display: none"></textarea>
+<select id="write_fb_id_to_delete" style="display: none">
+  <option id="dcb1" value="1" style="display: none;">1</option>
+  <option id="dcb2" value="2" style="display: none;">2</option>
+  <option id="dcb3" value="3" style="display: none;">3</option>
+  <option id="dcb4" value="4" style="display: none;">4</option>
+  <option id="dcb5" value="5" style="display: none;">5</option>
+  <option id="dcb6" value="6" style="display: none;">6</option>
+  <option id="dcb7" value="7" style="display: none;">7</option>
+  <option id="dcb8" value="8" style="display: none;">8</option>
+  <option id="dcb9" value="9" style="display: none;">9</option>
+  <option id="dcb10" value="10" style="display: none;">10</option>
+</select>
+{#<textarea id="write_fb_id_to_delete" placeholder="...כתבי את מזהה המשוב" style="text-align:right;direction:ltr;display: none"></textarea>#}
     <p></p>
 <button type="button" id="delete_chosen_fb" style="display: none">מחיקה</button>
 <p></p>

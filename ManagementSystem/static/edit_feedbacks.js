@@ -44,8 +44,8 @@ function wantToChangeButton(){
             var change_btn = document.getElementById("edit_chosen_fb");
             change_btn.style.display = "inline";
 
-            var delete_txt = document.getElementById("write_fb_id_to_delete");
-            delete_txt.style.display = "none";
+            var deletedFeedback = document.getElementById("write_fb_id_to_delete");
+            deletedFeedback.style.display = "none";
 
             var delete_btn = document.getElementById("delete_chosen_fb");
             delete_btn.style.display = "none";
@@ -88,14 +88,14 @@ function wantToDeleteButton(){
             var change_btn = document.getElementById("edit_chosen_fb");
             change_btn.style.display = "none";
 
-            var delete_txt = document.getElementById("write_fb_id_to_delete");
-            delete_txt.style.display = "inline";
+            var deletedFeedback = document.getElementById("write_fb_id_to_delete");
+            deletedFeedback.style.display = "inline";
 
             var delete_btn = document.getElementById("delete_chosen_fb");
             delete_btn.style.display = "inline";
 
             delete_btn.addEventListener('click', function() {
-                let fb_id = delete_txt.value;
+                let fb_id = deletedFeedback.options[deletedFeedback.selectedIndex].value;
                 deleteRequestFeedback(fb_id);
                 window.location.href='/edit_feedbacks';
 
@@ -107,30 +107,18 @@ var attractionObjToUseInHintDelete;
 
 function funcForExistingFeedbacks(feedbacksJSON){
         str="";
+        let i=1;
         feedbacksJSON.forEach(function (fb) {
+        let d_opt_id = "dcb"+i;
+        document.getElementById(d_opt_id).innerText = fb['question']
+            document.getElementById(d_opt_id).value = fb['id'];
+        document.getElementById(d_opt_id).style.display='inline';
+        i=i+1;
         str=str+"id: "+fb['id']+", question: "+fb['question']+", Type: "+fb['kind']+"<br />";
         });
         document.getElementById("existing_fbs").innerHTML = str ;
-
 }
 
-
-
-function funcInOrderToDeleteAmericanQuestion(AmericanQuestionsJSON) {
-    let aq_id_that_was_picked = document.getElementById("write_aq_id_to_delete").value;
-   // let number_hint_id = Number(hint_id_that_was_picked);
-      AmericanQuestionsJSON.forEach(function (aq) {
-          // alert("the id is: "+attr['id']);
-        // alert("in get name! "+"of the origin : " + lat + " , " + lng + "\n of the other: "+p.lat +" , "+ p.lng);
-        if(aq['id']==aq_id_that_was_picked)
-        {
-            //alert("before delete aq!");
-            deleteRequestAmericanQuestion(attractionObjToUseInHintDelete['id'],aq['id']);
-            window.location.href='/pick_aq_edit';
-        }
-      });
-
-}
 
 
 function doneEditingFbs() {

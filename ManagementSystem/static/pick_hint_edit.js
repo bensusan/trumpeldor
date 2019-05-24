@@ -115,33 +115,6 @@ window.onload = function () {
 };
 
 
-function b64ToUint6 (nChr) {
-
-  return nChr > 64 && nChr < 91 ?
-      nChr - 65
-    : nChr > 96 && nChr < 123 ?
-      nChr - 71
-    : nChr > 47 && nChr < 58 ?
-      nChr + 4
-    : nChr === 43 ?
-      62
-    : nChr === 47 ?
-      63
-    :
-      0;
-
-}
-
-
-function fileToString (sBase64) {
-
-	var sBinaryString = atob(sBase64), aBinaryView = new Uint8Array(sBinaryString.length);
-	Array.prototype.forEach.call(aBinaryView, function (el, idx, arr) { arr[idx] = sBinaryString.charCodeAt(idx); });
-	return String.fromCharCode.apply(null, new Uint16Array(aBinaryView.buffer));
-
-}
-
-
 function wantToEditButton(){
     var delTitle = document.getElementById("deleteTitle");
             delTitle.style.display = "none";
