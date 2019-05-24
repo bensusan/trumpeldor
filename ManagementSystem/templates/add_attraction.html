@@ -16,7 +16,7 @@
     {% load static %}
 <script src="{% static 'attractions.js' %}?version=19"></script>
     {% load static %}
-<script src="{% static 'add_attraction.js' %}?version=19"></script>
+<script src="{% static 'add_attraction.js' %}?version=20"></script>
 </head>
 <body>
 
@@ -31,7 +31,7 @@
     <div id="message"></div>
 <video height="200px" width="350px" controls="" autoplay=""></video>
     <input id="video_input" type="file" accept="video/*" onchange="encodeVideoFileAsURL(this)" style="display: none">
-<button class='button blogger' onclick="doVideo()" type="button" style="width: 320px;">Upload Video</button>
+<button class='button blogger' onclick="uploadVideoBTNclick()" type="button" style="width: 320px;">Upload Video</button>
 {#   <p></p>#}
 {#    <label for="hint" style="font-size: 20px;"><b>:העלאת תמונה למידע על אטרקציה</b></label>#}
 {#<p></p>#}
@@ -65,7 +65,7 @@
       <textarea type="text" id="subt" placeholder="הכנסי כתוביות..." name="attr_subt" style="direction:rtl;text-align:right;width: 310px;height: 200px; overflow: scroll"> </textarea>
 
 <p><br/></p>
-    <button class='button google-blue' id="submit_btn_add_attr" onclick="showDataCollected()" type="button" style="width: 220px;">שליחה</button>
+    <button class='button google-blue' id="submit_btn_add_attr" onclick="showDataCollected()" type="button" style="width: 220px;">המשך</button>
       <button class='button google-blue' id="submit_btn_add_attr" onclick="showDataCollectedWithout()" type="button" style="width: 220px;">שליחה ללא מידע נוסף</button>
     <button class='button google-blue' onclick="check()" type="button" style="width: 220px;">ניקוי</button>
 
