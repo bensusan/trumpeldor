@@ -122,6 +122,8 @@ function wantToEditButton(){
             var editChosenHintBTN = document.getElementById("edit_chosen_hint");
             editChosenHintBTN.style.display = "inline";
 
+            window.scrollTo(0,document.body.scrollHeight);
+
             editChosenHintBTN.addEventListener('click', function() {
                 let chosen_hint_id = comboEdit.options[comboEdit.selectedIndex].value;
                 // let hint_id_that_was_picked = document.getElementById("write_hint_id_to_edit").value;
@@ -151,6 +153,8 @@ function wantToDeleteButton(){
 
             var deleteChosenHintBTN = document.getElementById("delete_chosen_hint");
             deleteChosenHintBTN.style.display = "inline";
+
+                        window.scrollTo(0,document.body.scrollHeight);
 
             deleteChosenHintBTN.addEventListener('click', function() {
                 getRequestHints(funcInOrderToDeleteHint,attractionObjToUseInHintDelete['id']);

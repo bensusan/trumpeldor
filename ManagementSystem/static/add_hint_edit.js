@@ -14,12 +14,12 @@ function funcForExistingHints(attractionsJSON){
         let p = {name: attr['name'], description:attr['description']};
         if(p.name===name && p.description===desc)
         {
-            getRequestHints(hints_func,attr['id']);
+            getRequestHints(showAllTheHintsByType,attr['id']);
         }
         });
 }
 
-function hints_func(hintsJSON) {
+function showAllTheHintsByType(hintsJSON) {
         str="";
         let imageCounter = 1;
         let videoCounter = 1;
@@ -76,12 +76,11 @@ function hints_func(hintsJSON) {
 }
 
 function getRequestHints(funcOnHints,attr_id){
-    // serverRequest("GET", funcOnAttractions, 'http://192.168.1.12:12344/managementsystem/attraction/?format=json');
     // the server port and my ip
     serverRequest("GET", funcOnHints, 'http://'+ip+':12344/managementsystem/attraction/'+ attr_id+
         '/hint/?format=json');
-    //alert("need to remove this alert and fix funcToGetAttraction()!");
 }
+
 
 window.onload = function () {
 
@@ -114,10 +113,12 @@ var sendVidHintBTN = document.getElementById('send_vid_hint');
             thevidbrowse.style.display = "none";
             sendButtonVid.style.display = "none";
             upload_pic_title.style.display = "none";
+            window.scrollTo(0,document.body.scrollHeight);
         });
 
 var picHintBTN = document.getElementById('add_pic_hint');
         picHintBTN.addEventListener('click', function() {
+
             clickHere.style.display = "inline";
             picDesc.style.display = "inline";
             outpic.style.display = "inline";
@@ -129,6 +130,7 @@ var picHintBTN = document.getElementById('add_pic_hint');
             vidDesc.style.display = "none";
             thevidbrowse.style.display = "none";
             sendButtonVid.style.display = "none";
+            window.scrollTo(0,document.body.scrollHeight);
         });
 
 var vidHintBTN = document.getElementById('add_vid_hint');
@@ -144,6 +146,7 @@ var vidHintBTN = document.getElementById('add_vid_hint');
             outpic.style.display = "none";
             sendButtonPic.style.display = "none";
             upload_pic_title.style.display = "none";
+            window.scrollTo(0,document.body.scrollHeight);
 
         });
 
@@ -152,11 +155,11 @@ var vidHintBTN = document.getElementById('add_vid_hint');
     });
 
     sendPicHintBTN.addEventListener('click', function() {
-
+        sendImageHint();
     });
 
     sendVidHintBTN.addEventListener('click', function() {
-
+        sendVideoHint();
     });
 
         localFileVideoPlayer();
@@ -177,7 +180,7 @@ function hint_funcToGetAttraction(attractionsJSON) {
             attraction:attr,
             kind:'HT',
             data:document.getElementById("text_hint_id").value,
-                description:""
+            description:""
             };
             postRequestHint(textHintToSend,attr['id']);
             window.location.href='/add_hint_edit';
@@ -220,7 +223,6 @@ function localFileVideoPlayer() {
 
 function finishHint() {
     window.location.href='/pick_hint_edit';
-
 }
 
 function postRequestHint(the_hint,attr_id){
@@ -235,20 +237,9 @@ var helperVar;
 var helperVarVid;
 
 
-function dothat(the) {
-    helperVar=the;
-    document.getElementById("helpervar").innerHTML=helperVar;
-    localStorage.setItem("url_of_img",helperVar);
-    // var tmuna = document.getElementById("sukablat");
-    // tmuna.src = helperVar;
-}
 
-function dothatVid(the) {
-    helperVarVid=the;
-}
-
-
-function encodeImageFileAsURL(element) {
+function encodeImageFileAsURL(element)
+{
     var image = document.getElementById('output');
 	image.src = URL.createObjectURL(element.files[0]);
 
@@ -259,23 +250,23 @@ function encodeImageFileAsURL(element) {
 
   var reader = new FileReader();
   reader.onloadend = function() {
-   //alert(reader.result)
-   dothat(reader.result)
-  }
+   helperVar=reader.result
+  };
 
-  reader.readAsDataURL(blob);           //file insetead of blob
+  reader.readAsDataURL(blob);    //file insetead of blob
 }
 
 
 function encodeVideoFileAsURL(element) {
+    var video = document.getElementById('vid_hint_id');
+	video.src = URL.createObjectURL(element.files[0]);
 
     helperVarVid="";
 
   var file = element.files[0];
   var reader = new FileReader();
   reader.onloadend = function() {
-   //alert(reader.result)
-   dothatVid(reader.result)
+   helperVarVid = reader.result
   };
 
   reader.readAsDataURL(file);
@@ -321,7 +312,10 @@ function funcToSendVideo(attractionsJSON) {
         if(p.name===name && p.description===desc)
         {
 
-            let the_hint = {attraction: attr, kind: "HV", data:helperVarVid,description:document.getElementById("vid_hint_description").value};
+            let the_hint = {attraction: attr,
+                kind: "HV",
+                data:helperVarVid,
+                description:document.getElementById("vid_hint_description").value};
             let attr_id = attr['id'];
             postRequestHint(the_hint,attr_id);
             window.location.href='/add_hint_edit';
