@@ -37,11 +37,6 @@ function initMapAndAttractionss(){
                 // pointsOfPath.push(m.position);
                 str_of_points=str_of_points+m.position+"<br />";
             }
-            // alert(str_of_points);
-            // var border = document.getElementById("border_of_points");
-            // border.style.display = "block";
-            // document.getElementById("showing_added_points").innerHTML = str_of_points;
-            // document.getElementById("showing_added_points").style.fontWeight = 'bold';
             getRequestAttractions(needThisToGetPointsIDs);
            // alert("point been added! now its: "+ pointsOfPath.toString());
         });
