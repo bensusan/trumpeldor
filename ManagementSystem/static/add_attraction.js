@@ -44,7 +44,18 @@ function localFileVideoPlayer() {
 
 
 window.onload=function(){
+    let continueBTN = document.getElementById('continueBTN');
+    continueBTN.addEventListener('click',function () {
+        showDataCollected();
+    });
+
+    let submitBTN = document.getElementById('submit_btn_add_attr');
+    submitBTN.addEventListener('click',function () {
+        showDataCollectedWithout();
+    });
+
     localFileVideoPlayer();
+
     };
 
 function showDataCollectedWithout() {
