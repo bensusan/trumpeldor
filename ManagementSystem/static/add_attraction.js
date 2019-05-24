@@ -1,5 +1,3 @@
-// alert(localStorage.getItem("addedPoint"));
-
 
 var helperVar;
 var helperVarVid;
@@ -47,7 +45,8 @@ function localFileVideoPlayer() {
 
 window.onload=function(){
     localFileVideoPlayer();
-    }
+    };
+
 function showDataCollectedWithout() {
 
         let addedPoint = JSON.parse(localStorage.getItem("addedPoint"));

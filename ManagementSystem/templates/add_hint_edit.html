@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <title>Add Hint</title>
     {% load static %}
+<link rel="stylesheet" href="{% static 'withImages.css' %}?version=1">
+    {% load static %}
 <link rel="stylesheet" href="{% static 'beauty.css' %}?version=2">
        {% load static %}
 <link rel="stylesheet" href="{% static 'buttoni.css' %}?version=2">
@@ -14,14 +16,23 @@
     {% load static %}
 <script src="{% static 'attractions.js' %}?version=2"></script>
     {% load static %}
-<script src="{% static 'add_hint_edit.js' %}?version=4"></script>
+<script src="{% static 'add_hint_edit.js' %}?version=5"></script>
      {% load static %}
 <script src="{% static 'properties.js' %}?version=2"></script>
 </head>
 <body>
 <div align="center">
-<label for="hint"><b>:רמזים קיימים</b></label>
+    <label for="hint" style="font-size: 36px;"><b>:רמזים קיימים</b></label>
 <p id="existing_hints"></p>
+    <p style="font-size: 36px;">:תמונות</p>
+    <article>
+        <output id="result"/>
+    </article>
+    <p style="font-size: 36px;">:סרטונים</p>
+    <article>
+        <output id="resultVideos"/>
+    </article>
+   <p><br /></p>
 
 {#<label for="hint"><b>Add Hint:</b></label>#}
 
