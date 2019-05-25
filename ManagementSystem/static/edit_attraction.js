@@ -36,7 +36,7 @@ function localFileVideoPlayer() {
 
 
 window.onload=function(){
-    getRequestAttractions(getName);
+    getRequestAttractions(getFieldsValuesOfExistingAttraction);
     localFileVideoPlayer();
     };
 
@@ -106,13 +106,11 @@ function functionOfDelete(attractionsJSON) {
 
 
 
-    function getName(attractionsJSON){
-      // alert("in get name!");
+function getFieldsValuesOfExistingAttraction(attractionsJSON){
       let editedPoint = JSON.parse(localStorage.getItem("edited"));
       let lat = editedPoint.lat;
       let lng = editedPoint.lng;
-      // let name = "didn't found!!!";
-      // alert("in get name! "+"of the origin : " + lat + " , " + lng);
+
       attractionsJSON.forEach(function (attr) {
           // alert("the id is: "+attr['id']);
         let p = {id:attr['id'],name: attr['name'], description:attr['description'], lat: attr['x'], lng: attr['y']};
@@ -131,11 +129,10 @@ function functionOfDelete(attractionsJSON) {
         localStorage.setItem("desc_for_add_aq", p.description);
         }
       });
+}
 
-      // alert("the name is: "+name);
-    }
 
-    function  showVals() {
+function  showVals() {
       getRequestAttractions(getName);
     }
 
@@ -143,8 +140,6 @@ function functionOfDelete(attractionsJSON) {
     serverRequest("PUT", function noop(dummy){}, 'http://'+ip+':12344/managementsystem/attraction/'+attr_id+'/',
         JSON.stringify(attraction));
 }
-
-
 
 function encodeImageFileAsURL(element) {
     var image = document.getElementById('output');

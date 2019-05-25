@@ -1,9 +1,14 @@
+
+var str;
+var helperVar;
+var helperVarVid;
+
+
 var loadFile = function(event) {
 	var image = document.getElementById('output');
 	image.src = URL.createObjectURL(event.target.files[0]);
 };
 
-var str;
 
 function funcForExistingHints(attractionsJSON){
 
@@ -14,12 +19,12 @@ function funcForExistingHints(attractionsJSON){
         let p = {name: attr['name'], description:attr['description']};
         if(p.name===name && p.description===desc)
         {
-            getRequestHints(showAllTheHintsByType,attr['id']);
+            getRequestHints(loadStringOfInnerHTMLWithHints,attr['id']);
         }
         });
 }
 
-function showAllTheHintsByType(hintsJSON) {
+function loadStringOfInnerHTMLWithHints(hintsJSON) {
         str="";
         let imageCounter = 1;
         let videoCounter = 1;
@@ -85,7 +90,15 @@ function getRequestHints(funcOnHints,attr_id){
 window.onload = function () {
 
     getRequestAttractions(funcForExistingHints);
-var textHintBTN = document.getElementById('add_text_hint');
+    initializeBTNsFunctionality();
+
+        localFileVideoPlayer();
+
+};
+
+
+function initializeBTNsFunctionality(){
+    var textHintBTN = document.getElementById('add_text_hint');
 var textLine = document.getElementById("text_hint_id");
 var sendButtonTxt = document.getElementById("send_text_hint");
 var upload_pic_title = document.getElementById("upload_title");
@@ -151,7 +164,7 @@ var vidHintBTN = document.getElementById('add_vid_hint');
         });
 
     sendTextHintBTN.addEventListener('click', function() {
-        getRequestAttractions(hint_funcToGetAttraction);
+        getRequestAttractions(getTheNeededAttractionIdToSendItOnThePostRequest);
     });
 
     sendPicHintBTN.addEventListener('click', function() {
@@ -161,13 +174,10 @@ var vidHintBTN = document.getElementById('add_vid_hint');
     sendVidHintBTN.addEventListener('click', function() {
         sendVideoHint();
     });
-
-        localFileVideoPlayer();
-
-};
+}
 
 
-function hint_funcToGetAttraction(attractionsJSON) {
+function getTheNeededAttractionIdToSendItOnThePostRequest(attractionsJSON) {
         let name = localStorage.getItem("name_for_add_aq");
         let desc = localStorage.getItem("desc_for_add_aq");
       // alert("in get name! "+"of the origin : " + lat + " , " + lng);
@@ -189,6 +199,7 @@ function hint_funcToGetAttraction(attractionsJSON) {
       });
 
     }
+
 
 function localFileVideoPlayer() {
 	'use strict';
@@ -226,17 +237,10 @@ function finishHint() {
 }
 
 function postRequestHint(the_hint,attr_id){
-    //alert("hint blat");
     serverRequest("POST", function noop(dummy){}, 'http://'+ip+':12344/managementsystem/attraction/'+
         attr_id+'/hint/',
         JSON.stringify(the_hint));
 }
-
-
-var helperVar;
-var helperVarVid;
-
-
 
 function encodeImageFileAsURL(element)
 {

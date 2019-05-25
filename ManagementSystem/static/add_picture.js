@@ -3,6 +3,10 @@ var helperVar;
 
 window.onload = function(){
 
+initManyPicturesPresentation();
+};
+
+function initManyPicturesPresentation(){
     //Check File API support
     if(window.File && window.FileList && window.FileReader)
     {
@@ -46,15 +50,6 @@ window.onload = function(){
     {
         console.log("Your browser does not support File API");
     }
-};
-
-
-function thefunc(the) {
-    helperVar=the;
-    document.getElementById("suka").innerHTML=helperVar;
-    localStorage.setItem("url_of_img",helperVar);
-    // var tmuna = document.getElementById("sukablat");
-    // tmuna.src = helperVar;
 }
 
 
@@ -67,8 +62,7 @@ function encodeImageFileAsURL(element) {
   var file = element.files[0];
   var reader = new FileReader();
   reader.onloadend = function() {
-   //alert(reader.result)
-   thefunc(reader.result)
+   helperVar = reader.result
   }
 
   reader.readAsDataURL(file);
@@ -104,10 +98,6 @@ function funcToSendGame(attractionsJSON) {
 
             window.location.href='/'+localStorage.getItem("last_add_game_url"); ////////////////////////////change to both
         }
-
-
-
-
 
     });
 }

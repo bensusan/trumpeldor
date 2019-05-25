@@ -179,7 +179,6 @@ function getRequestTracks(funcOnTrack){
 }
 
 function addPointToTrackRequest(id_of_point_to_add,track_id){
-    //alert("trackos blatikus longos");
     serverRequest("PUT", function noop(dummy){}, 'http://'+ip+':12344/managementsystem/track/'+track_id+'/add',
         JSON.stringify(id_of_point_to_add));
 
