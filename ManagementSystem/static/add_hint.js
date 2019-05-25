@@ -1,9 +1,11 @@
+
+var str;
+
 var loadFile = function(event) {
 	var image = document.getElementById('output');
 	image.src = URL.createObjectURL(event.target.files[0]);
 };
 
-var str;
 
 function funcForExistingHints(attractionsJSON){
 
@@ -14,26 +16,23 @@ function funcForExistingHints(attractionsJSON){
         let p = {name: attr['name'], description:attr['description']};
         if(p.name===name && p.description===desc)
         {
-            getRequestHints(hints_func,attr['id']);
+            getRequestHints(loadStringOfInnerHTMLWithHints,attr['id']);
         }
         });
 }
 
-function hints_func(hintsJSON) {
+function loadStringOfInnerHTMLWithHints(hintsJSON) {
         str="";
         hintsJSON.forEach(function (hint) {
             str=str+"id: "+hint['id'] +", data: "+ hint['data']+"<br />";
-            // alert(str);
         });
         document.getElementById("existing_hints").innerHTML = str ;
 }
 
+
 function getRequestHints(funcOnHints,attr_id){
-    // serverRequest("GET", funcOnAttractions, 'http://192.168.1.12:12344/managementsystem/attraction/?format=json');
-    // the server port and my ip
     serverRequest("GET", funcOnHints, 'http://'+ip+':12344/managementsystem/attraction/'+ attr_id+
         '/hint/?format=json');
-    //alert("need to remove this alert and fix funcToGetAttraction()!");
 }
 
 window.onload = function () {
@@ -105,11 +104,11 @@ var vidHintBTN = document.getElementById('add_vid_hint');
     });
 
     sendPicHintBTN.addEventListener('click', function() {
-
+        sendImageHint();
     });
 
     sendVidHintBTN.addEventListener('click', function() {
-
+        sendVideoHint();
     });
 
         localFileVideoPlayer();
