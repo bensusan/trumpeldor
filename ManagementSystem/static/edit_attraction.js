@@ -36,21 +36,18 @@ function localFileVideoPlayer() {
 
 
 window.onload=function(){
-    getRequestAttractions(getName);
-    // var deletePointBTN = document.getElementById('delete_point');
-    // deletePointBTN.addEventListener('click', function() {
-    //     getRequestAttractions(functionOfDelete);
-    // });
+    getRequestAttractions(getFieldsValuesOfExistingAttraction);
     localFileVideoPlayer();
     };
 
 
-function doVideo(){
+function uploadVideoBTNclick(){
     	let vid_input = document.getElementById('video_input');
         vid_input.click();
 }
 
-    function finishEditingAttraction() {
+
+function finishEditingAttraction() {
     let attr_after_editing;
     let vidArr = attr_for_editing['videosURLS'];
     if(helperVarVid!=undefined)
@@ -83,68 +80,37 @@ function doVideo(){
     }
          editRequestAttraction(attr_after_editing,attr_for_editing['id']);
          window.location.href='/attractions';
-    }
+}
 
 
-    function deletePoint() {
+function deletePoint() {
         getRequestAttractions(functionOfDelete);
     }
 
-    function deletePoint2() {
-        getRequestAttractions(functionOfDelete2);
-    }
+function functionOfDelete(attractionsJSON) {
 
-    function functionOfDelete(attractionsJSON) {
-
-        let editedPoint = JSON.parse(localStorage.getItem("edited"));
+    let editedPoint = JSON.parse(localStorage.getItem("edited"));
       let lat = editedPoint.lat;
       let lng = editedPoint.lng;
-      //let name = "didn't found!!!";
-      // alert("in get name! "+"of the origin : " + lat + " , " + lng);
+
       attractionsJSON.forEach(function (attr) {
-          // alert("the id is: "+attr['id']);
         let p = {name: attr['name'], description:attr['description'], lat: attr['x'], lng: attr['y']};
-        // alert("in get name! "+"of the origin : " + lat + " , " + lng + "\n of the other: "+p.lat +" , "+ p.lng);
+
         if((p.lat).toFixed(8)==lat.toFixed(8)&&(p.lng).toFixed(8)==lng.toFixed(8))
         {
-            // alert("s");
-           // deleteRequestAttraction(attr,attr['id']);
             deleteRequestAttraction(attr['id']);
             window.location.href='/attractions';
         }
       });
-        // alert("cant believe this is happenning!");
-    }
-
-    function functionOfDelete2(attractionsJSON) {
-
-        let editedPoint = JSON.parse(localStorage.getItem("edited"));
-      let lat = editedPoint.lat;
-      let lng = editedPoint.lng;
-      //let name = "didn't found!!!";
-      // alert("in get name! "+"of the origin : " + lat + " , " + lng);
-      attractionsJSON.forEach(function (attr) {
-          // alert("the id is: "+attr['id']);
-        let p = {name: attr['name'], description:attr['description'], lat: attr['x'], lng: attr['y']};
-        // alert("in get name! "+"of the origin : " + lat + " , " + lng + "\n of the other: "+p.lat +" , "+ p.lng);
-        if((p.lat).toFixed(8)==lat.toFixed(8)&&(p.lng).toFixed(8)==lng.toFixed(8))
-        {
-            // alert("s");
-           // deleteRequestAttraction(attr,attr['id']);
-            deleteRequestAttraction(attr['id']);
-        }
-      });
-        // alert("cant believe this is happenning!");
     }
 
 
-    function getName(attractionsJSON){
-      // alert("in get name!");
+
+function getFieldsValuesOfExistingAttraction(attractionsJSON){
       let editedPoint = JSON.parse(localStorage.getItem("edited"));
       let lat = editedPoint.lat;
       let lng = editedPoint.lng;
-      // let name = "didn't found!!!";
-      // alert("in get name! "+"of the origin : " + lat + " , " + lng);
+
       attractionsJSON.forEach(function (attr) {
           // alert("the id is: "+attr['id']);
         let p = {id:attr['id'],name: attr['name'], description:attr['description'], lat: attr['x'], lng: attr['y']};
@@ -163,46 +129,16 @@ function doVideo(){
         localStorage.setItem("desc_for_add_aq", p.description);
         }
       });
+}
 
-      // alert("the name is: "+name);
-    }
 
-    function  showVals() {
-      // document.getElementById("attr_name").value =localStorage.getItem("attr_name"+localStorage.getItem("editedNum"));
-      // document.getElementById("desc").value = localStorage.getItem("desc"+localStorage.getItem("editedNum"));
-      // document.getElementById("ques").value = localStorage.getItem("ques"+localStorage.getItem("editedNum"));
-      // document.getElementById("ans1").value =localStorage.getItem("ans1"+localStorage.getItem("editedNum"));
-      // document.getElementById("ans2").value = localStorage.getItem("ans2"+localStorage.getItem("editedNum"));
-      // document.getElementById("ans3").value = localStorage.getItem("ans3"+localStorage.getItem("editedNum"));
-      // document.getElementById("ans4").value = localStorage.getItem("ans4"+localStorage.getItem("editedNum"));
-      //
-      // document.getElementById("path_len").value = localStorage.getItem("path_len"+localStorage.getItem("editedNum"));
-      // alert(localStorage.getItem("path_len"+localStorage.getItem("editedNum")));
-          // localStorage.getItem("path_len"+localStorage.getItem("editedNum"));
+function  showVals() {
       getRequestAttractions(getName);
     }
 
     function editRequestAttraction(attraction,attr_id){
-   // alert("edit blat hui");
     serverRequest("PUT", function noop(dummy){}, 'http://'+ip+':12344/managementsystem/attraction/'+attr_id+'/',
         JSON.stringify(attraction));
-}
-
-
-
-
-function dothat(the) {
-    helperVar=the;
-    document.getElementById("helpervar").innerHTML=helperVar;
-    localStorage.setItem("url_of_img",helperVar);
-    // var tmuna = document.getElementById("sukablat");
-    // tmuna.src = helperVar;
-}
-
-function dothatVid(the) {
-    helperVarVid=the;
-    // var tmuna = document.getElementById("sukablat");
-    // tmuna.src = helperVar;
 }
 
 function encodeImageFileAsURL(element) {
@@ -214,8 +150,7 @@ function encodeImageFileAsURL(element) {
   var file = element.files[0];
   var reader = new FileReader();
   reader.onloadend = function() {
-   //alert(reader.result)
-   dothat(reader.result)
+   helperVar=reader.result
   };
 
   reader.readAsDataURL(file);
@@ -230,7 +165,7 @@ function encodeVideoFileAsURL(element) {
   var reader = new FileReader();
   reader.onloadend = function() {
    //alert(reader.result)
-   dothatVid(reader.result)
+   helperVarVid=reader.result
   };
 
   reader.readAsDataURL(file);

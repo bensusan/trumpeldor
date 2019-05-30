@@ -4,10 +4,6 @@ from django.contrib.postgres.fields import ArrayField
 from django.core.validators import int_list_validator
 
 
-
-# we can see which type is every field
-
-
 class Attraction(models.Model):
     name = models.TextField()
     x = models.FloatField()

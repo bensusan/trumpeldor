@@ -3,6 +3,12 @@ let correctAnswersIndexes = [];
 
 window.onload = function() {
 
+    initializeFinishBTNfunctionality();
+
+};
+
+function initializeFinishBTNfunctionality()
+{
     let addAqBTN = document.getElementById('finish_add_aq_btn');
 
     addAqBTN.addEventListener('click', function() {
@@ -24,13 +30,10 @@ window.onload = function() {
             }
         }
 
-        // alert("ans: "+arrOfAnswers +" indexes: "+correctAnswersIndexes);
 
     getRequestAttractions(funcToGetAttraction);
     });
-
-};
-
+}
 
 function addRow(tableID) {
 

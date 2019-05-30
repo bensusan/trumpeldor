@@ -1,5 +1,3 @@
-// alert(localStorage.getItem("addedPoint"));
-
 
 var helperVar;
 var helperVarVid;
@@ -9,7 +7,7 @@ var loadFile = function(event) {
 	image.src = URL.createObjectURL(event.target.files[0]);
 };
 
-function doVideo(){
+function uploadVideoBTNclick(){
     	let vid_input = document.getElementById('video_input');
         vid_input.click();
 }
@@ -46,18 +44,32 @@ function localFileVideoPlayer() {
 
 
 window.onload=function(){
+    initializingButtonsWithFunctionality();
+
     localFileVideoPlayer();
-    }
-function showDataCollectedWithout() {
+
+    };
+
+function initializingButtonsWithFunctionality() {
+
+    let continueBTN = document.getElementById('continueBTN');
+    continueBTN.addEventListener('click',function () {
+        saveAndProceedToAttractionInfo();
+    });
+
+    let submitBTN = document.getElementById('submit_btn_add_attr');
+    submitBTN.addEventListener('click',function () {
+        submitAttractionWithoutInfo();
+    });
+}
+
+
+function submitAttractionWithoutInfo() {
 
         let addedPoint = JSON.parse(localStorage.getItem("addedPoint"));
-        // alert("is what: "+ addedPoint.lat +", " + addedPoint.lng + ", "+ (typeof addedPoint.lng));
-        // alert("2!");
-        // currPoints.push(addedPoint);
+
         let lat = addedPoint.lat;
-        let picArr=[];
         let vidArr=[];
-        if(helperVar!=undefined){picArr.push(helperVar);}
         if(helperVarVid!=undefined){vidArr.push(helperVarVid);}
         let lang = addedPoint.lng;
         let attraction_to_send = {
@@ -75,17 +87,12 @@ function showDataCollectedWithout() {
         //     "name:"+document.getElementById("attr_name").value);
 }
 
-    function showDataCollected() {
+function saveAndProceedToAttractionInfo() {
 
 
         let addedPoint = JSON.parse(localStorage.getItem("addedPoint"));
-        // alert("is what: "+ addedPoint.lat +", " + addedPoint.lng + ", "+ (typeof addedPoint.lng));
-        // alert("2!");
-        // currPoints.push(addedPoint);
         let lat = addedPoint.lat;
-        let picArr=[];
         let vidArr=[];
-        if(helperVar!=undefined){picArr.push(helperVar);}
         if(helperVarVid!=undefined){vidArr.push(helperVarVid);}
         let lang = addedPoint.lng;
         let name = document.getElementById("attr_name").value;
@@ -93,7 +100,7 @@ function showDataCollectedWithout() {
         let y = lang;
         localStorage.setItem("x",JSON.stringify(x));
         localStorage.setItem("y",JSON.stringify(y));
-        localStorage.setItem("vidArr",JSON.stringify(vidArr));
+        localStorage.setItem("vidArr",JSON.stringify(helperVarVid));
         localStorage.setItem("name_for_add_aq", name);
         localStorage.setItem("desc_for_add_aq", "");
         window.location.href='/attr_info';
@@ -109,23 +116,6 @@ function showDataCollectedWithout() {
     }
 
 
-
-
-function dothat(the) {
-    helperVar=the;
-    document.getElementById("helpervar").innerHTML=helperVar;
-    localStorage.setItem("url_of_img",helperVar);
-    // var tmuna = document.getElementById("sukablat");
-    // tmuna.src = helperVar;
-}
-
-
-function dothatVid(the) {
-    helperVarVid=the;
-    // var tmuna = document.getElementById("sukablat");
-    // tmuna.src = helperVar;
-}
-
 function encodeImageFileAsURL(element) {
     var image = document.getElementById('output');
     image.style.display="inline";
@@ -137,8 +127,8 @@ function encodeImageFileAsURL(element) {
   var reader = new FileReader();
   reader.onloadend = function() {
    //alert(reader.result)
-   dothat(reader.result)
-  }
+   helperVar = reader.result
+  };
 
   reader.readAsDataURL(file);
 }
@@ -151,8 +141,7 @@ function encodeVideoFileAsURL(element) {
   var file = element.files[0];
   var reader = new FileReader();
   reader.onloadend = function() {
-   //alert(reader.result)
-   dothatVid(reader.result)
+   helperVarVid= reader.result
   };
 
   reader.readAsDataURL(file);

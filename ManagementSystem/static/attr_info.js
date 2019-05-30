@@ -1,13 +1,11 @@
-var loadFile = function(event) {
-	var image = document.getElementById('output');
-	image.src = URL.createObjectURL(event.target.files[0]);
-};
-
 let arrOfPicsData = [];
 
 window.onload = function(){
+    initializeTheListOfPicturesToShow();
+};
 
-    //Check File API support
+function initializeTheListOfPicturesToShow() {
+        //Check File API support
     if(window.File && window.FileList && window.FileReader)
     {
         var filesInput = document.getElementById("files");
@@ -52,19 +50,13 @@ window.onload = function(){
     {
         console.log("Your browser does not support File API");
     }
-};
+}
 
-
-    function sendAll() {
+    function sendTheAttractionWithAllInformation() {
         let namee = localStorage.getItem("name_for_add_aq");
         let xx = JSON.parse(localStorage.getItem("x"));
         let yy = JSON.parse(localStorage.getItem("y"));
-        let vidArr = JSON.parse(localStorage.getItem("vidArr"));
-        // alert("is what: "+ addedPoint.lat +", " + addedPoint.lng + ", "+ (typeof addedPoint.lng));
-        // alert("2!");
-        // currPoints.push(addedPoint);
-
-        alert(arrOfPicsData.length);
+        // let vidArr = JSON.parse(localStorage.getItem("vidArr"));
 
         let attraction_to_send = {
             name:namee
@@ -72,6 +64,7 @@ window.onload = function(){
             ,x:xx ,y:yy
             ,description:document.getElementById("desc").value
             ,picturesURLS:arrOfPicsData ,videosURLS:[]};
+
         postRequestAttractionn(attraction_to_send);
         localStorage.setItem("name_for_add_aq", attraction_to_send.name);
         localStorage.setItem("desc_for_add_aq", attraction_to_send.description);

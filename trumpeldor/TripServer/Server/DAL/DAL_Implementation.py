@@ -89,9 +89,9 @@ class DAL_Implementation(DAL_Abstract):
         names_of_pics=[]
         names_of_vids=[]
         if picturesURLS != 'null':
-            names_of_pics = add_media(picturesURLS)
+            names_of_pics = add_media(picturesURLS, '.png')
         if videosURLS != 'null':
-            names_of_vids = add_media(videosURLS)
+            names_of_vids = add_media(videosURLS, '.mp4')
         attraction = Attraction(name=name, x=x, y=y, description=description, picturesURLS=addPrefixUrl(names_of_pics),
                                 videosURLS=addPrefixUrl(names_of_vids))
         attraction.save()
@@ -209,9 +209,9 @@ class DAL_Implementation(DAL_Abstract):
         attraction.y=y
         attraction.description=description
         if picturesURLS is not None:
-            attraction.picturesURLS=addPrefixUrl(add_media(picturesURLS))
+            attraction.picturesURLS=addPrefixUrl(add_media(picturesURLS, '.png'))
         if videosURLS is not None:
-            attraction.videosURLS=addPrefixUrl(add_media(videosURLS))
+            attraction.videosURLS=addPrefixUrl(add_media(videosURLS, '.mp4'))
         attraction.save()
         return attraction
 
@@ -334,7 +334,7 @@ class DAL_Implementation(DAL_Abstract):
         return SlidingPuzzle.objects.filter(attraction=self.get_attraction(id_attraction)).all()
 
     def add_sliding_puzzle(self, id_attraction, piecesURLS, width, height, description):
-        sliding_puzzle_pic = add_media([piecesURLS])
+        sliding_puzzle_pic = add_media([piecesURLS], '.png')
         wid = int(width)
         hei = int(height)
         slicers = image_slicer.slice('media/' + sliding_puzzle_pic[0], wid*hei)
@@ -355,7 +355,7 @@ class DAL_Implementation(DAL_Abstract):
         return Puzzle.objects.filter(attraction=self.get_attraction(id_attraction)).all()
 
     def add_puzzle(self, id_attraction, piecesURLS, width, height, description):
-        puzzle_pic = add_media([piecesURLS])
+        puzzle_pic = add_media([piecesURLS], '.png')
         wid = int(width)
         hei = int(height)
         slicers = image_slicer.slice('media/' + puzzle_pic[0], wid * hei)
@@ -413,13 +413,13 @@ class DAL_Implementation(DAL_Abstract):
         return settings
 
 #returns array of names of the media files saved in the media folder
-def add_media(media_urls):
+def add_media(media_urls, suffix):
     names_of_files = []
     for file in media_urls:
         file = file.replace('data:image/jpeg;base64,', '')
         #print(file)
         imgdata = base64.b64decode(file)
-        filename = str(uuid.uuid4()) + '.png'
+        filename = str(uuid.uuid4()) + suffix
         with open('media/' + filename, 'wb') as f:
             f.write(imgdata)
         names_of_files += [filename]

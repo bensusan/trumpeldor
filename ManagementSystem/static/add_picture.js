@@ -3,6 +3,10 @@ var helperVar;
 
 window.onload = function(){
 
+initManyPicturesPresentation();
+};
+
+function initManyPicturesPresentation(){
     //Check File API support
     if(window.File && window.FileList && window.FileReader)
     {
@@ -46,15 +50,6 @@ window.onload = function(){
     {
         console.log("Your browser does not support File API");
     }
-};
-
-
-function thefunc(the) {
-    helperVar=the;
-    document.getElementById("suka").innerHTML=helperVar;
-    localStorage.setItem("url_of_img",helperVar);
-    // var tmuna = document.getElementById("sukablat");
-    // tmuna.src = helperVar;
 }
 
 
@@ -67,8 +62,7 @@ function encodeImageFileAsURL(element) {
   var file = element.files[0];
   var reader = new FileReader();
   reader.onloadend = function() {
-   //alert(reader.result)
-   thefunc(reader.result)
+   helperVar = reader.result
   }
 
   reader.readAsDataURL(file);
@@ -86,9 +80,10 @@ function funcToSendGame(attractionsJSON) {
 
             if(localStorage.getItem("game_kind")=="sliding") {
                 let the_kind = "sliding_puzzle";
-                let n_size = document.getElementById("n_size").value;
+                let n_size = document.getElementById("n_size");
+                let n_size_val = n_size.options[n_size.selectedIndex].value
                 let data_send = {description: document.getElementById("game_instructions_text").value,
-                    piecesURLS: helperVar, width: n_size, height: n_size};
+                    piecesURLS: helperVar, width: n_size_val, height: n_size_val};
                 let attr_id = attr['id'];
                 postRequestGame(data_send,attr_id,the_kind);
             }
@@ -103,10 +98,6 @@ function funcToSendGame(attractionsJSON) {
 
             window.location.href='/'+localStorage.getItem("last_add_game_url"); ////////////////////////////change to both
         }
-
-
-
-
 
     });
 }
