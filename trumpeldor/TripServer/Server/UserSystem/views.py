@@ -231,8 +231,8 @@ def addTrack(subTrack, points, length):
     return track
 
 
-def addAttraction(name, x, y, description, picturesURLS, videosURLS, visible):
-    attraction = Attraction(name=name, x=x, y=y, description=description, picturesURLS=picturesURLS, videosURLS=videosURLS, visible=visible)
+def addAttraction(name, x, y, description, picturesURLS, videosURLS):
+    attraction = Attraction(name=name, x=x, y=y, description=description, picturesURLS=picturesURLS, videosURLS=videosURLS)
     attraction.save()
     return attraction
 
@@ -282,9 +282,9 @@ def addPrefixUrl(lst):
 
 
 def insertDebugData():
-    a1 = addAttraction("Meonot dalet", "31.263913", "34.796959", "We Are in Attraction 1", addPrefixUrl(["meonot_dalet_1.jpg", "meonot_dalet_2.jpg"]), [], True)
-    a2 = addAttraction("96 building", "31.264934", "34.802062", "We Are in Attraction 2", addPrefixUrl(["96_1.jpg"]), [], True)
-    a3 = addAttraction("Shnizale", "31.265129", "34.801575", "We Are in Attraction 3", addPrefixUrl(["shnizale_1.jpg", "shnizale_2.jpg"]), addPrefixUrl(["shnizale_video.mp4"]), True)
+    a1 = addAttraction("Meonot dalet", "31.263913", "34.796959", "We Are in Attraction 1", addPrefixUrl(["meonot_dalet_1.jpg", "meonot_dalet_2.jpg"]), [])
+    a2 = addAttraction("96 building", "31.264934", "34.802062", "We Are in Attraction 2", addPrefixUrl(["96_1.jpg"]), [])
+    a3 = addAttraction("Shnizale", "31.265129", "34.801575", "We Are in Attraction 3", addPrefixUrl(["shnizale_1.jpg", "shnizale_2.jpg"]), addPrefixUrl(["shnizale_video.mp4"]))
     aq1 = addAmericanQuestion("AQ1: Some question here ?", ["Correct answer",
                                                             "Incorrect answer",
                                                             "Incorrect answer",
