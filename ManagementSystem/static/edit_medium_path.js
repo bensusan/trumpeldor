@@ -18,59 +18,49 @@ function initMapAndAttractionss(){
     initAttractionsMarkersOfMediumPath();
 }
 
-  function addEditListenerr(m) {
+function addEditListenerr(m) {
       m.addListener('click', function() {
-            if(prev_m!=1) {
+          markingOnClickHandler(m);
 
-              prev_m.setIcon(prev_icon);
-          }
-          //alert("sda");
-          prev_icon=m.icon;
-          m.setIcon("http://maps.google.com/mapfiles/ms/icons/pink-dot.png");
+          addToPathBTNFunctionality(m);
 
-          prev_m=m;
-          curPosClicked=m.position;
-        var addToPathBTN = document.getElementById('add_reg_to_path_med');
-        addToPathBTN.addEventListener('click', function() {
-            if(pointsOfPath.indexOf(m.position)==-1 && curPosClicked==m.position)
-            {
-                let point_to_push = {lat: m.position.lat(), lng: m.position.lng()};
-                //let point_to_push2 = {lat: m.position.lat().toFixed(8), lng: m.position.lng().toFixed(8)};
-                pointsOfPath.push(point_to_push);
-                // pointsOfPath.push(m.position);
-                str_of_points=str_of_points+m.position+"<br />";
-            }
-            // alert(str_of_points);
-            // var border = document.getElementById("border_of_points");
-            // border.style.display = "block";
-            // document.getElementById("showing_added_points").innerHTML = str_of_points;
-            // document.getElementById("showing_added_points").style.fontWeight = 'bold';
-            getRequestAttractions(needThisToGetPointsIDs);
-           // alert("point been added! now its: "+ pointsOfPath.toString());
-        });
+          deleteFromPathBTNFunctionality(m);
 
-        var deleteFromPathBTN = document.getElementById('delete_from_path_med');
+  });
+  }
+
+
+function deleteFromPathBTNFunctionality(m) {
+    var deleteFromPathBTN = document.getElementById('delete_from_path_med');
         deleteFromPathBTN.addEventListener('click', function() {
                 //let point_to_delete = {lat: m.position.lat(), lng: m.position.lng()};
             let t=1;
-                let point_to_delete2 = {lat: m.position.lat().toFixed(10), lng: m.position.lng().toFixed(10)};
+                let point_to_delete2 = {lat: m.position.lat().toFixed(8), lng: m.position.lng().toFixed(8)};
                 fullMedPoints.forEach(function (med_point) {
-                   // alert(med_point['x'] +","+med_point['y'] +"\n"+point_to_delete2.lat+","+point_to_delete2.lng);
-                     if((med_point['x'].toFixed(10) == point_to_delete2.lat)  &&
-                         (med_point['y'].toFixed(10) == point_to_delete2.lng))
+
+
+                     if(isSamePoint(med_point,point_to_delete2))
                      {
-                         points_of_medTrack.forEach(function (the_point) {
-                             if ((the_point['x'].toFixed(10) == point_to_delete2.lat) &&
-                                 (the_point['y'].toFixed(10) == point_to_delete2.lng))
-                             {if(t==1) {
-                                     t=122;
-                                    deletePointFromTrackRequest(med_point['id'],idOfMedium);
-                                 }}
-                             else{
-                                 if(t==1) {
-                                     t=122;
+                         pointsOfShort.forEach(function (the_point) {
+
+                             if ((the_point.lat == point_to_delete2.lat)  &&
+                         (the_point.lng == point_to_delete2.lng))
+                             {
+                                  alert("אין אפשרות למחוק נקודה ממסלול שאינו בינוני.");
+
+                                 if (t == 1) {
+                                     t = 122;
                                      alert("אין אפשרות למחוק נקודה ממסלול שאינו בינוני.");
                                  }
+
+                             }
+                             else
+                             {
+                                  if (t == 1) {
+                                     t = 122;
+                                     deletePointFromTrackRequest(med_point['id'], idOfMedium);
+                                 }
+
                              }
 
                          });
@@ -80,18 +70,47 @@ function initMapAndAttractionss(){
             window.location.href='/edit_medium_path';
 
         });
-  });
-  }
+}
+
+function isSamePoint(med_point,point_to_delete2){
+   return ((med_point['x'].toFixed(8) == point_to_delete2.lat)  &&
+                         (med_point['y'].toFixed(8) == point_to_delete2.lng))
+}
+
+function addToPathBTNFunctionality(m) {
+    var addToPathBTN = document.getElementById('add_reg_to_path_med');
+        addToPathBTN.addEventListener('click', function() {
+            if(pointsOfPath.indexOf(m.position)==-1 && curPosClicked==m.position)
+            {
+                let point_to_push = {lat: m.position.lat(), lng: m.position.lng()};
+                //let point_to_push2 = {lat: m.position.lat().toFixed(8), lng: m.position.lng().toFixed(8)};
+                pointsOfPath.push(point_to_push);
+                // pointsOfPath.push(m.position);
+                str_of_points=str_of_points+m.position+"<br />";
+            }
+
+            getRequestAttractions(needThisToGetPointsIDs);
+        });
+}
+
+function markingOnClickHandler(m) {
+      if(prev_m!=1) {
+              prev_m.setIcon(prev_icon);
+          }
+          //alert("sda");
+          prev_icon=m.icon;
+          m.setIcon("http://maps.google.com/mapfiles/ms/icons/pink-dot.png");
+          prev_m=m;
+          curPosClicked=m.position;
+}
 
 function initMapp() {
      map = new google.maps.Map(document.getElementById('map'), {
         zoom: 18,
         center: {lat: 31.262860, lng: 34.801753}
     });
-   //initAttractionsMarkersOfMediumPath();
 
     listenerForMappo();
-   // initPoints();
 
 }
 
@@ -231,13 +250,11 @@ function getRequestTracks(funcOnTrack){
 }
 
 function addPointToTrackRequest(id_of_point_to_add,track_id){
-    //alert("trackos blatikus");
     serverRequest("PUT", function noop(dummy){}, 'http://'+ip+':12344/managementsystem/track/'+track_id+'/add',
         JSON.stringify(id_of_point_to_add));
 }
 
 function deletePointFromTrackRequest(id_of_point_to_del,track_id){
-   // alert("trackos mohekos");
     serverRequest("PUT", function noop(dummy){}, 'http://'+ip+':12344/managementsystem/track/'+track_id+'/del',
         JSON.stringify(id_of_point_to_del));
 }

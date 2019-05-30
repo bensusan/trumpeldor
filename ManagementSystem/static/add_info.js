@@ -1,7 +1,17 @@
+let info_txt;
+var attr_for_editing;
+var helperVar;
+var helperVarVid;
+
+
 window.onload = function () {
     getRequestInfo(func_to_show_info);
+    initializeBTNsFunctionality();
+    localFileVideoPlayer();
+};
 
-	let vid_title = document.getElementById("vid_title");
+function initializeBTNsFunctionality(){
+    let vid_title = document.getElementById("vid_title");
     let pic_title = document.getElementById("pic_title");
     let pic_input = document.getElementById("picInput");
     let pic_output = document.getElementById("output");
@@ -33,15 +43,8 @@ window.onload = function () {
 		vid_itself.style.display = '';
 		vid_uploadBTN.style.display = '';
 	});
+}
 
-
-    localFileVideoPlayer();
-};
-
-let info_txt;
-var attr_for_editing;
-var helperVar;
-var helperVarVid;
 
 function doVideo(){
     	let vid_input = document.getElementById('video_input');
@@ -70,8 +73,7 @@ function encodeImageFileAsURL(element) {
   var file = element.files[0];
   var reader = new FileReader();
   reader.onloadend = function() {
-   //alert(reader.result)
-   dothat(reader.result)
+   helperVar = reader.result
   };
 
   reader.readAsDataURL(file);

@@ -37,11 +37,6 @@ function initMapAndAttractionss(){
                 // pointsOfPath.push(m.position);
                 str_of_points=str_of_points+m.position+"<br />";
             }
-            // alert(str_of_points);
-            // var border = document.getElementById("border_of_points");
-            // border.style.display = "block";
-            // document.getElementById("showing_added_points").innerHTML = str_of_points;
-            // document.getElementById("showing_added_points").style.fontWeight = 'bold';
             getRequestAttractions(needThisToGetPointsIDs);
            // alert("point been added! now its: "+ pointsOfPath.toString());
         });
@@ -184,7 +179,6 @@ function getRequestTracks(funcOnTrack){
 }
 
 function addPointToTrackRequest(id_of_point_to_add,track_id){
-    //alert("trackos blatikus longos");
     serverRequest("PUT", function noop(dummy){}, 'http://'+ip+':12344/managementsystem/track/'+track_id+'/add',
         JSON.stringify(id_of_point_to_add));
 
