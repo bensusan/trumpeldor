@@ -22,7 +22,7 @@
 </head>
 <body>
 <div align="center">
-    <label for="hint" style="font-size: 36px;"><b>:רמזים קיימים</b></label>
+    <label style="font-size: 36px;"><b>:רמזים קיימים</b></label>
 <p id="existing_hints"></p>
     <p style="font-size: 36px;">:תמונות</p>
     <article>
@@ -34,20 +34,16 @@
     </article>
    <p><br /></p>
 
-{#<label for="hint"><b>Add Hint:</b></label>#}
-
 
 
    <p><br /></p>
-{#<button type="button" id="add_text_hint">add text</button>#}
-<p></p>
+    <p></p>
 <textarea id="text_hint_id" name="subject" placeholder="כתבי את הרמז..." style="direction:rtl;text-align:right;display: none;width:300px;height:200px;border-radius: 10px;"></textarea>
 <p></p>
     <button class="button" type="button" id="send_text_hint" style="display: none">שליחה</button>
 <p></p>
 
-{#<button type="button" id="add_vid_hint">add video</button>#}
-<p></p>
+    <p></p>
 <textarea id="vid_hint_description" placeholder="כתבי תיאור..." style="direction:rtl;text-align:right;width:340px;height:80px;display: none"></textarea>
 <p></p>
     <div id="message"></div>
@@ -58,11 +54,10 @@
 <button class="button" type="button" id="send_vid_hint" style="display: none">שליחה</button>
 <p></p>
 
-{#<button type="button" id="add_pic_hint">add picture</button>#}
-<p></p>
+    <p></p>
 <textarea id="pic_hint_description" placeholder="כתבי תיאור..." style="direction:rtl;text-align:right;width:340px;height:80px;display: none"></textarea>
     <p></p>
-   <label for="hint" id="upload_title" style="display: none"><b>העלאת תמונה</b></label>
+   <label id="upload_title" style="display: none"><b>העלאת תמונה</b></label>
 <p></p>
 <input type="file" id="file" onchange="encodeImageFileAsURL(this)" style="display: none"/>
 <p><img id="output" width="200" style="display: none"/></p>
@@ -71,11 +66,10 @@
 
 
 <p></p>
-{#<button class="button" id="finish_add_hint" onclick="finishHint()" type="button">!סיימתי</button>#}
 </div>
 <nav id="sideMenu"></nav>
 {% load static %}
 <script src="{% static 'menu_of_add_hint.js' %}?version=3"></script>
-{#style="display:none"#}
+
 </body>
 </html>

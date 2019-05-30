@@ -22,13 +22,11 @@
 </head>
 <body>
 <div align="center">
-     <label for="hint"><b>:שאלה אמריקאית</b></label>
+     <labels><b>:שאלה אמריקאית</b></labels>
     <p></p>
 
     <INPUT type="text" id="ques" placeholder="רשמי את השאלה" p name="chk" style="text-align:right;width: 660px;"/>
 <p></p>
-
-{#	<INPUT type="button" value="Delete Row" onclick="deleteRow('dataTable')" />#}
 
 	<TABLE id="dataTable" width="350px" border="1">
 		<TR>
@@ -48,7 +46,6 @@
     <INPUT type="button" value="הוספת תשובה" onclick="addRow('dataTable')" />
     <p></p>
     <button class='button blogger' id="finish_add_aq_btn" type="button">שליחה</button>
-{#<button class="button" id="finish_add_aq" onclick="finishAddAq()" type="button">Send</button>#}
     </div>
 <nav id="sideMenu"></nav>
 {% load static %}
