@@ -45,7 +45,7 @@ function showOpts(gamesJSON) {
 
     showChosenGameBTN.addEventListener('click',function () {
          game_id_that_was_picked = opts.options[opts.selectedIndex].value;
-         getRequestGames(doSome,type,attractionObjToUseInHintDelete['id']);
+         getRequestGames(getImageSrcAndShowIt,type,attractionObjToUseInHintDelete['id']);
     });
 
     var deleteChosenHintBTN = document.getElementById("delete_chosen_hint");
@@ -59,19 +59,13 @@ function showOpts(gamesJSON) {
 
 }
 
-function doSome(gamesJSON){
-    let namepic = "";
-
-    if(type == "sliding_puzzle")
-    { namepic = "piecesURLS"; }
-    else
-    { namepic = "piecesURLS"; }
+function getImageSrcAndShowIt(gamesJSON){
 
     gamesJSON.forEach(function (game) {
         if(game['id'] == game_id_that_was_picked)
         {
-            var image = document.getElementById('output');
-            image.src = game[namepic];
+            let image = document.getElementById('output');
+            image.src = game['piecesURLS'];
         }
     });
 }
@@ -184,69 +178,6 @@ function func_to_show(gamesJSON){
       });
 }
 
-function funcInOrderToDeleteHint(hintsJSON) {
-    let hint_id_that_was_picked = document.getElementById("write_hint_id_to_delete").value;
-   // let number_hint_id = Number(hint_id_that_was_picked);
-      hintsJSON.forEach(function (hint) {
-          // alert("the id is: "+attr['id']);
-        // alert("in get name! "+"of the origin : " + lat + " , " + lng + "\n of the other: "+p.lat +" , "+ p.lng);
-        if(hint['id']==hint_id_that_was_picked)
-        {
-            //alert("before delete hint!");
-            deleteRequestHint(attractionObjToUseInHintDelete['id'],hint['id']);
-            window.location.href='/pick_hint_edit';
-        }
-      });
-
-}
-
-function hint_funcToGetAttraction(attractionsJSON) {
-        let name = localStorage.getItem("name_for_add_aq");
-        let desc = localStorage.getItem("desc_for_add_aq");
-      // alert("in get name! "+"of the origin : " + lat + " , " + lng);
-        attractionsJSON.forEach(function (attr) {
-        let p = {name: attr['name'], description:attr['description']};
-       // alert("in get name! "+"of the origin : " + name + " , " + desc + "\n of the other: "+p.name +" , "+ p.description);
-        if(p.name===name && p.description===desc)
-        {
-            var textHintToSend = {
-            attraction:attr,
-            kind:'HT',
-            data:document.getElementById("text_hint_id").value
-            };
-            postRequestHint(textHintToSend,attr['id']);
-            window.location.href='/add_hint_edit';
-        }
-      });
-
-    }
-
-    function getTheAttr(attractionsJSON) {
-
-        let editedPoint = JSON.parse(localStorage.getItem("edited"));
-      let lat = editedPoint.lat;
-      let lng = editedPoint.lng;
-      //let name = "didn't found!!!";
-      // alert("in get name! "+"of the origin : " + lat + " , " + lng);
-      attractionsJSON.forEach(function (attr) {
-          // alert("the id is: "+attr['id']);
-        let p = {name: attr['name'], description:attr['description'], lat: attr['x'], lng: attr['y']};
-        // alert("in get name! "+"of the origin : " + lat + " , " + lng + "\n of the other: "+p.lat +" , "+ p.lng);
-        if(p.lat===lat&&(p.lng).toFixed(8)===lng.toFixed(8))
-        {
-            alert("before delete hint!");
-            deleteRequestHint(attr['id'],);
-            window.location.href='/pick_hint_edit';
-        }
-      });
-        // alert("cant believe this is happenning!");
-    }
-
-
-
-function donePickingHints() {
-    window.location.href='/attractions';
-}
 
 
 function getRequestGames(funcOnHints,game_type,attr_id){

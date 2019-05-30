@@ -1,11 +1,24 @@
 let aq_id_that_was_picked_del;
 let aq_id_that_was_picked_edit;
 let aq_arr_for_test = [];
-let id_to_delete=100;
+var str;
+var attractionObjToUseInHintDelete;
 
 window.onload = function () {
     getRequestAttractions(funcForExistingAmericanQuestions);
 
+    initBtns();
+        localFileVideoPlayer();
+
+};
+
+
+var loadFile = function(event) {
+	var image = document.getElementById('output');
+	image.src = URL.createObjectURL(event.target.files[0]);
+};
+
+function initBtns() {
     var wantToEditBTN = document.getElementById('want_to_edit_aq');
     // var writeChosenHintTextEdit = document.getElementById("write_aq_id_to_edit");
     var editChosenHintBTN = document.getElementById("edit_chosen_aq");
@@ -47,18 +60,7 @@ window.onload = function () {
                 getRequestAmericanQuestions(funcInOrderToDeleteAmericanQuestion,attractionObjToUseInHintDelete['id']);
             });
         });
-        localFileVideoPlayer();
-
-};
-
-
-var loadFile = function(event) {
-	var image = document.getElementById('output');
-	image.src = URL.createObjectURL(event.target.files[0]);
-};
-
-var str;
-var attractionObjToUseInHintDelete;
+}
 
 function funcForExistingAmericanQuestions(attractionsJSON){
         let name = localStorage.getItem("name_for_add_aq");
@@ -68,7 +70,7 @@ function funcForExistingAmericanQuestions(attractionsJSON){
         let p = {name: attr['name'], description:attr['description']};
         if(p.name===name && p.description===desc)
         {
-            getRequestAmericanQuestions(AmericanQuestions_func,attr['id']);
+            getRequestAmericanQuestions(showInnerHtmlAndLoadValuesToComboBox,attr['id']);
             attractionObjToUseInHintDelete=attr;
         }
         });
@@ -76,7 +78,7 @@ function funcForExistingAmericanQuestions(attractionsJSON){
 }
 
 
-function AmericanQuestions_func(AmericanQuestionsJSON) {
+function showInnerHtmlAndLoadValuesToComboBox(AmericanQuestionsJSON) {
         str="";
         let i=1;
         AmericanQuestionsJSON.forEach(function (aq) {
@@ -120,31 +122,16 @@ function funcInOrderToDeleteAmericanQuestion(AmericanQuestionsJSON) {
 }
 
 
-
-
-
 function donePickingAqs() {
     window.location.href='/edit_attraction';
 }
 
 
-
-
 function getRequestAmericanQuestions(funcOnAqs,attr_id){
-    // serverRequest("GET", funcOnAttractions, 'http://192.168.1.12:12344/managementsystem/attraction/?format=json');
-    // the server port and my ip
     serverRequest("GET", funcOnAqs, 'http://'+ip+':12344/managementsystem/attraction/'+ attr_id+
         '/aquestion/?format=json');
-    //alert("need to remove this alert and fix funcToGetAttraction()!");
 }
 
-
-function postRequestAmericanQuestion(aq,attr_id){
-  //  alert("aq blat");
-    serverRequest("POST", function noop(dummy){}, 'http://'+ip+':12344/managementsystem/attraction/'+
-        attr_id+'/aquestion/',
-        JSON.stringify(aq));
-}
 
 function deleteRequestAmericanQuestion(attr_id,aq_id){
      serverRequest("DELETE", function noop(dummy){}, 'http://'+ip+':12344/managementsystem/attraction/'+attr_id+'/aquestion/'+aq_id+'/');

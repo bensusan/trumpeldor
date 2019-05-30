@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <title>Add Hint</title>
     {% load static %}
+<link rel="stylesheet" href="{% static 'withImages.css' %}?version=1">
+    {% load static %}
 <link rel="stylesheet" href="{% static 'beauty.css' %}?version=2">
        {% load static %}
 <link rel="stylesheet" href="{% static 'buttoni.css' %}?version=2">
@@ -14,14 +16,23 @@
     {% load static %}
 <script src="{% static 'attractions.js' %}?version=2"></script>
     {% load static %}
-<script src="{% static 'add_hint_edit.js' %}?version=4"></script>
+<script src="{% static 'add_hint_edit.js' %}?version=8"></script>
      {% load static %}
 <script src="{% static 'properties.js' %}?version=2"></script>
 </head>
 <body>
 <div align="center">
-<label for="hint"><b>:רמזים קיימים</b></label>
+    <label for="hint" style="font-size: 36px;"><b>:רמזים קיימים</b></label>
 <p id="existing_hints"></p>
+    <p style="font-size: 36px;">:תמונות</p>
+    <article>
+        <output id="result"/>
+    </article>
+    <p style="font-size: 36px;">:סרטונים</p>
+    <article>
+        <output id="resultVideos"/>
+    </article>
+   <p><br /></p>
 
 {#<label for="hint"><b>Add Hint:</b></label>#}
 
@@ -44,7 +55,7 @@
 <p></p>
     <input type="file" id="vid_hint_browse_id" accept="video/*" onchange="encodeVideoFileAsURL(this)" style="display: none">
     <p></p>
-<button class="button" onclick="sendVideoHint()" type="button" id="send_vid_hint" style="display: none">שליחה</button>
+<button class="button" type="button" id="send_vid_hint" style="display: none">שליחה</button>
 <p></p>
 
 {#<button type="button" id="add_pic_hint">add picture</button>#}
@@ -56,7 +67,7 @@
 <input type="file" id="file" onchange="encodeImageFileAsURL(this)" style="display: none"/>
 <p><img id="output" width="200" style="display: none"/></p>
     <p></p>
-<button class="button" type="button" onclick="sendImageHint()" id="send_pic_hint" style="display: none">שליחה</button>
+<button class="button" type="button" id="send_pic_hint" style="display: none">שליחה</button>
 
 
 <p></p>

@@ -38,8 +38,15 @@
 
     <label for="hint"><b>:אורך ורוחב התמונה (n x n)</b></label>
 <p></p>
-    <textarea id="n_size" placeholder="הכניסי את הגודל n..." style="direction:rtl;text-align:right;"></textarea>
-<p></p>
+<select id="n_size">
+    <option value=3>3x3</option>
+    <option value=4>4x4</option>
+    <option value=5>5x5</option>
+    <option value=6>6x6</option>
+    <option value=7>7x7</option>
+    <option value=8>8x8</option>
+</select>
+    <p></p>
 <button class="button" onclick="sendTheGameData()" style="direction:rtl;text-align:right;">סיימתי!</button>
     </div>
 <nav id="sideMenu"></nav>

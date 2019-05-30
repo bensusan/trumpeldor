@@ -5,8 +5,6 @@ window.onload=function () {
     getRequestAttractions(funcForGettingCurrHintData);
 };
 
-
-
 function funcForGettingCurrHintData(attractionsJSON) {
     let name = localStorage.getItem("name_for_add_aq");
     let desc = localStorage.getItem("desc_for_add_aq");

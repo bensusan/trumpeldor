@@ -1,9 +1,13 @@
+
+var str;
+var helperVar;
+var helperVarVid;
+
 var loadFile = function(event) {
 	var image = document.getElementById('output');
 	image.src = URL.createObjectURL(event.target.files[0]);
 };
 
-var str;
 
 function funcForExistingHints(attractionsJSON){
 
@@ -14,31 +18,35 @@ function funcForExistingHints(attractionsJSON){
         let p = {name: attr['name'], description:attr['description']};
         if(p.name===name && p.description===desc)
         {
-            getRequestHints(hints_func,attr['id']);
+            getRequestHints(loadStringOfInnerHTMLWithHints,attr['id']);
         }
         });
 }
 
-function hints_func(hintsJSON) {
+function loadStringOfInnerHTMLWithHints(hintsJSON) {
         str="";
         hintsJSON.forEach(function (hint) {
             str=str+"id: "+hint['id'] +", data: "+ hint['data']+"<br />";
-            // alert(str);
         });
         document.getElementById("existing_hints").innerHTML = str ;
 }
 
+
 function getRequestHints(funcOnHints,attr_id){
-    // serverRequest("GET", funcOnAttractions, 'http://192.168.1.12:12344/managementsystem/attraction/?format=json');
-    // the server port and my ip
     serverRequest("GET", funcOnHints, 'http://'+ip+':12344/managementsystem/attraction/'+ attr_id+
         '/hint/?format=json');
-    //alert("need to remove this alert and fix funcToGetAttraction()!");
 }
 
 window.onload = function () {
     getRequestAttractions(funcForExistingHints);
-var textHintBTN = document.getElementById('add_text_hint');
+    initializeBTNsFunctionality();
+
+        localFileVideoPlayer();
+
+};
+
+function initializeBTNsFunctionality(){
+    var textHintBTN = document.getElementById('add_text_hint');
 var textLine = document.getElementById("text_hint_id");
 var sendButtonTxt = document.getElementById("send_text_hint");
 var upload_pic_title = document.getElementById("upload_title");
@@ -101,22 +109,20 @@ var vidHintBTN = document.getElementById('add_vid_hint');
         });
 
     sendTextHintBTN.addEventListener('click', function() {
-        getRequestAttractions(hint_funcToGetAttraction);
+        getRequestAttractions(getTheNeededAttractionIdToSendItOnThePostRequest);
     });
 
     sendPicHintBTN.addEventListener('click', function() {
-
+        sendImageHint();
     });
 
     sendVidHintBTN.addEventListener('click', function() {
-
+        sendVideoHint();
     });
+}
 
-        localFileVideoPlayer();
 
-};
-
-function hint_funcToGetAttraction(attractionsJSON) {
+function getTheNeededAttractionIdToSendItOnThePostRequest(attractionsJSON) {
         let name = localStorage.getItem("name_for_add_aq");
         let desc = localStorage.getItem("desc_for_add_aq");
       // alert("in get name! "+"of the origin : " + lat + " , " + lng);
@@ -171,41 +177,13 @@ function localFileVideoPlayer() {
 
 
 function finishHint() {
-    // let data=document.getElementById("data").value;
-    // let hint_to_send = {
-    //         attraction:"" //atraction id needs to be here
-    //     ,kind:
-    //     ,data:
-    // };
-        // postRequestHint(hint_to_send);
-
     window.location.href='/attractions';
 }
 
 function postRequestHint(the_hint,attr_id){
-    //alert("hint blat");
     serverRequest("POST", function noop(dummy){}, 'http://'+ip+':12344/managementsystem/attraction/'+
         attr_id+'/hint/',
         JSON.stringify(the_hint));
-}
-
-
-var helperVar;
-var helperVarVid;
-
-
-function dothat(suk) {
-    helperVar=suk;
-    document.getElementById("helpervar").innerHTML=helperVar;
-    localStorage.setItem("url_of_img",helperVar);
-    // var tmuna = document.getElementById("sukablat");
-    // tmuna.src = helperVar;
-}
-
-function dothatVid(the) {
-    helperVarVid=the;
-    // var tmuna = document.getElementById("sukablat");
-    // tmuna.src = helperVar;
 }
 
 
@@ -219,8 +197,7 @@ function encodeImageFileAsURL(element) {
     var blob = file.slice();
   var reader = new FileReader();
   reader.onloadend = function() {
-   //alert(reader.result)
-   dothat(reader.result)
+   helperVar = reader.result
   }
 
   reader.readAsDataURL(blob);       //file instead of blob
@@ -233,8 +210,7 @@ function encodeVideoFileAsURL(element) {
   var file = element.files[0];
   var reader = new FileReader();
   reader.onloadend = function() {
-   //alert(reader.result)
-   dothatVid(reader.result)
+   helperVarVid = reader.result
   };
 
   reader.readAsDataURL(file);

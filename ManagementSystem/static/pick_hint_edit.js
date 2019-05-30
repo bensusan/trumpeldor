@@ -25,6 +25,8 @@ function hints_func(hintsJSON) {
         str="";
         let i=1;
         let imageCounter = 1;
+        let videoCounter = 1;
+
         hintsJSON.forEach(function (hint) {
             let e_opt_id = "ecb"+i;
             let d_opt_id = "dcb"+i;
@@ -36,9 +38,19 @@ function hints_func(hintsJSON) {
             }
             else
             {
+                 if(hint['data'].substring(0,10) == 'data:video')
+            {
+                document.getElementById(d_opt_id).innerText = "VideoMedia"+videoCounter;
+                document.getElementById(e_opt_id).innerText = "VideoMedia"+videoCounter;
+            }
+            else
+            {
                 document.getElementById(d_opt_id).innerText = hint['data'];
                 document.getElementById(e_opt_id).innerText = hint['data'];
             }
+            }
+
+
 
             document.getElementById(e_opt_id).value = hint['id'];
             document.getElementById(e_opt_id).style.display='inline';
@@ -50,12 +62,20 @@ function hints_func(hintsJSON) {
             if(dataOfHint.substring(0,16) == 'data:application')
                 str=str+" data: "+ "media"+imageCounter+"<br />";
             else
+            {
+              if(hint['data'].substring(0,10) == 'data:video')
+                str=str+" data: "+ "VideoMedia"+videoCounter+"<br />";
+              else
                 str=str+" data: "+ hint['data']+"<br />";
+            }
+
+
             // alert(str);
 
             var output = document.getElementById("result");
+            var outputVideo = document.getElementById("resultVideos");
 
-            if(dataOfHint.substring(0,16) == 'data:application') {
+            if(hint['data'].substring(0,16) == 'data:application') {
                 imageCounter++;
                 var img = document.createElement("img");
                 img.src = dataOfHint;
@@ -65,6 +85,20 @@ function hints_func(hintsJSON) {
 
 
                   output.insertBefore(div,null);
+            }
+
+
+            if(hint['data'].substring(0,10) == 'data:video')
+            {
+                videoCounter++;
+                var vid = document.createElement("video");
+                vid.src = dataOfHint;
+                vid.className = 'thumbnail';
+                var div = document.createElement("div");
+                vid.autoplay = true;
+                div.appendChild(vid);
+
+                outputVideo.insertBefore(div,null);
             }
 
         });
@@ -79,6 +113,7 @@ window.onload = function () {
     localFileVideoPlayer();
 
 };
+
 
 function wantToEditButton(){
     var delTitle = document.getElementById("deleteTitle");
@@ -98,6 +133,8 @@ function wantToEditButton(){
 
             var editChosenHintBTN = document.getElementById("edit_chosen_hint");
             editChosenHintBTN.style.display = "inline";
+
+            window.scrollTo(0,document.body.scrollHeight);
 
             editChosenHintBTN.addEventListener('click', function() {
                 let chosen_hint_id = comboEdit.options[comboEdit.selectedIndex].value;
@@ -129,6 +166,8 @@ function wantToDeleteButton(){
             var deleteChosenHintBTN = document.getElementById("delete_chosen_hint");
             deleteChosenHintBTN.style.display = "inline";
 
+                        window.scrollTo(0,document.body.scrollHeight);
+
             deleteChosenHintBTN.addEventListener('click', function() {
                 getRequestHints(funcInOrderToDeleteHint,attractionObjToUseInHintDelete['id']);
             });
@@ -151,47 +190,47 @@ function funcInOrderToDeleteHint(hintsJSON) {
 
 }
 
-function hint_funcToGetAttraction(attractionsJSON) {
-        let name = localStorage.getItem("name_for_add_aq");
-        let desc = localStorage.getItem("desc_for_add_aq");
-      // alert("in get name! "+"of the origin : " + lat + " , " + lng);
-        attractionsJSON.forEach(function (attr) {
-        let p = {name: attr['name'], description:attr['description']};
-       // alert("in get name! "+"of the origin : " + name + " , " + desc + "\n of the other: "+p.name +" , "+ p.description);
-        if(p.name===name && p.description===desc)
-        {
-            var textHintToSend = {
-            attraction:attr,
-            kind:'HT',
-            data:document.getElementById("text_hint_id").value
-            };
-            postRequestHint(textHintToSend,attr['id']);
-            window.location.href='/add_hint_edit';
-        }
-      });
+// function hint_funcToGetAttraction(attractionsJSON) {
+//         let name = localStorage.getItem("name_for_add_aq");
+//         let desc = localStorage.getItem("desc_for_add_aq");
+//       // alert("in get name! "+"of the origin : " + lat + " , " + lng);
+//         attractionsJSON.forEach(function (attr) {
+//         let p = {name: attr['name'], description:attr['description']};
+//        // alert("in get name! "+"of the origin : " + name + " , " + desc + "\n of the other: "+p.name +" , "+ p.description);
+//         if(p.name===name && p.description===desc)
+//         {
+//             var textHintToSend = {
+//             attraction:attr,
+//             kind:'HT',
+//             data:document.getElementById("text_hint_id").value
+//             };
+//             postRequestHint(textHintToSend,attr['id']);
+//             window.location.href='/add_hint_edit';
+//         }
+//       });
+//
+//     }
 
-    }
-
-    function getTheAttr(attractionsJSON) {
-
-        let editedPoint = JSON.parse(localStorage.getItem("edited"));
-      let lat = editedPoint.lat;
-      let lng = editedPoint.lng;
-      //let name = "didn't found!!!";
-      // alert("in get name! "+"of the origin : " + lat + " , " + lng);
-      attractionsJSON.forEach(function (attr) {
-          // alert("the id is: "+attr['id']);
-        let p = {name: attr['name'], description:attr['description'], lat: attr['x'], lng: attr['y']};
-        // alert("in get name! "+"of the origin : " + lat + " , " + lng + "\n of the other: "+p.lat +" , "+ p.lng);
-        if(p.lat===lat&&(p.lng).toFixed(8)===lng.toFixed(8))
-        {
-            alert("before delete hint!");
-            deleteRequestHint(attr['id'],);
-            window.location.href='/pick_hint_edit';
-        }
-      });
-        // alert("cant believe this is happenning!");
-    }
+    // function getTheAttr(attractionsJSON) {
+    //
+    //     let editedPoint = JSON.parse(localStorage.getItem("edited"));
+    //   let lat = editedPoint.lat;
+    //   let lng = editedPoint.lng;
+    //   //let name = "didn't found!!!";
+    //   // alert("in get name! "+"of the origin : " + lat + " , " + lng);
+    //   attractionsJSON.forEach(function (attr) {
+    //       // alert("the id is: "+attr['id']);
+    //     let p = {name: attr['name'], description:attr['description'], lat: attr['x'], lng: attr['y']};
+    //     // alert("in get name! "+"of the origin : " + lat + " , " + lng + "\n of the other: "+p.lat +" , "+ p.lng);
+    //     if(p.lat===lat&&(p.lng).toFixed(8)===lng.toFixed(8))
+    //     {
+    //         alert("before delete hint!");
+    //         deleteRequestHint(attr['id'],);
+    //         window.location.href='/pick_hint_edit';
+    //     }
+    //   });
+    //     // alert("cant believe this is happenning!");
+    // }
 
 
 

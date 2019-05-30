@@ -17,7 +17,7 @@
      {% load static %}
 <script src="{% static 'properties.js' %}?version=5"></script>
     {% load static %}
-<script src="{% static 'attr_info.js' %}?version=18"></script>
+<script src="{% static 'attr_info.js' %}?version=19"></script>
 </head>
 <body>
 
@@ -26,14 +26,7 @@
 <div align="center">
 <h2>הוספת אטרקציה</h2>
 <form>
-{##}
-{#    <label for="hint" style="font-size: 20px;"><b>:העלאת תמונה למידע על אטרקציה</b></label>#}
-{#<p></p>#}
-{#<input type="file" onchange="encodeImageFileAsURL(this)"/>#}
-{#<p><img id="output" width="200"  style="display: none"/></p>#}
 
-{#        {% load static %}#}
-{#<script src="{% static 'add_attraction.js' %}?version=2"></script>#}
 
     <article>
         <label for="files">Select multiple files: </label>
@@ -49,7 +42,7 @@
 
 
 <p><br/></p>
-    <button class='button google-blue' id="submit_btn_add_attr" onclick="sendAll()" type="button" style="width: 220px;">שליחה</button>
+    <button class='button google-blue' id="submit_btn_add_attr" onclick="sendTheAttractionWithAllInformation()" type="button" style="width: 220px;">שליחה</button>
 
   </div>
 

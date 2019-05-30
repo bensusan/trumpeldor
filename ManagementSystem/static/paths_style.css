@@ -1,6 +1,6 @@
 body {
     background-repeat: no-repeat;
-    background-color: #a797cc;
+    background-color: #cccbac;
     /*background-size: cover;*/
     background-attachment: fixed;
 }
@@ -9,6 +9,11 @@ body {
 border-radius: 5px;
     width: 500px;
 border-color: green;}
+
+.threeButtonsLocation{
+    position: fixed;
+    left: 380px;
+}
 
 .button {
   background-color: blue;
