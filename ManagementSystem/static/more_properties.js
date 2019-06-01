@@ -1,24 +1,16 @@
 let theurl = "";
 
-window.onload = function () {
-    let sendSettings = document.getElementById("save_props");
-    sendSettings.addEventListener('click', function () {
-        sendThis();
-    });
-};
 
 function sendThis() {
-
-        // let toSend = {
-        //     boundaries: [],
-        //     logo: [],
-        //     loginHours: document.getElementById('info_ttl').value,
-        //     successAudio: [],
-        //     failureAudio: []
-        // };
-        //
-        // postRequestSettings(toSend);
-        window.location.href = '/main';
+    let toSend = {
+        boundaries: [],
+        logo: [],
+        loginHours: document.getElementById('info_ttl').value,
+        successAudio: [],
+        failureAudio: []
+    };
+    postRequestSettings(toSend);
+    window.location.href = '/main';
 }
 
 function func(element) {
@@ -30,7 +22,6 @@ function func(element) {
     mp.src = URL.createObjectURL(element.files[0]);
     aud.load();
     inpi.style.display = "none";
-
 
     theurl = "";
 
@@ -50,7 +41,7 @@ function doSomething(thing) {
 }
 
 function postRequestSettings(data) {
-    serverRequest("POST", function noop(dummy) {
+    serverRequest("PUT", function noop(dummy) {
         }, 'http://' + ip + ':12344/managementsystem/settings/',
         JSON.stringify(data));
 }

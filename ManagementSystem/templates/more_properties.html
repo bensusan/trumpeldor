@@ -9,14 +9,13 @@
     {% load static %}
     <link rel="stylesheet" href="{% static 'just_want_background.css' %}?version=2">
     {% load static %}
-    <link rel="stylesheet" href="{% static 'Map.css' %}?version=1">
+    <link rel="stylesheet" href="{% static 'Map.css' %}?version=2">
     {% load static %}
-    <script src="{% static 'properties.js' %}?version=4"></script>
-
+    <script src="{% static 'properties.js' %}?version=10"></script>
     {% load static %}
-    <script src="{% static 'more_properties.js' %}?version=44"></script>
+    <script src="{% static 'more_properties.js' %}?version=25"></script>
     {% load static %}
-    <script src="{% static 'prop_map.js' %}?version=5"></script>
+    <script src="{% static 'prop_map.js' %}?version=10"></script>
 
 </head>
 <body>
@@ -60,7 +59,7 @@
            style="width:160px;height:20px;">
     <label style="font-size: 20px"><b>?כמה זמן תהיי מעוניינת לשמור מידע על משתמש רשום</b></label>
     <p></p>
-    <input type="file" name="file" id="inpi" onchange="func(this)" accept=".mp3"/>
+    <input type="file" id="inpi" onchange="func(this)" accept=".mp3"/>
     <label style="font-size: 20px"><b>:הוספת צליל הגעה לאטרקציה</b></label>
     <p></p>
     <audio controls autoplay id="audio_controls" style="display: none">
@@ -68,7 +67,7 @@
     </audio>
 
     <p><br/></p>
-    <button class="button" id="save_props">שמירת הגדרות</button>
+     <button class="button" type="button" id="save_props" >שמירת הגדרות</button>
 
 </div>
 <nav id="sideMenu"></nav>
