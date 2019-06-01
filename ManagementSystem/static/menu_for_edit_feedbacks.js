@@ -5,7 +5,7 @@ document.getElementById("sideMenu").innerHTML = '<div class="sidenav">\n' +
     '  <a href="/main">לתפריט הראשי</a>\n' +
     // '  <a onclick="wantToChangeButton()">Change Feedback</a>\n' +
     '  <a onclick="wantToDeleteButton()">מחק שאלת משוב</a>\n' +
-    '  <a href="/edit_attraction">!סיימתי</a>\n' +
+    '  <a href="/main">!סיימתי</a>\n' +
     '</div>\n' +
     '\n' +
     '<div class="main">\n' +
