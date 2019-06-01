@@ -17,7 +17,7 @@
     {% load static %}
     <script src="{% static 'attractions.js' %}?version=5"></script>
     {% load static %}
-<script src="{% static 'add_aq.js' %}?version=8"></script>
+<script src="{% static 'add_aq.js' %}?version=11"></script>
 
 </head>
 <body>
@@ -35,6 +35,7 @@
     <p></p>
 
     <INPUT type="text" id="ques" placeholder="רשמי את השאלה" p name="chk" style="text-align:right;width: 660px;"/>
+    <INPUT type="text" id="quesEnglish" placeholder="write the question..." p name="chk" style="display:none;text-align:right;width: 660px;"/>
 <p></p>
 
 	<TABLE id="dataTable" width="350px" border="1">
@@ -51,8 +52,23 @@
 			<TD><INPUT type="text" name="txt" style="width: 660px;"/></TD>
 		</TR>
 	</TABLE>
+
+    <TABLE id="dataTableEnglish" width="350px" border="1" style="display: none">
+		<TR>
+			<TD><INPUT type="checkbox" name="chk" style="width: 50px;"/></TD>
+			<TD><INPUT type="text" name="txt" style="width: 660px;"/></TD>
+		</TR>
+        <TR>
+			<TD><INPUT type="checkbox" name="chk" style="width: 50px;"/></TD>
+			<TD><INPUT type="text" name="txt" style="width: 660px;"/></TD>
+		</TR>
+        <TR>
+			<TD><INPUT type="checkbox" name="chk" style="width: 50px;"/></TD>
+			<TD><INPUT type="text" name="txt" style="width: 660px;"/></TD>
+		</TR>
+	</TABLE>
 <p></p>
-    <INPUT type="button" value="הוספת תשובה" onclick="addRow('dataTable')" />
+    <INPUT type="button" value="הוספת תשובה" onclick="addRow('dataTable');addRow('dataTableEnglish')" />
     <p></p>
     <button class='button blogger' id="finish_add_aq_btn" type="button">שליחה</button>
     </div>
