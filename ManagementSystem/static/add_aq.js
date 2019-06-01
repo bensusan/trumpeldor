@@ -3,6 +3,20 @@ let correctAnswersIndexes = [];
 
 window.onload = function() {
 
+
+    let hebrewBTN = document.getElementById("hebrewBTN");
+    let englishBTN = document.getElementById("englishBTN");
+
+    hebrewBTN.addEventListener('click', function () {
+
+
+    });
+
+    englishBTN.addEventListener('click', function () {
+
+    });
+
+
     initializeFinishBTNfunctionality();
 
 };

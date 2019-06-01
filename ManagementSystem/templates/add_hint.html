@@ -14,11 +14,20 @@
     {% load static %}
 <script src="{% static 'attractions.js' %}?version=2"></script>
     {% load static %}
-<script src="{% static 'add_hint.js' %}?version=5"></script>
+<script src="{% static 'add_hint.js' %}?version=6"></script>
      {% load static %}
 <script src="{% static 'properties.js' %}?version=2"></script>
 </head>
 <body>
+
+<button id="englishBTN" class="language"
+        style="height: 58px;width: 100px; background-image: url('../static/usa.JPG');background-size: cover; font-size:24px">
+</button>
+<button id="hebrewBTN" class="language"
+        style="height: 58px;width: 100px; background-image: url('../static/israel.JPG');background-size: cover; font-size:24px">
+</button>
+
+
 <div align="center">
 <label><b>:רמזים קיימים</b></label>
 <p id="existing_hints"></p>
@@ -28,6 +37,7 @@
    <p><br /></p>
     <p></p>
 <textarea id="text_hint_id" name="subject" placeholder="...כתבי את הרמז" style="direction:ltr;text-align:right;display: none;width:300px;height:200px;border-radius: 10px;"></textarea>
+    <textarea id="text_hint_id_english" name="subject" placeholder="write the hint..." style="direction:ltr;text-align:right;display: none;width:300px;height:200px;border-radius: 10px;"></textarea>
 <p></p>
 <button class='button google-blue' type="button" id="send_text_hint" style="display: none">שליחה</button>
 <p></p>
