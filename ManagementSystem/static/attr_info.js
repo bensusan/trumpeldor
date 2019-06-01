@@ -1,6 +1,22 @@
 let arrOfPicsData = [];
 
 window.onload = function(){
+    let desc = document.getElementById("desc");
+    let desc_english = document.getElementById("desc_english");
+
+    let hebrewBTN = document.getElementById("hebrewBTN");
+    let englishBTN = document.getElementById("englishBTN");
+
+    hebrewBTN.addEventListener('click', function () {
+        desc.style.display = "";
+        desc_english.style.display = "none";
+
+    });
+
+    englishBTN.addEventListener('click', function () {
+        desc.style.display = "none";
+        desc_english.style.display = "";
+    });
     initializeTheListOfPicturesToShow();
 };
 
@@ -62,7 +78,7 @@ function initializeTheListOfPicturesToShow() {
             name:namee
             //,x:31.262860,y:34.801753
             ,x:xx ,y:yy
-            ,description:document.getElementById("desc").value
+            ,description:document.getElementById("desc").value+";;"+document.getElementById("desc_english").value
             ,picturesURLS:arrOfPicsData ,videosURLS:[]};
 
         postRequestAttractionn(attraction_to_send);

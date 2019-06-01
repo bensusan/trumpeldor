@@ -3,9 +3,9 @@
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     {% load static %}
-    <link rel="stylesheet" href="{% static 'buttoni.css' %}?version=5">
+    <link rel="stylesheet" href="{% static 'buttoni.css' %}?version=6">
     {% load static %}
-    <link rel="stylesheet" href="{% static 'attractions_style.css' %}?version=10">
+    <link rel="stylesheet" href="{% static 'attractions_style.css' %}?version=13">
     {% load static %}
     <link rel="stylesheet" href="{% static 'SideMenu.css' %}?version=1">
     {% load static %}
@@ -36,24 +36,24 @@
 
         </div>
     </div>
-    <p></p>
-    <div align="center">
-        <input type="text" id="manual_lng" placeholder="Enter longitude" style="display: none" required>
-        <input type="text" id="manual_lat" placeholder="Enter latitude" style="display: none" required>
+
+    <div class="mannualy">
+
+        <input type="text" id="manual_lng" placeholder="Enter longitude" style="width:150px;display: none" required>
+        <input type="text" id="manual_lat" placeholder="Enter latitude" style="width:150px;display: none" required>
+
+        <div align="center"><button id="add_manually" type="button" style="display: none">הוסיפי</button></div>
+
     </div>
-    <p></p>
-    <div align="center">
-        <button id="add_manually" type="button" style="display: none">הוסיפי</button>
-    </div>
+
+
     <textarea id="points_arr_for_test" style="display: none"></textarea>
 
 </div>
 
 <div>
 
-    {% load static %}
-    <script src="{% static 'usa.JPG' %}?version=5"></script>
-  <img src="usa.JPG"/>
+
 
     <nav id="sideMenu"></nav>
     {% load static %}

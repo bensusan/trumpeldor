@@ -80,6 +80,22 @@ background-image: -o-linear-gradient(top,#4D90FE,#357AE8);
 background-image: linear-gradient(top,#4D90FE,#357AE8);
 border: 1px solid #3079ED;
 }
+.language
+{
+border: 1px solid rgba(0, 0, 0, 0.1);
+background-image: -webkit-gradient(linear,left top,left bottom,from(#F5F5F5),to(#F1F1F1));
+background-image: -webkit-linear-gradient(top,#F5F5F5,#F1F1F1);
+background-image: -moz-linear-gradient(top,#F5F5F5,#F1F1F1);
+background-image: -ms-linear-gradient(top,#F5F5F5,#F1F1F1);
+background-image: -o-linear-gradient(top,#F5F5F5,#F1F1F1);
+background-image: linear-gradient(top,#F5F5F5,#F1F1F1);
+border: 1px solid #DCDCDC;
+}
+.language:hover
+{
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(0, 0, 0, 0.2);
+}
 .yahoo
 {
 border: 1px solid #3261C3;
