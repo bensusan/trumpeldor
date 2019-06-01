@@ -117,6 +117,8 @@ function getFieldsValuesOfExistingAttraction(attractionsJSON){
         // alert("in get name! "+"of the origin : " + lat + " , " + lng + "\n of the other: "+p.lat +" , "+ p.lng);
         if(p.lat===lat&&(p.lng).toFixed(8)===lng.toFixed(8))
         {
+            let picsRetreive = attr['picturesURLS'];
+            alert(picsRetreive[0]);
             attr_for_editing=attr;
           // name=p.name;
           document.getElementById("attr_name").value = p.name;
