@@ -7,6 +7,7 @@ namespace trumpeldor
 {
     public class LocationController
     {
+        private const double MINIMUM_DISTANCE = 5;
         private static LocationController instance = null;
         private List<Position> allPositions = null;
         public Position LastPoint { get; set; }
@@ -28,8 +29,14 @@ namespace trumpeldor
 
         public void AddToPositionsHistory(Position p)
         {
-            allPositions.Add(p);
             LastPoint = p;
+            if(isFarEnough(p))
+                allPositions.Add(p);
+        }
+
+        public void ClearPositions()
+        {
+            allPositions = null;
         }
 
         public int GetListCount()
@@ -72,6 +79,15 @@ namespace trumpeldor
             return deg * (Math.PI / 180);
         }
 
+        private bool isFarEnough(Position p)
+        {
+            if (allPositions!=null && allPositions.Count > 1)
+            {
+                Position target = allPositions[allPositions.Count - 1];
+                return DistanceBetween(p.Latitude, p.Longitude, target.Latitude, target.Longitude) > MINIMUM_DISTANCE;
+            }
+            else return true;
+        }
 
     }
 }

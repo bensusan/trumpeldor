@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using trumpeldor.Models;
 using trumpeldor.SheredClasses;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -15,9 +16,7 @@ namespace trumpeldor.Views
     public partial class groupCreationPage : ContentPage
     {
         private GameController gc;
-        private int selectedPathLength;
-        private static int DELETE_PLAYER_COLUMN = 0, PLAYER_NUMBER_COLUMN = 1, PLAYER_AGE_COLUMN = 2; 
-
+        private static int DELETE_PLAYER_COLUMN = 0, PLAYER_NUMBER_COLUMN = 1, PLAYER_AGE_COLUMN = 2;
         public groupCreationPage() : this("", User.SOCIAL_NETWORK.Anonymous){}
 
         public groupCreationPage(string userName, User.SOCIAL_NETWORK socialNetwork){
@@ -41,8 +40,17 @@ namespace trumpeldor.Views
         protected override async void OnAppearing()
         {
             base.OnAppearing();
-            if(!await ShowPastDetails())
+            if (!await ShowPastDetails())
+            {
+                var existingPages = Navigation.NavigationStack.ToList();
+                foreach (var page in existingPages)
+                    Navigation.RemovePage(page);
                 Application.Current.MainPage = new NavigationPage();
+                //var page= new Xamarin.Forms.NavigationPage(new trumpeldor.Views.NavigationPage());
+                //var r = Xamarin.Forms.NavigationPage.RootPageProperty;
+                //var r1 = page.RootPage;
+                //Application.Current.MainPage = page;
+            }
 
         }
 
@@ -67,6 +75,7 @@ namespace trumpeldor.Views
                         gc.ContinuePreviousTrip();
                         //Application.Current.MainPage = new NavigationPage();
                         return false;
+
                     }
                 }
                 RelevantInformation ans = gc.LoadRelevantInformationFromLastTrip();

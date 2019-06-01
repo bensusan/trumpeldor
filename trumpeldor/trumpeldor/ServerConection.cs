@@ -53,6 +53,12 @@ namespace trumpeldor
             urlPrefix = "http://" + IP + ":" + PORT + "/usersystem/";
         }
 
+        internal bool IsAdmin(string email)
+        {
+            string jsonResponse = SendToServerAndGetResponseBack(new { email=email,}, "IsAdmin/");
+            return jsonResponse.Equals("True");
+        }
+
         public User SignUp(String name, String socialNetwork) {
             var newUser = new
             {
@@ -141,6 +147,12 @@ namespace trumpeldor
             return null;
         }
 
+        internal Setttings GetSettings()
+        {
+            string jsonResponse = GetFromServer("getSettings/");
+            return JsonConvert.DeserializeObject<Setttings>(jsonResponse);
+        }
+
         private class HelpHints
         {
             public List<Hint> hints { get; set; }
@@ -220,8 +232,15 @@ namespace trumpeldor
 
         internal Trip GetPreviousTrip(User currentUser)
         {
+            //string jsonResponse = SendToServerAndGetResponseBack(currentUser, "previousTrip/");
+            //return JsonConvert.DeserializeObject<Trip>(jsonResponse);
             string jsonResponse = SendToServerAndGetResponseBack(currentUser, "previousTrip/");
-            return JsonConvert.DeserializeObject<Trip>(jsonResponse);
+            Trip trip = JsonConvert.DeserializeObject<Trip>(jsonResponse);
+            var t1 = Task.Run(() => { trip.attractionsDone = GetFullAttractions(trip.attractionsDone); });
+            var t2 = Task.Run(() => { trip.track = GetFullTrack(trip.track); });
+            var t3 = Task.Run(() => { trip.feedbacks = GetFeedbacks(trip); });
+            t1.Wait(); t2.Wait(); t3.Wait();
+            return trip;
         }
 
         class HelpOpenMessages

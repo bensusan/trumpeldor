@@ -71,6 +71,12 @@ class BL_Abstract(object):
     def getEntertainment(self, attraction):
         raise NotImplementedError("Should have implemented this")
 
+    def isAdmin(self, data):
+        raise NotImplementedError("Should have implemented this")
+
+    def getSettings(self):
+        raise NotImplementedError("Should have implemented this")
+
     def add_attraction(self, attraction):
         raise NotImplementedError("Should have implemented this")
 
@@ -162,7 +168,7 @@ class BL_Abstract(object):
     def get_info(self):
         raise NotImplementedError("Should have implemented this")
 
-    def delete_info(self, id):
+    def delete_info(self):
         raise NotImplementedError("Should have implemented this")
 
     def get_all_sliding_puzzles_for_attraction(self, id_attraction):
@@ -302,6 +308,16 @@ class BLProxy(BL_Abstract, ABC):
         if self.Implementation is None:
             raise NotImplementedError("Should have implemented this")
         return self.Implementation.getEntertainment(attraction)
+
+    def isAdmin(self, data):
+        if self.Implementation is None:
+            raise NotImplementedError("Should have implemented this")
+        return self.Implementation.isAdmin(data)
+
+    def getSettings(self):
+        if self.Implementation is None:
+            raise NotImplementedError("Should have implemented this")
+        return self.Implementation.getSettings()
 
     def add_attraction(self, attraction):
         if self.Implementation is None:
@@ -453,10 +469,10 @@ class BLProxy(BL_Abstract, ABC):
             raise NotImplementedError("Should have implemented this")
         return self.Implementation.get_info()
 
-    def delete_info(self, id):
+    def delete_info(self):
         if self.Implementation is None:
             raise NotImplementedError("Should have implemented this")
-        return self.Implementation.delete_info(id)
+        return self.Implementation.delete_info()
 
     def get_all_sliding_puzzles_for_attraction(self, id_attraction):
         if self.Implementation is None:

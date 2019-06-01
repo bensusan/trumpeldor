@@ -181,6 +181,17 @@ class BL_Implementation(BL_Abstract):
         entertainmentWrapper = {'className': className, 'object': entertainment}
         return entertainmentWrapper
 
+    def isAdmin(self, data):
+        # TODO change
+        lstOfAllAdmins = self.DAL.getAdmins()
+        for admin in lstOfAllAdmins:
+            if data['email'] == admin:
+                return True
+        return False
+
+    def getSettings(self):
+        return self.DAL.getSettings()
+
     def delete_attraction(self, id):
         if self.get_attraction(id) is not None:
             return self.DAL.delete_attraction(id)
@@ -249,13 +260,13 @@ class BL_Implementation(BL_Abstract):
         return self.DAL.get_all_feedback_questions()
 
     def add_info(self, info):
-        return self.DAL.add_info(info['info'])
+        return self.DAL.add_info(info['name_app'], info['about_app'], info['how_to_play'])
 
     def get_info(self):
         return self.DAL.get_info()
 
-    def delete_info(self, id):
-        return self.DAL.delete_info(id)
+    def delete_info(self, ):
+        return self.DAL.delete_info()
 
     def get_all_sliding_puzzles_for_attraction(self, id_attraction):
         return self.DAL.get_all_sliding_puzzles_for_attraction(id_attraction)

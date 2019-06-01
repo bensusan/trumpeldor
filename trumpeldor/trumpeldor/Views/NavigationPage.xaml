@@ -6,6 +6,7 @@
              xmlns:translator="clr-namespace:trumpeldor.Helpers">
     <ContentPage.Content>
         <StackLayout Style="{DynamicResource mainStackLayout}">
+            
             <StackLayout Style="{StaticResource mainStackLayout}" Orientation="Horizontal">
                 <StackLayout x:Name="buttonsTopLayout" Orientation="Horizontal" HorizontalOptions="StartAndExpand">
                     <ImageButton x:Name="v" Clicked="Next_Destination_Button_Clicked" Style="{StaticResource smallCircleImageButtonStyle}"/>
@@ -15,7 +16,7 @@
             <Label Text="Trumpeldor" Style="{StaticResource titleStyle}"/>
             <StackLayout Style="{StaticResource mainStackLayout}" Orientation="Horizontal" HorizontalOptions="Fill" Spacing="0" VerticalOptions="StartAndExpand">
                 <ImageButton x:Name="leftArrow" Clicked="LeftArrow_Clicked" HorizontalOptions="End" IsEnabled="False" Style="{StaticResource baseViewStyle}"/>
-                <Frame BorderColor="Black" CornerRadius="20" WidthRequest="200" HeightRequest="500" Padding="5" Margin="0">
+                <Frame x:Name="hintFrame" BorderColor="Black" CornerRadius="20" WidthRequest="200" HeightRequest="500" Padding="5" Margin="0">
                     <StackLayout x:Name="hintStack" Style="{StaticResource mainStackLayout}" Orientation="Vertical" WidthRequest="200" HeightRequest="500" HorizontalOptions="Fill" VerticalOptions="Fill" Margin="1" Padding="1">
                         <Label x:Name="hintText" Style="{StaticResource labelStyle}" IsVisible="False" WidthRequest="200" HeightRequest="500" HorizontalOptions="Fill" VerticalOptions="Fill"/>
                         <WebView x:Name="hintWebView" IsVisible="False" WidthRequest="200" HeightRequest="500" HorizontalOptions="Fill" VerticalOptions="Fill"/>
@@ -23,15 +24,15 @@
                     </StackLayout>
                 </Frame>
                 <ImageButton x:Name="rightArrow" Clicked="RightArrow_Clicked" HorizontalOptions="Start" IsEnabled="False" Style="{StaticResource baseViewStyle}"/>
-                <Grid>
-                    <Image x:Name="temperature"  WidthRequest="200" Style="{StaticResource baseViewStyle}"/>
-                    <Slider x:Name="odometer" IsEnabled="False" WidthRequest="180" Rotation="-90" />
+                <Grid Padding="0" Margin="0" HorizontalOptions="EndAndExpand" Style="{StaticResource gridStyle}">
+                    <Image x:Name="temperature" WidthRequest="200" HeightRequest="500" Style="{StaticResource baseViewStyle}" HorizontalOptions="EndAndExpand" Margin="0,100,0,100"/>
+                    <Slider x:Name="odometer" WidthRequest="200" IsEnabled="False" Rotation="-90" />
                 </Grid>
             </StackLayout>
             <StackLayout x:Name="downStack" Style="{StaticResource mainStackLayout}" Orientation="Horizontal" HorizontalOptions="FillAndExpand" Margin="0" Padding="0">
-                <Button x:Name="hintBtn" Text="{translator:Translate add_hint}" Clicked="Get_Hint_Button_Clicked" Style="{StaticResource largeButtonStyle}" AutomationId="AddHintBtn" Margin="20,10,30,10"/>
+                <Button x:Name="hintBtn" WidthRequest="150" Text="{translator:Translate add_hint}" Clicked="Get_Hint_Button_Clicked" Style="{StaticResource baseButtonStyle}" AutomationId="AddHintBtn"/>
                 <!--<maps:Map x:Name="mapBtn" Focused="Map_Focused" WidthRequest="70" HeightRequest="140" Margin="0"/>-->
-                <ImageButton x:Name="mapBtn" Style="{StaticResource regularCircleImageButtonStyle}" Clicked="Map_Clicked" />
+                <ImageButton x:Name="mapBtn" Style="{StaticResource regularCircleImageButtonStyle}" Clicked="Map_Clicked" HorizontalOptions="EndAndExpand"/>
             </StackLayout>
         </StackLayout>
     </ContentPage.Content>

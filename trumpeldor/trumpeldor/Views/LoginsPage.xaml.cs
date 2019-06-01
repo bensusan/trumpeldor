@@ -48,9 +48,17 @@ namespace trumpeldor.Views
         private void OnLoginComplete(GoogleUser googleUser, string message)
         {
             if (googleUser != null)
-                Application.Current.MainPage = new groupCreationPage(googleUser.ID, User.SOCIAL_NETWORK.Google);
+            {
+                //TODO
+                //if(GameController.getInstance().IsAdmin(googleUser.Email));
+                //Application.Current.MainPage = new AdminPage(googleUser);
+                ContentPage nextPage = new groupCreationPage(googleUser.ID, User.SOCIAL_NETWORK.Google);
+                _googleManager.Logout();
+                Application.Current.MainPage = nextPage;
+            }
             else
-                Device.BeginInvokeOnMainThread(async () =>{
+                Device.BeginInvokeOnMainThread(async () =>
+                {
                     await DisplayAlert(AppResources.error, AppResources.error_in_google_login, AppResources.ok);
                 });
         }

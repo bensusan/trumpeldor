@@ -20,23 +20,18 @@
 </head>
 <body>
 <div align="center">
-<label for="hint"><b>:רמזים קיימים</b></label>
+<label><b>:רמזים קיימים</b></label>
 <p id="existing_hints"></p>
-
-{#<label for="hint"><b>Add Hint:</b></label>#}
 
 
 
    <p><br /></p>
-{#<button type="button" id="add_text_hint">add text</button>#}
-<p></p>
+    <p></p>
 <textarea id="text_hint_id" name="subject" placeholder="...כתבי את הרמז" style="direction:ltr;text-align:right;display: none;width:300px;height:200px;border-radius: 10px;"></textarea>
 <p></p>
 <button class='button google-blue' type="button" id="send_text_hint" style="display: none">שליחה</button>
 <p></p>
 
-{#<button type="button" id="add_vid_hint">add video</button>#}
-<p></p>
 <textarea id="vid_hint_description" placeholder="...כתבי תיאור" style="width:340px;height:80px;direction:ltr;text-align:right;display: none"></textarea>
 <p></p>
     <div id="message"></div>
@@ -51,7 +46,7 @@
 <textarea id="pic_hint_description" placeholder="...כתבי תיאור" style="width:340px;height:80px;direction:ltr;text-align:right;display: none"></textarea>
     <p></p>
 <p></p>
-<label for="hint" id="upload_title" style="display: none"><b>:העלאת התמונה</b></label>
+<label id="upload_title" style="display: none"><b>:העלאת התמונה</b></label>
 <p></p>
 <input type="file" id="file" onchange="encodeImageFileAsURL(this)" style="display: none"/>
 <p><img id="output" width="200" style="display: none"/></p>

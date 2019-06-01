@@ -4,10 +4,6 @@ from django.contrib.postgres.fields import ArrayField
 from django.core.validators import int_list_validator
 
 
-
-# we can see which type is every field
-
-
 class Attraction(models.Model):
     name = models.TextField()
     x = models.FloatField()
@@ -15,6 +11,7 @@ class Attraction(models.Model):
     description = models.TextField()
     picturesURLS = JSONField(blank=True, null=True)
     videosURLS = JSONField(blank=True, null=True)
+    # visible = models.BooleanField()
 
 
 class User(models.Model):
@@ -127,7 +124,9 @@ class Message(models.Model):
 
 
 class Info(models.Model):
-    info = models.TextField()
+    app_name = models.TextField()
+    about_app = models.TextField()
+    how_to_play = models.TextField()
 
 
 class Admin(models.Model):

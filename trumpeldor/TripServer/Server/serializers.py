@@ -16,7 +16,7 @@ class HintSerializer(serializers.ModelSerializer):
 
 class AttractionSerializer(serializers.ModelSerializer):
     class Meta:
-        fields = ('id', 'name', 'x', 'y', 'description', 'picturesURLS', 'videosURLS',)
+        fields = ('id', 'name', 'x', 'y', 'description', 'picturesURLS', 'videosURLS')
         model = Attraction
 
 
@@ -158,7 +158,7 @@ class ScoreSerializer(serializers.ModelSerializer):
 
 class InfoSerializer(serializers.ModelSerializer):
     class Meta:
-        fields = ('id', 'info',)
+        fields = ('id', 'app_name', 'about_app', 'how_to_play',)
         model = Info
 
 
@@ -166,6 +166,11 @@ class MediaSerializer(serializers.ModelSerializer):
     class Meta:
         fields = ('description', 'fileURL',)
         model = Media
+
+
+class IsAdminSerializer(serializers.Serializer):
+    email = serializers.EmailField()
+
 
 
 class SettingsSerializer(serializers.ModelSerializer):

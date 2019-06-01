@@ -85,7 +85,7 @@ namespace trumpeldor.Views
                     }
                     else
                     {
-                        gc.EditScore(GameController.SCORE_VALUE.Attraction_Arrive);
+                        gc.EditScore(ScoreRule.Kinds.Attraction_Arrive);
                         DisplayAlert(AppResources.arrived, AppResources.arrived+"!  " + DistanceBetween(currLat, currLong, p.x, p.y).ToString(), AppResources.close);
                         Application.Current.MainPage = new AttractionPage();
                         return false;

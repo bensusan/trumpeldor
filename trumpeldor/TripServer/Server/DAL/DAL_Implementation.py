@@ -58,13 +58,40 @@ class DAL_Implementation(DAL_Abstract):
     def getTrip(self, tripId):
         return Trip.objects.filter(id=tripId).first()
 
+    def getAdmins(self):
+        # TODO!!!!!
+        return ['kaplan.amit@gmail.com']
+
+    def getSettings(self):
+        return  {
+                    'boundaries':   [
+                                        {'x': 31.265372, 'y': 34.798240},
+                                        {'x': 31.261009, 'y': 34.798178},
+                                        {'x': 31.260975, 'y': 34.805906},
+                                        {'x': 31.263513, 'y': 34.805998},
+                                        {'x': 31.265315, 'y': 34.803155}
+                                    ],
+                    'logo':         addPrefixUrlToSpecificName("logo.png"),
+                    'loginHours':   36,
+                    'scoreRules':   [
+                                        {'ruleName': 'hmtt', 'score': -10},
+                                        {'ruleName': 'aqm', 'score': -2},
+                                        {'ruleName': 'aqc', 'score': 10},
+                                        {'ruleName': 'aa', 'score': 50},
+                                        {'ruleName': 'sps', 'score': 10},
+                                        {'ruleName': 'ttd', 'score': 10},
+                                        {'ruleName': 'ps', 'score': 10}
+                                    ]
+
+                }
+
     def add_attraction(self, name, x, y, description, picturesURLS, videosURLS):
         names_of_pics=[]
         names_of_vids=[]
         if picturesURLS != 'null':
-            names_of_pics = add_media(picturesURLS)
+            names_of_pics = add_media(picturesURLS, 'image/jpeg', '.png')
         if videosURLS != 'null':
-            names_of_vids = add_media(videosURLS)
+            names_of_vids = add_media(videosURLS, 'video/mp4', '.mp4')
         attraction = Attraction(name=name, x=x, y=y, description=description, picturesURLS=addPrefixUrl(names_of_pics),
                                 videosURLS=addPrefixUrl(names_of_vids))
         attraction.save()
@@ -182,9 +209,9 @@ class DAL_Implementation(DAL_Abstract):
         attraction.y=y
         attraction.description=description
         if picturesURLS is not None:
-            attraction.picturesURLS=addPrefixUrl(add_media(picturesURLS))
+            attraction.picturesURLS=addPrefixUrl(add_media(picturesURLS, 'image/jpeg', '.png'))
         if videosURLS is not None:
-            attraction.videosURLS=addPrefixUrl(add_media(videosURLS))
+            attraction.videosURLS=addPrefixUrl(add_media(videosURLS, 'video/mp4', '.mp4'))
         attraction.save()
         return attraction
 
@@ -290,22 +317,24 @@ class DAL_Implementation(DAL_Abstract):
     def get_all_feedback_questions(self):
         return Feedback.objects.all()
 
-    def add_info(self, info):
-        info = Info(info=info)
+    def add_info(self, app_name, about_app, how_to_play):
+        info = Info(app_name=app_name, about_app=about_app,  how_to_play=how_to_play)
         info.save()
+        if Info.objects.all().count() > 1:
+            Info.objects.first().delete()
         return info
 
     def get_info(self):
-        return Info.objects.all()
+        return Info.objects.last()
 
-    def delete_info(self, id):
-        return Info.objects.filter(id=id).first().delete()
+    def delete_info(self):
+        return False
 
     def get_all_sliding_puzzles_for_attraction(self, id_attraction):
         return SlidingPuzzle.objects.filter(attraction=self.get_attraction(id_attraction)).all()
 
     def add_sliding_puzzle(self, id_attraction, piecesURLS, width, height, description):
-        sliding_puzzle_pic = add_media([piecesURLS])
+        sliding_puzzle_pic = add_media([piecesURLS], 'image/jpeg', '.png')
         wid = int(width)
         hei = int(height)
         slicers = image_slicer.slice('media/' + sliding_puzzle_pic[0], wid*hei)
@@ -326,7 +355,7 @@ class DAL_Implementation(DAL_Abstract):
         return Puzzle.objects.filter(attraction=self.get_attraction(id_attraction)).all()
 
     def add_puzzle(self, id_attraction, piecesURLS, width, height, description):
-        puzzle_pic = add_media([piecesURLS])
+        puzzle_pic = add_media([piecesURLS], 'image/jpeg', '.png')
         wid = int(width)
         hei = int(height)
         slicers = image_slicer.slice('media/' + puzzle_pic[0], wid * hei)
@@ -384,13 +413,13 @@ class DAL_Implementation(DAL_Abstract):
         return settings
 
 #returns array of names of the media files saved in the media folder
-def add_media(media_urls):
+def add_media(media_urls, replace, suffix):
     names_of_files = []
     for file in media_urls:
-        file = file.replace('data:image/jpeg;base64,', '')
+        file = file.replace('data:' + replace + ';base64,', '')
         #print(file)
         imgdata = base64.b64decode(file)
-        filename = str(uuid.uuid4()) + '.png'
+        filename = str(uuid.uuid4()) + suffix
         with open('media/' + filename, 'wb') as f:
             f.write(imgdata)
         names_of_files += [filename]

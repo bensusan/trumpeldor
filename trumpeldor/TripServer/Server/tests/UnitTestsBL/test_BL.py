@@ -10,7 +10,7 @@ import random
 from django.conf import settings
 import math
 from enum import Enum
-
+from Server.Services import *
 
 class TrackLength(Enum):
     NOT_EXIST = -1
@@ -46,19 +46,20 @@ def closestAttraction(userX, userY, destinations):
     return closest
 
 
-def check_getClosestAttractionFromTrack(track, testCase):
-    destinations = testCase.bl.getAllAttractionsFromTrack(track)
+def check_getClosestAttractionFromTrack(track, assertFunc):
+    destinations = bl.getAllAttractionsFromTrack(track)
     for dst in destinations:
         userX, userY = dst["x"], dst["y"]
-        testCase.check(
+        check(
             closestAttraction(userX, userY, destinations),
-            testCase.bl.getClosestAttractionFromTrack(track, userX, userY),
+            bl.getClosestAttractionFromTrack(track, userX, userY),
+            assertFunc,
             AttractionSerializer
         )
 
 
 def check_getTrackAndNextAttractionByLengthAndUserLocation(length, expectedAttraction, possibleTracks, testCase):
-    actualTrack, actualAttraction = testCase.bl.getTrackAndNextAttractionByLengthAndUserLocation(
+    actualTrack, actualAttraction = bl.getTrackAndNextAttractionByLengthAndUserLocation(
         length,
         expectedAttraction["x"],
         expectedAttraction["y"]
@@ -67,386 +68,418 @@ def check_getTrackAndNextAttractionByLengthAndUserLocation(length, expectedAttra
     testCase.assertIn(actualTrack, possibleTracks)
 
 
-class Unit_BL(TestCase):
-    BL_Impl = BL_Implementation()
-    BL_Impl.setDAL(DAL_Implementation())
-    bl = BLProxy()
-    bl.setImplementation(BL_Impl)
+BL_Impl = BL_Implementation()
+BL_Impl.setDAL(DAL_Implementation())
+bl = BLProxy()
+bl.setImplementation(BL_Impl)
 
-    # Users
-    UserNotExist = {"id": -1, "name": "NotExist", "socialNetwork": "Test", "lastSeen": None, "email": None}
-    UserExist = {"id": 0, "name": "Exist", "socialNetwork": "Test", "lastSeen": None, "email": None}
-    UserNew = {"id": 1, "name": "New", "socialNetwork": "Test", "lastSeen": None, "email": None}
+# Users
+UserNotExist = {"id": -1, "name": "NotExist", "socialNetwork": "Test", "lastSeen": None, "email": None}
+UserExist = {"id": 0, "name": "Exist", "socialNetwork": "Test", "lastSeen": None, "email": None}
+UserNew = {"id": 1, "name": "New", "socialNetwork": "Test", "lastSeen": None, "email": None}
 
-    # Attractions
-    xGen = randomValidNumber(settings.VALID_SECTOR[0], settings.VALID_SECTOR[1])
-    yGen = randomValidNumber(settings.VALID_SECTOR[2], settings.VALID_SECTOR[3])
-    AttractionNotExist = {"id": -1, "name": "NotExist", "x": next(xGen), "y": next(yGen), "description": "",
-                          "picturesURLS": [], "videosURLS": []}
-    AttractionSimple = {"id": 0, "name": "Simple", "x": next(xGen), "y": next(yGen), "description": "",
-                        "picturesURLS": [], "videosURLS": []}
-    AttractionPicture = {"id": 1, "name": "Simple", "x": next(xGen), "y": next(yGen), "description": "",
-                         "picturesURLS": ["x.jpg"], "videosURLS": []}
-    AttractionVideo = {"id": 2, "name": "Simple", "x": next(xGen), "y": next(yGen), "description": "",
-                       "picturesURLS": [], "videosURLS": ["x.mp4"]}
+# Attractions
+xGen = randomValidNumber(settings.VALID_SECTOR[0], settings.VALID_SECTOR[1])
+yGen = randomValidNumber(settings.VALID_SECTOR[2], settings.VALID_SECTOR[3])
+AttractionNotExist = {"id": -1, "name": "NotExist", "x": next(xGen), "y": next(yGen), "description": "",
+                      "picturesURLS": [], "videosURLS": []}
+AttractionSimple = {"id": 0, "name": "Simple", "x": next(xGen), "y": next(yGen), "description": "",
+                    "picturesURLS": [], "videosURLS": []}
+AttractionPicture = {"id": 1, "name": "Simple", "x": next(xGen), "y": next(yGen), "description": "",
+                     "picturesURLS": ["x.jpg"], "videosURLS": []}
+AttractionVideo = {"id": 2, "name": "Simple", "x": next(xGen), "y": next(yGen), "description": "",
+                   "picturesURLS": [], "videosURLS": ["x.mp4"]}
 
-    # Tracks
+# Tracks
 
-    TrackNotExist = {"id": -1, "subTrack": None, "points": [], "length": TrackLength.NOT_EXIST}
-    TrackEmpty = {"id": 0, "subTrack": None, "points": [], "length": TrackLength.EMPTY}
-    TrackShort = {"id": 1, "subTrack": None, "points": [AttractionSimple], "length": TrackLength.SHORT}
-    TrackMedium = {"id": 2, "subTrack": TrackShort, "points": [AttractionPicture], "length": TrackLength.MEDIUM}
-    TrackLong = {"id": 3, "subTrack": TrackMedium, "points": [AttractionVideo], "length": TrackLength.LONG}
+TrackNotExist = {"id": -1, "subTrack": None, "points": [], "length": TrackLength.NOT_EXIST.value}
+TrackEmpty = {"id": 0, "subTrack": None, "points": [], "length": TrackLength.EMPTY.value}
+TrackShort = {"id": 1, "subTrack": None, "points": [AttractionSimple], "length": TrackLength.SHORT.value}
+TrackMedium = {"id": 2, "subTrack": TrackShort, "points": [AttractionPicture], "length": TrackLength.MEDIUM.value}
+TrackLong = {"id": 3, "subTrack": TrackMedium, "points": [AttractionVideo], "length": TrackLength.LONG.value}
 
-    # AmericanQuestions
-    AQ_NotExist = {"id": -1, "question": "NotExist?", "answers": ["Yes"], "indexOfCorrectAnswer": 0,
-                   "attraction": AttractionNotExist}
-    AQ_Simple = {"id": 0, "question": "Simple?", "answers": ["Yes", "No"], "indexOfCorrectAnswer": 0,
-                 "attraction": AttractionSimple}
-    AQ_Picture = {"id": 1, "question": "Picture?", "answers": ["Yes", "No", "No"], "indexOfCorrectAnswer": 0,
-                  "attraction": AttractionPicture}
-    AQ_Video = {"id": 2, "question": "Video?", "answers": ["Yes", "No", "No", "No"], "indexOfCorrectAnswer": 0,
-                "attraction": AttractionPicture}
+# AmericanQuestions
+AQ_NotExist = {"id": -1, "question": "NotExist?", "answers": ["Yes"], "indexOfCorrectAnswer": 0,
+               "attraction": AttractionNotExist}
+AQ_Simple = {"id": 0, "question": "Simple?", "answers": ["Yes", "No"], "indexOfCorrectAnswer": 0,
+             "attraction": AttractionSimple}
+AQ_Picture = {"id": 1, "question": "Picture?", "answers": ["Yes", "No", "No"], "indexOfCorrectAnswer": 0,
+              "attraction": AttractionPicture}
+AQ_Video = {"id": 2, "question": "Video?", "answers": ["Yes", "No", "No", "No"], "indexOfCorrectAnswer": 0,
+            "attraction": AttractionVideo}
 
-    # Hints
-    Hint_NotExist = {"id": -1, "attraction": AttractionNotExist, "kind": "HintText", "data": "NotExist"}
-    Hint_Text = {"id": 0, "attraction": AttractionSimple, "kind": "HintText", "data": "Simple HT"}
-    Hint_Picture = {"id": 1, "attraction": AttractionSimple, "kind": "HintPicture", "data": "x.jpg"}
-    Hint_Video = {"id": 2, "attraction": AttractionSimple, "kind": "HintVideo", "data": "x.mp4"}
-    Hint_Map = {"id": 3, "attraction": AttractionSimple, "kind": "HintMap",
-                "data": "" + AttractionSimple["x"] + "," + AttractionSimple["y"]}
+# Hints
+Hint_NotExist = {"id": -1, "attraction": AttractionNotExist, "kind": "HintText", "data": "NotExist"}
+Hint_Text = {"id": 0, "attraction": AttractionSimple, "kind": "HintText", "data": "Simple HT"}
+Hint_Picture = {"id": 1, "attraction": AttractionSimple, "kind": "HintPicture", "data": "x.jpg"}
+Hint_Video = {"id": 2, "attraction": AttractionSimple, "kind": "HintVideo", "data": "x.mp4"}
 
-    # Feedbacks
-    Feedback_NotExist = {"id": -1, "question": "NotExist?", "kind": "FeedbackText"}
-    Feedback_Text = {"id": 0, "question": "Text?", "kind": "FeedbackText"}
-    Feedback_Rating = {"id": 1, "question": "Rating?", "kind": "FeedbackRating"}
+# Feedbacks
+Feedback_NotExist = {"id": -1, "question": "NotExist?", "kind": "FeedbackText"}
+Feedback_Text = {"id": 0, "question": "Text?", "kind": "FeedbackText"}
+Feedback_Rating = {"id": 1, "question": "Rating?", "kind": "FeedbackRating"}
 
-    # Trip
-    Trip_NotExist = {"id": -1, "user": UserNotExist, "groupName": "NotExist", "playersAges": [], "score": 0,
-                     "track": TrackNotExist, "attractionsDone": []}
-    Trip_Empty = {"id": 0, "user": UserExist, "groupName": "ExistEmpty", "playersAges": [10, 11], "score": 0,
-                  "track": TrackEmpty, "attractionsDone": []}
-    Trip_Short = {"id": 1, "user": UserExist, "groupName": "ExistShort", "playersAges": [10, 11], "score": 300,
-                  "track": TrackShort, "attractionsDone": [AttractionSimple]}
-    Trip_New = {"id": 2, "user": UserExist, "groupName": "New", "playersAges": [1, 2], "score": 0,
-                "track": TrackShort, "attractionsDone": [AttractionSimple]}
-    Trip_AddAttraction = {"id": 3, "user": UserExist, "groupName": "Add attraction", "playersAges": [10], "score": 200,
-                          "track": TrackMedium, "attractionsDone": [AttractionSimple]}
+# Trip
+Trip_NotExist = {"id": -1, "user": UserNotExist, "groupName": "NotExist", "playersAges": [], "score": 0,
+                 "track": TrackNotExist, "attractionsDone": []}
+Trip_Empty = {"id": 0, "user": UserExist, "groupName": "ExistEmpty", "playersAges": [10, 11], "score": 0,
+              "track": TrackEmpty, "attractionsDone": []}
+Trip_Short = {"id": 1, "user": UserExist, "groupName": "ExistShort", "playersAges": [10, 11], "score": 300,
+              "track": TrackShort, "attractionsDone": [AttractionSimple]}
+Trip_New = {"id": 2, "user": UserExist, "groupName": "New", "playersAges": [1, 2], "score": 0,
+            "track": TrackShort, "attractionsDone": [AttractionSimple]}
+Trip_AddAttraction = {"id": 3, "user": UserExist, "groupName": "Add attraction", "playersAges": [10], "score": 200,
+                      "track": TrackMedium, "attractionsDone": [AttractionSimple]}
 
-    # Feedbacks Instances
-    FeedbackInstance_NotExist = {"id": -1, "feedback": Feedback_NotExist, "trip": Trip_NotExist, "answer": "NotExist"}
-    FeedbackInstance_Text = {"id": 0, "feedback": Feedback_Text, "trip": Trip_Empty, "answer": "Empty and Text"}
-    FeedbackInstance_Rating = {"id": 1, "feedback": Feedback_Rating, "trip": Trip_Empty, "answer": "3"}
+# Feedbacks Instances
+FeedbackInstance_NotExist = {"id": -1, "feedback": Feedback_NotExist, "trip": Trip_NotExist, "answer": "NotExist"}
+FeedbackInstance_Text = {"id": 0, "feedback": Feedback_Text, "trip": Trip_Empty, "answer": "Empty and Text"}
+FeedbackInstance_Rating = {"id": 1, "feedback": Feedback_Rating, "trip": Trip_Empty, "answer": "3"}
 
-    def check(self, expected, actual, classSerializer=None, many=False, assertFunc=None):
-        jsonActual = None
-        if actual is not None:
-            serializerActual = classSerializer(actual, many=many)
-            jsonActual = json.loads(json.dumps(serializerActual.data))
-        if assertFunc is None:
-            self.assertEqual(expected, jsonActual)
-        else:
-            assertFunc(actual, expected)
+
+def check(expected, actual, assertFunc, classSerializer=None, many=False):
+    jsonActual = actual
+    if (actual is not None) and (classSerializer is not None):
+        serializerActual = classSerializer(actual, many=many)
+        jsonActual = json.loads(json.dumps(serializerActual.data))
+    assertFunc(jsonActual, expected)
+
+
+class Unit_Test_Users(TestCase):
+    addUser(UserExist['name'], UserExist['socialNetwork'])
 
     def test_getUser_NotExist(self):
-        self.check(
+        check(
             None,
-            self.bl.getUser(self.UserNotExist),
+            bl.getUser(UserNotExist),
+            self.assertEquals,
             UserSerializer
         )
 
     def test_getUser_Exist(self):
-        self.check(
-            self.UserExist,
-            self.bl.getUser(self.UserExist),
+        check(
+            UserExist,
+            bl.getUser(UserExist),
+            self.assertEquals,
             UserSerializer
         )
 
+
+class Unit_Test_PreviousUserTrip(TestCase):
+    addUser(UserExist['name'], UserExist['socialNetwork'])
+    # TODO - continue from here add all data and slice to cases (maybe slice to files which in each file test case and 1 more file of all the data for tests)
+
     def test_getPreviousUserTrip_NotExist(self):
-        self.check(
+        check(
             None,
-            self.bl.getPreviousUserTrip(self.UserNotExist),
+            bl.getPreviousUserTrip(UserNotExist),
+            self.assertEquals,
             TripSerializer
         )
 
     def test_getPreviousUserTrip_Exist(self):
-        self.check(
-            self.Trip_Short,
-            self.bl.getPreviousUserTrip(self.UserExist),
+        check(
+            Trip_Short,
+            bl.getPreviousUserTrip(UserExist),
+            self.assertEquals,
             TripSerializer
         )
 
     def test_getRelevantPreviousTripInformation_NotExist(self):
         with self.assertRaises(RuntimeError):
-            self.bl.getPreviousUserTrip(self.UserNotExist)
+            bl.getPreviousUserTrip(UserNotExist)
 
     def test_getRelevantPreviousTripInformation_New(self):
-        self.check(
+        check(
             None,
-            self.bl.getRelevantPreviousTripInformation(self.UserNew),
+            bl.getRelevantPreviousTripInformation(UserNew),
+            self.assertEquals,
             GetRelevantPreviousTripInformationSerializer
         )
 
     def test_getRelevantPreviousTripInformation_Exist(self):
-        self.check(
-            {"groupName": self.Trip_Short["groupName"], "playersAges": self.Trip_Short["playersAges"]},
-            self.bl.getRelevantPreviousTripInformation(self.UserExist),
+        check(
+            {"groupName": Trip_Short["groupName"], "playersAges": Trip_Short["playersAges"]},
+            bl.getRelevantPreviousTripInformation(UserExist),
+            self.assertEquals,
             GetRelevantPreviousTripInformationSerializer
         )
 
     def test_getAllAttractionsFromTrack_NotExist(self):
-        self.check(
+        check(
             None,
-            self.bl.getAllAttractionsFromTrack(self.TrackNotExist)
+            bl.getAllAttractionsFromTrack(TrackNotExist),
+            self.assertEquals
         )
 
     def test_getAllAttractionsFromTrack_Empty(self):
-        self.check(
+        check(
             [],
-            self.bl.getAllAttractionsFromTrack(self.TrackEmpty)
+            bl.getAllAttractionsFromTrack(TrackEmpty),
+            self.assertEquals
         )
 
     def test_getAllAttractionsFromTrack_Short(self):
-        self.check(
-            self.TrackShort["points"] + self.bl.getAllAttractionsFromTrack(self.TrackShort["subTrack"]),
-            self.bl.getAllAttractionsFromTrack(self.TrackShort)
+        check(
+            TrackShort["points"] + bl.getAllAttractionsFromTrack(TrackShort["subTrack"]),
+            bl.getAllAttractionsFromTrack(TrackShort),
+            self.assertEquals
         )
 
     def test_getAllAttractionsFromTrack_Medium(self):
-        self.check(
-            self.TrackMedium["points"] + self.bl.getAllAttractionsFromTrack(self.TrackMedium["subTrack"]),
-            self.bl.getAllAttractionsFromTrack(self.TrackMedium)
+        check(
+            TrackMedium["points"] + bl.getAllAttractionsFromTrack(TrackMedium["subTrack"]),
+            bl.getAllAttractionsFromTrack(TrackMedium),
+            self.assertEquals
         )
 
     def test_getAllAttractionsFromTrack_Long(self):
-        self.check(
-            self.TrackLong["points"] + self.bl.getAllAttractionsFromTrack(self.TrackLong["subTrack"]),
-            self.bl.getAllAttractionsFromTrack(self.TrackLong)
+        check(
+            TrackLong["points"] + bl.getAllAttractionsFromTrack(TrackLong["subTrack"]),
+            bl.getAllAttractionsFromTrack(TrackLong),
+            self.assertEquals
         )
 
     def test_getClosestAttractionFromTrack_NotExist(self):
         with self.assertRaises(Exception):
-            self.bl.getClosestAttractionFromTrack(self.TrackNotExist, next(self.xGen), next(self.yGen))
+            bl.getClosestAttractionFromTrack(TrackNotExist, next(xGen), next(yGen))
 
     def test_getClosestAttractionFromTrack_Empty(self):
-        self.check(
+        check(
             None,
-            self.bl.getClosestAttractionFromTrack(self.TrackEmpty, next(self.xGen), next(self.yGen)),
+            bl.getClosestAttractionFromTrack(TrackEmpty, next(xGen), next(yGen)),
+            self.assertEquals,
             AttractionSerializer
         )
 
     def test_getClosestAttractionFromTrack_Short(self):
-        userX, userY = next(self.xGen), next(self.yGen)
-        self.check(
-            closestAttraction(userX, userY, self.bl.getAllAttractionsFromTrack(self.TrackShort)),
-            self.bl.getClosestAttractionFromTrack(self.TrackShort, userX, userY),
+        userX, userY = next(xGen), next(yGen)
+        check(
+            closestAttraction(userX, userY, bl.getAllAttractionsFromTrack(TrackShort)),
+            bl.getClosestAttractionFromTrack(TrackShort, userX, userY),
+            self.assertEquals,
             AttractionSerializer
         )
-        check_getClosestAttractionFromTrack(self.TrackShort, self)
+        check_getClosestAttractionFromTrack(TrackShort, self.assertEquals)
 
     def test_getClosestAttractionFromTrack_Medium(self):
-        check_getClosestAttractionFromTrack(self.TrackMedium, self)
+        check_getClosestAttractionFromTrack(TrackMedium, self.assertEquals)
 
     def test_getClosestAttractionFromTrack_Long(self):
-        check_getClosestAttractionFromTrack(self.TrackLong, self)
+        check_getClosestAttractionFromTrack(TrackLong, self.assertEquals)
 
     def test_getTrackAndNextAttractionByLengthAndUserLocation_NotExist(self):
-        self.check(
+        check(
             None,
-            self.bl.getTrackAndNextAttractionByLengthAndUserLocation(TrackLength.NOT_EXIST,
-                                                                     next(self.xGen), next(self.yGen))
+            bl.getTrackAndNextAttractionByLengthAndUserLocation(
+                TrackLength.NOT_EXIST,
+                next(xGen),
+                next(yGen)
+            ),
+            self.assertEquals
         )
 
     def test_getTrackAndNextAttractionByLengthAndUserLocation_Short(self):
         check_getTrackAndNextAttractionByLengthAndUserLocation(
             TrackLength.SHORT,
-            self.AttractionSimple,
-            [self.TrackShort],
+            AttractionSimple,
+            [TrackShort],
             self
         )
 
     def test_getTrackAndNextAttractionByLengthAndUserLocation_Medium(self):
         check_getTrackAndNextAttractionByLengthAndUserLocation(
             TrackLength.MEDIUM,
-            self.AttractionSimple,
-            [self.TrackShort, self.TrackMedium],
+            AttractionSimple,
+            [TrackShort, TrackMedium],
             self
         )
 
         check_getTrackAndNextAttractionByLengthAndUserLocation(
             TrackLength.MEDIUM,
-            self.AttractionPicture,
-            [self.TrackMedium],
+            AttractionPicture,
+            [TrackMedium],
             self
         )
 
     def test_getTrackAndNextAttractionByLengthAndUserLocation_Long(self):
         check_getTrackAndNextAttractionByLengthAndUserLocation(
             TrackLength.LONG,
-            self.AttractionSimple,
-            [self.TrackShort, self.TrackMedium, self.TrackLong],
+            AttractionSimple,
+            [TrackShort, TrackMedium, TrackLong],
             self
         )
 
         check_getTrackAndNextAttractionByLengthAndUserLocation(
             TrackLength.LONG,
-            self.AttractionPicture,
-            [self.TrackMedium, self.TrackLong],
+            AttractionPicture,
+            [TrackMedium, TrackLong],
             self
         )
 
         check_getTrackAndNextAttractionByLengthAndUserLocation(
             TrackLength.LONG,
-            self.AttractionVideo,
-            [self.TrackLong],
+            AttractionVideo,
+            [TrackLong],
             self
         )
 
     def test_createTrip_NotExist(self):
-        inp = {"user": self.UserNotExist, "groupName": "NotExist", "playerAges": [],
-               "trackLength": TrackLength.NOT_EXIST, "x": next(self.xGen), "y": next(self.yGen)}
-        self.check(
-            None,
-            self.bl.createTrip(inp),
-            TripSerializer
-        )
+        inp = {"user": UserNotExist, "groupName": "NotExist", "playerAges": [],
+               "trackLength": TrackLength.NOT_EXIST.value, "x": next(xGen), "y": next(yGen)}
+        self.assertRaises(RuntimeError, bl.createTrip, inp)
+        # check(
+        #     None,
+        #     bl.createTrip(inp),
+        #     TripSerializer
+        # )
 
     def test_createTrip_Short(self):
-        attraction = self.Trip_New["attractionsDone"][0]
-        user = self.Trip_New["user"]
-        inp = {"user": user, "groupName": self.Trip_New["groupName"],
-               "playerAges": self.Trip_New["playersAges"], "trackLength": self.Trip_New["track"]["trackLength"],
+        attraction = Trip_New["attractionsDone"][0]
+        user = Trip_New["user"]
+        inp = {"user": user, "groupName": Trip_New["groupName"],
+               "playerAges": Trip_New["playersAges"], "trackLength": Trip_New["track"]["length"],
                "x": attraction["x"], "y": attraction["y"]}
-        actual = self.bl.createTrip(inp)
-        self.check(
-            [self.Trip_New],
+        actual = bl.createTrip(inp)
+        check(
+            [Trip_New],
             actual,
-            TripSerializer,
-            assertFunc=self.assertIn
+            self.assertIn,
+            TripSerializer
         )
-        self.check(
+        check(
             actual,
-            self.bl.getPreviousUserTrip(user),
+            bl.getPreviousUserTrip(user),
+            self.assertEquals,
             TripSerializer
         )
 
     def test_createUser_Exist(self):
         with self.assertRaises(RuntimeError):
-            self.bl.createUser(self.UserExist)
+            bl.createUser(UserExist)
 
     def test_createUser_NotExist(self):
-        self.check(
-            self.UserNew,
-            self.bl.createUser(self.UserNew),
+        check(
+            UserNew,
+            bl.createUser(UserNew),
+            self.assertEquals,
             UserSerializer
         )
 
     def test_getHints_NotExist(self):
         with self.assertRaises(RuntimeError):
-            self.bl.getHints(self.AttractionNotExist)
+            bl.getHints(AttractionNotExist)
 
     def test_getHints_Exist_No_Hints(self):
-        self.check(
+        check(
             None,
-            self.bl.getHints(self.AttractionVideo),
+            bl.getHints(AttractionVideo),
+            self.assertEquals,
             HintSerializer,
             True
         )
 
     def test_getHints_Exist_With_Hints(self):
-        self.check(
-            [self.Hint_Map, self.Hint_Text, self.Hint_Picture, self.Hint_Video],
-            self.bl.getHints(self.AttractionSimple),
+        check(
+            [Hint_Text, Hint_Picture, Hint_Video],
+            bl.getHints(AttractionSimple),
+            self.assertCountEqual,
             HintSerializer,
-            True,
-            assertFunc=self.assertCountEqual
+            True
         )
 
     def test_getFeedbacks_NotExist(self):
         with self.assertRaises(RuntimeError):
-            self.bl.getFeedbacks(self.Trip_NotExist)
+            bl.getFeedbackInstances(Trip_NotExist)
 
     def test_getFeedbacks_Exist_No_Feedbacks(self):
-        self.check(
+        check(
             None,
-            self.bl.getFeedbacks(self.Trip_Short),
+            bl.getFeedbackInstances(Trip_Short),
+            self.assertEquals,
             FeedbackInstanceSerializer,
             True
         )
 
     def test_getFeedbacks_Exist_With_Feedbacks(self):
-        self.check(
-            [self.FeedbackInstance_Text, self.FeedbackInstance_Rating],
-            self.bl.getFeedbacks(self.Trip_Empty),
+        check(
+            [FeedbackInstance_Text, FeedbackInstance_Rating],
+            bl.getFeedbackInstances(Trip_Empty),
+            self.assertCountEqual,
             FeedbackInstanceSerializer,
-            True,
-            assertFunc=self.assertCountEqual
+            True
         )
 
     def test_getAmericanQuestion_NotExist(self):
         with self.assertRaises(RuntimeError):
-            self.bl.getAmericanQuestion(self.AttractionNotExist)
+            bl.getAmericanQuestion(AttractionNotExist)
 
     def test_getAmericanQuestion_No_AQ(self):
-        self.check(
+        check(
             None,
-            self.bl.getAmericanQuestion(self.AttractionVideo),
+            bl.getAmericanQuestion(AttractionVideo),
+            self.assertEquals,
             AmericanQuestionSerializer,
             True
         )
 
     def test_getAmericanQuestion_With_AQ(self):
-        self.check(
-            [self.AQ_Simple],
-            self.bl.getAmericanQuestion(self.AttractionSimple),
+        check(
+            [AQ_Simple],
+            bl.getAmericanQuestion(AttractionSimple),
+            self.assertCountEqual,
             AmericanQuestionSerializer,
-            True,
-            assertFunc=self.assertCountEqual
+            True
         )
 
     def test_getAttraction_NotExist(self):
         with self.assertRaises(RuntimeError):
-            self.bl.getAttraction(self.AttractionNotExist)
+            bl.getAttraction(AttractionNotExist)
 
     def test_getAttraction_Exist(self):
-        self.check(
-            self.AttractionSimple,
-            self.bl.getAttraction(self.AttractionSimple),
-            AttractionSerializer,
+        check(
+            AttractionSimple,
+            bl.getAttraction(AttractionSimple),
+            self.assertEquals,
+            AttractionSerializer
         )
 
     def test_getTrip_NotExist(self):
         with self.assertRaises(RuntimeError):
-            self.bl.getTrip(self.Trip_NotExist)
+            bl.getTrip(Trip_NotExist)
 
     def test_getTrip_Exist(self):
-        self.check(
-            self.Trip_Short,
-            self.bl.getTrip(self.Trip_Short),
+        check(
+            Trip_Short,
+            bl.getTrip(Trip_Short),
+            self.assertEquals,
             TripSerializer
         )
 
     def test_signUp_NotExistedUser(self):
-        actual = self.bl.signUp(self.UserNew)
-        self.check(
-            self.UserNew,
+        actual = bl.signUp(UserNew)
+        check(
+            UserNew,
             actual,
+            self.assertEquals,
             UserSerializer
         )
-        self.check(
+        check(
             None,
             actual["lastSeen"],
+            self.assertEquals
         )
 
     def test_signUp_ExistedUser(self):
-        actual = self.bl.signUp(self.UserExist)
-        self.check(
-            self.UserExist,
+        actual = bl.signUp(UserExist)
+        check(
+            UserExist,
             actual,
+            self.assertEquals,
             UserSerializer
         )
-        self.check(
+        check(
             None,
             actual["lastSeen"],
-            assertFunc=self.assertNotEquals
+            self.assertNotEquals
         )

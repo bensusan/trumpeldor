@@ -14,15 +14,15 @@ namespace trumpeldor
 {
     public class GameController
     {
-        public enum SCORE_VALUE {
-            Hints_More_Than_Three = -10,
-            AQ_Mistake = -2,
-            AQ_Correct = 10,
-            Attraction_Arrive = 50,
-            Sliding_Puzzle_Solved = 10,
-            Taking_Picture_Done = 10,
-            Puzzle_Solved = 10
-        }
+        //public enum SCORE_VALUE {
+        //    Hints_More_Than_Three = -10,
+        //    AQ_Mistake = -2,
+        //    AQ_Correct = 10,
+        //    Attraction_Arrive = 50,
+        //    Sliding_Puzzle_Solved = 10,
+        //    Taking_Picture_Done = 10,
+        //    Puzzle_Solved = 10
+        //}
 
         private static GameController instance = null;
 
@@ -30,7 +30,7 @@ namespace trumpeldor
         public User currentUser = null; //Also will show in Trip object but necessary also.
         private ServerConection conn;
         public bool isFinishTrip;
-        const int LOGIN_RECENETLY_DIFFERENCE_HOURS = 36; //TODO - Very specific for now
+        //const int LOGIN_RECENETLY_DIFFERENCE_HOURS = 36; //TODO - Very specific for now
         public Track extendTrack = null;
         public bool isAttractionDone = false;
         public SheredClasses.Point myLocation;
@@ -38,6 +38,7 @@ namespace trumpeldor
         private static double DESIRED_SECONDS = 1;
         private static bool firstTime = true;
         private readonly System.Threading.EventWaitHandle waitHandle = new System.Threading.AutoResetEvent(false);
+        private Setttings appSettings;
 
         public static GameController getInstance()
         {
@@ -49,22 +50,29 @@ namespace trumpeldor
             return instance;
         }
 
+        internal bool IsAdmin(string email)
+        {
+            return conn.IsAdmin(email);
+        }
+
         internal bool IsUserInValidSector()
         {
             SheredClasses.Point currLoc = GetUserLocation();
             //Very specific to BGU!!! TODO CHANGE
-            List<SheredClasses.Point> points = new List<SheredClasses.Point>()
-            {
-                new SheredClasses.Point(31.265372, 34.798240),
-                new SheredClasses.Point(31.261009, 34.798178),
-                new SheredClasses.Point(31.260975, 34.805906),
-                new SheredClasses.Point(31.263513, 34.805998),
-                new SheredClasses.Point(31.265315, 34.803155)
-            };
+            //List<SheredClasses.Point> points = new List<SheredClasses.Point>()
+            //{
+            //    new SheredClasses.Point(31.265372, 34.798240),
+            //    new SheredClasses.Point(31.261009, 34.798178),
+            //    new SheredClasses.Point(31.260975, 34.805906),
+            //    new SheredClasses.Point(31.263513, 34.805998),
+            //    new SheredClasses.Point(31.265315, 34.803155)
+            //};
+            
 
             //xMin, xMax, yMin, yMax
-            double[] relevantValues = GetRelevantValuesFromPolygonSector(points);
+            //double[] relevantValues = GetRelevantValuesFromPolygonSector(points);
 
+            double[] relevantValues = GetRelevantValuesFromPolygonSector(appSettings.boundaries);
             if (
                 currLoc.x > relevantValues[0] &&
                 currLoc.x < relevantValues[1] &&
@@ -77,7 +85,7 @@ namespace trumpeldor
         private double[] GetRelevantValuesFromPolygonSector(List<SheredClasses.Point> points)
         {
             double[] ans = new double[4]; //xMin, xMax, yMin, yMax
-            foreach(SheredClasses.Point p in points)
+            foreach (SheredClasses.Point p in points)
             {
                 if (p.x < ans[0]) ans[0] = p.x;
                 if (p.x > ans[1]) ans[1] = p.x;
@@ -123,7 +131,7 @@ namespace trumpeldor
         public bool IsUserConnectedRecently()
         {
             return !this.IsNewUser() && 
-                (DateTime.Now - (DateTime)currentUser.lastSeen).TotalHours <= LOGIN_RECENETLY_DIFFERENCE_HOURS;
+                (DateTime.Now - (DateTime)currentUser.lastSeen).TotalHours <= appSettings.loginHours;
         }
 
         internal Attraction GetTempAttraction()
@@ -152,11 +160,25 @@ namespace trumpeldor
         internal void ContinuePreviousTrip()
         {
             this.currentTrip = conn.GetPreviousTrip(currentUser);
+            /*
+            currentTrip.feedbacks = new List<FeedbackInstance>();
+            currentTrip.feedbacks.Add(new FeedbackInstance { feedback = new Feedback { id = 1, kind = "l", question = "MMM" }, answer = "KK" });
+            foreach(var a in currentTrip.attractionsDone)
+            {
+                a.americanQuestion = new AmericanQuestion { id = 5, question = "A", answers = new List<string>(), indexOfCorrectAnswer = new int[1] };
+                a.americanQuestion.answers.Add("1");
+                a.americanQuestion.answers.Add("2");
+                a.americanQuestion.indexOfCorrectAnswer[0] = 1;
+                a.hints = new List<Hint>();
+                a.hints.Add(new Hint { kind="V", id=1, data="iiiiii", description="....." });
+            }
+            */
         }
 
         private GameController(ServerConection serverConnection)
         {
             this.conn = serverConnection;
+            appSettings = this.conn.GetSettings();
         }
 
         public void CreateTrip(string groupName, List<int> playersAges, int trackLength)
@@ -220,16 +242,22 @@ namespace trumpeldor
             isFinishTrip = currentTrip.DoneMyAttraction(currLoc.x, currLoc.y);
             UpdateTrip();
         }
-        
+
         public void SignUp(string name, string socialNetwork)
         {
             this.currentUser = conn.SignUp(name, socialNetwork);
         }
 
-        public int EditScore(SCORE_VALUE actionScore)
+        public int EditScore(ScoreRule.Kinds actionScore)
         {
-            currentTrip.score += (int)actionScore;
-            return currentTrip.score;
+            foreach(ScoreRule scoreRule in appSettings.scoreRules)
+            {
+                if(scoreRule.GetKind() == actionScore){
+                    currentTrip.score += scoreRule.score;
+                    return currentTrip.score;
+                }
+            }
+            throw new Exception("Score rule does not exist");
         }
 
         internal List<string> GetMainImages()
