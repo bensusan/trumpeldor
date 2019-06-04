@@ -46,6 +46,7 @@ namespace trumpeldor.Droid
             CrossCurrentActivity.Current.Init(this, savedInstanceState);
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
             ConfigurationManager.Initialize(new AndroidConfigurationStreamProviderFactory(() => this));
+            Rg.Plugins.Popup.Popup.Init(this, savedInstanceState);
             Xamarin.FormsMaps.Init(this, savedInstanceState);//for maps init
             DependencyService.Register<IShare, ShareImplementation>();
             LoadApplication(new App());

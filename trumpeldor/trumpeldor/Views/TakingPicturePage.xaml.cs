@@ -51,7 +51,7 @@ namespace trumpeldor.Views
                 photo = await Plugin.Media.CrossMedia.Current.TakePhotoAsync(new Plugin.Media.Abstractions.StoreCameraMediaOptions()
                 {
                     SaveToAlbum = true,
-                    Directory = "trumpeldor",
+                    Directory = "BGU ART",
                     Name = "photo" + count.ToString()
                 });
                 count++;

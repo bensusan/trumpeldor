@@ -12,6 +12,7 @@ using Xamarin.Forms.Xaml;
 
 using Plugin.Permissions;
 using Plugin.Permissions.Abstractions;
+using Rg.Plugins.Popup.Services;
 
 namespace trumpeldor.Views
 {
@@ -85,7 +86,8 @@ namespace trumpeldor.Views
 
         private async void HowToPlay_Button_Clicked(object sender, EventArgs e)
         {
-            await Navigation.PushModalAsync(new instructionsPage());
+            //await Navigation.PushModalAsync(new instructionsPage());
+            await PopupNavigation.Instance.PushAsync(new MyPopup());
         }
 
         private async void Info_Button_Clicked(object sender, EventArgs e)
