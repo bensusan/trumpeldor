@@ -1,10 +1,11 @@
 let info_txt;
-var attr_for_editing;
 var helperVar;
-var helperVarVid;
-
 
 window.onload = function () {
+    let sendInfoBTN = document.getElementById("sendInfo");
+    sendInfoBTN.addEventListener('click',function(){
+        sendInfo();
+    });
     getRequestInfo(func_to_show_info);
     initializeBTNsFunctionality();
     localFileVideoPlayer();
@@ -16,7 +17,6 @@ function initializeBTNsFunctionality(){
     let pic_input = document.getElementById("picInput");
     let pic_output = document.getElementById("output");
     let vid_itself = document.getElementById("vid_itself");
-    // let vid_input = document.getElementById("video_input");
     let vid_uploadBTN = document.getElementById("upvidBTN");
 
     let want_upvid = document.getElementById("add_vid_info");
@@ -80,8 +80,10 @@ function encodeImageFileAsURL(element) {
 }
 
 function sendInfo(){
-    let txt = document.getElementById('subject').value;
-    let inf = {info:txt};
+    let name = document.getElementById('appName').value;
+    let about = document.getElementById('aboutApp').value;
+    let howToPlay = document.getElementById('howToPlay').value;
+    let inf = {app_name:name, about_app:about, how_to_play:howToPlay};
     postRequestInfo(inf);
     window.location.href ='/main';
 }
@@ -128,8 +130,6 @@ if($('#email').val() == "") {
 });
 
 });
-
-
 
 function localFileVideoPlayer() {
 	'use strict';

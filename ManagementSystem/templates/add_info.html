@@ -13,7 +13,7 @@
     {% load static %}
     <script src="{% static 'attractions.js' %}?version=2"></script>
     {% load static %}
-    <script src="{% static 'add_info.js' %}?version=4"></script>
+    <script src="{% static 'add_info.js' %}?version=5"></script>
     {% load static %}
     <script src="{% static 'properties.js' %}?version=2"></script>
 </head>
@@ -50,11 +50,15 @@
             <p><img id="output" width="200" style="display: none"/></p>
 
 
-            <label style="text-align: right">:כתבי כאן</label>
-            <textarea id="message" name="message" style="text-align: right; width:500px;height: 300px;"></textarea>
+            <label style="text-align: right">:שם האפליקציה</label>
+            <textarea id="appName" style="text-align: right; width:500px;height: 60px;"></textarea>
+            <label style="text-align: right">:על האפליקציה</label>
+            <textarea id="aboutApp" style="text-align: right; width:500px;height: 300px;"></textarea>
+            <label style="text-align: right">:איך משחקים</label>
+            <textarea id="howToPlay" style="text-align: right; width:500px;height: 300px;"></textarea>
         </div>
 
-        <input type="submit" value="שליחת המידע הנוסף"/>
+        <input id="sendInfo" type="submit" value="שליחת המידע הנוסף"/>
         <p><br/><br/><br/></p>
         <p><br/></p>
     </form>
