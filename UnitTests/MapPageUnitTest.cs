@@ -22,6 +22,22 @@ namespace UnitTests
         }
 
         [TestMethod]
+        public void initTests()
+        {
+            ServerConnectionForTests sct = new ServerConnectionForTests();
+            GameController gc = GameController.getInstance(sct);
+        }
+
+        [TestMethod]
+        public void AnonymusLoginTest()
+        {
+            ServerConnectionForTests sct = new ServerConnectionForTests();
+            GameController gc = GameController.getInstance(sct);
+            gc.SignUp("shahar", "");
+            Assert.IsTrue(gc.currentUser.name.Equals("shahar") && gc.currentUser.socialNetwork.Equals(""));
+        }
+
+        [TestMethod]
         public void addCurrLocationToMap()
         {
             Map map = new Map()

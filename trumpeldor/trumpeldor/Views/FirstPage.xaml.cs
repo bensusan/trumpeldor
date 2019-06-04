@@ -25,10 +25,10 @@ namespace trumpeldor.Views
         public FirstPage()
         {
             InitializeComponent();
-            israelButton.Source = ServerConection.URL_MEDIA + "israel.png";
-            englandButton.Source = ServerConection.URL_MEDIA + "united-kingdom.png";
-            info.Source = ServerConection.URL_MEDIA + "information.png";
-            how.Source = ServerConection.URL_MEDIA + "how.png";
+            israelButton.Source = ServerConnectionImpl.URL_MEDIA + "israel.png";
+            englandButton.Source = ServerConnectionImpl.URL_MEDIA + "united-kingdom.png";
+            info.Source = ServerConnectionImpl.URL_MEDIA + "information.png";
+            how.Source = ServerConnectionImpl.URL_MEDIA + "how.png";
             CrossMultilingual.Current.CurrentCultureInfo = hebrew;
             gc = GameController.getInstance();
         }
@@ -54,7 +54,7 @@ namespace trumpeldor.Views
         {
             if (!gc.IsUserInValidSector()){
                 errorMessage.Text = AppResources.Out_Of_Valid_Sector_Title + "\n" + AppResources.Out_Of_Valid_Sector_Message;
-                if (ServerConection.DEBUG == 1)
+                if (ServerConnectionImpl.DEBUG == 1)
                     return await DisplayAlert("Debug Mode", "Do you want to continue", "yes", "no");
                 return false;
             }

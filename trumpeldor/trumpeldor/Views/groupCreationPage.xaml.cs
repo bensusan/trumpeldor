@@ -22,8 +22,8 @@ namespace trumpeldor.Views
         public groupCreationPage(string userName, User.SOCIAL_NETWORK socialNetwork){
             InitializeComponent();
             InitPicker();
-            addButton.Source = ServerConection.URL_MEDIA + "plus.png";
-            removeButton.Source = ServerConection.URL_MEDIA + "delete.png";
+            addButton.Source = ServerConnectionImpl.URL_MEDIA + "plus.png";
+            removeButton.Source = ServerConnectionImpl.URL_MEDIA + "delete.png";
             gc = GameController.getInstance();
             string socialnetworkString;
             User.SocialNetwork2string.TryGetValue(socialNetwork, out socialnetworkString);
@@ -95,7 +95,7 @@ namespace trumpeldor.Views
             agesGrid.RowDefinitions.Add(new RowDefinition { Height = GridLength.Star });
 
             //Delete imageButton addition
-            ImageButton removeButton = new ImageButton { Source = ServerConection.URL_MEDIA + "delete.png" };
+            ImageButton removeButton = new ImageButton { Source = ServerConnectionImpl.URL_MEDIA + "delete.png" };
             removeButton.Clicked += removeRow_Clicked;
             removeButton.SetDynamicResource(VisualElement.StyleProperty, "regularCircleImageButtonStyle");
             agesGrid.Children.Add(removeButton, DELETE_PLAYER_COLUMN, nextRow);

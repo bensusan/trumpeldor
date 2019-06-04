@@ -25,7 +25,7 @@ namespace trumpeldor.Views
             InitializeComponent();
             gc = GameController.getInstance();
             scoreLabel.Text = AppResources.score + ": " + gc.GetScore();
-            how.Source = ServerConection.URL_MEDIA + "how.png";
+            how.Source = ServerConnectionImpl.URL_MEDIA + "how.png";
             this.puzzle = puzzle;
             tiles = new List<JigsawTile>();
 

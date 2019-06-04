@@ -37,10 +37,10 @@ namespace trumpeldor.Views
 		{
 			InitializeComponent ();
             gc = GameController.getInstance();
-            leftArrow.Source = ServerConection.URL_MEDIA + "leftArrow.png";
-            rightArrow.Source = ServerConection.URL_MEDIA + "rightArrow.png";
-            temperature.Source = ServerConection.URL_MEDIA + "temperature2.png";
-            v.Source = ServerConection.URL_MEDIA + "v.png";
+            leftArrow.Source = ServerConnectionImpl.URL_MEDIA + "leftArrow.png";
+            rightArrow.Source = ServerConnectionImpl.URL_MEDIA + "rightArrow.png";
+            temperature.Source = ServerConnectionImpl.URL_MEDIA + "temperature2.png";
+            v.Source = ServerConnectionImpl.URL_MEDIA + "v.png";
             odometer.Maximum = 1;
             odometer.Minimum = 0;
             odometer.MinimumTrackColor = Color.FromHex("#0066ff");
@@ -56,7 +56,7 @@ namespace trumpeldor.Views
                 10);
             nextAttraction = gc.currentTrip.GetCurrentAttraction();
             myMap = new MapPage();
-            mapBtn.Source = ServerConection.URL_MEDIA + "googleMaps.png";
+            mapBtn.Source = ServerConnectionImpl.URL_MEDIA + "googleMaps.png";
             //mapBtn = myMap.map;
             AttachHint(0);
             
@@ -188,7 +188,7 @@ namespace trumpeldor.Views
                 lc.AddToPositionsHistory(new Plugin.Geolocator.Abstractions.Position(currLoc.x, currLoc.y));
                 double currentDistanceToDestination = lc.DistanceBetween(currLoc.x, currLoc.y, attractionLoc.x, attractionLoc.y);
                 if (currentDistanceToDestination > DESIRED_DISTANCE){
-                    if (ServerConection.DEBUG == 1)
+                    if (ServerConnectionImpl.DEBUG == 1)
                         Device.BeginInvokeOnMainThread (() => {
                             DisplayAlert("Must come closer", lc.DistanceBetween(currLoc.x, currLoc.y, attractionLoc.x, attractionLoc.y).ToString() + "\ncurr lat: " + currLoc.x + "\ncurr long: " + currLoc.y + "\nattractionLoc x: " + attractionLoc.x + "\nattractionLoc y: " + attractionLoc.y + "\npoint info: " + nextAttraction.name, "close");
                         });

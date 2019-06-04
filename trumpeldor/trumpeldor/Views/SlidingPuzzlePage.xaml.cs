@@ -24,7 +24,7 @@ namespace trumpeldor.Views
 		{
             InitializeComponent ();
             this.gc = GameController.getInstance();
-            how.Source = ServerConection.URL_MEDIA + "how.png";
+            how.Source = ServerConnectionImpl.URL_MEDIA + "how.png";
             this.sp = sp;
             tiles = new SlidingPuzzleTile[sp.width, sp.height];
             emptyRow = sp.width - 1;

@@ -37,7 +37,7 @@ namespace trumpeldor.Views
                 missionButton.Text = entertainment.EntertainmentName();
             else
                 missionButton.IsVisible = false;
-            informationButton.Source = ServerConection.URL_MEDIA + "information.png";
+            informationButton.Source = ServerConnectionImpl.URL_MEDIA + "information.png";
             isFirstAppear = true;
         }
 

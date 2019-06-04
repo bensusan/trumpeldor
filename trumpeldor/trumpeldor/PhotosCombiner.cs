@@ -36,14 +36,6 @@ namespace trumpeldor
 
         return outputImage;
     }*/
-        public static Bitmap mergeBitmap(Android.Graphics.Bitmap backBitmap, Android.Graphics.Bitmap frontBitmap)
-        {
-            Bitmap bitmap = backBitmap.Copy(Android.Graphics.Bitmap.Config.Argb8888, true);
-            Canvas canvas = new Canvas(bitmap);
-            Rect baseRect = new Rect(0, 0, backBitmap.Width, backBitmap.Height);
-            Rect frontRect = new Rect(0, 0, frontBitmap.Width, frontBitmap.Height);
-            canvas.DrawBitmap(frontBitmap, frontRect, baseRect, null);
-            return bitmap;
-        }
+
     }
 }

@@ -17,7 +17,7 @@ namespace trumpeldor.Views
 		{
 			InitializeComponent ();
             string hintStr = hint.kind;
-            string urlPref = "http://" + ServerConection.IP + ":" + ServerConection.PORT + "/media/";
+            string urlPref = "http://" + ServerConnectionImpl.IP + ":" + ServerConnectionImpl.PORT + "/media/";
 
             string hintPictureString;
             Hint.kind2String.TryGetValue(Hint.Kinds.HintPicture, out hintPictureString);

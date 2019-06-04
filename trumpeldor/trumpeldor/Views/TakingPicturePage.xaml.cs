@@ -34,7 +34,7 @@ namespace trumpeldor.Views
             gc = GameController.getInstance();
             scoreLabel.Text = AppResources.score + ": " + gc.GetScore();
             CameraButton.Clicked += CameraButton_Clicked;
-            how.Source = ServerConection.URL_MEDIA + "how.png";
+            how.Source = ServerConnectionImpl.URL_MEDIA + "how.png";
             this.tp = tp;
         }
 

@@ -33,24 +33,34 @@ namespace trumpeldor
         //const int LOGIN_RECENETLY_DIFFERENCE_HOURS = 36; //TODO - Very specific for now
         public Track extendTrack = null;
         public bool isAttractionDone = false;
-        public SheredClasses.Point myLocation;
+        public static SheredClasses.Point myLocation;
         //public DateTime? timeOfLocation = null;
         private static double DESIRED_SECONDS = 1;
         private static bool firstTime = true;
         private readonly System.Threading.EventWaitHandle waitHandle = new System.Threading.AutoResetEvent(false);
         private Setttings appSettings;
 
+        public static GameController getInstance(ServerConnectionForTests sct)
+        {
+            if (instance == null)
+            {
+                instance = new GameController(sct);
+                myLocation = new SheredClasses.Point(0, 0);
+            }
+            return instance;
+        }
+
         public static GameController getInstance()
         {
             if (instance == null)
             {
-                ServerConection serverConnection = ServerConection.getInstance();
+                ServerConnectionImpl serverConnection = ServerConnectionImpl.getInstance();
                 instance = new GameController(serverConnection);
             }
             return instance;
         }
 
-        internal bool IsAdmin(string email)
+        public bool IsAdmin(string email)
         {
             return conn.IsAdmin(email);
         }
@@ -177,8 +187,16 @@ namespace trumpeldor
 
         private GameController(ServerConection serverConnection)
         {
-            this.conn = serverConnection;
-            appSettings = this.conn.GetSettings();
+            if (serverConnection is ServerConnectionImpl)
+            {
+                this.conn = (ServerConnectionImpl)serverConnection;
+                appSettings = this.conn.GetSettings();
+            }
+            else if (serverConnection is ServerConnectionForTests)
+            {
+                this.conn = (ServerConnectionForTests)serverConnection;
+                appSettings = this.conn.GetSettings();
+            }
         }
 
         public void CreateTrip(string groupName, List<int> playersAges, int trackLength)
