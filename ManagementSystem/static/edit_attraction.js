@@ -56,10 +56,10 @@ function finishEditingAttraction() {
 
     if (helperVar == undefined) {
         attr_after_editing = {
-            name: document.getElementById("attr_name").value+';;'+document.getElementById("attr_name_english").value,
+            name: document.getElementById("attr_name").value + ';;' + document.getElementById("attr_name_english").value,
             x: attr_for_editing['x'],
             y: attr_for_editing['y'],
-            description: document.getElementById("desc").value+';;'+document.getElementById("desc_english").value,
+            description: document.getElementById("desc").value + ';;' + document.getElementById("desc_english").value,
             picturesURLS: attr_for_editing['picturesURLS'],
             videosURLS: vidArr
         };
@@ -67,10 +67,10 @@ function finishEditingAttraction() {
         let picArr = [];
         picArr.push(helperVar);
         attr_after_editing = {
-            name: document.getElementById("attr_name").value+';;'+document.getElementById("attr_name_english").value,
+            name: document.getElementById("attr_name").value + ';;' + document.getElementById("attr_name_english").value,
             x: attr_for_editing['x'],
             y: attr_for_editing['y'],
-            description: document.getElementById("desc").value+';;'+document.getElementById("desc_english").value,
+            description: document.getElementById("desc").value + ';;' + document.getElementById("desc_english").value,
             picturesURLS: picArr,
             videosURLS: vidArr
         };
@@ -122,19 +122,39 @@ function getFieldsValuesOfExistingAttraction(attractionsJSON) {
             document.getElementById("desc").value = descriptions[0];
             document.getElementById("attr_name_english").value = names[1];
             document.getElementById("desc_english").value = descriptions[1];
-            var image = document.getElementById('output');
-            image.src = attr['picturesURLS'][0];
+            // var image = document.getElementById('output');
+            // image.src = attr['picturesURLS'][0];
+            initializeTheListOfPicturesToShow(attr['picturesURLS']);
             var video = document.getElementById('vid_itself');
             video.src = attr['videosURLS'][0];
             localStorage.setItem("name_for_add_aq", p.name);
             localStorage.setItem("desc_for_add_aq", p.description);
-
         }
     });
 }
 
+function initializeTheListOfPicturesToShow(arrOfPics) {
+
+    //var files = event.target.files; //FileList object
+    var files = arrOfPics;
+    var output = document.getElementById("result");
+
+    for (var i = 0; i < files.length; i++) {
+        var file = files[i];
+        var img = document.createElement("img");
+        img.src = file;
+        img.className = 'thumbnail';
+        var div = document.createElement("div");
+        div.appendChild(img);
+
+        output.insertBefore(div, null);
+    }
+
+
+}
 
 function initializeLanguageBTNs() {
+
     let attr_name = document.getElementById("attr_name");
     let attr_name_english = document.getElementById("attr_name_english");
     let subt = document.getElementById("subt");
