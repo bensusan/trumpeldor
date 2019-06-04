@@ -10,7 +10,6 @@ window.onload = function(){
     hebrewBTN.addEventListener('click', function () {
         desc.style.display = "";
         desc_english.style.display = "none";
-
     });
 
     englishBTN.addEventListener('click', function () {

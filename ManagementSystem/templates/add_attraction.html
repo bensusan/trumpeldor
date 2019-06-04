@@ -28,7 +28,6 @@
         style="height: 58px;width: 100px; background-image: url('../static/israel.JPG');background-size: cover; font-size:24px">
 </button>
 
-
 <div align="center">
     <h2>הוספת אטרקציה</h2>
     <form>
@@ -52,8 +51,6 @@
                    style="display:none;text-align:right;"
                    required>
             <p></p>
-
-
             <label for="pop" style="font-size: 24px;"><b>הודעת פופ-אפ בהגעה לנקודה</b></label>
             <input type="text" id="pop" placeholder="הקלידי הודעה..." name="attr_pop"
                    style="direction:rtl;text-align:right;" required>
@@ -72,21 +69,14 @@
                 מידע נוסף
             </button>
             <button class='button google-blue' onclick="check()" type="button" style="width: 220px;">ניקוי</button>
-
         </div>
-
     </form>
-
-
 </div>
 
-
 <div>
-
     <nav id="sideMenu"></nav>
     {% load static %}
     <script src="{% static 'menu_of_add_attractions.js' %}?version=2"></script>
-
 </div>
 
 </body>

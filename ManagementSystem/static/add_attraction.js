@@ -104,7 +104,7 @@ function submitAttractionWithoutInfo() {
     }
     let lang = addedPoint.lng;
     let attraction_to_send = {
-        name: document.getElementById("attr_name").value +";;"+document.getElementById("attr_name_english").value
+        name: document.getElementById("attr_name").value + ";;" + document.getElementById("attr_name_english").value
         //,x:31.262860,y:34.801753
         , x: lat, y: lang
         , description: ""
@@ -114,9 +114,6 @@ function submitAttractionWithoutInfo() {
     localStorage.setItem("name_for_add_aq", attraction_to_send.name);
     localStorage.setItem("desc_for_add_aq", attraction_to_send.description);
     window.location.href = '/add_game';
-    // window.location.href='/attractions';
-    // alert("point:"+localStorage.getItem("addedPoint")+"\n"+
-    //     "name:"+document.getElementById("attr_name").value);
 }
 
 function saveAndProceedToAttractionInfo() {
@@ -129,7 +126,7 @@ function saveAndProceedToAttractionInfo() {
         vidArr.push(helperVarVid);
     }
     let lang = addedPoint.lng;
-    let name = document.getElementById("attr_name").value +";;"+document.getElementById("attr_name_english").value;
+    let name = document.getElementById("attr_name").value + ";;" + document.getElementById("attr_name_english").value;
     let x = lat;
     let y = lang;
     localStorage.setItem("x", JSON.stringify(x));
