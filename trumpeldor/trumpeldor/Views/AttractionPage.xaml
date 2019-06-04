@@ -2,18 +2,22 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="trumpeldor.Views.AttractionPage"
-             xmlns:translator="clr-namespace:trumpeldor.Helpers">
+             xmlns:translator="clr-namespace:trumpeldor.Helpers"
+             NavigationPage.HasNavigationBar="False"
+             ControlTemplate="{StaticResource template}">
     <ContentPage.Content>
         <StackLayout Style="{DynamicResource mainStackLayout}">
             <StackLayout Style="{StaticResource mainStackLayout}" Orientation="Horizontal">
                 <StackLayout x:Name="buttonsTopLayout" Orientation="Horizontal" HorizontalOptions="StartAndExpand">
                     <ImageButton x:Name="informationButton" Clicked="Information_Button_Clicked" Style="{StaticResource smallCircleImageButtonStyle}"/>
                 </StackLayout>
-                <Label x:Name = "scoreLabel" Style="{StaticResource labelStyle}" HorizontalOptions="EndAndExpand"/>
+                <Label x:Name="scoreLabel" Style="{StaticResource labelStyle}" HorizontalOptions="EndAndExpand"/>
             </StackLayout>
-            <Label x:Name = "attractionName" Style="{StaticResource titleStyle}"/>
-            <Image x:Name = "attractionImage" Style="{StaticResource largeImageStyle}"/>
+            <!--<Label x:Name = "attractionName" Style="{StaticResource titleStyle}"/>-->
+            <!--<Image x:Name = "attractionImage" Style="{StaticResource largeImageStyle}"/>-->
+            <Label Text="{translator:Translate AttractionPageTitle}" Style="{StaticResource labelStyle}" HorizontalOptions="CenterAndExpand"/>
             <Button x:Name = "missionButton" Clicked="Mission_Button_Clicked" Style="{StaticResource largeButtonStyle}"/>
+            <Label x:Name="or" Text="{translator:Translate or}" Style="{StaticResource labelStyle}" HorizontalOptions="CenterAndExpand"/>
             <Button x:Name = "questionButton" Text="{translator:Translate question}" Clicked="QuestionButton_Clicked" Style="{StaticResource largeButtonStyle}"/>
             <Button x:Name = "continueButton" Text="{translator:Translate continue_trip}" Clicked="Continue_Button_Clicked" Style="{StaticResource largeButtonStyle}"/>
         </StackLayout>

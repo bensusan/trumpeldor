@@ -47,13 +47,13 @@ namespace trumpeldor.Views
             odometer.MaximumTrackColor = Color.FromHex("#0066ff");
             odometer.Value = 0;
             //odometer.WidthRequest = temperature.Height/10 * 9;
-            hintBtn.Padding = 0;
+            //hintBtn.Padding = 0;
             //hintBtn.WidthRequest = hintFrame.Width;
-            hintBtn.Margin = new Thickness(
-                leftArrow.Width + hintFrame.Margin.Left + hintFrame.Padding.Left - 5,
-                10,
-                hintFrame.Margin.Right + hintFrame.Padding.Right,
-                10);
+            //hintBtn.Margin = new Thickness(
+            //    leftArrow.Width + hintFrame.Margin.Left + hintFrame.Padding.Left - 5,
+            //    10,
+            //    hintFrame.Margin.Right + hintFrame.Padding.Right,
+            //    10);
             nextAttraction = gc.currentTrip.GetCurrentAttraction();
             myMap = new MapPage();
             mapBtn.Source = ServerConection.URL_MEDIA + "googleMaps.png";
@@ -74,6 +74,12 @@ namespace trumpeldor.Views
         {
             base.OnAppearing();
             scoreLabel.Text = AppResources.score + ": " + gc.currentTrip.score;
+            if(ServerConection.DEBUG != 1)
+            {
+                buttonsTopLayout.IsVisible = false;
+                v.IsVisible = false;
+            }
+
         }
 
         private async void Get_Hint_Button_Clicked(object sender, EventArgs e)

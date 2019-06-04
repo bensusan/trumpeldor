@@ -25,18 +25,21 @@ namespace trumpeldor.Views
             //attractionImage.WidthRequest = Content.Width;
             gc = GameController.getInstance();
             this.attraction = gc.currentTrip.GetCurrentAttraction();
-            attractionName.Text = this.attraction.name;
+            //attractionName.Text = this.attraction.name;
             string mainPictureUrl = this.attraction.GetMainPictureUrl();
             //attractionImage.Source = ImageSource.FromStream(
             //() => new MemoryStream(Convert.FromBase64String(mainPictureUrl)));
-            attractionImage.Source = mainPictureUrl;
-            attractionImage.IsVisible = !mainPictureUrl.Equals("");
+            //attractionImage.Source = mainPictureUrl;
+            //attractionImage.IsVisible = !mainPictureUrl.Equals("");
             //watchAgainButton.IsVisible = !this.attraction.GetARURL().Equals("");
             entertainment = gc.currentTrip.GetCurrentAttraction().entertainment;
             if (entertainment != null)
                 missionButton.Text = entertainment.EntertainmentName();
             else
+            {
                 missionButton.IsVisible = false;
+                or.IsVisible = false;
+            }
             informationButton.Source = ServerConection.URL_MEDIA + "information.png";
             isFirstAppear = true;
         }
@@ -46,6 +49,7 @@ namespace trumpeldor.Views
             base.OnAppearing();
             missionButton.IsVisible = entertainment != null && !gc.isAttractionDone;
             questionButton.IsVisible = !gc.isAttractionDone;
+            or.IsVisible = !gc.isAttractionDone &&  entertainment != null;
             continueButton.IsVisible = gc.isAttractionDone;
             scoreLabel.Text = AppResources.score + ": " + gc.GetScore();
             if (isFirstAppear){

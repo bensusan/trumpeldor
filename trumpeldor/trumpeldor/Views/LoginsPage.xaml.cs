@@ -34,7 +34,8 @@ namespace trumpeldor.Views
 
         private async void Anonymus_Clicked(object sender, EventArgs e)
         {
-            await Navigation.PushModalAsync(new groupCreationPage());
+            if(await DisplayAlert(AppResources.login_as_anonymous, AppResources.anonymous_alert, AppResources.Yes, AppResources.No))
+                await Navigation.PushModalAsync(new groupCreationPage());
         }
 
 

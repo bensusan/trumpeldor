@@ -2,19 +2,22 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="trumpeldor.Views.MultipleChoiceQuestionPage"
-             xmlns:translator="clr-namespace:trumpeldor.Helpers">
+             xmlns:translator="clr-namespace:trumpeldor.Helpers"
+             NavigationPage.HasNavigationBar="False"
+             ControlTemplate="{StaticResource template}"
+             BackgroundColor="White">
     <ContentPage.Content>
-        <StackLayout Style="{DynamicResource mainStackLayout}">
+        <StackLayout Style="{DynamicResource mainStackLayout}" VerticalOptions="StartAndExpand">
             <StackLayout Style="{StaticResource mainStackLayout}" Orientation="Horizontal">
                 <Label x:Name = "scoreLabel" Style="{DynamicResource labelStyle}" HorizontalOptions="EndAndExpand"/>
             </StackLayout>
-            <Label Text="{translator:Translate MultipleChoiceQuestionPageTitle}" Style="{StaticResource titleStyle}"/>
-            <Label x:Name = "attractionQuestion" Style="{StaticResource labelStyle}"/>
+            <!--<Label Text="{translator:Translate MultipleChoiceQuestionPageTitle}" Style="{StaticResource titleStyle}"/>-->
+            <Label x:Name = "attractionQuestion" Style="{StaticResource labelStyle}" HorizontalOptions="CenterAndExpand"/>
             <StackLayout x:Name="answersLayout" Style="{StaticResource mainStackLayout}">
             </StackLayout>
             <StackLayout Style="{StaticResource mainStackLayout}" VerticalOptions="EndAndExpand">
-                <Label x:Name="explanation" Text="{translator:Translate aq_explanation}" Style="{StaticResource labelStyle}" IsVisible="False"/>
-                <Label x:Name="numToWait" IsVisible="False" Style="{StaticResource labelStyle}" FontSize="100" TextColor="Red" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="Center"/>
+                <Label x:Name="explanation" Text="{translator:Translate aq_explanation}" Style="{StaticResource labelStyle}" IsVisible="False" TextColor="Red" HorizontalOptions="Center"/>
+                <Label x:Name="numToWait" IsVisible="False" Style="{StaticResource labelStyle}" TextColor="Red" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="Center"/>
             </StackLayout>
         </StackLayout>
     </ContentPage.Content>

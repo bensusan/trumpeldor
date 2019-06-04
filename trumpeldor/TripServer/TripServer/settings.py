@@ -138,8 +138,6 @@ STATICFILES_DIRS = (
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
-VALID_SECTOR = (0, 0, 0, 0)     # (Min_X, Max_X, Min_Y, Max_Y)
-
 TOP_X = 10
 
 CORS_ORIGIN_ALLOW_ALL=True
@@ -152,3 +150,5 @@ CORS_ALLOW_METHODS = (
     'POST',
     'PUT',
 )
+
+TEST_RUNNER = "redgreenunittest.django.runner.RedGreenDiscoverRunner"

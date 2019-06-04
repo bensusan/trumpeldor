@@ -16,7 +16,7 @@ class HintSerializer(serializers.ModelSerializer):
 
 class AttractionSerializer(serializers.ModelSerializer):
     class Meta:
-        fields = ('id', 'name', 'x', 'y', 'description', 'picturesURLS', 'videosURLS', 'visible')
+        fields = ('id', 'name', 'x', 'y', 'description', 'picturesURLS', 'videosURLS')
         model = Attraction
 
 
