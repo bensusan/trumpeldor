@@ -61,7 +61,7 @@ class FindTheDifferences(Entertainment):
 
 
 class Puzzle(Entertainment):
-    piecesURLS = JSONField()# Should be list of paths
+    piecesURLS = JSONField()    # Should be list of paths
     width = models.IntegerField()
     height = models.IntegerField()
 
@@ -119,8 +119,8 @@ class Hint(models.Model):
 
 
 class Message(models.Model):
-    title = models.CharField(max_length=50)     # TODO - maybe change length
-    data = models.CharField(max_length=500)     # TODO - maybe change length
+    title = models.CharField(max_length=50)
+    data = models.CharField(max_length=500)
 
 
 class Info(models.Model):

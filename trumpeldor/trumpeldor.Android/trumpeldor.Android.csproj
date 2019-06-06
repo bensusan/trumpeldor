@@ -110,6 +110,7 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidAsset Include="Assets\config.json" />
+    <AndroidAsset Include="Assets\fonts\Hillel-CLM-Medium.ttf" />
     <None Include="google-services.json" />
     <None Include="Resources\AboutResources.txt" />
     <None Include="Assets\AboutAssets.txt" />

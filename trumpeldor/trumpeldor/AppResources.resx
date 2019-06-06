@@ -118,7 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="add_hint" xml:space="preserve">
-    <value>רמז נוסף</value>
+    <value>קבלו רמז נוסף</value>
   </data>
   <data name="add_player" xml:space="preserve">
     <value>הוסף שחקן</value>
@@ -139,7 +139,7 @@
     <value>ברכות סיימת את המסלול עם </value>
   </data>
   <data name="continue_to_longer_track" xml:space="preserve">
-    <value>הרחיבו את המסלול</value>
+    <value>האריכו את המסלול</value>
   </data>
   <data name="Do_you_want_to_continue_last_trip" xml:space="preserve">
     <value>רוצה להמשיך את המסלול הקודם שלך?</value>
@@ -166,7 +166,7 @@
     <value>רמזים</value>
   </data>
   <data name="how_to_play" xml:space="preserve">
-    <value>איך משחקים</value>
+    <value>איך משחקים?</value>
   </data>
   <data name="information" xml:space="preserve">
     <value>מידע</value>
@@ -178,13 +178,13 @@
     <value>התחבר עם פייסבוק</value>
   </data>
   <data name="long_path" xml:space="preserve">
-    <value>ארוך</value>
+    <value>ארוך(כשעה וחצי)</value>
   </data>
   <data name="map" xml:space="preserve">
     <value>מפה</value>
   </data>
   <data name="medium_path" xml:space="preserve">
-    <value>בינוני</value>
+    <value>בינוני(כשעה)</value>
   </data>
   <data name="mission" xml:space="preserve">
     <value>משימה</value>
@@ -202,7 +202,7 @@
     <value>אורך מסלול:</value>
   </data>
   <data name="play" xml:space="preserve">
-    <value>שחק</value>
+    <value>התחילו לשחק</value>
   </data>
   <data name="player" xml:space="preserve">
     <value>מס' שחקן</value>
@@ -214,7 +214,7 @@
     <value>נקודות</value>
   </data>
   <data name="question" xml:space="preserve">
-    <value>שאלה</value>
+    <value>שאלה אמריקאית</value>
   </data>
   <data name="score" xml:space="preserve">
     <value>ניקוד</value>
@@ -223,7 +223,7 @@
     <value>שתף</value>
   </data>
   <data name="short_path" xml:space="preserve">
-    <value>קצר</value>
+    <value>קצר(כחצי שעה)</value>
   </data>
   <data name="start_trip" xml:space="preserve">
     <value>התחל מסלול</value>
@@ -280,7 +280,7 @@
     <value>הרמז האחרון!</value>
   </data>
   <data name="login_as_anonymous" xml:space="preserve">
-    <value>דלג</value>
+    <value>כניסה ללא התחברות</value>
   </data>
   <data name="Out_Of_Valid_Sector_Message" xml:space="preserve">
     <value>תוכל להשתמש בחלקים בסיסיים מהאפליקציה</value>
@@ -304,7 +304,8 @@
     <value>מקום</value>
   </data>
   <data name="continue_trip" xml:space="preserve">
-    <value>המשך מסלול</value>
+    <value>קבלו את הרמז
+לנקודה הבאה</value>
   </data>
   <data name="login_with_google" xml:space="preserve">
     <value>התחבר עם חשבון גוגל</value>
@@ -337,13 +338,15 @@
     <value>פאזל</value>
   </data>
   <data name="aq_explanation" xml:space="preserve">
-    <value>טעיתם מספר פעמים. תאלצו המתין:</value>
+    <value>טעות
+יש להמתין</value>
   </data>
   <data name="FeedbackPageTitle" xml:space="preserve">
-    <value>תנו לנו משוב</value>
+    <value>רגע לפני סיום</value>
   </data>
   <data name="FinishTrackPageTitle" xml:space="preserve">
-    <value>סיימתם מסלול</value>
+    <value>כל הכבוד!
+סיימתם את המסלול</value>
   </data>
   <data name="group" xml:space="preserve">
     <value>קבוצה</value>
@@ -358,21 +361,39 @@
     <value>הנחיות</value>
   </data>
   <data name="JigsawPuzzlePageTitle" xml:space="preserve">
-    <value>פתרו את הפאזל</value>
+    <value>התמונה התפרקה, עזרו לנו להחזיר את כל החתיכות למקום</value>
   </data>
   <data name="LeadingTablePageTitle" xml:space="preserve">
     <value>טבלת מובילים</value>
   </data>
   <data name="LoginsPageTitle" xml:space="preserve">
-    <value>התחברו</value>
+    <value>התחברות</value>
   </data>
   <data name="MultipleChoiceQuestionPageTitle" xml:space="preserve">
     <value>ענו על השאלה</value>
   </data>
   <data name="SlidingPuzzlePageTitle" xml:space="preserve">
-    <value>פתרו את הפאזל</value>
+    <value>התמונה התערבבה, עזרו לנו לסדר אותה</value>
   </data>
   <data name="TakingPicturePageTitle" xml:space="preserve">
-    <value>צלמו תמונה</value>
+    <value>הצטלמו עם הפסל</value>
+  </data>
+  <data name="anonymous_alert" xml:space="preserve">
+    <value>בכניסה ללא התחברות, לא ישמרו נתוני המשחק ביציאה מהאפליקציה. האם אתם בטוחים?</value>
+  </data>
+  <data name="AttractionPageTitle" xml:space="preserve">
+    <value>לקבלת הרמז הבא השלימו:</value>
+  </data>
+  <data name="GroupCreationPage_start_game" xml:space="preserve">
+    <value>התחילו משחק</value>
+  </data>
+  <data name="informationFirstPage" xml:space="preserve">
+    <value>עכשיו בגלריות האוניברסיטה</value>
+  </data>
+  <data name="NavigationPageTitle" xml:space="preserve">
+    <value>רמז לנקודה הבאה</value>
+  </data>
+  <data name="or" xml:space="preserve">
+    <value>או</value>
   </data>
 </root>

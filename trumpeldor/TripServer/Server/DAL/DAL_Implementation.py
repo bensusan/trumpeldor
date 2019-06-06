@@ -63,27 +63,29 @@ class DAL_Implementation(DAL_Abstract):
         return ['kaplan.amit@gmail.com']
 
     def getSettings(self):
-        return  {
-                    'boundaries':   [
-                                        {'x': 31.265372, 'y': 34.798240},
-                                        {'x': 31.261009, 'y': 34.798178},
-                                        {'x': 31.260975, 'y': 34.805906},
-                                        {'x': 31.263513, 'y': 34.805998},
-                                        {'x': 31.265315, 'y': 34.803155}
-                                    ],
-                    'logo':         addPrefixUrlToSpecificName("logo.png"),
-                    'loginHours':   36,
-                    'scoreRules':   [
-                                        {'ruleName': 'hmtt', 'score': -10},
-                                        {'ruleName': 'aqm', 'score': -2},
-                                        {'ruleName': 'aqc', 'score': 10},
-                                        {'ruleName': 'aa', 'score': 50},
-                                        {'ruleName': 'sps', 'score': 10},
-                                        {'ruleName': 'ttd', 'score': 10},
-                                        {'ruleName': 'ps', 'score': 10}
-                                    ]
-
-                }
+        return\
+            {
+                'boundaries':
+                    [
+                        {'x': 31.265372, 'y': 34.798240},
+                        {'x': 31.261009, 'y': 34.798178},
+                        {'x': 31.260975, 'y': 34.805906},
+                        {'x': 31.263513, 'y': 34.805998},
+                        {'x': 31.265315, 'y': 34.803155}
+                    ],
+                'logo': addPrefixUrlToSpecificName("logo.png"),
+                'loginHours': 36,
+                'scoreRules':
+                    [
+                        {'ruleName': 'hmtt', 'score': -10},
+                        {'ruleName': 'aqm', 'score': -2},
+                        {'ruleName': 'aqc', 'score': 10},
+                        {'ruleName': 'aa', 'score': 50},
+                        {'ruleName': 'sps', 'score': 10},
+                        {'ruleName': 'ttd', 'score': 10},
+                        {'ruleName': 'ps', 'score': 10}
+                    ]
+            }
 
     def add_attraction(self, name, x, y, description, picturesURLS, videosURLS):
         names_of_pics=[]

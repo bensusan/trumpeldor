@@ -118,7 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="add_hint" xml:space="preserve">
-    <value>add hint</value>
+    <value>Get another hint</value>
   </data>
   <data name="add_player" xml:space="preserve">
     <value>add player</value>
@@ -166,13 +166,13 @@
     <value>hints</value>
   </data>
   <data name="how_to_play" xml:space="preserve">
-    <value>how to play</value>
+    <value>how to play?</value>
   </data>
   <data name="information" xml:space="preserve">
     <value>information</value>
   </data>
   <data name="leading_Table" xml:space="preserve">
-    <value>leading table</value>
+    <value>Leading table</value>
   </data>
   <data name="login_with_facebook" xml:space="preserve">
     <value>Login with Facebook</value>
@@ -202,7 +202,7 @@
     <value>Track length:</value>
   </data>
   <data name="play" xml:space="preserve">
-    <value>play</value>
+    <value>Play</value>
   </data>
   <data name="player" xml:space="preserve">
     <value>No. player</value>
@@ -214,7 +214,7 @@
     <value>points</value>
   </data>
   <data name="question" xml:space="preserve">
-    <value>Question</value>
+    <value>American question</value>
   </data>
   <data name="score" xml:space="preserve">
     <value>score</value>
@@ -301,7 +301,8 @@
     <value>Position</value>
   </data>
   <data name="continue_trip" xml:space="preserve">
-    <value>Continue trip</value>
+    <value>Recieve next
+point's hint</value>
   </data>
   <data name="login_with_google" xml:space="preserve">
     <value>Login with Google account</value>
@@ -334,13 +335,15 @@
     <value>Puzzle</value>
   </data>
   <data name="aq_explanation" xml:space="preserve">
-    <value>Too many mistakes. You should wait:</value>
+    <value>Wrong
+Wait:</value>
   </data>
   <data name="FeedbackPageTitle" xml:space="preserve">
-    <value>Give Us Feedbacks</value>
+    <value>Just before finishing</value>
   </data>
   <data name="FinishTrackPageTitle" xml:space="preserve">
-    <value>Finished Your Track</value>
+    <value>Well done!
+You have complete a track</value>
   </data>
   <data name="group" xml:space="preserve">
     <value>Group</value>
@@ -355,21 +358,39 @@
     <value>Instructions</value>
   </data>
   <data name="JigsawPuzzlePageTitle" xml:space="preserve">
-    <value>Solve the Puzzle</value>
+    <value>The picture broke up, help us put the pieces back in the correct place</value>
   </data>
   <data name="LeadingTablePageTitle" xml:space="preserve">
     <value>Leading Table</value>
   </data>
   <data name="LoginsPageTitle" xml:space="preserve">
-    <value>Sign In</value>
+    <value>Login</value>
   </data>
   <data name="MultipleChoiceQuestionPageTitle" xml:space="preserve">
     <value>Answer the Question</value>
   </data>
   <data name="SlidingPuzzlePageTitle" xml:space="preserve">
-    <value>Solve the Puzzle</value>
+    <value>The picture shuffled. Help us to organize it</value>
   </data>
   <data name="TakingPicturePageTitle" xml:space="preserve">
-    <value>Take a Picture</value>
+    <value>Take a Picture with the statue</value>
+  </data>
+  <data name="anonymous_alert" xml:space="preserve">
+    <value>The data will not save if you choose to skip. Are you sure about it? </value>
+  </data>
+  <data name="AttractionPageTitle" xml:space="preserve">
+    <value>To earn the next hint, complete one of the following:</value>
+  </data>
+  <data name="GroupCreationPage_start_game" xml:space="preserve">
+    <value>Play game</value>
+  </data>
+  <data name="informationFirstPage" xml:space="preserve">
+    <value>Now in university's galleries</value>
+  </data>
+  <data name="NavigationPageTitle" xml:space="preserve">
+    <value>Hint to the next point of interest</value>
+  </data>
+  <data name="or" xml:space="preserve">
+    <value>Or</value>
   </data>
 </root>
