@@ -9,6 +9,7 @@ using System.IO;
 using Xamarin.Forms;
 using System.Runtime.CompilerServices;
 using System.Timers;
+using System.Globalization;
 
 namespace trumpeldor
 {
@@ -39,6 +40,9 @@ namespace trumpeldor
         private static bool firstTime = true;
         private readonly System.Threading.EventWaitHandle waitHandle = new System.Threading.AutoResetEvent(false);
         private Setttings appSettings;
+
+        public CultureInfo hebrew = new CultureInfo("he");
+        public CultureInfo english = new CultureInfo("en");
 
         public static GameController getInstance()
         {

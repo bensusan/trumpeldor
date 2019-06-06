@@ -208,6 +208,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <BundleResource Include="Resources\fonts\Hillel-CLM-Medium.ttf" />
     <None Include="Resources\israel.png" />
     <Content Include="TaDa.mp3" />
   </ItemGroup>

@@ -1,7 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="trumpeldor.Views.AccessFacebookProfile">
+             x:Class="trumpeldor.Views.AccessFacebookProfile"
+             NavigationPage.HasNavigationBar="False">
     <ContentPage.Content>
         <StackLayout Style="{DynamicResource mainStackLayout}" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
             <WebView x:Name="webView" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"/>

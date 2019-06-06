@@ -2,7 +2,10 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="trumpeldor.Views.JigsawPuzzlePage"
-             xmlns:translator="clr-namespace:trumpeldor.Helpers">
+             xmlns:translator="clr-namespace:trumpeldor.Helpers"
+             NavigationPage.HasNavigationBar="False"
+             ControlTemplate="{StaticResource template}"
+             BackgroundColor="White">
 
     <ContentPage.Padding>
         <OnPlatform x:TypeArguments="Thickness"
@@ -17,7 +20,7 @@
                 </StackLayout>
                 <Label x:Name = "scoreLabel" Style="{DynamicResource labelStyle}" HorizontalOptions="EndAndExpand"/>
             </StackLayout>
-            <Label Text="{translator:Translate JigsawPuzzlePageTitle}" Style="{StaticResource titleStyle}"/>
+            <Label Text="{translator:Translate JigsawPuzzlePageTitle}" Style="{StaticResource labelStyle}"/>
             <Button Opacity="0"
                     HorizontalOptions="CenterAndExpand"
                     VerticalOptions="CenterAndExpand" />
