@@ -170,7 +170,8 @@ namespace trumpeldor {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to המשך מסלול.
+        ///   Looks up a localized string similar to קבלו את הרמז
+        ///לנקודה הבאה.
         /// </summary>
         public static string continue_trip {
             get {

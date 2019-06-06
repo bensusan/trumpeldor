@@ -301,7 +301,8 @@
     <value>Position</value>
   </data>
   <data name="continue_trip" xml:space="preserve">
-    <value>Continue trip</value>
+    <value>Recieve next
+point's hint</value>
   </data>
   <data name="login_with_google" xml:space="preserve">
     <value>Login with Google account</value>

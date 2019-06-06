@@ -39,7 +39,7 @@ namespace trumpeldor.Views
             gc = GameController.getInstance();
             leftArrow.Source = ServerConection.URL_MEDIA + "leftArrow.png";
             rightArrow.Source = ServerConection.URL_MEDIA + "rightArrow.png";
-            temperature.Source = ServerConection.URL_MEDIA + "temperature2.png";
+            temperature.Source = ServerConection.URL_MEDIA + "thermometer.png";
             v.Source = ServerConection.URL_MEDIA + "v.png";
             odometer.Maximum = 1;
             odometer.Minimum = 0;
@@ -56,7 +56,7 @@ namespace trumpeldor.Views
             //    10);
             nextAttraction = gc.currentTrip.GetCurrentAttraction();
             myMap = new MapPage();
-            mapBtn.Source = ServerConection.URL_MEDIA + "googleMaps.png";
+            mapBtn.Source = ServerConection.URL_MEDIA + "map.png";
             //mapBtn = myMap.map;
             AttachHint(0);
             

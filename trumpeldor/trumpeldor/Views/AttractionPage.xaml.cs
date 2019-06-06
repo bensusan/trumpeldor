@@ -40,7 +40,10 @@ namespace trumpeldor.Views
                 missionButton.IsVisible = false;
                 or.IsVisible = false;
             }
-            informationButton.Source = ServerConection.URL_MEDIA + "information.png";
+            //informationButton.Source = ServerConection.URL_MEDIA + "information.png";
+            info.Source = ServerConection.URL_MEDIA + "info.png";
+            playVideo.Source = ServerConection.URL_MEDIA + "playVideo.png";
+            mapBtn.Source = ServerConection.URL_MEDIA + "map.png";
             isFirstAppear = true;
         }
 
@@ -88,6 +91,16 @@ namespace trumpeldor.Views
         private async void QuestionButton_Clicked(object sender, EventArgs e)
         {
             await Navigation.PushModalAsync(new MultipleChoiceQuestionPage());
+        }
+
+        private void PlayVideo_Clicked(object sender, EventArgs e)
+        {
+
+        }
+
+        private void MapBtn_Clicked(object sender, EventArgs e)
+        {
+
         }
     }
 }

@@ -304,7 +304,8 @@
     <value>מקום</value>
   </data>
   <data name="continue_trip" xml:space="preserve">
-    <value>המשך מסלול</value>
+    <value>קבלו את הרמז
+לנקודה הבאה</value>
   </data>
   <data name="login_with_google" xml:space="preserve">
     <value>התחבר עם חשבון גוגל</value>

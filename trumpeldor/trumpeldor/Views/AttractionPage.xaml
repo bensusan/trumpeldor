@@ -8,18 +8,27 @@
     <ContentPage.Content>
         <StackLayout Style="{DynamicResource mainStackLayout}">
             <StackLayout Style="{StaticResource mainStackLayout}" Orientation="Horizontal">
-                <StackLayout x:Name="buttonsTopLayout" Orientation="Horizontal" HorizontalOptions="StartAndExpand">
+                <!--<StackLayout x:Name="buttonsTopLayout" Orientation="Horizontal" HorizontalOptions="StartAndExpand">
                     <ImageButton x:Name="informationButton" Clicked="Information_Button_Clicked" Style="{StaticResource smallCircleImageButtonStyle}"/>
-                </StackLayout>
+                </StackLayout>-->
                 <Label x:Name="scoreLabel" Style="{StaticResource labelStyle}" HorizontalOptions="EndAndExpand"/>
             </StackLayout>
             <!--<Label x:Name = "attractionName" Style="{StaticResource titleStyle}"/>-->
             <!--<Image x:Name = "attractionImage" Style="{StaticResource largeImageStyle}"/>-->
-            <Label Text="{translator:Translate AttractionPageTitle}" Style="{StaticResource labelStyle}" HorizontalOptions="CenterAndExpand"/>
-            <Button x:Name = "missionButton" Clicked="Mission_Button_Clicked" Style="{StaticResource largeButtonStyle}"/>
-            <Label x:Name="or" Text="{translator:Translate or}" Style="{StaticResource labelStyle}" HorizontalOptions="CenterAndExpand"/>
-            <Button x:Name = "questionButton" Text="{translator:Translate question}" Clicked="QuestionButton_Clicked" Style="{StaticResource largeButtonStyle}"/>
-            <Button x:Name = "continueButton" Text="{translator:Translate continue_trip}" Clicked="Continue_Button_Clicked" Style="{StaticResource largeButtonStyle}"/>
+            <StackLayout Style="{StaticResource mainStackLayout}">
+                <Label Text="{translator:Translate AttractionPageTitle}" Style="{StaticResource labelStyle}" HorizontalOptions="CenterAndExpand"/>
+                <Button x:Name = "missionButton" Clicked="Mission_Button_Clicked" Style="{StaticResource largeButtonStyle}"/>
+                <Label x:Name="or" Text="{translator:Translate or}" Style="{StaticResource labelStyle}" HorizontalOptions="CenterAndExpand"/>
+                <Button x:Name = "questionButton" Text="{translator:Translate question}" Clicked="QuestionButton_Clicked" Style="{StaticResource largeButtonStyle}"/>
+                <Button x:Name = "continueButton" Text="{translator:Translate continue_trip}" Clicked="Continue_Button_Clicked" Style="{StaticResource largeButtonStyle}"/>
+            </StackLayout>
+            <StackLayout Style="{StaticResource mainStackLayout}" Orientation="Horizontal" VerticalOptions="End">
+                <ImageButton x:Name="info" Clicked="Information_Button_Clicked" Style="{StaticResource regularCircleImageButtonStyle}"/>
+                <ImageButton x:Name="playVideo" Clicked="PlayVideo_Clicked" Style="{StaticResource regularCircleImageButtonStyle}"/>
+            </StackLayout>
+            <StackLayout Style="{StaticResource mainStackLayout}" Orientation="Horizontal" HorizontalOptions="End" VerticalOptions="End">
+                <ImageButton x:Name="mapBtn" Style="{StaticResource regularCircleImageButtonStyle}" Clicked="MapBtn_Clicked" HorizontalOptions="EndAndExpand" VerticalOptions="End"/>
+            </StackLayout>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
