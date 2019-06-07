@@ -161,5 +161,9 @@ function funcToGetAttraction(attractionsJSON) {
     window.location.href = '/pick_aq_edit';
 }
 
+function deleteRequestAq(attr_id,aq_id){
+    serverRequest("DELETE", function noop(dummy){}, 'http://'+ip+':12344/managementsystem/attraction/'+attr_id+
+        '/aquestion/'+aq_id+'/');
+}
 
 

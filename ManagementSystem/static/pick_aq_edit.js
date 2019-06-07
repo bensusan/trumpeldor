@@ -13,11 +13,6 @@ window.onload = function () {
 };
 
 
-var loadFile = function(event) {
-	var image = document.getElementById('output');
-	image.src = URL.createObjectURL(event.target.files[0]);
-};
-
 function initBtns() {
     var wantToEditBTN = document.getElementById('want_to_edit_aq');
     // var writeChosenHintTextEdit = document.getElementById("write_aq_id_to_edit");

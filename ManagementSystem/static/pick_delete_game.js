@@ -1,7 +1,3 @@
-var loadFile = function(event) {
-	var image = document.getElementById('output');
-	image.src = URL.createObjectURL(event.target.files[0]);
-};
 
 var str;
 var str2;
@@ -79,8 +75,8 @@ function funcForExistingHints(attractionsJSON){
         let p = {name: attr['name'], description:attr['description']};
         if(p.name===name && p.description===desc)
         {
-            getRequestGames(games_func_sliding,"sliding_puzzle",attr['id']);
-            // getRequestGames(games_func_drag,"puzzle",attr['id']);
+           // getRequestGames(games_func_sliding,"sliding_puzzle",attr['id']);
+           // getRequestGames(games_func_drag,"puzzle",attr['id']);
             attractionObjToUseInHintDelete=attr;
         }
         });
@@ -118,7 +114,6 @@ window.onload = function () {
     };
     getRequestAttractions(funcForExistingHints);
     localFileVideoPlayer();
-
 };
 
 function wantToDeleteButton(){

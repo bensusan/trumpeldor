@@ -3,12 +3,6 @@ var helperVar;
 var helperVarVid;
 
 
-var loadFile = function (event) {
-    var image = document.getElementById('output');
-    image.src = URL.createObjectURL(event.target.files[0]);
-};
-
-
 function funcForExistingHints(attractionsJSON) {
 
     let name = localStorage.getItem("name_for_add_aq");
@@ -95,6 +89,7 @@ window.onload = function () {
 
 function initializeBTNsFunctionality() {
     var textHintBTN = document.getElementById('add_text_hint');
+    var textLineEnglish = document.getElementById('text_hint_id_english');
     var textLine = document.getElementById("text_hint_id");
     var sendButtonTxt = document.getElementById("send_text_hint");
     var upload_pic_title = document.getElementById("upload_title");
@@ -111,8 +106,8 @@ function initializeBTNsFunctionality() {
     var sendVidHintBTN = document.getElementById('send_vid_hint');
 
     textHintBTN.addEventListener('click', function () {
-        textLine.style.display = "";
-        sendButtonTxt.style.display = "";
+         textLine.style.display = "inline";
+        sendButtonTxt.style.display = "inline";
         clickHere.style.display = "none";
         picDesc.style.display = "none";
         outpic.style.display = "none";
@@ -123,6 +118,19 @@ function initializeBTNsFunctionality() {
         sendButtonVid.style.display = "none";
         upload_pic_title.style.display = "none";
         window.scrollTo(0, document.body.scrollHeight);
+
+        let hebrewBTN = document.getElementById("hebrewBTN");
+        let englishBTN = document.getElementById("englishBTN");
+
+        hebrewBTN.addEventListener('click', function () {
+            textLine.style.display = "";
+            textLineEnglish.style.display = "none";
+        });
+
+        englishBTN.addEventListener('click', function () {
+            textLine.style.display = "none";
+            textLineEnglish.style.display = "";
+        });
     });
 
     var picHintBTN = document.getElementById('add_pic_hint');
@@ -184,7 +192,7 @@ function getTheNeededAttractionIdToSendItOnThePostRequest(attractionsJSON) {
             var textHintToSend = {
                 attraction: attr,
                 kind: 'HT',
-                data: document.getElementById("text_hint_id").value,
+                data: document.getElementById("text_hint_id").value+ ";;" + document.getElementById("text_hint_id_english").value,
                 description: ""
             };
             postRequestHint(textHintToSend, attr['id']);
