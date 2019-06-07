@@ -24,49 +24,24 @@ window.onload = function () {
     ok1.addEventListener('click', function () {
         ok2.style.display = '';
         ok1.style.display = 'none';
-
-        let x = document.getElementById('lat' + countOfPoints);
-        let y = document.getElementById('lng' + countOfPoints);
-        let pointToMark = positionInMap(x.value, y.value);
-        arrOfPoints.push(pointToMark);
-        let theMark = markAttraction(pointToMark);
-        countOfPoints++;
-        markArr();
+        showingPointOnMapAndChooseIt();
     });
 
     ok2.addEventListener('click', function () {
         ok3.style.display = '';
         ok2.style.display = 'none';
-        let x = document.getElementById('lat' + countOfPoints);
-        let y = document.getElementById('lng' + countOfPoints);
-        let pointToMark = positionInMap(x.value, y.value);
-        arrOfPoints.push(pointToMark);
-        let theMark = markAttraction(pointToMark);
-        countOfPoints++;
-        markArr();
+        showingPointOnMapAndChooseIt();
     });
 
     ok3.addEventListener('click', function () {
         ok4.style.display = '';
         ok3.style.display = 'none';
-        let x = document.getElementById('lat' + countOfPoints);
-        let y = document.getElementById('lng' + countOfPoints);
-        let pointToMark = positionInMap(x.value, y.value);
-        arrOfPoints.push(pointToMark);
-        let theMark = markAttraction(pointToMark);
-        countOfPoints++;
-        markArr();
+        showingPointOnMapAndChooseIt();
     });
 
     ok4.addEventListener('click', function () {
         ok4.style.display = 'none';
-        let x = document.getElementById('lat' + countOfPoints);
-        let y = document.getElementById('lng' + countOfPoints);
-        let pointToMark = positionInMap(x.value, y.value);
-        arrOfPoints.push(pointToMark);
-        let theMark = markAttraction(pointToMark);
-        countOfPoints++;
-        markArr();
+        showingPointOnMapAndChooseIt();
     });
 
 };
@@ -74,6 +49,16 @@ window.onload = function () {
 function initMapAndAttractionsprop() {
     initMap();
     initAttractionsMarkers();
+}
+
+function showingPointOnMapAndChooseIt() {
+    let x = document.getElementById('lat' + countOfPoints);
+    let y = document.getElementById('lng' + countOfPoints);
+    let pointToMark = positionInMap(x.value, y.value);
+    arrOfPoints.push(pointToMark);
+    markAttraction(pointToMark);
+    countOfPoints++;
+    markArr();
 }
 
 function sendAllSettingsWithPointArr() {

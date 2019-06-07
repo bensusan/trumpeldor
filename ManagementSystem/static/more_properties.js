@@ -3,7 +3,6 @@ let failurl = "";
 let helperVar = "";
 
 function sendThis(arrOfBoundries) {
-    alert(arrOfBoundries);
     let toSend = {
         boundaries: arrOfBoundries,
         logo: [helperVar],
