@@ -158,7 +158,7 @@ function funcToGetAttraction(attractionsJSON) {
         }
     });
 
-    window.location.href = '/add_hint';
+    window.location.href = '/pick_aq_edit';
 }
 
 

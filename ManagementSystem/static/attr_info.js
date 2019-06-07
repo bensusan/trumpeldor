@@ -78,8 +78,8 @@ function initializeTheListOfPicturesToShow() {
             //,x:31.262860,y:34.801753
             ,x:xx ,y:yy
             ,description:document.getElementById("desc").value+";;"+document.getElementById("desc_english").value
-            ,picturesURLS:arrOfPicsData ,videosURLS:[]};
-
+            ,picturesURLS:arrOfPicsData ,videosURLS:[JSON.parse(localStorage.getItem("vidArr"))]};
+//JSON.parse(localStorage.getItem("vidArr"))
         postRequestAttractionn(attraction_to_send);
         localStorage.setItem("name_for_add_aq", attraction_to_send.name);
         localStorage.setItem("desc_for_add_aq", attraction_to_send.description);

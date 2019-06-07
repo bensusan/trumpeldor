@@ -8,15 +8,15 @@
     {% load static %}
 <link rel="stylesheet" href="{% static 'beauty.css' %}?version=2">
        {% load static %}
-<link rel="stylesheet" href="{% static 'buttoni.css' %}?version=2">
+<link rel="stylesheet" href="{% static 'buttoni.css' %}?version=4">
       {% load static %}
-<link rel="stylesheet" href="{% static 'just_want_background.css' %}?version=1">
+<link rel="stylesheet" href="{% static 'just_want_background.css' %}?version=2">
     {% load static %}
-<link rel="stylesheet" href="{% static 'SideMenu.css' %}?version=4">
+<link rel="stylesheet" href="{% static 'SideMenu.css' %}?version=5">
     {% load static %}
 <script src="{% static 'attractions.js' %}?version=2"></script>
     {% load static %}
-<script src="{% static 'add_hint_edit.js' %}?version=8"></script>
+<script src="{% static 'add_hint_edit.js' %}?version=10"></script>
      {% load static %}
 <script src="{% static 'properties.js' %}?version=2"></script>
 </head>
@@ -40,7 +40,7 @@
     <p></p>
 <textarea id="text_hint_id" name="subject" placeholder="כתבי את הרמז..." style="direction:rtl;text-align:right;display: none;width:300px;height:200px;border-radius: 10px;"></textarea>
 <p></p>
-    <button class="button" type="button" id="send_text_hint" style="display: none">שליחה</button>
+    <button class="blogger" type="button" id="send_text_hint" style="display: none;width:80px;font-size: 20px;">שליחה</button>
 <p></p>
 
     <p></p>
@@ -51,7 +51,7 @@
 <p></p>
     <input type="file" id="vid_hint_browse_id" accept="video/*" onchange="encodeVideoFileAsURL(this)" style="display: none">
     <p></p>
-<button class="button" type="button" id="send_vid_hint" style="display: none">שליחה</button>
+<button class="blogger" type="button" id="send_vid_hint" style="display: none;width:80px;font-size: 20px;">שליחה</button>
 <p></p>
 
     <p></p>
@@ -62,7 +62,7 @@
 <input type="file" id="file" onchange="encodeImageFileAsURL(this)" style="display: none"/>
 <p><img id="output" width="200" style="display: none"/></p>
     <p></p>
-<button class="button" type="button" id="send_pic_hint" style="display: none">שליחה</button>
+<button class="blogger" type="button" id="send_pic_hint" style="display: none;width:80px;font-size: 20px;">שליחה</button>
 
 
 <p></p>

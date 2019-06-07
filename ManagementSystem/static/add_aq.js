@@ -107,7 +107,7 @@ function funcToGetAttraction(attractionsJSON) {
         if (p.name === name && p.description === desc) {
 
             let american_question_to_send = {
-                question: document.getElementById("ques").value+";;"+document.getElementById("quesEnglish")
+                question: document.getElementById("ques").value+";;"+document.getElementById("quesEnglish").value
                 , answers: arrOfAnswers
                 , indexOfCorrectAnswer: correctAnswersIndexes
                 , attraction: attr['id'] //atraction id needs to be here
