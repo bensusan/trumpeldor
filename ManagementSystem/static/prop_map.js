@@ -1,22 +1,15 @@
-//from django.conf import settings
 let countOfPoints = 1;
 let curPosClicked;
 let curMarker;
 let coordinates_of_last_click;
 let arrOfPoints = [];
-// let points= [
-//     {lat: 31.263465932844372, lng: 34.801946282386783},
-//     {lat: 31.263065932844372, lng: 34.801146282386783},
-//     {lat: 31.263865932844372, lng: 34.802146282386783},
-//     {lat: 31.262773527283052, lng: 34.802075028419495}
-// ];
 let map;
 //
 window.onload = function () {
 
     let sendSettings = document.getElementById("save_props");
     sendSettings.addEventListener('click', function () {
-        sendThis();
+        sendAllSettingsWithPointArr();
     });
 
     let ok1 = document.getElementById('ok1');
@@ -32,7 +25,6 @@ window.onload = function () {
         ok2.style.display = '';
         ok1.style.display = 'none';
 
-
         let x = document.getElementById('lat' + countOfPoints);
         let y = document.getElementById('lng' + countOfPoints);
         let pointToMark = positionInMap(x.value, y.value);
@@ -45,18 +37,36 @@ window.onload = function () {
     ok2.addEventListener('click', function () {
         ok3.style.display = '';
         ok2.style.display = 'none';
+        let x = document.getElementById('lat' + countOfPoints);
+        let y = document.getElementById('lng' + countOfPoints);
+        let pointToMark = positionInMap(x.value, y.value);
+        arrOfPoints.push(pointToMark);
+        let theMark = markAttraction(pointToMark);
         countOfPoints++;
+        markArr();
     });
 
     ok3.addEventListener('click', function () {
         ok4.style.display = '';
         ok3.style.display = 'none';
+        let x = document.getElementById('lat' + countOfPoints);
+        let y = document.getElementById('lng' + countOfPoints);
+        let pointToMark = positionInMap(x.value, y.value);
+        arrOfPoints.push(pointToMark);
+        let theMark = markAttraction(pointToMark);
         countOfPoints++;
+        markArr();
     });
 
     ok4.addEventListener('click', function () {
         ok4.style.display = 'none';
+        let x = document.getElementById('lat' + countOfPoints);
+        let y = document.getElementById('lng' + countOfPoints);
+        let pointToMark = positionInMap(x.value, y.value);
+        arrOfPoints.push(pointToMark);
+        let theMark = markAttraction(pointToMark);
         countOfPoints++;
+        markArr();
     });
 
 };
@@ -66,6 +76,11 @@ function initMapAndAttractionsprop() {
     initAttractionsMarkers();
 }
 
+function sendAllSettingsWithPointArr() {
+    sendThis(arrOfPoints);
+}
+
+
 function initMap() {
     map = new google.maps.Map(document.getElementById('map'), {
         zoom: 18,
@@ -74,23 +89,12 @@ function initMap() {
     // initAttractionsMarkers();
     listenerForMap(map);
     initPoints();
-    // alert("the number of points is now :" + points.length)
-    // var shortPath1 = JSON.parse(localStorage.getItem("short_path"));
-    //     var medPath1 = JSON.parse(localStorage.getItem("medium_path"));
-    //     var longPath1 = JSON.parse(localStorage.getItem("long_path"));
-    // alert("short:"+shortPath1.length +"\nmedium: "+medPath1.length +"\nlong: "+longPath1.length);
-
-
 }
 
 
 function addEditListener(m) {
     m.addListener('click', function () {
-
-
         prev_m = m;
-        // markSpecificAttraction(pos);
-        // alert("the point "+m.position);
     });
 }
 
@@ -131,13 +135,9 @@ function markAttractions(attractionsJSON) {
 
         let pos = {lat: attr['x'], lng: attr['y']};
         marker_arr.push(pos);
-        localStorage.setItem("title" + pos, "attraction ID: " + attr['id'] + "\nattraction name: " + attr['name'] + "\nposition: (" + attr['x'] + "," + attr['y'] + ")");
+        localStorage.setItem("title" + pos, "attraction ID: " + attr['id'] +
+            "\nattraction name: " + attr['name'] + "\nposition: (" + attr['x'] + "," + attr['y'] + ")");
         markAttraction(pos);
-        // var currPoints = JSON.parse(localStorage.getItem("points"));
-        // currPoints.push(x.position);
-        // localStorage.setItem("points",JSON.stringify(currPoints));
-
-
     });
 }
 
