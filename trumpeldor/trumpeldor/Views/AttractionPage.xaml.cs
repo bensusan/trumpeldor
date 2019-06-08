@@ -8,6 +8,7 @@ using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using trumpeldor.SheredClasses;
 using System.IO;
+using Rg.Plugins.Popup.Services;
 
 namespace trumpeldor.Views
 {
@@ -95,9 +96,9 @@ namespace trumpeldor.Views
             await Navigation.PushModalAsync(new MultipleChoiceQuestionPage());
         }
 
-        private void PlayVideo_Clicked(object sender, EventArgs e)
+        private async void PlayVideo_Clicked(object sender, EventArgs e)
         {
-
+            await PopupNavigation.Instance.PushAsync(new MyPopup(attraction.videosURLS[0]));
         }
 
         private void MapBtn_Clicked(object sender, EventArgs e)
