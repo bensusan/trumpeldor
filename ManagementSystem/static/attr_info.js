@@ -1,6 +1,11 @@
 let arrOfPicsData = [];
 
 window.onload = function(){
+    let submitBTN = document.getElementById("submit_btn_add_attr");
+    submitBTN.addEventListener('click', function () {
+        sendTheAttractionWithAllInformation();
+    });
+
     let desc = document.getElementById("desc");
     let desc_english = document.getElementById("desc_english");
 
@@ -72,13 +77,13 @@ function initializeTheListOfPicturesToShow() {
         let xx = JSON.parse(localStorage.getItem("x"));
         let yy = JSON.parse(localStorage.getItem("y"));
         // let vidArr = JSON.parse(localStorage.getItem("vidArr"));
-
+        alert(JSON.parse(localStorage.getItem("vidArr")));
         let attraction_to_send = {
             name:namee
             //,x:31.262860,y:34.801753
             ,x:xx ,y:yy
             ,description:document.getElementById("desc").value+";;"+document.getElementById("desc_english").value
-            ,picturesURLS:arrOfPicsData ,videosURLS:[JSON.parse(localStorage.getItem("vidArr"))]};
+            ,picturesURLS:arrOfPicsData ,videosURLS:JSON.parse(localStorage.getItem("vidArr"))};
 //JSON.parse(localStorage.getItem("vidArr"))
         postRequestAttractionn(attraction_to_send);
         localStorage.setItem("name_for_add_aq", attraction_to_send.name);

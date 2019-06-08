@@ -131,7 +131,7 @@ function saveAndProceedToAttractionInfo() {
     let y = lang;
     localStorage.setItem("x", JSON.stringify(x));
     localStorage.setItem("y", JSON.stringify(y));
-    localStorage.setItem("vidArr", JSON.stringify(helperVarVid));
+    localStorage.setItem("vidArr", JSON.stringify(vidArr));
     localStorage.setItem("name_for_add_aq", name);
     localStorage.setItem("desc_for_add_aq", "");
     window.location.href = '/attr_info';
