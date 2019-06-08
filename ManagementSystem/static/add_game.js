@@ -3,7 +3,11 @@ let curr_url = window.location;
 
 window.onload=function () {
     getRequestAttractions(funcToGetID);
-    let p1 = document.getElementById('p1');
+    initializeGamesBTNs();
+};
+
+function initializeGamesBTNs() {
+        let p1 = document.getElementById('p1');
     let p2 = document.getElementById('p2');
     let p3 = document.getElementById('p3');
     let sureLBL = document.getElementById('sureLBL');
@@ -76,15 +80,9 @@ window.onload=function () {
 
 
         });
-
-var tmuna = document.getElementById("helperi");
-    tmuna.src = localStorage.getItem("url_of_img");
-
-};
-
+}
 
 function postRequestPhotoGame(desc,attr_id){
- //   alert("hint blat");
     serverRequest("POST", function noop(dummy){}, 'http://'+ip+':12344/managementsystem/attraction/'+
         attr_id+'/taking_pic/',
         JSON.stringify(desc));

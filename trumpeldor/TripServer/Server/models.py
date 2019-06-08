@@ -4,10 +4,6 @@ from django.contrib.postgres.fields import ArrayField
 from django.core.validators import int_list_validator
 
 
-
-# we can see which type is every field
-
-
 class Attraction(models.Model):
     name = models.TextField()
     x = models.FloatField()
@@ -15,7 +11,7 @@ class Attraction(models.Model):
     description = models.TextField()
     picturesURLS = JSONField(blank=True, null=True)
     videosURLS = JSONField(blank=True, null=True)
-    visible = models.BooleanField()
+    # visible = models.BooleanField()
 
 
 class User(models.Model):
@@ -65,7 +61,7 @@ class FindTheDifferences(Entertainment):
 
 
 class Puzzle(Entertainment):
-    piecesURLS = JSONField()# Should be list of paths
+    piecesURLS = JSONField()    # Should be list of paths
     width = models.IntegerField()
     height = models.IntegerField()
 
@@ -123,8 +119,8 @@ class Hint(models.Model):
 
 
 class Message(models.Model):
-    title = models.CharField(max_length=50)     # TODO - maybe change length
-    data = models.CharField(max_length=500)     # TODO - maybe change length
+    title = models.CharField(max_length=50)
+    data = models.CharField(max_length=500)
 
 
 class Info(models.Model):

@@ -19,30 +19,31 @@ namespace trumpeldor.Views
     public partial class FirstPage : ContentPage
     {
         private GameController gc;
-        private CultureInfo hebrew = new CultureInfo("he");
-        private CultureInfo english = new CultureInfo("en");
+        //private CultureInfo hebrew = new CultureInfo("he");
+        //private CultureInfo english = new CultureInfo("en");
 
         public FirstPage()
         {
             InitializeComponent();
             israelButton.Source = ServerConnectionImpl.URL_MEDIA + "israel.png";
             englandButton.Source = ServerConnectionImpl.URL_MEDIA + "united-kingdom.png";
-            info.Source = ServerConnectionImpl.URL_MEDIA + "information.png";
-            how.Source = ServerConnectionImpl.URL_MEDIA + "how.png";
-            CrossMultilingual.Current.CurrentCultureInfo = hebrew;
+            //info.Source = ServerConection.URL_MEDIA + "information.png";
+            //how.Source = ServerConection.URL_MEDIA + "how.png";
             gc = GameController.getInstance();
+            CrossMultilingual.Current.CurrentCultureInfo = gc.hebrew;
+            countriesStackLayout.FlowDirection = FlowDirection.RightToLeft;
         }
 
         protected override void OnAppearing()
         {
             base.OnAppearing();
             DeleteBordersToCountries();
-            if (CrossMultilingual.Current.CurrentCultureInfo.Equals(hebrew))
+            if (CrossMultilingual.Current.CurrentCultureInfo.Equals(gc.hebrew))
             {
                 israelButton.BorderWidth = 1;
                 israelButton.BorderColor = Color.Black;
             }
-            else if (CrossMultilingual.Current.CurrentCultureInfo.Equals(english))
+            else if (CrossMultilingual.Current.CurrentCultureInfo.Equals(gc.english))
             {
                 englandButton.BorderWidth = 1;
                 englandButton.BorderColor = Color.Black;
@@ -53,8 +54,8 @@ namespace trumpeldor.Views
         private async Task<bool> CanUserPlay()
         {
             if (!gc.IsUserInValidSector()){
-                errorMessage.Text = AppResources.Out_Of_Valid_Sector_Title + "\n" + AppResources.Out_Of_Valid_Sector_Message;
-                if (ServerConnectionImpl.DEBUG == 1)
+                //errorMessage.Text = AppResources.Out_Of_Valid_Sector_Title + "\n" + AppResources.Out_Of_Valid_Sector_Message;
+                if (ServerConection.DEBUG == 1)
                     return await DisplayAlert("Debug Mode", "Do you want to continue", "yes", "no");
                 return false;
             }
@@ -81,6 +82,9 @@ namespace trumpeldor.Views
             gc.StartTaskLocation();
             if(await CanUserPlay())
                 await Navigation.PushModalAsync(new LoginsPage());
+            else
+                await DisplayAlert("BGU ARTS", AppResources.Out_Of_Valid_Sector_Message, AppResources.ok);
+
         }
 
         private async void HowToPlay_Button_Clicked(object sender, EventArgs e)
@@ -95,22 +99,22 @@ namespace trumpeldor.Views
 
         private void English_Button_Clicked(object sender, EventArgs e)
         {
-            CrossMultilingual.Current.CurrentCultureInfo = english;
+            CrossMultilingual.Current.CurrentCultureInfo = gc.english;
             DeleteBordersToCountries();
             englandButton.BorderWidth = 1;
             englandButton.BorderColor = Color.Black;
-            if(errorMessage.Text != "")
-                errorMessage.Text = AppResources.Out_Of_Valid_Sector_Title + "\n" + AppResources.Out_Of_Valid_Sector_Message;
+            //if(errorMessage.Text != "")
+            //    errorMessage.Text = AppResources.Out_Of_Valid_Sector_Title + "\n" + AppResources.Out_Of_Valid_Sector_Message;
         }
 
         private void Hebrew_Button_Clicked(object sender, EventArgs e)
         {
-            CrossMultilingual.Current.CurrentCultureInfo = hebrew;
+            CrossMultilingual.Current.CurrentCultureInfo = gc.hebrew;
             DeleteBordersToCountries();
             israelButton.BorderWidth = 1;
             israelButton.BorderColor = Color.Black;
-            if (errorMessage.Text != "")
-                errorMessage.Text = AppResources.Out_Of_Valid_Sector_Title + "\n" + AppResources.Out_Of_Valid_Sector_Message;
+            //if (errorMessage.Text != "")
+            //    errorMessage.Text = AppResources.Out_Of_Valid_Sector_Title + "\n" + AppResources.Out_Of_Valid_Sector_Message;
         }
 
         private void DeleteBordersToCountries()

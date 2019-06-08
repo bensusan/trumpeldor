@@ -2,7 +2,9 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="trumpeldor.Views.FeedbackPage"
-             xmlns:translator="clr-namespace:trumpeldor.Helpers">
+             xmlns:translator="clr-namespace:trumpeldor.Helpers"
+             NavigationPage.HasNavigationBar="False"
+             ControlTemplate="{StaticResource template}">
     <ContentPage.Content>
         <StackLayout Style="{DynamicResource mainStackLayout}">
             <Label Text="{translator:Translate FeedbackPageTitle}" Style="{StaticResource titleStyle}" />
@@ -19,7 +21,7 @@
                 <!--<Label Text="{translator:Translate question}" Grid.Column="0" Grid.Row="0" Style="{DynamicResource labelStyle}"/>-->
                 <!--<Label Text="{translator:Translate Answer}" Grid.Column="1" Grid.Row="0" Style="{DynamicResource labelStyle}"/>-->
             </Grid>
-            <Button Text="{translator:Translate Reply}" Clicked="Reply_Button_Clicked" x:Name="ReplyButton" Style="{StaticResource largeButtonStyle}"/>
+            <Button Text="{translator:Translate Reply}" Clicked="Reply_Button_Clicked" x:Name="ReplyButton" Style="{StaticResource largeButtonStyle}" BackgroundColor="Orange"/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

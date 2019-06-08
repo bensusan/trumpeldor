@@ -41,7 +41,6 @@ function hints_func_in_edit(hintsJSON) {
 }
 
 function editRequestHint(the_hint,attr_id,hint_id){
-  //  alert("edit hint huibla");
     serverRequest("PUT", function noop(dummy){}, 'http://'+ip+':12344/managementsystem/attraction/'+attr_id+'/hint/'+hint_id+'/',
         JSON.stringify(the_hint));
 }

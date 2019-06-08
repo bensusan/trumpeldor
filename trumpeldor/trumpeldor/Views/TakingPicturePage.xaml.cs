@@ -34,6 +34,10 @@ namespace trumpeldor.Views
             gc = GameController.getInstance();
             scoreLabel.Text = AppResources.score + ": " + gc.GetScore();
             CameraButton.Clicked += CameraButton_Clicked;
+
+            subtitles.Source = ServerConnectionImpl.URL_MEDIA + "subtitles.jpg";
+            info.Source = ServerConnectionImpl.URL_MEDIA + "info.jpg";
+            playVideo.Source = ServerConnectionImpl.URL_MEDIA + "playVideo.png";
             how.Source = ServerConnectionImpl.URL_MEDIA + "how.png";
             this.tp = tp;
         }
@@ -73,7 +77,8 @@ namespace trumpeldor.Views
                 }
 
                 CameraButton.Text = AppResources.save_and_continue;
-                AddToLayout(BtnLayout,AppResources.share, ShareButton_Clicked);
+                CameraButton.BackgroundColor = Color.White;
+                AddToLayout(BtnLayout,AppResources.share, ShareButton_Clicked, Color.Orange);
 
 
                 clicked.IsEnabled = true;//enable button
@@ -114,11 +119,12 @@ namespace trumpeldor.Views
             
         }
 
-        private void AddToLayout(StackLayout layout, string btnName, EventHandler e)
+        private void AddToLayout(StackLayout layout, string btnName, EventHandler e, Color c)
         {
             Button btn = new Button();
             btn.Text = btnName;
             btn.Clicked += e;
+            btn.BackgroundColor = c;
             btn.Style = (Style)Application.Current.Resources["largeButtonStyle"];
             layout.Children.Add(btn);
         }
@@ -134,6 +140,21 @@ namespace trumpeldor.Views
         private async void HowToPlay_Button_Clicked(object sender, EventArgs e)
         {
             await Navigation.PushModalAsync(new instructionsPage(tp));
+        }
+
+        private void PlayVideo_Clicked(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Subtitles_Clicked(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Information_Button_Clicked(object sender, EventArgs e)
+        {
+
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json.Linq;
+using Plugin.Multilingual;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -24,6 +25,7 @@ namespace trumpeldor.Views
             InitPicker();
             addButton.Source = ServerConnectionImpl.URL_MEDIA + "plus.png";
             removeButton.Source = ServerConnectionImpl.URL_MEDIA + "delete.png";
+            dropDownArrow.Source = ServerConnectionImpl.URL_MEDIA + "dropDownArrow.png";
             gc = GameController.getInstance();
             string socialnetworkString;
             User.SocialNetwork2string.TryGetValue(socialNetwork, out socialnetworkString);
@@ -40,6 +42,16 @@ namespace trumpeldor.Views
         protected override async void OnAppearing()
         {
             base.OnAppearing();
+            if (CrossMultilingual.Current.CurrentCultureInfo.Equals(gc.hebrew))
+            {
+                groupNameStack.FlowDirection = FlowDirection.RightToLeft;
+                pathLengthStack.FlowDirection = FlowDirection.RightToLeft;
+                agesGrid.FlowDirection = FlowDirection.RightToLeft;
+                //firstPlayerNumber.FlowDirection = FlowDirection.RightToLeft;
+                //firstPlayerEntry.FlowDirection = FlowDirection.RightToLeft;
+                //firstPlayerNumber.HorizontalTextAlignment = TextAlignment.Center;
+                //firstPlayerEntry.HorizontalTextAlignment = TextAlignment.Center;
+            }
             if (!await ShowPastDetails())
             {
                 var existingPages = Navigation.NavigationStack.ToList();
@@ -101,20 +113,29 @@ namespace trumpeldor.Views
             agesGrid.Children.Add(removeButton, DELETE_PLAYER_COLUMN, nextRow);
 
             //Player number addition
-            Label lbl = new Label { Text = nextRow + ")" };
+            Label lbl = new Label { Text = nextRow + "", VerticalTextAlignment = TextAlignment.End, Margin = new Thickness(0,0,1,8) };
             lbl.SetDynamicResource(VisualElement.StyleProperty, "labelStyle");
             agesGrid.Children.Add(lbl, PLAYER_NUMBER_COLUMN, nextRow);
 
             //Player's age addition
-            Entry entry = new Entry { Keyboard = Keyboard.Numeric };            
+            Entry entry = new Entry { Keyboard = Keyboard.Numeric, VerticalOptions = LayoutOptions.End };            
             entry.SetDynamicResource(VisualElement.StyleProperty, "entryStyle");
             agesGrid.Children.Add(entry, PLAYER_AGE_COLUMN, nextRow);
+
+            //Graphical settings
+            lbl.HorizontalTextAlignment = TextAlignment.Center;
+            entry.HorizontalTextAlignment = TextAlignment.Center;
         }
 
 
         private void Add_Player_Button_Clicked(object sender, EventArgs e)
         {
             AddRowToPlayersGrid(null);
+        }
+
+        private void DropDownArrow_Clicked(object sender, EventArgs e)
+        {
+            picker.Focus();
         }
 
         private void Start_Trip_Button_Clicked(object sender, EventArgs e)

@@ -6,8 +6,14 @@ let idOfAttraction = localStorage.getItem("attr_id_for_aq_edit");
 
 window.onload = function() {
 
+
+    getRequestAmericanQuestion(howMuchRowsToAddPick,idOfAttraction,idOfQuestion);
+    initAddAqBTNfunctionality();
+
+};
+
+function initAddAqBTNfunctionality() {
     let addAqBTN = document.getElementById('finish_add_aq_btn');
-    getRequestAmericanQuestion(decideFunc,idOfAttraction,idOfQuestion);
     addAqBTN.addEventListener('click', function() {
 
         let tableOfAnswers = document.getElementById('dataTable');
@@ -31,10 +37,9 @@ window.onload = function() {
 
     getRequestAttractions(funcToGetAttraction);
     });
+}
 
-};
-
-function decideFunc(aqJSON) {
+function howMuchRowsToAddPick(aqJSON) {
     let question = aqJSON['question'];
     let answersArr = aqJSON['answers'];
     let indexesArr = aqJSON['indexOfCorrectAnswer'];
@@ -98,18 +103,14 @@ function addRow(tableID) {
 
 
 function postRequestAmericanQuestion(aq,attr_id){
-    //alert("aq blat");
     serverRequest("POST", function noop(dummy){}, 'http://'+ip+':12344/managementsystem/attraction/'+
         attr_id+'/aquestion/',
         JSON.stringify(aq));
 }
 
 function getRequestAmericanQuestion(funcOnAq,attr_id,aq_id){
-    // serverRequest("GET", funcOnAttractions, 'http://192.168.1.12:12344/managementsystem/attraction/?format=json');
-    // the server port and my ip
     serverRequest("GET", funcOnAq, 'http://'+ip+':12344/managementsystem/attraction/'+ attr_id+
         '/aquestion/'+aq_id+'/'+'?format=json');
-    //alert("need to remove this alert and fix funcToGetAttraction()!");
 }
 
  function funcToGetAttraction(attractionsJSON) {

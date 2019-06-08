@@ -1,22 +1,30 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="trumpeldor.Views.FirstPage">
+             x:Class="trumpeldor.Views.FirstPage"
+             xmlns:translator="clr-namespace:trumpeldor.Helpers"
+             NavigationPage.HasNavigationBar="False"
+             ControlTemplate="{StaticResource template}">
     <ContentPage.Content>
         <StackLayout Style="{DynamicResource mainStackLayout}">
-            <StackLayout Style="{DynamicResource mainStackLayout}" Orientation="Horizontal" HorizontalOptions="FillAndExpand">
-                <StackLayout Style="{DynamicResource mainStackLayout}" Orientation="Horizontal" HorizontalOptions="StartAndExpand">
+            <!--<StackLayout Style="{DynamicResource mainStackLayout}" Orientation="Horizontal" HorizontalOptions="FillAndExpand">-->
+                <!--<StackLayout Style="{DynamicResource mainStackLayout}" Orientation="Horizontal" HorizontalOptions="StartAndExpand">
                     <ImageButton x:Name="info" Clicked="Info_Button_Clicked" Style="{StaticResource smallCircleImageButtonStyle}" AutomationId="InfoBtn"/>
                     <ImageButton x:Name="how" Clicked="HowToPlay_Button_Clicked" Style="{StaticResource smallCircleImageButtonStyle}" AutomationId="HowToPlayBtn"/>
-                </StackLayout>
+                </StackLayout>-->
                 <StackLayout x:Name="countriesStackLayout" Style="{DynamicResource mainStackLayout}" Orientation="Horizontal" HorizontalOptions="EndAndExpand">
                     <ImageButton x:Name="englandButton" Clicked="English_Button_Clicked" Style="{StaticResource smallCircleImageButtonStyle}" AutomationId="EnglishBtn"/>
                     <ImageButton x:Name="israelButton" Clicked="Hebrew_Button_Clicked" Style="{StaticResource smallCircleImageButtonStyle}"/>
                 </StackLayout>
+            <!--</StackLayout>-->
+            <!--<Label Text="Trumpeldor" Style="{StaticResource titleStyle}"/>-->
+            <StackLayout Style="{StaticResource mainStackLayout}" VerticalOptions="CenterAndExpand">
+                <Button x:Name="how" Text="{translator:Translate how_to_play}" Style="{StaticResource largeButtonStyle}" AutomationId="HowToPlayBtn" Clicked="HowToPlay_Button_Clicked"/>
+                <Button x:Name="playButton" Text="{translator:Translate play}" Style="{StaticResource largeButtonStyle}" AutomationId="PlayBtn" Clicked="Play_Button_Clicked" BackgroundColor="Orange"/>
+                <Button x:Name="info" Text="{translator:Translate informationFirstPage}" Style="{StaticResource largeButtonStyle}" AutomationId="InfoBtn" Clicked="Info_Button_Clicked"/>
             </StackLayout>
-            <Label Text="Trumpeldor" Style="{StaticResource titleStyle}"/>
-            <ImageButton x:Name="playButton" Source="http://icons.iconarchive.com/icons/custom-icon-design/flatastic-9/512/Start-icon.png" Clicked="Play_Button_Clicked" Style="{StaticResource largeImageButtonStyle}" AutomationId="PlayBtn"/>
-            <Label x:Name="errorMessage" Text="" Style="{StaticResource labelStyle}"/>
+            <!--<ImageButton x:Name="playButton" Source="http://icons.iconarchive.com/icons/custom-icon-design/flatastic-9/512/Start-icon.png" Clicked="Play_Button_Clicked" Style="{StaticResource largeImageButtonStyle}" AutomationId="PlayBtn"/>-->
+            <!--<Label x:Name="errorMessage" Text="" Style="{StaticResource labelStyle}"/>-->
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

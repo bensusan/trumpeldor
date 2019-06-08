@@ -24,6 +24,9 @@ namespace trumpeldor.Views
         {
             InitializeComponent();
             gc = GameController.getInstance();
+            subtitles.Source = ServerConection.URL_MEDIA + "subtitles.jpg";
+            info.Source = ServerConection.URL_MEDIA + "info.jpg";
+            playVideo.Source = ServerConection.URL_MEDIA + "playVideo.png";
             scoreLabel.Text = AppResources.score + ": " + gc.GetScore();
             how.Source = ServerConnectionImpl.URL_MEDIA + "how.png";
             this.puzzle = puzzle;
@@ -135,6 +138,21 @@ namespace trumpeldor.Views
         private async void HowToPlay_Button_Clicked(object sender, EventArgs e)
         {
             await Navigation.PushModalAsync(new instructionsPage(puzzle));
+        }
+
+        private void PlayVideo_Clicked(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Subtitles_Clicked(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Information_Button_Clicked(object sender, EventArgs e)
+        {
+
         }
     }
 }

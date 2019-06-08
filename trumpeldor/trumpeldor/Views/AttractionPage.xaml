@@ -2,20 +2,42 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="trumpeldor.Views.AttractionPage"
-             xmlns:translator="clr-namespace:trumpeldor.Helpers">
+             xmlns:translator="clr-namespace:trumpeldor.Helpers"
+             NavigationPage.HasNavigationBar="False"
+             ControlTemplate="{StaticResource template}">
     <ContentPage.Content>
-        <StackLayout Style="{DynamicResource mainStackLayout}">
+        <StackLayout Style="{DynamicResource mainStackLayout}" VerticalOptions="Fill">
             <StackLayout Style="{StaticResource mainStackLayout}" Orientation="Horizontal">
-                <StackLayout x:Name="buttonsTopLayout" Orientation="Horizontal" HorizontalOptions="StartAndExpand">
+                <!--<StackLayout x:Name="buttonsTopLayout" Orientation="Horizontal" HorizontalOptions="StartAndExpand">
                     <ImageButton x:Name="informationButton" Clicked="Information_Button_Clicked" Style="{StaticResource smallCircleImageButtonStyle}"/>
-                </StackLayout>
-                <Label x:Name = "scoreLabel" Style="{StaticResource labelStyle}" HorizontalOptions="EndAndExpand"/>
+                </StackLayout>-->
+                <Label x:Name="scoreLabel" Style="{StaticResource labelStyle}" HorizontalOptions="EndAndExpand"/>
             </StackLayout>
-            <Label x:Name = "attractionName" Style="{StaticResource titleStyle}"/>
-            <Image x:Name = "attractionImage" Style="{StaticResource largeImageStyle}"/>
-            <Button x:Name = "missionButton" Clicked="Mission_Button_Clicked" Style="{StaticResource largeButtonStyle}"/>
-            <Button x:Name = "questionButton" Text="{translator:Translate question}" Clicked="QuestionButton_Clicked" Style="{StaticResource largeButtonStyle}"/>
-            <Button x:Name = "continueButton" Text="{translator:Translate continue_trip}" Clicked="Continue_Button_Clicked" Style="{StaticResource largeButtonStyle}"/>
+            <!--<Label x:Name = "attractionName" Style="{StaticResource titleStyle}"/>-->
+            <!--<Image x:Name = "attractionImage" Style="{StaticResource largeImageStyle}"/>-->
+            <Label x:Name="title" Text="{translator:Translate AttractionPageTitle}" Style="{StaticResource labelStyle}" HorizontalOptions="CenterAndExpand"/>
+            <Button x:Name = "missionButton" Text="{translator:Translate mission}" Clicked="Mission_Button_Clicked" Style="{StaticResource largeButtonStyle}" BackgroundColor="Orange"/>
+            <Label x:Name="or" Text="{translator:Translate or}" Style="{StaticResource labelStyle}" HorizontalOptions="CenterAndExpand"/>
+            <Button x:Name = "questionButton" Text="{translator:Translate question}" Clicked="QuestionButton_Clicked" Style="{StaticResource largeButtonStyle}" BackgroundColor="Orange"/>
+            <Button x:Name = "continueButton" Text="{translator:Translate continue_trip}" Clicked="Continue_Button_Clicked" Style="{StaticResource largeButtonStyle}" BackgroundColor="Orange"/>
+            
+            <StackLayout Style="{StaticResource mainStackLayout}" Orientation="Horizontal" VerticalOptions="End" HorizontalOptions="CenterAndExpand">
+                <StackLayout Style="{StaticResource mainStackLayout}" Spacing="1">
+                    <ImageButton x:Name="subtitles" Clicked="Subtitles_Clicked" Style="{StaticResource regularCircleImageButtonStyle}"/>
+                    <Label Text="{translator:Translate subtitlesBtn}" Style="{StaticResource smallTextStyle}"/>
+                </StackLayout>
+                <StackLayout Style="{StaticResource mainStackLayout}" Spacing="1">
+                    <ImageButton x:Name="info" Clicked="Information_Button_Clicked" Style="{StaticResource regularCircleImageButtonStyle}"/>
+                    <Label Text="{translator:Translate infoBtn}" Style="{StaticResource smallTextStyle}"/>
+                </StackLayout>
+                <StackLayout Style="{StaticResource mainStackLayout}" Spacing="1">
+                    <ImageButton x:Name="playVideo" Clicked="PlayVideo_Clicked" Style="{StaticResource regularCircleImageButtonStyle}"/>
+                    <Label Text="{translator:Translate playVideoBtn}" Style="{StaticResource smallTextStyle}"/>
+                </StackLayout>
+            </StackLayout>
+            <StackLayout Style="{StaticResource mainStackLayout}" Orientation="Horizontal" HorizontalOptions="End" VerticalOptions="End">
+                <ImageButton x:Name="mapBtn" Style="{StaticResource regularCircleImageButtonStyle}" Clicked="MapBtn_Clicked" HorizontalOptions="EndAndExpand" VerticalOptions="End"/>
+            </StackLayout>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

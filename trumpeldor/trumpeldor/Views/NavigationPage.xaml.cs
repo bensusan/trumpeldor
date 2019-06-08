@@ -37,9 +37,9 @@ namespace trumpeldor.Views
 		{
 			InitializeComponent ();
             gc = GameController.getInstance();
-            leftArrow.Source = ServerConnectionImpl.URL_MEDIA + "leftArrow.png";
-            rightArrow.Source = ServerConnectionImpl.URL_MEDIA + "rightArrow.png";
-            temperature.Source = ServerConnectionImpl.URL_MEDIA + "temperature2.png";
+            leftArrow.Source = ServerConnectionImpl.URL_MEDIA + "leftArrow.jpg";
+            rightArrow.Source = ServerConnectionImpl.URL_MEDIA + "rightArrow.jpg";
+            temperature.Source = ServerConnectionImpl.URL_MEDIA + "thermometer.jpg";
             v.Source = ServerConnectionImpl.URL_MEDIA + "v.png";
             odometer.Maximum = 1;
             odometer.Minimum = 0;
@@ -47,16 +47,16 @@ namespace trumpeldor.Views
             odometer.MaximumTrackColor = Color.FromHex("#0066ff");
             odometer.Value = 0;
             //odometer.WidthRequest = temperature.Height/10 * 9;
-            hintBtn.Padding = 0;
+            //hintBtn.Padding = 0;
             //hintBtn.WidthRequest = hintFrame.Width;
-            hintBtn.Margin = new Thickness(
-                leftArrow.Width + hintFrame.Margin.Left + hintFrame.Padding.Left - 5,
-                10,
-                hintFrame.Margin.Right + hintFrame.Padding.Right,
-                10);
+            //hintBtn.Margin = new Thickness(
+            //    leftArrow.Width + hintFrame.Margin.Left + hintFrame.Padding.Left - 5,
+            //    10,
+            //    hintFrame.Margin.Right + hintFrame.Padding.Right,
+            //    10);
             nextAttraction = gc.currentTrip.GetCurrentAttraction();
             myMap = new MapPage();
-            mapBtn.Source = ServerConnectionImpl.URL_MEDIA + "googleMaps.png";
+            mapBtn.Source = ServerConnectionImpl.URL_MEDIA + "map.png";
             //mapBtn = myMap.map;
             AttachHint(0);
             
@@ -74,12 +74,22 @@ namespace trumpeldor.Views
         {
             base.OnAppearing();
             scoreLabel.Text = AppResources.score + ": " + gc.currentTrip.score;
+            if(ServerConection.DEBUG != 1)
+            {
+                buttonsTopLayout.IsVisible = false;
+                v.IsVisible = false;
+            }
+
         }
 
         private async void Get_Hint_Button_Clicked(object sender, EventArgs e)
         {
             ContentPage temp = this;
             bool dialogAnswer = false;
+            if (hintsIndex >= 1){
+                alertFrame.IsVisible = true;
+                alert.IsVisible = true;
+            }
             if (nextAttraction.IsThisLastHint(hintsIndex)){
                 dialogAnswer = await DisplayAlert(
                     AppResources.Last_Hint_Alert_Title,
@@ -88,7 +98,9 @@ namespace trumpeldor.Views
                     AppResources.No);
                 if (!dialogAnswer)
                     return;
-                hintBtn.IsEnabled = false;
+                alertFrame.IsVisible = false;
+                alert.IsVisible = false;
+                hintBtn.IsVisible = false;
             }
             //else
             AttachHint(hintsIndex);
@@ -106,7 +118,7 @@ namespace trumpeldor.Views
             {
                 //TODO change when shahar will finish
                 // mapInstance = new MapPage(new SheredClasses.Point(nextAttraction.x, nextAttraction.y));
-                if(firstAttachOfHintMap)
+                if (firstAttachOfHintMap)
                     myMap.AddPointToMap(myMap.map, new SheredClasses.Point(nextAttraction.x, nextAttraction.y));
                 hintWebView.IsVisible = false;
                 hintText.IsVisible = false;
@@ -131,6 +143,11 @@ namespace trumpeldor.Views
                     hintText.Text = currentHint.data;
                 }
             }
+            if (nextAttraction.IsThisLastHint(hintIndex))
+                title.Text = AppResources.last_hint;
+            else
+                title.Text = AppResources.hint + " " + (hintIndex+1);
+            title.IsVisible = true;
         }
 
         private void Next_Destination_Button_Clicked(object sender, EventArgs e)

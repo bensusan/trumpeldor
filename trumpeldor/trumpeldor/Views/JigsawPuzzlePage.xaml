@@ -2,7 +2,10 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="trumpeldor.Views.JigsawPuzzlePage"
-             xmlns:translator="clr-namespace:trumpeldor.Helpers">
+             xmlns:translator="clr-namespace:trumpeldor.Helpers"
+             NavigationPage.HasNavigationBar="False"
+             ControlTemplate="{StaticResource template}"
+             BackgroundColor="White">
 
     <ContentPage.Padding>
         <OnPlatform x:TypeArguments="Thickness"
@@ -11,13 +14,13 @@
 
     <ContentView SizeChanged="OnContainerSizeChanged">
         <StackLayout x:Name="stackLayout">
-            <StackLayout Style="{StaticResource mainStackLayout}" Orientation="Horizontal">
+            <StackLayout Style="{StaticResource mainStackLayout}" Orientation="Horizontal" VerticalOptions="Fill">
                 <StackLayout x:Name="buttonsTopLayout" Orientation="Horizontal" HorizontalOptions="StartAndExpand">
                     <ImageButton x:Name="how" Clicked="HowToPlay_Button_Clicked" Style="{StaticResource smallCircleImageButtonStyle}"/>
                 </StackLayout>
                 <Label x:Name = "scoreLabel" Style="{DynamicResource labelStyle}" HorizontalOptions="EndAndExpand"/>
             </StackLayout>
-            <Label Text="{translator:Translate JigsawPuzzlePageTitle}" Style="{StaticResource titleStyle}"/>
+            <Label Text="{translator:Translate JigsawPuzzlePageTitle}" Style="{StaticResource labelStyle}"/>
             <Button Opacity="0"
                     HorizontalOptions="CenterAndExpand"
                     VerticalOptions="CenterAndExpand" />
@@ -29,6 +32,21 @@
             <Button Opacity="0"
                     HorizontalOptions="CenterAndExpand"
                     VerticalOptions="CenterAndExpand" />
+
+            <StackLayout Style="{StaticResource mainStackLayout}" Orientation="Horizontal" VerticalOptions="End" HorizontalOptions="CenterAndExpand">
+                <StackLayout Style="{StaticResource mainStackLayout}" Spacing="1">
+                    <ImageButton x:Name="subtitles" Clicked="Subtitles_Clicked" Style="{StaticResource regularCircleImageButtonStyle}"/>
+                    <Label Text="{translator:Translate subtitlesBtn}" Style="{StaticResource smallTextStyle}"/>
+                </StackLayout>
+                <StackLayout Style="{StaticResource mainStackLayout}" Spacing="1">
+                    <ImageButton x:Name="info" Clicked="Information_Button_Clicked" Style="{StaticResource regularCircleImageButtonStyle}"/>
+                    <Label Text="{translator:Translate infoBtn}" Style="{StaticResource smallTextStyle}"/>
+                </StackLayout>
+                <StackLayout Style="{StaticResource mainStackLayout}" Spacing="1">
+                    <ImageButton x:Name="playVideo" Clicked="PlayVideo_Clicked" Style="{StaticResource regularCircleImageButtonStyle}"/>
+                    <Label Text="{translator:Translate playVideoBtn}" Style="{StaticResource smallTextStyle}"/>
+                </StackLayout>
+            </StackLayout>
 
         </StackLayout>
     </ContentView>

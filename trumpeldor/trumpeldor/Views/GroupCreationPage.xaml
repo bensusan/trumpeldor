@@ -2,17 +2,20 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="trumpeldor.Views.groupCreationPage"
-             xmlns:translator="clr-namespace:trumpeldor.Helpers">
+             xmlns:translator="clr-namespace:trumpeldor.Helpers"
+             NavigationPage.HasNavigationBar="False"
+             ControlTemplate="{StaticResource template}">
     <ContentPage.Content>
         <StackLayout x:Name="mainStack" Style="{DynamicResource mainStackLayout}">
-            <Label Text="{translator:Translate GroupCreationPageTitle}" Style="{StaticResource titleStyle}"/>
-            <StackLayout Style="{DynamicResource mainStackLayout}" Orientation="Horizontal">
-                <Label x:Name="groupNameLabel" Text="{translator:Translate group_name}" Style="{StaticResource labelStyle}" WidthRequest="200"/>
-                <Entry x:Name="groupNameEntry" Style="{StaticResource entryStyle}" AutomationId="EnterGroupName" WidthRequest="200"/>
+            <!--<Label Text="{translator:Translate GroupCreationPageTitle}" Style="{StaticResource titleStyle}"/>-->
+            <StackLayout x:Name="groupNameStack" Style="{DynamicResource mainStackLayout}" Orientation="Horizontal" Spacing="2" HorizontalOptions="Fill">
+                <Label x:Name="groupNameLabel" Text="{translator:Translate group_name}" Style="{StaticResource labelStyle}" VerticalTextAlignment="End" Margin="0,0,1,8"/>
+                <Entry x:Name="groupNameEntry" Style="{StaticResource entryStyle}" AutomationId="EnterGroupName" WidthRequest="200" VerticalOptions="End"/>
             </StackLayout>
-            <StackLayout Style="{DynamicResource mainStackLayout}" Orientation="Horizontal">
-                <Label x:Name="pathLengthLabel" Text="{translator:Translate path_length}" Style="{StaticResource labelStyle}" WidthRequest="200"/>
-                <Picker x:Name="picker" Style="{StaticResource picker}" WidthRequest="200"/>
+            <StackLayout x:Name="pathLengthStack" Style="{DynamicResource mainStackLayout}" Orientation="Horizontal" HorizontalOptions="Fill" Spacing="2">
+                <Label x:Name="pathLengthLabel" Text="{translator:Translate path_length}" Style="{StaticResource labelStyle}" VerticalTextAlignment="End" Margin="0,0,1,8"/>
+                <Picker x:Name="picker" Style="{StaticResource picker}" WidthRequest="200" VerticalOptions="End"/>
+                <ImageButton x:Name="dropDownArrow" Style="{StaticResource smallImageButtonStyle}" Clicked="DropDownArrow_Clicked" VerticalOptions="End"/>
             </StackLayout>    
             <ScrollView VerticalOptions="StartAndExpand" Orientation="Vertical" Style="{StaticResource scrollView}">
                 <Grid x:Name="agesGrid" Style="{DynamicResource gridStyle}">
@@ -26,14 +29,15 @@
                         <ColumnDefinition Width="*"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
                     <ImageButton x:Name="addButton" Grid.Column="0" Grid.Row="0" Clicked="Add_Player_Button_Clicked" Style="{StaticResource regularCircleImageButtonStyle}"/>
-                    <Label Text="{translator:Translate player}" Grid.Column="1" Grid.Row="0" Style="{DynamicResource labelStyle}"/>
-                    <Label Text="{translator:Translate age}" Grid.Column="2" Grid.Row="0" Style="{DynamicResource labelStyle}"/>
-                    <ImageButton x:Name="removeButton" Grid.Column="0" Grid.Row="1" Clicked="removeRow_Clicked" Style="{StaticResource regularCircleImageButtonStyle}"/>
-                    <Label Text="1)" Grid.Column="1" Grid.Row="1" Style="{DynamicResource labelStyle}"/>
-                    <Entry Keyboard="Numeric" Grid.Column="2" Grid.Row="1" Style="{DynamicResource entryStyle}" AutomationId="EnterAge"/>
+                    <Label Text="{translator:Translate player}" Grid.Column="1" Grid.Row="0" Style="{DynamicResource labelStyle}" HorizontalTextAlignment="Center"/>
+                    <Label Text="{translator:Translate age}" Grid.Column="2" Grid.Row="0" Style="{DynamicResource labelStyle}" HorizontalTextAlignment="Center"/>
+                    <ImageButton x:Name="removeButton" Grid.Column="0" Grid.Row="1" Clicked="removeRow_Clicked" Style="{StaticResource regularCircleImageButtonStyle}" VerticalOptions="End"/>
+                    <Label x:Name="firstPlayerNumber" Text="1" Grid.Column="1" Grid.Row="1" Style="{DynamicResource labelStyle}" HorizontalTextAlignment="Center" VerticalTextAlignment="End" Margin="0,0,1,8"/>
+                    <Entry x:Name="firstPlayerEntry" Keyboard="Numeric" Grid.Column="2" Grid.Row="1" Style="{DynamicResource entryStyle}" AutomationId="EnterAge" HorizontalTextAlignment="Center" VerticalOptions="End"/>
                 </Grid>
             </ScrollView>
-            <ImageButton x:Name="StartTripButton" Source="http://icons.iconarchive.com/icons/custom-icon-design/flatastic-9/512/Start-icon.png" Clicked="Start_Trip_Button_Clicked" Style="{StaticResource largeImageButtonStyle}" AutomationId="BtnStartTripClicked" VerticalOptions="EndAndExpand"/>
+            <Button x:Name="StartTripButton" Text="{translator:Translate GroupCreationPage_start_game}" Style="{StaticResource largeButtonStyle}" Clicked="Start_Trip_Button_Clicked" AutomationId="BtnStartTripClicked" VerticalOptions="EndAndExpand" BackgroundColor="Orange"/>
+            <!--<ImageButton x:Name="StartTripButton" Source="http://icons.iconarchive.com/icons/custom-icon-design/flatastic-9/512/Start-icon.png" Clicked="Start_Trip_Button_Clicked" Style="{StaticResource largeImageButtonStyle}" AutomationId="BtnStartTripClicked" VerticalOptions="EndAndExpand"/>-->
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

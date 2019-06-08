@@ -24,6 +24,9 @@ namespace trumpeldor.Views
 		{
             InitializeComponent ();
             this.gc = GameController.getInstance();
+            subtitles.Source = ServerConnectionImpl.URL_MEDIA + "subtitles.jpg";
+            info.Source = ServerConnectionImpl.URL_MEDIA + "info.jpg";
+            playVideo.Source = ServerConnectionImpl.URL_MEDIA + "playVideo.png";
             how.Source = ServerConnectionImpl.URL_MEDIA + "how.png";
             this.sp = sp;
             tiles = new SlidingPuzzleTile[sp.width, sp.height];
@@ -207,6 +210,22 @@ namespace trumpeldor.Views
         private async void HowToPlay_Button_Clicked(object sender, EventArgs args)
         {
             await Navigation.PushModalAsync(new instructionsPage(sp));
+        }
+
+        private void PlayVideo_Clicked(object sender, EventArgs e)
+        {
+
+        }
+
+
+        private void Subtitles_Clicked(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Information_Button_Clicked(object sender, EventArgs e)
+        {
+            
         }
 
 
