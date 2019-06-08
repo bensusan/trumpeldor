@@ -319,3 +319,7 @@ class BL_Implementation(BL_Abstract):
 
     def edit_info(self, info):
         return self.DAL.edit_info(info['app_name'], info['about_app'], info['how_to_play'])
+
+    def edit_american_question(self, id_attraction, id_aquestion, aquestion):
+        return self.DAL.edit_american_question(id_attraction, id_aquestion, aquestion['question'], aquestion['answers'],
+                                              aquestion['indexOfCorrectAnswer'])

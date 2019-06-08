@@ -219,6 +219,8 @@ class BL_Abstract(object):
     def edit_info(self, info):
         raise NotImplementedError("Should have implemented this")
 
+    def edit_american_question(self, id_attraction, id_aquestion, aquestion):
+        raise NotImplementedError("Should have implemented this")
 
 
 class BLProxy(BL_Abstract, ABC):
@@ -557,3 +559,9 @@ class BLProxy(BL_Abstract, ABC):
         if self.Implementation is None:
             raise NotImplementedError("Should have implemented this")
         return self.Implementation.edit_info(info)
+
+    def edit_american_question(self, id_attraction, id_aquestion, aquestion):
+        if self.Implementation is None:
+            raise NotImplementedError("Should have implemented this")
+        return self.Implementation.edit_american_question(id_attraction, id_aquestion, aquestion)
+
