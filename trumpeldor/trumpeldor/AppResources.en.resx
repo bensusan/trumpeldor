@@ -280,7 +280,7 @@
     <value>Skip</value>
   </data>
   <data name="Out_Of_Valid_Sector_Message" xml:space="preserve">
-    <value>You may use basic parts of the application</value>
+    <value>Enter the campus to play</value>
   </data>
   <data name="Out_Of_Valid_Sector_Title" xml:space="preserve">
     <value>You are out of the bounds of the valid sector</value>
@@ -392,5 +392,26 @@ You have complete a track</value>
   </data>
   <data name="or" xml:space="preserve">
     <value>Or</value>
+  </data>
+  <data name="hint" xml:space="preserve">
+    <value>Hint</value>
+  </data>
+  <data name="infoBtn" xml:space="preserve">
+    <value>More info</value>
+  </data>
+  <data name="last_hint" xml:space="preserve">
+    <value>Last hint</value>
+  </data>
+  <data name="missionComplete" xml:space="preserve">
+    <value>Mission Complete</value>
+  </data>
+  <data name="next_hint_alert" xml:space="preserve">
+    <value>The next hint will result in a score reduction</value>
+  </data>
+  <data name="playVideoBtn" xml:space="preserve">
+    <value>Watch video</value>
+  </data>
+  <data name="subtitlesBtn" xml:space="preserve">
+    <value>Text on the statue</value>
   </data>
 </root>

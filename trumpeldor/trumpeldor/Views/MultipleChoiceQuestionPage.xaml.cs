@@ -25,6 +25,9 @@ namespace trumpeldor.Views
 			InitializeComponent ();
             this.mistakes = 0;
             gc = GameController.getInstance();
+            subtitles.Source = ServerConection.URL_MEDIA + "subtitles.jpg";
+            info.Source = ServerConection.URL_MEDIA + "info.jpg";
+            playVideo.Source = ServerConection.URL_MEDIA + "playVideo.png";
             this.aq = gc.currentTrip.GetCurrentAttraction().americanQuestion;
             attractionQuestion.Text = aq.question;
             answersInitialize();
@@ -131,6 +134,21 @@ namespace trumpeldor.Views
             else
                 await Task.Delay(100);
             ((Button)sender).BackgroundColor = regular;
+        }
+
+        private void PlayVideo_Clicked(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Subtitles_Clicked(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Information_Button_Clicked(object sender, EventArgs e)
+        {
+
         }
     }
 }

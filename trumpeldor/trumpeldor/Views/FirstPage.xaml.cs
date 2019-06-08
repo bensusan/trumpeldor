@@ -82,6 +82,9 @@ namespace trumpeldor.Views
             gc.StartTaskLocation();
             if(await CanUserPlay())
                 await Navigation.PushModalAsync(new LoginsPage());
+            else
+                await DisplayAlert("BGU ARTS", AppResources.Out_Of_Valid_Sector_Message, AppResources.ok);
+
         }
 
         private async void HowToPlay_Button_Clicked(object sender, EventArgs e)

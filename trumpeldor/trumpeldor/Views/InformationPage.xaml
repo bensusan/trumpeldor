@@ -4,7 +4,8 @@
              x:Class="trumpeldor.Views.informationPage"
              xmlns:translator="clr-namespace:trumpeldor.Helpers"
              NavigationPage.HasNavigationBar="False"
-             ControlTemplate="{StaticResource template}">
+             ControlTemplate="{StaticResource template}"
+             BackgroundColor="White">
     <ContentPage.Content>
         <ScrollView Style="{StaticResource scrollView}">
             <StackLayout Style="{DynamicResource mainStackLayout}">

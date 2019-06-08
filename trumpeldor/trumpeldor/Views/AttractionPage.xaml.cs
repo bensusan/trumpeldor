@@ -33,15 +33,15 @@ namespace trumpeldor.Views
             //attractionImage.IsVisible = !mainPictureUrl.Equals("");
             //watchAgainButton.IsVisible = !this.attraction.GetARURL().Equals("");
             entertainment = gc.currentTrip.GetCurrentAttraction().entertainment;
-            if (entertainment != null)
-                missionButton.Text = entertainment.EntertainmentName();
-            else
-            {
+            //if (entertainment != null)
+            //    missionButton.Text = entertainment.EntertainmentName();
+            if (entertainment == null){
                 missionButton.IsVisible = false;
                 or.IsVisible = false;
             }
             //informationButton.Source = ServerConection.URL_MEDIA + "information.png";
-            info.Source = ServerConection.URL_MEDIA + "info.png";
+            subtitles.Source = ServerConection.URL_MEDIA + "subtitles.jpg";
+            info.Source = ServerConection.URL_MEDIA + "info.jpg";
             playVideo.Source = ServerConection.URL_MEDIA + "playVideo.png";
             mapBtn.Source = ServerConection.URL_MEDIA + "map.png";
             isFirstAppear = true;
@@ -54,6 +54,8 @@ namespace trumpeldor.Views
             questionButton.IsVisible = !gc.isAttractionDone;
             or.IsVisible = !gc.isAttractionDone &&  entertainment != null;
             continueButton.IsVisible = gc.isAttractionDone;
+            if (gc.isAttractionDone)
+                title.Text = AppResources.missionComplete;
             scoreLabel.Text = AppResources.score + ": " + gc.GetScore();
             if (isFirstAppear){
                 DependencyService.Get<IAudioService>().PlayAudioFile("TaDa.mp3");
@@ -99,6 +101,11 @@ namespace trumpeldor.Views
         }
 
         private void MapBtn_Clicked(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Subtitles_Clicked(object sender, EventArgs e)
         {
 
         }

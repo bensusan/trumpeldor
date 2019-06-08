@@ -37,9 +37,9 @@ namespace trumpeldor.Views
 		{
 			InitializeComponent ();
             gc = GameController.getInstance();
-            leftArrow.Source = ServerConection.URL_MEDIA + "leftArrow.png";
-            rightArrow.Source = ServerConection.URL_MEDIA + "rightArrow.png";
-            temperature.Source = ServerConection.URL_MEDIA + "thermometer.png";
+            leftArrow.Source = ServerConection.URL_MEDIA + "leftArrow.jpg";
+            rightArrow.Source = ServerConection.URL_MEDIA + "rightArrow.jpg";
+            temperature.Source = ServerConection.URL_MEDIA + "thermometer.jpg";
             v.Source = ServerConection.URL_MEDIA + "v.png";
             odometer.Maximum = 1;
             odometer.Minimum = 0;
@@ -86,6 +86,10 @@ namespace trumpeldor.Views
         {
             ContentPage temp = this;
             bool dialogAnswer = false;
+            if (hintsIndex >= 1){
+                alertFrame.IsVisible = true;
+                alert.IsVisible = true;
+            }
             if (nextAttraction.IsThisLastHint(hintsIndex)){
                 dialogAnswer = await DisplayAlert(
                     AppResources.Last_Hint_Alert_Title,
@@ -94,7 +98,9 @@ namespace trumpeldor.Views
                     AppResources.No);
                 if (!dialogAnswer)
                     return;
-                hintBtn.IsEnabled = false;
+                alertFrame.IsVisible = false;
+                alert.IsVisible = false;
+                hintBtn.IsVisible = false;
             }
             //else
             AttachHint(hintsIndex);
@@ -112,7 +118,7 @@ namespace trumpeldor.Views
             {
                 //TODO change when shahar will finish
                 // mapInstance = new MapPage(new SheredClasses.Point(nextAttraction.x, nextAttraction.y));
-                if(firstAttachOfHintMap)
+                if (firstAttachOfHintMap)
                     myMap.AddPointToMap(myMap.map, new SheredClasses.Point(nextAttraction.x, nextAttraction.y));
                 hintWebView.IsVisible = false;
                 hintText.IsVisible = false;
@@ -137,6 +143,11 @@ namespace trumpeldor.Views
                     hintText.Text = currentHint.data;
                 }
             }
+            if (nextAttraction.IsThisLastHint(hintIndex))
+                title.Text = AppResources.last_hint;
+            else
+                title.Text = AppResources.hint + " " + (hintIndex+1);
+            title.IsVisible = true;
         }
 
         private void Next_Destination_Button_Clicked(object sender, EventArgs e)
