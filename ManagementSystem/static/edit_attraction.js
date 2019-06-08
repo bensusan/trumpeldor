@@ -75,6 +75,12 @@ function finishEditingAttraction() {
             videosURLS: vidArr
         };
     }
+    if (helperVarVid != undefined) {
+        vidArr = [];
+        vidArr.push(helperVarVid);
+        //localStorage.clear();
+        localStorage.setItem(attr_after_editing['name']+"_vid",vidArr);
+    }
     editRequestAttraction(attr_after_editing, attr_for_editing['id']);
     window.location.href = '/attractions';
 }
