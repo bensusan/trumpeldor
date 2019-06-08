@@ -111,6 +111,7 @@ function submitAttractionWithoutInfo() {
         , picturesURLS: [], videosURLS: vidArr
     };
     postRequestAttraction(attraction_to_send);
+    localStorage.setItem(attraction_to_send.name+"_vid", vidArr);
     localStorage.setItem("name_for_add_aq", attraction_to_send.name);
     localStorage.setItem("desc_for_add_aq", attraction_to_send.description);
     window.location.href = '/add_game';
@@ -132,6 +133,7 @@ function saveAndProceedToAttractionInfo() {
     localStorage.setItem("x", JSON.stringify(x));
     localStorage.setItem("y", JSON.stringify(y));
     localStorage.setItem("vidArr", JSON.stringify(vidArr));
+    localStorage.setItem(name+"_vid", vidArr);
     localStorage.setItem("name_for_add_aq", name);
     localStorage.setItem("desc_for_add_aq", "");
     window.location.href = '/attr_info';

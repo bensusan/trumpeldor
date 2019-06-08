@@ -124,9 +124,10 @@ function getFieldsValuesOfExistingAttraction(attractionsJSON) {
             document.getElementById("desc_english").value = descriptions[1];
             // var image = document.getElementById('output');
             // image.src = attr['picturesURLS'][0];
-            initializeTheListOfPicturesToShow(attr['picturesURLS']);
+            // alert(JSON.parse(localStorage.getItem(p.name+"_pics")));
+            initializeTheListOfPicturesToShow(JSON.parse(localStorage.getItem(p.name+"_pics")));
             var video = document.getElementById('vid_itself');
-            video.src = attr['videosURLS'];
+            video.src = localStorage.getItem(p.name+"_vid");
             localStorage.setItem("name_for_add_aq", p.name);
             localStorage.setItem("desc_for_add_aq", p.description);
         }
