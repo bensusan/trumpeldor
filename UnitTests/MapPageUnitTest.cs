@@ -55,5 +55,51 @@ namespace UnitTests
         }
 
 
+        [TestMethod]
+        public void CurrLocationTest()
+        {
+            ServerConnectionForTests sct = new ServerConnectionForTests();
+            GameController gc = GameController.getInstance(sct);
+            trumpeldor.SheredClasses.Point target = gc.GetUserLocation();
+            Assert.IsTrue(target.x== 31.262880 && target.y== 34.801722);
+        }
+
+        [TestMethod]
+        public void IsInBoundTest()
+        {
+            ServerConnectionForTests sct = new ServerConnectionForTests();
+            GameController gc = GameController.getInstance(sct);
+            Assert.IsTrue(gc.IsUserInValidSector());
+        }
+
+        [TestMethod]
+        public void ClosestAttractionTest()
+        {
+            //Arrange
+            ServerConnectionForTests sct = new ServerConnectionForTests();
+            GameController gc = GameController.getInstance(sct);
+            System.Collections.Generic.List<int> myAges = new System.Collections.Generic.List<int>();
+            myAges.Add(9);
+            myAges.Add(8);
+
+            //Act
+            gc.CreateTrip("testtrip group", myAges, 2);
+            gc.currentTrip.
+        }
+
+        [TestMethod]
+        public void TripTest()
+        {
+            //Arrange
+            ServerConnectionForTests sct = new ServerConnectionForTests();
+            GameController gc = GameController.getInstance(sct);
+            System.Collections.Generic.List<int> myAges = new System.Collections.Generic.List<int>();
+            myAges.Add(9);
+            myAges.Add(8);
+
+            //Act
+            gc.CreateTrip("testtrip group", myAges, 2);
+        }
+
     }
 }

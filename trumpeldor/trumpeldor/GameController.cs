@@ -39,13 +39,15 @@ namespace trumpeldor
         private static bool firstTime = true;
         private readonly System.Threading.EventWaitHandle waitHandle = new System.Threading.AutoResetEvent(false);
         private Setttings appSettings;
+        private static bool isInTest = false;
 
         public static GameController getInstance(ServerConnectionForTests sct)
         {
             if (instance == null)
             {
+                isInTest = true;
                 instance = new GameController(sct);
-                myLocation = new SheredClasses.Point(0, 0);
+                myLocation = new SheredClasses.Point(31.262880,34.801722);
             }
             return instance;
         }
@@ -65,7 +67,7 @@ namespace trumpeldor
             return conn.IsAdmin(email);
         }
 
-        internal bool IsUserInValidSector()
+        public bool IsUserInValidSector()
         {
             SheredClasses.Point currLoc = GetUserLocation();
             //Very specific to BGU!!! TODO CHANGE
@@ -207,7 +209,11 @@ namespace trumpeldor
 
         public SheredClasses.Point GetUserLocation()
         {
-            waitHandle.WaitOne();
+            if (!isInTest)
+            {
+                waitHandle.WaitOne();
+                return myLocation;
+            }
             return myLocation;
         }
 

@@ -16,7 +16,17 @@ namespace UnitTests
         [TestMethod]
         public void CurrLocationTest()
         {
-            
+            ServerConnectionForTests sct = new ServerConnectionForTests();
+            GameController gc = GameController.getInstance(sct);
+            Assert.IsTrue(gc.GetUserLocation().Equals(new trumpeldor.SheredClasses.Point(31.262880, 34.801722)));
+        }
+
+        [TestMethod]
+        public void IsInBoundTest()
+        {
+            ServerConnectionForTests sct = new ServerConnectionForTests();
+            GameController gc = GameController.getInstance(sct);
+            Assert.IsTrue(gc.IsUserInValidSector());
         }
     }
 }

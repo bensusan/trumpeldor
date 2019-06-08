@@ -55,7 +55,7 @@ namespace trumpeldor
                 lastSeen = null
             };
         }
-        private Attraction MakeAttractionA()
+        private Attraction MakeAttractionA()//the closer attraction
         {
             int[] correctIdx = new int[1];
             correctIdx[0] = 1;
@@ -76,8 +76,8 @@ namespace trumpeldor
                 picturesURLS=myPicturesUrls,
                 videosURLS=null,
                 visible=true,
-                x=1,
-                y=1
+                x=(float)31.262884,
+                y=(float)34.801481
             };
         }
 
@@ -102,8 +102,8 @@ namespace trumpeldor
                 picturesURLS = myPicturesUrls,
                 videosURLS = null,
                 visible = true,
-                x = 2,
-                y = 2
+                x = (float)31.265315,
+                y = (float)34.803155
             };
         }
 
@@ -219,10 +219,10 @@ namespace trumpeldor
         public Setttings GetSettings()
         {
             List<Point> bounds = new List<Point>();
-            bounds.Add(new Point(-2, -2));
-            bounds.Add(new Point(2, -2));
-            bounds.Add(new Point(-2, 2));
-            bounds.Add(new Point(2, 2));
+            bounds.Add(new SheredClasses.Point(31.265372, 34.798240));
+            bounds.Add(new SheredClasses.Point(31.261009, 34.798178));
+            bounds.Add(new SheredClasses.Point(31.260975, 34.805906));
+            bounds.Add(new SheredClasses.Point(31.265315, 34.803155));
             List<ScoreRule> myRules = new List<ScoreRule>();
             myRules.Add(new ScoreRule { ruleName = "hmtt", score = 10 });
             myRules.Add(new ScoreRule { ruleName = "aqm", score = 20 });
