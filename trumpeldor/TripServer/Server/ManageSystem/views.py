@@ -235,13 +235,14 @@ class Attraction(generics.GenericAPIView):
         ans = json.loads(json.dumps(ans.data))
         return Response(ans)
 
+
 class Info(generics.GenericAPIView):
     serializer_class = InfoSerializer
     queryset = ''
 
     def get(self, request, *args, **kwargs):
         ans = BL.get_info()
-        ans = InfoSerializer(ans, many=True)
+        ans = InfoSerializer(ans, many=False)
         ans = json.loads(json.dumps(ans.data))
         return Response(ans)
 
@@ -251,6 +252,12 @@ class Info(generics.GenericAPIView):
             "AddAttraction",
             BL.add_info,
             InfoSerializer)
+
+    def put(self, request, *args, **kwargs):
+        ans = BL.edit_info(request.data)
+        ans = InfoSerializer(ans, many=False)
+        ans = json.loads(json.dumps(ans.data))
+        return Response(ans)
 
 
 class InfoSpecific(generics.GenericAPIView):
