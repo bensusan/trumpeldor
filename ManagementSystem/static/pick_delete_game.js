@@ -60,8 +60,10 @@ function getImageSrcAndShowIt(gamesJSON){
     gamesJSON.forEach(function (game) {
         if(game['id'] == game_id_that_was_picked)
         {
+            let name = localStorage.getItem("name_for_add_aq");
+            let other_src = localStorage.getItem(name+type);
             let image = document.getElementById('output');
-            image.src = game['piecesURLS'];
+            image.src =other_src;// game['piecesURLS'];
         }
     });
 }

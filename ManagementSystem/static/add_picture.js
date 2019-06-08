@@ -102,6 +102,7 @@ function funcToSendGame(attractionsJSON) {
                     description: description,
                     piecesURLS: helperVar, width: n_size_val, height: n_size_val
                 };
+                localStorage.setItem(name+the_kind,helperVar);
                 let attr_id = attr['id'];
                 postRequestGame(data_send, attr_id, the_kind);
             }
@@ -112,6 +113,7 @@ function funcToSendGame(attractionsJSON) {
                     description: description,
                     piecesURLS: helperVar, width: n_size, height: n_size
                 };
+                localStorage.setItem(name+the_kind,helperVar);
                 let attr_id = attr['id'];
                 postRequestGame(data_send, attr_id, the_kind);
             }
