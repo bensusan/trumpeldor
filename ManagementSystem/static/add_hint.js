@@ -23,10 +23,56 @@ function funcForExistingHints(attractionsJSON) {
 
 function loadStringOfInnerHTMLWithHints(hintsJSON) {
     str = "";
+    let imageCounter = 1;
+    let videoCounter = 1;
+
     hintsJSON.forEach(function (hint) {
-        str = str + "id: " + hint['id'] + ", data: " + hint['data'] + "<br />";
+
+        let dataOfHint = hint['data'];
+        if (dataOfHint.substring(0, 16) == 'data:application')
+            str = str + " data: " + "media" + imageCounter + "<br />";
+        else {
+            if (hint['data'].substring(0, 10) == 'data:video')
+                str = str + " data: " + "VideoMedia" + videoCounter + "<br />";
+            else
+                str = str + " data: " + hint['data'] + "<br />";
+        }
+
+
+        // alert(str);
+
+        var output = document.getElementById("result");
+        var outputVideo = document.getElementById("resultVideos");
+
+        if (hint['data'].substring(0, 16) == 'data:application') {
+            imageCounter++;
+            var img = document.createElement("img");
+            img.src = dataOfHint;
+            img.className = 'thumbnail';
+            var div = document.createElement("div");
+            div.appendChild(img);
+
+
+            output.insertBefore(div, null);
+        }
+
+        if (hint['data'].substring(0, 10) == 'data:video') {
+            videoCounter++;
+            var vid = document.createElement("video");
+            vid.src = dataOfHint;
+            vid.className = 'thumbnail';
+            var div = document.createElement("div");
+            vid.autoplay = true;
+            div.appendChild(vid);
+
+            outputVideo.insertBefore(div, null);
+        }
+
     });
     document.getElementById("existing_hints").innerHTML = str;
+    document.getElementById("existing_hints").style.fontWeight = 'bold';
+    document.getElementById("existing_hints").style.fontFamily = 'david';
+    document.getElementById("existing_hints").style.fontSize = '24px';
 }
 
 
@@ -75,6 +121,8 @@ function initializeBTNsFunctionality() {
         thevidbrowse.style.display = "none";
         sendButtonVid.style.display = "none";
         upload_pic_title.style.display = "none";
+        window.scrollTo(0, document.body.scrollHeight);
+
 
         let hebrewBTN = document.getElementById("hebrewBTN");
         let englishBTN = document.getElementById("englishBTN");
@@ -105,6 +153,8 @@ function initializeBTNsFunctionality() {
         vidDesc.style.display = "none";
         thevidbrowse.style.display = "none";
         sendButtonVid.style.display = "none";
+        window.scrollTo(0, document.body.scrollHeight);
+
     });
 
     var vidHintBTN = document.getElementById('add_vid_hint');
@@ -121,6 +171,7 @@ function initializeBTNsFunctionality() {
         outpic.style.display = "none";
         sendButtonPic.style.display = "none";
         upload_pic_title.style.display = "none";
+        window.scrollTo(0, document.body.scrollHeight);
 
     });
 
