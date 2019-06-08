@@ -39,6 +39,10 @@ window.onload = function () {
     saveEditBTN.addEventListener('click',function () {
         finishEditingAttraction();
     });
+    let deletePointBTN = document.getElementById("delete_point");
+    deletePointBTN.addEventListener('click',function () {
+        deletePoint();
+    });
     getRequestAttractions(getFieldsValuesOfExistingAttraction);
     localFileVideoPlayer();
 };
