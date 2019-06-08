@@ -84,7 +84,7 @@ namespace UnitTests
 
             //Act
             gc.CreateTrip("testtrip group", myAges, 2);
-            gc.currentTrip.
+            //gc.currentTrip.
         }
 
         [TestMethod]

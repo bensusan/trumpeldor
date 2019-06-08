@@ -55,7 +55,7 @@ namespace trumpeldor.Views
         {
             if (!gc.IsUserInValidSector()){
                 //errorMessage.Text = AppResources.Out_Of_Valid_Sector_Title + "\n" + AppResources.Out_Of_Valid_Sector_Message;
-                if (ServerConection.DEBUG == 1)
+                if (ServerConnectionImpl.DEBUG == 1)
                     return await DisplayAlert("Debug Mode", "Do you want to continue", "yes", "no");
                 return false;
             }

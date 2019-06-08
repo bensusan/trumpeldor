@@ -58,7 +58,7 @@ namespace trumpeldor.Views
                     Label num = new Label { Text = (i+1) + "" , HorizontalOptions = LayoutOptions.CenterAndExpand };
                     num.SetDynamicResource(VisualElement.StyleProperty, "labelStyle");
                     rateGrid.Children.Add(num, i, 0);
-                    ImageButton button = new ImageButton { Source = ServerConection.URL_MEDIA + (i+1) + ".jpg", HorizontalOptions = LayoutOptions.CenterAndExpand, BackgroundColor = Color.White };
+                    ImageButton button = new ImageButton { Source = ServerConnectionImpl.URL_MEDIA + (i+1) + ".jpg", HorizontalOptions = LayoutOptions.CenterAndExpand, BackgroundColor = Color.White };
                     button.Clicked += (sender, e) =>
                     {
                         int numberOfChildren = rateGrid.Children.Count;

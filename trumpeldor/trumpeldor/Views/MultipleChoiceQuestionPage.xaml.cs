@@ -25,9 +25,9 @@ namespace trumpeldor.Views
 			InitializeComponent ();
             this.mistakes = 0;
             gc = GameController.getInstance();
-            subtitles.Source = ServerConection.URL_MEDIA + "subtitles.jpg";
-            info.Source = ServerConection.URL_MEDIA + "info.jpg";
-            playVideo.Source = ServerConection.URL_MEDIA + "playVideo.png";
+            subtitles.Source = ServerConnectionImpl.URL_MEDIA + "subtitles.jpg";
+            info.Source = ServerConnectionImpl.URL_MEDIA + "info.jpg";
+            playVideo.Source = ServerConnectionImpl.URL_MEDIA + "playVideo.png";
             this.aq = gc.currentTrip.GetCurrentAttraction().americanQuestion;
             attractionQuestion.Text = aq.question;
             answersInitialize();

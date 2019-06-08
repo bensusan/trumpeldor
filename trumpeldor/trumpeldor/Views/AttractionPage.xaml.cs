@@ -40,10 +40,10 @@ namespace trumpeldor.Views
                 or.IsVisible = false;
             }
             //informationButton.Source = ServerConection.URL_MEDIA + "information.png";
-            subtitles.Source = ServerConection.URL_MEDIA + "subtitles.jpg";
-            info.Source = ServerConection.URL_MEDIA + "info.jpg";
-            playVideo.Source = ServerConection.URL_MEDIA + "playVideo.png";
-            mapBtn.Source = ServerConection.URL_MEDIA + "map.png";
+            subtitles.Source = ServerConnectionImpl.URL_MEDIA + "subtitles.jpg";
+            info.Source = ServerConnectionImpl.URL_MEDIA + "info.jpg";
+            playVideo.Source = ServerConnectionImpl.URL_MEDIA + "playVideo.png";
+            mapBtn.Source = ServerConnectionImpl.URL_MEDIA + "map.png";
             isFirstAppear = true;
         }
 

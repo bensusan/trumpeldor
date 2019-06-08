@@ -74,7 +74,7 @@ namespace trumpeldor.Views
         {
             base.OnAppearing();
             scoreLabel.Text = AppResources.score + ": " + gc.currentTrip.score;
-            if(ServerConection.DEBUG != 1)
+            if(ServerConnectionImpl.DEBUG != 1)
             {
                 buttonsTopLayout.IsVisible = false;
                 v.IsVisible = false;
