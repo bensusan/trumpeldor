@@ -8,7 +8,7 @@
     {% load static %}
     <link rel="stylesheet" href="{% static 'SideMenu.css' %}?version=4">
     {% load static %}
-    <script src="{% static 'edit_feedbacks.js' %}?version=12"></script>
+    <script src="{% static 'edit_feedbacks.js' %}?version=13"></script>
     {% load static %}
     <script src="{% static 'attractions.js' %}?version=3"></script>
     {% load static %}
@@ -36,6 +36,9 @@
         <option id="ecb9" value="9" style="display: none;">9</option>
         <option id="ecb10" value="10" style="display: none;">10</option>
     </select>
+    <p></p>
+    <textarea id="fb_edit_txt"
+              style="display:none;direction:rtl;text-align:right;height:100px;width:250px"></textarea>
     <p></p>
     <button class="blogger" type="button" id="edit_chosen_fb" style="display: none">עריכה</button>
     <p></p>
