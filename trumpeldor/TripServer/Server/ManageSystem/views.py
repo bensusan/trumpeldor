@@ -140,8 +140,8 @@ class AmericanQuestion(generics.GenericAPIView):
         ans = json.loads(json.dumps(ans))
         return Response(ans)
 
-    def post(self, request, *args, **kwargs):
-        ans = BL.add_american_question(self.kwargs['id_attr'], request.data)
+    def put(self, request, *args, **kwargs):
+        ans = BL.edit_american_question(self.kwargs['id_attr'], self.kwargs['id_quest'], request.data)
         ans = AmericanQuestionSerializer(ans, many=False)
         ans = json.loads(json.dumps(ans.data))
         return Response(ans)
@@ -245,7 +245,6 @@ class Info(generics.GenericAPIView):
         ans = InfoSerializer(ans, many=False)
         ans = json.loads(json.dumps(ans.data))
         return Response(ans)
-
     def post(self, request, *args, **kwargs):
         return general_post_or_get(
             request,
