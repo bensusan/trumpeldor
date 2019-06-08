@@ -215,6 +215,9 @@ class DAL_Abstract(object):
     def create_settings(self, boundaries, logo, loginHours, successAudio, failureAudio):
         raise NotImplementedError("Should have implemented this")
 
+    def edit_info(self, app_name, about_app, how_to_play):
+        raise NotImplementedError("Should have implemented this")
+
 
 class DALProxy(DAL_Abstract):
     Implementation = None
@@ -576,3 +579,8 @@ class DALProxy(DAL_Abstract):
         if self.Implementation is None:
             raise NotImplementedError("Should have implemented this")
         return self.Implementation.create_settings(boundaries, logo, loginHours, successAudio, failureAudio)
+
+    def edit_info(self, app_name, about_app, how_to_play):
+        if self.Implementation is None:
+            raise NotImplementedError("Should have implemented this")
+        return self.Implementation.edit_info(app_name, about_app, how_to_play)

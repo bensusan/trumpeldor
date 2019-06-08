@@ -260,7 +260,7 @@ class BL_Implementation(BL_Abstract):
         return self.DAL.get_all_feedback_questions()
 
     def add_info(self, info):
-        return self.DAL.add_info(info['name_app'], info['about_app'], info['how_to_play'])
+        return self.DAL.add_info(info['app_name'], info['about_app'], info['how_to_play'])
 
     def get_info(self):
         return self.DAL.get_info()
@@ -316,3 +316,6 @@ class BL_Implementation(BL_Abstract):
     def create_settings(self, settings):
         return self.DAL.create_settings(settings['boundaries'],settings['logo'], settings['loginHours'],
                                         settings['successAudio'], settings['failureAudio'])
+
+    def edit_info(self, info):
+        return self.DAL.edit_info(info['app_name'], info['about_app'], info['how_to_play'])
