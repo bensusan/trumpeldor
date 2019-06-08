@@ -13,11 +13,18 @@
     {% load static %}
     <script src="{% static 'attractions.js' %}?version=2"></script>
     {% load static %}
-    <script src="{% static 'add_info.js' %}?version=10"></script>
+    <script src="{% static 'add_info.js' %}?version=11"></script>
     {% load static %}
     <script src="{% static 'properties.js' %}?version=2"></script>
 </head>
 <body>
+
+<button id="englishBTN" class="language"
+        style="height: 58px;width: 100px; background-image: url('../static/usa.JPG');background-size: cover; font-size:24px">
+</button>
+<button id="hebrewBTN" class="language"
+        style="height: 58px;width: 100px; background-image: url('../static/israel.JPG');background-size: cover; font-size:24px">
+</button>
 
 <header>
     <h1>מידע נוסף</h1>
@@ -52,15 +59,18 @@
 
             <label style="text-align: right">:שם האפליקציה</label>
             <textarea id="appName" style="text-align: right; width:500px;height: 60px;"></textarea>
+            <textarea id="appNameEnglish" style="display:none;text-align: right; width:500px;height: 60px;"></textarea>
             <label style="text-align: right">:על האפליקציה</label>
             <textarea id="aboutApp" style="text-align: right; width:500px;height: 300px;"></textarea>
+            <textarea id="aboutAppEnglish" style="display:none;text-align: right; width:500px;height: 300px;"></textarea>
             <label style="text-align: right">:איך משחקים</label>
             <textarea id="howToPlay" style="text-align: right; width:500px;height: 300px;"></textarea>
+            <textarea id="howToPlayEnglish" style="display:none;text-align: right; width:500px;height: 300px;"></textarea>
         </div>
         <p><br/></p>
         <input class="yahoo" id="sendInfo" type="button" value="שליחת המידע הנוסף"/>
         <p></p>
-         <input class="yahoo" id="clear" type="button" value="נקה"/>
+        <input class="yahoo" id="clear" type="button" value="נקה"/>
         <p><br/><br/><br/></p>
         <p><br/></p>
     </form>

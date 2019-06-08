@@ -12,10 +12,40 @@ window.onload = function () {
     clearInfoBTN.addEventListener('click', function () {
         clearText();
     });
+    initLanguageBTNs();
     getRequestInfo(func_to_show_info);
     initializeBTNsFunctionality();
     localFileVideoPlayer();
 };
+
+function initLanguageBTNs() {
+    let hebrewBTN = document.getElementById("hebrewBTN");
+    let englishBTN = document.getElementById("englishBTN");
+    let name = document.getElementById("appName");
+    let nameEng = document.getElementById("appNameEnglish");
+    let about = document.getElementById("aboutApp");
+    let aboutEng = document.getElementById("aboutAppEnglish");
+    let howto = document.getElementById("howToPlay");
+    let howtoEng = document.getElementById("howToPlayEnglish");
+
+    hebrewBTN.addEventListener('click', function () {
+        name.style.display = "";
+        nameEng.style.display = "none";
+        about.style.display = "";
+        aboutEng.style.display = "none";
+        howto.style.display = "";
+        howtoEng.style.display = "none";
+    });
+
+    englishBTN.addEventListener('click', function () {
+        name.style.display = "none";
+        nameEng.style.display = "";
+        about.style.display = "none";
+        aboutEng.style.display = "";
+        howto.style.display = "none";
+        howtoEng.style.display = "";
+    });
+}
 
 function initializeBTNsFunctionality() {
     let vid_title = document.getElementById("vid_title");
@@ -58,24 +88,36 @@ function doVideo() {
 }
 
 function func_to_show_info(info) {
-    appName = info['app_name'];
-    aboutApp = info['about_app'];
-    howToPlay = info['how_to_play'];
+    appName = info['app_name'].split(';;');
+    aboutApp = info['about_app'].split(';;');
+    howToPlay = info['how_to_play'].split(';;');
     let name = document.getElementById('appName');
-    name.value = appName;
+    let nameEnglish = document.getElementById('appNameEnglish');
+    name.value = appName[0];
+    nameEnglish.value = appName[1];
     let about = document.getElementById('aboutApp');
-    about.value = aboutApp;
+    let aboutEnglish = document.getElementById('aboutAppEnglish');
+    about.value = aboutApp[0];
+    aboutEnglish.value = aboutApp[1];
     let howtoplay = document.getElementById('howToPlay');
-    howtoplay.value = howToPlay;
+    let howtoplayEnglish = document.getElementById('howToPlayEnglish');
+    howtoplay.value = howToPlay[0];
+    howtoplayEnglish.value = howToPlay[1];
 }
 
 function clearText() {
     let name = document.getElementById('appName');
-    name.value = "";
+    let nameEnglish = document.getElementById('appNameEnglish');
+    let aboutEnglish = document.getElementById('aboutAppEnglish');
+    let howtoplayEnglish = document.getElementById('howToPlayEnglish');
     let about = document.getElementById('aboutApp');
-    about.value = "";
     let howtoplay = document.getElementById('howToPlay');
+    name.value = "";
+    about.value = "";
     howtoplay.value = "";
+    nameEnglish.value = "";
+    aboutEnglish.value = "";
+    howtoplayEnglish.value = "";
 }
 
 function encodeImageFileAsURL(element) {
@@ -94,9 +136,9 @@ function encodeImageFileAsURL(element) {
 }
 
 function sendInfo() {
-    let name = document.getElementById('appName').value;
-    let about = document.getElementById('aboutApp').value;
-    let howToPlay = document.getElementById('howToPlay').value;
+    let name = document.getElementById('appName').value + ';;' + document.getElementById('appNameEnglish').value;
+    let about = document.getElementById('aboutApp').value + ';;' + document.getElementById('aboutAppEnglish').value;
+    let howToPlay = document.getElementById('howToPlay').value + ';;' + document.getElementById('howToPlayEnglish').value;
     let inf = {app_name: name, about_app: about, how_to_play: howToPlay};
     postRequestInfo(inf);
     window.location.href = '/main';
