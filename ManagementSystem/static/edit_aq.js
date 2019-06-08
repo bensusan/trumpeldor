@@ -125,10 +125,10 @@ function addRow(tableID) {
 }
 
 
-function postRequestAmericanQuestion(aq, attr_id) {
-    serverRequest("POST", function noop(dummy) {
+function postRequestAmericanQuestion(aq, attr_id,ques_id) {
+    serverRequest("PUT", function noop(dummy) {
         }, 'http://' + ip + ':12344/managementsystem/attraction/' +
-        attr_id + '/aquestion/',
+        attr_id + '/aquestion/'+ques_id+'/',
         JSON.stringify(aq));
 }
 
@@ -152,7 +152,7 @@ function funcToGetAttraction(attractionsJSON) {
                 , indexOfCorrectAnswer: correctAnswersIndexes
                 , attraction: attr['id'] //atraction id needs to be here
             };
-            postRequestAmericanQuestion(american_question_to_send, attr['id']);
+            postRequestAmericanQuestion(american_question_to_send, attr['id'],idOfQuestion);
             // also need to delete here
             localStorage.setItem("the_attr", JSON.stringify(attr));
         }
