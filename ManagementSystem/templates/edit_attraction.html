@@ -19,7 +19,7 @@
     {% load static %}
     <script src="{% static 'attractions.js' %}?version=3"></script>
     {% load static %}
-    <script src="{% static 'edit_attraction.js' %}?version=23"></script>
+    <script src="{% static 'edit_attraction.js' %}?version=25"></script>
     {% load static %}
     <script src="{% static 'properties.js' %}?version=12"></script>
 </head>
@@ -82,7 +82,7 @@
                 <textarea type="text" id="subt_english" placeholder="enter subtitles..." name="attr_subt_eng"
                           style="display:none;direction:rtl;text-align:right;width: 310px;height: 200px; overflow: scroll"> </textarea>
                 <p><br/></p>
-                <button class='button google-blue' onclick="finishEditingAttraction()" type="button"
+                <button class='button google-blue' id="saveEditBTN" type="button"
                         style="width: 220px;">שמירה
                 </button>
                 <button class='button google-blue' onclick="deletePoint()" id='delete_point' type="button"
@@ -96,7 +96,7 @@
 <div>
     <nav id="sideMenu"></nav>
     {% load static %}
-    <script src="{% static 'menu_of_edit_attractions.js' %}?version=2"></script>
+    <script src="{% static 'menu_of_edit_attractions.js' %}?version=3"></script>
 </div>
 
 </body>

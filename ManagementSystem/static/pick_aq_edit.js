@@ -101,14 +101,12 @@ function showInnerHtmlAndLoadValuesToComboBox(AmericanQuestionsJSON) {
 
 
 function funcInOrderToDeleteAmericanQuestion(AmericanQuestionsJSON) {
-    aq_id_that_was_picked_del = document.getElementById("write_aq_id_to_delete").value;
+    var comboDelete = document.getElementById("delete_cb");
+    aq_id_that_was_picked_del = comboDelete.options[comboDelete.selectedIndex].value;
    // let number_hint_id = Number(hint_id_that_was_picked);
       AmericanQuestionsJSON.forEach(function (aq) {
-          // alert("the id is: "+attr['id']);
-        // alert("in get name! "+"of the origin : " + lat + " , " + lng + "\n of the other: "+p.lat +" , "+ p.lng);
         if(aq['id']==aq_id_that_was_picked_del)
         {
-            //alert("before delete aq!");
             deleteRequestAmericanQuestion(attractionObjToUseInHintDelete['id'],aq['id']);
             window.location.href='/pick_aq_edit';
         }

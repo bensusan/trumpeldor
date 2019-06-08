@@ -35,6 +35,10 @@ function localFileVideoPlayer() {
 
 
 window.onload = function () {
+    let saveEditBTN = document.getElementById("saveEditBTN");
+    saveEditBTN.addEventListener('click',function () {
+        finishEditingAttraction();
+    });
     getRequestAttractions(getFieldsValuesOfExistingAttraction);
     localFileVideoPlayer();
 };
