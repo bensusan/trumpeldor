@@ -12,7 +12,7 @@
     </ContentPage.Padding>
 
     <ContentView SizeChanged="OnContainerSizeChanged">
-        <StackLayout x:Name="stackLayout" Style="{DynamicResource mainStackLayout}">
+        <StackLayout x:Name="stackLayout" Style="{DynamicResource mainStackLayout}" VerticalOptions="Fill">
             <StackLayout Style="{StaticResource mainStackLayout}" Orientation="Horizontal">
                 <StackLayout x:Name="buttonsTopLayout" Orientation="Horizontal" HorizontalOptions="StartAndExpand">
                     <ImageButton x:Name="how" Clicked="HowToPlay_Button_Clicked" Style="{StaticResource smallCircleImageButtonStyle}"/>
@@ -27,6 +27,21 @@
                     Opacity="0"
                     HorizontalOptions="CenterAndExpand"
                     VerticalOptions="CenterAndExpand" />
+
+            <StackLayout Style="{StaticResource mainStackLayout}" Orientation="Horizontal" VerticalOptions="End" HorizontalOptions="CenterAndExpand">
+                <StackLayout Style="{StaticResource mainStackLayout}" Spacing="1">
+                    <ImageButton x:Name="subtitles" Clicked="Subtitles_Clicked" Style="{StaticResource regularCircleImageButtonStyle}"/>
+                    <Label Text="{translator:Translate subtitlesBtn}" Style="{StaticResource smallTextStyle}"/>
+                </StackLayout>
+                <StackLayout Style="{StaticResource mainStackLayout}" Spacing="1">
+                    <ImageButton x:Name="info" Clicked="Information_Button_Clicked" Style="{StaticResource regularCircleImageButtonStyle}"/>
+                    <Label Text="{translator:Translate infoBtn}" Style="{StaticResource smallTextStyle}"/>
+                </StackLayout>
+                <StackLayout Style="{StaticResource mainStackLayout}" Spacing="1">
+                    <ImageButton x:Name="playVideo" Clicked="PlayVideo_Clicked" Style="{StaticResource regularCircleImageButtonStyle}"/>
+                    <Label Text="{translator:Translate playVideoBtn}" Style="{StaticResource smallTextStyle}"/>
+                </StackLayout>
+            </StackLayout>
         </StackLayout>
     </ContentView>
 </ContentPage>

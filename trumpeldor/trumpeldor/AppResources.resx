@@ -172,7 +172,7 @@
     <value>מידע</value>
   </data>
   <data name="leading_Table" xml:space="preserve">
-    <value>טבלת מובילים</value>
+    <value>טבלת ניקוד</value>
   </data>
   <data name="login_with_facebook" xml:space="preserve">
     <value>התחבר עם פייסבוק</value>
@@ -220,7 +220,7 @@
     <value>ניקוד</value>
   </data>
   <data name="share" xml:space="preserve">
-    <value>שתף</value>
+    <value>שיתוף</value>
   </data>
   <data name="short_path" xml:space="preserve">
     <value>קצר(כחצי שעה)</value>
@@ -283,7 +283,7 @@
     <value>כניסה ללא התחברות</value>
   </data>
   <data name="Out_Of_Valid_Sector_Message" xml:space="preserve">
-    <value>תוכל להשתמש בחלקים בסיסיים מהאפליקציה</value>
+    <value>היכנסו לקמפוס לשחק</value>
   </data>
   <data name="Out_Of_Valid_Sector_Title" xml:space="preserve">
     <value>אתה נמצא מחוץ לגבולות הגזרה</value>
@@ -364,7 +364,7 @@
     <value>התמונה התפרקה, עזרו לנו להחזיר את כל החתיכות למקום</value>
   </data>
   <data name="LeadingTablePageTitle" xml:space="preserve">
-    <value>טבלת מובילים</value>
+    <value>טבלת ניקוד</value>
   </data>
   <data name="LoginsPageTitle" xml:space="preserve">
     <value>התחברות</value>
@@ -395,5 +395,27 @@
   </data>
   <data name="or" xml:space="preserve">
     <value>או</value>
+  </data>
+  <data name="hint" xml:space="preserve">
+    <value>רמז</value>
+  </data>
+  <data name="infoBtn" xml:space="preserve">
+    <value>מידע נוסף</value>
+  </data>
+  <data name="last_hint" xml:space="preserve">
+    <value>רמז אחרון</value>
+  </data>
+  <data name="missionComplete" xml:space="preserve">
+    <value>המשימה הושלמה</value>
+  </data>
+  <data name="next_hint_alert" xml:space="preserve">
+    <value>הרמז הבא יגרור
+הורדה בניקוד</value>
+  </data>
+  <data name="playVideoBtn" xml:space="preserve">
+    <value>צפייה בסרטון</value>
+  </data>
+  <data name="subtitlesBtn" xml:space="preserve">
+    <value>טקסט על הפסל</value>
   </data>
 </root>

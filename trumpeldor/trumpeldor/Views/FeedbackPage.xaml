@@ -21,7 +21,7 @@
                 <!--<Label Text="{translator:Translate question}" Grid.Column="0" Grid.Row="0" Style="{DynamicResource labelStyle}"/>-->
                 <!--<Label Text="{translator:Translate Answer}" Grid.Column="1" Grid.Row="0" Style="{DynamicResource labelStyle}"/>-->
             </Grid>
-            <Button Text="{translator:Translate Reply}" Clicked="Reply_Button_Clicked" x:Name="ReplyButton" Style="{StaticResource largeButtonStyle}"/>
+            <Button Text="{translator:Translate Reply}" Clicked="Reply_Button_Clicked" x:Name="ReplyButton" Style="{StaticResource largeButtonStyle}" BackgroundColor="Orange"/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

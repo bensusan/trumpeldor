@@ -7,7 +7,7 @@
              ControlTemplate="{StaticResource template}"
              BackgroundColor="White">
     <ContentPage.Content>
-        <StackLayout Style="{DynamicResource mainStackLayout}" VerticalOptions="StartAndExpand">
+        <StackLayout Style="{DynamicResource mainStackLayout}" VerticalOptions="Fill">
             <StackLayout Style="{StaticResource mainStackLayout}" Orientation="Horizontal">
                 <Label x:Name = "scoreLabel" Style="{DynamicResource labelStyle}" HorizontalOptions="EndAndExpand"/>
             </StackLayout>
@@ -18,6 +18,21 @@
             <StackLayout Style="{StaticResource mainStackLayout}" VerticalOptions="EndAndExpand">
                 <Label x:Name="explanation" Text="{translator:Translate aq_explanation}" Style="{StaticResource labelStyle}" IsVisible="False" TextColor="Red" HorizontalOptions="Center"/>
                 <Label x:Name="numToWait" IsVisible="False" Style="{StaticResource labelStyle}" TextColor="Red" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="Center"/>
+            </StackLayout>
+            
+            <StackLayout Style="{StaticResource mainStackLayout}" Orientation="Horizontal" VerticalOptions="End" HorizontalOptions="CenterAndExpand">
+                <StackLayout Style="{StaticResource mainStackLayout}" Spacing="1">
+                    <ImageButton x:Name="subtitles" Clicked="Subtitles_Clicked" Style="{StaticResource regularCircleImageButtonStyle}"/>
+                    <Label Text="{translator:Translate subtitlesBtn}" Style="{StaticResource smallTextStyle}"/>
+                </StackLayout>
+                <StackLayout Style="{StaticResource mainStackLayout}" Spacing="1">
+                    <ImageButton x:Name="info" Clicked="Information_Button_Clicked" Style="{StaticResource regularCircleImageButtonStyle}"/>
+                    <Label Text="{translator:Translate infoBtn}" Style="{StaticResource smallTextStyle}"/>
+                </StackLayout>
+                <StackLayout Style="{StaticResource mainStackLayout}" Spacing="1">
+                    <ImageButton x:Name="playVideo" Clicked="PlayVideo_Clicked" Style="{StaticResource regularCircleImageButtonStyle}"/>
+                    <Label Text="{translator:Translate playVideoBtn}" Style="{StaticResource smallTextStyle}"/>
+                </StackLayout>
             </StackLayout>
         </StackLayout>
     </ContentPage.Content>

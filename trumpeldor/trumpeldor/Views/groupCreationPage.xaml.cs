@@ -113,12 +113,12 @@ namespace trumpeldor.Views
             agesGrid.Children.Add(removeButton, DELETE_PLAYER_COLUMN, nextRow);
 
             //Player number addition
-            Label lbl = new Label { Text = nextRow + "" };
+            Label lbl = new Label { Text = nextRow + "", VerticalTextAlignment = TextAlignment.End, Margin = new Thickness(0,0,1,8) };
             lbl.SetDynamicResource(VisualElement.StyleProperty, "labelStyle");
             agesGrid.Children.Add(lbl, PLAYER_NUMBER_COLUMN, nextRow);
 
             //Player's age addition
-            Entry entry = new Entry { Keyboard = Keyboard.Numeric };            
+            Entry entry = new Entry { Keyboard = Keyboard.Numeric, VerticalOptions = LayoutOptions.End };            
             entry.SetDynamicResource(VisualElement.StyleProperty, "entryStyle");
             agesGrid.Children.Add(entry, PLAYER_AGE_COLUMN, nextRow);
 

@@ -73,8 +73,8 @@
             </Style>
 
             <Style x:Key="regularCircleImageButtonStyle" TargetType="ImageButton" BasedOn="{StaticResource baseImageButtonStyle}">
-                <Setter Property="WidthRequest" Value="40" />
-                <Setter Property="HeightRequest" Value="40"/>
+                <Setter Property="WidthRequest" Value="50" />
+                <Setter Property="HeightRequest" Value="50"/>
             </Style>
 
             <Style x:Key="labelStyle" TargetType="Label" BasedOn="{StaticResource baseViewStyle}">
@@ -82,7 +82,12 @@
                 <Setter Property="FontSize" Value="20"/>
                 <Setter Property="FontFamily" Value="{StaticResource NormalFont}"/>
             </Style>
-            
+
+            <Style x:Key="smallTextStyle" TargetType="Label" BasedOn="{StaticResource labelStyle}">
+                <Setter Property="FontSize" Value="14"/>
+                <Setter Property="HorizontalOptions" Value="CenterAndExpand"/>
+            </Style>
+
             <Style x:Key="titleStyle" TargetType="Label" BasedOn="{StaticResource labelStyle}">
                 <Setter Property="FontSize" Value="32"/>
                 <Setter Property="HorizontalOptions" Value="CenterAndExpand"/>
@@ -132,7 +137,8 @@
 
                     <ContentPresenter VerticalOptions="FillAndExpand"/>
                     <StackLayout Orientation="Horizontal" BackgroundColor="DeepSkyBlue" HorizontalOptions="Fill">
-                        <Label Style="{StaticResource titleStyle}" Text="BGU ART" TextColor="Black" FontAttributes="Bold" BackgroundColor="DeepSkyBlue"/>
+                        <!--<Label Style="{StaticResource titleStyle}" Text="BGU ART" TextColor="Black" FontAttributes="Bold" BackgroundColor="DeepSkyBlue"/>-->
+                        <Image Source="http://www.bgu.ac.il/~bel/BGUsig4HandE.png" Style="{StaticResource baseImageStyle}" BackgroundColor="DeepSkyBlue"/>
                     </StackLayout>
                 </StackLayout>
             </ControlTemplate>
