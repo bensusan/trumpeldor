@@ -77,7 +77,6 @@ function initializeTheListOfPicturesToShow() {
         let xx = JSON.parse(localStorage.getItem("x"));
         let yy = JSON.parse(localStorage.getItem("y"));
         // let vidArr = JSON.parse(localStorage.getItem("vidArr"));
-        alert(JSON.parse(localStorage.getItem("vidArr")));
         let attraction_to_send = {
             name:namee
             //,x:31.262860,y:34.801753

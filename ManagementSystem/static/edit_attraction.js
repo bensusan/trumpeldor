@@ -126,7 +126,6 @@ function getFieldsValuesOfExistingAttraction(attractionsJSON) {
             // image.src = attr['picturesURLS'][0];
             initializeTheListOfPicturesToShow(attr['picturesURLS']);
             var video = document.getElementById('vid_itself');
-            alert(attr['videosURLS']);
             video.src = attr['videosURLS'];
             localStorage.setItem("name_for_add_aq", p.name);
             localStorage.setItem("desc_for_add_aq", p.description);
