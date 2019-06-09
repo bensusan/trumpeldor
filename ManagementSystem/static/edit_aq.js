@@ -50,7 +50,7 @@ function initAddAqBTNfunctionality() {
             arrOfAnswers.push(answer + ";;" + answerEnglish);
 
             if (isChecked == true) {
-                correctAnswersIndexes.push(rowIteratorIndex + 1);
+                correctAnswersIndexes.push(rowIteratorIndex);
             }
         }
         getRequestAttractions(funcToGetAttraction);

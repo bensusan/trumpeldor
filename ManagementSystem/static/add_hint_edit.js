@@ -106,7 +106,7 @@ function initializeBTNsFunctionality() {
     var sendVidHintBTN = document.getElementById('send_vid_hint');
 
     textHintBTN.addEventListener('click', function () {
-         textLine.style.display = "inline";
+        textLine.style.display = "inline";
         sendButtonTxt.style.display = "inline";
         clickHere.style.display = "none";
         picDesc.style.display = "none";
@@ -192,7 +192,7 @@ function getTheNeededAttractionIdToSendItOnThePostRequest(attractionsJSON) {
             var textHintToSend = {
                 attraction: attr,
                 kind: 'HT',
-                data: document.getElementById("text_hint_id").value+ ";;" + document.getElementById("text_hint_id_english").value,
+                data: document.getElementById("text_hint_id").value + ";;" + document.getElementById("text_hint_id_english").value,
                 description: ""
             };
             postRequestHint(textHintToSend, attr['id']);
