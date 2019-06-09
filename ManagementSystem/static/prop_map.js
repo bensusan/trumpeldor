@@ -12,6 +12,8 @@ window.onload = function () {
         sendAllSettingsWithPointArr();
     });
 
+    getRequestSettings(showSettings);
+
     let ok1 = document.getElementById('ok1');
     let ok2 = document.getElementById('ok2');
     let ok3 = document.getElementById('ok3');
@@ -45,6 +47,43 @@ window.onload = function () {
     });
 
 };
+
+function showSettings(settingsJSON) {
+    let boundaries = settingsJSON['boundaries'];
+    let logo = settingsJSON['logo'];
+    document.getElementById('lat1').value = boundaries[0].lat;
+    document.getElementById('lng1').value = boundaries[0].lng;
+    document.getElementById('lat2').value = boundaries[1].lat;
+    document.getElementById('lng2').value = boundaries[1].lng;
+    document.getElementById('lat3').value = boundaries[2].lat;
+    document.getElementById('lng3').value = boundaries[2].lng;
+    document.getElementById('lat4').value = boundaries[3].lat;
+    document.getElementById('lng4').value = boundaries[3].lng;
+
+    if (logo != "") {
+        var image = document.getElementById('output');
+        image.style.display = "";
+        image.src = logo;
+    }
+
+    document.getElementById('info_ttl').value = settingsJSON['loginHours'];
+
+    if (settingsJSON['successAudio'] != "") {
+        let aud = document.getElementById('audio_controls');
+        let mp = document.getElementById('attr_sound');
+        aud.style.display = "";
+        mp.src = settingsJSON['successAudio'];
+        aud.load();
+    }
+
+    if (settingsJSON['failureAudio'] != "") {
+        let aud = document.getElementById('audio_controls_fail');
+        let mp = document.getElementById('attr_sound_fail');
+        aud.style.display = "";
+        mp.src = settingsJSON['failureAudio'];
+        aud.load();
+    }
+}
 
 function initMapAndAttractionsprop() {
     initMap();
@@ -151,4 +190,8 @@ function markArr() {
         let p = arrOfPoints[i];
         markAttraction(p);
     }
+}
+
+function getRequestSettings(func) {
+    serverRequest("GET", func, 'http://' + ip + ':12344/managementsystem/settings/?format=json');
 }

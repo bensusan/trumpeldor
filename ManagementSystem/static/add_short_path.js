@@ -53,7 +53,7 @@ function functionToGetNames(attractionsJSON) {
         if ((p.lat).toFixed(8) == lat && (p.lng).toFixed(8) == lng) {
             str_of_points = str_of_points + attr['name'] + "<br />";
             var border = document.getElementById("border_of_points");
-            border.style.display = "block";
+            border.style.display = "none";
             document.getElementById("showing_added_points").innerHTML = str_of_points;
             document.getElementById("showing_added_points").style.fontWeight = 'bold';
         }

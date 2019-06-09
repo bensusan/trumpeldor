@@ -17,17 +17,17 @@ function sendThis(arrOfBoundries) {
 function encodeImageFileAsURL(element) {
     var image = document.getElementById('output');
     image.style.display = "";
-	image.src = URL.createObjectURL(element.files[0]);
+    image.src = URL.createObjectURL(element.files[0]);
 
-    helperVar="";
+    helperVar = "";
 
-  var file = element.files[0];
-  var reader = new FileReader();
-  reader.onloadend = function() {
-   helperVar = reader.result
-  };
+    var file = element.files[0];
+    var reader = new FileReader();
+    reader.onloadend = function () {
+        helperVar = reader.result
+    };
 
-  reader.readAsDataURL(file);
+    reader.readAsDataURL(file);
 }
 
 function func(element) {
@@ -66,8 +66,6 @@ function funcFail(element) {
     };
     reader.readAsDataURL(file);
 }
-
-
 
 
 function postRequestSettings(data) {
