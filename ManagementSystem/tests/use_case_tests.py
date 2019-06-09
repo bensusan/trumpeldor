@@ -69,12 +69,13 @@ def make_check_uc1p8p1(url):
     r = requests.get(url)
     arrJson = r.json()
     for attr in arrJson:
-        if attr['name'] == 'this is a test;;':
+        if attr['name'] == 'test attraction;;':
             newURL = url + str(attr['id']) + '/hint/'
             r2 = requests.get(newURL)
             arrJson2 = r2.json()
+            print(arrJson2)
             for hint in arrJson2:
-                if hint['data'] == 'chiburashka':
+                if hint['data'] == 'chiburashka;;':
                     return True
 
     return False
@@ -104,7 +105,10 @@ def main():
     # uc1p6p1(browser)
     # uc1p6p2(browser)
     # uc1p8p1(browser)
+    # uc1p8p2(browser)
+    # uc1p8p3(browser)
     # uc1p10p1(browser)
+    # uc1p10p2(browser)
     # uc2p123(browser)
     # uc2p4(browser)
     # uc3p1(browser)
@@ -272,19 +276,15 @@ def uc1p8p1(driver):
     # driver.find_element_by_id('edit_attraction').click()
     driver.execute_script("localStorage.setItem('edited', JSON.stringify({lat:31.2625444444,lng:34.8019111199}));")
     first = driver.current_url  # needs to be http://10.0.0.6:12345/edit_attraction/
-    editHintBTN = driver.find_element(By.CSS_SELECTOR, "#sideMenu > div.sidenav > a:nth-child(6)")
-    editHintBTN.click()
+    driver.find_element_by_id('edit_hints').click()
     second = driver.current_url  # needs to be http://10.0.0.6:12345/pick_hint_edit/
-    edHintBTN = driver.find_element(By.CSS_SELECTOR, "#sideMenu > div.sidenav > a:nth-child(4)")
-    edHintBTN.click()
     addHintBTN = driver.find_element(By.CSS_SELECTOR, "#sideMenu > div.sidenav > a:nth-child(3)")
     addHintBTN.click()
     third = driver.current_url  # needs to be http://10.0.0.6:12345/add_hint_edit/
-    addTextBTN = driver.find_element(By.CSS_SELECTOR, "#add_text_hint")
-    addTextBTN.click()
+    driver.execute_script("document.getElementById('add_text_hint').click();")
     fourth = driver.current_url  # needs to be http://10.0.0.6:12345/add_hint_edit/
     # driver.find_element_by_id('text_hint_id').send_keys("chiburashka")
-    driver.execute_script("document.getElementById('text_hint_id').value='chiburashka';")
+    driver.execute_script("document.getElementById('text_hint_id').value = 'chiburashka';")
     driver.execute_script("document.getElementById('send_text_hint').click();")
     fifth = driver.current_url  # needs to be http://10.0.0.6:12345/add_hint_edit/
 
@@ -314,15 +314,10 @@ def uc1p8p2(driver):
     # driver.find_element_by_id('edit_attraction').click()
     driver.execute_script("localStorage.setItem('edited', JSON.stringify({lat:31.2625444444,lng:34.8019111199}));")
     first = driver.current_url  # needs to be http://10.0.0.6:12345/edit_attraction/
-    editHintBTN = driver.find_element(By.CSS_SELECTOR, "#sideMenu > div.sidenav > a:nth-child(5)")
-    editHintBTN.click()
+    driver.find_element_by_id('edit_hints').click()
     second = driver.current_url  # needs to be http://10.0.0.6:12345/pick_hint_edit/
-    edHintBTN = driver.find_element(By.CSS_SELECTOR, "#sideMenu > div.sidenav > a:nth-child(4)")
-    edHintBTN.click()
-    delHintBTN = driver.find_element(By.CSS_SELECTOR, "#sideMenu > div.sidenav > a:nth-child(5)")
-    delHintBTN.click()
+    driver.find_element_by_id('deleteHintBTNmenu').click()
     third = driver.current_url  # needs to be http://10.0.0.6:12345/pick_hint_edit/
-    driver.find_element_by_id('write_hint_id_to_delete').send_keys("2")
     driver.find_element_by_id('delete_chosen_hint').click()
     fourth = driver.current_url  # needs to be http://10.0.0.6:12345/pick_hint_edit/
 
@@ -356,7 +351,6 @@ def check_json_for_uc1p8p2(url):
 
 def uc1p8p3(driver):
     print("Use Case: Edit Hint to attraction.")
-
     # print(get_length_from_url('http://10.0.0.6:12344/managementsystem/attraction/68/hint/'))
     driver.get("http://" + ip + ":12345/attractions/")
     driver.get("http://" + ip + ":12345/edit_attraction/")
@@ -365,25 +359,21 @@ def uc1p8p3(driver):
     # driver.find_element_by_id('edit_attraction').click()
     driver.execute_script("localStorage.setItem('edited', JSON.stringify({lat:31.2625444444,lng:34.8019111199}));")
     first = driver.current_url  # needs to be http://10.0.0.6:12345/edit_attraction/
-    editHintBTN = driver.find_element(By.CSS_SELECTOR, "#sideMenu > div.sidenav > a:nth-child(5)")
-    editHintBTN.click()
+    driver.find_element_by_id('edit_hints').click()
     second = driver.current_url  # needs to be http://10.0.0.6:12345/pick_hint_edit/
-    edHintBTN = driver.find_element(By.CSS_SELECTOR, "#sideMenu > div.sidenav > a:nth-child(4)")
-    edHintBTN.click()
+    driver.find_element_by_id('editHintBTNmenu').click()
     third = driver.current_url  # needs to be http://10.0.0.6:12345/pick_hint_edit/
-    the_id = check_json_for_uc1p8p2('http://' + ip + ':12344/managementsystem/attraction/')
-    driver.find_element_by_id('write_hint_id_to_edit').send_keys(the_id)
+    driver.execute_script("document.getElementById('edit_cb').selectedIndex = 0;")
     driver.find_element_by_id('edit_chosen_hint').click()
     fourth = driver.current_url  # needs to be http://10.0.0.6:12345/edit_hint_edit/
-    driver.find_element_by_id('write_hint_text_in_edit').send_keys("chuchuchu")
     # driver.execute_script("document.querySelector('#write_hint_id_to_edit').value='chuchuchi';")
-    driver.find_element_by_id('submit_to_edit_hint').click()
     fifth = driver.current_url  # needs to be http://10.0.0.6:12345/pick_hint_edit/
 
     bool1 = first == 'http://' + ip + ':12345/edit_attraction/'
     bool2 = second == 'http://' + ip + ':12345/pick_hint_edit/'
     bool3 = third == 'http://' + ip + ':12345/pick_hint_edit/'
-    bool4 = fourth == 'http://' + ip + ':12345/edit_hint_edit/'
+    #bool4 = fourth == 'http://' + ip + ':12345/edit_hint_edit/'
+    bool4 = fourth == 'http://' + ip + ':12345/pick_hint_edit/'
     bool5 = fifth == 'http://' + ip + ':12345/pick_hint_edit/'
 
     if bool1 and bool2 and bool3 and bool4 and bool5:
@@ -415,8 +405,8 @@ def uc1p10p2(driver):
     print("Use Case: Additional Info deletion test.")
     driver.get("http://" + ip + ":12345/main/")
     driver.find_element(By.CSS_SELECTOR, "#sideMenu > div.sidenav > a:nth-child(6)").click()
-    driver.find_element(By.CSS_SELECTOR, "body > div > input:nth-child(5)").click()
-    driver.find_element(By.CSS_SELECTOR, "body > div > input:nth-child(4)").click()
+    driver.find_element_by_id('clear').click()
+    driver.find_element_by_id('sendInfo').click()
 
     if driver.current_url == 'http://' + ip + ':12345/main/':
         print(green('--- test passed!!! ---'))
