@@ -90,8 +90,7 @@ namespace trumpeldor.Views
 
         private async void HowToPlay_Button_Clicked(object sender, EventArgs e)
         {
-            //await Navigation.PushModalAsync(new instructionsPage());
-            await PopupNavigation.Instance.PushAsync(new MyPopup());
+            await Navigation.PushModalAsync(new instructionsPage());
         }
 
         private async void Info_Button_Clicked(object sender, EventArgs e)

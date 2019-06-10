@@ -14,11 +14,12 @@ namespace trumpeldor
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class MyPopup : PopupPage
     {
-        public string url = "https://storage.googleapis.com/appconfig-media/appconfig-content/uploads/2016/04/xamarin-app-logo2.png";
-		public MyPopup ()
+        public string currUrl = "";
+		public MyPopup (string url)
 		{
 			InitializeComponent ();
-            webView.Source = url;
+            currUrl = url;
+            webView.Source = currUrl;
         }
 
         void Handle_Clicked(object sender, System.EventArgs e)

@@ -27,7 +27,7 @@ namespace trumpeldor.Views
         public LocationController lc;
         trumpeldor.SheredClasses.Point attractionLoc, currLoc;
         public double currLat = 0, currLong = 0;
-        MapPage myMap = null;
+        public static MapPage myMap = null;
         private bool firstAttachOfHintMap = true;
         private double startDistanceToDestination;
         //private bool stopDestinationCheck = false;

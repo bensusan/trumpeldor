@@ -8,6 +8,7 @@ using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using trumpeldor.SheredClasses;
 using System.IO;
+using Rg.Plugins.Popup.Services;
 
 namespace trumpeldor.Views
 {
@@ -50,6 +51,11 @@ namespace trumpeldor.Views
         protected override void OnAppearing()
         {
             base.OnAppearing();
+
+            //pop up video on arrival
+            if(attraction.videosURLS.Count > 0)
+                PopupNavigation.Instance.PushAsync(new MyPopup(attraction.videosURLS[0]));
+
             missionButton.IsVisible = entertainment != null && !gc.isAttractionDone;
             questionButton.IsVisible = !gc.isAttractionDone;
             or.IsVisible = !gc.isAttractionDone &&  entertainment != null;
@@ -95,14 +101,16 @@ namespace trumpeldor.Views
             await Navigation.PushModalAsync(new MultipleChoiceQuestionPage());
         }
 
-        private void PlayVideo_Clicked(object sender, EventArgs e)
+        private async void PlayVideo_Clicked(object sender, EventArgs e)
         {
-
+            if (attraction.videosURLS.Count > 0 && isFirstAppear)
+                await PopupNavigation.Instance.PushAsync(new MyPopup(attraction.videosURLS[0]));
         }
 
-        private void MapBtn_Clicked(object sender, EventArgs e)
+        private async void MapBtn_Clicked(object sender, EventArgs e)
         {
-
+            //added with map as static field
+            await Navigation.PushModalAsync(NavigationPage.myMap);
         }
 
         private void Subtitles_Clicked(object sender, EventArgs e)
