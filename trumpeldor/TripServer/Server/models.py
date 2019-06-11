@@ -141,8 +141,7 @@ class Media(models.Model):
 
 class Settings(models.Model):
     boundaries = JSONField()
-    logo = JSONField()
     loginHours = models.IntegerField(default=36)
-    successAudio = JSONField()
-    failureAudio = JSONField()
+    scoreRules = JSONField()
+
 

@@ -404,9 +404,8 @@ class DAL_Implementation(DAL_Abstract):
     def edit_settings(self, boundaries, logo, loginHours, successAudio, failureAudio):
         raise NotImplementedError("Should have implemented this")
 
-    def create_settings(self, boundaries, logo, loginHours, successAudio, failureAudio):
-        settings = Settings(boundaries=boundaries , logo=logo, loginHours=loginHours, successAudio=successAudio,
-                            failureAudio=failureAudio)
+    def create_settings(self, boundaries, loginHours, scoreRules):
+        settings = Settings(boundaries=boundaries, loginHours=loginHours, scoreRules=scoreRules)
         settings.save()
         if Settings.objects.all().count() > 1:
             Settings.objects.first().delete()
