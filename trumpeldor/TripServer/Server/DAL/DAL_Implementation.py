@@ -100,7 +100,11 @@ class DAL_Implementation(DAL_Abstract):
         return attraction
 
     def add_hint(self, id_attraction, kind, data, description):
-        hint = Hint(attraction=self.getAttraction(id_attraction), kind=kind, data=data, description=description)
+        if kind == 'HP':
+            data = add_media([data], 'image/jpeg', '.png')
+        elif kind == 'HV':
+            data = add_media([data], 'video/mp4', '.mp4')
+        hint = Hint(attraction=self.getAttraction(id_attraction), kind=kind, data=addPrefixUrl(data)[0], description=description)
         hint.save()
         return hint
 
@@ -396,7 +400,7 @@ class DAL_Implementation(DAL_Abstract):
         return True
 
     def add_taking_pic(self, id_attraction, description):
-        taking_pic = TakingPicture(attraction=self.get_attraction(id_attraction) ,description=description)
+        taking_pic = TakingPicture(attraction=self.get_attraction(id_attraction), description=description)
         taking_pic.save()
         return taking_pic
 
@@ -406,9 +410,8 @@ class DAL_Implementation(DAL_Abstract):
     def edit_settings(self, boundaries, logo, loginHours, successAudio, failureAudio):
         raise NotImplementedError("Should have implemented this")
 
-    def create_settings(self, boundaries, logo, loginHours, successAudio, failureAudio):
-        settings = Settings(boundaries=boundaries , logo=logo, loginHours=loginHours, successAudio=successAudio,
-                            failureAudio=failureAudio)
+    def create_settings(self, boundaries, loginHours, scoreRules):
+        settings = Settings(boundaries=boundaries, loginHours=loginHours, scoreRules=scoreRules)
         settings.save()
         if Settings.objects.all().count() > 1:
             Settings.objects.first().delete()

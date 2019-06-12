@@ -314,8 +314,7 @@ class BL_Implementation(BL_Abstract):
         return self.DAL.edit_settings(settings)
 
     def create_settings(self, settings):
-        return self.DAL.create_settings(settings['boundaries'],settings['logo'], settings['loginHours'],
-                                        settings['successAudio'], settings['failureAudio'])
+        return self.DAL.create_settings(settings['boundaries'],settings['loginHours'], settings['scoreRules'])
 
     def edit_info(self, info):
         return self.DAL.edit_info(info['app_name'], info['about_app'], info['how_to_play'])
