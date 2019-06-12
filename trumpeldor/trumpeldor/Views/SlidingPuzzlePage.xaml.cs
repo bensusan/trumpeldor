@@ -7,6 +7,8 @@ using trumpeldor.ViewModels;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using trumpeldor.SheredClasses;
+using Rg.Plugins.Popup.Services;
+
 namespace trumpeldor.Views
 {
 	[XamlCompilation(XamlCompilationOptions.Compile)]
@@ -19,8 +21,9 @@ namespace trumpeldor.Views
         private bool isBusy;
         private SlidingPuzzle sp;
         private GameController gc;
+        private Attraction attraction;
 
-        public SlidingPuzzlePage (SlidingPuzzle sp)
+        public SlidingPuzzlePage (SlidingPuzzle sp, Attraction attraction)
 		{
             InitializeComponent ();
             this.gc = GameController.getInstance();
@@ -32,6 +35,7 @@ namespace trumpeldor.Views
             tiles = new SlidingPuzzleTile[sp.width, sp.height];
             emptyRow = sp.width - 1;
             emptyCol = sp.height - 1;
+            this.attraction = attraction;
 
             for (int row = 0; row < sp.width; row++)
             {
@@ -212,15 +216,16 @@ namespace trumpeldor.Views
             await Navigation.PushModalAsync(new instructionsPage(sp));
         }
 
-        private void PlayVideo_Clicked(object sender, EventArgs e)
+        private async void PlayVideo_Clicked(object sender, EventArgs e)
         {
-
+            if (attraction.videosURLS.Count > 0)
+                await PopupNavigation.Instance.PushAsync(new MyPopup(attraction.videosURLS[0], true));
         }
 
 
-        private void Subtitles_Clicked(object sender, EventArgs e)
+        private async void Subtitles_Clicked(object sender, EventArgs e)
         {
-
+            await PopupNavigation.Instance.PushAsync(new MyPopup("subtitles for the point of interest", false));
         }
 
         private void Information_Button_Clicked(object sender, EventArgs e)

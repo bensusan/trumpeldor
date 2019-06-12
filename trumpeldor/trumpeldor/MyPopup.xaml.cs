@@ -14,12 +14,19 @@ namespace trumpeldor
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class MyPopup : PopupPage
     {
-        public string currUrl = "";
-		public MyPopup (string url)
+        public string currTxt = "";
+		public MyPopup (string txt, bool isUrl)
 		{
 			InitializeComponent ();
-            currUrl = url;
-            webView.Source = currUrl;
+            currTxt = txt;
+            if (isUrl)
+            {
+                webView.Source = currTxt;
+            }
+            else
+            {
+                textLbl.Text = txt;
+            }
         }
 
         void Handle_Clicked(object sender, System.EventArgs e)

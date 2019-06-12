@@ -24,18 +24,24 @@ namespace trumpeldor.Views
 
         private async void FacebookLogin_Clicked(object sender, EventArgs e)
         {
+            ButtonsLocker.LockAll(btnLayout);
             await Navigation.PushModalAsync(new AccessFacebookProfile());
+            ButtonsLocker.UnlockAll(btnLayout);
         }
 
         private void GoogleLogin_Clicked(object sender, EventArgs e)
         {
+            ButtonsLocker.LockAll(btnLayout);
             _googleManager.Login(OnLoginComplete);
+            ButtonsLocker.UnlockAll(btnLayout);
         }
 
         private async void Anonymus_Clicked(object sender, EventArgs e)
         {
-            if(await DisplayAlert(AppResources.login_as_anonymous, AppResources.anonymous_alert, AppResources.Yes, AppResources.No))
+            ButtonsLocker.LockAll(btnLayout);
+            if (await DisplayAlert(AppResources.login_as_anonymous, AppResources.anonymous_alert, AppResources.Yes, AppResources.No))
                 await Navigation.PushModalAsync(new groupCreationPage());
+            ButtonsLocker.UnlockAll(btnLayout);
         }
 
 

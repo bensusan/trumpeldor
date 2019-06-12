@@ -53,8 +53,8 @@ namespace trumpeldor.Views
             base.OnAppearing();
 
             //pop up video on arrival
-            if(attraction.videosURLS.Count > 0)
-                PopupNavigation.Instance.PushAsync(new MyPopup(attraction.videosURLS[0]));
+            if(attraction.videosURLS.Count > 0 && isFirstAppear)
+                PopupNavigation.Instance.PushAsync(new MyPopup(attraction.videosURLS[0], true));
 
             missionButton.IsVisible = entertainment != null && !gc.isAttractionDone;
             questionButton.IsVisible = !gc.isAttractionDone;
@@ -71,12 +71,16 @@ namespace trumpeldor.Views
 
         private async void Information_Button_Clicked(object sender, EventArgs e)
         {
+            Lock();
             await Navigation.PushModalAsync(new informationPage(this.attraction));
+            UnLock();
         }
 
         private async void Mission_Button_Clicked(object sender, EventArgs e)
         {
-            await Navigation.PushModalAsync(gc.currentTrip.GetCurrentAttraction().entertainment.EntertainmentPageInstance());
+            Lock();
+            await Navigation.PushModalAsync(gc.currentTrip.GetCurrentAttraction().entertainment.EntertainmentPageInstance(attraction));
+            UnLock();
         }
 
         private void Watch_Again_Button_Clicked(object sender, EventArgs e)
@@ -86,6 +90,7 @@ namespace trumpeldor.Views
 
         private void Continue_Button_Clicked(object sender, EventArgs e)
         {
+            Lock();
             gc.isAttractionDone = false;
             var existingPages = Navigation.NavigationStack.ToList();
             foreach (var page in existingPages)
@@ -94,28 +99,63 @@ namespace trumpeldor.Views
                Application.Current.MainPage = new FinishTrackPage(gc.CanContinueToLongerTrack());
             else
                 Application.Current.MainPage = new NavigationPage();
+            UnLock();
         }
 
         private async void QuestionButton_Clicked(object sender, EventArgs e)
         {
-            await Navigation.PushModalAsync(new MultipleChoiceQuestionPage());
+            Lock();
+            await Navigation.PushModalAsync(new MultipleChoiceQuestionPage(attraction));
+            UnLock();
         }
 
         private async void PlayVideo_Clicked(object sender, EventArgs e)
         {
-            if (attraction.videosURLS.Count > 0 && isFirstAppear)
-                await PopupNavigation.Instance.PushAsync(new MyPopup(attraction.videosURLS[0]));
+            if (attraction.videosURLS.Count > 0)
+            {
+                Lock();
+                await PopupNavigation.Instance.PushAsync(new MyPopup(attraction.videosURLS[0], true));
+                UnLock();
+            }
         }
 
         private async void MapBtn_Clicked(object sender, EventArgs e)
         {
+            Lock();
             //added with map as static field
             await Navigation.PushModalAsync(NavigationPage.myMap);
+            UnLock();
         }
 
-        private void Subtitles_Clicked(object sender, EventArgs e)
+        private async void Subtitles_Clicked(object sender, EventArgs e)
         {
+            Lock();
+            await PopupNavigation.Instance.PushAsync(new MyPopup("subtitles for the point of interest", false));
+            UnLock();
+        }
 
+
+        private void Lock()
+        {
+            ButtonsLocker.LockAll(btnLayout);
+            subtitles.IsEnabled = false;
+            info.IsEnabled = false;
+            playVideo.IsEnabled = false;
+            mapBtn.IsEnabled = false;
+        }
+
+        private void UnLock()
+        {
+            ButtonsLocker.UnlockAll(btnLayout);
+            subtitles.IsEnabled = true;
+            info.IsEnabled = true;
+            playVideo.IsEnabled = true;
+            mapBtn.IsEnabled = true;
         }
     }
 }
+
+//to lock:
+//btnLayout-mission, question, continue
+//subtitles, info, playVideo
+//mapBtn

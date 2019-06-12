@@ -8,7 +8,7 @@ using trumpeldor.ViewModels;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using trumpeldor.SheredClasses;
-
+using Rg.Plugins.Popup.Services;
 
 namespace trumpeldor.Views
 {
@@ -19,8 +19,9 @@ namespace trumpeldor.Views
         private List<JigsawTile> tiles;
         private Puzzle puzzle;
         private GameController gc;
+        private Attraction attraction;
 
-        public JigsawPuzzlePage(Puzzle puzzle)
+        public JigsawPuzzlePage(Puzzle puzzle, Attraction attraction)
         {
             InitializeComponent();
             gc = GameController.getInstance();
@@ -31,6 +32,7 @@ namespace trumpeldor.Views
             how.Source = ServerConection.URL_MEDIA + "how.png";
             this.puzzle = puzzle;
             tiles = new List<JigsawTile>();
+            this.attraction = attraction;
 
             for (int row = 0; row < puzzle.width; row++)
             {
@@ -140,14 +142,15 @@ namespace trumpeldor.Views
             await Navigation.PushModalAsync(new instructionsPage(puzzle));
         }
 
-        private void PlayVideo_Clicked(object sender, EventArgs e)
+        private async void PlayVideo_Clicked(object sender, EventArgs e)
         {
-
+            if (attraction.videosURLS.Count > 0)
+                await PopupNavigation.Instance.PushAsync(new MyPopup(attraction.videosURLS[0], true));
         }
 
-        private void Subtitles_Clicked(object sender, EventArgs e)
+        private async void Subtitles_Clicked(object sender, EventArgs e)
         {
-
+            await PopupNavigation.Instance.PushAsync(new MyPopup("subtitles for the point of interest", false));
         }
 
         private void Information_Button_Clicked(object sender, EventArgs e)

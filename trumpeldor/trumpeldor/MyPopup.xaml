@@ -5,6 +5,7 @@
              xmlns:translator="clr-namespace:trumpeldor.Helpers"
              xmlns:pages="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup">
     <StackLayout Margin="12" Padding="24" Spacing="24" BackgroundColor="white" HorizontalOptions="Center" VerticalOptions="Center">
+        <Label x:Name="textLbl" />
         <WebView x:Name="webView" WidthRequest="500" HeightRequest="500"/>
         <Button Clicked="Handle_Clicked" Text="{translator:Translate close}"/>
     </StackLayout>
