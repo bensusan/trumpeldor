@@ -28,5 +28,11 @@ body {
 
 .twoButtonsLocation{
     position: fixed;
-    left: 490px;
+    left: 420px;
+}
+
+.mannualy{
+    position: fixed;
+    top:539px;
+    left:100px;
 }

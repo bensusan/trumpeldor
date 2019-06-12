@@ -4,8 +4,8 @@ document.getElementById("sideMenu").innerHTML = '<div class="sidenav">\n' +
     '  <h2 style="color:#818181;">עריכת רמזים</h2>' +
     '  <a href="/main">לתפריט הראשי</a>\n' +
     '  <a href="/add_hint_edit">הוספת רמז</a>\n' +
-    '  <a onclick="wantToEditButton()">עריכת רמז</a>\n' +
-    '  <a onclick="wantToDeleteButton()">מחיקת רמז</a>\n' +
+    '  <a id="editHintBTNmenu">עריכת רמז</a>\n' +
+    '  <a id="deleteHintBTNmenu">מחיקת רמז</a>\n' +
     '  <a href="/edit_attraction">!סיימתי</a>\n' +
     '</div>\n' +
     '\n' +

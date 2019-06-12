@@ -28,11 +28,11 @@ namespace trumpeldor.Droid
         {
             Intent shareIntent = new Intent();
             shareIntent.SetAction(Intent.ActionSend);
-            shareIntent.PutExtra(Intent.ExtraText, "Trumpeldor Application");
+            shareIntent.PutExtra(Intent.ExtraText, "BGU ART Application");
             shareIntent.SetType("image/*");
             var path = Android.OS.Environment.GetExternalStoragePublicDirectory(Android.OS.Environment.DirectoryPictures).AbsolutePath;
             //string absPath = path + "/trumpeldor/photo1.jpg";
-            string absPath = path + "/trumpeldor/" + imageName;
+            string absPath = path + "/BGUART/" + imageName;
             shareIntent.PutExtra(Intent.ExtraStream, Android.Net.Uri.Parse("file://" + absPath));
             MainActivity.Instance.StartActivity(Intent.CreateChooser(shareIntent, "Share via"));
             return Task.FromResult(0);

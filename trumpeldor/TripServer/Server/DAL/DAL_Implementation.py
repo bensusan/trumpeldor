@@ -414,6 +414,23 @@ class DAL_Implementation(DAL_Abstract):
             Settings.objects.first().delete()
         return settings
 
+    def edit_info(self, app_name, about_app, how_to_play):
+        raise NotImplementedError("Should have implemented this")
+
+    def edit_american_question(self, id_attraction, id_aquestion, question, answers, indexOfCorrectAnswer):
+        arr_correct_answers = []
+        for ind in indexOfCorrectAnswer:
+            index = int(ind) - 1
+            arr_correct_answers.append(index)
+        aq = self.get_american_question(id_attraction, id_aquestion)
+        aq.question = question
+        aq.answers = answers
+        aq.indexOfCorrectAnswer = indexOfCorrectAnswer
+        aq.save()
+        return aq
+
+
+
 #returns array of names of the media files saved in the media folder
 def add_media(media_urls, replace, suffix):
     names_of_files = []
@@ -449,3 +466,4 @@ def num_of_media_files():
     num_files = len([f for f in os.listdir(path) if os.path.isfile(os.path.join(path, f))])
     print(num_files)
     return num_files
+

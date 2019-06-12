@@ -1,15 +1,15 @@
 body {
-    background-repeat: no-repeat;
-    background-color: #4bcca6;
+
+    background:#cccbac;
     /*background-size: cover;*/
-    background-attachment: fixed;
+
 }
 
 .button {
   background-color: blue;
   border: none;
     border-radius: 12px;
-  color: white;
+  color: #c7ccff;
   padding: 10px;
   text-align: center;
   text-decoration: none;
