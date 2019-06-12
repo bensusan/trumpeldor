@@ -212,10 +212,10 @@ namespace trumpeldor.Views
                 lc.AddToPositionsHistory(new Plugin.Geolocator.Abstractions.Position(currLoc.x, currLoc.y));
                 double currentDistanceToDestination = lc.DistanceBetween(currLoc.x, currLoc.y, attractionLoc.x, attractionLoc.y);
                 if (currentDistanceToDestination > DESIRED_DISTANCE){
-                    if (ServerConection.DEBUG == 1)
-                        Device.BeginInvokeOnMainThread (() => {
-                            DisplayAlert("Must come closer", lc.DistanceBetween(currLoc.x, currLoc.y, attractionLoc.x, attractionLoc.y).ToString() + "\ncurr lat: " + currLoc.x + "\ncurr long: " + currLoc.y + "\nattractionLoc x: " + attractionLoc.x + "\nattractionLoc y: " + attractionLoc.y + "\npoint info: " + nextAttraction.name, "close");
-                        });
+                    //if (ServerConection.DEBUG == 1)
+                    //    Device.BeginInvokeOnMainThread (() => {
+                    //        DisplayAlert("Must come closer", lc.DistanceBetween(currLoc.x, currLoc.y, attractionLoc.x, attractionLoc.y).ToString() + "\ncurr lat: " + currLoc.x + "\ncurr long: " + currLoc.y + "\nattractionLoc x: " + attractionLoc.x + "\nattractionLoc y: " + attractionLoc.y + "\npoint info: " + nextAttraction.name, "close");
+                    //    });
                     double percentApproachingTarget = Math.Max(0, Math.Min(1, (1 - (currentDistanceToDestination / startDistanceToDestination))));
                     odometer.Value = percentApproachingTarget;
                     if (percentApproachingTarget < 0.3){
