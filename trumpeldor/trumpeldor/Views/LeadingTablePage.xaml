@@ -11,38 +11,38 @@
                 <Label x:Name = "scoreLabel" Style="{DynamicResource labelStyle}" HorizontalOptions="EndAndExpand"/>
             </StackLayout>-->
             <Label Text="{translator:Translate LeadingTablePageTitle}" Style="{StaticResource titleStyle}"/>
-            <ScrollView VerticalOptions="StartAndExpand" Orientation="Vertical" Style="{StaticResource scrollView}">
-                <Grid x:Name="leadingTable" VerticalOptions="StartAndExpand" Style="{DynamicResource gridStyle}" BackgroundColor="Black" ColumnSpacing="0" RowSpacing="1">
+            <Frame BackgroundColor="White" BorderColor="Black" HorizontalOptions="Fill" VerticalOptions="Fill" Padding="2" Margin="1">
+                <ScrollView VerticalOptions="StartAndExpand" Orientation="Vertical" Style="{StaticResource scrollView}" Padding="0" Margin="0">
+                    <Grid x:Name="leadingTable" VerticalOptions="StartAndExpand" Style="{DynamicResource gridStyle}" BackgroundColor="Black" ColumnSpacing="0" RowSpacing="1" Margin="0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"></RowDefinition>
+                            <RowDefinition Height="*"></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"></ColumnDefinition>
+                            <ColumnDefinition Width="*"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <StackLayout Style="{StaticResource mainStackLayout}" HorizontalOptions="Fill" VerticalOptions="Fill" Grid.Column="0" Grid.Row="0">
+                            <Label Text="{translator:Translate position}" Style="{DynamicResource labelStyle}" HorizontalOptions="CenterAndExpand"/>    
+                        </StackLayout>
+                        <StackLayout Style="{StaticResource mainStackLayout}" HorizontalOptions="Fill" VerticalOptions="Fill" Grid.Column="1" Grid.Row="0">
+                            <Label Text="{translator:Translate group}" Style="{DynamicResource labelStyle}" HorizontalOptions="CenterAndExpand"/>
+                        </StackLayout>
+                        <StackLayout Style="{StaticResource mainStackLayout}" HorizontalOptions="Fill" VerticalOptions="Fill" Grid.Column="2" Grid.Row="0">
+                            <Label Text="{translator:Translate score}" Style="{DynamicResource labelStyle}" HorizontalOptions="CenterAndExpand"/>
+                        </StackLayout>
+                    </Grid>
+                </ScrollView>
+            </Frame>
+
+            <Frame BackgroundColor="Orange" BorderColor="Black" VerticalOptions="End" Padding="2" Margin="1" HeightRequest="50">
+                <Grid IsVisible="False" x:Name="userPlace" Style="{DynamicResource gridStyle}" ColumnSpacing="0" RowSpacing="1" Margin="0" BackgroundColor="Orange">
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="*"></RowDefinition>
-                        <RowDefinition Height="*"></RowDefinition>
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"></ColumnDefinition>
-                        <ColumnDefinition Width="*"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
-                    <StackLayout Style="{StaticResource mainStackLayout}" HorizontalOptions="Fill" VerticalOptions="Fill" Grid.Column="0" Grid.Row="0">
-                        <Label Text="{translator:Translate position}" Style="{DynamicResource labelStyle}" HorizontalOptions="CenterAndExpand"/>    
-                    </StackLayout>
-                    <StackLayout Style="{StaticResource mainStackLayout}" HorizontalOptions="Fill" VerticalOptions="Fill" Grid.Column="1" Grid.Row="0">
-                        <Label Text="{translator:Translate group}" Style="{DynamicResource labelStyle}" HorizontalOptions="CenterAndExpand"/>
-                    </StackLayout>
-                    <StackLayout Style="{StaticResource mainStackLayout}" HorizontalOptions="Fill" VerticalOptions="Fill" Grid.Column="2" Grid.Row="0">
-                        <Label Text="{translator:Translate score}" Style="{DynamicResource labelStyle}" HorizontalOptions="CenterAndExpand"/>
-                    </StackLayout>
                 </Grid>
-            </ScrollView>
-
-            <Grid IsVisible="False" x:Name="userPlace" VerticalOptions="End" Style="{DynamicResource gridStyle}" ColumnSpacing="0" RowSpacing="1">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="*"></RowDefinition>
-                    <RowDefinition Height="*"></RowDefinition>
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"></ColumnDefinition>
-                    <ColumnDefinition Width="*"></ColumnDefinition>
-                </Grid.ColumnDefinitions>
-            </Grid>
+            </Frame>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
