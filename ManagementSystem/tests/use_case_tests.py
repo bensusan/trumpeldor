@@ -509,6 +509,7 @@ def uc2p5(driver):
 
     # driver.find_element(By.ID, "delete_chosen_path").click()
     if c1 > c2 and driver.current_url == 'http://' + ip + ':12345/main/':
+
         print(green('--- test passed!!! ---'))
     else:
         print(red('--- test failed!!! ---'))
