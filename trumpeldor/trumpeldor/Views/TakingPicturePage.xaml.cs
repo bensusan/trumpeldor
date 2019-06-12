@@ -57,7 +57,7 @@ namespace trumpeldor.Views
                 photo = await Plugin.Media.CrossMedia.Current.TakePhotoAsync(new Plugin.Media.Abstractions.StoreCameraMediaOptions()
                 {
                     SaveToAlbum = true,
-                    Directory = "BGU ART",
+                    Directory = "BGUART",
                     Name = "photo" + count.ToString()
                 });
                 count++;
@@ -112,7 +112,7 @@ namespace trumpeldor.Views
             string imgName = aPpath.Substring(index, aPpath.Length - index );
             if (Device.RuntimePlatform == Device.iOS)
             {
-                DependencyService.Get<IShare>().ShareOnSocialMedia("Trumpeldor App", imgSrc);
+                DependencyService.Get<IShare>().ShareOnSocialMedia("BGUART", imgSrc);
             }
             else if (Device.RuntimePlatform == Device.Android)
             {
