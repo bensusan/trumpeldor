@@ -9,7 +9,7 @@
  {% load static %}
 <link rel="stylesheet" href="{% static 'buttoni.css' %}?version=2">
     {% load static %}
-<link rel="stylesheet" href="{% static 'add_game.css' %}?version=1">
+<link rel="stylesheet" href="{% static 'add_game.css' %}?version=2">
     {% load static %}
 <script src="{% static 'add_game.js' %}?version=5"></script>
       {% load static %}
@@ -18,7 +18,6 @@
 <script src="{% static 'properties.js' %}?version=2"></script>
 </head>
 <body>
-{#<button onclick="window.location.href='/main'" type="button">Back to menu</button>#}
 <div align="center">
 <h2>הוספת משחק</h2>
 <form>
@@ -30,7 +29,7 @@
       <button class='yahoo' type="button" id="capture_task">משימת צילום</button>
 
       <p id="p1" style="display: none"></p>
-      <label id="sureLBL" for="message"  style="text-align: right; display: none">?האם את בטוחה</label>
+      <label id="sureLBL" style="text-align: right; display: none">?האם את בטוחה</label>
       <p id="p2" style="display: none"></p>
       <button class='yahoo' type="button" id="noBTN" style="width: 100px; display: none">לא</button>
       <button class='yahoo' type="button" id="yesBTN" style="width: 100px; display: none">כן</button>
@@ -49,7 +48,5 @@
 {% load static %}
 <script src="{% static 'games_menu.js' %}?version=4"></script>
 
-{#<button onclick="window.location.href='/add_aq'" type="button">Skip</button>#}
-{#<button onclick="addGames()" type="button">Finish</button>#}
 </body>
 </html>

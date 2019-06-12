@@ -1,7 +1,3 @@
-var loadFile = function(event) {
-	var image = document.getElementById('output');
-	image.src = URL.createObjectURL(event.target.files[0]);
-};
 
 var str;
 var str2;
@@ -64,8 +60,10 @@ function getImageSrcAndShowIt(gamesJSON){
     gamesJSON.forEach(function (game) {
         if(game['id'] == game_id_that_was_picked)
         {
+            let name = localStorage.getItem("name_for_add_aq");
+            let other_src = localStorage.getItem(name+type);
             let image = document.getElementById('output');
-            image.src = game['piecesURLS'];
+            image.src =other_src;// game['piecesURLS'];
         }
     });
 }
@@ -79,8 +77,8 @@ function funcForExistingHints(attractionsJSON){
         let p = {name: attr['name'], description:attr['description']};
         if(p.name===name && p.description===desc)
         {
-            getRequestGames(games_func_sliding,"sliding_puzzle",attr['id']);
-            // getRequestGames(games_func_drag,"puzzle",attr['id']);
+           // getRequestGames(games_func_sliding,"sliding_puzzle",attr['id']);
+           // getRequestGames(games_func_drag,"puzzle",attr['id']);
             attractionObjToUseInHintDelete=attr;
         }
         });
@@ -118,7 +116,6 @@ window.onload = function () {
     };
     getRequestAttractions(funcForExistingHints);
     localFileVideoPlayer();
-
 };
 
 function wantToDeleteButton(){

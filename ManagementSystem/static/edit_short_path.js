@@ -188,7 +188,7 @@ function markAttractionOfShortPath(pos){
           map: map,
           title:the_title
           ,icon: {
-                url: "http://maps.google.com/mapfiles/ms/icons/purple-dot.png"
+                url: "http://maps.google.com/mapfiles/ms/icons/yellow-dot.png"
                 // https://medium.com/@letian1997/how-to-change-javascript-google-map-marker-color-8a72131d1207
                 }
         });

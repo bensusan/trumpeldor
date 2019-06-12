@@ -10,24 +10,20 @@
     {% load static %}
 <link rel="stylesheet" href="{% static 'SideMenu.css' %}?version=4">
     {% load static %}
-<link rel="stylesheet" href="{% static 'paths_style.css' %}?version=2">
+<link rel="stylesheet" href="{% static 'paths_style.css' %}?version=4">
 {% load static %}
 <link rel="stylesheet" href="{% static 'Map.css' %}?version=3">
 {% load static %}
 <script src="{% static 'attractions.js' %}?version=5"></script>
     {% load static %}
-<script src="{% static 'add_short_path.js' %}?version=2"></script>
+<script src="{% static 'add_short_path.js' %}?version=3"></script>
      {% load static %}
-<script src="{% static 'properties.js' %}?version=2"></script>
+<script src="{% static 'properties.js' %}?version=5"></script>
 </head>
 <body>
-{#<meta name="viewport" content="width=device-width, initial-scale=1">#}
-{#{% load static %}#}
-{#<link rel="stylesheet" href="{% static 'Map.css' %}?version=1">#}
-{#{% load static %}#}
-{#<script src="{% static 'attractions.js' %}?version=1"></script>#}
 
-<div align="center">
+
+<div>
 <div id="map">
 {% load static %}
 <script src="{% static 'Map.js' %}?version=1"></script>
@@ -38,7 +34,7 @@
 </div>
 
     <div align="center">
-<div class="buttonStyle">
+<div class="twoButtonsLocation">
 
 <button class='yahoo' id="add_reg_to_path" type="button">הוספה למסלול</button>
 <button class='yahoo' id="finish_reg" type="button">!סיימתי</button>

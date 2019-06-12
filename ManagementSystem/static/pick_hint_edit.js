@@ -109,6 +109,14 @@ function hints_func(hintsJSON) {
 }
 
 window.onload = function () {
+    let editMenuBTN = document.getElementById('editHintBTNmenu');
+    editMenuBTN.addEventListener('click', function(){
+        wantToEditButton();
+    });
+    let deleteMenuBTN = document.getElementById('deleteHintBTNmenu');
+    deleteMenuBTN.addEventListener('click', function(){
+        wantToDeleteButton();
+    });
     getRequestAttractions(funcForExistingHints);
     localFileVideoPlayer();
 
@@ -189,48 +197,6 @@ function funcInOrderToDeleteHint(hintsJSON) {
       });
 
 }
-
-// function hint_funcToGetAttraction(attractionsJSON) {
-//         let name = localStorage.getItem("name_for_add_aq");
-//         let desc = localStorage.getItem("desc_for_add_aq");
-//       // alert("in get name! "+"of the origin : " + lat + " , " + lng);
-//         attractionsJSON.forEach(function (attr) {
-//         let p = {name: attr['name'], description:attr['description']};
-//        // alert("in get name! "+"of the origin : " + name + " , " + desc + "\n of the other: "+p.name +" , "+ p.description);
-//         if(p.name===name && p.description===desc)
-//         {
-//             var textHintToSend = {
-//             attraction:attr,
-//             kind:'HT',
-//             data:document.getElementById("text_hint_id").value
-//             };
-//             postRequestHint(textHintToSend,attr['id']);
-//             window.location.href='/add_hint_edit';
-//         }
-//       });
-//
-//     }
-
-    // function getTheAttr(attractionsJSON) {
-    //
-    //     let editedPoint = JSON.parse(localStorage.getItem("edited"));
-    //   let lat = editedPoint.lat;
-    //   let lng = editedPoint.lng;
-    //   //let name = "didn't found!!!";
-    //   // alert("in get name! "+"of the origin : " + lat + " , " + lng);
-    //   attractionsJSON.forEach(function (attr) {
-    //       // alert("the id is: "+attr['id']);
-    //     let p = {name: attr['name'], description:attr['description'], lat: attr['x'], lng: attr['y']};
-    //     // alert("in get name! "+"of the origin : " + lat + " , " + lng + "\n of the other: "+p.lat +" , "+ p.lng);
-    //     if(p.lat===lat&&(p.lng).toFixed(8)===lng.toFixed(8))
-    //     {
-    //         alert("before delete hint!");
-    //         deleteRequestHint(attr['id'],);
-    //         window.location.href='/pick_hint_edit';
-    //     }
-    //   });
-    //     // alert("cant believe this is happenning!");
-    // }
 
 
 

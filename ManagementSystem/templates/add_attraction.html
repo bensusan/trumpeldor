@@ -1,88 +1,82 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
     {% load static %}
-<link rel="stylesheet" href="{% static 'beauty.css' %}?version=3">
-       {% load static %}
-<link rel="stylesheet" href="{% static 'buttoni.css' %}?version=3">
-     {% load static %}
-<link rel="stylesheet" href="{% static 'SideMenu.css' %}?version=4">
-{% load static %}
-<link rel="stylesheet" href="{% static 'signInForm.css' %}?version=2">
-     {% load static %}
-<script src="{% static 'properties.js' %}?version=5"></script>
+    <link rel="stylesheet" href="{% static 'beauty.css' %}?version=3">
     {% load static %}
-<script src="{% static 'attractions.js' %}?version=19"></script>
+    <link rel="stylesheet" href="{% static 'buttoni.css' %}?version=3">
     {% load static %}
-<script src="{% static 'add_attraction.js' %}?version=20"></script>
+    <link rel="stylesheet" href="{% static 'SideMenu.css' %}?version=4">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'signInForm.css' %}?version=2">
+    {% load static %}
+    <script src="{% static 'properties.js' %}?version=9"></script>
+    {% load static %}
+    <script src="{% static 'attractions.js' %}?version=19"></script>
+    {% load static %}
+    <script src="{% static 'add_attraction.js' %}?version=18"></script>
 </head>
 
 <body>
 
+<button id="englishBTN" class="language"
+        style="height: 58px;width: 100px; background-image: url('../static/usa.JPG');background-size: cover; font-size:24px">
+</button>
+<button id="hebrewBTN" class="language"
+        style="height: 58px;width: 100px; background-image: url('../static/israel.JPG');background-size: cover; font-size:24px">
+</button>
 
 <div align="center">
-<h2>הוספת אטרקציה</h2>
-<form>
+    <h2>הוספת אטרקציה</h2>
+    <form>
 
-    <label for="name" style="font-size: 24px;"><b>:העלאת סרטון</b></label>
+        <label style="font-size: 24px;"><b>:העלאת סרטון</b></label>
 
-    <div id="message"></div>
-<video height="200px" width="350px" controls="" autoplay=""></video>
-    <input id="video_input" type="file" accept="video/*" onchange="encodeVideoFileAsURL(this)" style="display: none">
-<button class='button blogger' onclick="uploadVideoBTNclick()" type="button" style="width: 320px;">Upload Video</button>
-{#   <p></p>#}
-{#    <label for="hint" style="font-size: 20px;"><b>:העלאת תמונה למידע על אטרקציה</b></label>#}
-{#<p></p>#}
-{#<input type="file" onchange="encodeImageFileAsURL(this)"/>#}
-{#<p><img id="output" width="200"  style="display: none"/></p>#}
-{#        {% load static %}#}
-{#<script src="{% static 'add_attraction.js' %}?version=2"></script>#}
-
-{#    <p></p>#}
-{#    <label for="hint"><b>Upload Image:</b></label>#}
-{#    <p><input type="file"  accept="image/*" name="image" id="file"  onchange="loadFile(event)" style="display: none;"></p>#}
-{#    <p><label for="file" style="cursor: pointer;">Click Here!</label></p>#}
-{#    <p><img id="output" width="200"  /></p>#}
-
-{#    style="display:none"#}
-
-  <div class="container">
-    <label for="name" style="font-size: 24px;"><b>:שם האטרקציה</b></label>
-    <input  type="text" id="attr_name" placeholder="שם האטרקציה" name="attr_name" style="text-align:right;" required>
-<p></p>
-{#    <label for="desc" style="font-size: 24px;"><b>:תיאור</b></label>#}
-{#    <input type="text" id="desc" placeholder="Enter description" name="attr_desc" required>#}
-{#      <textarea id="desc" name="attr_desc" placeholder="הכניסי תיאור אטרקציה" style="text-align:right;width:310px;height:200px"></textarea>#}
-{#<p></p>#}
-
-       <label for="pop" style="font-size: 24px;"><b>הודעת פופ-אפ בהגעה לנקודה</b></label>
-    <input  type="text" id="pop" placeholder="הקלידי הודעה..." name="attr_pop" style="direction:rtl;text-align:right;" required>
-<p></p>
-      <label for="subt" style="font-size: 24px;text-align: right"><b>כתוביות</b></label>
-{#    <input  type="text" id="subt" placeholder="Enter Subtitles" name="attr_subt" style="height: 200px; overflow: scroll" required>#}
-      <textarea type="text" id="subt" placeholder="הכנסי כתוביות..." name="attr_subt" style="direction:rtl;text-align:right;width: 310px;height: 200px; overflow: scroll"> </textarea>
-
-<p><br/></p>
-    <button class='button google-blue' id="continueBTN" type="button" style="width: 220px;">המשך</button>
-      <button class='button google-blue' id="submit_btn_add_attr" type="button" style="width: 220px;">שליחה ללא מידע נוסף</button>
-    <button class='button google-blue' onclick="check()" type="button" style="width: 220px;">ניקוי</button>
-
-  </div>
-
-</form>
+        <div id="message"></div>
+        <video height="200px" width="350px" controls="" autoplay=""></video>
+        <input id="video_input" type="file" accept="video/*" onchange="encodeVideoFileAsURL(this)"
+               style="display: none">
+        <button class='button blogger' onclick="uploadVideoBTNclick()" type="button" style="width: 320px;">Upload
+            Video
+        </button>
 
 
+        <div class="container">
+            <label style="font-size: 24px;"><b>:שם האטרקציה</b></label>
+            <input type="text" id="attr_name" placeholder="שם האטרקציה" name="attr_name" style="text-align:right;"
+                   required>
+            <input type="text" id="attr_name_english" placeholder="attraction name" name="attr_name_eng"
+                   style="display:none;text-align:right;"
+                   required>
+            <p></p>
+            <label for="pop" style="font-size: 24px;"><b>הודעת פופ-אפ בהגעה לנקודה</b></label>
+            <input type="text" id="pop" placeholder="הקלידי הודעה..." name="attr_pop"
+                   style="direction:rtl;text-align:right;" required>
+            <input type="text" id="pop_english" placeholder="write message" name="attr_pop_eng"
+                   style="display:none;direction:rtl;text-align:right;" required>
+            <p></p>
+            <label for="subt" style="font-size: 24px;text-align: right"><b>כתוביות</b></label>
+            <textarea type="text" id="subt" placeholder="הכנסי כתוביות..." name="attr_subt"
+                      style="direction:rtl;text-align:right;width: 310px;height: 200px; overflow: scroll"> </textarea>
+            <textarea type="text" id="subt_english" placeholder="enter subtitles..." name="attr_subt_eng"
+                      style="display:none;direction:rtl;text-align:right;width: 310px;height: 200px; overflow: scroll"> </textarea>
+
+            <p><br/></p>
+            <button class='button google-blue' id="continueBTN" type="button" style="width: 220px;">המשך</button>
+            <button class='button google-blue' id="submit_btn_add_attr" type="button" style="width: 220px;">שליחה ללא
+                מידע נוסף
+            </button>
+            <button class='button google-blue' onclick="check()" type="button" style="width: 220px;">ניקוי</button>
+        </div>
+    </form>
 </div>
 
-
 <div>
-
-<nav id="sideMenu"></nav>
-{% load static %}
-<script src="{% static 'menu_of_add_attractions.js' %}?version=2"></script>
-
+    <nav id="sideMenu"></nav>
+    {% load static %}
+    <script src="{% static 'menu_of_add_attractions.js' %}?version=2"></script>
 </div>
 
 </body>

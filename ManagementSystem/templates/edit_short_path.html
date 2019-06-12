@@ -15,19 +15,15 @@
 {% load static %}
 <script src="{% static 'attractions.js' %}?version=5"></script>
     {% load static %}
-<script src="{% static 'edit_short_path.js' %}?version=4"></script>
+<script src="{% static 'edit_short_path.js' %}?version=5"></script>
      {% load static %}
 <script src="{% static 'properties.js' %}?version=2"></script>
 
 
 </head>
 <body>
-{#<meta name="viewport" content="width=device-width, initial-scale=1">#}
-{#{% load static %}#}
-{#<link rel="stylesheet" href="{% static 'Map.css' %}?version=1">#}
-{#{% load static %}#}
-{#<script src="{% static 'attractions.js' %}?version=1"></script>#}
-<div align="center">
+
+<div>
 <div id="map">
 {% load static %}
 <script src="{% static 'Map.js' %}?version=3"></script>
@@ -37,19 +33,14 @@
 
 </div>
 
-   <div align="center">
+   <div class="threeButtonsLocation">
 <button class="yahoo" id="add_reg_to_path_med" type="button">הוספה למסלול</button>
 <button class="yahoo" id="delete_from_path_med" type="button">מחיקת נקודה</button>
 <button class="yahoo" id="finish_reg_med" type="button">!סיימתי</button>
 
 <p></p>
 <p></p>
-{#<div id="border_of_points" class="pointsBorder"  style="display: none" align="center">#}
-{#    <div align="center">#}
-{#        <p><b>Added Points:</b></p>#}
-{#    </div>#}
-{#<p id="showing_added_points"></p>#}
-{#    </div>#}
+
     </div>
 </div>
 
