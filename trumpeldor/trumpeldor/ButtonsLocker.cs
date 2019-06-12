@@ -9,17 +9,23 @@ namespace trumpeldor
     {
         public static void LockAll(StackLayout layout)
         {
-            foreach(Button btn in layout.Children)
+            foreach(var btn in layout.Children)
             {
-                btn.IsEnabled = false;
+                if (btn is ImageButton)
+                    ((ImageButton)btn).IsEnabled = false;
+                else if (btn is Button)
+                    ((Button)btn).IsEnabled = false;
             }
         }
 
         public static void UnlockAll(StackLayout layout)
         {
-            foreach (Button btn in layout.Children)
+            foreach (var btn in layout.Children)
             {
-                btn.IsEnabled = true;
+                if (btn is ImageButton)
+                    ((ImageButton)btn).IsEnabled = true;
+                else if (btn is Button)
+                    ((Button)btn).IsEnabled = true;
             }
         }
     }

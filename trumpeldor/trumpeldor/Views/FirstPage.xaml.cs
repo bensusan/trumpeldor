@@ -12,6 +12,7 @@ using Xamarin.Forms.Xaml;
 
 using Plugin.Permissions;
 using Plugin.Permissions.Abstractions;
+using Rg.Plugins.Popup.Services;
 
 namespace trumpeldor.Views
 {
@@ -78,23 +79,28 @@ namespace trumpeldor.Views
 
         private async void Play_Button_Clicked(object sender, EventArgs e)
         {
+            ButtonsLocker.LockAll(BtnLayout);
             while (!await AskPermissionToUseLocation()) ;
             gc.StartTaskLocation();
-            if(await CanUserPlay())
+            if (await CanUserPlay())
                 await Navigation.PushModalAsync(new LoginsPage());
             else
                 await DisplayAlert("BGU ARTS", AppResources.Out_Of_Valid_Sector_Message, AppResources.ok);
-
+            ButtonsLocker.UnlockAll(BtnLayout);
         }
 
         private async void HowToPlay_Button_Clicked(object sender, EventArgs e)
         {
+            ButtonsLocker.LockAll(BtnLayout);
             await Navigation.PushModalAsync(new instructionsPage());
+            ButtonsLocker.UnlockAll(BtnLayout);
         }
 
         private async void Info_Button_Clicked(object sender, EventArgs e)
         {
+            ButtonsLocker.LockAll(BtnLayout);
             await Navigation.PushModalAsync(new informationPage());
+            ButtonsLocker.UnlockAll(BtnLayout);
         }
 
         private void English_Button_Clicked(object sender, EventArgs e)

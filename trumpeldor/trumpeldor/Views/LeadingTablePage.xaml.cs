@@ -74,6 +74,7 @@ namespace trumpeldor.Views
                 sScore.SetDynamicResource(VisualElement.StyleProperty, "mainStackLayout");
                 sScore.Children.Add(lblScore);
                 userPlace.Children.Add(sScore, 2, 0);
+                userPlace.BackgroundColor = Color.Orange;
                 userPlace.IsVisible = true;
             }
         }

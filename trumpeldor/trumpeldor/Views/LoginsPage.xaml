@@ -11,7 +11,7 @@
             <Label Text="{translator:Translate LoginsPageTitle}" Style="{StaticResource titleStyle}" VerticalOptions="Start"/>
             <!--<Button Text="{translator:Translate login_with_facebook}" Clicked="FacebookLogin_Clicked" Style="{StaticResource largeButtonStyle}" AutomationId="FacebookLoginBtn"/>
             <Button Text="{translator:Translate login_with_google}" Clicked="GoogleLogin_Clicked" Style="{StaticResource largeButtonStyle}"/>-->
-            <StackLayout Style="{DynamicResource mainStackLayout}" VerticalOptions="CenterAndExpand">
+            <StackLayout x:Name="btnLayout" Style="{DynamicResource mainStackLayout}" VerticalOptions="CenterAndExpand">
                 <ImageButton x:Name="facebook" Clicked="FacebookLogin_Clicked" Style="{StaticResource regularImageButtonStyle}" AutomationId="FacebookLoginBtn"/>
                 <ImageButton x:Name="google" Clicked="GoogleLogin_Clicked" Style="{StaticResource regularImageButtonStyle}"/>
                 <Button Text="{translator:Translate login_as_anonymous}" Clicked="Anonymus_Clicked" Style="{StaticResource largeButtonStyle}" AutomationId="AnonymusLoginBtn"/>

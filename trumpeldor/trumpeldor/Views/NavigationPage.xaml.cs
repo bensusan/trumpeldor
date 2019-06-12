@@ -27,7 +27,7 @@ namespace trumpeldor.Views
         public LocationController lc;
         trumpeldor.SheredClasses.Point attractionLoc, currLoc;
         public double currLat = 0, currLong = 0;
-        MapPage myMap = null;
+        public static MapPage myMap = null;
         private bool firstAttachOfHintMap = true;
         private double startDistanceToDestination;
         //private bool stopDestinationCheck = false;
@@ -84,6 +84,7 @@ namespace trumpeldor.Views
 
         private async void Get_Hint_Button_Clicked(object sender, EventArgs e)
         {
+            mapBtn.IsEnabled = false;
             ContentPage temp = this;
             bool dialogAnswer = false;
             if (hintsIndex >= 1){
@@ -97,7 +98,10 @@ namespace trumpeldor.Views
                     AppResources.Yes,
                     AppResources.No);
                 if (!dialogAnswer)
+                {
+                    mapBtn.IsEnabled = true;
                     return;
+                }
                 alertFrame.IsVisible = false;
                 alert.IsVisible = false;
                 hintBtn.IsVisible = false;
@@ -110,6 +114,7 @@ namespace trumpeldor.Views
             hintsIndex++;
             if (hintsIndex >= 3)
                 scoreLabel.Text = AppResources.score + ": " + gc.EditScore(ScoreRule.Kinds.Hints_More_Than_Three);
+            mapBtn.IsEnabled = true;
         }
 
         private async void AttachHint(int hintIndex)
@@ -176,7 +181,9 @@ namespace trumpeldor.Views
 
         private async void Map_Clicked(object sender, EventArgs e)
         {
+            hintBtn.IsEnabled = false;
             await Navigation.PushModalAsync(myMap);
+            hintBtn.IsEnabled = true;
         }
 
         private void RightArrow_Clicked(object sender, EventArgs e)

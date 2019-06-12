@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Plugin;
 using Plugin.Media;
 using Plugin.Media.Abstractions;
+using Rg.Plugins.Popup.Services;
 using trumpeldor;
 using trumpeldor.SheredClasses;
 using Xamarin.Forms;
@@ -26,8 +27,9 @@ namespace trumpeldor.Views
         ImageSource imgSrc;
         private GameController gc;
         private TakingPicture tp;
+        private Attraction attraction;
 
-        public TakingPicturePage (TakingPicture tp)
+        public TakingPicturePage (TakingPicture tp, Attraction attraction)
 		{
 			InitializeComponent ();
             pc = PhotosController.GetInstance();
@@ -39,6 +41,7 @@ namespace trumpeldor.Views
             playVideo.Source = ServerConection.URL_MEDIA + "playVideo.png";
             how.Source = ServerConection.URL_MEDIA + "how.png";
             this.tp = tp;
+            this.attraction = attraction;
         }
 
         private async void CameraButton_Clicked(object sender, EventArgs e)
@@ -54,7 +57,7 @@ namespace trumpeldor.Views
                 photo = await Plugin.Media.CrossMedia.Current.TakePhotoAsync(new Plugin.Media.Abstractions.StoreCameraMediaOptions()
                 {
                     SaveToAlbum = true,
-                    Directory = "trumpeldor",
+                    Directory = "BGU ART",
                     Name = "photo" + count.ToString()
                 });
                 count++;
@@ -141,14 +144,15 @@ namespace trumpeldor.Views
             await Navigation.PushModalAsync(new instructionsPage(tp));
         }
 
-        private void PlayVideo_Clicked(object sender, EventArgs e)
+        private async void PlayVideo_Clicked(object sender, EventArgs e)
         {
-
+            if (attraction.videosURLS.Count > 0)
+                await PopupNavigation.Instance.PushAsync(new MyPopup(attraction.videosURLS[0], true));
         }
 
-        private void Subtitles_Clicked(object sender, EventArgs e)
+        private async void Subtitles_Clicked(object sender, EventArgs e)
         {
-
+            await PopupNavigation.Instance.PushAsync(new MyPopup("subtitles for the point of interest", false));
         }
 
         private void Information_Button_Clicked(object sender, EventArgs e)

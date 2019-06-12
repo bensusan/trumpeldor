@@ -13,7 +13,7 @@
             </StackLayout>
             <!--<Label Text="{translator:Translate MultipleChoiceQuestionPageTitle}" Style="{StaticResource titleStyle}"/>-->
             <Label x:Name = "attractionQuestion" Style="{StaticResource labelStyle}" HorizontalOptions="CenterAndExpand"/>
-            <StackLayout x:Name="answersLayout" Style="{StaticResource mainStackLayout}">
+            <StackLayout x:Name="answersLayout" Style="{StaticResource mainStackLayout}" HorizontalOptions="Fill">
             </StackLayout>
             <StackLayout Style="{StaticResource mainStackLayout}" VerticalOptions="EndAndExpand">
                 <Label x:Name="explanation" Text="{translator:Translate aq_explanation}" Style="{StaticResource labelStyle}" IsVisible="False" TextColor="Red" HorizontalOptions="Center"/>
