@@ -14,11 +14,13 @@ namespace trumpeldor.Views
 	{
         private GameController gc;
         private ContentPage attractionPage;
-		public MissionPage (ContentPage attractionPage)
+        private Attraction attraction;
+		public MissionPage (ContentPage attractionPage, Attraction attraction)
 		{
 			InitializeComponent ();
             this.attractionPage = attractionPage;
             gc = GameController.getInstance();
+            this.attraction = attraction;
             missionButton.Text = gc.currentTrip.GetCurrentAttraction().entertainment.EntertainmentName();
 		}
 
@@ -31,12 +33,12 @@ namespace trumpeldor.Views
 
         private async void Question_Button_Clicked(object sender, EventArgs e)
         {
-            await Navigation.PushModalAsync(new MultipleChoiceQuestionPage());
+            await Navigation.PushModalAsync(new MultipleChoiceQuestionPage(attraction));
         }
 
         private async void Mission_Button_Clicked(object sender, EventArgs e)
         {
-            await Navigation.PushModalAsync(gc.currentTrip.GetCurrentAttraction().entertainment.EntertainmentPageInstance());
+            await Navigation.PushModalAsync(gc.currentTrip.GetCurrentAttraction().entertainment.EntertainmentPageInstance(attraction));
         }
     }
 }

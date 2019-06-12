@@ -39,7 +39,8 @@ namespace UITest
             app.Tap("AnonymusLoginBtn");
 
             //Assert
-            app.WaitFor(() => app.Query("EnterGroupName").FirstOrDefault().Enabled, timeout: TimeSpan.FromSeconds(1200));
+            app.WaitFor(() => app.Query("EnterGroupName").FirstOrDefault().Enabled,
+                timeout: TimeSpan.FromSeconds(1200));
             var groupEntry = app.Query(x => x.Marked("EnterGroupName"));
             Assert.IsTrue(groupEntry != null && groupEntry[0].Text == "");
         }

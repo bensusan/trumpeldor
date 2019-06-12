@@ -17,9 +17,9 @@ namespace trumpeldor.SheredClasses
             return AppResources.puzzle;
         }
 
-        public override ContentPage EntertainmentPageInstance()
+        public override ContentPage EntertainmentPageInstance(Attraction attraction)
         {
-            return new JigsawPuzzlePage(this);
+            return new JigsawPuzzlePage(this, attraction);
         }
 
         public static bool isMyClassName(string className)

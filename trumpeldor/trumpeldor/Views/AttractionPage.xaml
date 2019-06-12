@@ -6,7 +6,7 @@
              NavigationPage.HasNavigationBar="False"
              ControlTemplate="{StaticResource template}">
     <ContentPage.Content>
-        <StackLayout Style="{DynamicResource mainStackLayout}" VerticalOptions="Fill">
+        <StackLayout x:Name="btnLayout" Style="{DynamicResource mainStackLayout}" VerticalOptions="Fill">
             <StackLayout Style="{StaticResource mainStackLayout}" Orientation="Horizontal">
                 <!--<StackLayout x:Name="buttonsTopLayout" Orientation="Horizontal" HorizontalOptions="StartAndExpand">
                     <ImageButton x:Name="informationButton" Clicked="Information_Button_Clicked" Style="{StaticResource smallCircleImageButtonStyle}"/>

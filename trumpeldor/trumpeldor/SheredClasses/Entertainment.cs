@@ -12,6 +12,6 @@ namespace trumpeldor.SheredClasses
 
         public abstract string EntertainmentName();
 
-        public abstract ContentPage EntertainmentPageInstance();
+        public abstract ContentPage EntertainmentPageInstance(Attraction attraction);
     }
 }
