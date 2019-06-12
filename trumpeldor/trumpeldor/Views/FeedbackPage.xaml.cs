@@ -14,7 +14,7 @@ namespace trumpeldor.Views
 	public partial class FeedbackPage : ContentPage
 	{
         GameController gc;
-
+        int numberOfInnerGrids = 0;
         public FeedbackPage ()
 		{
 			InitializeComponent();
@@ -32,6 +32,7 @@ namespace trumpeldor.Views
         private void AddFeedback(FeedbackInstance fi)
         {
             int nextRow = feedbacks.RowDefinitions.Count;
+            nextRow += 2*numberOfInnerGrids;
             feedbacks.RowDefinitions.Add(new RowDefinition { Height = GridLength.Star });
             Label lbl = new Label { Text = fi.feedback.question, HorizontalOptions = LayoutOptions.CenterAndExpand };
             lbl.SetDynamicResource(VisualElement.StyleProperty, "labelStyle");
@@ -54,7 +55,6 @@ namespace trumpeldor.Views
                 rateGrid.SetDynamicResource(VisualElement.StyleProperty, "gridStyle");
                 for (int i = 0; i < 5; i++)
                 {
-                    //entry = new Entry { Keyboard = Keyboard.Numeric };  //TODO - change to stars according to link
                     Label num = new Label { Text = (i+1) + "" , HorizontalOptions = LayoutOptions.CenterAndExpand };
                     num.SetDynamicResource(VisualElement.StyleProperty, "labelStyle");
                     rateGrid.Children.Add(num, i, 0);
@@ -64,9 +64,10 @@ namespace trumpeldor.Views
                         int numberOfChildren = rateGrid.Children.Count;
                         for (int childIndex = 0; childIndex < numberOfChildren; ++childIndex){
                             //var column = Grid.GetColumn(rateGrid.Children[childIndex]);
-                            if(Grid.GetRow(rateGrid.Children[childIndex]) == 1){
+                            if(Grid.GetRow(rateGrid.Children[childIndex]) == 1)
+                            {
                                 ImageButton ib = (ImageButton)rateGrid.Children[childIndex];
-                                ib.BorderColor = rateGrid.BackgroundColor;
+                                ib.BorderColor = feedbacks.BackgroundColor;
                                 ib.BorderWidth = 0;
                             }
                         }
@@ -84,6 +85,7 @@ namespace trumpeldor.Views
                     rateGrid.Children.Add(button, i, 1);
                 }
                 feedbacks.Children.Add(rateGrid, 0, nextRow + 1);
+                numberOfInnerGrids ++;
             }
         }
 
@@ -108,10 +110,21 @@ namespace trumpeldor.Views
                         {
                             ImageButton ib = (ImageButton)ch.Children[childIndex];
                             if (ib.BorderWidth != 0)
-                                gc.currentTrip.feedbacks[indexFeedback].answer = (Grid.GetColumn(ch.Children[childIndex])+1) + "";    
+                                gc.currentTrip.feedbacks[indexFeedback].answer = (Grid.GetColumn(ch.Children[childIndex]) + 1) + "";
                         }
                     }
                     indexFeedback++;
+                    //counter++;
+                    //ImageButton ib = (ImageButton)child;
+                    //if (ib.BorderWidth != 0)
+                    //{
+                    //    gc.currentTrip.feedbacks[indexFeedback].answer = (Grid.GetColumn(child) + 1) + "";
+                    //    indexFeedback++;
+                    //    lastAnswerRow = Grid.GetRow(child);
+                    //    counter = 0;
+                    //}
+                    //if(counter == 5)
+                    //    indexFeedback++;
                 }
             }
             gc.UpdateTrip();

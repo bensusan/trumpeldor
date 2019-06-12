@@ -72,6 +72,8 @@ namespace trumpeldor.Views
                 Button answerButton = new Button();
                 answerButton.Text = answers.ElementAt(i);
                 answerButton.Style = (Style)Application.Current.Resources["largeButtonStyle"];
+                answerButton.HorizontalOptions = LayoutOptions.Fill;
+                answerButton.Margin = new Thickness(1);
                 bool isFound = false;
                 for(int j= 0; j<correctAnswerIndex.Length; j++){
                     if (i == correctAnswerIndex[j]){
