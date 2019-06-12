@@ -377,7 +377,7 @@ class TakingPictureList(generics.GenericAPIView):
         return Response(ans)
 
     def post(self, request, *args, **kwargs):
-        ans = BL.add_taking_pic(self.kwargs['id_attr'], request.data)
+        ans = BL.add_taking_pic(self.kwargs['id_attr'], request.data['description'])
         ans = TakingPictureSerializer(ans, many=False)
         ans = json.loads(json.dumps(ans.data))
         return Response(ans)
