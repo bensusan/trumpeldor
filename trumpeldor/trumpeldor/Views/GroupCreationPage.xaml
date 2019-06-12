@@ -9,12 +9,12 @@
         <StackLayout x:Name="mainStack" Style="{DynamicResource mainStackLayout}">
             <!--<Label Text="{translator:Translate GroupCreationPageTitle}" Style="{StaticResource titleStyle}"/>-->
             <StackLayout x:Name="groupNameStack" Style="{DynamicResource mainStackLayout}" Orientation="Horizontal" Spacing="2" HorizontalOptions="Fill">
-                <Label x:Name="groupNameLabel" Text="{translator:Translate group_name}" Style="{StaticResource labelStyle}"/>
-                <Entry x:Name="groupNameEntry" Style="{StaticResource entryStyle}" AutomationId="EnterGroupName" WidthRequest="200"/>
+                <Label x:Name="groupNameLabel" Text="{translator:Translate group_name}" Style="{StaticResource labelStyle}" VerticalTextAlignment="End" Margin="0,0,1,8"/>
+                <Entry x:Name="groupNameEntry" Style="{StaticResource entryStyle}" AutomationId="EnterGroupName" WidthRequest="200" VerticalOptions="End"/>
             </StackLayout>
             <StackLayout x:Name="pathLengthStack" Style="{DynamicResource mainStackLayout}" Orientation="Horizontal" HorizontalOptions="Fill" Spacing="2">
-                <Label x:Name="pathLengthLabel" Text="{translator:Translate path_length}" Style="{StaticResource labelStyle}"/>
-                <Picker x:Name="picker" Style="{StaticResource picker}" WidthRequest="200"/>
+                <Label x:Name="pathLengthLabel" Text="{translator:Translate path_length}" Style="{StaticResource labelStyle}" VerticalTextAlignment="End" Margin="0,0,1,8"/>
+                <Picker x:Name="picker" Style="{StaticResource picker}" WidthRequest="200" VerticalOptions="End"/>
                 <ImageButton x:Name="dropDownArrow" Style="{StaticResource smallImageButtonStyle}" Clicked="DropDownArrow_Clicked" VerticalOptions="End"/>
             </StackLayout>    
             <ScrollView VerticalOptions="StartAndExpand" Orientation="Vertical" Style="{StaticResource scrollView}">
@@ -32,11 +32,11 @@
                     <Label Text="{translator:Translate player}" Grid.Column="1" Grid.Row="0" Style="{DynamicResource labelStyle}" HorizontalTextAlignment="Center"/>
                     <Label Text="{translator:Translate age}" Grid.Column="2" Grid.Row="0" Style="{DynamicResource labelStyle}" HorizontalTextAlignment="Center"/>
                     <ImageButton x:Name="removeButton" Grid.Column="0" Grid.Row="1" Clicked="removeRow_Clicked" Style="{StaticResource regularCircleImageButtonStyle}" VerticalOptions="End"/>
-                    <Label x:Name="firstPlayerNumber" Text="1" Grid.Column="1" Grid.Row="1" Style="{DynamicResource labelStyle}" HorizontalTextAlignment="Center"/>
-                    <Entry x:Name="firstPlayerEntry" Keyboard="Numeric" Grid.Column="2" Grid.Row="1" Style="{DynamicResource entryStyle}" AutomationId="EnterAge" HorizontalTextAlignment="Center"/>
+                    <Label x:Name="firstPlayerNumber" Text="1" Grid.Column="1" Grid.Row="1" Style="{DynamicResource labelStyle}" HorizontalTextAlignment="Center" VerticalTextAlignment="End" Margin="0,0,1,8"/>
+                    <Entry x:Name="firstPlayerEntry" Keyboard="Numeric" Grid.Column="2" Grid.Row="1" Style="{DynamicResource entryStyle}" AutomationId="EnterAge" HorizontalTextAlignment="Center" VerticalOptions="End"/>
                 </Grid>
             </ScrollView>
-            <Button x:Name="StartTripButton" Text="{translator:Translate GroupCreationPage_start_game}" Style="{StaticResource largeButtonStyle}" Clicked="Start_Trip_Button_Clicked" AutomationId="BtnStartTripClicked" VerticalOptions="EndAndExpand"/>
+            <Button x:Name="StartTripButton" Text="{translator:Translate GroupCreationPage_start_game}" Style="{StaticResource largeButtonStyle}" Clicked="Start_Trip_Button_Clicked" AutomationId="BtnStartTripClicked" VerticalOptions="EndAndExpand" BackgroundColor="Orange"/>
             <!--<ImageButton x:Name="StartTripButton" Source="http://icons.iconarchive.com/icons/custom-icon-design/flatastic-9/512/Start-icon.png" Clicked="Start_Trip_Button_Clicked" Style="{StaticResource largeImageButtonStyle}" AutomationId="BtnStartTripClicked" VerticalOptions="EndAndExpand"/>-->
         </StackLayout>
     </ContentPage.Content>

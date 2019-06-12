@@ -40,14 +40,51 @@ namespace trumpeldor.Views
             Feedback.kindToEnum.TryGetValue(fi.feedback.kind, out kind);
             Entry entry = null;
             if (kind == Feedback.Kinds.FeedBackText)
-                entry = new Entry { Keyboard = Keyboard.Text }; 
+            {
+                entry = new Entry { Keyboard = Keyboard.Text };
+                if (fi.answer != null)
+                    entry.Text = fi.answer;
+                feedbacks.RowDefinitions.Add(new RowDefinition { Height = GridLength.Star });
+                entry.SetDynamicResource(VisualElement.StyleProperty, "entryStyle");
+                feedbacks.Children.Add(entry, 0, nextRow + 1);
+            }
             else if (kind == Feedback.Kinds.FeedBackRating)
-                entry = new Entry { Keyboard = Keyboard.Numeric };  //TODO - change to stars according to link
-            if (fi.answer != null)
-                entry.Text = fi.answer;
-            feedbacks.RowDefinitions.Add(new RowDefinition { Height = GridLength.Star });
-            entry.SetDynamicResource(VisualElement.StyleProperty, "entryStyle");
-            feedbacks.Children.Add(entry, 0, nextRow+1);
+            {
+                Grid rateGrid = new Grid();
+                rateGrid.SetDynamicResource(VisualElement.StyleProperty, "gridStyle");
+                for (int i = 0; i < 5; i++)
+                {
+                    //entry = new Entry { Keyboard = Keyboard.Numeric };  //TODO - change to stars according to link
+                    Label num = new Label { Text = (i+1) + "" , HorizontalOptions = LayoutOptions.CenterAndExpand };
+                    num.SetDynamicResource(VisualElement.StyleProperty, "labelStyle");
+                    rateGrid.Children.Add(num, i, 0);
+                    ImageButton button = new ImageButton { Source = ServerConection.URL_MEDIA + (i+1) + ".jpg", HorizontalOptions = LayoutOptions.CenterAndExpand, BackgroundColor = Color.White };
+                    button.Clicked += (sender, e) =>
+                    {
+                        int numberOfChildren = rateGrid.Children.Count;
+                        for (int childIndex = 0; childIndex < numberOfChildren; ++childIndex){
+                            //var column = Grid.GetColumn(rateGrid.Children[childIndex]);
+                            if(Grid.GetRow(rateGrid.Children[childIndex]) == 1){
+                                ImageButton ib = (ImageButton)rateGrid.Children[childIndex];
+                                ib.BorderColor = rateGrid.BackgroundColor;
+                                ib.BorderWidth = 0;
+                            }
+                        }
+                        ImageButton clickedBtn = ((ImageButton)sender);
+                        clickedBtn.BorderColor = Color.Black;
+                        clickedBtn.BorderWidth = 1;
+                    };
+                    button.SetDynamicResource(VisualElement.StyleProperty, "regularCircleImageButtonStyle");
+
+                    if (fi.answer != null && fi.answer.Equals((i + 1) + ""))
+                    {
+                        button.BorderColor = Color.Black;
+                        button.BorderWidth = 1;
+                    }
+                    rateGrid.Children.Add(button, i, 1);
+                }
+                feedbacks.Children.Add(rateGrid, 0, nextRow + 1);
+            }
         }
 
         private void Reply_Button_Clicked(object sender, EventArgs e)
@@ -58,6 +95,22 @@ namespace trumpeldor.Views
                 if (child is Entry)
                 {
                     gc.currentTrip.feedbacks[indexFeedback].answer = ((Entry)child).Text;
+                    indexFeedback++;
+                }
+                else if(child is Grid)
+                {
+                    Grid ch = ((Grid)child);
+                    int numberOfChildren = ch.Children.Count;
+                    for (int childIndex = 0; childIndex < numberOfChildren; ++childIndex)
+                    {
+                        //var column = Grid.GetColumn(rateGrid.Children[childIndex]);
+                        if (Grid.GetRow(ch.Children[childIndex]) == 1)
+                        {
+                            ImageButton ib = (ImageButton)ch.Children[childIndex];
+                            if (ib.BorderWidth != 0)
+                                gc.currentTrip.feedbacks[indexFeedback].answer = (Grid.GetColumn(ch.Children[childIndex])+1) + "";    
+                        }
+                    }
                     indexFeedback++;
                 }
             }

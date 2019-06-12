@@ -20,7 +20,7 @@
             <!--<Label Text="Trumpeldor" Style="{StaticResource titleStyle}"/>-->
             <StackLayout Style="{StaticResource mainStackLayout}" VerticalOptions="CenterAndExpand">
                 <Button x:Name="how" Text="{translator:Translate how_to_play}" Style="{StaticResource largeButtonStyle}" AutomationId="HowToPlayBtn" Clicked="HowToPlay_Button_Clicked"/>
-                <Button x:Name="playButton" Text="{translator:Translate play}" Style="{StaticResource largeButtonStyle}" AutomationId="PlayBtn" Clicked="Play_Button_Clicked"/>
+                <Button x:Name="playButton" Text="{translator:Translate play}" Style="{StaticResource largeButtonStyle}" AutomationId="PlayBtn" Clicked="Play_Button_Clicked" BackgroundColor="Orange"/>
                 <Button x:Name="info" Text="{translator:Translate informationFirstPage}" Style="{StaticResource largeButtonStyle}" AutomationId="InfoBtn" Clicked="Info_Button_Clicked"/>
             </StackLayout>
             <!--<ImageButton x:Name="playButton" Source="http://icons.iconarchive.com/icons/custom-icon-design/flatastic-9/512/Start-icon.png" Clicked="Play_Button_Clicked" Style="{StaticResource largeImageButtonStyle}" AutomationId="PlayBtn"/>-->
