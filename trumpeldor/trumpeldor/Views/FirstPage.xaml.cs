@@ -109,6 +109,7 @@ namespace trumpeldor.Views
             DeleteBordersToCountries();
             englandButton.BorderWidth = 1;
             englandButton.BorderColor = Color.Black;
+            updateLangInThisPage();
             //if(errorMessage.Text != "")
             //    errorMessage.Text = AppResources.Out_Of_Valid_Sector_Title + "\n" + AppResources.Out_Of_Valid_Sector_Message;
         }
@@ -119,8 +120,16 @@ namespace trumpeldor.Views
             DeleteBordersToCountries();
             israelButton.BorderWidth = 1;
             israelButton.BorderColor = Color.Black;
+            updateLangInThisPage();
             //if (errorMessage.Text != "")
             //    errorMessage.Text = AppResources.Out_Of_Valid_Sector_Title + "\n" + AppResources.Out_Of_Valid_Sector_Message;
+        }
+
+        private void updateLangInThisPage()
+        {
+            how.Text = AppResources.how_to_play;
+            playButton.Text = AppResources.play;
+            info.Text = AppResources.informationFirstPage;
         }
 
         private void DeleteBordersToCountries()
