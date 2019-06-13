@@ -214,10 +214,10 @@ class DAL_Implementation(DAL_Abstract):
         attraction.x=x
         attraction.y=y
         attraction.description=description
-        if picturesURLS is not None:
-            attraction.picturesURLS=addPrefixUrl(add_media(picturesURLS, 'image/jpeg', '.png'))
-        if videosURLS is not None:
-            attraction.videosURLS=addPrefixUrl(add_media(videosURLS, 'video/mp4', '.mp4'))
+        #if picturesURLS is not null:
+        attraction.picturesURLS=addPrefixUrl(add_media(picturesURLS, 'image/jpeg', '.png'))
+        #if videosURLS is not null:
+        attraction.videosURLS=addPrefixUrl(add_media(videosURLS, 'video/mp4', '.mp4'))
         attraction.save()
         return attraction
 
@@ -229,9 +229,14 @@ class DAL_Implementation(DAL_Abstract):
         hint = self.get_hint(id_attraction, id_hint).delete()
         return True
 
-    def edit_hint(self, id_attraction, id_hint, data):
+    def edit_hint(self, id_attraction, id_hint, data, description):
         hint = self.get_hint(id_attraction, id_hint)
-        hint.data = data
+        if hint.kind == 'HP':
+            data = add_media([data], 'image/jpeg', '.png')
+        elif hint.kind == 'HV':
+            data = add_media([data], 'video/mp4', '.mp4')
+        hint.data = addPrefixUrl(data)[0]
+        hint.description = description
         hint.save()
         return True
 
@@ -271,7 +276,7 @@ class DAL_Implementation(DAL_Abstract):
         #         track.points.add(attr)
         #         track.save()
         #     return True
-        attr = self.getAttraction(id_attraction)
+        attr = self.get_attraction(id_attraction)
         if attr is not None:
             track = self.get_track(id_track)
             track.points.add(attr)
@@ -428,7 +433,7 @@ class DAL_Implementation(DAL_Abstract):
         aq = self.get_american_question(id_attraction, id_aquestion)
         aq.question = question
         aq.answers = answers
-        aq.indexOfCorrectAnswer = indexOfCorrectAnswer
+        aq.indexOfCorrectAnswer = arr_correct_answers
         aq.save()
         return aq
 
@@ -436,6 +441,8 @@ class DAL_Implementation(DAL_Abstract):
 
 #returns array of names of the media files saved in the media folder
 def add_media(media_urls, replace, suffix):
+    if media_urls is None:
+        return null
     names_of_files = []
     for file in media_urls:
         file = file.replace('data:' + replace + ';base64,', '')
@@ -457,6 +464,8 @@ def addPrefixUrlToSpecificName(name):
 
 
 def addPrefixUrl(lst):
+    if lst is None:
+        return null
     newLst = []
     for name in lst:
         newLst += [addPrefixUrlToSpecificName(name)]

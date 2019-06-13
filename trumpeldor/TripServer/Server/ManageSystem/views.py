@@ -78,6 +78,7 @@ class Hint(generics.GenericAPIView):
 
 class FeedbackList(generics.GenericAPIView):
     serializer_class = FeedbackSerializer
+    queryset = ''
 
     def get(self, request, *args, **kwargs):
         ans = BL.get_all_feedback_questions()
@@ -105,6 +106,11 @@ class Feedback(generics.GenericAPIView):
         ans = BL.delete_feedback_question(self.kwargs['id'])
         ans = json.loads(json.dumps(ans))
         return Response(ans)
+
+    # def put(self, request, *args, **kwargs):
+    #     ans = BL.edit_feedback(self.kwargs['id_attr'], self.kwargs['id_hint'], request.data)
+    #     ans = json.loads(json.dumps(ans))
+    #     return Response(ans)
 
 
 class AmericanQuestionsList(generics.GenericAPIView):
@@ -193,12 +199,6 @@ class AttractionsList(generics.GenericAPIView):
     queryset = ''
 
     def get(self, request, *args, **kwargs):
-        # ans = BL.get_attractions()
-        # ans = AttractionSerializer(ans, many=True)
-        # ans = json.loads(json.dumps(ans.data))
-        # if DEBUG:
-        #     print("Sent:", ans, sep="\n")
-        # return Response(ans)
         return general_post_or_get(
             None,
             "AddAttraction",
@@ -245,6 +245,7 @@ class Info(generics.GenericAPIView):
         ans = InfoSerializer(ans, many=False)
         ans = json.loads(json.dumps(ans.data))
         return Response(ans)
+
     def post(self, request, *args, **kwargs):
         return general_post_or_get(
             request,
@@ -252,20 +253,6 @@ class Info(generics.GenericAPIView):
             BL.add_info,
             InfoSerializer)
 
-    def put(self, request, *args, **kwargs):
-        ans = BL.edit_info(request.data)
-        ans = InfoSerializer(ans, many=False)
-        ans = json.loads(json.dumps(ans.data))
-        return Response(ans)
-
-
-class InfoSpecific(generics.GenericAPIView):
-    serializer_class = InfoSerializer
-
-    def delete(self, request, *args, **kwargs):
-        ans = BL.delete_info(self.kwargs['id'])
-        ans = json.loads(json.dumps(ans))
-        return Response(ans)
 
 
 class SlidingPuzzleList(generics.GenericAPIView):
@@ -377,7 +364,7 @@ class TakingPictureList(generics.GenericAPIView):
         return Response(ans)
 
     def post(self, request, *args, **kwargs):
-        ans = BL.add_taking_pic(self.kwargs['id_attr'], request.data)
+        ans = BL.add_taking_pic(self.kwargs['id_attr'], request.data['description'])
         ans = TakingPictureSerializer(ans, many=False)
         ans = json.loads(json.dumps(ans.data))
         return Response(ans)
@@ -393,11 +380,6 @@ class SettingsList(generics.GenericAPIView):
         ans = json.loads(json.dumps(ans.data))
         return Response(ans)
 
-    def put(self, request, *args, **kwargs):
-        ans = BL.edit_settings(request.data)
-        ans = SettingsSerializer(ans, many=False)
-        ans = json.loads(json.dumps(ans.data))
-        return Response(ans)
 
     def post(self, request, *args, **kwargs):
         ans = BL.create_settings(request.data)
