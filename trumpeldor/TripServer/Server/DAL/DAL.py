@@ -116,7 +116,7 @@ class DAL_Abstract(object):
     def delete_hint(self, id_attraction, id_hint, data):
         raise NotImplementedError("Should have implemented this")
 
-    def edit_hint(self, id_attraction, id_hint, data):
+    def edit_hint(self, id_attraction, id_hint, data, description):
         raise NotImplementedError("Should have implemented this")
 
     def get_all_tracks(self):
@@ -418,10 +418,10 @@ class DALProxy(DAL_Abstract):
             raise NotImplementedError("Should have implemented this")
         return self.Implementation.delete_hint(id_attraction, id_hint)
 
-    def edit_hint(self, id_attraction, id_hint, data):
+    def edit_hint(self, id_attraction, id_hint, data, description):
         if self.Implementation is None:
             raise NotImplementedError("Should have implemented this")
-        return self.Implementation.edit_hint(id_attraction, id_hint, data)
+        return self.Implementation.edit_hint(id_attraction, id_hint, data, description)
 
     def get_all_tracks(self):
         if self.Implementation is None:
