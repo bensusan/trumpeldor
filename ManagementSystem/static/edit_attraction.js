@@ -174,8 +174,6 @@ function initializeLanguageBTNs() {
     let attr_name_english = document.getElementById("attr_name_english");
     let subt = document.getElementById("subt");
     let subt_english = document.getElementById("subt_english");
-    let pop = document.getElementById("pop");
-    let pop_english = document.getElementById("pop_english");
     let desc = document.getElementById("desc");
     let desc_english = document.getElementById("desc_english");
     let hebrewBTN = document.getElementById("hebrewBTN");
@@ -184,10 +182,8 @@ function initializeLanguageBTNs() {
     hebrewBTN.addEventListener('click', function () {
         attr_name.style.display = "";
         subt.style.display = "";
-        pop.style.display = "";
         attr_name_english.style.display = "none";
         subt_english.style.display = "none";
-        pop_english.style.display = "none";
         desc.style.display = "";
         desc_english.style.display = "none";
     });
@@ -195,10 +191,8 @@ function initializeLanguageBTNs() {
     englishBTN.addEventListener('click', function () {
         attr_name.style.display = "none";
         subt.style.display = "none";
-        pop.style.display = "none";
         attr_name_english.style.display = "";
         subt_english.style.display = "";
-        pop_english.style.display = "";
         desc.style.display = "none";
         desc_english.style.display = "";
     });
