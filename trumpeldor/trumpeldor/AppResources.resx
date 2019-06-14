@@ -418,4 +418,7 @@
   <data name="subtitlesBtn" xml:space="preserve">
     <value>טקסט על הפסל</value>
   </data>
+  <data name="reset" xml:space="preserve">
+    <value>אפס</value>
+  </data>
 </root>

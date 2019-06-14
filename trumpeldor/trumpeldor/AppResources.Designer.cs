@@ -749,6 +749,15 @@ namespace trumpeldor {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to אפס.
+        /// </summary>
+        public static string reset {
+            get {
+                return ResourceManager.GetString("reset", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to המשך.
         /// </summary>
         public static string save_and_continue {

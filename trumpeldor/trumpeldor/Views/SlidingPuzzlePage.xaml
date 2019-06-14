@@ -23,7 +23,7 @@
             <AbsoluteLayout x:Name="absoluteLayout"
                             BackgroundColor="Black" />
 
-            <Button Text="Randomize"
+            <Button Text="{translator:Translate reset}" Clicked="OnResetButtonClickedAsync"
                     Opacity="0"
                     HorizontalOptions="CenterAndExpand"
                     VerticalOptions="CenterAndExpand" />

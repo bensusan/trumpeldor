@@ -414,4 +414,7 @@ You have complete a track</value>
   <data name="subtitlesBtn" xml:space="preserve">
     <value>Text on the statue</value>
   </data>
+  <data name="reset" xml:space="preserve">
+    <value>reset</value>
+  </data>
 </root>

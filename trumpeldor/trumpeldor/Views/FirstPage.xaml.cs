@@ -13,6 +13,7 @@ using Xamarin.Forms.Xaml;
 using Plugin.Permissions;
 using Plugin.Permissions.Abstractions;
 using Rg.Plugins.Popup.Services;
+using System.Diagnostics;
 
 namespace trumpeldor.Views
 {
@@ -55,10 +56,14 @@ namespace trumpeldor.Views
         private async Task<bool> CanUserPlay()
         {
             if (!gc.IsUserInValidSector()){
-                //errorMessage.Text = AppResources.Out_Of_Valid_Sector_Title + "\n" + AppResources.Out_Of_Valid_Sector_Message;
-                if (ServerConection.DEBUG == 1)
+                if (Debugger.IsAttached)
+                {
                     return await DisplayAlert("Debug Mode", "Do you want to continue", "yes", "no");
-                return false;
+                }
+                else
+                {
+                    return false;
+                }
             }
             return true;
         }

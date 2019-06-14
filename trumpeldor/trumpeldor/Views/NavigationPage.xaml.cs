@@ -11,6 +11,7 @@ using trumpeldor.SheredClasses;
 using trumpeldor;
 using Plugin.Geolocator;
 using System.Timers;
+using System.Diagnostics;
 
 namespace trumpeldor.Views
 {
@@ -74,7 +75,7 @@ namespace trumpeldor.Views
         {
             base.OnAppearing();
             scoreLabel.Text = AppResources.score + ": " + gc.currentTrip.score;
-            if(ServerConection.DEBUG != 1)
+            if(Debugger.IsAttached)
             {
                 buttonsTopLayout.IsVisible = false;
                 v.IsVisible = false;

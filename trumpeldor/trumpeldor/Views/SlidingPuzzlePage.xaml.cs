@@ -22,6 +22,7 @@ namespace trumpeldor.Views
         private SlidingPuzzle sp;
         private GameController gc;
         private Attraction attraction;
+        private List<Tuple<int, int>> taps;
 
         public SlidingPuzzlePage (SlidingPuzzle sp, Attraction attraction)
 		{
@@ -32,6 +33,7 @@ namespace trumpeldor.Views
             playVideo.Source = ServerConection.URL_MEDIA + "playVideo.png";
             how.Source = ServerConection.URL_MEDIA + "how.png";
             this.sp = sp;
+            taps = new List<Tuple<int, int>>();
             tiles = new SlidingPuzzleTile[sp.width, sp.height];
             emptyRow = sp.width - 1;
             emptyCol = sp.height - 1;
@@ -101,6 +103,7 @@ namespace trumpeldor.Views
 
             View tileView = (View)sender;
             SlidingPuzzleTile tappedTile = SlidingPuzzleTile.Dictionary[tileView];
+            taps.Add(new Tuple<int, int>(tappedTile.currentRow, tappedTile.currentCol));
 
             await ShiftIntoEmpty(tappedTile.currentRow, tappedTile.currentCol);
             isBusy = false;
@@ -190,14 +193,12 @@ namespace trumpeldor.Views
             emptyCol = col;
         }
 
-        void OnRandomizeButtonClicked(object sender, EventArgs args)
+        async void OnResetButtonClickedAsync(object sender, EventArgs args)
         {
             Button button = (Button)sender;
             button.IsEnabled = false;
-            shuffle();
+            await resetAsync();
             button.IsEnabled = true;
-
-            
         }
 
         private async void shuffle() {
@@ -233,7 +234,17 @@ namespace trumpeldor.Views
             
         }
 
-
+        private async Task resetAsync()
+        {
+            taps.Reverse();
+            isBusy = true;
+            foreach (Tuple<int,int> tap in taps)
+            {
+                await ShiftIntoEmpty(tap.Item1, tap.Item2);
+            }
+            isBusy = false;
+            taps.Clear();
+        }
 
     }
 }
