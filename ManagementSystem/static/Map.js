@@ -26,16 +26,18 @@ window.onload = function () {
         var place_button = document.getElementById("place");
         place_button.style.display = "inline";
         place_button.addEventListener('click', function () {
-            let man_location = positionInMap(the_manual_lat.value, the_manual_lng.value);
-            let marker = new google.maps.Marker({
-                position: man_location,
-                map: map
-                , icon: {
-                    url: "http://maps.google.com/mapfiles/ms/icons/pink-dot.png"
-                }
-            });
-            marker.setMap(map);
-            map.panTo(man_location);
+            if (the_manual_lng.value != "" && the_manual_lat.value != "") {
+                let man_location = positionInMap(parseFloat(the_manual_lat.value), parseFloat(the_manual_lng.value));
+                let marker = new google.maps.Marker({
+                    position: man_location,
+                    map: map
+                    , icon: {
+                        url: "http://maps.google.com/mapfiles/ms/icons/pink-dot.png"
+                    }
+                });
+                marker.setMap(map);
+                map.panTo(man_location);
+            }
         });
     });
 
