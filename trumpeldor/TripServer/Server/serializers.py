@@ -175,5 +175,5 @@ class IsAdminSerializer(serializers.Serializer):
 
 class SettingsSerializer(serializers.ModelSerializer):
     class Meta:
-        fields = ('boundaries', 'logo', 'loginHours', 'successAudio', 'failureAudio',)
+        fields = ('boundaries', 'loginHours', 'scoreRules',)
         model = Settings

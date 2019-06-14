@@ -212,7 +212,7 @@ class BL_Implementation(BL_Abstract):
     def edit_hint(self, id_attraction, id_hint_to_edit, hint):
         hint_before_edit = self.get_hint(id_attraction, id_hint_to_edit)
         if hint_before_edit is not None and hint_before_edit.kind == hint['kind']:
-            return self.DAL.edit_hint(id_attraction, id_hint_to_edit, hint['data'])
+            return self.DAL.edit_hint(id_attraction, id_hint_to_edit, hint['data'], hint['description'])
 
     def get_all_tracks(self):
         return self.DAL.get_all_tracks()
@@ -314,8 +314,7 @@ class BL_Implementation(BL_Abstract):
         return self.DAL.edit_settings(settings)
 
     def create_settings(self, settings):
-        return self.DAL.create_settings(settings['boundaries'],settings['logo'], settings['loginHours'],
-                                        settings['successAudio'], settings['failureAudio'])
+        return self.DAL.create_settings(settings['boundaries'],settings['loginHours'], settings['scoreRules'])
 
     def edit_info(self, info):
         return self.DAL.edit_info(info['app_name'], info['about_app'], info['how_to_play'])
