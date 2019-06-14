@@ -5,10 +5,8 @@ let helperVar = "";
 function sendThis(arrOfBoundries) {
     let toSend = {
         boundaries: arrOfBoundries,
-        logo: [helperVar],
         loginHours: document.getElementById('info_ttl').value,
-        successAudio: [theurl],
-        failureAudio: [failurl]
+        scoreRules: ""
     };
     postRequestSettings(toSend);
     window.location.href = '/main';

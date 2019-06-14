@@ -56,32 +56,12 @@
                 async defer>
         </script>
     </div>
-
     <p><br/></p>
-    <input id="picInput" type="file" onchange="encodeImageFileAsURL(this)"/>
-    <label id="pic_title" style="text-align: right;"><b>:העלאת תמונת לוגו של האפליקציה</b></label>
-    <p><img id="output" width="200" style="display: none"/></p>
-    <p></p>
-
     <input type="number" id="info_ttl" name="subject" placeholder="הקלידי את תשובתך בשעות"
            style="width:160px;height:20px;">
     <label style="font-size: 20px"><b>?כמה זמן תהיי מעוניינת לשמור מידע על משתמש רשום</b></label>
     <p></p>
-    <input type="file" id="inputBar" onchange="func(this)" accept=".mp3"/>
-    <label style="font-size: 20px"><b>:הוספת צליל הגעה לאטרקציה</b></label>
-    <p></p>
-    <audio controls autoplay id="audio_controls" style="display: none">
-        <source id="attr_sound" src="" type="audio/mpeg">
-    </audio>
-
-    <p></p>
-    <input type="file" id="inputBarFail" onchange="funcFail(this)" accept=".mp3"/>
-    <label style="font-size: 20px"><b>:הוספת צליל כישלון</b></label>
-    <p></p>
-    <audio controls autoplay id="audio_controls_fail" style="display: none">
-        <source id="attr_sound_fail" src="" type="audio/mpeg">
-    </audio>
-
+    <label style="text-align:right;font-size: 20px"><b>:חוקי ניקוד</b></label>
     <p><br/></p>
     <button class="yahoo" id="save_props" type="button">שמירת הגדרות</button>
 
