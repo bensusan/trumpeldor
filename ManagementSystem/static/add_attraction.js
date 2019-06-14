@@ -48,8 +48,6 @@ window.onload = function () {
     let attr_name_english = document.getElementById("attr_name_english");
     let subt = document.getElementById("subt");
     let subt_english = document.getElementById("subt_english");
-    let pop = document.getElementById("pop");
-    let pop_english = document.getElementById("pop_english");
 
     let hebrewBTN = document.getElementById("hebrewBTN");
     let englishBTN = document.getElementById("englishBTN");
@@ -57,20 +55,16 @@ window.onload = function () {
     hebrewBTN.addEventListener('click', function () {
         attr_name.style.display = "";
         subt.style.display = "";
-        pop.style.display = "";
         attr_name_english.style.display = "none";
         subt_english.style.display = "none";
-        pop_english.style.display = "none";
 
     });
 
     englishBTN.addEventListener('click', function () {
         attr_name.style.display = "none";
         subt.style.display = "none";
-        pop.style.display = "none";
         attr_name_english.style.display = "";
         subt_english.style.display = "";
-        pop_english.style.display = "";
     });
 
     initializingButtonsWithFunctionality();
