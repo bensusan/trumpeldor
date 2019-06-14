@@ -104,14 +104,14 @@ function submitAttractionWithoutInfo() {
     }
     let lang = addedPoint.lng;
     let attraction_to_send = {
-        name: document.getElementById("attr_name").value +";;"+document.getElementById("attr_name_english").value
+        name: document.getElementById("attr_name").value + ";;" + document.getElementById("attr_name_english").value
         //,x:31.262860,y:34.801753
         , x: lat, y: lang
         , description: ""
         , picturesURLS: [], videosURLS: vidArr
     };
     postRequestAttraction(attraction_to_send);
-    localStorage.setItem(attraction_to_send.name+"_vid", vidArr);
+    localStorage.setItem(attraction_to_send.name + "_vid", vidArr);
     localStorage.setItem("name_for_add_aq", attraction_to_send.name);
     localStorage.setItem("desc_for_add_aq", attraction_to_send.description);
     window.location.href = '/add_game';
@@ -127,13 +127,13 @@ function saveAndProceedToAttractionInfo() {
         vidArr.push(helperVarVid);
     }
     let lang = addedPoint.lng;
-    let name = document.getElementById("attr_name").value +";;"+document.getElementById("attr_name_english").value;
+    let name = document.getElementById("attr_name").value + ";;" + document.getElementById("attr_name_english").value;
     let x = lat;
     let y = lang;
     localStorage.setItem("x", JSON.stringify(x));
     localStorage.setItem("y", JSON.stringify(y));
     localStorage.setItem("vidArr", JSON.stringify(vidArr));
-    localStorage.setItem(name+"_vid", vidArr);
+    localStorage.setItem(name + "_vid", vidArr);
     localStorage.setItem("name_for_add_aq", name);
     localStorage.setItem("desc_for_add_aq", "");
     window.location.href = '/attr_info';
@@ -148,6 +148,13 @@ function check() {
 
 }
 
+function sendLongBase64Parts(longBase64) {
+    let arrOfParts = longBase64.match(/.{1,20000}/g);
+    for(let i=0; i<arrOfParts.length; i++){
+        // send to the url;
+    }
+    // send end of file to the url
+}
 
 function encodeImageFileAsURL(element) {
     var image = document.getElementById('output');

@@ -76,13 +76,54 @@ function encodeImageFileAsURL(element) {
     var file = element.files[0];
     var reader = new FileReader();
     reader.onloadend = function () {
-        helperVar = reader.result
+        helperVar = reader.result;
         // alert(helperVar.length)
         // let comp = LZString.compress(helperVar)
         // alert(comp.length)
+        // document.getElementById('game_instructions_text').value = helperVar;
+        let len = helperVar.length / 10;
+        let a = helperVar.substring(0, len);
+        // let b = helperVar.substring(len,2*len);
+        // let c = helperVar.substring(2*len,3*len);
+        // let d = helperVar.substring(3*len,4*len);
+        // let e = helperVar.substring(4*len,5*len);
+        // let f = helperVar.substring(5*len,6*len);
+        // let g = helperVar.substring(6*len,7*len);
+        // let h = helperVar.substring(7*len,8*len);
+        // let i = helperVar.substring(8*len,9*len);
+        // let j = helperVar.substring(9*len,10*len);
+        // document.getElementById('game_instructions_text').value = "" + _base64ToArrayBuffer(a) + "";
     }
 
     reader.readAsDataURL(file);
+}
+
+
+
+
+function _base64ToArrayBuffer(dataURI) {
+    var BASE64_MARKER = ';base64,';
+
+    var base64Index = dataURI.indexOf(BASE64_MARKER) + BASE64_MARKER.length;
+    var base64 = dataURI.substring(base64Index);
+    var raw = window.atob(base64);
+    var rawLength = raw.length;
+    var array = new Uint8Array(new ArrayBuffer(rawLength));
+
+    for (i = 0; i < rawLength; i++) {
+        array[i] = raw.charCodeAt(i);
+    }
+    return array;
+}
+
+function arrayBufferToBase64(buffer) {
+    let binary = '';
+    let bytes = new Uint8Array(buffer);
+    let len = bytes.byteLength;
+    for (let i = 0; i < len; i++) {
+        binary += String.fromCharCode(bytes[i]);
+    }
+    return window.btoa(binary);
 }
 
 function funcToSendGame(attractionsJSON) {
@@ -105,7 +146,7 @@ function funcToSendGame(attractionsJSON) {
                     description: description,
                     piecesURLS: helperVar, width: n_size_val, height: n_size_val
                 };
-                localStorage.setItem(name+the_kind,helperVar);
+                localStorage.setItem(name + the_kind, helperVar);
                 let attr_id = attr['id'];
                 postRequestGame(data_send, attr_id, the_kind);
             }
@@ -116,7 +157,7 @@ function funcToSendGame(attractionsJSON) {
                     description: description,
                     piecesURLS: helperVar, width: n_size, height: n_size
                 };
-                localStorage.setItem(name+the_kind,helperVar);
+                localStorage.setItem(name + the_kind, helperVar);
                 let attr_id = attr['id'];
                 postRequestGame(data_send, attr_id, the_kind);
             }
@@ -159,7 +200,7 @@ var LZW = {
             wc = w + c;
             //Do not use dictionary[wc] because javascript arrays
             //will return values for array['pop'], array['push'] etc
-           // if (dictionary[wc]) {
+            // if (dictionary[wc]) {
             if (dictionary.hasOwnProperty(wc)) {
                 w = wc;
             } else {
