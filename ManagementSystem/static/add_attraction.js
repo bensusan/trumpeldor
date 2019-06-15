@@ -90,6 +90,7 @@ function submitAttractionWithoutInfo() {
     let lat = addedPoint.lat;
     let lang = addedPoint.lng;
     if (helperVarVid != undefined) {
+        alert("ds");
         sendLongBase64Parts(helperVarVid);
     }
     let attraction_to_send = {
@@ -177,6 +178,7 @@ function encodeVideoFileAsURL(element) {
 
     reader.readAsDataURL(file);
 }
+
 
 function postRequestFile(file) {
     //   alert("hint blat");

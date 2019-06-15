@@ -454,3 +454,26 @@ def file(request):
         return Response(json.loads(json.dumps(True)))
 
 
+
+
+# views.py
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from django.views.decorators.csrf import csrf_exempt
+from braces.views import CsrfExemptMixin
+
+
+class File(CsrfExemptMixin, APIView):
+    authentication_classes = []
+
+    def post(self, request, format=None):
+        if request.path_info == '/managementsystem/file/img':
+            file_path = 'Server/ManageSystem/fileImg'
+        else:
+            file_path = 'Server/ManageSystem/fileVid'
+        if request.data == "end of file":
+            return
+        with open(file_path, "a") as fp:
+            fp.write(request.data)
+            fp.close()
+        return Response(json.loads(json.dumps(True)))
