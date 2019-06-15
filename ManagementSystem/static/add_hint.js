@@ -35,8 +35,8 @@ function loadStringOfInnerHTMLWithHints(hintsJSON) {
             if (hint['data'].substring(0, 10) == 'data:video')
                 str = str + " data: " + "VideoMedia" + videoCounter + "<br />";
             else
-                str=str+" text: "+ hint['data'].split(';;')[0]+"<br />";
-            }
+                str = str + " text: " + hint['data'].split(';;')[0] + "<br />";
+        }
         // alert(str);
 
         var output = document.getElementById("result");
@@ -106,6 +106,10 @@ function initializeBTNsFunctionality() {
     var sendTextHintBTN = document.getElementById('send_text_hint');
     var sendPicHintBTN = document.getElementById('send_pic_hint');
     var sendVidHintBTN = document.getElementById('send_vid_hint');
+    let hebrewBTN = document.getElementById("hebrewBTN");
+    let englishBTN = document.getElementById("englishBTN");
+    var vidEng = document.getElementById("vid_hint_descriptionEnglish");
+    var picEng = document.getElementById("pic_hint_descriptionEnglish");
 
     textHintBTN.addEventListener('click', function () {
         textLine.style.display = "inline";
@@ -121,9 +125,6 @@ function initializeBTNsFunctionality() {
         upload_pic_title.style.display = "none";
         window.scrollTo(0, document.body.scrollHeight);
 
-
-        let hebrewBTN = document.getElementById("hebrewBTN");
-        let englishBTN = document.getElementById("englishBTN");
 
         hebrewBTN.addEventListener('click', function () {
             textLine.style.display = "";
@@ -152,6 +153,16 @@ function initializeBTNsFunctionality() {
         thevidbrowse.style.display = "none";
         sendButtonVid.style.display = "none";
         window.scrollTo(0, document.body.scrollHeight);
+        hebrewBTN.addEventListener('click', function () {
+            picEng.style.display = "none";
+            picDesc.style.display = "";
+        });
+
+        englishBTN.addEventListener('click', function () {
+            picEng.style.display = "";
+            picDesc.style.display = "none";
+        });
+
 
     });
 
@@ -170,7 +181,15 @@ function initializeBTNsFunctionality() {
         sendButtonPic.style.display = "none";
         upload_pic_title.style.display = "none";
         window.scrollTo(0, document.body.scrollHeight);
+        hebrewBTN.addEventListener('click', function () {
+            vidEng.style.display = "none";
+            vidDesc.style.display = "";
+        });
 
+        englishBTN.addEventListener('click', function () {
+            vidEng.style.display = "";
+            vidDesc.style.display = "none";
+        });
     });
 
     sendTextHintBTN.addEventListener('click', function () {
@@ -303,7 +322,7 @@ function funcToSendImage(attractionsJSON) {
                 attraction: attr,
                 kind: "HP",
                 data: pixArr,
-                description: document.getElementById("pic_hint_description").value
+                description: document.getElementById("pic_hint_description").value+';;'+document.getElementById("pic_hint_descriptionEnglish").value
             };
             let attr_id = attr['id'];
             postRequestHint(the_hint, attr_id);
@@ -335,7 +354,7 @@ function funcToSendVideo(attractionsJSON) {
                 attraction: attr,
                 kind: "HV",
                 data: vidArr,
-                description: document.getElementById("vid_hint_description").value
+                description: document.getElementById("vid_hint_description").value+';;'+document.getElementById("vid_hint_descriptionEnglish").value
             };
             let attr_id = attr['id'];
             postRequestHint(the_hint, attr_id);

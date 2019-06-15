@@ -141,7 +141,6 @@ function getFieldsValuesOfExistingAttraction(attractionsJSON) {
             video.src = localStorage.getItem(p.name + "_vid");
             localStorage.setItem("name_for_add_aq", p.name);
             localStorage.setItem("desc_for_add_aq", p.description);
-            alert(localStorage.getItem(""+p.name+"_vid"));
             document.getElementById('nameOfVid').innerText = localStorage.getItem(""+p.name+"_vid");
         }
     });
