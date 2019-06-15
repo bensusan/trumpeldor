@@ -68,6 +68,7 @@ function finishEditingAttraction() {
     if (arrOfPicsData.length != 0) {
         // can do it with all pics.. just add loop
         sendLongBase64PartsPic(arrOfPicsData[0]);
+        window.location.href = '/attractions';
     } else {
         pixArr = attr_for_editing['picturesURLS'];
     }

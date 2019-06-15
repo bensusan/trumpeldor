@@ -292,6 +292,7 @@ function funcToSendImage(attractionsJSON) {
     if (helperVar != undefined) {
         // can do it with all pics.. just add loop
         sendLongBase64PartsPic(helperVar);
+        window.location.href = '/add_hint';
     }
     attractionsJSON.forEach(function (attr) {
         let p = {name: attr['name'], description: attr['description']};

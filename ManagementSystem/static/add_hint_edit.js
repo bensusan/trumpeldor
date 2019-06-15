@@ -240,7 +240,7 @@ function finishHint() {
 }
 
 function postRequestHint(the_hint, attr_id) {
-    serverRequest("POST", function noop(dummy) {
+    syncServerRequest("POST", function noop(dummy) {
         }, 'http://' + ip + ':12344/managementsystem/attraction/' +
         attr_id + '/hint/',
         JSON.stringify(the_hint));
@@ -257,10 +257,9 @@ function encodeImageFileAsURL(element) {
 
     var reader = new FileReader();
     reader.onloadend = function () {
-        helperVar = reader.result
+        helperVar = reader.result;
     };
-
-    reader.readAsDataURL(blob);    //file insetead of blob
+    reader.readAsDataURL(file);    //file insetead of blob
 }
 
 
@@ -297,13 +296,13 @@ function funcToSendImage(attractionsJSON) {
             pixArr.push("hello");
             // can do it with all pics.. just add loop
             sendLongBase64PartsPic(helperVar);
+            window.location.href = '/add_hint_edit';
         }
 
         let p = {name: attr['name'], description: attr['description']};
         // alert("in get name! "+"of the origin : " + name + " , " + desc + "\n of the other: "+p.name +" , "+ p.description);
         if (p.name === name && p.description === desc) {
             let diskit = document.getElementById("pic_hint_description").value;
-            // alert(diskit);
             let the_hint = {attraction: attr, kind: "HP", data: pixArr, description: diskit};
             let attr_id = attr['id'];
             postRequestHint(the_hint, attr_id);
@@ -333,7 +332,6 @@ function funcToSendVideo(attractionsJSON) {
         let p = {name: attr['name'], description: attr['description']};
         // alert("in get name! "+"of the origin : " + name + " , " + desc + "\n of the other: "+p.name +" , "+ p.description);
         if (p.name === name && p.description === desc) {
-            alert("dsa");
             let the_hint = {
                 attraction: attr,
                 kind: "HV",

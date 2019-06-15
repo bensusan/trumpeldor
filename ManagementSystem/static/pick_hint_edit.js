@@ -1,8 +1,3 @@
-var loadFile = function (event) {
-    var image = document.getElementById('output');
-    image.src = URL.createObjectURL(event.target.files[0]);
-};
-
 var str;
 var attractionObjToUseInHintDelete;
 
@@ -20,7 +15,72 @@ function funcForExistingHints(attractionsJSON) {
 
 }
 
+
 function hints_func(hintsJSON) {
+    str = "";
+    let imageCounter = 1;
+    let videoCounter = 1;
+    let i = 1;
+
+    hintsJSON.forEach(function (hint) {
+        let e_opt_id = "ecb" + i;
+        let d_opt_id = "dcb" + i;
+        document.getElementById(d_opt_id).innerText = hint['data'].split(';;')[0];
+        document.getElementById(e_opt_id).innerText = hint['data'].split(';;')[0];
+
+        document.getElementById(e_opt_id).value = hint['id'];
+        document.getElementById(e_opt_id).style.display = '';
+        document.getElementById(d_opt_id).value = hint['id'];
+        document.getElementById(d_opt_id).style.display = '';
+        i = i + 1;
+
+        let dataOfHint = hint['data'];
+        if (dataOfHint.substring(0, 16) == 'data:application')
+            str = str + " data: " + "media" + imageCounter + "<br />";
+        else {
+            if (hint['data'].substring(0, 10) == 'data:video')
+                str = str + " data: " + "VideoMedia" + videoCounter + "<br />";
+            else
+                str = str + " text: " + hint['data'].split(';;')[0] + "<br />";
+        }
+        // alert(str);
+
+        var output = document.getElementById("result");
+        var outputVideo = document.getElementById("resultVideos");
+
+        if (hint['data'].substring(0, 16) == 'data:application') {
+            imageCounter++;
+            var img = document.createElement("img");
+            img.src = dataOfHint;
+            img.className = 'thumbnail';
+            var div = document.createElement("div");
+            div.appendChild(img);
+
+
+            output.insertBefore(div, null);
+        }
+
+        if (hint['data'].substring(0, 10) == 'data:video') {
+            videoCounter++;
+            var vid = document.createElement("video");
+            vid.src = dataOfHint;
+            vid.className = 'thumbnail';
+            var div = document.createElement("div");
+            vid.autoplay = true;
+            div.appendChild(vid);
+
+            outputVideo.insertBefore(div, null);
+        }
+
+    });
+    document.getElementById("existing_hints").innerHTML = str;
+    document.getElementById("existing_hints").style.fontWeight = 'bold';
+    document.getElementById("existing_hints").style.fontFamily = 'david';
+    document.getElementById("existing_hints").style.fontSize = '24px';
+}
+
+
+function ffff(hintsJSON) {
     str = "";
     let i = 1;
     let imageCounter = 1;
@@ -56,8 +116,8 @@ function hints_func(hintsJSON) {
             if (hint['data'].substring(0, 10) == 'data:video')
                 str = str + " data: " + "VideoMedia" + videoCounter + "<br />";
             else
-                str=str+" text: "+ hint['data'].split(';;')[0]+"<br />";
-            }
+                str = str + " text: " + hint['data'].split(';;')[0] + "<br />";
+        }
 
         var output = document.getElementById("result");
         var outputVideo = document.getElementById("resultVideos");

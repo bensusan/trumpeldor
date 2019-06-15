@@ -10,7 +10,7 @@ function serverRequest(getOrPost, functionOnReady, url, post=null){
             functionOnReady(JSON.parse(Http.responseText));
         }
     };
-    Http.open(getOrPost, url, true);
+    Http.open(getOrPost, url, false);
     if(post) {
         Http.setRequestHeader('Content-type','application/json; charset=utf-8');
         Http.send(post);

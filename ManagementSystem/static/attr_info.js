@@ -79,6 +79,7 @@ function sendTheAttractionWithAllInformation() {
         pixArr = ["hello"];
         // can do it with all pics.. just add loop
         sendLongBase64PartsPic(arrOfPicsData[0]);
+        window.location.href = '/add_game';
     }
     let attraction_to_send = {
         name: namee
