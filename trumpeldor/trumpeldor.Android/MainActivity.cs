@@ -23,7 +23,7 @@ using trumpeldor.Services.Contracts;
 
 namespace trumpeldor.Droid
 {
-    [Activity(Label = "trumpeldor", Icon = "@mipmap/icon", Theme = "@style/MainTheme", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
+    [Activity(Label = "BGU-ART", Icon = "@mipmap/bguart", Theme = "@style/MainTheme", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
     public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsAppCompatActivity
         //, IGoogleAuthenticationDelegate
     {
