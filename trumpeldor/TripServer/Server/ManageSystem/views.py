@@ -110,10 +110,11 @@ class Feedback(generics.GenericAPIView):
         ans = json.loads(json.dumps(ans))
         return Response(ans)
 
-    # def put(self, request, *args, **kwargs):
-    #     ans = BL.edit_feedback(self.kwargs['id_attr'], self.kwargs['id_hint'], request.data)
-    #     ans = json.loads(json.dumps(ans))
-    #     return Response(ans)
+    def put(self, request, *args, **kwargs):
+        ans = BL.edit_feedback_question(self.kwargs['id'], request.data)
+        ans = FeedbackSerializer(ans, many=False)
+        ans = json.loads(json.dumps(ans.data))
+        return Response(ans)
 
 
 class AmericanQuestionsList(generics.GenericAPIView):
