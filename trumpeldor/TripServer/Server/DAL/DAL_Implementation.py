@@ -115,9 +115,11 @@ class DAL_Implementation(DAL_Abstract):
     def add_hint(self, id_attraction, kind, data, description):
         if kind == 'HP':
             data = add_media([readAndClear('Server/ManageSystem/fileImg')], 'image/jpeg', '.png')
+            data = addPrefixUrl(data)[0]
         elif kind == 'HV':
             data = add_media([readAndClear('Server/ManageSystem/fileVid')], 'video/mp4', '.mp4')
-        hint = Hint(attraction=self.getAttraction(id_attraction), kind=kind, data=addPrefixUrl(data)[0], description=description)
+            data = addPrefixUrl(data)[0]
+        hint = Hint(attraction=self.getAttraction(id_attraction), kind=kind, data=data, description=description)
         hint.save()
         return hint
 
@@ -227,10 +229,10 @@ class DAL_Implementation(DAL_Abstract):
         attraction.x=x
         attraction.y=y
         attraction.description=description
-        #if picturesURLS is not null:
-        attraction.picturesURLS=addPrefixUrl(add_media([readAndClear(readAndClear('Server/ManageSystem/fileImg'))], 'image/jpeg', '.png'))
-        #if videosURLS is not null:
-        attraction.videosURLS=addPrefixUrl(add_media([readAndClear(readAndClear('Server/ManageSystem/fileVid'))], 'video/mp4', '.mp4'))
+        if picturesURLS != 'null':
+            attraction.picturesURLS=addPrefixUrl(add_media([readAndClear('Server/ManageSystem/fileImg')], 'image/jpeg', '.png'))
+        if videosURLS != 'null':
+            attraction.videosURLS=addPrefixUrl(add_media([readAndClear('Server/ManageSystem/fileVid')], 'video/mp4', '.mp4'))
         attraction.save()
         return attraction
 
@@ -245,10 +247,12 @@ class DAL_Implementation(DAL_Abstract):
     def edit_hint(self, id_attraction, id_hint, data, description):
         hint = self.get_hint(id_attraction, id_hint)
         if hint.kind == 'HP':
-            data = add_media([readAndClear(readAndClear('Server/ManageSystem/fileImg'))], 'image/jpeg', '.png')
+            data = add_media([readAndClear('Server/ManageSystem/fileImg')], 'image/jpeg', '.png')
+            data = addPrefixUrl(data)[0]
         elif hint.kind == 'HV':
-            data = add_media([readAndClear(readAndClear('Server/ManageSystem/fileVid'))], 'video/mp4', '.mp4')
-        hint.data = addPrefixUrl(data)[0]
+            data = add_media([readAndClear('Server/ManageSystem/fileVid')], 'video/mp4', '.mp4')
+            data = addPrefixUrl(data)[0]
+        hint.data = data
         hint.description = description
         hint.save()
         return True
@@ -358,7 +362,7 @@ class DAL_Implementation(DAL_Abstract):
         return SlidingPuzzle.objects.filter(attraction=self.get_attraction(id_attraction)).all()
 
     def add_sliding_puzzle(self, id_attraction, piecesURLS, width, height, description):
-        sliding_puzzle_pic = add_media([readAndClear(readAndClear('Server/ManageSystem/fileImg'))], 'image/jpeg', '.png')
+        sliding_puzzle_pic = add_media([readAndClear('Server/ManageSystem/fileImg')], 'image/jpeg', '.png')
         wid = int(width)
         hei = int(height)
         slicers = image_slicer.slice('media/' + sliding_puzzle_pic[0], wid*hei)
@@ -379,7 +383,7 @@ class DAL_Implementation(DAL_Abstract):
         return Puzzle.objects.filter(attraction=self.get_attraction(id_attraction)).all()
 
     def add_puzzle(self, id_attraction, piecesURLS, width, height, description):
-        puzzle_pic = add_media([readAndClear(readAndClear('Server/ManageSystem/fileImg'))], 'image/jpeg', '.png')
+        puzzle_pic = add_media([readAndClear('Server/ManageSystem/fileImg')], 'image/jpeg', '.png')
         wid = int(width)
         hei = int(height)
         slicers = image_slicer.slice('media/' + puzzle_pic[0], wid * hei)
@@ -459,7 +463,6 @@ def add_media(media_urls, replace, suffix):
     names_of_files = []
     for file in media_urls:
         file = file.replace('data:' + replace + ';base64,', '')
-        #print(shit)
         imgdata = base64.b64decode(file)
         filename = str(uuid.uuid4()) + suffix
         with open('media/' + filename, 'wb') as f:
