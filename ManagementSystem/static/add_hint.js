@@ -289,6 +289,13 @@ function funcToSendImage(attractionsJSON) {
     let name = localStorage.getItem("name_for_add_aq");
     let desc = localStorage.getItem("desc_for_add_aq");
     // alert("in get name! "+"of the origin : " + lat + " , " + lng);
+    let pixArr = 'null';
+    if (helperVar != undefined) {
+        pixArr = [];
+        pixArr.push("hello");
+        // can do it with all pics.. just add loop
+        sendLongBase64PartsPic(helperVar);
+    }
     attractionsJSON.forEach(function (attr) {
         let p = {name: attr['name'], description: attr['description']};
         // alert("in get name! "+"of the origin : " + name + " , " + desc + "\n of the other: "+p.name +" , "+ p.description);
@@ -297,7 +304,7 @@ function funcToSendImage(attractionsJSON) {
             let the_hint = {
                 attraction: attr,
                 kind: "HP",
-                data: helperVar,
+                data: pixArr,
                 description: document.getElementById("pic_hint_description").value
             };
             let attr_id = attr['id'];
@@ -317,6 +324,12 @@ function funcToSendVideo(attractionsJSON) {
     let name = localStorage.getItem("name_for_add_aq");
     let desc = localStorage.getItem("desc_for_add_aq");
     // alert("in get name! "+"of the origin : " + lat + " , " + lng);
+    let vidArr = 'null';
+    if (helperVarVid != undefined) {
+        vidArr = [];
+        vidArr.push("hello");
+        sendLongBase64Parts(helperVarVid);
+    }
     attractionsJSON.forEach(function (attr) {
         let p = {name: attr['name'], description: attr['description']};
         // alert("in get name! "+"of the origin : " + name + " , " + desc + "\n of the other: "+p.name +" , "+ p.description);
@@ -325,7 +338,7 @@ function funcToSendVideo(attractionsJSON) {
             let the_hint = {
                 attraction: attr,
                 kind: "HV",
-                data: helperVarVid,
+                data: vidArr,
                 description: document.getElementById("vid_hint_description").value
             };
             let attr_id = attr['id'];

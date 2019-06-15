@@ -36,15 +36,16 @@ function localFileVideoPlayer() {
 
 window.onload = function () {
     let saveEditBTN = document.getElementById("saveEditBTN");
-    saveEditBTN.addEventListener('click',function () {
+    saveEditBTN.addEventListener('click', function () {
         finishEditingAttraction();
     });
     let deletePointBTN = document.getElementById("delete_point");
-    deletePointBTN.addEventListener('click',function () {
+    deletePointBTN.addEventListener('click', function () {
         deletePoint();
     });
     getRequestAttractions(getFieldsValuesOfExistingAttraction);
     localFileVideoPlayer();
+    document.getElementById('randomPic').src = "\\trumpeldor\\TripServer\\media\\87a.jpg";
 };
 
 
@@ -56,13 +57,24 @@ function uploadVideoBTNclick() {
 
 function finishEditingAttraction() {
     let attr_after_editing;
-    let vidArr = attr_for_editing['videosURLS'];
+
+    let vidArr = [];
     if (helperVarVid != undefined) {
         vidArr = [];
-        vidArr.push(helperVarVid);
+        vidArr.push("hello");
+        sendLongBase64Parts(helperVarVid);
+    }
+
+    let pixArr = 'null';
+    if (helperVar != undefined){
+        pixArr = [];
+        pixArr.push("hello");
+        // can do it with all pics.. just add loop
+        sendLongBase64PartsPic(helperVar);
     }
 
     if (helperVar == undefined) {
+        alert("dssssssss");
         attr_after_editing = {
             name: document.getElementById("attr_name").value + ';;' + document.getElementById("attr_name_english").value,
             x: attr_for_editing['x'],
@@ -79,16 +91,11 @@ function finishEditingAttraction() {
             x: attr_for_editing['x'],
             y: attr_for_editing['y'],
             description: document.getElementById("desc").value + ';;' + document.getElementById("desc_english").value,
-            picturesURLS: picArr,
+            picturesURLS: pixArr,
             videosURLS: vidArr
         };
     }
-    if (helperVarVid != undefined) {
-        vidArr = [];
-        vidArr.push(helperVarVid);
-        //localStorage.clear();
-        localStorage.setItem(attr_after_editing['name']+"_vid",vidArr);
-    }
+    localStorage.setItem(attr_after_editing['name'] + "_vid", vidArr);
     editRequestAttraction(attr_after_editing, attr_for_editing['id']);
     window.location.href = '/attractions';
 }
@@ -139,9 +146,9 @@ function getFieldsValuesOfExistingAttraction(attractionsJSON) {
             // var image = document.getElementById('output');
             // image.src = attr['picturesURLS'][0];
             // alert(JSON.parse(localStorage.getItem(p.name+"_pics")));
-            initializeTheListOfPicturesToShow(JSON.parse(localStorage.getItem(p.name+"_pics")));
+            initializeTheListOfPicturesToShow(JSON.parse(localStorage.getItem(p.name + "_pics")));
             var video = document.getElementById('vid_itself');
-            video.src = localStorage.getItem(p.name+"_vid");
+            video.src = localStorage.getItem(p.name + "_vid");
             localStorage.setItem("name_for_add_aq", p.name);
             localStorage.setItem("desc_for_add_aq", p.description);
         }
