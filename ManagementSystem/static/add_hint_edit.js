@@ -321,7 +321,8 @@ function funcToSendVideo(attractionsJSON) {
     let desc = localStorage.getItem("desc_for_add_aq");
     // alert("in get name! "+"of the origin : " + lat + " , " + lng);
     attractionsJSON.forEach(function (attr) {
-        let vidArr = 'null';
+
+        let vidArr = [];
         if (helperVarVid != undefined) {
             vidArr = [];
             vidArr.push("hello");
@@ -330,13 +331,14 @@ function funcToSendVideo(attractionsJSON) {
         let p = {name: attr['name'], description: attr['description']};
         // alert("in get name! "+"of the origin : " + name + " , " + desc + "\n of the other: "+p.name +" , "+ p.description);
         if (p.name === name && p.description === desc) {
-
+            alert("dsa");
             let the_hint = {
                 attraction: attr,
                 kind: "HV",
                 data: vidArr,
                 description: document.getElementById("vid_hint_description").value
             };
+
             let attr_id = attr['id'];
             postRequestHint(the_hint, attr_id);
             window.location.href = '/add_hint_edit';

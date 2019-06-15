@@ -57,7 +57,8 @@ function uploadVideoBTNclick() {
 
 function finishEditingAttraction() {
     let attr_after_editing;
-    let vidArr = 'null';
+
+    let vidArr = [];
     if (helperVarVid != undefined) {
         vidArr = [];
         vidArr.push("hello");
@@ -65,13 +66,15 @@ function finishEditingAttraction() {
     }
 
     let pixArr = 'null';
-    if (arrOfPicsData != []) {
+    if (helperVar != undefined){
         pixArr = [];
         pixArr.push("hello");
         // can do it with all pics.. just add loop
-        sendLongBase64PartsPic(arrOfPicsData[0]);
+        sendLongBase64PartsPic(helperVar);
     }
+
     if (helperVar == undefined) {
+        alert("dssssssss");
         attr_after_editing = {
             name: document.getElementById("attr_name").value + ';;' + document.getElementById("attr_name_english").value,
             x: attr_for_editing['x'],
