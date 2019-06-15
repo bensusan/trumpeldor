@@ -30,7 +30,7 @@ function loadStringOfInnerHTMLWithHints(hintsJSON) {
             if (hint['data'].substring(0, 10) == 'data:video')
                 str = str + " data: " + "VideoMedia" + videoCounter + "<br />";
             else
-                str=str+" text: "+ hint['data'].split(';;')[0]+"<br />";
+                str = str + " text: " + hint['data'].split(';;')[0] + "<br />";
         }
 
 
@@ -290,12 +290,19 @@ function funcToSendImage(attractionsJSON) {
     let desc = localStorage.getItem("desc_for_add_aq");
     // alert("in get name! "+"of the origin : " + lat + " , " + lng);
     attractionsJSON.forEach(function (attr) {
+        let pixArr = 'null';
+        if (arrOfPicsData != []) {
+            pixArr = [];
+            pixArr.push("hello");
+            // can do it with all pics.. just add loop
+            sendLongBase64PartsPic(helperVar);
+        }
         let p = {name: attr['name'], description: attr['description']};
         // alert("in get name! "+"of the origin : " + name + " , " + desc + "\n of the other: "+p.name +" , "+ p.description);
         if (p.name === name && p.description === desc) {
             let diskit = document.getElementById("pic_hint_description").value;
             // alert(diskit);
-            let the_hint = {attraction: attr, kind: "HP", data: helperVar, description: diskit};
+            let the_hint = {attraction: attr, kind: "HP", data: pixArr, description: diskit};
             let attr_id = attr['id'];
             postRequestHint(the_hint, attr_id);
             window.location.href = '/add_hint_edit';
@@ -314,6 +321,12 @@ function funcToSendVideo(attractionsJSON) {
     let desc = localStorage.getItem("desc_for_add_aq");
     // alert("in get name! "+"of the origin : " + lat + " , " + lng);
     attractionsJSON.forEach(function (attr) {
+        let vidArr = 'null';
+        if (helperVarVid != undefined) {
+            vidArr = [];
+            vidArr.push("hello");
+            sendLongBase64Parts(helperVarVid);
+        }
         let p = {name: attr['name'], description: attr['description']};
         // alert("in get name! "+"of the origin : " + name + " , " + desc + "\n of the other: "+p.name +" , "+ p.description);
         if (p.name === name && p.description === desc) {
@@ -321,7 +334,7 @@ function funcToSendVideo(attractionsJSON) {
             let the_hint = {
                 attraction: attr,
                 kind: "HV",
-                data: helperVarVid,
+                data: vidArr,
                 description: document.getElementById("vid_hint_description").value
             };
             let attr_id = attr['id'];

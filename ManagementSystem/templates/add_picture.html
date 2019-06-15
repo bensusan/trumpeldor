@@ -4,21 +4,23 @@
     <meta charset="UTF-8">
     <title>הוספת תמונה למשחק</title>
     {% load static %}
-<link rel="stylesheet" href="{% static 'buttoni.css' %}?version=4">
+    <link rel="stylesheet" href="{% static 'buttoni.css' %}?version=4">
     {% load static %}
-<link rel="stylesheet" href="{% static 'withImages.css' %}?version=1">
-     {% load static %}
-<link rel="stylesheet" href="{% static 'SideMenu.css' %}?version=4">
-{% load static %}
-<link rel="stylesheet" href="{% static 'just_want_background.css' %}?version=3">
-     {% load static %}
-<script src="{% static 'properties.js' %}?version=4"></script>
-        {% load static %}
-<script src="{% static 'attractions.js' %}?version=4"></script>
+    <link rel="stylesheet" href="{% static 'withImages.css' %}?version=1">
     {% load static %}
-<script src="{% static 'add_picture.js' %}?version=19"></script>
+    <link rel="stylesheet" href="{% static 'SideMenu.css' %}?version=4">
     {% load static %}
-<script src="{% static 'lz-string.js' %}?version=12"></script>
+    <link rel="stylesheet" href="{% static 'just_want_background.css' %}?version=3">
+    {% load static %}
+    <script src="{% static 'properties.js' %}?version=4"></script>
+    {% load static %}
+    <script src="{% static 'attractions.js' %}?version=9"></script>
+    {% load static %}
+    <script src="{% static 'add_picture.js' %}?version=19"></script>
+    {% load static %}
+    <script src="{% static 'lz-string.js' %}?version=12"></script>
+    {% load static %}
+    <script src="{% static 'syncAttr.js' %}?version=4"></script>
 </head>
 <body>
 
@@ -32,32 +34,35 @@
 
 <div align="center">
     <label><b>:הדרכה למשחק</b></label>
-<p></p>
-<textarea id="game_instructions_text" placeholder="הוראות המשחק..." style="direction:rtl;text-align:right;height:100px;width:250px"></textarea>
-    <textarea id="game_instructions_text_english" placeholder="game instructions..." style="display:none;direction:ltr;text-align:left;height:100px;width:250px"></textarea>
+    <p></p>
+    <textarea id="game_instructions_text" placeholder="הוראות המשחק..."
+              style="direction:rtl;text-align:right;height:100px;width:250px"></textarea>
+    <textarea id="game_instructions_text_english" placeholder="game instructions..."
+              style="display:none;direction:ltr;text-align:left;height:100px;width:250px"></textarea>
     <p></p>
     <label><b>:העלאת תמונה</b></label>
-<p></p>
-<input type="file" onchange="encodeImageFileAsURL(this)"/>
-<p><img id="output" width="200" /></p>
+    <p></p>
+    <input type="file" onchange="encodeImageFileAsURL(this)"/>
+    <p><img id="output" width="200"/></p>
 
     <label><b>:אורך ורוחב התמונה (n x n)</b></label>
-<p></p>
-<select id="n_size">
-    <option value=3>3x3</option>
-    <option value=4>4x4</option>
-    <option value=5>5x5</option>
-    <option value=6>6x6</option>
-    <option value=7>7x7</option>
-    <option value=8>8x8</option>
-</select>
     <p></p>
-<button class="blogger" id="submitEverything" type="button" style="font-size:22px;border-radius:5px;direction:rtl;text-align:right;">סיימתי!</button>
-    </div>
+    <select id="n_size">
+        <option value=3>3x3</option>
+        <option value=4>4x4</option>
+        <option value=5>5x5</option>
+        <option value=6>6x6</option>
+        <option value=7>7x7</option>
+        <option value=8>8x8</option>
+    </select>
+    <p></p>
+    <button class="blogger" id="submitEverything" type="button"
+            style="font-size:22px;border-radius:5px;direction:rtl;text-align:right;">סיימתי!
+    </button>
+</div>
 <nav id="sideMenu"></nav>
 {% load static %}
 <script src="{% static 'menu_add_pic.js' %}?version=3"></script>
-
 
 
 </body>
