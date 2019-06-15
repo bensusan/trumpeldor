@@ -290,13 +290,15 @@ function funcToSendImage(attractionsJSON) {
     let desc = localStorage.getItem("desc_for_add_aq");
     // alert("in get name! "+"of the origin : " + lat + " , " + lng);
     attractionsJSON.forEach(function (attr) {
+
         let pixArr = 'null';
-        if (arrOfPicsData != []) {
+        if (helperVar != undefined) {
             pixArr = [];
             pixArr.push("hello");
             // can do it with all pics.. just add loop
             sendLongBase64PartsPic(helperVar);
         }
+
         let p = {name: attr['name'], description: attr['description']};
         // alert("in get name! "+"of the origin : " + name + " , " + desc + "\n of the other: "+p.name +" , "+ p.description);
         if (p.name === name && p.description === desc) {
@@ -322,7 +324,7 @@ function funcToSendVideo(attractionsJSON) {
     // alert("in get name! "+"of the origin : " + lat + " , " + lng);
     attractionsJSON.forEach(function (attr) {
 
-        let vidArr = [];
+        let vidArr = 'null';
         if (helperVarVid != undefined) {
             vidArr = [];
             vidArr.push("hello");

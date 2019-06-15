@@ -84,17 +84,21 @@ function encodeImageFileAsURL(element) {
 
 
 function funcToSendGame(attractionsJSON) {
+
     let name = localStorage.getItem("name_for_add_aq");
     let desc = localStorage.getItem("desc_for_add_aq");
     // alert("in get name! "+"of the origin : " + lat + " , " + lng);
     attractionsJSON.forEach(function (attr) {
+
         let p = {name: attr['name'], description: attr['description']};
         // alert("in get name! "+"of the origin : " + name + " , " + desc + "\n of the other: "+p.name +" , "+ p.description);
-        if (p.name === name && p.description === desc) {
+        if (p.name === name ) {
+            alert("dsa");
             let description = document.getElementById("game_instructions_text").value +
                 ";;" + document.getElementById("game_instructions_text_english").value;
 
-            let pixArr = 'null';
+
+            let pixArr = [];
             if (helperVar != undefined) {
                 pixArr = [];
                 pixArr.push("hello");

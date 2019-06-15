@@ -96,6 +96,7 @@ function finishEditingAttraction() {
         };
     }
     localStorage.setItem(attr_after_editing['name'] + "_vid", vidArr);
+    localStorage.setItem("desc_for_add_aq", attr_after_editing['description']);
     editRequestAttraction(attr_after_editing, attr_for_editing['id']);
     window.location.href = '/attractions';
 }

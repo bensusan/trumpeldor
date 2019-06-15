@@ -98,7 +98,7 @@ function submitAttractionWithoutInfo() {
         name: document.getElementById("attr_name").value + ";;" + document.getElementById("attr_name_english").value
         //,x:31.262860,y:34.801753
         , x: lat, y: lang
-        , description: ""
+        , description: ";;"
         , picturesURLS: 'null', videosURLS: vidArr
     };
     postRequestAttraction(attraction_to_send);
