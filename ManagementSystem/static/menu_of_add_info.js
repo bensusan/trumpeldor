@@ -2,8 +2,8 @@
 
 document.getElementById("sideMenu").innerHTML = '<div class="sidenav">\n' +
     '  <h2 style="color:#818181;">מידע נוסף על האפליקציה</h2>' +
-    '  <a id="add_pic_info">הוספת תמונה</a>\n' +
-    '  <a id="add_vid_info">הוספת סרטון</a>\n' +
+    // '  <a id="add_pic_info">הוספת תמונה</a>\n' +
+    // '  <a id="add_vid_info">הוספת סרטון</a>\n' +
     '  <a href="/main">לתפריט הראשי</a>\n' +
     '</div>\n' +
     '\n' +

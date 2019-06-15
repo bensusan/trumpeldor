@@ -1,6 +1,26 @@
 let arrOfPicsData = [];
 
 window.onload = function(){
+    let submitBTN = document.getElementById("submit_btn_add_attr");
+    submitBTN.addEventListener('click', function () {
+        sendTheAttractionWithAllInformation();
+    });
+
+    let desc = document.getElementById("desc");
+    let desc_english = document.getElementById("desc_english");
+
+    let hebrewBTN = document.getElementById("hebrewBTN");
+    let englishBTN = document.getElementById("englishBTN");
+
+    hebrewBTN.addEventListener('click', function () {
+        desc.style.display = "";
+        desc_english.style.display = "none";
+    });
+
+    englishBTN.addEventListener('click', function () {
+        desc.style.display = "none";
+        desc_english.style.display = "";
+    });
     initializeTheListOfPicturesToShow();
 };
 
@@ -57,14 +77,14 @@ function initializeTheListOfPicturesToShow() {
         let xx = JSON.parse(localStorage.getItem("x"));
         let yy = JSON.parse(localStorage.getItem("y"));
         // let vidArr = JSON.parse(localStorage.getItem("vidArr"));
-
         let attraction_to_send = {
             name:namee
             //,x:31.262860,y:34.801753
             ,x:xx ,y:yy
-            ,description:document.getElementById("desc").value
-            ,picturesURLS:arrOfPicsData ,videosURLS:[]};
-
+            ,description:document.getElementById("desc").value+";;"+document.getElementById("desc_english").value
+            ,picturesURLS:arrOfPicsData ,videosURLS:JSON.parse(localStorage.getItem("vidArr"))};
+        localStorage.setItem(namee+"_pics",JSON.stringify(arrOfPicsData))
+//JSON.parse(localStorage.getItem("vidArr"))
         postRequestAttractionn(attraction_to_send);
         localStorage.setItem("name_for_add_aq", attraction_to_send.name);
         localStorage.setItem("desc_for_add_aq", attraction_to_send.description);

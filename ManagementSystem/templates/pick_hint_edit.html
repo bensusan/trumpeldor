@@ -6,13 +6,15 @@
     {% load static %}
     <link rel="stylesheet" href="{% static 'withImages.css' %}?version=1">
     {% load static %}
+    <link rel="stylesheet" href="{% static 'buttoni.css' %}?version=2">
+    {% load static %}
     <link rel="stylesheet" href="{% static 'just_want_background.css' %}?version=1">
     {% load static %}
     <link rel="stylesheet" href="{% static 'SideMenu.css' %}?version=4">
     {% load static %}
     <script src="{% static 'attractions.js' %}?version=1"></script>
     {% load static %}
-    <script src="{% static 'pick_hint_edit.js' %}?version=13"></script>
+    <script src="{% static 'pick_hint_edit.js' %}?version=18"></script>
     {% load static %}
     <script src="{% static 'properties.js' %}?version=2"></script>
 </head>
@@ -21,7 +23,7 @@
 <div>
     <nav id="sideMenu"></nav>
     {% load static %}
-    <script src="{% static 'menu_of_pick_hint_edit.js' %}?version=2"></script>
+    <script src="{% static 'menu_of_pick_hint_edit.js' %}?version=4"></script>
 
 </div>
 
@@ -54,7 +56,7 @@
         <option id="ecb10" value="10" style="display: none;">10</option>
     </select>
     <p></p>
-    <button class="button" type="button" id="edit_chosen_hint" style="display: none">עריכה</button>
+    <button class="blogger" type="button" id="edit_chosen_hint" style="display: none;font-size: 20px;">עריכה</button>
     <p></p>
     <label id="deleteTitle" style="display:none;font-size: 26px;"><b>בחירת רמז למחיקה</b></label>
     <p></p>
@@ -71,7 +73,7 @@
         <option id="dcb10" value="10" style="display: none;">10</option>
     </select>
     <p></p>
-    <button class="button" type="button" id="delete_chosen_hint" style="display: none">מחיקה</button>
+    <button class="blogger" type="button" id="delete_chosen_hint" style="display: none;font-size: 20px;">מחיקה</button>
     <p></p>
 
 

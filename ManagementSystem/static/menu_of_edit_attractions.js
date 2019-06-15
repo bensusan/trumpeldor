@@ -7,11 +7,11 @@ document.getElementById("sideMenu").innerHTML = '<div class="sidenav">\n' +
     '    <i class="fa fa-caret-down"></i>\n' +
     '  </button>\n' +
     '  <div class="dropdown-container">\n' +
-    '    <a href="/add_game_edit">הוספת משחק</a>\n' +
+    '    <a id="add_game" href="/add_game_edit">הוספת משחק</a>\n' +
     '    <a href="/pick_delete_game">מחיקת משחק</a>\n' +
     '  </div>\n' +
-    '  <a href="/pick_aq_edit">עריכת שאלות אמריקאיות</a>\n' +
-    '  <a href="/pick_hint_edit">עריכת רמזים</a>\n' +
+    '  <a id="edit_aqs" href="/pick_aq_edit">עריכת שאלות אמריקאיות</a>\n' +
+    '  <a id="edit_hints" href="/pick_hint_edit">עריכת רמזים</a>\n' +
      '  <a href="/main">לתפריט הראשי</a>\n' +
     '</div>\n' +
     '\n' +

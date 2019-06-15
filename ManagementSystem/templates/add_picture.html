@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <title>הוספת תמונה למשחק</title>
     {% load static %}
+<link rel="stylesheet" href="{% static 'buttoni.css' %}?version=4">
+    {% load static %}
 <link rel="stylesheet" href="{% static 'withImages.css' %}?version=1">
      {% load static %}
 <link rel="stylesheet" href="{% static 'SideMenu.css' %}?version=4">
@@ -14,13 +16,25 @@
         {% load static %}
 <script src="{% static 'attractions.js' %}?version=4"></script>
     {% load static %}
-<script src="{% static 'add_picture.js' %}?version=6"></script>
+<script src="{% static 'add_picture.js' %}?version=18"></script>
+    {% load static %}
+<script src="{% static 'lz-string.js' %}?version=12"></script>
 </head>
 <body>
+
+
+<button id="englishBTN" class="language"
+        style="height: 58px;width: 100px; background-image: url('../static/usa.JPG');background-size: cover; font-size:24px">
+</button>
+<button id="hebrewBTN" class="language"
+        style="height: 58px;width: 100px; background-image: url('../static/israel.JPG');background-size: cover; font-size:24px">
+</button>
+
 <div align="center">
     <label><b>:הדרכה למשחק</b></label>
 <p></p>
 <textarea id="game_instructions_text" placeholder="הוראות המשחק..." style="direction:rtl;text-align:right;height:100px;width:250px"></textarea>
+    <textarea id="game_instructions_text_english" placeholder="game instructions..." style="display:none;direction:ltr;text-align:left;height:100px;width:250px"></textarea>
     <p></p>
     <label><b>:העלאת תמונה</b></label>
 <p></p>
@@ -38,7 +52,7 @@
     <option value=8>8x8</option>
 </select>
     <p></p>
-<button class="button" onclick="sendTheGameData()" style="direction:rtl;text-align:right;">סיימתי!</button>
+<button class="blogger" id="submitEverything" type="button" style="font-size:22px;border-radius:5px;direction:rtl;text-align:right;">סיימתי!</button>
     </div>
 <nav id="sideMenu"></nav>
 {% load static %}

@@ -3,7 +3,7 @@
 document.getElementById("sideMenu").innerHTML = '<div class="sidenav">\n' +
      '  <h2 style="color:#818181;">עריכת שאלה אמריקאית</h2>' +
     '  <a href="/main">לתפריט הראשי</a>\n' +
-    '  <a href="/add_aq_edit">הוספת שאלה אמריקאית</a>\n' +
+    '  <a id="want_to_add_aq" href="/add_aq_edit">הוספת שאלה אמריקאית</a>\n' +
     '  <a id="want_to_edit_aq">עריכת שאלה אמריקאית</a>\n' +
     '  <a id="want_to_delete_aq">מחיקת שאלה אמריקאית</a>\n' +
     '  <a onclick="donePickingAqs()">סיימתי</a>\n' +

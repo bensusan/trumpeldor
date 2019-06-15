@@ -5,74 +5,83 @@
     <title>הגדרות אפליקציה</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     {% load static %}
-<link rel="stylesheet" href="{% static 'SideMenu.css' %}?version=4">
-{% load static %}
-<link rel="stylesheet" href="{% static 'just_want_background.css' %}?version=2">
+    <link rel="stylesheet" href="{% static 'buttoni.css' %}?version=12">
     {% load static %}
-<link rel="stylesheet" href="{% static 'Map.css' %}?version=1">
- {% load static %}
-<script src="{% static 'properties.js' %}?version=3"></script>
-
+    <link rel="stylesheet" href="{% static 'SideMenu.css' %}?version=12">
     {% load static %}
-<script src="{% static 'more_properties.js' %}?version=22"></script>
+    <link rel="stylesheet" href="{% static 'just_want_background.css' %}?version=11">
     {% load static %}
-<script src="{% static 'prop_map.js' %}?version=6"></script>
+    <link rel="stylesheet" href="{% static 'Map.css' %}?version=11">
+    {% load static %}
+    <script src="{% static 'attractions.js' %}?version=5"></script>
+    {% load static %}
+    <script src="{% static 'properties.js' %}?version=5"></script>
+    {% load static %}
+    <script src="{% static 'prop_map.js' %}?version=15"></script>
+    {% load static %}
+    <script src="{% static 'more_properties.js' %}?version=26"></script>
 
 </head>
 <body>
 <div align="center">
     <label style="font-size: 44px"><b>הגדרות</b></label>
-    <p><br /></p>
+    <p><br/></p>
     <p><b>:(גבולות הגזרה (בחרי ארבע נקודות שיתחמו את גבולות המשחק</b></p>
-        <button id="ok1" type="button">save point</button>
+    <button id="ok1" type="button">save point</button>
     <input id="lat1" name="subject" placeholder="lat" style="width:50px;height:20px;">
     <input id="lng1" name="subject" placeholder="lng" style="width:50px;height:20px;">
- <label style="font-size: 16px"><b> :  נקודה 1</b></label>
+    <label style="font-size: 16px"><b> : נקודה 1</b></label>
     <p></p>
     <button id="ok2" type="button">save point</button>
-<input id="lat2" name="subject" placeholder="lat" style="width:50px;height:20px;">
+    <input id="lat2" name="subject" placeholder="lat" style="width:50px;height:20px;">
     <input id="lng2" name="subject" placeholder="lng" style="width:50px;height:20px;">
- <label style="font-size: 16px"><b> :  נקודה 2</b></label>
+    <label style="font-size: 16px"><b> : נקודה 2</b></label>
 
     <p></p>
-        <button  id="ok3" type="button">save point</button>
-<input id="lat3" name="subject" placeholder="lat" style="width:50px;height:20px;">
+    <button id="ok3" type="button">save point</button>
+    <input id="lat3" name="subject" placeholder="lat" style="width:50px;height:20px;">
     <input id="lng3" name="subject" placeholder="lng" style="width:50px;height:20px;">
- <label style="font-size: 16px"><b> :  נקודה 3</b></label>
+    <label style="font-size: 16px"><b> : נקודה 3</b></label>
     <p></p>
-        <button id="ok4" type="button">save point</button>
-<input id="lat4" name="subject" placeholder="lat" style="width:50px;height:20px;">
+    <button id="ok4" type="button">save point</button>
+    <input id="lat4" name="subject" placeholder="lat" style="width:50px;height:20px;">
     <input id="lng4" name="subject" placeholder="lng" style="width:50px;height:20px;">
- <label style="font-size: 16px"><b> :  נקודה 4</b></label>
-<p></p>
-
-<div id="map">
-{% load static %}
-<script src="{% static 'prop_map.js' %}?version=5"></script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD7rvXqYArUeu8hVHETM6g9w-ek0RqusZ4&callback=initMapAndAttractionsprop&language=he&region=UK"
-    async defer>
-    </script>
-</div>
-
-    <p><br /></p>
-
-      <input type="number" id="info_ttl" name="subject" placeholder="הקלידי את תשובתך בשעות" style="width:160px;height:20px;">
-    <label style="font-size: 20px"><b>?כמה זמן תהיי מעוניינת לשמור מידע על משתמש רשום</b></label>
-<p></p>
-    <input type="file" name="file" id="inpi" onchange="func(this)" accept=".mp3"/>
-        <label style="font-size: 20px"><b>:הוספת צליל הגעה לאטרקציה</b></label>
+    <label style="font-size: 16px"><b> : נקודה 4</b></label>
     <p></p>
-<audio controls autoplay id="audio_controls" style="display: none">
-  <source id="attr_sound" src="" type="audio/mpeg">
-</audio>
 
-    <p><br /></p>
-     <button class="button" id="save_props" onclick="sendThis()" type="button">שמירת הגדרות</button>
-
+    <div id="map" style="left:0;width:730px;height: 400px;">
+        {% load static %}
+        <script src="{% static 'prop_map.js' %}?version=5"></script>
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD7rvXqYArUeu8hVHETM6g9w-ek0RqusZ4&callback=initMapAndAttractionsprop&language=he&region=UK"
+                async defer>
+        </script>
     </div>
+    <p><br/></p>
+    <input type="number" id="info_ttl" name="subject" placeholder="הקלידי את תשובתך בשעות"
+           style="width:160px;height:20px;">
+    <label style="font-size: 20px"><b>?כמה זמן תהיי מעוניינת לשמור מידע על משתמש רשום</b></label>
+    <p></p>
+    <label style="text-align:right;font-size: 20px"><b>:חוקי ניקוד</b></label>
+    <p></p>
+    <TABLE id="ruleTable" width="350px" border="1">
+		<TR>
+            <TD><INPUT type="checkbox" name="chk" style="width: 50px;"/></TD>
+            <TD><INPUT type="text" name="rule" placeholder="כמות ניקוד" style="direction:rtl;text-align:right;width: 200px;"/></TD>
+			<TD><INPUT type="text" name="points" placeholder="תיאור החוק" style="direction:rtl;text-align:right;width: 500px;"/></TD>
+		</TR>
+	</TABLE>
+    <p></p>
+    <INPUT type="button" value="הוספת חוק" onclick="addRow('ruleTable')" />
+    <INPUT type="button" value="מחיקת חוק" onclick="deleteRow('ruleTable')" />
+    <p></p>
+
+    <p><br/></p>
+    <button class="yahoo" id="save_props" type="button">שמירת הגדרות</button>
+
+</div>
 <nav id="sideMenu"></nav>
 {% load static %}
 <script src="{% static 'menu_of_feedback.js' %}?version=3"></script>
 
 </body>
-</html>s
+</html>

@@ -13,11 +13,6 @@ window.onload = function () {
 };
 
 
-var loadFile = function(event) {
-	var image = document.getElementById('output');
-	image.src = URL.createObjectURL(event.target.files[0]);
-};
-
 function initBtns() {
     var wantToEditBTN = document.getElementById('want_to_edit_aq');
     // var writeChosenHintTextEdit = document.getElementById("write_aq_id_to_edit");
@@ -95,9 +90,9 @@ function showInnerHtmlAndLoadValuesToComboBox(AmericanQuestionsJSON) {
             i=i+1;
             let ansString = "";
             aq['answers'].forEach(function (ans) {
-                ansString += "&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;"+ans+"</br>";
+                ansString += "&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;"+ans.split(';;')[0]+"</br>";
             });
-            str=str+"<pre>"+aq['id']+".</br>" +"question:"+ aq['question']+"</br>answers: </br>"+ ansString+"indexOfCorrectAnswer: "+ aq['indexOfCorrectAnswer']+"</pre>";
+            str=str+"<pre>"+aq['id']+".</br>" +"question:"+ aq['question'].split(';;')[0]+"</br>answers: </br>"+ ansString+"indexOfCorrectAnswer: "+ aq['indexOfCorrectAnswer']+"</pre>";
             // alert(str);
             aq_arr_for_test.push(aq);
         });
@@ -106,14 +101,12 @@ function showInnerHtmlAndLoadValuesToComboBox(AmericanQuestionsJSON) {
 
 
 function funcInOrderToDeleteAmericanQuestion(AmericanQuestionsJSON) {
-    aq_id_that_was_picked_del = document.getElementById("write_aq_id_to_delete").value;
+    var comboDelete = document.getElementById("delete_cb");
+    aq_id_that_was_picked_del = comboDelete.options[comboDelete.selectedIndex].value;
    // let number_hint_id = Number(hint_id_that_was_picked);
       AmericanQuestionsJSON.forEach(function (aq) {
-          // alert("the id is: "+attr['id']);
-        // alert("in get name! "+"of the origin : " + lat + " , " + lng + "\n of the other: "+p.lat +" , "+ p.lng);
         if(aq['id']==aq_id_that_was_picked_del)
         {
-            //alert("before delete aq!");
             deleteRequestAmericanQuestion(attractionObjToUseInHintDelete['id'],aq['id']);
             window.location.href='/pick_aq_edit';
         }
