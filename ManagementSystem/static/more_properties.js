@@ -1,5 +1,3 @@
-let theurl = "";
-let failurl = "";
 let helperVar = "";
 
 function sendThis(arrOfBoundries) {
@@ -10,6 +8,8 @@ function sendThis(arrOfBoundries) {
         loginHours: document.getElementById('info_ttl').value,
         scoreRules: scoreRules
     };
+
+    alert(toSend.toString());
     postRequestSettings(toSend);
     window.location.href = '/main';
 }
