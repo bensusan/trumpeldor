@@ -90,6 +90,7 @@ function submitAttractionWithoutInfo() {
     let lat = addedPoint.lat;
     let vidArr = [];
     if (helperVarVid != undefined) {
+        alert("ds");
         sendLongBase64Parts(helperVarVid);
     }
     let lang = addedPoint.lng;
@@ -180,6 +181,6 @@ function encodeVideoFileAsURL(element) {
 
 function postRequestFile(file){
  //   alert("hint blat");
-    syncServerRequest("POST", function noop(dummy){}, 'http://'+ip+':12344/managementsystem/file/',
+    syncServerRequest("POST", function noop(dummy){}, 'http://'+ip+':12344/managementsystem/file/vid',
         JSON.stringify(file));
 }
