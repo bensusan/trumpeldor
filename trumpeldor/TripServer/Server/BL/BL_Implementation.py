@@ -116,8 +116,6 @@ class BL_Implementation(BL_Abstract):
             return self.DAL.add_track(track['subTrack'], track['points'], track['length'])
 
     def add_feedback_question(self, feedback):#question, kind
-        print(feedback)
-        print(feedback['question'])
         return self.DAL.add_feedback_question(feedback['question'], feedback['kind'])
 
     def get_track(self, id):
@@ -322,3 +320,6 @@ class BL_Implementation(BL_Abstract):
     def edit_american_question(self, id_attraction, id_aquestion, aquestion):
         return self.DAL.edit_american_question(id_attraction, id_aquestion, aquestion['question'], aquestion['answers'],
                                               aquestion['indexOfCorrectAnswer'])
+
+    def edit_feedback_question(self, id, feedback):#question, kind
+        return self.DAL.edit_feedback_question(id, feedback['question'], feedback['kind'])

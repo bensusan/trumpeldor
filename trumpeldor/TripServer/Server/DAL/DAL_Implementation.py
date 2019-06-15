@@ -454,6 +454,15 @@ class DAL_Implementation(DAL_Abstract):
         aq.save()
         return aq
 
+    def edit_feedback_question(self, id, question, kind):
+        feedback = self.get_feedback_question(id)
+        feedback.question = question
+        feedback.kind = kind
+        feedback.save()
+        return feedback
+
+
+
 
 
 #returns array of names of the media files saved in the media folder
