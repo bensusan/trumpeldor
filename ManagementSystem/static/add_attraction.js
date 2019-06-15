@@ -88,27 +88,24 @@ function submitAttractionWithoutInfo() {
     let addedPoint = JSON.parse(localStorage.getItem("addedPoint"));
 
     let lat = addedPoint.lat;
-    let vidArr = [];
+    let lang = addedPoint.lng;
     if (helperVarVid != undefined) {
         sendLongBase64Parts(helperVarVid);
     }
-    let lang = addedPoint.lng;
     let attraction_to_send = {
         name: document.getElementById("attr_name").value + ";;" + document.getElementById("attr_name_english").value
         //,x:31.262860,y:34.801753
         , x: lat, y: lang
         , description: ""
-        , picturesURLS: [], videosURLS: []
+        , picturesURLS: [], videosURLS: 'null'
     };
     postRequestAttraction(attraction_to_send);
-    localStorage.setItem(attraction_to_send.name + "_vid", vidArr);
     localStorage.setItem("name_for_add_aq", attraction_to_send.name);
     localStorage.setItem("desc_for_add_aq", attraction_to_send.description);
     window.location.href = '/add_game';
 }
 
 function saveAndProceedToAttractionInfo() {
-
 
     let addedPoint = JSON.parse(localStorage.getItem("addedPoint"));
     let lat = addedPoint.lat;
@@ -141,10 +138,13 @@ function check() {
 
 function sendLongBase64Parts(longBase64) {
     let arrOfParts = longBase64.match(/.{1,10000}/g);
-    for(let i=0; i<arrOfParts.length; i++){
-       postRequestFile(arrOfParts[i]);
+    let counter = 0;
+    for (let i = 0; i < arrOfParts.length; i++) {
+        postRequestFile(arrOfParts[i]);
+        counter++;
     }
-   postRequestFile("end of file");
+    alert(counter);
+    postRequestFile("end of file");
 }
 
 function encodeImageFileAsURL(element) {
@@ -178,8 +178,9 @@ function encodeVideoFileAsURL(element) {
     reader.readAsDataURL(file);
 }
 
-function postRequestFile(file){
- //   alert("hint blat");
-    syncServerRequest("POST", function noop(dummy){}, 'http://'+ip+':12344/managementsystem/file/',
+function postRequestFile(file) {
+    //   alert("hint blat");
+    syncServerRequest("POST", function noop(dummy) {
+        }, 'http://' + ip + ':12344/managementsystem/file/vid',
         JSON.stringify(file));
 }

@@ -1,4 +1,4 @@
-const Http = new XMLHttpRequest();
+// const Http = new XMLHttpRequest();
 
 function syncServerRequest(getOrPost, functionOnReady, url, post=null){
     Http.onreadystatechange = function(){
