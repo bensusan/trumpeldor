@@ -50,7 +50,6 @@ window.onload = function () {
 
 function showSettings(settingsJSON) {
     let boundaries = settingsJSON['boundaries'];
-    let logo = settingsJSON['logo'];
     document.getElementById('lat1').value = boundaries[0].lat;
     document.getElementById('lng1').value = boundaries[0].lng;
     document.getElementById('lat2').value = boundaries[1].lat;
@@ -60,28 +59,24 @@ function showSettings(settingsJSON) {
     document.getElementById('lat4').value = boundaries[3].lat;
     document.getElementById('lng4').value = boundaries[3].lng;
 
-    if (logo != "") {
-        var image = document.getElementById('output');
-        image.style.display = "";
-        image.src = logo;
-    }
 
     document.getElementById('info_ttl').value = settingsJSON['loginHours'];
-
-    if (settingsJSON['successAudio'] != "") {
-        let aud = document.getElementById('audio_controls');
-        let mp = document.getElementById('attr_sound');
-        aud.style.display = "";
-        mp.src = settingsJSON['successAudio'];
-        aud.load();
+    let rules = settingsJSON['scoreRules'];
+    let rulesCount = rules.length;
+    let rulesToAdd = rulesCount - 1;
+    for (let i = 0; i < rulesToAdd; i++) {
+        addRow('ruleTable');
     }
+    let tableOfAnswers = document.getElementById('ruleTable');
+    let rowsOfTable = tableOfAnswers.rows;
+    let numberOfRowsInTable = rowsOfTable.length;
+    let rowIteratorIndex;
 
-    if (settingsJSON['failureAudio'] != "") {
-        let aud = document.getElementById('audio_controls_fail');
-        let mp = document.getElementById('attr_sound_fail');
-        aud.style.display = "";
-        mp.src = settingsJSON['failureAudio'];
-        aud.load();
+    for (rowIteratorIndex = 0; rowIteratorIndex < numberOfRowsInTable; rowIteratorIndex++) {
+        let rule = rules[rowIteratorIndex].ruleName;
+        let score = rules[rowIteratorIndex].score;
+        rowsOfTable[rowIteratorIndex].cells[1].childNodes[0].value = score;
+        rowsOfTable[rowIteratorIndex].cells[2].childNodes[0].value = rule;
     }
 }
 

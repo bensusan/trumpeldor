@@ -1,10 +1,16 @@
 let helperVar = "";
 
 function sendThis(arrOfBoundries) {
-
+    let boundries = arrOfBoundries;
+    if(arrOfBoundries.length != 4){
+        boundries = [{lat:document.getElementById('lat1').value,lng:document.getElementById('lng1').value},
+        {lat:document.getElementById('lat2').value,lng:document.getElementById('lng2').value},
+        {lat:document.getElementById('lat3').value,lng:document.getElementById('lng3').value},
+        {lat:document.getElementById('lat4').value,lng:document.getElementById('lng4').value}];
+    }
     let scoreRules = handleScoreRules();
     let toSend = {
-        boundaries: arrOfBoundries,
+        boundaries: boundries,
         loginHours: document.getElementById('info_ttl').value,
         scoreRules: scoreRules
     };
