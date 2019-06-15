@@ -93,15 +93,12 @@ function funcToSendGame(attractionsJSON) {
         let p = {name: attr['name'], description: attr['description']};
         // alert("in get name! "+"of the origin : " + name + " , " + desc + "\n of the other: "+p.name +" , "+ p.description);
         if (p.name === name ) {
-            alert("dsa");
             let description = document.getElementById("game_instructions_text").value +
                 ";;" + document.getElementById("game_instructions_text_english").value;
 
 
-            let pixArr = [];
+            let pixArr = ["hello"];
             if (helperVar != undefined) {
-                pixArr = [];
-                pixArr.push("hello");
                 // can do it with all pics.. just add loop
                 sendLongBase64PartsPic(helperVar);
             }

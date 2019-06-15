@@ -1,7 +1,7 @@
 var attr_for_editing;
 var helperVar;
 var helperVarVid;
-
+let arrOfPicsData = [];
 
 function localFileVideoPlayer() {
     'use strict';
@@ -45,6 +45,7 @@ window.onload = function () {
     });
     getRequestAttractions(getFieldsValuesOfExistingAttraction);
     localFileVideoPlayer();
+    initializeTheListOfPicturesToShow();
     document.getElementById('randomPic').src = "\\trumpeldor\\TripServer\\media\\87a.jpg";
 };
 
@@ -57,46 +58,31 @@ function uploadVideoBTNclick() {
 
 function finishEditingAttraction() {
     let attr_after_editing;
-
-    let vidArr = [];
+    let vidArr = ["hello"];
     if (helperVarVid != undefined) {
-        vidArr = [];
-        vidArr.push("hello");
         sendLongBase64Parts(helperVarVid);
-    }
-
-    let pixArr = 'null';
-    if (helperVar != undefined){
-        pixArr = [];
-        pixArr.push("hello");
-        // can do it with all pics.. just add loop
-        sendLongBase64PartsPic(helperVar);
-    }
-
-    if (helperVar == undefined) {
-        alert("dssssssss");
-        attr_after_editing = {
-            name: document.getElementById("attr_name").value + ';;' + document.getElementById("attr_name_english").value,
-            x: attr_for_editing['x'],
-            y: attr_for_editing['y'],
-            description: document.getElementById("desc").value + ';;' + document.getElementById("desc_english").value,
-            picturesURLS: attr_for_editing['picturesURLS'],
-            videosURLS: vidArr
-        };
     } else {
-        let picArr = [];
-        picArr.push(helperVar);
-        attr_after_editing = {
-            name: document.getElementById("attr_name").value + ';;' + document.getElementById("attr_name_english").value,
-            x: attr_for_editing['x'],
-            y: attr_for_editing['y'],
-            description: document.getElementById("desc").value + ';;' + document.getElementById("desc_english").value,
-            picturesURLS: pixArr,
-            videosURLS: vidArr
-        };
+        vidArr = 'null';
     }
+    let pixArr = ["hello"];
+    if (arrOfPicsData.length != 0) {
+        // can do it with all pics.. just add loop
+        sendLongBase64PartsPic(arrOfPicsData[0]);
+    } else {
+        pixArr = attr_for_editing['picturesURLS'];
+    }
+
+    attr_after_editing = {
+        name: document.getElementById("attr_name").value + ';;' + document.getElementById("attr_name_english").value,
+        x: attr_for_editing['x'],
+        y: attr_for_editing['y'],
+        description: document.getElementById("desc").value + ';;' + document.getElementById("desc_english").value,
+        picturesURLS: pixArr,
+        videosURLS: vidArr
+    };
     localStorage.setItem(attr_after_editing['name'] + "_vid", vidArr);
     localStorage.setItem("desc_for_add_aq", attr_after_editing['description']);
+
     editRequestAttraction(attr_after_editing, attr_for_editing['id']);
     window.location.href = '/attractions';
 }
@@ -147,7 +133,7 @@ function getFieldsValuesOfExistingAttraction(attractionsJSON) {
             // var image = document.getElementById('output');
             // image.src = attr['picturesURLS'][0];
             // alert(JSON.parse(localStorage.getItem(p.name+"_pics")));
-            initializeTheListOfPicturesToShow(JSON.parse(localStorage.getItem(p.name + "_pics")));
+            // initializeTheListOfPicturesToShow(JSON.parse(localStorage.getItem(p.name + "_pics")));
             var video = document.getElementById('vid_itself');
             video.src = localStorage.getItem(p.name + "_vid");
             localStorage.setItem("name_for_add_aq", p.name);
@@ -156,25 +142,71 @@ function getFieldsValuesOfExistingAttraction(attractionsJSON) {
     });
 }
 
-function initializeTheListOfPicturesToShow(arrOfPics) {
 
-    //var files = event.target.files; //FileList object
-    var files = arrOfPics;
-    var output = document.getElementById("result");
+function initializeTheListOfPicturesToShow() {
+    //Check File API support
+    if (window.File && window.FileList && window.FileReader) {
+        var filesInput = document.getElementById("files");
 
-    for (var i = 0; i < files.length; i++) {
-        var file = files[i];
-        var img = document.createElement("img");
-        img.src = file;
-        img.className = 'thumbnail';
-        var div = document.createElement("div");
-        div.appendChild(img);
+        filesInput.addEventListener("change", function (event) {
 
-        output.insertBefore(div, null);
+            var files = event.target.files; //FileList object
+            var output = document.getElementById("result");
+
+            for (var i = 0; i < files.length; i++) {
+                var file = files[i];
+
+                //Only pics
+                if (!file.type.match('image'))
+                    continue;
+
+                var picReader = new FileReader();
+
+                picReader.addEventListener("load", function (event) {
+
+                    var picFile = event.target;
+
+                    var div = document.createElement("div");
+
+                    div.innerHTML = "<img class='thumbnail' src='" + picFile.result + "'" +
+                        "title='" + picFile.name + "'/>";
+
+                    let picURL = picFile.result;
+                    arrOfPicsData.push(picURL);
+                    output.insertBefore(div, null);
+
+                });
+
+                //Read the image
+                picReader.readAsDataURL(file);
+            }
+
+        });
+    } else {
+        console.log("Your browser does not support File API");
     }
-
-
 }
+
+
+// function initializeTheListOfPicturesToShow(arrOfPics) {
+//
+//     //var files = event.target.files; //FileList object
+//     var files = arrOfPics;
+//     var output = document.getElementById("result");
+//
+//     for (var i = 0; i < files.length; i++) {
+//         var file = files[i];
+//         var img = document.createElement("img");
+//         img.src = file;
+//         img.className = 'thumbnail';
+//         var div = document.createElement("div");
+//         div.appendChild(img);
+//
+//         output.insertBefore(div, null);
+//     }
+//
+//
+// }
 
 function initializeLanguageBTNs() {
 

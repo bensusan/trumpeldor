@@ -201,7 +201,6 @@ function getTheNeededAttractionIdToSendItOnThePostRequest(attractionsJSON) {
                 data: document.getElementById("text_hint_id").value + ";;" + document.getElementById("text_hint_id_english").value,
                 description: ""
             };
-            alert(attr['id']);
             postRequestHint(textHintToSend, attr['id']);
             window.location.href = '/add_hint';
         }
@@ -289,10 +288,8 @@ function funcToSendImage(attractionsJSON) {
     let name = localStorage.getItem("name_for_add_aq");
     let desc = localStorage.getItem("desc_for_add_aq");
     // alert("in get name! "+"of the origin : " + lat + " , " + lng);
-    let pixArr = 'null';
+    let pixArr = ["hello"];
     if (helperVar != undefined) {
-        pixArr = [];
-        pixArr.push("hello");
         // can do it with all pics.. just add loop
         sendLongBase64PartsPic(helperVar);
     }
@@ -324,10 +321,8 @@ function funcToSendVideo(attractionsJSON) {
     let name = localStorage.getItem("name_for_add_aq");
     let desc = localStorage.getItem("desc_for_add_aq");
     // alert("in get name! "+"of the origin : " + lat + " , " + lng);
-    let vidArr = 'null';
+    let vidArr = ["hello"];
     if (helperVarVid != undefined) {
-        vidArr = [];
-        vidArr.push("hello");
         sendLongBase64Parts(helperVarVid);
     }
     attractionsJSON.forEach(function (attr) {
