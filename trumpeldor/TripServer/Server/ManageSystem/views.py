@@ -429,4 +429,28 @@ def settings(request):
 
 
 
+################### FOR FILES #############################
+
+
+def file(request):
+    if request.method == 'GET':
+        if request.path_info == '/managementsystem/file/img':
+            file_path = 'Server/ManageSystem/fileImg'
+        else:
+            file_path = 'Server/ManageSystem/fileVid'
+        with open(file_path, "r") as fp:
+            file_cont = fp.read()
+        return JsonResponse({'data':file_cont})
+    elif request.method == 'POST':
+        if request.path_info == '/managementsystem/file/img':
+            file_path = 'Server/ManageSystem/fileImg'
+        else:
+            file_path = 'Server/ManageSystem/fileVid'
+        if request.data == "end of file":
+            return
+        with open(file_path, "a") as fp:
+            fp.write(request.data)
+            fp.close()
+        return Response(json.loads(json.dumps(True)))
+
 

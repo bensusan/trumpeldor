@@ -88,12 +88,16 @@ class DAL_Implementation(DAL_Abstract):
     def add_attraction(self, name, x, y, description, picturesURLS, videosURLS):
         names_of_pics=[]
         names_of_vids=[]
+        # if picturesURLS != 'null':
+        #     names_of_pics = add_media(picturesURLS, 'image/jpeg', '.png')
+        # if videosURLS != 'null':
+        #     names_of_vids = add_media(videosURLS, 'video/mp4', '.mp4')
+        # attraction = Attraction(name=name, x=x, y=y, description=description, picturesURLS=addPrefixUrl(names_of_pics),
+        #                         videosURLS=addPrefixUrl(names_of_vids))
         if picturesURLS != 'null':
             names_of_pics = add_media(picturesURLS, 'image/jpeg', '.png')
         if videosURLS != 'null':
             names_of_vids = add_media(videosURLS, 'video/mp4', '.mp4')
-        attraction = Attraction(name=name, x=x, y=y, description=description, picturesURLS=addPrefixUrl(names_of_pics),
-                                videosURLS=addPrefixUrl(names_of_vids))
         attraction.save()
         return attraction
 
@@ -444,7 +448,7 @@ def add_media(media_urls, replace, suffix):
     names_of_files = []
     for file in media_urls:
         file = file.replace('data:' + replace + ';base64,', '')
-        #print(file)
+        #print(shit)
         imgdata = base64.b64decode(file)
         filename = str(uuid.uuid4()) + suffix
         with open('media/' + filename, 'wb') as f:
