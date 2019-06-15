@@ -76,12 +76,11 @@ function sendTheAttractionWithAllInformation() {
 
     let pixArr = 'null';
     if (arrOfPicsData != []) {
-        pixArr = 'hello';
-        // pixArr.push("hello");
+        pixArr = [];
+        pixArr.push("hello");
         // can do it with all pics.. just add loop
         sendLongBase64PartsPic(arrOfPicsData[0]);
     }
-    alert("Sda");
     let attraction_to_send = {
         name: namee
         //,x:31.262860,y:34.801753
