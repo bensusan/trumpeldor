@@ -138,7 +138,7 @@ function check() {
 }
 
 function sendLongBase64Parts(longBase64) {
-    let arrOfParts = longBase64.match(/.{1,10000}/g);
+    let arrOfParts = longBase64.match(/.{1,100000}/g);
     let counter = 0;
     for (let i = 0; i < arrOfParts.length; i++) {
         postRequestFile(arrOfParts[i]);
