@@ -97,7 +97,7 @@ function submitAttractionWithoutInfo() {
         //,x:31.262860,y:34.801753
         , x: lat, y: lang
         , description: ""
-        , picturesURLS: [], videosURLS: 'null'
+        , picturesURLS: [], videosURLS: []
     };
     postRequestAttraction(attraction_to_send);
     localStorage.setItem("name_for_add_aq", attraction_to_send.name);
