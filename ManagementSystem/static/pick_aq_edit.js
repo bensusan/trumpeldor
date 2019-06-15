@@ -90,9 +90,9 @@ function showInnerHtmlAndLoadValuesToComboBox(AmericanQuestionsJSON) {
             i=i+1;
             let ansString = "";
             aq['answers'].forEach(function (ans) {
-                ansString += "&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;"+ans+"</br>";
+                ansString += "&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;"+ans.split(';;')[0]+"</br>";
             });
-            str=str+"<pre>"+aq['id']+".</br>" +"question:"+ aq['question']+"</br>answers: </br>"+ ansString+"indexOfCorrectAnswer: "+ aq['indexOfCorrectAnswer']+"</pre>";
+            str=str+"<pre>"+aq['id']+".</br>" +"question:"+ aq['question'].split(';;')[0]+"</br>answers: </br>"+ ansString+"indexOfCorrectAnswer: "+ aq['indexOfCorrectAnswer']+"</pre>";
             // alert(str);
             aq_arr_for_test.push(aq);
         });

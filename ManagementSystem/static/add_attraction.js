@@ -142,9 +142,9 @@ function check() {
 function sendLongBase64Parts(longBase64) {
     let arrOfParts = longBase64.match(/.{1,10000}/g);
     for(let i=0; i<arrOfParts.length; i++){
-       // postRequestFile(arrOfParts[i]);
+       postRequestFile(arrOfParts[i]);
     }
-   // postRequestFile("end of file");
+   postRequestFile("end of file");
 }
 
 function encodeImageFileAsURL(element) {

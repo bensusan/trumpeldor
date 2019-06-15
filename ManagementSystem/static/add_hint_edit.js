@@ -30,7 +30,7 @@ function loadStringOfInnerHTMLWithHints(hintsJSON) {
             if (hint['data'].substring(0, 10) == 'data:video')
                 str = str + " data: " + "VideoMedia" + videoCounter + "<br />";
             else
-                str = str + " data: " + hint['data'] + "<br />";
+                str=str+" text: "+ hint['data'].split(';;')[0]+"<br />";
         }
 
 
