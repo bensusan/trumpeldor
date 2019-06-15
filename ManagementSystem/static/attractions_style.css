@@ -27,7 +27,7 @@ body {
 }
 
 .twoButtonsLocation{
-    position: fixed;
+    position: absolute;
     left: 420px;
 }
 
