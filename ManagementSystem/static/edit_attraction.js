@@ -27,6 +27,8 @@ function localFileVideoPlayer() {
 
         let fileURL = URL.createObjectURL(file);
         videoNode.src = fileURL;
+        document.getElementById('nameOfVid').innerText = file.name;
+        vidName = file.name;
 
     };
     let inputNode = document.querySelector('input');
@@ -46,7 +48,7 @@ window.onload = function () {
     getRequestAttractions(getFieldsValuesOfExistingAttraction);
     localFileVideoPlayer();
     initializeTheListOfPicturesToShow();
-    document.getElementById('randomPic').src = "\\trumpeldor\\TripServer\\media\\87a.jpg";
+    // document.getElementById('randomPic').src = "\\trumpeldor\\TripServer\\media\\87a.jpg";
 };
 
 
@@ -81,7 +83,7 @@ function finishEditingAttraction() {
         picturesURLS: pixArr,
         videosURLS: vidArr
     };
-    localStorage.setItem(attr_after_editing['name'] + "_vid", vidArr);
+    localStorage.setItem(attr_after_editing['name'] + "_vid", document.getElementById('nameOfVid').innerText);
     localStorage.setItem("desc_for_add_aq", attr_after_editing['description']);
 
     editRequestAttraction(attr_after_editing, attr_for_editing['id']);
@@ -139,6 +141,8 @@ function getFieldsValuesOfExistingAttraction(attractionsJSON) {
             video.src = localStorage.getItem(p.name + "_vid");
             localStorage.setItem("name_for_add_aq", p.name);
             localStorage.setItem("desc_for_add_aq", p.description);
+            alert(localStorage.getItem(""+p.name+"_vid"));
+            document.getElementById('nameOfVid').innerText = localStorage.getItem(""+p.name+"_vid");
         }
     });
 }

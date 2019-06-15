@@ -19,7 +19,7 @@
     {% load static %}
     <script src="{% static 'attractions.js' %}?version=12"></script>
     {% load static %}
-    <script src="{% static 'edit_attraction.js' %}?version=29"></script>
+    <script src="{% static 'edit_attraction.js' %}?version=35"></script>
     {% load static %}
     <script src="{% static 'properties.js' %}?version=15"></script>
     {% load static %}
@@ -44,6 +44,7 @@
             <video id="vid_itself" height="200px" width="350px" controls="" autoplay=""></video>
             <input id="video_input" type="file" accept="video/*" onchange="encodeVideoFileAsURL(this)"
                    style="display: none">
+            <p id="nameOfVid"></p>
             <button class='button blogger' onclick="uploadVideoBTNclick()" type="button" style="width: 320px;">Upload
                 Video
             </button>
