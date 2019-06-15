@@ -147,6 +147,7 @@ function initializeBTNsFunctionality() {
         vidDesc.style.display = "none";
         thevidbrowse.style.display = "none";
         sendButtonVid.style.display = "none";
+        textLineEnglish.style.display = "none";
         window.scrollTo(0, document.body.scrollHeight);
     });
 
@@ -163,6 +164,8 @@ function initializeBTNsFunctionality() {
         outpic.style.display = "none";
         sendButtonPic.style.display = "none";
         upload_pic_title.style.display = "none";
+        textLineEnglish.style.display = "none";
+
         window.scrollTo(0, document.body.scrollHeight);
 
     });
@@ -308,7 +311,6 @@ function funcToSendImage(attractionsJSON) {
 
     });
 }
-
 
 
 function sendVideoHint() {
