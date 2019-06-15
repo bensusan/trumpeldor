@@ -1,5 +1,6 @@
 from django.conf.urls import url
 from django.urls import path
+from django.views.decorators.csrf import csrf_exempt
 from rest_framework.urlpatterns import format_suffix_patterns
 from .views import *
 from django.views.generic.base import TemplateView
@@ -25,8 +26,8 @@ urlpatterns = {
     #path('attraction/<int:id_attr>/find_the_differences/', FindTheDifferencesList.as_view()),  #not relevant
     path('attraction/<int:id_attr>/taking_pic/', TakingPictureList.as_view()),
     path('settings/', SettingsList.as_view()),
-    path('file/img', views.file),
-    path('file/vid', views.file),
+    path('file/img', views.File.as_view()),
+    path('file/vid', views.File.as_view()),
 
 }
 

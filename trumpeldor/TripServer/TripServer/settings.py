@@ -43,6 +43,8 @@ INSTALLED_APPS = [
     'corsheaders',
 ]
 
+
+
 MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -152,3 +154,8 @@ CORS_ALLOW_METHODS = (
     'POST',
     'PUT',
 )
+
+CSRF_COOKIE_SECURE = True
+SESSION_COOKIE_SECURE = True
+
+
