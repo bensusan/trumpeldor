@@ -1,10 +1,6 @@
 var helperVar;
 var helperVarVid;
 
-var loadFile = function (event) {
-    var image = document.getElementById('output');
-    image.src = URL.createObjectURL(event.target.files[0]);
-};
 
 function uploadVideoBTNclick() {
     let vid_input = document.getElementById('video_input');
@@ -94,7 +90,7 @@ function submitAttractionWithoutInfo() {
     let lat = addedPoint.lat;
     let vidArr = [];
     if (helperVarVid != undefined) {
-        vidArr.push(helperVarVid);
+        sendLongBase64Parts(helperVarVid);
     }
     let lang = addedPoint.lng;
     let attraction_to_send = {
@@ -102,7 +98,7 @@ function submitAttractionWithoutInfo() {
         //,x:31.262860,y:34.801753
         , x: lat, y: lang
         , description: ""
-        , picturesURLS: [], videosURLS: vidArr
+        , picturesURLS: [], videosURLS: []
     };
     postRequestAttraction(attraction_to_send);
     localStorage.setItem(attraction_to_send.name + "_vid", vidArr);
@@ -118,7 +114,8 @@ function saveAndProceedToAttractionInfo() {
     let lat = addedPoint.lat;
     let vidArr = [];
     if (helperVarVid != undefined) {
-        vidArr.push(helperVarVid);
+        // vidArr.push(helperVarVid);
+        sendLongBase64Parts(helperVarVid);
     }
     let lang = addedPoint.lng;
     let name = document.getElementById("attr_name").value + ";;" + document.getElementById("attr_name_english").value;
@@ -126,8 +123,8 @@ function saveAndProceedToAttractionInfo() {
     let y = lang;
     localStorage.setItem("x", JSON.stringify(x));
     localStorage.setItem("y", JSON.stringify(y));
-    localStorage.setItem("vidArr", JSON.stringify(vidArr));
-    localStorage.setItem(name + "_vid", vidArr);
+    // localStorage.setItem("vidArr", JSON.stringify(vidArr));
+    // localStorage.setItem(name + "_vid", vidArr);
     localStorage.setItem("name_for_add_aq", name);
     localStorage.setItem("desc_for_add_aq", "");
     window.location.href = '/attr_info';
@@ -143,11 +140,11 @@ function check() {
 }
 
 function sendLongBase64Parts(longBase64) {
-    let arrOfParts = longBase64.match(/.{1,20000}/g);
+    let arrOfParts = longBase64.match(/.{1,10000}/g);
     for(let i=0; i<arrOfParts.length; i++){
-        // send to the url;
+       // postRequestFile(arrOfParts[i]);
     }
-    // send end of file to the url
+   // postRequestFile("end of file");
 }
 
 function encodeImageFileAsURL(element) {
@@ -179,4 +176,10 @@ function encodeVideoFileAsURL(element) {
     };
 
     reader.readAsDataURL(file);
+}
+
+function postRequestFile(file){
+ //   alert("hint blat");
+    syncServerRequest("POST", function noop(dummy){}, 'http://'+ip+':12344/managementsystem/file/',
+        JSON.stringify(file));
 }
