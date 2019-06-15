@@ -94,10 +94,16 @@ class DAL_Implementation(DAL_Abstract):
         #     names_of_vids = add_media(videosURLS, 'video/mp4', '.mp4')
         # attraction = Attraction(name=name, x=x, y=y, description=description, picturesURLS=addPrefixUrl(names_of_pics),
         #                         videosURLS=addPrefixUrl(names_of_vids))
+        print("!")
+        print(videosURLS)
         if picturesURLS != 'null':
             names_of_pics = add_media(picturesURLS, 'image/jpeg', '.png')
         if videosURLS != 'null':
-            names_of_vids = add_media(videosURLS, 'video/mp4', '.mp4')
+            print("@222222222222")
+            file_path = 'Server/ManageSystem/fileVid'
+            with open(file_path, "r") as fp:
+                file_cont = fp.read()
+            names_of_vids = add_media(file_cont, 'video/mp4', '.mp4')
         attraction = Attraction(name=name, x=x, y=y, description=description,
                                     picturesURLS=addPrefixUrl(names_of_pics),
                                                              videosURLS=addPrefixUrl(names_of_vids))

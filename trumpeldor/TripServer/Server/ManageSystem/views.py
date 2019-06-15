@@ -1,6 +1,9 @@
 from django.shortcuts import render, redirect
 from rest_framework.utils import json
-
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from django.views.decorators.csrf import csrf_exempt
+from braces.views import CsrfExemptMixin
 import null
 from rest_framework.response import Response
 from django.http import Http404, HttpResponse, JsonResponse
@@ -454,15 +457,6 @@ def file(request):
         return Response(json.loads(json.dumps(True)))
 
 
-
-
-# views.py
-from rest_framework.views import APIView
-from rest_framework.response import Response
-from django.views.decorators.csrf import csrf_exempt
-from braces.views import CsrfExemptMixin
-
-
 class File(CsrfExemptMixin, APIView):
     authentication_classes = []
 
@@ -472,7 +466,7 @@ class File(CsrfExemptMixin, APIView):
         else:
             file_path = 'Server/ManageSystem/fileVid'
         if request.data == "end of file":
-            return
+            return Response(json.loads(json.dumps(True)))
         with open(file_path, "a") as fp:
             fp.write(request.data)
             fp.close()
