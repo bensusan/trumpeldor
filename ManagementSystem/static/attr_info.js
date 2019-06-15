@@ -88,7 +88,6 @@ function sendTheAttractionWithAllInformation() {
         , description: document.getElementById("desc").value + ";;" + document.getElementById("desc_english").value
         , picturesURLS: pixArr, videosURLS: JSON.parse(localStorage.getItem("vidArr"))
     };
-    alert("sad");
     postRequestAttractionn(attraction_to_send);
     localStorage.setItem("name_for_add_aq", attraction_to_send.name);
     localStorage.setItem("desc_for_add_aq", attraction_to_send.description);

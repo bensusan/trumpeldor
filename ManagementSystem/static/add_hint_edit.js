@@ -288,16 +288,13 @@ function funcToSendImage(attractionsJSON) {
     let name = localStorage.getItem("name_for_add_aq");
     let desc = localStorage.getItem("desc_for_add_aq");
     // alert("in get name! "+"of the origin : " + lat + " , " + lng);
+    let pixArr = ["hello"];
+    if (helperVar != undefined) {
+        // can do it with all pics.. just add loop
+        sendLongBase64PartsPic(helperVar);
+        window.location.href = '/add_hint_edit';
+    }
     attractionsJSON.forEach(function (attr) {
-
-        let pixArr = 'null';
-        if (helperVar != undefined) {
-            pixArr = [];
-            pixArr.push("hello");
-            // can do it with all pics.. just add loop
-            sendLongBase64PartsPic(helperVar);
-            window.location.href = '/add_hint_edit';
-        }
 
         let p = {name: attr['name'], description: attr['description']};
         // alert("in get name! "+"of the origin : " + name + " , " + desc + "\n of the other: "+p.name +" , "+ p.description);
@@ -313,6 +310,7 @@ function funcToSendImage(attractionsJSON) {
 }
 
 
+
 function sendVideoHint() {
     getRequestAttractions(funcToSendVideo);
 }
@@ -321,24 +319,21 @@ function funcToSendVideo(attractionsJSON) {
     let name = localStorage.getItem("name_for_add_aq");
     let desc = localStorage.getItem("desc_for_add_aq");
     // alert("in get name! "+"of the origin : " + lat + " , " + lng);
+    let vidArr = ["hello"];
+    if (helperVarVid != undefined) {
+        sendLongBase64Parts(helperVarVid);
+    }
     attractionsJSON.forEach(function (attr) {
-
-        let vidArr = 'null';
-        if (helperVarVid != undefined) {
-            vidArr = [];
-            vidArr.push("hello");
-            sendLongBase64Parts(helperVarVid);
-        }
         let p = {name: attr['name'], description: attr['description']};
         // alert("in get name! "+"of the origin : " + name + " , " + desc + "\n of the other: "+p.name +" , "+ p.description);
         if (p.name === name && p.description === desc) {
+
             let the_hint = {
                 attraction: attr,
                 kind: "HV",
                 data: vidArr,
                 description: document.getElementById("vid_hint_description").value
             };
-
             let attr_id = attr['id'];
             postRequestHint(the_hint, attr_id);
             window.location.href = '/add_hint_edit';
