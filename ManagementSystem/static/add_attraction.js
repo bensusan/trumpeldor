@@ -111,9 +111,10 @@ function saveAndProceedToAttractionInfo() {
 
     let addedPoint = JSON.parse(localStorage.getItem("addedPoint"));
     let lat = addedPoint.lat;
-    let vidArr = [];
+    let vidArr = 'null';
     if (helperVarVid != undefined) {
-        // vidArr.push(helperVarVid);
+        vidArr = [];
+        vidArr.push("hello");
         sendLongBase64Parts(helperVarVid);
     }
     let lang = addedPoint.lng;
@@ -122,7 +123,7 @@ function saveAndProceedToAttractionInfo() {
     let y = lang;
     localStorage.setItem("x", JSON.stringify(x));
     localStorage.setItem("y", JSON.stringify(y));
-    // localStorage.setItem("vidArr", JSON.stringify(vidArr));
+    localStorage.setItem("vidArr", JSON.stringify(vidArr));
     // localStorage.setItem(name + "_vid", vidArr);
     localStorage.setItem("name_for_add_aq", name);
     localStorage.setItem("desc_for_add_aq", "");
@@ -181,9 +182,3 @@ function encodeVideoFileAsURL(element) {
 }
 
 
-function postRequestFile(file) {
-    //   alert("hint blat");
-    syncServerRequest("POST", function noop(dummy) {
-        }, 'http://' + ip + ':12344/managementsystem/file/vid',
-        JSON.stringify(file));
-}

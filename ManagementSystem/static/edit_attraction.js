@@ -45,6 +45,7 @@ window.onload = function () {
     });
     getRequestAttractions(getFieldsValuesOfExistingAttraction);
     localFileVideoPlayer();
+    document.getElementById('randomPic').src = "\\trumpeldor\\TripServer\\media\\87a.jpg";
 };
 
 

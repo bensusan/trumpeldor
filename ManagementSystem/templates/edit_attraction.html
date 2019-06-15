@@ -19,7 +19,7 @@
     {% load static %}
     <script src="{% static 'attractions.js' %}?version=3"></script>
     {% load static %}
-    <script src="{% static 'edit_attraction.js' %}?version=25"></script>
+    <script src="{% static 'edit_attraction.js' %}?version=23"></script>
     {% load static %}
     <script src="{% static 'properties.js' %}?version=12"></script>
 </head>
@@ -37,6 +37,7 @@
     <div align="center">
         <h2>עריכת אטרקציה</h2>
         <form>
+            <img id="randomPic" src="" style="width:300px">
             <label style="font-size: 24px;"><b>:העלאת סרטון</b></label>
             <div id="message"></div>
             <video id="vid_itself" height="200px" width="350px" controls="" autoplay=""></video>

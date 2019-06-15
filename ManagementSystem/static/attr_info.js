@@ -1,6 +1,6 @@
 let arrOfPicsData = [];
 
-window.onload = function(){
+window.onload = function () {
     let submitBTN = document.getElementById("submit_btn_add_attr");
     submitBTN.addEventListener('click', function () {
         sendTheAttractionWithAllInformation();
@@ -25,77 +25,83 @@ window.onload = function(){
 };
 
 function initializeTheListOfPicturesToShow() {
-        //Check File API support
-    if(window.File && window.FileList && window.FileReader)
-    {
+    //Check File API support
+    if (window.File && window.FileList && window.FileReader) {
         var filesInput = document.getElementById("files");
 
-        filesInput.addEventListener("change", function(event){
+        filesInput.addEventListener("change", function (event) {
 
             var files = event.target.files; //FileList object
             var output = document.getElementById("result");
 
-            for(var i = 0; i< files.length; i++)
-            {
+            for (var i = 0; i < files.length; i++) {
                 var file = files[i];
 
                 //Only pics
-                if(!file.type.match('image'))
-                  continue;
+                if (!file.type.match('image'))
+                    continue;
 
                 var picReader = new FileReader();
 
-                picReader.addEventListener("load",function(event){
+                picReader.addEventListener("load", function (event) {
 
                     var picFile = event.target;
 
                     var div = document.createElement("div");
 
                     div.innerHTML = "<img class='thumbnail' src='" + picFile.result + "'" +
-                            "title='" + picFile.name + "'/>";
+                        "title='" + picFile.name + "'/>";
 
                     let picURL = picFile.result;
                     arrOfPicsData.push(picURL);
-                    output.insertBefore(div,null);
+                    output.insertBefore(div, null);
 
                 });
 
-                 //Read the image
+                //Read the image
                 picReader.readAsDataURL(file);
             }
 
         });
-    }
-    else
-    {
+    } else {
         console.log("Your browser does not support File API");
     }
 }
 
-    function sendTheAttractionWithAllInformation() {
-        let namee = localStorage.getItem("name_for_add_aq");
-        let xx = JSON.parse(localStorage.getItem("x"));
-        let yy = JSON.parse(localStorage.getItem("y"));
-        // let vidArr = JSON.parse(localStorage.getItem("vidArr"));
-        let attraction_to_send = {
-            name:namee
-            //,x:31.262860,y:34.801753
-            ,x:xx ,y:yy
-            ,description:document.getElementById("desc").value+";;"+document.getElementById("desc_english").value
-            ,picturesURLS:arrOfPicsData ,videosURLS:JSON.parse(localStorage.getItem("vidArr"))};
-        localStorage.setItem(namee+"_pics",JSON.stringify(arrOfPicsData))
-//JSON.parse(localStorage.getItem("vidArr"))
-        postRequestAttractionn(attraction_to_send);
-        localStorage.setItem("name_for_add_aq", attraction_to_send.name);
-        localStorage.setItem("desc_for_add_aq", attraction_to_send.description);
-        window.location.href='/add_game';
-        // window.location.href='/attractions';
-        // alert("point:"+localStorage.getItem("addedPoint")+"\n"+
-        //     "name:"+document.getElementById("attr_name").value);
+function sendTheAttractionWithAllInformation() {
+    let namee = localStorage.getItem("name_for_add_aq");
+    let xx = JSON.parse(localStorage.getItem("x"));
+    let yy = JSON.parse(localStorage.getItem("y"));
+    // let vidArr = JSON.parse(localStorage.getItem("vidArr"));
+
+    let pixArr = 'null';
+    if (arrOfPicsData != []) {
+        pixArr = 'hello';
+        // pixArr.push("hello");
+        // can do it with all pics.. just add loop
+        sendLongBase64PartsPic(arrOfPicsData[0]);
     }
+    alert("Sda");
+    let attraction_to_send = {
+        name: namee
+        //,x:31.262860,y:34.801753
+        , x: xx, y: yy
+        , description: document.getElementById("desc").value + ";;" + document.getElementById("desc_english").value
+        , picturesURLS: pixArr, videosURLS: JSON.parse(localStorage.getItem("vidArr"))
+    };
+    postRequestAttractionn(attraction_to_send);
+    localStorage.setItem("name_for_add_aq", attraction_to_send.name);
+    localStorage.setItem("desc_for_add_aq", attraction_to_send.description);
+    window.location.href = '/add_game';
+    // window.location.href='/attractions';
+    // alert("point:"+localStorage.getItem("addedPoint")+"\n"+
+    //     "name:"+document.getElementById("attr_name").value);
+}
 
 
-    function postRequestAttractionn(attraction){
-    serverRequest("POST", function noop(dummy){}, 'http://'+ip+':12344/managementsystem/attraction/',
+function postRequestAttractionn(attraction) {
+    serverRequest("POST", function noop(dummy) {
+        }, 'http://' + ip + ':12344/managementsystem/attraction/',
         JSON.stringify(attraction));
 }
+
