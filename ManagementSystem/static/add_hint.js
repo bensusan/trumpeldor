@@ -201,10 +201,10 @@ function getTheNeededAttractionIdToSendItOnThePostRequest(attractionsJSON) {
                 data: document.getElementById("text_hint_id").value + ";;" + document.getElementById("text_hint_id_english").value,
                 description: ""
             };
+            alert(attr['id']);
             postRequestHint(textHintToSend, attr['id']);
             window.location.href = '/add_hint';
         }
-
     });
 
 }
