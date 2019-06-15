@@ -41,7 +41,7 @@ function hints_func(hintsJSON) {
             if (hint['data'].substring(0, 10) == 'data:video')
                 str = str + " data: " + "VideoMedia" + videoCounter + "<br />";
             else
-                str = str + " text: " + hint['data'].split(';;')[0] + "<br />";
+                str = str + (i-1) +". " + hint['data'].split(';;')[0] + "<br />";
         }
         // alert(str);
 
@@ -116,7 +116,7 @@ function ffff(hintsJSON) {
             if (hint['data'].substring(0, 10) == 'data:video')
                 str = str + " data: " + "VideoMedia" + videoCounter + "<br />";
             else
-                str = str + " text: " + hint['data'].split(';;')[0] + "<br />";
+                str = str + hint['id'] + hint['data'].split(';;')[0] + "<br />";
         }
 
         var output = document.getElementById("result");

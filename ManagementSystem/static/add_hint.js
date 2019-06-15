@@ -25,7 +25,7 @@ function loadStringOfInnerHTMLWithHints(hintsJSON) {
     str = "";
     let imageCounter = 1;
     let videoCounter = 1;
-
+    let i = 1;
     hintsJSON.forEach(function (hint) {
 
         let dataOfHint = hint['data'];
@@ -35,9 +35,9 @@ function loadStringOfInnerHTMLWithHints(hintsJSON) {
             if (hint['data'].substring(0, 10) == 'data:video')
                 str = str + " data: " + "VideoMedia" + videoCounter + "<br />";
             else
-                str = str + " text: " + hint['data'].split(';;')[0] + "<br />";
+                str = str + i + "." + hint['data'].split(';;')[0] + "<br />";
         }
-        // alert(str);
+        i += 1;
 
         var output = document.getElementById("result");
         var outputVideo = document.getElementById("resultVideos");
