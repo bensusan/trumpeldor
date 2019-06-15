@@ -58,7 +58,7 @@ function initializeGamesBTNs() {
                 if (idOfAttraction == -22)
                     alert(curr_url);
                 else {
-                    postRequestPhotoGame(photoGameInstructions.value, idOfAttraction);
+                    postRequestPhotoGame({description:photoGameInstructions.value}, idOfAttraction);
                     window.location = curr_url;
                 }
             });
