@@ -32,7 +32,7 @@ document.getElementById("sideMenu").innerHTML = '<div class="sidenav">\n' +
     '  </button>\n' +
     '  <div class="dropdown-container">\n' +
     '    <a href="/feedback">הוסף משוב</a>\n' +
-    '    <a href="/edit_feedbacks">מחק משוב</a>\n' +
+    '    <a href="/edit_feedbacks">עריכת משוב</a>\n' +
     '  </div>\n' +
     '  <a href="/more_properties">הגדרות אפליקציה</a>\n' +
     '</div>\n' +

@@ -1,7 +1,7 @@
 //menu_of_edit_attractions
 
 document.getElementById("sideMenu").innerHTML = '<div class="sidenav">\n' +
-    '  <h2 style="color:#818181;">מחיקת משוב</h2>' +
+    '  <h2 style="color:#818181;">עריכת משוב</h2>' +
     '  <a href="/main">לתפריט הראשי</a>\n' +
     '  <a id="edit_feedback">ערוך משוב</a>\n' +
     '  <a id="delete_feedback">מחק שאלת משוב</a>\n' +
