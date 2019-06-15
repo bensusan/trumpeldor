@@ -8,8 +8,6 @@ function sendThis(arrOfBoundries) {
         loginHours: document.getElementById('info_ttl').value,
         scoreRules: scoreRules
     };
-
-    alert(toSend.toString());
     postRequestSettings(toSend);
     window.location.href = '/main';
 }
@@ -45,25 +43,6 @@ function encodeImageFileAsURL(element) {
 
     reader.readAsDataURL(file);
 }
-
-// function func(element) {
-//     var aud = document.getElementById('audio_controls');
-//     var mp = document.getElementById('attr_sound');
-//     var inputBar = document.getElementById('inputBar');
-//
-//     aud.style.display = "inline";
-//     mp.src = URL.createObjectURL(element.files[0]);
-//     aud.load();
-//     inputBar.style.display = "none";
-//     theurl = "";
-//     var file = element.files[0];
-//     var reader = new FileReader();
-//     reader.onloadend = function () {
-//         theurl = reader.result
-//     };
-//     reader.readAsDataURL(file);
-// }
-//
 
 
 function addRow(tableID) {
