@@ -24,10 +24,11 @@ namespace trumpeldor.Views
             string hintVideoString;
             Hint.kind2String.TryGetValue(Hint.Kinds.HintVideo, out hintVideoString);
             if(hintStr.Equals(hintPictureString) || hintStr.Equals(hintVideoString)){
-                webView.IsVisible = true;
+               // webView.IsVisible = true;
                 string tmp = hint.data.Substring(1, hint.data.Length - 2);
                 string dt = hint.data;
-                webView.Source = urlPref + dt;
+                //webView.Source = urlPref + dt;
+                img.Source = urlPref + dt;
             }
             else //case text
             { 

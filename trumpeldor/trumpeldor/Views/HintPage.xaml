@@ -7,6 +7,7 @@
     <ContentPage.Content>
         <StackLayout Style="{DynamicResource mainStackLayout}">
             <Label x:Name="textualHint" AutomationId="HintDisplay" />
+            <Image x:Name="img"></Image>
             <WebView x:Name="webView" WidthRequest="500" HeightRequest="500" AutomationId="HintWebViewDisplay"/>
         </StackLayout>
     </ContentPage.Content>
