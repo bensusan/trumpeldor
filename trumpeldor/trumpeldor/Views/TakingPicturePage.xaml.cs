@@ -38,7 +38,7 @@ namespace trumpeldor.Views
             CameraButton.Clicked += CameraButton_Clicked;
             subtitles.Source = ServerConection.URL_MEDIA + "subtitles.jpg";
             info.Source = ServerConection.URL_MEDIA + "info.jpg";
-            playVideo.Source = ServerConection.URL_MEDIA + "playVideo.png";
+            playVideo.Source = ServerConection.URL_MEDIA + "playVideo.jpg";
             how.Source = ServerConection.URL_MEDIA + "how.png";
             this.tp = tp;
             this.attraction = attraction;

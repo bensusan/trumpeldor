@@ -27,7 +27,7 @@ namespace trumpeldor.Views
             gc = GameController.getInstance();
             subtitles.Source = ServerConection.URL_MEDIA + "subtitles.jpg";
             info.Source = ServerConection.URL_MEDIA + "info.jpg";
-            playVideo.Source = ServerConection.URL_MEDIA + "playVideo.png";
+            playVideo.Source = ServerConection.URL_MEDIA + "playVideo.jpg";
             scoreLabel.Text = AppResources.score + ": " + gc.GetScore();
             how.Source = ServerConection.URL_MEDIA + "how.png";
             this.puzzle = puzzle;

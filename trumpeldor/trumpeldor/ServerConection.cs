@@ -153,6 +153,14 @@ namespace trumpeldor
             return JsonConvert.DeserializeObject<Setttings>(jsonResponse);
         }
 
+        internal Info GetInfo()
+        {
+            string jsonResponse = GetFromServer("getInfo/");
+            if (jsonResponse == "null")
+                return null;
+            return JsonConvert.DeserializeObject<Info>(jsonResponse);
+        }
+
         private class HelpHints
         {
             public List<Hint> hints { get; set; }
@@ -177,6 +185,8 @@ namespace trumpeldor
         {
             public List<FeedbackInstance> feedbacks { get; set; }
         }
+
+        
 
         private List<FeedbackInstance> GetFeedbacks(Trip trip)
         {

@@ -10,6 +10,7 @@ using Xamarin.Forms;
 using System.Runtime.CompilerServices;
 using System.Timers;
 using System.Globalization;
+using Plugin.Multilingual;
 
 namespace trumpeldor
 {
@@ -40,6 +41,7 @@ namespace trumpeldor
         private static bool firstTime = true;
         private readonly System.Threading.EventWaitHandle waitHandle = new System.Threading.AutoResetEvent(false);
         private Setttings appSettings;
+        public Info appInformationAndInstruction;
 
         public CultureInfo hebrew = new CultureInfo("he");
         public CultureInfo english = new CultureInfo("en");
@@ -183,6 +185,7 @@ namespace trumpeldor
         {
             this.conn = serverConnection;
             appSettings = this.conn.GetSettings();
+            appInformationAndInstruction = this.conn.GetInfo();
         }
 
         public void CreateTrip(string groupName, List<int> playersAges, int trackLength)
@@ -287,6 +290,20 @@ namespace trumpeldor
         internal List<UserGroupScore> GetLeadingTable()
         {
             return conn.GetBestScoreData();
+        }
+
+        public string GetCurrentLanguageText(string text)
+        {
+            string[] splits = text.Split(new string[] { ";;" }, StringSplitOptions.None);
+            if (CrossMultilingual.Current.CurrentCultureInfo.Equals(hebrew))
+            {
+                return splits[0];
+            }
+            else if (CrossMultilingual.Current.CurrentCultureInfo.Equals(english))
+            {
+                return splits[1];
+            }
+            return "";
         }
 
     }
