@@ -11,13 +11,19 @@
     {% load static %}
 <link rel="stylesheet" href="{% static 'add_game.css' %}?version=2">
     {% load static %}
-<script src="{% static 'add_game.js' %}?version=11"></script>
+<script src="{% static 'add_game.js' %}?version=18"></script>
       {% load static %}
 <script src="{% static 'attractions.js' %}?version=9"></script>
      {% load static %}
 <script src="{% static 'properties.js' %}?version=6"></script>
 </head>
 <body>
+<button id="englishBTN" class="language"
+        style="height: 58px;width: 100px; background-image: url('../static/usa.JPG');background-size: cover; font-size:24px">
+</button>
+<button id="hebrewBTN" class="language"
+        style="height: 58px;width: 100px; background-image: url('../static/israel.JPG');background-size: cover; font-size:24px">
+</button>
 <div align="center">
 <h2>הוספת משחק</h2>
 <form>
@@ -35,7 +41,8 @@
       <button class='yahoo' type="button" id="yesBTN" style="width: 100px; display: none">כן</button>
       <p id="p3" style="display: none"></p>
 
-      <textarea id="game_instructions_text" placeholder="כתבי את הוראות המשחק..." style="display: none;direction:rtl;text-align:right;height:100px;width:250px"></textarea>
+       <textarea id="game_instructions_text" placeholder="כתבי את הוראות המשחק..." style="display: none;direction:rtl;text-align:right;height:100px;width:250px"></textarea>
+      <textarea id="game_instructions_text_english" placeholder="write game instructions..." style="display: none;direction:ltr;text-align:left;height:100px;width:250px"></textarea>
       <button class='yahoo' type="button" id="sendPhotoGame" style="width: 100px; display: none">שליחה</button>
 
   </div>

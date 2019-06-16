@@ -100,10 +100,11 @@ function submitAttractionWithoutInfo() {
         //,x:31.262860,y:34.801753
         , x: lat, y: lang
         , description: ";;"
+        //, script: document.getElementById("subt").value + ";;" + document.getElementById("subt_english").value
         , picturesURLS: 'null', videosURLS: vidArr
     };
 
-    localStorage.setItem(""+attraction_to_send.name+"_vid",document.getElementById('nameOfVid').innerText);
+    localStorage.setItem("" + attraction_to_send.name + "_vid", document.getElementById('nameOfVid').innerText);
     postRequestAttraction(attraction_to_send);
     localStorage.setItem("name_for_add_aq", attraction_to_send.name);
     localStorage.setItem("desc_for_add_aq", attraction_to_send.description);
@@ -122,9 +123,10 @@ function saveAndProceedToAttractionInfo() {
     }
     let lang = addedPoint.lng;
     let name = document.getElementById("attr_name").value + ";;" + document.getElementById("attr_name_english").value;
-    localStorage.setItem(""+name+"_vid",document.getElementById('nameOfVid').innerText);
+    localStorage.setItem("" + name + "_vid", document.getElementById('nameOfVid').innerText);
     let x = lat;
     let y = lang;
+    localStorage.setItem("script", JSON.stringify(document.getElementById("subt").value + ";;" + document.getElementById("subt_english").value));
     localStorage.setItem("x", JSON.stringify(x));
     localStorage.setItem("y", JSON.stringify(y));
     localStorage.setItem("vidArr", JSON.stringify(vidArr));

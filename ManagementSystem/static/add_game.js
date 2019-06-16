@@ -7,6 +7,8 @@ window.onload = function () {
 };
 
 function initializeGamesBTNs() {
+    let hebrewBTN = document.getElementById("hebrewBTN");
+    let englishBTN = document.getElementById("englishBTN");
     let p1 = document.getElementById('p1');
     let p2 = document.getElementById('p2');
     let p3 = document.getElementById('p3');
@@ -14,6 +16,7 @@ function initializeGamesBTNs() {
     let yesBTN = document.getElementById('yesBTN');
     let noBTN = document.getElementById('noBTN');
     let photoGameInstructions = document.getElementById('game_instructions_text');
+    let photoGameInstructionsEnglish = document.getElementById('game_instructions_text_english');
     let sendPhotoGameBTN = document.getElementById('sendPhotoGame');
 
     let slidingPuzzleBTN = document.getElementById('sliding_puzzle_button');
@@ -54,11 +57,22 @@ function initializeGamesBTNs() {
             photoGameInstructions.style.display = '';
             sendPhotoGameBTN.style.display = '';
 
+            hebrewBTN.addEventListener('click', function () {
+                photoGameInstructions.style.display = "";
+                photoGameInstructionsEnglish.style.display = "none";
+            });
+
+            englishBTN.addEventListener('click', function () {
+                photoGameInstructions.style.display = "none";
+                photoGameInstructionsEnglish.style.display = "";
+            });
+
             sendPhotoGameBTN.addEventListener('click', function () {
                 if (idOfAttraction == -22)
                     alert(curr_url);
                 else {
-                    postRequestPhotoGame({description:photoGameInstructions.value}, idOfAttraction);
+                    postRequestPhotoGame({description: photoGameInstructions.value + ';;' + photoGameInstructionsEnglish.value}, idOfAttraction);
+                    alert("משימת צילום נוספה בהצלחה !");
                     window.location = curr_url;
                 }
             });
