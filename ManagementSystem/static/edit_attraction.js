@@ -80,6 +80,7 @@ function finishEditingAttraction() {
         x: attr_for_editing['x'],
         y: attr_for_editing['y'],
         description: document.getElementById("desc").value + ';;' + document.getElementById("desc_english").value,
+        script: document.getElementById("subt").value + ';;' + document.getElementById("subt_english").value,
         picturesURLS: pixArr,
         videosURLS: vidArr
     };
@@ -119,7 +120,7 @@ function getFieldsValuesOfExistingAttraction(attractionsJSON) {
 
     attractionsJSON.forEach(function (attr) {
         // alert("the id is: "+attr['id']);
-        let p = {id: attr['id'], name: attr['name'], description: attr['description'], lat: attr['x'], lng: attr['y']};
+        let p = {id: attr['id'], name: attr['name'], description: attr['description'],script: attr['script'], lat: attr['x'], lng: attr['y']};
         // alert("in get name! "+"of the origin : " + lat + " , " + lng + "\n of the other: "+p.lat +" , "+ p.lng);
         if (p.lat === lat && (p.lng).toFixed(8) === lng.toFixed(8)) {
             //  let picsRetreive = attr['picturesURLS'];
@@ -129,10 +130,13 @@ function getFieldsValuesOfExistingAttraction(attractionsJSON) {
             initializeLanguageBTNs();
             let names = p.name.split(';;');
             let descriptions = p.description.split(';;');
+            let scripts = p.script.split(';;');
             document.getElementById("attr_name").value = names[0];
             document.getElementById("desc").value = descriptions[0];
             document.getElementById("attr_name_english").value = names[1];
             document.getElementById("desc_english").value = descriptions[1];
+            document.getElementById("subt").value = scripts[0];
+            document.getElementById("subt_english").value = scripts[1];
             // var image = document.getElementById('output');
             // image.src = attr['picturesURLS'][0];
             // alert(JSON.parse(localStorage.getItem(p.name+"_pics")));

@@ -86,6 +86,7 @@ function sendTheAttractionWithAllInformation() {
         //,x:31.262860,y:34.801753
         , x: xx, y: yy
         , description: document.getElementById("desc").value + ";;" + document.getElementById("desc_english").value
+        , script: JSON.parse(localStorage.getItem("script"))
         , picturesURLS: pixArr, videosURLS: JSON.parse(localStorage.getItem("vidArr"))
     };
     postRequestAttractionn(attraction_to_send);
