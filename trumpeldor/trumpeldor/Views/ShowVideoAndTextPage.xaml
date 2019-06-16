@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:translator="clr-namespace:trumpeldor.Helpers"
+             x:Class="trumpeldor.Views.ShowVideoAndTextPage">
+    <ContentPage.Content>
+        <StackLayout Style="{DynamicResource mainStackLayout}">
+            <StackLayout x:Name="exitStackLayout" Style="{DynamicResource mainStackLayout}" Orientation="Horizontal" HorizontalOptions="EndAndExpand">
+                <ImageButton x:Name="removeButton" Clicked="Handle_Clicked" Style="{StaticResource smallCircleImageButtonStyle}" AutomationId="EnglishBtn"/>
+            </StackLayout>
+            
+            <StackLayout x:Name="InfoLayout" Style="{StaticResource mainStackLayout}" VerticalOptions="CenterAndExpand">
+                <Label x:Name="textLbl" />
+                <WebView x:Name="webView" WidthRequest="500" HeightRequest="500"/>
+            </StackLayout>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

@@ -18,7 +18,7 @@ namespace trumpeldor.Views
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class NavigationPage : ContentPage
 	{
-        private const double DESIRED_DISTANCE = 20;
+        private const double DESIRED_DISTANCE = 5;//meters
         private const double DESIRED_SECONDS = 10;
         public static bool isFirst = true;
         public static bool firstTimeLocationUpdate = true;

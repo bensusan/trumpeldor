@@ -1,6 +1,4 @@
-﻿using Rg.Plugins.Popup.Pages;
-using Rg.Plugins.Popup.Services;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,15 +7,16 @@ using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace trumpeldor
+namespace trumpeldor.Views
 {
 	[XamlCompilation(XamlCompilationOptions.Compile)]
-	public partial class MyPopup : PopupPage
-    {
+	public partial class ShowVideoAndTextPage : ContentPage
+	{
         public string currTxt = "";
-		public MyPopup (string txt, bool isUrl, bool a)
+        public ShowVideoAndTextPage (string txt, bool isUrl)
 		{
-			InitializeComponent ();
+            InitializeComponent();
+            removeButton.Source = ServerConection.URL_MEDIA + "delete.png";
             currTxt = txt;
             if (isUrl)
             {
@@ -31,7 +30,7 @@ namespace trumpeldor
 
         void Handle_Clicked(object sender, System.EventArgs e)
         {
-            PopupNavigation.Instance.PopAsync(true);
+            Navigation.PopModalAsync();
         }
-	}
+    }
 }

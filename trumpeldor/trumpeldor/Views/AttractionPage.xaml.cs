@@ -53,8 +53,8 @@ namespace trumpeldor.Views
             base.OnAppearing();
 
             //pop up video on arrival
-            if(attraction.videosURLS.Count > 0 && isFirstAppear)
-                PopupNavigation.Instance.PushAsync(new MyPopup(attraction.videosURLS[0], true));
+            if (attraction.videosURLS.Count > 0 && isFirstAppear)
+                Navigation.PushModalAsync(new ShowVideoAndTextPage(attraction.videosURLS[0], true));
 
             missionButton.IsVisible = entertainment != null && !gc.isAttractionDone;
             questionButton.IsVisible = !gc.isAttractionDone;
@@ -114,7 +114,7 @@ namespace trumpeldor.Views
             if (attraction.videosURLS.Count > 0)
             {
                 Lock();
-                await PopupNavigation.Instance.PushAsync(new MyPopup(attraction.videosURLS[0], true));
+                await Navigation.PushModalAsync(new ShowVideoAndTextPage(attraction.videosURLS[0], true));
                 UnLock();
             }
         }
@@ -130,7 +130,7 @@ namespace trumpeldor.Views
         private async void Subtitles_Clicked(object sender, EventArgs e)
         {
             Lock();
-            await PopupNavigation.Instance.PushAsync(new MyPopup("subtitles for the point of interest", false));
+            await Navigation.PushModalAsync(new ShowVideoAndTextPage("", false));
             UnLock();
         }
 

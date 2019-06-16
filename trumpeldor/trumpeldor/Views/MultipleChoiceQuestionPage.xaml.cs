@@ -144,12 +144,12 @@ namespace trumpeldor.Views
         private async void PlayVideo_Clicked(object sender, EventArgs e)
         {
             if (attraction.videosURLS.Count > 0)
-                await PopupNavigation.Instance.PushAsync(new MyPopup(attraction.videosURLS[0], true));
+                await Navigation.PushModalAsync(new ShowVideoAndTextPage(attraction.videosURLS[0], true));
         }
 
         private async void Subtitles_Clicked(object sender, EventArgs e)
         {
-            await PopupNavigation.Instance.PushAsync(new MyPopup("subtitles for the point of interest", false));
+            await Navigation.PushModalAsync(new ShowVideoAndTextPage("", false));
         }
 
         private void Information_Button_Clicked(object sender, EventArgs e)
