@@ -8,7 +8,7 @@
     <ContentPage.Content>
         <StackLayout Style="{DynamicResource mainStackLayout}">
             <Label Text="{translator:Translate InstructionsPageTitle}" Style="{StaticResource titleStyle}"/>
-            <Label x:Name="details" Text="Details about how the application works" Style="{StaticResource labelStyle}"/>
+            <Label x:Name="details" Text="" Style="{StaticResource labelStyle}"/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

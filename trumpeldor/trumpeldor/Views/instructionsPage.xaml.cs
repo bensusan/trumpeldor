@@ -26,6 +26,7 @@ namespace trumpeldor.Views
         public instructionsPage(Entertainment entertainment)
         {
             InitializeComponent();
+            gc = GameController.getInstance();
             details.Text = gc.GetCurrentLanguageText(entertainment.description);
         }
 
