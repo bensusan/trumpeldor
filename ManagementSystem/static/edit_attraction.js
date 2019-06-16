@@ -130,19 +130,16 @@ function getFieldsValuesOfExistingAttraction(attractionsJSON) {
             initializeLanguageBTNs();
             let names = p.name.split(';;');
             let descriptions = p.description.split(';;');
-            let scripts = p.script.split(';;');
+           // let scripts = p.script.split(';;');
             document.getElementById("attr_name").value = names[0];
             document.getElementById("desc").value = descriptions[0];
             document.getElementById("attr_name_english").value = names[1];
             document.getElementById("desc_english").value = descriptions[1];
-            document.getElementById("subt").value = scripts[0];
-            document.getElementById("subt_english").value = scripts[1];
-            // var image = document.getElementById('output');
-            // image.src = attr['picturesURLS'][0];
-            // alert(JSON.parse(localStorage.getItem(p.name+"_pics")));
-            // initializeTheListOfPicturesToShow(JSON.parse(localStorage.getItem(p.name + "_pics")));
+         //   document.getElementById("subt").value = scripts[0];
+           // document.getElementById("subt_english").value = scripts[1];
+
             var video = document.getElementById('vid_itself');
-            video.src = localStorage.getItem(p.name + "_vid");
+            video.src = attr['videosURLS'];
             localStorage.setItem("name_for_add_aq", p.name);
             localStorage.setItem("desc_for_add_aq", p.description);
             document.getElementById('nameOfVid').innerText = localStorage.getItem(""+p.name+"_vid");

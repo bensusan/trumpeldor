@@ -100,7 +100,7 @@ function submitAttractionWithoutInfo() {
         //,x:31.262860,y:34.801753
         , x: lat, y: lang
         , description: ";;"
-        , script: document.getElementById("subt").value + ";;" + document.getElementById("subt_english").value
+        //, script: document.getElementById("subt").value + ";;" + document.getElementById("subt_english").value
         , picturesURLS: 'null', videosURLS: vidArr
     };
 
