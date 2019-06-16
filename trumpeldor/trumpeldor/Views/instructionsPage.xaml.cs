@@ -14,15 +14,19 @@ namespace trumpeldor.Views
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class instructionsPage : ContentPage
 	{
+        private GameController gc;
 		public instructionsPage ()
 		{
             InitializeComponent ();
+            gc = GameController.getInstance();
+            if (gc.appInformationAndInstruction != null)
+                details.Text = gc.GetCurrentLanguageText(gc.appInformationAndInstruction.how_to_play);
         }
 
         public instructionsPage(Entertainment entertainment)
         {
             InitializeComponent();
-            details.Text = entertainment.description;
+            details.Text = gc.GetCurrentLanguageText(entertainment.description);
         }
 
     }

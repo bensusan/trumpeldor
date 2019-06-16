@@ -22,7 +22,8 @@ namespace trumpeldor.Views
 		{
 			InitializeComponent ();
             gc = GameController.getInstance();
-            generalInfoTextStart = "General information, links, ...";
+            if(gc.appInformationAndInstruction != null)
+                generalInfoTextStart = gc.GetCurrentLanguageText(gc.appInformationAndInstruction.about_app);
             generalInformation.FormattedText = new FormattedString();
             generalInformation.FormattedText.Spans.Add(new Span { Text = generalInfoTextStart, Style = (Style)Application.Current.Resources["labelStyle"] });
             isGeneral = true;
@@ -31,7 +32,7 @@ namespace trumpeldor.Views
 
         public informationPage(Attraction attraction) : this()
         {
-            generalInfoTextStart = attraction.description;
+            generalInfoTextStart = gc.GetCurrentLanguageText(attraction.description);
             generalInformation.FormattedText = new FormattedString();
             generalInformation.FormattedText.Spans.Add(new Span { Text = generalInfoTextStart, Style = (Style)Application.Current.Resources["labelStyle"] });
             isGeneral = false;
@@ -65,8 +66,8 @@ namespace trumpeldor.Views
         {
             List<OpenMessage> messagesToShow = gc.GetOpenMessages();
             foreach (OpenMessage om in messagesToShow) {
-                generalInformation.FormattedText.Spans.Add(new Span { Text = "\n\n" + om.title + ":", FontSize = 26, TextColor = Color.Black, FontAttributes = FontAttributes.Bold });
-                generalInformation.FormattedText.Spans.Add(new Span { Text = "\n" + om.data, FontSize = 20, TextColor = Color.Black });
+                generalInformation.FormattedText.Spans.Add(new Span { Text = "\n\n" + gc.GetCurrentLanguageText(om.title) + ":", FontSize = 26, TextColor = Color.Black, FontAttributes = FontAttributes.Bold });
+                generalInformation.FormattedText.Spans.Add(new Span { Text = "\n" + gc.GetCurrentLanguageText(om.data), FontSize = 20, TextColor = Color.Black });
                 //Device.BeginInvokeOnMainThread(async () => {
                 //    await DisplayAlert(om.title, om.data, AppResources.ok);
                 //});
@@ -76,8 +77,8 @@ namespace trumpeldor.Views
         protected override void OnAppearing()
         {
             base.OnAppearing();
-            if(isGeneral)
-                ShowMessagesInStart();
+            //if(isGeneral)
+            //    ShowMessagesInStart();
         }
     }
 }

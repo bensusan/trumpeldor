@@ -17,8 +17,8 @@ namespace trumpeldor.Views
 		public LoginsPage ()
 		{
 			InitializeComponent ();
-            facebook.Source = ServerConection.URL_MEDIA + "facebook.png";
-            google.Source = ServerConection.URL_MEDIA + "google.png";
+            //facebook.Source = ServerConection.URL_MEDIA + "facebook.png";
+            //google.Source = ServerConection.URL_MEDIA + "google.png";
             _googleManager = DependencyService.Get<IGoogleManager>();
         }
 

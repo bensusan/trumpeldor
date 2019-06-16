@@ -75,10 +75,10 @@ namespace trumpeldor.Views
         {
             base.OnAppearing();
             scoreLabel.Text = AppResources.score + ": " + gc.currentTrip.score;
-            if(Debugger.IsAttached)
+            if(Debugger.IsAttached || ServerConection.DEBUG == 1)
             {
-                buttonsTopLayout.IsVisible = false;
-                v.IsVisible = false;
+                buttonsTopLayout.IsVisible = true;
+                v.IsVisible = true;
             }
 
         }
@@ -146,7 +146,7 @@ namespace trumpeldor.Views
                 {
                     hintWebView.IsVisible = false;
                     hintText.IsVisible = true;
-                    hintText.Text = currentHint.data;
+                    hintText.Text = gc.GetCurrentLanguageText(currentHint.data);
                 }
             }
             if (nextAttraction.IsThisLastHint(hintIndex))

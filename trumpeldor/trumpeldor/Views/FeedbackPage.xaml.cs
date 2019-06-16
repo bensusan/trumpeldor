@@ -34,7 +34,7 @@ namespace trumpeldor.Views
             int nextRow = feedbacks.RowDefinitions.Count;
             nextRow += 2*numberOfInnerGrids;
             feedbacks.RowDefinitions.Add(new RowDefinition { Height = GridLength.Star });
-            Label lbl = new Label { Text = fi.feedback.question, HorizontalOptions = LayoutOptions.CenterAndExpand };
+            Label lbl = new Label { Text = gc.GetCurrentLanguageText(fi.feedback.question), HorizontalOptions = LayoutOptions.CenterAndExpand };
             lbl.SetDynamicResource(VisualElement.StyleProperty, "labelStyle");
             feedbacks.Children.Add(lbl, 0, nextRow);
             Feedback.Kinds kind;
