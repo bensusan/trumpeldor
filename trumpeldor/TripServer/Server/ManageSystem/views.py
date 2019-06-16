@@ -1,6 +1,9 @@
 from django.shortcuts import render, redirect
 from rest_framework.utils import json
-
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from django.views.decorators.csrf import csrf_exempt
+from braces.views import CsrfExemptMixin
 import null
 from rest_framework.response import Response
 from django.http import Http404, HttpResponse, JsonResponse
@@ -107,10 +110,11 @@ class Feedback(generics.GenericAPIView):
         ans = json.loads(json.dumps(ans))
         return Response(ans)
 
-    # def put(self, request, *args, **kwargs):
-    #     ans = BL.edit_feedback(self.kwargs['id_attr'], self.kwargs['id_hint'], request.data)
-    #     ans = json.loads(json.dumps(ans))
-    #     return Response(ans)
+    def put(self, request, *args, **kwargs):
+        ans = BL.edit_feedback_question(self.kwargs['id'], request.data)
+        ans = FeedbackSerializer(ans, many=False)
+        ans = json.loads(json.dumps(ans.data))
+        return Response(ans)
 
 
 class AmericanQuestionsList(generics.GenericAPIView):
@@ -429,4 +433,42 @@ def settings(request):
 
 
 
+################### FOR FILES #############################
 
+
+def file(request):
+    if request.method == 'GET':
+        if request.path_info == '/managementsystem/file/img':
+            file_path = 'Server/ManageSystem/fileImg'
+        else:
+            file_path = 'Server/ManageSystem/fileVid'
+        with open(file_path, "r") as fp:
+            file_cont = fp.read()
+        return JsonResponse({'data':file_cont})
+    elif request.method == 'POST':
+        if request.path_info == '/managementsystem/file/img':
+            file_path = 'Server/ManageSystem/fileImg'
+        else:
+            file_path = 'Server/ManageSystem/fileVid'
+        if request.data == "end of file":
+            return
+        with open(file_path, "a") as fp:
+            fp.write(request.data)
+            fp.close()
+        return Response(json.loads(json.dumps(True)))
+
+
+class File(CsrfExemptMixin, APIView):
+    authentication_classes = []
+
+    def post(self, request, format=None):
+        if request.path_info == '/managementsystem/file/img':
+            file_path = 'Server/ManageSystem/fileImg'
+        else:
+            file_path = 'Server/ManageSystem/fileVid'
+        if request.data == "end of file":
+            return Response(json.loads(json.dumps(True)))
+        with open(file_path, "a") as fp:
+            fp.write(request.data)
+            fp.close()
+        return Response(json.loads(json.dumps(True)))

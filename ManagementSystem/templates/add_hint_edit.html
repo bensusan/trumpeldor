@@ -14,11 +14,13 @@
     {% load static %}
     <link rel="stylesheet" href="{% static 'SideMenu.css' %}?version=5">
     {% load static %}
-    <script src="{% static 'attractions.js' %}?version=2"></script>
+    <script src="{% static 'attractions.js' %}?version=90"></script>
     {% load static %}
-    <script src="{% static 'add_hint_edit.js' %}?version=11"></script>
+    <script src="{% static 'add_hint_edit.js' %}?version=22"></script>
     {% load static %}
-    <script src="{% static 'properties.js' %}?version=2"></script>
+    <script src="{% static 'properties.js' %}?version=10"></script>
+    {% load static %}
+    <script src="{% static 'syncAttr.js' %}?version=10"></script>
 </head>
 <body>
 
@@ -31,28 +33,28 @@
 
 
 <div align="center">
-     <label style="font-size: 36px;"><b>:רמזים קיימים</b></label>
+    <label style="font-size: 36px;"><b>:רמזים קיימים</b></label>
     <p id="existing_hints"></p>
-    <p style="font-size: 36px;">:תמונות</p>
+    <p style="display: none;font-size: 36px;">:תמונות</p>
     <article>
         <output id="result"/>
     </article>
-    <p style="font-size: 36px;">:סרטונים</p>
+    <p style="display:none;font-size: 36px;">:סרטונים</p>
     <article>
         <output id="resultVideos"/>
     </article>
     <p><br/></p>
     <p></p>
-    <textarea id="text_hint_id" name="subject" placeholder="...כתבי את הרמז"
-              style="direction:ltr;text-align:right;display: none;width:300px;height:200px;border-radius: 10px;"></textarea>
+    <textarea id="text_hint_id" name="subject" placeholder="כתבי את הרמז..."
+              style="direction:rtl;text-align:right;display: none;width:300px;height:200px;border-radius: 10px;"></textarea>
     <textarea id="text_hint_id_english" name="subject" placeholder="write the hint..."
-              style="direction:ltr;text-align:right;display: none;width:300px;height:200px;border-radius: 10px;"></textarea>
+              style="direction:ltr;text-align:left;display: none;width:300px;height:200px;border-radius: 10px;"></textarea>
     <p></p>
     <button class='button google-blue' type="button" id="send_text_hint" style="display: none">שליחה</button>
     <p></p>
 
     <textarea id="vid_hint_description" placeholder="...כתבי תיאור"
-              style="width:340px;height:80px;direction:ltr;text-align:right;display: none"></textarea>
+              style="width:340px;height:80px;direction:rtl;text-align:right;display: none"></textarea>
     <p></p>
     <div id="message"></div>
     <video id="vid_hint_id" height="200px" width="350px" controls="" autoplay="" style="display: none"></video>
@@ -65,7 +67,7 @@
 
     <p></p>
     <textarea id="pic_hint_description" placeholder="...כתבי תיאור"
-              style="width:340px;height:80px;direction:ltr;text-align:right;display: none"></textarea>
+              style="width:340px;height:80px;direction:rtl;text-align:right;display: none"></textarea>
     <p></p>
     <p></p>
     <label id="upload_title" style="display: none"><b>:העלאת התמונה</b></label>

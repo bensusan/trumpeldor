@@ -17,9 +17,9 @@
     {% load static %}
     <script src="{% static 'properties.js' %}?version=5"></script>
     {% load static %}
-    <script src="{% static 'prop_map.js' %}?version=15"></script>
+    <script src="{% static 'prop_map.js' %}?version=22"></script>
     {% load static %}
-    <script src="{% static 'more_properties.js' %}?version=24"></script>
+    <script src="{% static 'more_properties.js' %}?version=28"></script>
 
 </head>
 <body>
@@ -56,31 +56,24 @@
                 async defer>
         </script>
     </div>
-
     <p><br/></p>
-    <input id="picInput" type="file" onchange="encodeImageFileAsURL(this)"/>
-    <label id="pic_title" style="text-align: right;"><b>:העלאת תמונת לוגו של האפליקציה</b></label>
-    <p><img id="output" width="200" style="display: none"/></p>
-    <p></p>
-
     <input type="number" id="info_ttl" name="subject" placeholder="הקלידי את תשובתך בשעות"
            style="width:160px;height:20px;">
     <label style="font-size: 20px"><b>?כמה זמן תהיי מעוניינת לשמור מידע על משתמש רשום</b></label>
     <p></p>
-    <input type="file" id="inputBar" onchange="func(this)" accept=".mp3"/>
-    <label style="font-size: 20px"><b>:הוספת צליל הגעה לאטרקציה</b></label>
+    <label style="text-align:right;font-size: 20px"><b>:חוקי ניקוד</b></label>
     <p></p>
-    <audio controls autoplay id="audio_controls" style="display: none">
-        <source id="attr_sound" src="" type="audio/mpeg">
-    </audio>
-
+    <TABLE id="ruleTable" width="350px" border="1">
+		<TR>
+            <TD><INPUT type="checkbox" name="chk" style="width: 50px;"/></TD>
+            <TD><INPUT type="text" name="rule" placeholder="כמות ניקוד" style="direction:rtl;text-align:right;width: 200px;"/></TD>
+			<TD><INPUT type="text" name="points" placeholder="תיאור החוק" style="direction:rtl;text-align:right;width: 500px;"/></TD>
+		</TR>
+	</TABLE>
     <p></p>
-    <input type="file" id="inputBarFail" onchange="funcFail(this)" accept=".mp3"/>
-    <label style="font-size: 20px"><b>:הוספת צליל כישלון</b></label>
+    <INPUT type="button" value="הוספת חוק" onclick="addRow('ruleTable')" />
+    <INPUT type="button" value="מחיקת חוק" onclick="deleteRow('ruleTable')" />
     <p></p>
-    <audio controls autoplay id="audio_controls_fail" style="display: none">
-        <source id="attr_sound_fail" src="" type="audio/mpeg">
-    </audio>
 
     <p><br/></p>
     <button class="yahoo" id="save_props" type="button">שמירת הגדרות</button>

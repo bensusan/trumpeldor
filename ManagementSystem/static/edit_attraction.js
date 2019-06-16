@@ -1,7 +1,7 @@
 var attr_for_editing;
 var helperVar;
 var helperVarVid;
-
+let arrOfPicsData = [];
 
 function localFileVideoPlayer() {
     'use strict';
@@ -27,6 +27,8 @@ function localFileVideoPlayer() {
 
         let fileURL = URL.createObjectURL(file);
         videoNode.src = fileURL;
+        document.getElementById('nameOfVid').innerText = file.name;
+        vidName = file.name;
 
     };
     let inputNode = document.querySelector('input');
@@ -36,15 +38,17 @@ function localFileVideoPlayer() {
 
 window.onload = function () {
     let saveEditBTN = document.getElementById("saveEditBTN");
-    saveEditBTN.addEventListener('click',function () {
+    saveEditBTN.addEventListener('click', function () {
         finishEditingAttraction();
     });
     let deletePointBTN = document.getElementById("delete_point");
-    deletePointBTN.addEventListener('click',function () {
+    deletePointBTN.addEventListener('click', function () {
         deletePoint();
     });
     getRequestAttractions(getFieldsValuesOfExistingAttraction);
     localFileVideoPlayer();
+    initializeTheListOfPicturesToShow();
+    // document.getElementById('randomPic').src = "\\trumpeldor\\TripServer\\media\\87a.jpg";
 };
 
 
@@ -56,39 +60,32 @@ function uploadVideoBTNclick() {
 
 function finishEditingAttraction() {
     let attr_after_editing;
-    let vidArr = attr_for_editing['videosURLS'];
+    let vidArr = ["hello"];
     if (helperVarVid != undefined) {
-        vidArr = [];
-        vidArr.push(helperVarVid);
+        sendLongBase64Parts(helperVarVid);
+    } else {
+        vidArr = 'null';
+    }
+    let pixArr = ["hello"];
+    if (arrOfPicsData.length != 0) {
+        // can do it with all pics.. just add loop
+        sendLongBase64PartsPic(arrOfPicsData[0]);
+        window.location.href = '/attractions';
+    } else {
+        pixArr = attr_for_editing['picturesURLS'];
     }
 
-    if (helperVar == undefined) {
-        attr_after_editing = {
-            name: document.getElementById("attr_name").value + ';;' + document.getElementById("attr_name_english").value,
-            x: attr_for_editing['x'],
-            y: attr_for_editing['y'],
-            description: document.getElementById("desc").value + ';;' + document.getElementById("desc_english").value,
-            picturesURLS: attr_for_editing['picturesURLS'],
-            videosURLS: vidArr
-        };
-    } else {
-        let picArr = [];
-        picArr.push(helperVar);
-        attr_after_editing = {
-            name: document.getElementById("attr_name").value + ';;' + document.getElementById("attr_name_english").value,
-            x: attr_for_editing['x'],
-            y: attr_for_editing['y'],
-            description: document.getElementById("desc").value + ';;' + document.getElementById("desc_english").value,
-            picturesURLS: picArr,
-            videosURLS: vidArr
-        };
-    }
-    if (helperVarVid != undefined) {
-        vidArr = [];
-        vidArr.push(helperVarVid);
-        //localStorage.clear();
-        localStorage.setItem(attr_after_editing['name']+"_vid",vidArr);
-    }
+    attr_after_editing = {
+        name: document.getElementById("attr_name").value + ';;' + document.getElementById("attr_name_english").value,
+        x: attr_for_editing['x'],
+        y: attr_for_editing['y'],
+        description: document.getElementById("desc").value + ';;' + document.getElementById("desc_english").value,
+        picturesURLS: pixArr,
+        videosURLS: vidArr
+    };
+    localStorage.setItem(attr_after_editing['name'] + "_vid", document.getElementById('nameOfVid').innerText);
+    localStorage.setItem("desc_for_add_aq", attr_after_editing['description']);
+
     editRequestAttraction(attr_after_editing, attr_for_editing['id']);
     window.location.href = '/attractions';
 }
@@ -139,34 +136,81 @@ function getFieldsValuesOfExistingAttraction(attractionsJSON) {
             // var image = document.getElementById('output');
             // image.src = attr['picturesURLS'][0];
             // alert(JSON.parse(localStorage.getItem(p.name+"_pics")));
-            initializeTheListOfPicturesToShow(JSON.parse(localStorage.getItem(p.name+"_pics")));
+            // initializeTheListOfPicturesToShow(JSON.parse(localStorage.getItem(p.name + "_pics")));
             var video = document.getElementById('vid_itself');
-            video.src = localStorage.getItem(p.name+"_vid");
+            video.src = localStorage.getItem(p.name + "_vid");
             localStorage.setItem("name_for_add_aq", p.name);
             localStorage.setItem("desc_for_add_aq", p.description);
+            document.getElementById('nameOfVid').innerText = localStorage.getItem(""+p.name+"_vid");
         }
     });
 }
 
-function initializeTheListOfPicturesToShow(arrOfPics) {
 
-    //var files = event.target.files; //FileList object
-    var files = arrOfPics;
-    var output = document.getElementById("result");
+function initializeTheListOfPicturesToShow() {
+    //Check File API support
+    if (window.File && window.FileList && window.FileReader) {
+        var filesInput = document.getElementById("files");
 
-    for (var i = 0; i < files.length; i++) {
-        var file = files[i];
-        var img = document.createElement("img");
-        img.src = file;
-        img.className = 'thumbnail';
-        var div = document.createElement("div");
-        div.appendChild(img);
+        filesInput.addEventListener("change", function (event) {
 
-        output.insertBefore(div, null);
+            var files = event.target.files; //FileList object
+            var output = document.getElementById("result");
+
+            for (var i = 0; i < files.length; i++) {
+                var file = files[i];
+
+                //Only pics
+                if (!file.type.match('image'))
+                    continue;
+
+                var picReader = new FileReader();
+
+                picReader.addEventListener("load", function (event) {
+
+                    var picFile = event.target;
+
+                    var div = document.createElement("div");
+
+                    div.innerHTML = "<img class='thumbnail' src='" + picFile.result + "'" +
+                        "title='" + picFile.name + "'/>";
+
+                    let picURL = picFile.result;
+                    arrOfPicsData.push(picURL);
+                    output.insertBefore(div, null);
+
+                });
+
+                //Read the image
+                picReader.readAsDataURL(file);
+            }
+
+        });
+    } else {
+        console.log("Your browser does not support File API");
     }
-
-
 }
+
+
+// function initializeTheListOfPicturesToShow(arrOfPics) {
+//
+//     //var files = event.target.files; //FileList object
+//     var files = arrOfPics;
+//     var output = document.getElementById("result");
+//
+//     for (var i = 0; i < files.length; i++) {
+//         var file = files[i];
+//         var img = document.createElement("img");
+//         img.src = file;
+//         img.className = 'thumbnail';
+//         var div = document.createElement("div");
+//         div.appendChild(img);
+//
+//         output.insertBefore(div, null);
+//     }
+//
+//
+// }
 
 function initializeLanguageBTNs() {
 
@@ -174,8 +218,6 @@ function initializeLanguageBTNs() {
     let attr_name_english = document.getElementById("attr_name_english");
     let subt = document.getElementById("subt");
     let subt_english = document.getElementById("subt_english");
-    let pop = document.getElementById("pop");
-    let pop_english = document.getElementById("pop_english");
     let desc = document.getElementById("desc");
     let desc_english = document.getElementById("desc_english");
     let hebrewBTN = document.getElementById("hebrewBTN");
@@ -184,10 +226,8 @@ function initializeLanguageBTNs() {
     hebrewBTN.addEventListener('click', function () {
         attr_name.style.display = "";
         subt.style.display = "";
-        pop.style.display = "";
         attr_name_english.style.display = "none";
         subt_english.style.display = "none";
-        pop_english.style.display = "none";
         desc.style.display = "";
         desc_english.style.display = "none";
     });
@@ -195,10 +235,8 @@ function initializeLanguageBTNs() {
     englishBTN.addEventListener('click', function () {
         attr_name.style.display = "none";
         subt.style.display = "none";
-        pop.style.display = "none";
         attr_name_english.style.display = "";
         subt_english.style.display = "";
-        pop_english.style.display = "";
         desc.style.display = "none";
         desc_english.style.display = "";
     });

@@ -13,7 +13,7 @@
     {% load static %}
     <script src="{% static 'attractions.js' %}?version=5"></script>
     {% load static %}
-    <script src="{% static 'properties.js' %}?version=10"></script>
+    <script src="{% static 'properties.js' %}?version=11"></script>
 </head>
 <body>
 <div>
@@ -21,7 +21,7 @@
 
     <div id="map">
         {% load static %}
-        <script src="{% static 'Map.js' %}?version=4"></script>
+        <script src="{% static 'Map.js' %}?version=8"></script>
         <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD7rvXqYArUeu8hVHETM6g9w-ek0RqusZ4&callback=initMapAndAttractions&language=he&region=UK"
                 async defer>
         </script>
@@ -43,6 +43,7 @@
         <input type="text" id="manual_lat" placeholder="Enter latitude" style="width:150px;display: none" required>
 
         <div align="center"><button id="add_manually" type="button" style="display: none">הוסיפי</button></div>
+        <div align="center"><button id="place" type="button" style="display: none">מיקום</button></div>
 
     </div>
 

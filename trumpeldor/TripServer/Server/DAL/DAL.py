@@ -221,6 +221,9 @@ class DAL_Abstract(object):
     def edit_american_question(self, id_attraction, id_aquestion, question, answers, indexOfCorrectAnswer):
         raise NotImplementedError("Should have implemented this")
 
+    def edit_feedback_question(self, id, question, kind):#question, kind
+        raise NotImplementedError("Should have implemented this")
+
 
 class DALProxy(DAL_Abstract):
     Implementation = None
@@ -592,3 +595,8 @@ class DALProxy(DAL_Abstract):
         if self.Implementation is None:
             raise NotImplementedError("Should have implemented this")
         return self.Implementation.edit_american_question(id_attraction, id_aquestion, question, answers, indexOfCorrectAnswer)
+
+    def edit_feedback_question(self, id, question, kind):
+        if self.Implementation is None:
+            raise NotImplementedError("Should have implemented this")
+        return self.Implementation.edit_feedback_question(id, question, kind)

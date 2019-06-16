@@ -90,21 +90,38 @@ class DAL_Implementation(DAL_Abstract):
     def add_attraction(self, name, x, y, description, picturesURLS, videosURLS):
         names_of_pics=[]
         names_of_vids=[]
+        # if picturesURLS != 'null':
+        #     names_of_pics = add_media(picturesURLS, 'image/jpeg', '.png')
+        # if videosURLS != 'null':
+        #     names_of_vids = add_media(videosURLS, 'video/mp4', '.mp4')
+        # attraction = Attraction(name=name, x=x, y=y, description=description, picturesURLS=addPrefixUrl(names_of_pics),
+        #                         videosURLS=addPrefixUrl(names_of_vids))
         if picturesURLS != 'null':
-            names_of_pics = add_media(picturesURLS, 'image/jpeg', '.png')
+            file_path = 'Server/ManageSystem/fileImg'
+            with open(file_path, "r") as fp:
+                file_cont = fp.read()
+            names_of_pics = add_media([file_cont], 'image/jpeg', '.png')
+            open(file_path, 'w').close()
         if videosURLS != 'null':
-            names_of_vids = add_media(videosURLS, 'video/mp4', '.mp4')
-        attraction = Attraction(name=name, x=x, y=y, description=description, picturesURLS=addPrefixUrl(names_of_pics),
-                                videosURLS=addPrefixUrl(names_of_vids))
+            file_path = 'Server/ManageSystem/fileVid'
+            with open(file_path, "r") as fp:
+                file_cont = fp.read()
+            open(file_path, 'w').close()
+            names_of_vids = add_media([file_cont], 'video/mp4', '.mp4')
+        attraction = Attraction(name=name, x=x, y=y, description=description,
+                                    picturesURLS=addPrefixUrl(names_of_pics),
+                                                             videosURLS=addPrefixUrl(names_of_vids))
         attraction.save()
         return attraction
 
     def add_hint(self, id_attraction, kind, data, description):
         if kind == 'HP':
-            data = add_media([data], 'image/jpeg', '.png')
+            data = add_media([readAndClear('Server/ManageSystem/fileImg')], 'image/jpeg', '.png')
+            data = addPrefixUrl(data)[0]
         elif kind == 'HV':
-            data = add_media([data], 'video/mp4', '.mp4')
-        hint = Hint(attraction=self.getAttraction(id_attraction), kind=kind, data=addPrefixUrl(data)[0], description=description)
+            data = add_media([readAndClear('Server/ManageSystem/fileVid')], 'video/mp4', '.mp4')
+            data = addPrefixUrl(data)[0]
+        hint = Hint(attraction=self.getAttraction(id_attraction), kind=kind, data=data, description=description)
         hint.save()
         return hint
 
@@ -214,10 +231,10 @@ class DAL_Implementation(DAL_Abstract):
         attraction.x=x
         attraction.y=y
         attraction.description=description
-        #if picturesURLS is not null:
-        attraction.picturesURLS=addPrefixUrl(add_media(picturesURLS, 'image/jpeg', '.png'))
-        #if videosURLS is not null:
-        attraction.videosURLS=addPrefixUrl(add_media(videosURLS, 'video/mp4', '.mp4'))
+        if picturesURLS != 'null':
+            attraction.picturesURLS=addPrefixUrl(add_media([readAndClear('Server/ManageSystem/fileImg')], 'image/jpeg', '.png'))
+        if videosURLS != 'null':
+            attraction.videosURLS=addPrefixUrl(add_media([readAndClear('Server/ManageSystem/fileVid')], 'video/mp4', '.mp4'))
         attraction.save()
         return attraction
 
@@ -232,10 +249,12 @@ class DAL_Implementation(DAL_Abstract):
     def edit_hint(self, id_attraction, id_hint, data, description):
         hint = self.get_hint(id_attraction, id_hint)
         if hint.kind == 'HP':
-            data = add_media([data], 'image/jpeg', '.png')
+            data = add_media([readAndClear('Server/ManageSystem/fileImg')], 'image/jpeg', '.png')
+            data = addPrefixUrl(data)[0]
         elif hint.kind == 'HV':
-            data = add_media([data], 'video/mp4', '.mp4')
-        hint.data = addPrefixUrl(data)[0]
+            data = add_media([readAndClear('Server/ManageSystem/fileVid')], 'video/mp4', '.mp4')
+            data = addPrefixUrl(data)[0]
+        hint.data = data
         hint.description = description
         hint.save()
         return True
@@ -345,7 +364,7 @@ class DAL_Implementation(DAL_Abstract):
         return SlidingPuzzle.objects.filter(attraction=self.get_attraction(id_attraction)).all()
 
     def add_sliding_puzzle(self, id_attraction, piecesURLS, width, height, description):
-        sliding_puzzle_pic = add_media([piecesURLS], 'image/jpeg', '.png')
+        sliding_puzzle_pic = add_media([readAndClear('Server/ManageSystem/fileImg')], 'image/jpeg', '.png')
         wid = int(width)
         hei = int(height)
         slicers = image_slicer.slice('media/' + sliding_puzzle_pic[0], wid*hei)
@@ -366,7 +385,7 @@ class DAL_Implementation(DAL_Abstract):
         return Puzzle.objects.filter(attraction=self.get_attraction(id_attraction)).all()
 
     def add_puzzle(self, id_attraction, piecesURLS, width, height, description):
-        puzzle_pic = add_media([piecesURLS], 'image/jpeg', '.png')
+        puzzle_pic = add_media([readAndClear('Server/ManageSystem/fileImg')], 'image/jpeg', '.png')
         wid = int(width)
         hei = int(height)
         slicers = image_slicer.slice('media/' + puzzle_pic[0], wid * hei)
@@ -437,6 +456,15 @@ class DAL_Implementation(DAL_Abstract):
         aq.save()
         return aq
 
+    def edit_feedback_question(self, id, question, kind):
+        feedback = self.get_feedback_question(id)
+        feedback.question = question
+        feedback.kind = kind
+        feedback.save()
+        return feedback
+
+
+
 
 
 #returns array of names of the media files saved in the media folder
@@ -446,7 +474,6 @@ def add_media(media_urls, replace, suffix):
     names_of_files = []
     for file in media_urls:
         file = file.replace('data:' + replace + ';base64,', '')
-        #print(file)
         imgdata = base64.b64decode(file)
         filename = str(uuid.uuid4()) + suffix
         with open('media/' + filename, 'wb') as f:
@@ -479,3 +506,10 @@ def num_of_media_files():
     print(num_files)
     return num_files
 
+
+#read and than clear file
+def readAndClear(file_path):
+    with open(file_path, "r") as fp:
+        file_cont = fp.read()
+    open(file_path, 'w').close()
+    return file_cont

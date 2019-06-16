@@ -83,3 +83,36 @@ function deleteRequestAttraction(id){
 }
 
 
+function sendLongBase64Parts(longBase64) {
+    let arrOfParts = longBase64.match(/.{1,100000}/g);
+    let counter = 0;
+    for (let i = 0; i < arrOfParts.length; i++) {
+        postRequestFile(arrOfParts[i]);
+        counter++;
+    }
+    postRequestFile("end of file");
+}
+
+function sendLongBase64PartsPic(longBase64) {
+    let arrOfParts = longBase64.match(/.{1,100000}/g);
+    let counter = 0;
+    for (let i = 0; i < arrOfParts.length; i++) {
+        postRequestFilePic(arrOfParts[i]);
+        counter++;
+    }
+    postRequestFilePic("end of file");
+}
+
+function postRequestFile(file) {
+    //   alert("hint blat");
+    syncServerRequest("POST", function noop(dummy) {
+        }, 'http://' + ip + ':12344/managementsystem/file/vid',
+        JSON.stringify(file));
+}
+
+function postRequestFilePic(file) {
+    //   alert("hint blat");
+    syncServerRequest("POST", function noop(dummy) {
+        }, 'http://' + ip + ':12344/managementsystem/file/img',
+        JSON.stringify(file));
+}

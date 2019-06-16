@@ -13,11 +13,13 @@
     {% load static %}
     <link rel="stylesheet" href="{% static 'signInForm.css' %}?version=2">
     {% load static %}
-    <script src="{% static 'attractions.js' %}?version=6"></script>
+    <script src="{% static 'attractions.js' %}?version=13"></script>
     {% load static %}
     <script src="{% static 'properties.js' %}?version=5"></script>
     {% load static %}
-    <script src="{% static 'attr_info.js' %}?version=26"></script>
+    <script src="{% static 'attr_info.js' %}?version=11"></script>
+    {% load static %}
+    <script src="{% static 'syncAttr.js' %}?version=4"></script>
 </head>
 <body>
 
@@ -43,9 +45,9 @@
 
             <label for="desc" style="font-size: 24px;"><b>:תיאור</b></label>
             <textarea id="desc" name="attr_desc" placeholder="הכניסי תיאור אטרקציה"
-                      style="text-align:right;width:310px;height:200px"></textarea>
+                      style="direction:rtl;text-align:right;width:310px;height:200px"></textarea>
             <textarea id="desc_english" name="attr_desc_eng" placeholder="enter attraction description"
-                      style="display:none;text-align:right;width:310px;height:200px"></textarea>
+                      style="display:none;direction:ltr;text-align:left;width:310px;height:200px"></textarea>
             <p><br/></p>
             <button class='button google-blue' id="submit_btn_add_attr"
                     type="button" style="width: 220px;">שליחה

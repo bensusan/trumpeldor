@@ -1,10 +1,6 @@
 var helperVar;
 var helperVarVid;
-
-var loadFile = function (event) {
-    var image = document.getElementById('output');
-    image.src = URL.createObjectURL(event.target.files[0]);
-};
+let vidName = "";
 
 function uploadVideoBTNclick() {
     let vid_input = document.getElementById('video_input');
@@ -35,7 +31,8 @@ function localFileVideoPlayer() {
 
         let fileURL = URL.createObjectURL(file);
         videoNode.src = fileURL;
-
+        document.getElementById('nameOfVid').innerText = file.name;
+        vidName = file.name;
     };
     let inputNode = document.querySelector('input');
     inputNode.addEventListener('change', playSelectedFile, false);
@@ -48,8 +45,6 @@ window.onload = function () {
     let attr_name_english = document.getElementById("attr_name_english");
     let subt = document.getElementById("subt");
     let subt_english = document.getElementById("subt_english");
-    let pop = document.getElementById("pop");
-    let pop_english = document.getElementById("pop_english");
 
     let hebrewBTN = document.getElementById("hebrewBTN");
     let englishBTN = document.getElementById("englishBTN");
@@ -57,20 +52,16 @@ window.onload = function () {
     hebrewBTN.addEventListener('click', function () {
         attr_name.style.display = "";
         subt.style.display = "";
-        pop.style.display = "";
         attr_name_english.style.display = "none";
         subt_english.style.display = "none";
-        pop_english.style.display = "none";
 
     });
 
     englishBTN.addEventListener('click', function () {
         attr_name.style.display = "none";
         subt.style.display = "none";
-        pop.style.display = "none";
         attr_name_english.style.display = "";
         subt_english.style.display = "";
-        pop_english.style.display = "";
     });
 
     initializingButtonsWithFunctionality();
@@ -96,22 +87,24 @@ function initializingButtonsWithFunctionality() {
 function submitAttractionWithoutInfo() {
 
     let addedPoint = JSON.parse(localStorage.getItem("addedPoint"));
-
+    let vidArr = 'null';
     let lat = addedPoint.lat;
-    let vidArr = [];
-    if (helperVarVid != undefined) {
-        vidArr.push(helperVarVid);
-    }
     let lang = addedPoint.lng;
+    if (helperVarVid != undefined) {
+        vidArr = [];
+        vidArr.push("hello");
+        sendLongBase64Parts(helperVarVid);
+    }
     let attraction_to_send = {
-        name: document.getElementById("attr_name").value +";;"+document.getElementById("attr_name_english").value
+        name: document.getElementById("attr_name").value + ";;" + document.getElementById("attr_name_english").value
         //,x:31.262860,y:34.801753
         , x: lat, y: lang
-        , description: ""
-        , picturesURLS: [], videosURLS: vidArr
+        , description: ";;"
+        , picturesURLS: 'null', videosURLS: vidArr
     };
+
+    localStorage.setItem(""+attraction_to_send.name+"_vid",document.getElementById('nameOfVid').innerText);
     postRequestAttraction(attraction_to_send);
-    localStorage.setItem(attraction_to_send.name+"_vid", vidArr);
     localStorage.setItem("name_for_add_aq", attraction_to_send.name);
     localStorage.setItem("desc_for_add_aq", attraction_to_send.description);
     window.location.href = '/add_game';
@@ -119,21 +112,23 @@ function submitAttractionWithoutInfo() {
 
 function saveAndProceedToAttractionInfo() {
 
-
     let addedPoint = JSON.parse(localStorage.getItem("addedPoint"));
     let lat = addedPoint.lat;
-    let vidArr = [];
+    let vidArr = 'null';
     if (helperVarVid != undefined) {
-        vidArr.push(helperVarVid);
+        vidArr = [];
+        vidArr.push("hello");
+        sendLongBase64Parts(helperVarVid);
     }
     let lang = addedPoint.lng;
-    let name = document.getElementById("attr_name").value +";;"+document.getElementById("attr_name_english").value;
+    let name = document.getElementById("attr_name").value + ";;" + document.getElementById("attr_name_english").value;
+    localStorage.setItem(""+name+"_vid",document.getElementById('nameOfVid').innerText);
     let x = lat;
     let y = lang;
     localStorage.setItem("x", JSON.stringify(x));
     localStorage.setItem("y", JSON.stringify(y));
     localStorage.setItem("vidArr", JSON.stringify(vidArr));
-    localStorage.setItem(name+"_vid", vidArr);
+    // localStorage.setItem(name + "_vid", vidArr);
     localStorage.setItem("name_for_add_aq", name);
     localStorage.setItem("desc_for_add_aq", "");
     window.location.href = '/attr_info';
@@ -148,6 +143,16 @@ function check() {
 
 }
 
+function sendLongBase64Parts(longBase64) {
+    let arrOfParts = longBase64.match(/.{1,100000}/g);
+    let counter = 0;
+    for (let i = 0; i < arrOfParts.length; i++) {
+        postRequestFile(arrOfParts[i]);
+        counter++;
+    }
+    alert(counter);
+    postRequestFile("end of file");
+}
 
 function encodeImageFileAsURL(element) {
     var image = document.getElementById('output');
@@ -179,3 +184,5 @@ function encodeVideoFileAsURL(element) {
 
     reader.readAsDataURL(file);
 }
+
+

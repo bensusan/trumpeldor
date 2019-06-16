@@ -43,6 +43,8 @@ INSTALLED_APPS = [
     'corsheaders',
 ]
 
+
+
 MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -150,3 +152,7 @@ CORS_ALLOW_METHODS = (
 )
 
 TEST_RUNNER = "redgreenunittest.django.runner.RedGreenDiscoverRunner"
+CSRF_COOKIE_SECURE = True
+SESSION_COOKIE_SECURE = True
+
+

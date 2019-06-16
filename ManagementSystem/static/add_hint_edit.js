@@ -20,7 +20,7 @@ function loadStringOfInnerHTMLWithHints(hintsJSON) {
     str = "";
     let imageCounter = 1;
     let videoCounter = 1;
-
+    let i = 1;
     hintsJSON.forEach(function (hint) {
 
         let dataOfHint = hint['data'];
@@ -30,8 +30,9 @@ function loadStringOfInnerHTMLWithHints(hintsJSON) {
             if (hint['data'].substring(0, 10) == 'data:video')
                 str = str + " data: " + "VideoMedia" + videoCounter + "<br />";
             else
-                str = str + " data: " + hint['data'] + "<br />";
+                str = str + i + ". " + hint['data'].split(';;')[0] + "<br />";
         }
+        i += 1;
 
 
         // alert(str);
@@ -147,6 +148,7 @@ function initializeBTNsFunctionality() {
         vidDesc.style.display = "none";
         thevidbrowse.style.display = "none";
         sendButtonVid.style.display = "none";
+        textLineEnglish.style.display = "none";
         window.scrollTo(0, document.body.scrollHeight);
     });
 
@@ -163,6 +165,8 @@ function initializeBTNsFunctionality() {
         outpic.style.display = "none";
         sendButtonPic.style.display = "none";
         upload_pic_title.style.display = "none";
+        textLineEnglish.style.display = "none";
+
         window.scrollTo(0, document.body.scrollHeight);
 
     });
@@ -240,7 +244,7 @@ function finishHint() {
 }
 
 function postRequestHint(the_hint, attr_id) {
-    serverRequest("POST", function noop(dummy) {
+    syncServerRequest("POST", function noop(dummy) {
         }, 'http://' + ip + ':12344/managementsystem/attraction/' +
         attr_id + '/hint/',
         JSON.stringify(the_hint));
@@ -257,10 +261,9 @@ function encodeImageFileAsURL(element) {
 
     var reader = new FileReader();
     reader.onloadend = function () {
-        helperVar = reader.result
+        helperVar = reader.result;
     };
-
-    reader.readAsDataURL(blob);    //file insetead of blob
+    reader.readAsDataURL(file);    //file insetead of blob
 }
 
 
@@ -289,13 +292,19 @@ function funcToSendImage(attractionsJSON) {
     let name = localStorage.getItem("name_for_add_aq");
     let desc = localStorage.getItem("desc_for_add_aq");
     // alert("in get name! "+"of the origin : " + lat + " , " + lng);
+    let pixArr = ["hello"];
+    if (helperVar != undefined) {
+        // can do it with all pics.. just add loop
+        sendLongBase64PartsPic(helperVar);
+        window.location.href = '/add_hint_edit';
+    }
     attractionsJSON.forEach(function (attr) {
+
         let p = {name: attr['name'], description: attr['description']};
         // alert("in get name! "+"of the origin : " + name + " , " + desc + "\n of the other: "+p.name +" , "+ p.description);
         if (p.name === name && p.description === desc) {
             let diskit = document.getElementById("pic_hint_description").value;
-            // alert(diskit);
-            let the_hint = {attraction: attr, kind: "HP", data: helperVar, description: diskit};
+            let the_hint = {attraction: attr, kind: "HP", data: pixArr, description: diskit};
             let attr_id = attr['id'];
             postRequestHint(the_hint, attr_id);
             window.location.href = '/add_hint_edit';
@@ -313,6 +322,10 @@ function funcToSendVideo(attractionsJSON) {
     let name = localStorage.getItem("name_for_add_aq");
     let desc = localStorage.getItem("desc_for_add_aq");
     // alert("in get name! "+"of the origin : " + lat + " , " + lng);
+    let vidArr = ["hello"];
+    if (helperVarVid != undefined) {
+        sendLongBase64Parts(helperVarVid);
+    }
     attractionsJSON.forEach(function (attr) {
         let p = {name: attr['name'], description: attr['description']};
         // alert("in get name! "+"of the origin : " + name + " , " + desc + "\n of the other: "+p.name +" , "+ p.description);
@@ -321,7 +334,7 @@ function funcToSendVideo(attractionsJSON) {
             let the_hint = {
                 attraction: attr,
                 kind: "HV",
-                data: helperVarVid,
+                data: vidArr,
                 description: document.getElementById("vid_hint_description").value
             };
             let attr_id = attr['id'];

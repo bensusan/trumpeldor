@@ -25,7 +25,7 @@ function loadStringOfInnerHTMLWithHints(hintsJSON) {
     str = "";
     let imageCounter = 1;
     let videoCounter = 1;
-
+    let i = 1;
     hintsJSON.forEach(function (hint) {
 
         let dataOfHint = hint['data'];
@@ -35,11 +35,9 @@ function loadStringOfInnerHTMLWithHints(hintsJSON) {
             if (hint['data'].substring(0, 10) == 'data:video')
                 str = str + " data: " + "VideoMedia" + videoCounter + "<br />";
             else
-                str = str + " data: " + hint['data'] + "<br />";
+                str = str + i + "." + hint['data'].split(';;')[0] + "<br />";
         }
-
-
-        // alert(str);
+        i += 1;
 
         var output = document.getElementById("result");
         var outputVideo = document.getElementById("resultVideos");
@@ -108,6 +106,10 @@ function initializeBTNsFunctionality() {
     var sendTextHintBTN = document.getElementById('send_text_hint');
     var sendPicHintBTN = document.getElementById('send_pic_hint');
     var sendVidHintBTN = document.getElementById('send_vid_hint');
+    let hebrewBTN = document.getElementById("hebrewBTN");
+    let englishBTN = document.getElementById("englishBTN");
+    var vidEng = document.getElementById("vid_hint_descriptionEnglish");
+    var picEng = document.getElementById("pic_hint_descriptionEnglish");
 
     textHintBTN.addEventListener('click', function () {
         textLine.style.display = "inline";
@@ -123,9 +125,6 @@ function initializeBTNsFunctionality() {
         upload_pic_title.style.display = "none";
         window.scrollTo(0, document.body.scrollHeight);
 
-
-        let hebrewBTN = document.getElementById("hebrewBTN");
-        let englishBTN = document.getElementById("englishBTN");
 
         hebrewBTN.addEventListener('click', function () {
             textLine.style.display = "";
@@ -154,6 +153,16 @@ function initializeBTNsFunctionality() {
         thevidbrowse.style.display = "none";
         sendButtonVid.style.display = "none";
         window.scrollTo(0, document.body.scrollHeight);
+        hebrewBTN.addEventListener('click', function () {
+            picEng.style.display = "none";
+            picDesc.style.display = "";
+        });
+
+        englishBTN.addEventListener('click', function () {
+            picEng.style.display = "";
+            picDesc.style.display = "none";
+        });
+
 
     });
 
@@ -172,7 +181,15 @@ function initializeBTNsFunctionality() {
         sendButtonPic.style.display = "none";
         upload_pic_title.style.display = "none";
         window.scrollTo(0, document.body.scrollHeight);
+        hebrewBTN.addEventListener('click', function () {
+            vidEng.style.display = "none";
+            vidDesc.style.display = "";
+        });
 
+        englishBTN.addEventListener('click', function () {
+            vidEng.style.display = "";
+            vidDesc.style.display = "none";
+        });
     });
 
     sendTextHintBTN.addEventListener('click', function () {
@@ -206,7 +223,6 @@ function getTheNeededAttractionIdToSendItOnThePostRequest(attractionsJSON) {
             postRequestHint(textHintToSend, attr['id']);
             window.location.href = '/add_hint';
         }
-
     });
 
 }
@@ -291,6 +307,12 @@ function funcToSendImage(attractionsJSON) {
     let name = localStorage.getItem("name_for_add_aq");
     let desc = localStorage.getItem("desc_for_add_aq");
     // alert("in get name! "+"of the origin : " + lat + " , " + lng);
+    let pixArr = ["hello"];
+    if (helperVar != undefined) {
+        // can do it with all pics.. just add loop
+        sendLongBase64PartsPic(helperVar);
+        window.location.href = '/add_hint';
+    }
     attractionsJSON.forEach(function (attr) {
         let p = {name: attr['name'], description: attr['description']};
         // alert("in get name! "+"of the origin : " + name + " , " + desc + "\n of the other: "+p.name +" , "+ p.description);
@@ -299,8 +321,8 @@ function funcToSendImage(attractionsJSON) {
             let the_hint = {
                 attraction: attr,
                 kind: "HP",
-                data: helperVar,
-                description: document.getElementById("pic_hint_description").value
+                data: pixArr,
+                description: document.getElementById("pic_hint_description").value+';;'+document.getElementById("pic_hint_descriptionEnglish").value
             };
             let attr_id = attr['id'];
             postRequestHint(the_hint, attr_id);
@@ -319,6 +341,10 @@ function funcToSendVideo(attractionsJSON) {
     let name = localStorage.getItem("name_for_add_aq");
     let desc = localStorage.getItem("desc_for_add_aq");
     // alert("in get name! "+"of the origin : " + lat + " , " + lng);
+    let vidArr = ["hello"];
+    if (helperVarVid != undefined) {
+        sendLongBase64Parts(helperVarVid);
+    }
     attractionsJSON.forEach(function (attr) {
         let p = {name: attr['name'], description: attr['description']};
         // alert("in get name! "+"of the origin : " + name + " , " + desc + "\n of the other: "+p.name +" , "+ p.description);
@@ -327,8 +353,8 @@ function funcToSendVideo(attractionsJSON) {
             let the_hint = {
                 attraction: attr,
                 kind: "HV",
-                data: helperVarVid,
-                description: document.getElementById("vid_hint_description").value
+                data: vidArr,
+                description: document.getElementById("vid_hint_description").value+';;'+document.getElementById("vid_hint_descriptionEnglish").value
             };
             let attr_id = attr['id'];
             postRequestHint(the_hint, attr_id);

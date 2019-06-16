@@ -87,8 +87,8 @@ function howMuchRowsToAddPick(aqJSON) {
         rowsOfTable[rowIteratorIndex].cells[1].childNodes[0].value = ans[0];
         rowsOfTableEnglish[rowIteratorIndex].cells[1].childNodes[0].value = ans[1];
         if (indexesArr.includes(rowIteratorIndex)) {
-            rowsOfTable[rowIteratorIndex].cells[0].childNodes[0].checked = true;
-            rowsOfTableEnglish[rowIteratorIndex].cells[0].childNodes[0].checked = true;
+            rowsOfTable[rowIteratorIndex + 1].cells[0].childNodes[0].checked = true;
+            rowsOfTableEnglish[rowIteratorIndex + 1].cells[0].childNodes[0].checked = true;
         }
     }
 
@@ -125,10 +125,44 @@ function addRow(tableID) {
 }
 
 
-function postRequestAmericanQuestion(aq, attr_id,ques_id) {
+function deleteRow(tableID) {
+    try {
+        var table = document.getElementById(tableID);
+        var tableEnglish = document.getElementById('dataTableEnglish');
+        var rowCount = table.rows.length;
+
+        for (var i = 0; i < rowCount; i++) {
+            var row = table.rows[i];
+            var rowEnglish = tableEnglish.rows[i];
+            var chkbox = row.cells[0].childNodes[0];
+            if (chkbox.checked == true) {
+                rowEnglish.cells[0].childNodes[0].checked = true;
+            } else {
+                rowEnglish.cells[0].childNodes[0].checked = false;
+            }
+            if (null != chkbox && true == chkbox.checked) {
+                if (rowCount <= 1) {
+                    alert("Cannot delete all the rows.");
+                    break;
+                }
+                table.deleteRow(i);
+                tableEnglish.deleteRow(i);
+                rowCount--;
+                i--;
+            }
+
+
+        }
+    } catch (e) {
+        alert(e);
+    }
+}
+
+
+function postRequestAmericanQuestion(aq, attr_id, ques_id) {
     serverRequest("PUT", function noop(dummy) {
         }, 'http://' + ip + ':12344/managementsystem/attraction/' +
-        attr_id + '/aquestion/'+ques_id+'/',
+        attr_id + '/aquestion/' + ques_id + '/',
         JSON.stringify(aq));
 }
 
@@ -152,7 +186,7 @@ function funcToGetAttraction(attractionsJSON) {
                 , indexOfCorrectAnswer: correctAnswersIndexes
                 , attraction: attr['id'] //atraction id needs to be here
             };
-            postRequestAmericanQuestion(american_question_to_send, attr['id'],idOfQuestion);
+            postRequestAmericanQuestion(american_question_to_send, attr['id'], idOfQuestion);
             // also need to delete here
             localStorage.setItem("the_attr", JSON.stringify(attr));
         }
@@ -161,9 +195,10 @@ function funcToGetAttraction(attractionsJSON) {
     window.location.href = '/pick_aq_edit';
 }
 
-function deleteRequestAq(attr_id,aq_id){
-    serverRequest("DELETE", function noop(dummy){}, 'http://'+ip+':12344/managementsystem/attraction/'+attr_id+
-        '/aquestion/'+aq_id+'/');
+function deleteRequestAq(attr_id, aq_id) {
+    serverRequest("DELETE", function noop(dummy) {
+    }, 'http://' + ip + ':12344/managementsystem/attraction/' + attr_id +
+        '/aquestion/' + aq_id + '/');
 }
 
 
