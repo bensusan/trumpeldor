@@ -9,6 +9,7 @@ class Attraction(models.Model):
     x = models.FloatField()
     y = models.FloatField()
     description = models.TextField()
+    script = models.TextField()
     picturesURLS = JSONField(blank=True, null=True)
     videosURLS = JSONField(blank=True, null=True)
     # visible = models.BooleanField()

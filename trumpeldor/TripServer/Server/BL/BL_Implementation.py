@@ -102,7 +102,7 @@ class BL_Implementation(BL_Abstract):
     def add_attraction(self, attraction):
         #if self.getAttraction(attraction['id']) is None:
         return self.DAL.add_attraction(attraction['name'], attraction['x'], attraction['y'],
-                                       attraction['description'], attraction['picturesURLS'], attraction['videosURLS'])
+                                       attraction['description'], attraction['script'], attraction['picturesURLS'], attraction['videosURLS'])
 
     def add_hint(self, id_attraction, hint):
         return self.DAL.add_hint(id_attraction, hint['kind'], hint['data'], hint['description'])
@@ -197,7 +197,7 @@ class BL_Implementation(BL_Abstract):
     def edit_attraction(self, id, attraction):
         if self.get_attraction(id) is not None:
             return self.DAL.edit_attraction(id, attraction['name'], attraction['x'], attraction['y'],
-                                            attraction['description'], attraction['picturesURLS'], attraction['videosURLS'])
+                                            attraction['description'], attraction['script'], attraction['picturesURLS'], attraction['videosURLS'])
 
     def delete_american_question(self, id_attraction, id_a_question):
         if self.get_american_question(id_attraction, id_a_question):
