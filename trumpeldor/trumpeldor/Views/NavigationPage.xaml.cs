@@ -145,7 +145,7 @@ namespace trumpeldor.Views
                         await Task.Delay(100);
                         hintImg.IsVisible = true;
                         hintImg.Aspect = Aspect.AspectFit;
-                        hintImg.Source = ImageSource.FromUri(new Uri("https://eoimages.gsfc.nasa.gov/images/imagerecords/74000/74393/world.topo.200407.3x5400x2700.jpg"));
+                        hintImg.Source = ImageSource.FromUri(new Uri(currentHint.data));
                     }
                     else
                     {
