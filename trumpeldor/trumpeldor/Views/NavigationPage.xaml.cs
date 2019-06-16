@@ -138,12 +138,26 @@ namespace trumpeldor.Views
                 //hintMap.IsVisible = false;
                 Hint currentHint = nextAttraction.hints[hintIndex];
                 if (currentHint.GetKindHint() == Hint.Kinds.HintPicture || currentHint.GetKindHint() == Hint.Kinds.HintVideo){
-                    hintText.IsVisible = false;
-                    hintWebView.IsVisible = true;
-                    hintWebView.Source = currentHint.data;
+                    if (currentHint.GetKindHint() == Hint.Kinds.HintPicture)
+                    {
+                        hintText.IsVisible = false;
+                        hintWebView.IsVisible = false;
+                        await Task.Delay(100);
+                        hintImg.IsVisible = true;
+                        hintImg.Aspect = Aspect.AspectFit;
+                        hintImg.Source = ImageSource.FromUri(new Uri("https://eoimages.gsfc.nasa.gov/images/imagerecords/74000/74393/world.topo.200407.3x5400x2700.jpg"));
+                    }
+                    else
+                    {
+                        hintImg.IsVisible = false;
+                        hintText.IsVisible = false;
+                        hintWebView.IsVisible = true;
+                        hintWebView.Source = currentHint.data;
+                    }
                 }
                 else //case text
                 {
+                    hintImg.IsVisible = false;
                     hintWebView.IsVisible = false;
                     hintText.IsVisible = true;
                     hintText.Text = gc.GetCurrentLanguageText(currentHint.data);
