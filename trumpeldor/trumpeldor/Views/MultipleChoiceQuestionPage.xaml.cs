@@ -29,7 +29,7 @@ namespace trumpeldor.Views
             gc = GameController.getInstance();
             subtitles.Source = ServerConection.URL_MEDIA + "subtitles.jpg";
             info.Source = ServerConection.URL_MEDIA + "info.jpg";
-            playVideo.Source = ServerConection.URL_MEDIA + "playVideo.png";
+            playVideo.Source = ServerConection.URL_MEDIA + "playVideo.jpg";
             this.aq = gc.currentTrip.GetCurrentAttraction().americanQuestion;
             attractionQuestion.Text = gc.GetCurrentLanguageText(aq.question);
             this.attraction = attraction;
