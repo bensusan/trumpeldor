@@ -24,8 +24,9 @@
                 <AbsoluteLayout x:Name="absoluteLayout"
                                 BackgroundColor="Black" />
 
-                <Button Text="{translator:Translate reset}" Clicked="OnResetButtonClickedAsync"
-                        Opacity="0"
+                <Button Text="{translator:Translate reset}"
+                        Clicked="OnResetButtonClickedAsync"
+                        Style="{StaticResource largeButtonStyle}"
                         HorizontalOptions="CenterAndExpand"
                         VerticalOptions="CenterAndExpand" />
 

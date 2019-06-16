@@ -103,8 +103,8 @@ namespace trumpeldor.Views
 
             View tileView = (View)sender;
             SlidingPuzzleTile tappedTile = SlidingPuzzleTile.Dictionary[tileView];
-            taps.Add(new Tuple<int, int>(tappedTile.currentRow, tappedTile.currentCol));
 
+            taps.Add(new Tuple<int, int>(emptyRow, emptyCol));
             await ShiftIntoEmpty(tappedTile.currentRow, tappedTile.currentCol);
             isBusy = false;
             await isPuzzleSolved();
@@ -240,7 +240,7 @@ namespace trumpeldor.Views
             isBusy = true;
             foreach (Tuple<int,int> tap in taps)
             {
-                await ShiftIntoEmpty(tap.Item1, tap.Item2);
+                await ShiftIntoEmpty(tap.Item1, tap.Item2,25);
             }
             isBusy = false;
             taps.Clear();
