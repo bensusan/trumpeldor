@@ -47,7 +47,7 @@ namespace trumpeldor.Views
             odometer.MinimumTrackColor = Color.FromHex("#0066ff");
             odometer.MaximumTrackColor = Color.FromHex("#0066ff");
             odometer.Value = 0;
-            //odometer.WidthRequest = temperature.Height/10 * 9;
+            odometer.WidthRequest = temperature.HeightRequest;
             //hintBtn.Padding = 0;
             //hintBtn.WidthRequest = hintFrame.Width;
             //hintBtn.Margin = new Thickness(
