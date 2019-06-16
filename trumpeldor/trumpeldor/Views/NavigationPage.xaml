@@ -22,6 +22,7 @@
                     <StackLayout x:Name="hintStack" Style="{StaticResource mainStackLayout}" Orientation="Vertical" HorizontalOptions="Fill" HeightRequest="300" WidthRequest="300">
                         <Label x:Name="hintText" Style="{StaticResource labelStyle}" IsVisible="False" HorizontalOptions="Fill" HeightRequest="300" WidthRequest="300"/>
                         <WebView x:Name="hintWebView" IsVisible="False" HorizontalOptions="Fill" VerticalOptions="Fill" HeightRequest="300" WidthRequest="300"/>
+                        <Image x:Name="hintImg" IsVisible="False" HorizontalOptions="Fill" VerticalOptions="Fill" HeightRequest="300" WidthRequest="300"/>
                     </StackLayout>
                 </Frame>
                 <ImageButton x:Name="rightArrow" Clicked="RightArrow_Clicked" HorizontalOptions="Start" IsEnabled="False" Style="{StaticResource baseViewStyle}" WidthRequest="20"/>
