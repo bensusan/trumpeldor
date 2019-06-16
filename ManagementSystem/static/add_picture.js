@@ -96,12 +96,10 @@ function funcToSendGame(attractionsJSON) {
             let description = document.getElementById("game_instructions_text").value +
                 ";;" + document.getElementById("game_instructions_text_english").value;
 
-
-            let pixArr = ["hello"];
             if (helperVar != undefined) {
                 // can do it with all pics.. just add loop
                 sendLongBase64PartsPic(helperVar);
-                window.location.href = '/' + localStorage.getItem("last_add_game_url");
+                //window.location.href = '/' + localStorage.getItem("last_add_game_url");
             }
 
             if (localStorage.getItem("game_kind") == "sliding") {
@@ -110,7 +108,7 @@ function funcToSendGame(attractionsJSON) {
                 let n_size_val = n_size.options[n_size.selectedIndex].value;
                 let data_send = {
                     description: description,
-                    piecesURLS: pixArr, width: n_size_val, height: n_size_val
+                    piecesURLS: [], width: n_size_val, height: n_size_val
                 };
                 localStorage.setItem(name + the_kind, helperVar);
                 let attr_id = attr['id'];
@@ -121,7 +119,7 @@ function funcToSendGame(attractionsJSON) {
                 let n_size = document.getElementById("n_size").value;
                 let data_send = {
                     description: description,
-                    piecesURLS: pixArr, width: n_size, height: n_size
+                    piecesURLS: [], width: n_size, height: n_size
                 };
                 localStorage.setItem(name + the_kind, helperVar);
                 let attr_id = attr['id'];
