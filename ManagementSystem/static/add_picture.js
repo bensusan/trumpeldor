@@ -51,7 +51,6 @@ function funcToSendGame(attractionsJSON) {
             if (helperVar != undefined) {
                 // can do it with all pics.. just add loop
                 sendLongBase64PartsPic(helperVar);
-                //window.location.href = '/' + localStorage.getItem("last_add_game_url");
             }
 
             if (localStorage.getItem("game_kind") == "sliding") {
@@ -77,10 +76,8 @@ function funcToSendGame(attractionsJSON) {
                 let attr_id = attr['id'];
                 postRequestGame(data_send, attr_id, the_kind);
             }
-
             window.location.href = '/' + localStorage.getItem("last_add_game_url"); ////////////////////////////change to both
         }
-
     });
 }
 

@@ -241,22 +241,6 @@ function editRequestAttraction(attraction, attr_id) {
         JSON.stringify(attraction));
 }
 
-function encodeImageFileAsURL(element) {
-    var image = document.getElementById('output');
-    image.src = URL.createObjectURL(element.files[0]);
-
-    helperVar = "";
-
-    var file = element.files[0];
-    var reader = new FileReader();
-    reader.onloadend = function () {
-        helperVar = reader.result
-    };
-
-    reader.readAsDataURL(file);
-}
-
-
 function encodeVideoFileAsURL(element) {
 
     helperVarVid = "";
