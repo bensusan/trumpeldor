@@ -7,7 +7,6 @@ function funcForExistingHints(attractionsJSON) {
 
     let name = localStorage.getItem("name_for_add_aq");
     let desc = localStorage.getItem("desc_for_add_aq");
-    // alert("in get name! "+"of the origin : " + lat + " , " + lng);
     attractionsJSON.forEach(function (attr) {
         let p = {name: attr['name'], description: attr['description']};
         if (p.name === name && p.description === desc) {
@@ -72,7 +71,6 @@ function loadStringOfInnerHTMLWithHints(hintsJSON) {
 }
 
 function getRequestHints(funcOnHints, attr_id) {
-    // the server port and my ip
     serverRequest("GET", funcOnHints, 'http://' + ip + ':12344/managementsystem/attraction/' + attr_id +
         '/hint/?format=json');
 }
@@ -89,46 +87,55 @@ window.onload = function () {
 
 
 function initializeBTNsFunctionality() {
-    var textHintBTN = document.getElementById('add_text_hint');
-    var textLineEnglish = document.getElementById('text_hint_id_english');
-    var textLine = document.getElementById("text_hint_id");
-    var sendButtonTxt = document.getElementById("send_text_hint");
-    var upload_pic_title = document.getElementById("upload_title");
-    var clickHere = document.getElementById("file");
-    var picDesc = document.getElementById("pic_hint_description");
-    var outpic = document.getElementById("output");
-    var sendButtonPic = document.getElementById("send_pic_hint");
+    let hebrewBTN = document.getElementById("hebrewBTN");
+    let englishBTN = document.getElementById("englishBTN");
+    let textHintBTN = document.getElementById('add_text_hint');
+    let textLineEnglish = document.getElementById('text_hint_id_english');
+    let textLine = document.getElementById("text_hint_id");
+    let sendButtonTxt = document.getElementById("send_text_hint");
+    let upload_pic_title = document.getElementById("upload_title");
+    let clickHere = document.getElementById("file");
+    let picDesc = document.getElementById("pic_hint_description");
+    let outpic = document.getElementById("output");
     var thevid = document.getElementById("vid_hint_id");
-    var vidDesc = document.getElementById("vid_hint_description");
+    let vidDesc = document.getElementById("vid_hint_description");
     var thevidbrowse = document.getElementById("vid_hint_browse_id");
-    var sendButtonVid = document.getElementById("send_vid_hint");
     var sendTextHintBTN = document.getElementById('send_text_hint');
     var sendPicHintBTN = document.getElementById('send_pic_hint');
     var sendVidHintBTN = document.getElementById('send_vid_hint');
+    var vidEng = document.getElementById("vid_hint_descriptionEnglish");
+    var picEng = document.getElementById("pic_hint_descriptionEnglish");
 
     textHintBTN.addEventListener('click', function () {
-        textLine.style.display = "inline";
-        sendButtonTxt.style.display = "inline";
+        textLine.style.display = "";
+        sendButtonTxt.style.display = "";
         clickHere.style.display = "none";
         picDesc.style.display = "none";
+        picEng.style.display = "none";
         outpic.style.display = "none";
-        sendButtonPic.style.display = "none";
+        sendPicHintBTN.style.display = "none";
         thevid.style.display = "none";
         vidDesc.style.display = "none";
+        vidEng.style.display = "none";
         thevidbrowse.style.display = "none";
-        sendButtonVid.style.display = "none";
+        sendVidHintBTN.style.display = "none";
         upload_pic_title.style.display = "none";
         window.scrollTo(0, document.body.scrollHeight);
 
-        let hebrewBTN = document.getElementById("hebrewBTN");
-        let englishBTN = document.getElementById("englishBTN");
-
         hebrewBTN.addEventListener('click', function () {
+            picEng.style.display = "none";
+            picDesc.style.display = "none";
+            vidDesc.style.display = "none";
+            vidEng.style.display = "none";
             textLine.style.display = "";
             textLineEnglish.style.display = "none";
         });
 
         englishBTN.addEventListener('click', function () {
+            picEng.style.display = "none";
+            picDesc.style.display = "none";
+            vidDesc.style.display = "none";
+            vidEng.style.display = "none";
             textLine.style.display = "none";
             textLineEnglish.style.display = "";
         });
@@ -141,15 +148,33 @@ function initializeBTNsFunctionality() {
         picDesc.style.display = "";
         outpic.style.display = "";
         upload_pic_title.style.display = "";
-        sendButtonPic.style.display = "";
+        sendPicHintBTN.style.display = "";
         textLine.style.display = "none";
         sendButtonTxt.style.display = "none";
         thevid.style.display = "none";
         vidDesc.style.display = "none";
+        vidEng.style.display = "none";
         thevidbrowse.style.display = "none";
-        sendButtonVid.style.display = "none";
+        sendVidHintBTN.style.display = "none";
         textLineEnglish.style.display = "none";
         window.scrollTo(0, document.body.scrollHeight);
+        hebrewBTN.addEventListener('click', function () {
+            picEng.style.display = "none";
+            picDesc.style.display = "";
+            vidDesc.style.display = "none";
+            vidEng.style.display = "none";
+            textLine.style.display = "none";
+            textLineEnglish.style.display = "none";
+        });
+
+        englishBTN.addEventListener('click', function () {
+            picEng.style.display = "";
+            picDesc.style.display = "none";
+            vidDesc.style.display = "none";
+            vidEng.style.display = "none";
+            textLine.style.display = "none";
+            textLineEnglish.style.display = "none";
+        });
     });
 
     var vidHintBTN = document.getElementById('add_vid_hint');
@@ -157,18 +182,35 @@ function initializeBTNsFunctionality() {
         thevid.style.display = "";
         vidDesc.style.display = "";
         thevidbrowse.style.display = "";
-        sendButtonVid.style.display = "";
+        sendVidHintBTN.style.display = "";
         textLine.style.display = "none";
         sendButtonTxt.style.display = "none";
         clickHere.style.display = "none";
         picDesc.style.display = "none";
+        picEng.style.display = "none";
         outpic.style.display = "none";
-        sendButtonPic.style.display = "none";
+        sendPicHintBTN.style.display = "none";
         upload_pic_title.style.display = "none";
         textLineEnglish.style.display = "none";
-
         window.scrollTo(0, document.body.scrollHeight);
 
+        hebrewBTN.addEventListener('click', function () {
+            picEng.style.display = "none";
+            picDesc.style.display = "none";
+            vidDesc.style.display = "";
+            vidEng.style.display = "none";
+            textLine.style.display = "none";
+            textLineEnglish.style.display = "none";
+        });
+
+        englishBTN.addEventListener('click', function () {
+            picEng.style.display = "none";
+            picDesc.style.display = "none";
+            vidDesc.style.display = "none";
+            vidEng.style.display = "";
+            textLine.style.display = "none";
+            textLineEnglish.style.display = "none";
+        });
     });
 
     sendTextHintBTN.addEventListener('click', function () {
@@ -224,15 +266,11 @@ function localFileVideoPlayer() {
         if (canPlay === '') canPlay = 'no';
         let message = 'Can play type "' + type + '": ' + canPlay;
         let isError = canPlay === 'no';
-        //displayMessage(message, isError)
-
         if (isError) {
             return
         }
-
         let fileURL = URL.createObjectURL(file);
         videoNode.src = fileURL;
-
     };
     let inputNode = document.querySelector('input');
     inputNode.addEventListener('change', playSelectedFile, false);
@@ -253,12 +291,9 @@ function postRequestHint(the_hint, attr_id) {
 function encodeImageFileAsURL(element) {
     var image = document.getElementById('output');
     image.src = URL.createObjectURL(element.files[0]);
-
     helperVar = "";
-
     var file = element.files[0];
     var blob = file.slice();
-
     var reader = new FileReader();
     reader.onloadend = function () {
         helperVar = reader.result;
@@ -299,9 +334,7 @@ function funcToSendImage(attractionsJSON) {
         window.location.href = '/add_hint_edit';
     }
     attractionsJSON.forEach(function (attr) {
-
         let p = {name: attr['name'], description: attr['description']};
-        // alert("in get name! "+"of the origin : " + name + " , " + desc + "\n of the other: "+p.name +" , "+ p.description);
         if (p.name === name && p.description === desc) {
             let diskit = document.getElementById("pic_hint_description").value;
             let the_hint = {attraction: attr, kind: "HP", data: pixArr, description: diskit};
@@ -309,7 +342,6 @@ function funcToSendImage(attractionsJSON) {
             postRequestHint(the_hint, attr_id);
             window.location.href = '/add_hint_edit';
         }
-
     });
 }
 
