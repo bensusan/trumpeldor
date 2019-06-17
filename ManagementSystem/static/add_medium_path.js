@@ -1,6 +1,5 @@
 let curPosClicked;
 
-var str_of_points = "";
 let pointsOfPath = [];
 let pointsOfShort = [];
 let pointsOfMedium = [];
@@ -9,7 +8,6 @@ let idOfLong = 0;
 
 
 function initMapAndAttractionss() {
-    str_of_points = "";
     pointsOfPath = [];
 
     getRequestTracks(markAttractionsOfMediumPaths);
@@ -35,7 +33,6 @@ function addEditListenerr(m) {
             if (pointsOfPath.indexOf(m.position) == -1 && curPosClicked == m.position) {
                 let point_to_push = {lat: m.position.lat(), lng: m.position.lng()};
                 pointsOfPath.push(point_to_push);
-                str_of_points = str_of_points + m.position + "<br />";
             }
             getRequestAttractions(needThisToGetPointsIDs);
         });
@@ -79,7 +76,6 @@ function markAttractionsOfMediumPaths(tracksJSON) {
             })
         }
 
-
         if (track['length'] == 3) {
             idOfLong = track['id'];
         }
@@ -102,9 +98,7 @@ function markAttractionsOfMediumPath_left(attractionsJSON) {
         });
         let firstBool = lats.includes(pos2.lat);
         let secondBool = lngs.includes(pos2.lng);
-        // alert(lats.length);
         if (!(firstBool && secondBool)) {
-            // alert("ad");
             localStorage.setItem("title" + pos, "attraction ID: " + attr['id'] + "\nattraction name: " + attr['name'] + "\nposition: (" + attr['x'] + "," + attr['y'] + ")");
             markAttractionElse(pos);
         }
@@ -134,7 +128,6 @@ function needThisToGetPointsIDs(attractionsJSON) {
     });
 
     window.location.href = '/add_medium_path';
-    //window.location.href='/edit_path';
 }
 
 function markAttractionOfMediumPath(pos) {
@@ -181,8 +174,7 @@ function getRequestTracks(funcOnTrack) {
 }
 
 function addPointToTrackRequest(id_of_point_to_add, track_id) {
-    //alert("trackos blatikus");
-    serverRequest("PUT", function noop(dummy) {
+    syncServerRequest("PUT", function noop(dummy) {
         }, 'http://' + ip + ':12344/managementsystem/track/' + track_id + '/add',
         JSON.stringify(id_of_point_to_add));
 }
