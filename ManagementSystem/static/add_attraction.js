@@ -91,8 +91,7 @@ function submitAttractionWithoutInfo() {
     let lat = addedPoint.lat;
     let lang = addedPoint.lng;
     if (helperVarVid != undefined) {
-        vidArr = [];
-        vidArr.push("hello");
+        vidArr = ["hello"];
         sendLongBase64Parts(helperVarVid);
     }
     let attraction_to_send = {
@@ -146,7 +145,6 @@ function sendLongBase64Parts(longBase64) {
         postRequestFile(arrOfParts[i]);
         counter++;
     }
-    alert(counter);
     postRequestFile("end of file");
 }
 
@@ -181,7 +179,7 @@ function encodeVideoFileAsURL(element) {
 }
 
 function postRequestAttractionSync(attraction) {
-    syncServerRequest("POST", function noop(dummy) {
+    serverRequest("POST", function noop(dummy) {
         }, 'http://' + ip + ':12344/managementsystem/attraction/',
         JSON.stringify(attraction));
 }
