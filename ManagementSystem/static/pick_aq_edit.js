@@ -127,5 +127,5 @@ function getRequestAmericanQuestions(funcOnAqs,attr_id){
 
 
 function deleteRequestAmericanQuestion(attr_id,aq_id){
-     serverRequest("DELETE", function noop(dummy){}, 'http://'+ip+':12344/managementsystem/attraction/'+attr_id+'/aquestion/'+aq_id+'/');
+     syncServerRequest("DELETE", function noop(dummy){}, 'http://'+ip+':12344/managementsystem/attraction/'+attr_id+'/aquestion/'+aq_id+'/');
     }

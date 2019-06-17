@@ -160,7 +160,7 @@ function deleteRow(tableID) {
 
 
 function postRequestAmericanQuestion(aq, attr_id, ques_id) {
-    serverRequest("PUT", function noop(dummy) {
+    syncServerRequest("PUT", function noop(dummy) {
         }, 'http://' + ip + ':12344/managementsystem/attraction/' +
         attr_id + '/aquestion/' + ques_id + '/',
         JSON.stringify(aq));

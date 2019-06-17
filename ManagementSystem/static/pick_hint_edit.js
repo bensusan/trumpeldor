@@ -298,6 +298,6 @@ function postRequestHint(the_hint, attr_id) {
 }
 
 function deleteRequestHint(attr_id, hint_id) {
-    serverRequest("DELETE", function noop(dummy) {
+    syncServerRequest("DELETE", function noop(dummy) {
     }, 'http://' + ip + ':12344/managementsystem/attraction/' + attr_id + '/hint/' + hint_id + '/');
 }
