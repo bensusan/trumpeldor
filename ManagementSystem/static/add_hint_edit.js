@@ -92,7 +92,6 @@ function initializeBTNsFunctionality() {
     let textHintBTN = document.getElementById('add_text_hint');
     let textLineEnglish = document.getElementById('text_hint_id_english');
     let textLine = document.getElementById("text_hint_id");
-    let sendButtonTxt = document.getElementById("send_text_hint");
     let upload_pic_title = document.getElementById("upload_title");
     let clickHere = document.getElementById("file");
     let picDesc = document.getElementById("pic_hint_description");
@@ -108,7 +107,7 @@ function initializeBTNsFunctionality() {
 
     textHintBTN.addEventListener('click', function () {
         textLine.style.display = "";
-        sendButtonTxt.style.display = "";
+        sendTextHintBTN.style.display = "";
         clickHere.style.display = "none";
         picDesc.style.display = "none";
         picEng.style.display = "none";
@@ -150,7 +149,7 @@ function initializeBTNsFunctionality() {
         upload_pic_title.style.display = "";
         sendPicHintBTN.style.display = "";
         textLine.style.display = "none";
-        sendButtonTxt.style.display = "none";
+        sendTextHintBTN.style.display = "none";
         thevid.style.display = "none";
         vidDesc.style.display = "none";
         vidEng.style.display = "none";
@@ -184,7 +183,7 @@ function initializeBTNsFunctionality() {
         thevidbrowse.style.display = "";
         sendVidHintBTN.style.display = "";
         textLine.style.display = "none";
-        sendButtonTxt.style.display = "none";
+        sendTextHintBTN.style.display = "none";
         clickHere.style.display = "none";
         picDesc.style.display = "none";
         picEng.style.display = "none";

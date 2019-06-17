@@ -124,7 +124,7 @@ function saveAndProceedToAttractionInfo() {
     localStorage.setItem("" + name + "_vid", document.getElementById('nameOfVid').innerText);
     let x = lat;
     let y = lang;
-    localStorage.setItem("script", JSON.stringify(document.getElementById("subt").value + ";;" + document.getElementById("subt_english").value));
+    //localStorage.setItem("script", JSON.stringify(document.getElementById("subt").value + ";;" + document.getElementById("subt_english").value));
     localStorage.setItem("x", JSON.stringify(x));
     localStorage.setItem("y", JSON.stringify(y));
     localStorage.setItem("vidArr", JSON.stringify(vidArr));
@@ -147,23 +147,6 @@ function sendLongBase64Parts(longBase64) {
     }
     postRequestFile("end of file");
 }
-
-function encodeImageFileAsURL(element) {
-    var image = document.getElementById('output');
-    image.style.display = "inline";
-    image.src = URL.createObjectURL(element.files[0]);
-
-    helperVar = "";
-
-    var file = element.files[0];
-    var reader = new FileReader();
-    reader.onloadend = function () {
-        helperVar = reader.result
-    };
-
-    reader.readAsDataURL(file);
-}
-
 
 function encodeVideoFileAsURL(element) {
 
