@@ -86,7 +86,7 @@ function sendTheGameData() {
 }
 
 function postRequestGame(data, attr_id, game_kind) {
-    serverRequest("POST", function noop(dummy) {
+    syncServerRequest("POST", function noop(dummy) {
         }, 'http://' + ip + ':12344/managementsystem/attraction/' +
         attr_id + '/' + game_kind + '/',
         JSON.stringify(data));
