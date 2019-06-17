@@ -261,5 +261,11 @@ namespace trumpeldor.Views
         //    currLat = position.Latitude;
         //    currLong = position.Longitude;
         //}
+        protected override bool OnBackButtonPressed()
+        {
+            //return base.OnBackButtonPressed();
+
+            return true;
+        }
     }
 }

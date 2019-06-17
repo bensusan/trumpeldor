@@ -136,5 +136,12 @@ namespace trumpeldor.Views
             }
             Application.Current.MainPage = new FirstPage();
         }
+
+        protected override bool OnBackButtonPressed()
+        {
+            //return base.OnBackButtonPressed();
+
+            return true;
+        }
     }
 }

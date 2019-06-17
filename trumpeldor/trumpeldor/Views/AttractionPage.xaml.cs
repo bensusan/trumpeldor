@@ -152,6 +152,13 @@ namespace trumpeldor.Views
             playVideo.IsEnabled = true;
             mapBtn.IsEnabled = true;
         }
+
+        protected override bool OnBackButtonPressed()
+        {
+            //return base.OnBackButtonPressed();
+
+            return true;
+        }
     }
 }
 
