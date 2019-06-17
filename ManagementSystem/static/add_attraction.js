@@ -40,7 +40,7 @@ function localFileVideoPlayer() {
 
 
 window.onload = function () {
-
+    localStorage.setItem("whereToGoInGame",'/add_game');
     let attr_name = document.getElementById("attr_name");
     let attr_name_english = document.getElementById("attr_name_english");
     let subt = document.getElementById("subt");
@@ -93,6 +93,7 @@ function submitAttractionWithoutInfo() {
     if (helperVarVid != undefined) {
         vidArr = ["hello"];
         sendLongBase64Parts(helperVarVid);
+        window.location.href = '/add_game';
     }
     let attraction_to_send = {
         name: document.getElementById("attr_name").value + ";;" + document.getElementById("attr_name_english").value
@@ -162,7 +163,7 @@ function encodeVideoFileAsURL(element) {
 }
 
 function postRequestAttractionSync(attraction) {
-    serverRequest("POST", function noop(dummy) {
+    syncServerRequest("POST", function noop(dummy) {
         }, 'http://' + ip + ':12344/managementsystem/attraction/',
         JSON.stringify(attraction));
 }
