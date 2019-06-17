@@ -17,7 +17,7 @@ namespace trumpeldor.Views
     public partial class MapPage : ContentPage
     {
         public CustomMap map;
-        private const double DESIRED_DISTANCE = 20;
+        private const double DESIRED_DISTANCE = 10;
         private const double DESIRED_SECONDS = 10;
 
         //Point p = new Point(31.262566, 34.796832); (latitude -> x, longtitude -> y)
@@ -57,7 +57,7 @@ namespace trumpeldor.Views
                 {
                     Type = PinType.Place,
                     Position = new Position(attraction.x, attraction.y),
-                    Label = attraction.name,
+                    Label = gc.GetCurrentLanguageText(attraction.name),
                     Address="35"
                 };
                 map.Pins.Add(pin);
