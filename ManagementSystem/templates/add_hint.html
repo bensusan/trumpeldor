@@ -21,6 +21,8 @@
     <script src="{% static 'properties.js' %}?version=2"></script>
     {% load static %}
     <script src="{% static 'syncAttr.js' %}?version=4"></script>
+    {% load static %}
+    <script src="{% static 'menu_of_add_hint.js' %}?version=5"></script>
 </head>
 <body>
 
@@ -82,11 +84,9 @@
     <button class='button google-blue' type="button" id="send_pic_hint" style="display: none">שליחה</button>
 
     <p></p>
-    {#<button class="button" id="finish_add_hint" onclick="finishHint()" type="button" style="direction:rtl;text-align:right;">סיימתי!</button>#}
 </div>
 <nav id="sideMenu"></nav>
 {% load static %}
-<script src="{% static 'menu_of_add_hint.js' %}?version=2"></script>
-{#style="display:none"#}
+<script src="{% static 'menu_of_add_hint.js' %}?version=5"></script>
 </body>
 </html>

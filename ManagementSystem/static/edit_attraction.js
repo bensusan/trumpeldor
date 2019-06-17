@@ -237,7 +237,7 @@ function showVals() {
 }
 
 function editRequestAttraction(attraction, attr_id) {
-    serverRequest("PUT", function noop(dummy) {
+    syncServerRequest("PUT", function noop(dummy) {
         }, 'http://' + ip + ':12344/managementsystem/attraction/' + attr_id + '/',
         JSON.stringify(attraction));
 }
