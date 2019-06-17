@@ -37,6 +37,7 @@ function localFileVideoPlayer() {
 
 
 window.onload = function () {
+    localStorage.setItem("whereToGoInGame",'/add_game_edit');
     let saveEditBTN = document.getElementById("saveEditBTN");
     saveEditBTN.addEventListener('click', function () {
         finishEditingAttraction();

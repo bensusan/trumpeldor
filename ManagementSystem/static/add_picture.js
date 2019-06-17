@@ -76,8 +76,7 @@ function funcToSendGame(attractionsJSON) {
                 let attr_id = attr['id'];
                 postRequestGame(data_send, attr_id, the_kind);
             }
-            alert(localStorage.getItem("last_add_game_url"));
-            window.location.href = '/' + localStorage.getItem("last_add_game_url"); ////////////////////////////change to both
+            window.location.href = localStorage.getItem("whereToGoInGame");
         }
     });
 }
