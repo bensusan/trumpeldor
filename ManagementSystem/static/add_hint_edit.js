@@ -336,8 +336,12 @@ function funcToSendImage(attractionsJSON) {
     attractionsJSON.forEach(function (attr) {
         let p = {name: attr['name'], description: attr['description']};
         if (p.name === name && p.description === desc) {
-            let diskit = document.getElementById("pic_hint_description").value;
-            let the_hint = {attraction: attr, kind: "HP", data: pixArr, description: diskit};
+            let the_hint = {
+                attraction: attr,
+                kind: "HP",
+                data: pixArr,
+                description: document.getElementById("pic_hint_description").value + ';;' + document.getElementById("pic_hint_descriptionEnglish").value
+            };
             let attr_id = attr['id'];
             postRequestHint(the_hint, attr_id);
             window.location.href = '/add_hint_edit';
@@ -362,12 +366,11 @@ function funcToSendVideo(attractionsJSON) {
         let p = {name: attr['name'], description: attr['description']};
         // alert("in get name! "+"of the origin : " + name + " , " + desc + "\n of the other: "+p.name +" , "+ p.description);
         if (p.name === name && p.description === desc) {
-
             let the_hint = {
                 attraction: attr,
                 kind: "HV",
                 data: vidArr,
-                description: document.getElementById("vid_hint_description").value
+                description: document.getElementById("vid_hint_description").value + ';;' + document.getElementById("vid_hint_descriptionEnglish").value
             };
             let attr_id = attr['id'];
             postRequestHint(the_hint, attr_id);
