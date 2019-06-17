@@ -29,7 +29,7 @@ function initializeBtnsFunctionality() {
             let fb = {
                 question:document.getElementById('fb_edit_txt').value,
                 kind: type
-            }
+            };
             editRequestFeedback(fb, fb_id);
             window.location.href = '/edit_feedbacks';
         });
@@ -75,18 +75,17 @@ function doneEditingFbs() {
 
 
 function getRequestFeedbacks(funcOnAqs) {
-
     serverRequest("GET", funcOnAqs, 'http://' + ip + ':12344/managementsystem/feedback/?format=json');
 }
 
 
 function deleteRequestFeedback(fb_id) {
-    serverRequest("DELETE", function noop(dummy) {
+    syncServerRequest("DELETE", function noop(dummy) {
     }, 'http://' + ip + ':12344/managementsystem/feedback/' + fb_id + '/');
 }
 
 function editRequestFeedback(feedback, feedback_id) {
-    serverRequest("PUT", function noop(dummy) {
+    syncServerRequest("PUT", function noop(dummy) {
         }, 'http://' + ip + ':12344/managementsystem/feedback/' + feedback_id + '/',
         JSON.stringify(feedback));
 }
