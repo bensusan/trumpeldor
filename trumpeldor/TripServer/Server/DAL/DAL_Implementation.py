@@ -87,6 +87,9 @@ class DAL_Implementation(DAL_Abstract):
                     ]
             }
 
+    def getInfo(self):
+        return Info.objects.first()
+
     def add_attraction(self, name, x, y, description, picturesURLS, videosURLS):
         names_of_pics=[]
         names_of_vids=[]
@@ -175,8 +178,21 @@ class DAL_Implementation(DAL_Abstract):
     def get_attractions(self):
         return Attraction.objects.all()
 
-    def getAllTracksThatIncludeThisTrack(self, track):
-        return Track.objects.filter(subTrack=track).all()
+    def getAllTracksThatIncludeThisTrack(self, track, getAllAttractionsFromTrack):
+        tracks = Track.objects.filter(subTrack=track).all()
+        # remove same tracks (with the same points with different length)
+        trackAttractions = getAllAttractionsFromTrack(track)
+        wanted_items = set()
+        for oneTrack in tracks:
+            oneTrackAttractions = getAllAttractionsFromTrack(oneTrack)
+            isDifferentTrack = False
+            for attraction in oneTrackAttractions:
+                if not trackAttractions.filter(id=attraction.id).exists():
+                    isDifferentTrack = True
+            if isDifferentTrack:
+                wanted_items.add(oneTrack.pk)
+
+        return Track.objects.filter(subTrack=track, pk__in=wanted_items).all()
 
     def getOpenMessages(self):
         return Message.objects.all()

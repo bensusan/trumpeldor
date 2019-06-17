@@ -129,7 +129,7 @@ class BL_Implementation(BL_Abstract):
 
     def getExtendedTrack(self, data):
         track = self.DAL.getTrackById(data["trackId"])
-        tracks = self.DAL.getAllTracksThatIncludeThisTrack(track)
+        tracks = self.DAL.getAllTracksThatIncludeThisTrack(track, self.getAllAttractionsFromTrack)
         track, attraction = self.getMinTrackAndAttraction(tracks, data["x"], data["y"])
         return track
 
@@ -189,6 +189,9 @@ class BL_Implementation(BL_Abstract):
 
     def getSettings(self):
         return self.DAL.getSettings()
+
+    def getInfo(self):
+        return self.DAL.getInfo()
 
     def delete_attraction(self, id):
         if self.get_attraction(id) is not None:
