@@ -65,7 +65,7 @@ class DAL_Abstract(object):
     def get_attractions(self):
         raise NotImplementedError("Should have implemented this")
 
-    def getAllTracksThatIncludeThisTrack(self, track):
+    def getAllTracksThatIncludeThisTrack(self, track, getAllAttractionsFromTrack): #getAllAttractons is function
         raise NotImplementedError("Should have implemented this")
 
     def getOpenMessages(self):
@@ -102,6 +102,9 @@ class DAL_Abstract(object):
         raise NotImplementedError("Should have implemented this")
 
     def getSettings(self):
+        raise NotImplementedError("Should have implemented this")
+
+    def getInfo(self):
         raise NotImplementedError("Should have implemented this")
 
     def delete_attraction(self, id):
@@ -336,10 +339,10 @@ class DALProxy(DAL_Abstract):
             raise NotImplementedError("Should have implemented this")
         return self.Implementation.get_attractions()
 
-    def getAllTracksThatIncludeThisTrack(self, track):
+    def getAllTracksThatIncludeThisTrack(self, track, getAllAttractionsFromTrack):
         if self.Implementation is None:
             raise NotImplementedError("Should have implemented this")
-        return self.Implementation.getAllTracksThatIncludeThisTrack(track)
+        return self.Implementation.getAllTracksThatIncludeThisTrack(track, getAllAttractionsFromTrack)
 
     def getOpenMessages(self):
         if self.Implementation is None:
@@ -400,6 +403,11 @@ class DALProxy(DAL_Abstract):
         if self.Implementation is None:
             raise NotImplementedError("Should have implemented this")
         return self.Implementation.getSettings()
+
+    def getInfo(self):
+        if self.Implementation is None:
+            raise NotImplementedError("Should have implemented this")
+        return self.Implementation.getInfo()
 
     def delete_attraction(self, id):
         if self.Implementation is None:

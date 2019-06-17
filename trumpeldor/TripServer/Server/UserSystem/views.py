@@ -193,6 +193,14 @@ class GetSettings(views.APIView):
         return generalGet(
             "GetSettings",
             BL.getSettings)
+
+
+class GetInfo(views.APIView):
+    def get(self, request):
+        return generalGet(
+            "GetInfo",
+            BL.getInfo,
+            InfoSerializer)
 ######################################################################################################
 # ----------------------------------------Add Manual Data Part----------------------------------------
 ######################################################################################################

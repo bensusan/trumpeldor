@@ -21,7 +21,8 @@ urlpatterns = [
     path('getBestScores/', GetBestScores.as_view()),
     path('getEntertainment/', GetEntertainment.as_view()),
     path('isAdmin/', IsAdmin.as_view()),
-    path('getSettings/', GetSettings.as_view())
+    path('getSettings/', GetSettings.as_view()),
+    path('getInfo/', GetInfo.as_view())
 
 ]
 
