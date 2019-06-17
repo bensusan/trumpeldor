@@ -56,7 +56,7 @@ namespace trumpeldor.Views
         private async Task<bool> CanUserPlay()
         {
             if (!gc.IsUserInValidSector()){
-                if (Debugger.IsAttached || ServerConection.DEBUG == 1)
+                if (Debugger.IsAttached /*|| ServerConection.DEBUG == 1*/)
                 {
                     return await DisplayAlert("Debug Mode", "Do you want to continue", "yes", "no");
                 }
