@@ -64,7 +64,11 @@ function finishEditingAttraction() {
     if (helperVarVid != undefined) {
         sendLongBase64Parts(helperVarVid);
     } else {
-        vidArr = 'null';
+        if (attr_for_editing['videosURLS'].length != 0) {
+            vidArr = attr_for_editing['videosURLS'];
+        } else {
+            vidArr = 'null';
+        }
     }
     let pixArr = ["hello"];
     if (arrOfPicsData.length != 0) {
@@ -72,7 +76,11 @@ function finishEditingAttraction() {
         sendLongBase64PartsPic(arrOfPicsData[0]);
         window.location.href = '/attractions';
     } else {
-        pixArr = attr_for_editing['picturesURLS'];
+        if (attr_for_editing['picturesURLS'].length != 0) {
+            pixArr = attr_for_editing['picturesURLS'];
+        } else {
+            pixArr = 'null';
+        }
     }
 
     attr_after_editing = {
@@ -120,7 +128,14 @@ function getFieldsValuesOfExistingAttraction(attractionsJSON) {
 
     attractionsJSON.forEach(function (attr) {
         // alert("the id is: "+attr['id']);
-        let p = {id: attr['id'], name: attr['name'], description: attr['description'],script: attr['script'], lat: attr['x'], lng: attr['y']};
+        let p = {
+            id: attr['id'],
+            name: attr['name'],
+            description: attr['description'],
+            script: attr['script'],
+            lat: attr['x'],
+            lng: attr['y']
+        };
         // alert("in get name! "+"of the origin : " + lat + " , " + lng + "\n of the other: "+p.lat +" , "+ p.lng);
         if (p.lat === lat && (p.lng).toFixed(8) === lng.toFixed(8)) {
             //  let picsRetreive = attr['picturesURLS'];
@@ -130,19 +145,19 @@ function getFieldsValuesOfExistingAttraction(attractionsJSON) {
             initializeLanguageBTNs();
             let names = p.name.split(';;');
             let descriptions = p.description.split(';;');
-           // let scripts = p.script.split(';;');
+            // let scripts = p.script.split(';;');
             document.getElementById("attr_name").value = names[0];
             document.getElementById("desc").value = descriptions[0];
             document.getElementById("attr_name_english").value = names[1];
             document.getElementById("desc_english").value = descriptions[1];
-         //   document.getElementById("subt").value = scripts[0];
-           // document.getElementById("subt_english").value = scripts[1];
+            //   document.getElementById("subt").value = scripts[0];
+            // document.getElementById("subt_english").value = scripts[1];
 
             var video = document.getElementById('vid_itself');
             video.src = attr['videosURLS'];
             localStorage.setItem("name_for_add_aq", p.name);
             localStorage.setItem("desc_for_add_aq", p.description);
-            document.getElementById('nameOfVid').innerText = localStorage.getItem(""+p.name+"_vid");
+            document.getElementById('nameOfVid').innerText = localStorage.getItem("" + p.name + "_vid");
         }
     });
 }
@@ -191,27 +206,6 @@ function initializeTheListOfPicturesToShow() {
         console.log("Your browser does not support File API");
     }
 }
-
-
-// function initializeTheListOfPicturesToShow(arrOfPics) {
-//
-//     //var files = event.target.files; //FileList object
-//     var files = arrOfPics;
-//     var output = document.getElementById("result");
-//
-//     for (var i = 0; i < files.length; i++) {
-//         var file = files[i];
-//         var img = document.createElement("img");
-//         img.src = file;
-//         img.className = 'thumbnail';
-//         var div = document.createElement("div");
-//         div.appendChild(img);
-//
-//         output.insertBefore(div, null);
-//     }
-//
-//
-// }
 
 function initializeLanguageBTNs() {
 
