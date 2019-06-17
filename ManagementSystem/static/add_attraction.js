@@ -97,7 +97,6 @@ function submitAttractionWithoutInfo() {
     }
     let attraction_to_send = {
         name: document.getElementById("attr_name").value + ";;" + document.getElementById("attr_name_english").value
-        //,x:31.262860,y:34.801753
         , x: lat, y: lang
         , description: ";;"
         //, script: document.getElementById("subt").value + ";;" + document.getElementById("subt_english").value
@@ -105,7 +104,7 @@ function submitAttractionWithoutInfo() {
     };
 
     localStorage.setItem("" + attraction_to_send.name + "_vid", document.getElementById('nameOfVid').innerText);
-    postRequestAttraction(attraction_to_send);
+    postRequestAttractionSync(attraction_to_send);
     localStorage.setItem("name_for_add_aq", attraction_to_send.name);
     localStorage.setItem("desc_for_add_aq", attraction_to_send.description);
     window.location.href = '/add_game';
@@ -130,19 +129,14 @@ function saveAndProceedToAttractionInfo() {
     localStorage.setItem("x", JSON.stringify(x));
     localStorage.setItem("y", JSON.stringify(y));
     localStorage.setItem("vidArr", JSON.stringify(vidArr));
-    // localStorage.setItem(name + "_vid", vidArr);
     localStorage.setItem("name_for_add_aq", name);
     localStorage.setItem("desc_for_add_aq", "");
     window.location.href = '/attr_info';
-    // window.location.href='/attractions';
-    // alert("point:"+localStorage.getItem("addedPoint")+"\n"+
-    //     "name:"+document.getElementById("attr_name").value);
+
 }
 
 function check() {
-
     alert("ayooooooooo");
-
 }
 
 function sendLongBase64Parts(longBase64) {
@@ -166,7 +160,6 @@ function encodeImageFileAsURL(element) {
     var file = element.files[0];
     var reader = new FileReader();
     reader.onloadend = function () {
-        //alert(reader.result)
         helperVar = reader.result
     };
 
@@ -185,6 +178,12 @@ function encodeVideoFileAsURL(element) {
     };
 
     reader.readAsDataURL(file);
+}
+
+function postRequestAttractionSync(attraction) {
+    syncServerRequest("POST", function noop(dummy) {
+        }, 'http://' + ip + ':12344/managementsystem/attraction/',
+        JSON.stringify(attraction));
 }
 
 

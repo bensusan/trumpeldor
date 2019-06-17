@@ -72,7 +72,6 @@ function sendTheAttractionWithAllInformation() {
     let namee = localStorage.getItem("name_for_add_aq");
     let xx = JSON.parse(localStorage.getItem("x"));
     let yy = JSON.parse(localStorage.getItem("y"));
-    // let vidArr = JSON.parse(localStorage.getItem("vidArr"));
 
     let pixArr = 'null';
     if (arrOfPicsData.length > 0) {
@@ -83,24 +82,20 @@ function sendTheAttractionWithAllInformation() {
     }
     let attraction_to_send = {
         name: namee
-        //,x:31.262860,y:34.801753
         , x: xx, y: yy
         , description: document.getElementById("desc").value + ";;" + document.getElementById("desc_english").value
         //, script: JSON.parse(localStorage.getItem("script"))
         , picturesURLS: pixArr, videosURLS: JSON.parse(localStorage.getItem("vidArr"))
     };
-    postRequestAttractionn(attraction_to_send);
+    postRequestAttractionSync(attraction_to_send);
     localStorage.setItem("name_for_add_aq", attraction_to_send.name);
     localStorage.setItem("desc_for_add_aq", attraction_to_send.description);
     window.location.href = '/add_game';
-    // window.location.href='/attractions';
-    // alert("point:"+localStorage.getItem("addedPoint")+"\n"+
-    //     "name:"+document.getElementById("attr_name").value);
 }
 
 
-function postRequestAttractionn(attraction) {
-    serverRequest("POST", function noop(dummy) {
+function postRequestAttractionSync(attraction) {
+    syncServerRequest("POST", function noop(dummy) {
         }, 'http://' + ip + ':12344/managementsystem/attraction/',
         JSON.stringify(attraction));
 }
