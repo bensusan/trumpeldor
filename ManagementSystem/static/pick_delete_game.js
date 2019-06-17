@@ -13,9 +13,6 @@ function showingSelectOfType(){
     if(game_type.value == 'opt1')
                 type = "puzzle";
 
-    if(game_type.value == 'opt3')
-                type = "";
-
     getRequestGames(showOpts,type,attractionObjToUseInHintDelete['id']);
 }
 
@@ -142,9 +139,6 @@ function wantToDeleteButton(){
             if(game_type.value == 'opt1')
                 type = "puzzle";
 
-            if(game_type.value == 'opt3')
-                type = "";
-
             getRequestGames(func_to_show,type,attractionObjToUseInHintDelete['id']);
 
             });
@@ -152,9 +146,6 @@ function wantToDeleteButton(){
             deleteChosenHintBTN.addEventListener('click', function() {
                 if(game_type.value == 'opt1')
                 type = "puzzle";
-
-                if(game_type.value == 'opt3')
-                 type = "";
 
                 deleteRequestGame(attractionObjToUseInHintDelete['id'],type);
                 window.location.href = '/pick_delete_game';

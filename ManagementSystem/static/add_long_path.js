@@ -1,13 +1,11 @@
 
 let curPosClicked;
 
-var str_of_points="";
 let pointsOfPath = [];
 let pointsOfMedium = [];
 let idOfLong = 0;
 
 function initMapAndAttractionss(){
-    str_of_points="";
     pointsOfPath = [];
 
     getRequestTracks(markAttractionsOfLongPaths);
@@ -32,13 +30,9 @@ function initMapAndAttractionss(){
             if(pointsOfPath.indexOf(m.position)==-1 && curPosClicked==m.position)
             {
                 let point_to_push = {lat: m.position.lat(), lng: m.position.lng()};
-                //let point_to_push2 = {lat: m.position.lat().toFixed(8), lng: m.position.lng().toFixed(8)};
                 pointsOfPath.push(point_to_push);
-                // pointsOfPath.push(m.position);
-                str_of_points=str_of_points+m.position+"<br />";
             }
             getRequestAttractions(needThisToGetPointsIDs);
-           // alert("point been added! now its: "+ pointsOfPath.toString());
         });
   });
   }
@@ -48,11 +42,7 @@ function initMapp() {
         zoom: 18,
         center: {lat: 31.262860, lng: 34.801753}
     });
-   //initAttractionsMarkersOfMediumPath();
-
     listenerForMappo();
-   // initPoints();
-
 }
 
 
@@ -62,7 +52,6 @@ function markAttractionsOfLongPaths(tracksJSON){
 
         if(track['length']==3) {
             idOfLong = track['id'];
-
             let points_of_track = track['points'];
             let points_of_subtrack = track['subTrack']['points'];
             let points_of_subsubtrack = track['subTrack']['subTrack']['points'];
@@ -71,18 +60,14 @@ function markAttractionsOfLongPaths(tracksJSON){
             children.forEach(function (attr) {
 
                 let pos2 = {lat: (attr['x']).toFixed(8), lng: (attr['y']).toFixed(8)}; // change to 13 instead of 8!!!
-
                     let pos = {lat: attr['x'], lng: attr['y']};
                     pointsOfMedium.push(pos2);
                     localStorage.setItem("title" + pos, "attraction ID: " + attr['id'] + "\nattraction name: " + attr['name'] + "\nposition: (" + attr['x'] + "," + attr['y'] + ")");
                     markAttractionOfLongPath(pos);
-
             });
         }
-
     });
     getRequestAttractions(markAttractionsOfLongPath_left);
-
 }
 
 function markAttractionsOfLongPath_left(attractionsJSON){
@@ -96,9 +81,7 @@ function markAttractionsOfLongPath_left(attractionsJSON){
         let lngs=pointsOfMedium.map(function (x){return (x.lng)});
         let firstBool = lats.includes(pos2.lat);
         let secondBool = lngs.includes(pos2.lng);
-        // alert(lats.length);
          if(!(firstBool && secondBool)){
-             // alert("ad");
             localStorage.setItem("title" + pos, "attraction ID: " + attr['id'] + "\nattraction name: " + attr['name'] + "\nposition: (" + attr['x'] + "," + attr['y'] + ")");
             markAttractionElse(pos);
         }
@@ -108,9 +91,7 @@ function markAttractionsOfLongPath_left(attractionsJSON){
 function listenerForMappo(){
         var finishBTN = document.getElementById('finish_reg_long');
         finishBTN.addEventListener('click', function() {
-
             getRequestAttractions(needThisToGetPointsIDs);
-
         });
 }
 
@@ -121,18 +102,12 @@ function needThisToGetPointsIDs(attractionsJSON) {
         let attr_id = attr['id'];
         pointsOfPath.forEach(function (point) {
                 let the_point = {x: (point.lat).toFixed(13) , y: (point.lng).toFixed(13)};
-                // let bolia = attr_point == the_point;
-                // alert("attr: "+ attr_point.x +","+ attr_point.y +"\npont: "+the_point.x +","+the_point.y+"\n"+bolia);
                 if((attr_point.x == the_point.x)  &&  (attr_point.y == the_point.y) ){
-                    //alert("bazinga!");
                     addPointToTrackRequest(attr_id,idOfLong);
-                    //addPointToTrackRequest(attr_id,idOfLong);
                 }
-
             });
     });
     window.location.href='/add_long_path';
-    //window.location.href='/edit_path';
 }
 
 

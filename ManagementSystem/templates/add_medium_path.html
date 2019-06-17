@@ -1,56 +1,45 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-     {% load static %}
-<link rel="stylesheet" href="{% static 'buttoni.css' %}?version=2">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     {% load static %}
-<link rel="stylesheet" href="{% static 'SideMenu.css' %}?version=4">
+    <link rel="stylesheet" href="{% static 'buttoni.css' %}?version=2">
     {% load static %}
-<link rel="stylesheet" href="{% static 'attractions_style.css' %}?version=1">
+    <link rel="stylesheet" href="{% static 'SideMenu.css' %}?version=4">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'attractions_style.css' %}?version=1">
     <title>הוספת מסלול בינוני</title>
     {% load static %}
-<link rel="stylesheet" href="{% static 'paths_style.css' %}?version=1">
-{% load static %}
-<link rel="stylesheet" href="{% static 'Map.css' %}?version=3">
-{% load static %}
-<script src="{% static 'attractions.js' %}?version=5"></script>
+    <link rel="stylesheet" href="{% static 'paths_style.css' %}?version=1">
     {% load static %}
-<script src="{% static 'add_medium_path.js' %}?version=2"></script>
-     {% load static %}
-<script src="{% static 'properties.js' %}?version=3"></script>
+    <link rel="stylesheet" href="{% static 'Map.css' %}?version=3">
+    {% load static %}
+    <script src="{% static 'attractions.js' %}?version=6"></script>
+    {% load static %}
+    <script src="{% static 'add_medium_path.js' %}?version=6"></script>
+    {% load static %}
+    <script src="{% static 'properties.js' %}?version=5"></script>
+    {% load static %}
+    <script src="{% static 'syncAttr.js' %}?version=5"></script>
 </head>
 <body>
-<!--{#<meta name="viewport" content="width=device-width, initial-scale=1">#}-->
-<!--{#{% load static %}#}-->
-<!--{#<link rel="stylesheet" href="{% static 'Map.css' %}?version=1">#}-->
-<!--{#{% load static %}#}-->
-<!--{#<script src="{% static 'attractions.js' %}?version=1"></script>#}-->
 <div>
-<div id="map">
-{% load static %}
-<script src="{% static 'Map.js' %}?version=3"></script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD7rvXqYArUeu8hVHETM6g9w-ek0RqusZ4&callback=initMapAndAttractionss&language=he&region=UK"
-    async defer>
-    </script>
+    <div id="map">
+        {% load static %}
+        <script src="{% static 'Map.js' %}?version=5"></script>
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD7rvXqYArUeu8hVHETM6g9w-ek0RqusZ4&callback=initMapAndAttractionss&language=he&region=UK"
+                async defer>
+        </script>
 
-</div>
+    </div>
 
     <div style="position:fixed ;left:490px;">
-<div class="buttonStyle">
+        <div class="buttonStyle">
 
-<button class='yahoo' id="add_reg_to_path_med" type="button">הוספה למסלול</button>
-<!--{#<button class="button" id="finish_reg_med" type="button">Finish!</button>#}-->
-</div>
+            <button class='yahoo' id="add_reg_to_path_med" type="button">הוספה למסלול</button>
+        </div>
 
         <p></p>
-<!--<p></p>-->
-<!--{#<div id="border_of_points" class="pointsBorder"  style="display: none" align="center">#}-->
-<!--{#    <div align="center">#}-->
-<!--{#        <p><b>Added Points:</b></p>#}-->
-<!--{#    </div>#}-->
-<!--{#<p id="showing_added_points"></p>#}-->
-<!--{#    </div>#}-->
 
     </div>
 
