@@ -37,7 +37,7 @@ function localFileVideoPlayer() {
 
 
 window.onload = function () {
-    localStorage.setItem("whereToGoInGame",'/add_game_edit');
+    localStorage.setItem("whereToGoInGame", '/add_game_edit');
     let saveEditBTN = document.getElementById("saveEditBTN");
     saveEditBTN.addEventListener('click', function () {
         finishEditingAttraction();
@@ -61,21 +61,17 @@ function uploadVideoBTNclick() {
 
 function finishEditingAttraction() {
     let attr_after_editing;
-    let vidArr = ["hello"];
+    let vidArr1 = ["hello"];
     if (helperVarVid != undefined) {
         sendLongBase64Parts(helperVarVid);
     } else {
-        if (attr_for_editing['videosURLS'] != []) {
-            vidArr = [attr_for_editing['videosURLS']];
-        } else {
-            vidArr = 'null';
-        }
+        vidArr1 = 'null';
     }
     let pixArr = ["hello"];
     if (arrOfPicsData.length != 0) {
         // can do it with all pics.. just add loop
         sendLongBase64PartsPic(arrOfPicsData[0]);
-       // window.location.href = '/attractions';
+        // window.location.href = '/attractions';
     } else {
         if (attr_for_editing['picturesURLS'].length != 0) {
             pixArr = attr_for_editing['picturesURLS'];
@@ -91,7 +87,7 @@ function finishEditingAttraction() {
         description: document.getElementById("desc").value + ';;' + document.getElementById("desc_english").value,
         script: document.getElementById("subt").value + ';;' + document.getElementById("subt_english").value,
         picturesURLS: pixArr,
-        videosURLS: vidArr
+        videosURLS: vidArr1
     };
     localStorage.setItem(attr_after_editing['name'] + "_vid", document.getElementById('nameOfVid').innerText);
     localStorage.setItem("desc_for_add_aq", attr_after_editing['description']);
