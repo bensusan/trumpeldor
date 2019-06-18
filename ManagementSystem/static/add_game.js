@@ -107,7 +107,6 @@ function funcToGetID(attractionsJSON) {
         let p = {name: attr['name'], description: attr['description']};
         if (p.name === name && p.description === desc) {
             idOfAttraction = attr['id'];
-            alert(idOfAttraction);
         }
     });
 

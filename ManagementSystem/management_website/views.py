@@ -67,10 +67,6 @@ def add_aq_edit_page(request):
     return render(request, "add_aq_edit.html")
 
 
-def pick_hint_page(request):
-    return render(request, "pick_hint.html")
-
-
 def pick_hint_edit_page(request):
     return render(request, "pick_hint_edit.html")
 
