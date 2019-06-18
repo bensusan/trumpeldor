@@ -28,7 +28,7 @@ namespace trumpeldor.Views
         public LocationController lc;
         trumpeldor.SheredClasses.Point attractionLoc, currLoc;
         public double currLat = 0, currLong = 0;
-        public static MapPage myMap = null;
+        public MapPage myMap = null;
         private bool firstAttachOfHintMap = true;
         private double startDistanceToDestination;
         //private bool stopDestinationCheck = false;
@@ -56,7 +56,7 @@ namespace trumpeldor.Views
             //    hintFrame.Margin.Right + hintFrame.Padding.Right,
             //    10);
             nextAttraction = gc.currentTrip.GetCurrentAttraction();
-            myMap = new MapPage();
+            myMap = MapPage.GetInstance();
             mapBtn.Source = ServerConection.URL_MEDIA + "map.png";
             //mapBtn = myMap.map;
             AttachHint(0);
@@ -67,8 +67,10 @@ namespace trumpeldor.Views
             {
                 isFirst = false;
                 //Task.Run(() => TimerCheck()).ConfigureAwait(false);
-                TimerCheck();
+                //TimerCheck();
             }
+            myMap.AddCurrlocationToMap(gc.GetUserLocation());
+            TimerCheck();
         }
 
         protected override void OnAppearing()
@@ -125,10 +127,12 @@ namespace trumpeldor.Views
                 //TODO change when shahar will finish
                 // mapInstance = new MapPage(new SheredClasses.Point(nextAttraction.x, nextAttraction.y));
                 if (firstAttachOfHintMap)
-                    myMap.AddPointToMap(myMap.map, new SheredClasses.Point(nextAttraction.x, nextAttraction.y));
+                    myMap.AddPointToMap(new SheredClasses.Point(nextAttraction.x, nextAttraction.y), nextAttraction);
                 hintWebView.IsVisible = false;
                 hintText.IsVisible = false;
+                myMap.DrawPastPath();
                 await Navigation.PushModalAsync(myMap);
+                myMap.ClearPastPath();
                 firstAttachOfHintMap = false;
                 //hintMap = myMap.map;
                 //hintMap.IsVisible = true;
@@ -197,7 +201,9 @@ namespace trumpeldor.Views
         private async void Map_Clicked(object sender, EventArgs e)
         {
             hintBtn.IsEnabled = false;
+            myMap.DrawPastPath();
             await Navigation.PushModalAsync(myMap);
+            myMap.ClearPastPath();
             hintBtn.IsEnabled = true;
         }
 
@@ -216,6 +222,12 @@ namespace trumpeldor.Views
             arrivedTimer.Interval = DESIRED_SECONDS * 1000;
             arrivedTimer.Elapsed += (o, e) =>
             {
+                /*
+                Device.BeginInvokeOnMainThread(() => {
+                    DisplayAlert("Must come closer", lc.DistanceBetween(currLoc.x, currLoc.y, attractionLoc.x, attractionLoc.y).ToString() + "\ncurr lat: " + currLoc.x + "\ncurr long: " + currLoc.y + "\nattractionLoc x: " + attractionLoc.x + "\nattractionLoc y: " + attractionLoc.y + "\npoint info: " + nextAttraction.name, "close");
+                });
+                */
+                
                 if (done)
                     arrivedTimer.Stop();
                 currLoc = gc.GetUserLocation();
@@ -225,6 +237,10 @@ namespace trumpeldor.Views
                     startDistanceToDestination = lc.DistanceBetween(currLoc.x, currLoc.y, attractionLoc.x, attractionLoc.y);
                 }
                 lc.AddToPositionsHistory(new Plugin.Geolocator.Abstractions.Position(currLoc.x, currLoc.y));
+                //myMap.AddCurrlocationToMap(currLoc);
+                myMap.OnTimerCheck(new Plugin.Geolocator.Abstractions.Position(currLoc.x, currLoc.y));
+                //myMap.AddPointToMap(currLoc);
+                //myMap.DrawPastPath();
                 double currentDistanceToDestination = lc.DistanceBetween(currLoc.x, currLoc.y, attractionLoc.x, attractionLoc.y);
                 if (currentDistanceToDestination > DESIRED_DISTANCE){
                     //if (ServerConection.DEBUG == 1)

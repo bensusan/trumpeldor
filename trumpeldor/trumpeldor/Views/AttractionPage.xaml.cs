@@ -19,6 +19,7 @@ namespace trumpeldor.Views
         private Attraction attraction;
         private bool isFirstAppear;
         private Entertainment entertainment = null;
+        private MapPage map = null;
         public AttractionPage()
 		{
 			InitializeComponent ();
@@ -45,6 +46,7 @@ namespace trumpeldor.Views
             info.Source = ServerConection.URL_MEDIA + "info.jpg";
             playVideo.Source = ServerConection.URL_MEDIA + "playVideo.jpg";
             mapBtn.Source = ServerConection.URL_MEDIA + "map.png";
+            map = MapPage.GetInstance();
             isFirstAppear = true;
         }
 
@@ -122,8 +124,9 @@ namespace trumpeldor.Views
         private async void MapBtn_Clicked(object sender, EventArgs e)
         {
             Lock();
-            //added with map as static field
-            await Navigation.PushModalAsync(NavigationPage.myMap);
+            map.DrawPastPath();
+            await Navigation.PushModalAsync(map);
+            map.ClearPastPath();
             UnLock();
         }
 
