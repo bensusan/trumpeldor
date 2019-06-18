@@ -72,7 +72,7 @@ function sendTheAttractionWithAllInformation() {
     let namee = localStorage.getItem("name_for_add_aq");
     let xx = JSON.parse(localStorage.getItem("x"));
     let yy = JSON.parse(localStorage.getItem("y"));
-
+    let vidArr = 'hello';
     let pixArr = 'null';
     if (arrOfPicsData.length > 0) {
         pixArr = "hello";
@@ -85,7 +85,7 @@ function sendTheAttractionWithAllInformation() {
         , x: xx, y: yy
         , description: document.getElementById("desc").value + ";;" + document.getElementById("desc_english").value
         //, script: JSON.parse(localStorage.getItem("script"))
-        , picturesURLS: pixArr, videosURLS: JSON.parse(localStorage.getItem("vidArr"))
+        , picturesURLS: pixArr, videosURLS: vidArr
     };
     postRequestAttractionSync(attraction_to_send);
     localStorage.setItem("name_for_add_aq", attraction_to_send.name);
