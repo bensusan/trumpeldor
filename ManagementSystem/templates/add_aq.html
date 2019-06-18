@@ -17,7 +17,7 @@
     {% load static %}
     <script src="{% static 'attractions.js' %}?version=5"></script>
     {% load static %}
-    <script src="{% static 'add_aq.js' %}?version=15"></script>
+    <script src="{% static 'add_aq.js' %}?version=16"></script>
     {% load static %}
     <script src="{% static 'syncAttr.js' %}?version=5"></script>
 
@@ -73,6 +73,7 @@
     </TABLE>
     <p></p>
     <INPUT type="button" value="הוספת תשובה" onclick="addRow('dataTable');addRow('dataTableEnglish')"/>
+    <INPUT type="button" value="מחיקת תשובה" onclick="deleteRow('dataTable');deleteRow('dataTableEnglish')"/>
     <p></p>
     <button class='button blogger' id="finish_add_aq_btn" type="button">שליחה</button>
 </div>
