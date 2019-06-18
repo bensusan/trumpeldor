@@ -73,11 +73,7 @@ function finishEditingAttraction() {
         sendLongBase64PartsPic(arrOfPicsData[0]);
         // window.location.href = '/attractions';
     } else {
-        if (attr_for_editing['picturesURLS'].length != 0) {
-            pixArr = attr_for_editing['picturesURLS'];
-        } else {
-            pixArr = 'null';
-        }
+        pixArr = 'null';
     }
 
     attr_after_editing = {

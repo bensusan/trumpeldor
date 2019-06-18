@@ -2,7 +2,6 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
     {% load static %}
     <link rel="stylesheet" href="{% static 'beauty.css' %}?version=3">
     {% load static %}
@@ -14,7 +13,7 @@
     {% load static %}
     <script src="{% static 'properties.js' %}?version=4"></script>
     {% load static %}
-    <script src="{% static 'attractions.js' %}?version=28"></script>
+    <script src="{% static 'attractions.js' %}?version=9"></script>
     {% load static %}
     <script src="{% static 'add_attraction.js' %}?version=15"></script>
     {% load static %}
@@ -48,17 +47,18 @@
 
         <div class="container">
             <label style="font-size: 24px;"><b>:שם האטרקציה</b></label>
-            <input type="text" id="attr_name" placeholder="שם האטרקציה" name="attr_name" style="direction:rtl;text-align:right;"
+            <input type="text" id="attr_name" placeholder="שם האטרקציה" name="attr_name"
+                   style="direction:rtl;text-align:right;"
                    required>
             <input type="text" id="attr_name_english" placeholder="attraction name" name="attr_name_eng"
                    style="display:none;direction:ltr;text-align:left;"
                    required>
             <p></p>
             <label for="subt" style="font-size: 24px;text-align: right"><b>תסריט</b></label>
-                <textarea id="subt" name="attr_subt" placeholder="הכנסי תסריט..."
-                          style="direction:rtl;text-align:right;width:310px;height:200px"></textarea>
-                <textarea id="subt_english" name="attr_subt_eng" placeholder="enter subtitles..."
-                          style="display:none;direction:ltr;text-align:left;width:310px;height:200px"></textarea>
+            <textarea id="subt" name="attr_subt" placeholder="הכנסי תסריט..."
+                      style="direction:rtl;text-align:right;width:310px;height:200px"></textarea>
+            <textarea id="subt_english" name="attr_subt_eng" placeholder="enter subtitles..."
+                      style="display:none;direction:ltr;text-align:left;width:310px;height:200px"></textarea>
             <p><br/></p>
             <button class='button google-blue' id="continueBTN" type="button" style="width: 220px;">המשך</button>
             <button class='button google-blue' id="submit_btn_add_attr" type="button" style="width: 220px;">שליחה ללא
