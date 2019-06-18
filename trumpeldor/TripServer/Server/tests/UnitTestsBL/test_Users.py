@@ -35,9 +35,7 @@ class Unit_Test_InsertAndRetrieveUsers(TestCase):
         )
 
 
-class Unit_Test_GetUsers(TestCase):
-
-
+class Unit_Test_GetHints(TestCase):
 
     def test_getHints_NotExist(self):
         with self.assertRaises(RuntimeError):
