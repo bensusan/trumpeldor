@@ -55,10 +55,9 @@ function getImageSrcAndShowIt(gamesJSON) {
 
     gamesJSON.forEach(function (game) {
         if (game['id'] == game_id_that_was_picked) {
-            let name = localStorage.getItem("name_for_add_aq");
-            let other_src = localStorage.getItem(name + type);
+            let picture = game['piecesURLS'][0];
             let image = document.getElementById('output');
-            image.src = other_src;// game['piecesURLS'];
+            image.src = picture.replace('_01_01','');
         }
     });
 }
@@ -79,29 +78,6 @@ function funcForExistingHints(attractionsJSON) {
 
 }
 
-function games_func_sliding(gamesJSON) {
-    str = "Sliding:<br />";
-    gamesJSON.forEach(function (game) {
-        str = str + "id: " + game['id'] + ", instructions: " + game['description'] + "<br />";
-        // alert(str);
-    });
-    // document.getElementById("existing_hints").innerHTML = str;
-    // document.getElementById("existing_hints").style.fontWeight = 'bold';
-    // document.getElementById("existing_hints").style.fontFamily='david';
-    // document.getElementById("existing_hints").style.fontSize='24px';
-}
-
-function games_func_drag(gamesJSON) {
-    str2 = "Drag:<br />";
-    gamesJSON.forEach(function (game) {
-        str2 = str2 + "id: " + game['id'] + ", instructions: " + game['description'] + "<br />";
-        // alert(str);
-    });
-    // document.getElementById("existing_hints_drag").innerHTML = str2;
-    // document.getElementById("existing_hints_drag").style.fontWeight = 'bold';
-    // document.getElementById("existing_hints_drag").style.fontFamily='david';
-    // document.getElementById("existing_hints_drag").style.fontSize='24px';
-}
 
 window.onload = function () {
     let cb = document.getElementById("delete_cb");
@@ -153,8 +129,7 @@ function func_to_show(gamesJSON) {
     let hint_id_that_was_picked = document.getElementById("write_hint_id_to_delete").value;
     // let number_hint_id = Number(hint_id_that_was_picked);
     gamesJSON.forEach(function (game) {
-        // alert("the id is: "+attr['id']);
-        // alert("in get name! "+"of the origin : " + lat + " , " + lng + "\n of the other: "+p.lat +" , "+ p.lng);
+
         if (game['id'] == hint_id_that_was_picked) {
             let img = document.getElementById('output');
             img.src = game['piecesURLS'];
@@ -166,14 +141,13 @@ function func_to_show(gamesJSON) {
 function getRequestGames(funcOnHints, game_type, attr_id) {
     // serverRequest("GET", funcOnAttractions, 'http://192.168.1.12:12344/managementsystem/attraction/?format=json');
     // the server port and my ip
-    serverRequest("GET", funcOnHints, 'http://' + ip + ':12344/managementsystem/attraction/' + attr_id +
+    syncServerRequest("GET", funcOnHints, 'http://' + ip + ':12344/managementsystem/attraction/' + attr_id +
         '/' + game_type + '/?format=json');
 
-    //alert("need to remove this alert and fix funcToGetAttraction()!");
 }
 
 
 function deleteRequestGame(attr_id, game_type) {
-    serverRequest("DELETE", function noop(dummy) {
+    syncServerRequest("DELETE", function noop(dummy) {
     }, 'http://' + ip + ':12344/managementsystem/attraction/' + attr_id + '/' + game_type + '/');
 }
