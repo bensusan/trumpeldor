@@ -41,10 +41,11 @@ function encodeImageFileAsURL(element) {
 function funcToSendGame(attractionsJSON) {
 
     let name = localStorage.getItem("name_for_add_aq");
+    let desc = localStorage.getItem("desc_for_add_aq");
     attractionsJSON.forEach(function (attr) {
 
         let p = {name: attr['name'], description: attr['description']};
-        if (p.name === name ) {
+        if (p.name === name && p.description == desc) {
             let description = document.getElementById("game_instructions_text").value +
                 ";;" + document.getElementById("game_instructions_text_english").value;
 
@@ -86,7 +87,7 @@ function sendTheGameData() {
 }
 
 function postRequestGame(data, attr_id, game_kind) {
-    serverRequest("POST", function noop(dummy) {
+    syncServerRequest("POST", function noop(dummy) {
         }, 'http://' + ip + ':12344/managementsystem/attraction/' +
         attr_id + '/' + game_kind + '/',
         JSON.stringify(data));

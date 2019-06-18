@@ -92,6 +92,7 @@ function submitAttractionWithoutInfo() {
     let lang = addedPoint.lng;
     if (helperVarVid != undefined) {
         vidArr = ["hello"];
+        alert(helperVarVid);
         sendLongBase64Parts(helperVarVid);
         window.location.href = '/add_game';
     }
@@ -104,9 +105,9 @@ function submitAttractionWithoutInfo() {
     };
 
     localStorage.setItem("" + attraction_to_send.name + "_vid", document.getElementById('nameOfVid').innerText);
-    postRequestAttractionSync(attraction_to_send);
     localStorage.setItem("name_for_add_aq", attraction_to_send.name);
     localStorage.setItem("desc_for_add_aq", attraction_to_send.description);
+    postRequestAttraction(attraction_to_send);
     window.location.href = '/add_game';
 }
 
@@ -128,6 +129,7 @@ function saveAndProceedToAttractionInfo() {
     //localStorage.setItem("script", JSON.stringify(document.getElementById("subt").value + ";;" + document.getElementById("subt_english").value));
     localStorage.setItem("x", JSON.stringify(x));
     localStorage.setItem("y", JSON.stringify(y));
+    alert(JSON.stringify(vidArr));
     localStorage.setItem("vidArr", JSON.stringify(vidArr));
     localStorage.setItem("name_for_add_aq", name);
     localStorage.setItem("desc_for_add_aq", "");
@@ -135,19 +137,6 @@ function saveAndProceedToAttractionInfo() {
 
 }
 
-function check() {
-    alert("ayooooooooo");
-}
-
-function sendLongBase64Parts(longBase64) {
-    let arrOfParts = longBase64.match(/.{1,100000}/g);
-    let counter = 0;
-    for (let i = 0; i < arrOfParts.length; i++) {
-        postRequestFile(arrOfParts[i]);
-        counter++;
-    }
-    postRequestFile("end of file");
-}
 
 function encodeVideoFileAsURL(element) {
 
@@ -162,10 +151,10 @@ function encodeVideoFileAsURL(element) {
     reader.readAsDataURL(file);
 }
 
-function postRequestAttractionSync(attraction) {
-    syncServerRequest("POST", function noop(dummy) {
-        }, 'http://' + ip + ':12344/managementsystem/attraction/',
-        JSON.stringify(attraction));
-}
+// function postRequestAttractionSync(attraction) {
+//     syncServerRequest("POST", function noop(dummy) {
+//         }, 'http://' + ip + ':12344/managementsystem/attraction/',
+//         JSON.stringify(attraction));
+// }
 
 
