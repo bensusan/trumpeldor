@@ -320,7 +320,7 @@ function sendImageHint() {
 function funcToSendImage(attractionsJSON) {
     let name = localStorage.getItem("name_for_add_aq");
     let desc = localStorage.getItem("desc_for_add_aq");
-    let pixArr = ["hello"];
+    let pixArr = "hello";
     if (helperVar != undefined) {
         // can do it with all pics.. just add loop
         sendLongBase64PartsPic(helperVar);
@@ -350,7 +350,7 @@ function sendVideoHint() {
 function funcToSendVideo(attractionsJSON) {
     let name = localStorage.getItem("name_for_add_aq");
     let desc = localStorage.getItem("desc_for_add_aq");
-    let vidArr = ["hello"];
+    let vidArr = "hello";
     if (helperVarVid != undefined) {
         sendLongBase64Parts(helperVarVid);
     }

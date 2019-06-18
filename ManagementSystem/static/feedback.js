@@ -20,6 +20,6 @@ window.onload = function() {
 
 
 function postRequestFeedback(fb){
-    serverRequest("POST", function noop(dummy){}, 'http://'+ip+':12344/managementsystem/feedback/',
+    syncServerRequest("POST", function noop(dummy){}, 'http://'+ip+':12344/managementsystem/feedback/',
         JSON.stringify(fb));
 }
