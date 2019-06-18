@@ -49,7 +49,6 @@ window.onload = function () {
     getRequestAttractions(getFieldsValuesOfExistingAttraction);
     localFileVideoPlayer();
     initializeTheListOfPicturesToShow();
-    // document.getElementById('randomPic').src = "\\trumpeldor\\TripServer\\media\\87a.jpg";
 };
 
 
@@ -61,17 +60,16 @@ function uploadVideoBTNclick() {
 
 function finishEditingAttraction() {
     let attr_after_editing;
-    let vidArr1 = ["hello"];
+    let vidArr1 = "hello";
     if (helperVarVid != undefined) {
         sendLongBase64Parts(helperVarVid);
     } else {
         vidArr1 = 'null';
     }
-    let pixArr = ["hello"];
+    let pixArr = "hello";
     if (arrOfPicsData.length != 0) {
         // can do it with all pics.. just add loop
         sendLongBase64PartsPic(arrOfPicsData[0]);
-        // window.location.href = '/attractions';
     } else {
         pixArr = 'null';
     }
@@ -142,6 +140,8 @@ function getFieldsValuesOfExistingAttraction(attractionsJSON) {
             // document.getElementById("subt_english").value = scripts[1];
             var video = document.getElementById('vid_itself');
             video.src = attr['videosURLS'];
+            var picture = document.getElementById('editPicture');
+            picture.src = attr['picturesURLS'];
             localStorage.setItem("name_for_add_aq", p.name);
             localStorage.setItem("desc_for_add_aq", p.description);
             document.getElementById('nameOfVid').innerText = localStorage.getItem("" + p.name + "_vid");
