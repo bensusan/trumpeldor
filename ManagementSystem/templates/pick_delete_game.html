@@ -4,59 +4,62 @@
     <meta charset="UTF-8">
     <title>בחירת משחק למחיקה</title>
     {% load static %}
-<link rel="stylesheet" href="{% static 'buttoni.css' %}?version=4">
+    <link rel="stylesheet" href="{% static 'buttoni.css' %}?version=4">
     {% load static %}
-<link rel="stylesheet" href="{% static 'just_want_background.css' %}?version=1">
+    <link rel="stylesheet" href="{% static 'just_want_background.css' %}?version=1">
 
     {% load static %}
-<link rel="stylesheet" href="{% static 'SideMenu.css' %}?version=4">
+    <link rel="stylesheet" href="{% static 'SideMenu.css' %}?version=4">
     {% load static %}
-<script src="{% static 'attractions.js' %}?version=1"></script>
+    <script src="{% static 'attractions.js' %}?version=2ד"></script>
     {% load static %}
-<script src="{% static 'pick_delete_game.js' %}?version=18"></script>
-     {% load static %}
-<script src="{% static 'properties.js' %}?version=5"></script>
+    <script src="{% static 'pick_delete_game.js' %}?version=19"></script>
+    {% load static %}
+    <script src="{% static 'properties.js' %}?version=5"></script>
+    {% load static %}
+    <script src="{% static 'syncAttr.js' %}?version=4"></script>
 
 </head>
 <body>
 
 <div>
-<nav id="sideMenu"></nav>
-{% load static %}
-<script src="{% static 'menu_for_pick_delete_game.js' %}?version=2"></script>
+    <nav id="sideMenu"></nav>
+    {% load static %}
+    <script src="{% static 'menu_for_pick_delete_game.js' %}?version=2"></script>
 
 </div>
 
 <div align="center">
     <label style="font-size: 36px;"><b>:משחקים קיימים</b></label>
-<p></p>
+    <p></p>
 
     <p> בחרי משחק למחוק</p>
 
     <select id="game_type" onchange="showingSelectOfType()" style="height:80px;width:300px;font-size: 20px;">
         <option value="choose">בחרי סוג פאזל...</option>
-      <option value="opt1">פאזל גרירה</option>
-      <option value="opt2">פאזל הזזה</option>
+        <option value="opt1">פאזל גרירה</option>
+        <option value="opt2">פאזל הזזה</option>
     </select>
 
-        <p></p>
+    <p></p>
     <select id="delete_cb" style="height:80px;width:300px;display:none;font-size: 20px;">
-  <option id="dcb1" value="1" style="display: none;">ריק</option>
-  <option id="dcb2" value="2" style="display: none;">2</option>
-  <option id="dcb3" value="3" style="display: none;">3</option>
-  <option id="dcb4" value="4" style="display: none;">4</option>
-  <option id="dcb5" value="5" style="display: none;">5</option>
-  <option id="dcb6" value="6" style="display: none;">6</option>
-  <option id="dcb7" value="7" style="display: none;">7</option>
-  <option id="dcb8" value="8" style="display: none;">8</option>
-  <option id="dcb9" value="9" style="display: none;">9</option>
-  <option id="dcb10" value="10" style="display: none;">10</option>
-</select>
-        <p><img id="output" width="200"/></p>
+        <option id="dcb1" value="1" style="display: none;">ריק</option>
+        <option id="dcb2" value="2" style="display: none;">2</option>
+        <option id="dcb3" value="3" style="display: none;">3</option>
+        <option id="dcb4" value="4" style="display: none;">4</option>
+        <option id="dcb5" value="5" style="display: none;">5</option>
+        <option id="dcb6" value="6" style="display: none;">6</option>
+        <option id="dcb7" value="7" style="display: none;">7</option>
+        <option id="dcb8" value="8" style="display: none;">8</option>
+        <option id="dcb9" value="9" style="display: none;">9</option>
+        <option id="dcb10" value="10" style="display: none;">10</option>
+    </select>
+    <p><img id="output" width="200"/></p>
 
     <button class="yahoo" type="button" id="show_chosen_game" style="width:80px;height:30px;display: none">הצג</button>
-<button class="yahoo" type="button" id="delete_chosen_hint" style="width:90px;height:30px;display: none">מחיקה</button>
-<p></p>
+    <button class="yahoo" type="button" id="delete_chosen_hint" style="width:90px;height:30px;display: none">מחיקה
+    </button>
+    <p></p>
 
 </div>
 
