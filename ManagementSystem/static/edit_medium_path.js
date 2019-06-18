@@ -226,7 +226,7 @@ function initAttractionsMarkersOfMediumPath() {
 
 function getRequestTracks(funcOnTrack) {
     // the server port and my ip
-    serverRequest("GET", funcOnTrack, 'http://' + ip + ':12344/managementsystem/track/?format=json');
+    syncServerRequest("GET", funcOnTrack, 'http://' + ip + ':12344/managementsystem/track/?format=json');
 
 }
 
@@ -237,7 +237,7 @@ function addPointToTrackRequest(id_of_point_to_add, track_id) {
 }
 
 function deletePointFromTrackRequest(id_of_point_to_del, track_id) {
-    serverRequest("PUT", function noop(dummy) {
+    syncServerRequest("PUT", function noop(dummy) {
         }, 'http://' + ip + ':12344/managementsystem/track/' + track_id + '/del',
         JSON.stringify(id_of_point_to_del));
 }
