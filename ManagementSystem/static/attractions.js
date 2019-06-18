@@ -61,7 +61,7 @@ function initAttractionsMarkers() {
 
 
 function postRequestAttraction(attraction) {
-    serverRequest("POST", function noop(dummy) {
+    syncServerRequest("POST", function noop(dummy) {
         }, 'http://' + ip + ':12344/managementsystem/attraction/',
         JSON.stringify(attraction));
 }

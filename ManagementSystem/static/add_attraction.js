@@ -91,10 +91,9 @@ function submitAttractionWithoutInfo() {
     let lat = addedPoint.lat;
     let lang = addedPoint.lng;
     if (helperVarVid != undefined) {
-        vidArr = ["hello"];
-        alert(helperVarVid);
+        vidArr = "hello";
         sendLongBase64Parts(helperVarVid);
-        window.location.href = '/add_game';
+        // window.location.href = '/add_game';
     }
     let attraction_to_send = {
         name: document.getElementById("attr_name").value + ";;" + document.getElementById("attr_name_english").value
