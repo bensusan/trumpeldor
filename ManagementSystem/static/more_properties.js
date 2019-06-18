@@ -105,7 +105,7 @@ function deleteRow(tableID) {
 }
 
 function postRequestSettings(data) {
-    serverRequest("POST", function noop(dummy) {
+    syncServerRequest("POST", function noop(dummy) {
         }, 'http://' + ip + ':12344/managementsystem/settings/',
         JSON.stringify(data));
 }

@@ -17,9 +17,11 @@
     {% load static %}
     <script src="{% static 'properties.js' %}?version=5"></script>
     {% load static %}
-    <script src="{% static 'prop_map.js' %}?version=22"></script>
+    <script src="{% static 'prop_map.js' %}?version=33"></script>
     {% load static %}
     <script src="{% static 'more_properties.js' %}?version=28"></script>
+    {% load static %}
+    <script src="{% static 'syncAttr.js' %}?version=3"></script>
 
 </head>
 <body>
@@ -64,15 +66,17 @@
     <label style="text-align:right;font-size: 20px"><b>:חוקי ניקוד</b></label>
     <p></p>
     <TABLE id="ruleTable" width="350px" border="1">
-		<TR>
+        <TR>
             <TD><INPUT type="checkbox" name="chk" style="width: 50px;"/></TD>
-            <TD><INPUT type="text" name="rule" placeholder="כמות ניקוד" style="direction:rtl;text-align:right;width: 200px;"/></TD>
-			<TD><INPUT type="text" name="points" placeholder="תיאור החוק" style="direction:rtl;text-align:right;width: 500px;"/></TD>
-		</TR>
-	</TABLE>
+            <TD><INPUT type="text" name="rule" placeholder="כמות ניקוד"
+                       style="direction:rtl;text-align:right;width: 200px;"/></TD>
+            <TD><INPUT type="text" name="points" placeholder="תיאור החוק"
+                       style="direction:rtl;text-align:right;width: 500px;"/></TD>
+        </TR>
+    </TABLE>
     <p></p>
-    <INPUT type="button" value="הוספת חוק" onclick="addRow('ruleTable')" />
-    <INPUT type="button" value="מחיקת חוק" onclick="deleteRow('ruleTable')" />
+    <INPUT type="button" value="הוספת חוק" onclick="addRow('ruleTable')"/>
+    <INPUT type="button" value="מחיקת חוק" onclick="deleteRow('ruleTable')"/>
     <p></p>
 
     <p><br/></p>
