@@ -87,6 +87,40 @@ function addRow(tableID) {
 }
 
 
+function deleteRow(tableID) {
+    try {
+        var table = document.getElementById(tableID);
+        var tableEnglish = document.getElementById('dataTableEnglish');
+        var rowCount = table.rows.length;
+
+        for (var i = 0; i < rowCount; i++) {
+            var row = table.rows[i];
+            var rowEnglish = tableEnglish.rows[i];
+            var chkbox = row.cells[0].childNodes[0];
+            if (chkbox.checked == true) {
+                rowEnglish.cells[0].childNodes[0].checked = true;
+            } else {
+                rowEnglish.cells[0].childNodes[0].checked = false;
+            }
+            if (null != chkbox && true == chkbox.checked) {
+                if (rowCount <= 1) {
+                    alert("Cannot delete all the rows.");
+                    break;
+                }
+                table.deleteRow(i);
+                tableEnglish.deleteRow(i);
+                rowCount--;
+                i--;
+            }
+
+
+        }
+    } catch (e) {
+        alert(e);
+    }
+}
+
+
 function postRequestAmericanQuestion(aq, attr_id) {
     syncServerRequest("POST", function noop(dummy) {
         }, 'http://' + ip + ':12344/managementsystem/attraction/' +

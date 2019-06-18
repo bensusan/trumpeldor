@@ -17,7 +17,7 @@
     {% load static %}
     <script src="{% static 'attractions.js' %}?version=5"></script>
     {% load static %}
-    <script src="{% static 'add_aq_edit.js' %}?version=11"></script>
+    <script src="{% static 'add_aq_edit.js' %}?version=15"></script>
     {% load static %}
     <script src="{% static 'syncAttr.js' %}?version=5"></script>
 
@@ -36,7 +36,8 @@
     <labels><b>:שאלה אמריקאית</b></labels>
     <p></p>
 
-    <INPUT type="text" id="ques" placeholder="רשמי את השאלה" p name="chk" style="direction:rtl;text-align:right;width: 660px;"/>
+    <INPUT type="text" id="ques" placeholder="רשמי את השאלה" p name="chk"
+           style="direction:rtl;text-align:right;width: 660px;"/>
     <INPUT type="text" id="quesEnglish" placeholder="write the question..." p name="chk"
            style="display:none;direction:ltr;text-align:left;width: 660px;"/>
     <p></p>
@@ -72,6 +73,7 @@
     </TABLE>
     <p></p>
     <INPUT type="button" value="הוספת תשובה" onclick="addRow('dataTable');addRow('dataTableEnglish')"/>
+    <INPUT type="button" value="מחיקת תשובה" onclick="deleteRow('dataTable');deleteRow('dataTableEnglish')"/>
     <p></p>
     <button class='button blogger' id="finish_add_aq_btn" type="button">שליחה</button>
 </div>
