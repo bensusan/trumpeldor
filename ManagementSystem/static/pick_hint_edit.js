@@ -4,7 +4,6 @@ var attractionObjToUseInHintDelete;
 function funcForExistingHints(attractionsJSON) {
     let name = localStorage.getItem("name_for_add_aq");
     let desc = localStorage.getItem("desc_for_add_aq");
-    // alert("in get name! "+"of the origin : " + lat + " , " + lng);
     attractionsJSON.forEach(function (attr) {
         let p = {name: attr['name'], description: attr['description']};
         if (p.name === name && p.description === desc) {
@@ -43,8 +42,6 @@ function hints_func(hintsJSON) {
             else
                 str = str + (i-1) +". " + hint['data'].split(';;')[0] + "<br />";
         }
-        // alert(str);
-
         var output = document.getElementById("result");
         var outputVideo = document.getElementById("resultVideos");
 
@@ -230,12 +227,8 @@ function wantToDeleteButton() {
 function funcInOrderToDeleteHint(hintsJSON) {
     var comboDelete = document.getElementById("delete_cb");
     let hint_id_that_was_picked = comboDelete.options[comboDelete.selectedIndex].value;
-    // let number_hint_id = Number(hint_id_that_was_picked);
     hintsJSON.forEach(function (hint) {
-        // alert("the id is: "+attr['id']);
-        // alert("in get name! "+"of the origin : " + lat + " , " + lng + "\n of the other: "+p.lat +" , "+ p.lng);
         if (hint['id'] == hint_id_that_was_picked) {
-            //alert("before delete hint!");
             deleteRequestHint(attractionObjToUseInHintDelete['id'], hint['id']);
             window.location.href = '/pick_hint_edit';
         }
@@ -281,16 +274,12 @@ function donePickingHints() {
 
 
 function getRequestHints(funcOnHints, attr_id) {
-    // serverRequest("GET", funcOnAttractions, 'http://192.168.1.12:12344/managementsystem/attraction/?format=json');
-    // the server port and my ip
     serverRequest("GET", funcOnHints, 'http://' + ip + ':12344/managementsystem/attraction/' + attr_id +
         '/hint/?format=json');
-    //alert("need to remove this alert and fix funcToGetAttraction()!");
 }
 
 
 function postRequestHint(the_hint, attr_id) {
-    //   alert("hint blat");
     serverRequest("POST", function noop(dummy) {
         }, 'http://' + ip + ':12344/managementsystem/attraction/' +
         attr_id + '/hint/',

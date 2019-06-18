@@ -60,7 +60,6 @@ function initBtns() {
 function funcForExistingAmericanQuestions(attractionsJSON){
         let name = localStorage.getItem("name_for_add_aq");
         let desc = localStorage.getItem("desc_for_add_aq");
-      // alert("in get name! "+"of the origin : " + lat + " , " + lng);
         attractionsJSON.forEach(function (attr) {
         let p = {name: attr['name'], description:attr['description']};
         if(p.name===name && p.description===desc)
@@ -93,7 +92,6 @@ function showInnerHtmlAndLoadValuesToComboBox(AmericanQuestionsJSON) {
                 ansString += "&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;"+ans.split(';;')[0]+"</br>";
             });
             str=str+"<pre>"+aq['id']+".</br>" +"question:"+ aq['question'].split(';;')[0]+"</br>answers: </br>"+ ansString+"indexOfCorrectAnswer: "+ aq['indexOfCorrectAnswer']+"</pre>";
-            // alert(str);
             aq_arr_for_test.push(aq);
         });
         document.getElementById("existing_aqs").innerHTML = str ;

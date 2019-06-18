@@ -85,7 +85,6 @@ function markingOnClickHandler(m) {
     if (prev_m != 1) {
         prev_m.setIcon(prev_icon);
     }
-    //alert("sda");
     prev_icon = m.icon;
     m.setIcon("http://maps.google.com/mapfiles/ms/icons/pink-dot.png");
     prev_m = m;

@@ -145,11 +145,9 @@ function initAttractionsMarkers() {
 function getRequestAttractions(funcOnAttractions) {
     // the server port and my ip
     serverRequest("GET", funcOnAttractions, 'http://' + ip + ':12344/managementsystem/attraction/?format=json');
-    //alert("need to remove this alert and fix funcToGetAttraction()!");
 }
 
 function markAttractions(attractionsJSON) {
-    //alert(window.innerHeight + " "+ window.innerWidth);
     attractionsJSON.forEach(function (attr) {
 
         let pos = {lat: attr['x'], lng: attr['y']};
