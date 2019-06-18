@@ -7,7 +7,7 @@ namespace trumpeldor
 {
     public class LocationController
     {
-        private const double MINIMUM_DISTANCE = 5;
+        private const double MINIMUM_DISTANCE = 2;
         private static LocationController instance = null;
         private List<Position> allPositions = null;
         public Position LastPoint { get; set; }
@@ -32,6 +32,18 @@ namespace trumpeldor
             LastPoint = p;
             if(isFarEnough(p))
                 allPositions.Add(p);
+        }
+
+        public void RemoveFromHistory(Position p)
+        {
+            if(p!=null)
+            {
+                foreach(Position pos in allPositions)
+                {
+                    if (pos.Latitude == p.Latitude && pos.Longitude == p.Longitude)
+                        allPositions.Remove(p);
+                }
+            }
         }
 
         public void ClearPositions()

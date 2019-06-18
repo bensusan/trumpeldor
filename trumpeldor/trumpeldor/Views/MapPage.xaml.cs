@@ -32,7 +32,10 @@ namespace trumpeldor.Views
         public GameController gc;
         public LocationController lc;
         public Attraction nextAttraction;
-
+        private static MapPage instance = null;
+        List<SheredClasses.Attraction> visitedTrackPoints = null;
+        Attraction hintedAttraction = null;
+        Pin hintedPin = null;
 
         public MapPage()
         {
@@ -49,7 +52,12 @@ namespace trumpeldor.Views
                 HeightRequest = 960,
                 VerticalOptions = LayoutOptions.FillAndExpand
             };
+            Content = map;
+            map.MoveToRegion(MapSpan.FromCenterAndRadius(new Position(31.262820, 34.802352), Distance.FromKilometers(3)).WithZoom(10));
+
             //-------------------------------------------------------------------
+
+            /*
             List<SheredClasses.Attraction> visitedTrackPoints = gc.GetVisitedAttractions();
             foreach (SheredClasses.Attraction attraction in visitedTrackPoints)
             {
@@ -58,7 +66,6 @@ namespace trumpeldor.Views
                     Type = PinType.Place,
                     Position = new Position(attraction.x, attraction.y),
                     Label = gc.GetCurrentLanguageText(attraction.name),
-                    Address="35"
                 };
                 map.Pins.Add(pin);
             }
@@ -68,8 +75,35 @@ namespace trumpeldor.Views
             Content = map;
             DrawPastPath(map);
             map.MoveToRegion(MapSpan.FromCenterAndRadius(new Position(31.262820, 34.802352), Distance.FromKilometers(3)).WithZoom(10));
+        */
+        }
+
+
+        public static MapPage GetInstance()
+        {
+            if (instance == null)
+            {
+                instance = new MapPage();
+            }
+            return instance;
         }
         
+
+        public void DrawPastAttractions()
+        {
+            visitedTrackPoints = gc.GetVisitedAttractions();
+            foreach (SheredClasses.Attraction attraction in visitedTrackPoints)
+            {
+                Pin pin = new Pin
+                {
+                    Type = PinType.Place,
+                    Position = new Position(attraction.x, attraction.y),
+                    Label = gc.GetCurrentLanguageText(attraction.name),
+                };
+                map.Pins.Add(pin);
+            }
+        }
+
         public async Task TimerCheck(CustomMap map)
         {
             Device.StartTimer(TimeSpan.FromSeconds(DESIRED_SECONDS), () =>
@@ -99,37 +133,42 @@ namespace trumpeldor.Views
             });
         }
 
-        private void AddCurrlocationToMap (Map map)
+        public void AddCurrlocationToMap (trumpeldor.SheredClasses.Point location)
         {
             //var locator = CrossGeolocator.Current;
             //Plugin.Geolocator.Abstractions.Position position =await locator.GetPositionAsync();
-            trumpeldor.SheredClasses.Point p = gc.GetUserLocation();
+
+            //trumpeldor.SheredClasses.Point p = gc.GetUserLocation();
             Pin currLocationPin = new Pin
             {
                 Type = PinType.Place,
-                Position = new Position(p.x, p.y),
+                Position = new Position(location.x, location.y),
                 Label = "current location"
             };
             previous = currLocationPin;
-            currLat = p.x;
-            currLong = p.y;
+            currLat = location.x;
+            currLong = location.y;
             map.Pins.Add(currLocationPin); 
         }
 
+        public void AddToHistory(Plugin.Geolocator.Abstractions.Position p)
+        {
+            lc.AddToPositionsHistory(p);
+        }
 
-
-        public void AddPointToMap(Map map, trumpeldor.SheredClasses.Point p)
+        public void AddPointToMap(trumpeldor.SheredClasses.Point p, Attraction attraction)
         {
             Pin toAdd = new Pin
             {
                 Type = PinType.Place,
                 Position = new Position(p.x, p.y),
-                Label = "the attraction"
-                
-               
+                Label=gc.GetCurrentLanguageText(attraction.name)
             };
+            hintedAttraction = attraction;
+            hintedPin = toAdd;
             map.Pins.Add(toAdd);
         }
+
 
 
         private async Task OnLocationCheck(Map map)
@@ -145,10 +184,40 @@ namespace trumpeldor.Views
             };
             currLat = position.Latitude;
             currLong = position.Longitude;
-            map.Pins.Remove(previous);
+            if (previous != null)
+            {
+                previous.Label = "8888";
+                map.Pins.Remove(previous);
+            }
             map.Pins.Add(newCurrLocationPin);
             previous = newCurrLocationPin;
         }
+
+
+        public void OnTimerCheck(Plugin.Geolocator.Abstractions.Position position)
+        {
+            //map.Pins.Clear();
+            DrawPastAttractions();
+            Pin newCurrLocationPin = new Pin
+            {
+                Type = PinType.Place,
+                Position = new Position(position.Latitude, position.Longitude),
+                Label = "current new location"
+            };
+            currLat = position.Latitude;
+            currLong = position.Longitude;
+            if (previous != null)
+            {
+                map.Pins.Remove(previous);
+                //lc.RemoveFromHistory(new Plugin.Geolocator.Abstractions.Position(previous.Position.Latitude, previous.Position.Longitude));
+            }
+            map.Pins.Add(newCurrLocationPin);
+            previous = newCurrLocationPin;
+        }
+
+
+
+
         public static double DistanceBetween(double lat1, double lon1, double lat2, double lon2)//distance in meters
         {
             double R = 6371000; // Radius of the earth in meters
@@ -169,7 +238,7 @@ namespace trumpeldor.Views
             return deg * (Math.PI / 180);
         }
 
-        private void DrawPastPath(CustomMap map)
+        public void DrawPastPath()
         {
             map.RouteCoordinates.Clear();
             List<Plugin.Geolocator.Abstractions.Position> lst = lc.GetStoredPositions();
@@ -178,10 +247,19 @@ namespace trumpeldor.Views
                 foreach (Plugin.Geolocator.Abstractions.Position pos in lst)
                 {
                     if (pos != null && pos.Latitude != 0 && pos.Longitude != 0)
+                    {
                         map.RouteCoordinates.Add(new Xamarin.Forms.Maps.Position(pos.Latitude, pos.Longitude));
+                    }
                 }
             }
         }
+
+        public void ClearPastPath()
+        {
+            map.RouteCoordinates.Clear();
+        }
+
+
 
 
     }
