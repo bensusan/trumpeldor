@@ -1,4 +1,3 @@
-//from django.conf import settings
 let curPosClicked;
 
 var str_of_points = "";
@@ -121,7 +120,7 @@ function getRequestShortPath(funcOnShortPath) {
 }
 
 function postRequestShortPath(short_path) {
-    serverRequest("POST", function noop(dummy) {
+    syncServerRequest("POST", function noop(dummy) {
         }, 'http://' + ip + ':12344/managementsystem/track/',
         JSON.stringify(short_path));
     readyToMedium = 1;
