@@ -117,8 +117,7 @@ function saveAndProceedToAttractionInfo() {
     let lat = addedPoint.lat;
     let vidArr = 'null';
     if (helperVarVid != undefined) {
-        vidArr = [];
-        vidArr.push("hello");
+        vidArr = "hello";
         sendLongBase64Parts(helperVarVid);
     }
     let lang = addedPoint.lng;
@@ -129,7 +128,6 @@ function saveAndProceedToAttractionInfo() {
     //localStorage.setItem("script", JSON.stringify(document.getElementById("subt").value + ";;" + document.getElementById("subt_english").value));
     localStorage.setItem("x", JSON.stringify(x));
     localStorage.setItem("y", JSON.stringify(y));
-    alert(JSON.stringify(vidArr));
     localStorage.setItem("vidArr", JSON.stringify(vidArr));
     localStorage.setItem("name_for_add_aq", name);
     localStorage.setItem("desc_for_add_aq", "");

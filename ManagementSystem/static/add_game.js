@@ -93,7 +93,7 @@ function initializeGamesBTNs() {
 }
 
 function postRequestPhotoGame(desc, attr_id) {
-    serverRequest("POST", function noop(dummy) {
+    syncServerRequest("POST", function noop(dummy) {
         }, 'http://' + ip + ':12344/managementsystem/attraction/' +
         attr_id + '/taking_pic/',
         JSON.stringify(desc));
@@ -103,12 +103,11 @@ function postRequestPhotoGame(desc, attr_id) {
 function funcToGetID(attractionsJSON) {
     let name = localStorage.getItem("name_for_add_aq");
     let desc = localStorage.getItem("desc_for_add_aq");
-    // alert("in get name! "+"of the origin : " + lat + " , " + lng);
     attractionsJSON.forEach(function (attr) {
         let p = {name: attr['name'], description: attr['description']};
-        // alert("in get name! "+"of the origin : " + name + " , " + desc + "\n of the other: "+p.name +" , "+ p.description);
         if (p.name === name && p.description === desc) {
             idOfAttraction = attr['id'];
+            alert(idOfAttraction);
         }
     });
 

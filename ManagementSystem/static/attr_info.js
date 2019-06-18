@@ -75,9 +75,8 @@ function sendTheAttractionWithAllInformation() {
 
     let pixArr = 'null';
     if (arrOfPicsData.length > 0) {
-        pixArr = ["hello"];
+        pixArr = "hello";
         // can do it with all pics.. just add loop
-        alert(arrOfPicsData[0].substring(0,20));
         sendLongBase64PartsPic(arrOfPicsData[0]);
         window.location.href = '/add_game';
     }
@@ -96,7 +95,7 @@ function sendTheAttractionWithAllInformation() {
 
 
 function postRequestAttractionSync(attraction) {
-    serverRequest("POST", function noop(dummy) {
+    syncServerRequest("POST", function noop(dummy) {
         }, 'http://' + ip + ':12344/managementsystem/attraction/',
         JSON.stringify(attraction));
 }
