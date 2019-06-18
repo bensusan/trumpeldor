@@ -13,7 +13,7 @@
     </ContentPage.Padding>
 
     <ContentView SizeChanged="OnContainerSizeChanged">
-        <ScrollView Style="{StaticResource scrollView}" VerticalOptions="Fill">
+        <!--<ScrollView Style="{StaticResource scrollView}" VerticalOptions="Fill">-->
             <StackLayout x:Name="stackLayout" Style="{StaticResource mainStackLayout}" VerticalOptions="Fill">
                 <StackLayout Style="{StaticResource mainStackLayout}" Orientation="Horizontal" VerticalOptions="Fill">
                     <StackLayout x:Name="buttonsTopLayout" Orientation="Horizontal" HorizontalOptions="StartAndExpand">
@@ -50,7 +50,7 @@
                 </StackLayout>
 
             </StackLayout>
-        </ScrollView>
+        <!--</ScrollView>-->
     </ContentView>
 
 </ContentPage>
