@@ -264,8 +264,8 @@ function finishHint() {
     window.location.href = '/attractions';
 }
 
-function postRequestHint(the_hint, attr_id) {
-    serverRequest("POST", function noop(dummy) {
+function postRequestHint(the_hint, attr_id) { // might not sync
+    syncServerRequest("POST", function noop(dummy) {
         }, 'http://' + ip + ':12344/managementsystem/attraction/' +
         attr_id + '/hint/',
         JSON.stringify(the_hint));
