@@ -50,7 +50,7 @@ function initAddAqBTNfunctionality() {
             arrOfAnswers.push(answer + ";;" + answerEnglish);
 
             if (isChecked == true) {
-                correctAnswersIndexes.push(rowIteratorIndex);
+                correctAnswersIndexes.push(rowIteratorIndex+1);
             }
         }
         getRequestAttractions(funcToGetAttraction);
@@ -87,7 +87,7 @@ function howMuchRowsToAddPick(aqJSON) {
         rowsOfTable[rowIteratorIndex].cells[1].childNodes[0].value = ans[0];
         rowsOfTableEnglish[rowIteratorIndex].cells[1].childNodes[0].value = ans[1];
         if (indexesArr.includes(rowIteratorIndex)) {
-            rowsOfTable[rowIteratorIndex + 1].cells[0].childNodes[0].checked = true;
+            rowsOfTable[rowIteratorIndex].cells[0].childNodes[0].checked = true;
             rowsOfTableEnglish[rowIteratorIndex + 1].cells[0].childNodes[0].checked = true;
         }
     }
@@ -109,7 +109,6 @@ function addRow(tableID) {
         var newcell = row.insertCell(i);
 
         newcell.innerHTML = table.rows[0].cells[i].innerHTML;
-        //alert(newcell.childNodes);
         switch (newcell.childNodes[0].type) {
             case "text":
                 newcell.childNodes[0].value = "";
