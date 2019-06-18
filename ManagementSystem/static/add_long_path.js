@@ -19,7 +19,6 @@ function initMapAndAttractionss(){
 
               prev_m.setIcon(prev_icon);
           }
-          //alert("sda");
           prev_icon=m.icon;
           m.setIcon("http://maps.google.com/mapfiles/ms/icons/pink-dot.png");
 

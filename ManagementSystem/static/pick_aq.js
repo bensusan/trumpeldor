@@ -52,7 +52,6 @@ var loadFile = function(event) {
 function funcForExistingAmericanQuestions(attractionsJSON){
         let name = localStorage.getItem("name_for_add_aq");
         let desc = localStorage.getItem("desc_for_add_aq");
-      // alert("in get name! "+"of the origin : " + lat + " , " + lng);
         attractionsJSON.forEach(function (attr) {
         let p = {name: attr['name'], description:attr['description']};
         if(p.name===name && p.description===desc)
@@ -69,7 +68,6 @@ function helpsToShowAllAmericanQuestions(AmericanQuestionsJSON) {
         let s;
         AmericanQuestionsJSON.forEach(function (aq) {
             str=str+"id: "+aq['id'] +", question: "+ aq['question']+", answers: "+ aq['answers']+", indexOfCorrectAnswer: "+ aq['indexOfCorrectAnswer']+"<br />";
-            // alert(str);
             id_to_delete = aq['id'];
             s=id_to_delete;
             aq_arr_for_test.push(aq);
@@ -82,11 +80,8 @@ function funcInOrderToDeleteAmericanQuestion(AmericanQuestionsJSON) {
     let aq_id_that_was_picked = document.getElementById("write_aq_id_to_delete").value;
    // let number_hint_id = Number(hint_id_that_was_picked);
       AmericanQuestionsJSON.forEach(function (aq) {
-          // alert("the id is: "+attr['id']);
-        // alert("in get name! "+"of the origin : " + lat + " , " + lng + "\n of the other: "+p.lat +" , "+ p.lng);
-        if(aq['id']==aq_id_that_was_picked)
+          if(aq['id']==aq_id_that_was_picked)
         {
-            //alert("before delete aq!");
             deleteRequestAmericanQuestion(attractionObjToUseInHintDelete['id'],aq['id']);
             window.location.href='/pick_aq';
         }
@@ -103,7 +98,6 @@ function getRequestAmericanQuestions(funcOnAqs,attr_id){
     // the server port and my ip
     serverRequest("GET", funcOnAqs, 'http://'+ip+':12344/managementsystem/attraction/'+ attr_id+
         '/aquestion/?format=json');
-    //alert("need to remove this alert and fix funcToGetAttraction()!");
 }
 
 

@@ -10,7 +10,6 @@ window.onload=function () {
 function funcForGettingCurrHintData(attractionsJSON) {
     let name = localStorage.getItem("name_for_add_aq");
     let desc = localStorage.getItem("desc_for_add_aq");
-    // alert("in get name! "+"of the origin : " + lat + " , " + lng);
     attractionsJSON.forEach(function (attr) {
         let p = {name: attr['name'], description: attr['description']};
         if (p.name === name && p.description === desc) {
@@ -26,7 +25,6 @@ function hints_func_in_edit(hintsJSON) {
                 document.getElementById('write_hint_text_in_edit').value = hint['data'];
                 let finishEditionOfHintBTN = document.getElementById('submit_to_edit_hint');
                 finishEditionOfHintBTN.addEventListener('click', function() {
-                   // alert(document.getElementById("write_hint_text_in_edit").value);
                     let hint_to_send = {
                         attraction: attractionObjToUseInHintEdit,
                         kind:'HT',

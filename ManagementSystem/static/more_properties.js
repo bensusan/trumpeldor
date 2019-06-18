@@ -65,7 +65,6 @@ function addRow(tableID) {
         var newcell = row.insertCell(i);
 
         newcell.innerHTML = table.rows[0].cells[i].innerHTML;
-        //alert(newcell.childNodes);
         switch (newcell.childNodes[0].type) {
             case "text":
                 newcell.childNodes[0].value = "";

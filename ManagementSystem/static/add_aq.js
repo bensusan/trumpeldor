@@ -72,7 +72,6 @@ function addRow(tableID) {
         var newcell = row.insertCell(i);
 
         newcell.innerHTML = table.rows[0].cells[i].innerHTML;
-        //alert(newcell.childNodes);
         switch (newcell.childNodes[0].type) {
             case "text":
                 newcell.childNodes[0].value = "";
@@ -89,7 +88,6 @@ function addRow(tableID) {
 
 
 function postRequestAmericanQuestion(aq, attr_id) {
-    //alert("aq blat");
     syncServerRequest("POST", function noop(dummy) {
         }, 'http://' + ip + ':12344/managementsystem/attraction/' +
         attr_id + '/aquestion/',
@@ -100,10 +98,8 @@ function funcToGetAttraction(attractionsJSON) {
 
     let name = localStorage.getItem("name_for_add_aq");
     let desc = localStorage.getItem("desc_for_add_aq");
-    // alert("in get name! "+"of the origin : " + lat + " , " + lng);
     attractionsJSON.forEach(function (attr) {
         let p = {name: attr['name'], description: attr['description']};
-        // alert("in get name! "+"of the origin : " + name + " , " + desc + "\n of the other: "+p.name +" , "+ p.description);
         if (p.name === name && p.description === desc) {
 
             let american_question_to_send = {

@@ -20,7 +20,6 @@ window.onload = function() {
 
 
 function postRequestFeedback(fb){
-    //alert("aq blat");
     serverRequest("POST", function noop(dummy){}, 'http://'+ip+':12344/managementsystem/feedback/',
         JSON.stringify(fb));
 }

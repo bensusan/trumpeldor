@@ -46,15 +46,12 @@ window.onload = function () {
         let manualLat = document.getElementById('manual_lat').value;
         let manualLng = document.getElementById('manual_lng').value;
         let pos = {lat: manualLat, lng: manualLng};
-        // markAttraction(pos);
         localStorage.setItem("addedPoint", JSON.stringify(pos));
-        // alert("this is what: "+ pos.lat +", " + pos.lng + ", "+ (typeof pos.lat));
         window.location.href = '/add_attraction';
     });
 };
 
 function initMapAndAttractions() {
-    //alert("dasmaps");
     initMap();
     initAttractionsMarkers();
 }
@@ -67,12 +64,6 @@ function initMap() {
     initAttractionsMarkers();
     listenerForMap(map);
     initPoints();
-    // alert("the number of points is now :" + points.length)
-    // var shortPath1 = JSON.parse(localStorage.getItem("short_path"));
-    //     var medPath1 = JSON.parse(localStorage.getItem("medium_path"));
-    //     var longPath1 = JSON.parse(localStorage.getItem("long_path"));
-    // alert("short:"+shortPath1.length +"\nmedium: "+medPath1.length +"\nlong: "+longPath1.length);
-
 
 }
 
@@ -84,13 +75,11 @@ function addEditListener(m) {
 
             prev_m.setIcon(prev_icon);
         }
-        //alert("sda");
         prev_icon = m.icon;
         m.setIcon("http://maps.google.com/mapfiles/ms/icons/pink-dot.png");
 
         prev_m = m;
-        // markSpecificAttraction(pos);
-        // alert("the point "+m.position);
+
         var editBTN = document.getElementById('edit_attraction');
         editBTN.addEventListener('click', function () {
             localStorage.setItem("edited", JSON.stringify(m.position));
@@ -102,8 +91,6 @@ function addEditListener(m) {
 function listenerForMap(map) {
     google.maps.event.addListener(map, 'click', (function (event) {
         coordinates_of_last_click = event.latLng;
-        // alert(coordinates_of_last_click.lat()+","+coordinates_of_last_click.lng())
-        // alert(coordinates_of_last_click);
         if (curPosClicked) {
             curMarker.setMap(null);
         }
@@ -112,11 +99,8 @@ function listenerForMap(map) {
         curMarker = markAttraction(curPosClicked);
         var addBTN = document.getElementById('add_attraction');
         addBTN.addEventListener('click', function (event) {
-            // localStorage.setItem("addedPoint", JSON.stringify(curPosClicked));
             let pos = {lat: curPosClicked.lat, lng: curPosClicked.lng};
-            // markAttraction(pos);
             localStorage.setItem("addedPoint", JSON.stringify(pos));
-            // alert("this is what: "+ pos.lat +", " + pos.lng + ", "+ (typeof pos.lat));
             window.location.href = '/add_attraction';
         });
     }));

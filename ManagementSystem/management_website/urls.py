@@ -26,7 +26,6 @@ urlpatterns = [
     path('add_hint_edit/', views.add_hint_edit_page),
     path('add_game_edit/', views.add_game_edit_page),
     path('add_hint/', views.add_hint_page),
-    path('pick_hint/', views.pick_hint_page),
     path('edit_hint/', views.edit_hint_page),
     path('edit_hint_edit/', views.edit_hint_edit_page),
     path('pick_aq/', views.pick_aq_page),

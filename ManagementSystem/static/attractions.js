@@ -76,12 +76,10 @@ function deleteRequestAttraction(id) {
 function sendLongBase64Parts(longBase64) {
     let arrOfParts = longBase64.match(/.{1,100000}/g);
     let counter = 0;
-    alert("here!");
     for (let i = 0; i < arrOfParts.length; i++) {
         postRequestFile(arrOfParts[i]);
         counter++;
     }
-    alert(counter);
     postRequestFile("end of file");
 }
 
