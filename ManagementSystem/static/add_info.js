@@ -146,11 +146,11 @@ function sendInfo() {
 
 function getRequestInfo(func) {
     // the server port and my ip
-    serverRequest("GET", func, 'http://' + ip + ':12344/managementsystem/info/?format=json');
+    syncServerRequest("GET", func, 'http://' + ip + ':12344/managementsystem/info/?format=json');
 }
 
 function postRequestInfo(info) {
-    serverRequest("POST", function noop(dummy) {
+    syncServerRequest("POST", function noop(dummy) {
         }, 'http://' + ip + ':12344/managementsystem/info/',
         JSON.stringify(info));
 }

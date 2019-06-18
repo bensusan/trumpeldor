@@ -144,7 +144,7 @@ function initAttractionsMarkers() {
 
 function getRequestAttractions(funcOnAttractions) {
     // the server port and my ip
-    serverRequest("GET", funcOnAttractions, 'http://' + ip + ':12344/managementsystem/attraction/?format=json');
+    syncServerRequest("GET", funcOnAttractions, 'http://' + ip + ':12344/managementsystem/attraction/?format=json');
 }
 
 function markAttractions(attractionsJSON) {
@@ -186,5 +186,5 @@ function markArr() {
 }
 
 function getRequestSettings(func) {
-    serverRequest("GET", func, 'http://' + ip + ':12344/managementsystem/settings/?format=json');
+    syncServerRequest("GET", func, 'http://' + ip + ':12344/managementsystem/settings/?format=json');
 }
