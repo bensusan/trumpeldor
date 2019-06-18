@@ -51,7 +51,12 @@ function funcToSendGame(attractionsJSON) {
 
             if (helperVar != undefined) {
                 // can do it with all pics.. just add loop
-                sendLongBase64PartsPic(helperVar);
+                if (helperVar.substring(0, 4) == 'blob') {
+                    helperVar = helperVar.substring(5);
+                    sendLongBase64PartsPic(helperVar);
+                } else {
+                    sendLongBase64PartsPic(helperVar);
+                }
             }
 
             if (localStorage.getItem("game_kind") == "sliding") {
