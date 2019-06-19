@@ -6,6 +6,7 @@
              NavigationPage.HasNavigationBar="False"
              ControlTemplate="{StaticResource template}">
     <ContentPage.Content>
+        <ScrollView Style="{StaticResource scrollView}">
         <StackLayout Style="{DynamicResource mainStackLayout}">
             <Label Text="{translator:Translate FeedbackPageTitle}" Style="{StaticResource titleStyle}" />
 
@@ -23,5 +24,6 @@
             </Grid>
             <Button Text="{translator:Translate Reply}" Clicked="Reply_Button_Clicked" x:Name="ReplyButton" Style="{StaticResource largeButtonStyle}" BackgroundColor="Orange"/>
         </StackLayout>
+        </ScrollView>
     </ContentPage.Content>
 </ContentPage>
