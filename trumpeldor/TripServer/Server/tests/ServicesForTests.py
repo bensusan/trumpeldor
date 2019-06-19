@@ -1,4 +1,5 @@
 from Server.BL.BL import BLProxy
+from Server.DAL.DAL import DALProxy
 from Server.BL.BL_Implementation import BL_Implementation
 from Server.DAL.DAL_Implementation import DAL_Implementation
 import math
@@ -49,10 +50,15 @@ def check_getTrackAndNextAttractionByLengthAndUserLocation(length, expectedAttra
     testCase.assertIn(actualTrack, possibleTracks)
 
 
+# For BL Tests
 BL_Impl = BL_Implementation()
 BL_Impl.setDAL(DAL_Implementation())
 bl = BLProxy()
 bl.setImplementation(BL_Impl)
+
+# For DAL Tests
+dal = DALProxy()
+dal.setImplementation(DAL_Implementation())
 
 
 def isJson(obj):

@@ -59,3 +59,17 @@ class Unit_Test_OldTrip(TestCase):
                "trackLength": TrackLength.NOT_EXIST.value, "x": next(xGen), "y": next(yGen)}
         self.assertRaises(RuntimeError, bl.createTrip, inp)
 
+
+class Unit_Test_GetTrip(TestCase):
+
+    def test_getTrip_NotExist(self):
+        with self.assertRaises(RuntimeError):
+            bl.getTrip(Trip_NotExist)
+
+    def test_getTrip_Exist(self):
+        check(
+            Trip_Short,
+            bl.getTrip(Trip_Short),
+            self.assertEquals,
+            TripSerializer
+        )
