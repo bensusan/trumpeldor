@@ -41,7 +41,7 @@ class DAL_Abstract(object):
     def getTrip(self, tripId):
         raise NotImplementedError("Should have implemented this")
 
-    def add_attraction(self, name, x, y, description, script, picturesURLS, videosURLS):
+    def add_attraction(self, name, x, y, description, picturesURLS, videosURLS):
         raise NotImplementedError("Should have implemented this")
 
     def add_hint(self, id_attraction, kind, data, description):
@@ -107,7 +107,7 @@ class DAL_Abstract(object):
     def delete_attraction(self, id):
         raise NotImplementedError("Should have implemented this")
 
-    def edit_attraction(self, id, name, x, y, description, script, picturesURLS, videosURLS):
+    def edit_attraction(self, id, name, x, y, description, picturesURLS, videosURLS):
         raise NotImplementedError("Should have implemented this")
 
     def delete_american_question(self, id_attraction, id_a_question):
@@ -296,10 +296,10 @@ class DALProxy(DAL_Abstract):
             raise NotImplementedError("Should have implemented this")
         return self.Implementation.getTrip(tripId)
 
-    def add_attraction(self, name, x, y, description, script, picturesURLS, videosURLS):
+    def add_attraction(self, name, x, y, description, picturesURLS, videosURLS):
         if self.Implementation is None:
             raise NotImplementedError("Should have implemented this")
-        return self.Implementation.add_attraction(name, x, y, description, script, picturesURLS, videosURLS)
+        return self.Implementation.add_attraction(name, x, y, description, picturesURLS, videosURLS)
 
     def add_hint(self, id_attraction, kind, data, description):
         if self.Implementation is None:
@@ -406,10 +406,10 @@ class DALProxy(DAL_Abstract):
             raise NotImplementedError("Should have implemented this")
         return self.Implementation.delete_attraction(id)
 
-    def edit_attraction(self, id, name, x, y, description, script, picturesURLS, videosURLS):
+    def edit_attraction(self, id, name, x, y, description, picturesURLS, videosURLS):
         if self.Implementation is None:
             raise NotImplementedError("Should have implemented this")
-        return self.Implementation.edit_attraction(id, name, x, y, description, script, picturesURLS, videosURLS)
+        return self.Implementation.edit_attraction(id, name, x, y, description, picturesURLS, videosURLS)
 
     def delete_american_question(self, id_attraction, id_a_question):
         if self.Implementation is None:

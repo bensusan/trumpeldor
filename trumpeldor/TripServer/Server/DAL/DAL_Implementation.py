@@ -85,7 +85,7 @@ class DAL_Implementation(DAL_Abstract):
 
                 }
 
-    def add_attraction(self, name, x, y, description, script, picturesURLS, videosURLS):
+    def add_attraction(self, name, x, y, description, picturesURLS, videosURLS):
         names_of_pics=[]
         names_of_vids=[]
         # if picturesURLS != 'null':
@@ -106,7 +106,7 @@ class DAL_Implementation(DAL_Abstract):
                 file_cont = fp.read()
             open(file_path, 'w').close()
             names_of_vids = add_media([file_cont], 'video/mp4', '.mp4')
-        attraction = Attraction(name=name, x=x, y=y, description=description, script=script,
+        attraction = Attraction(name=name, x=x, y=y, description=description,
                                     picturesURLS=addPrefixUrl(names_of_pics),
                                                              videosURLS=addPrefixUrl(names_of_vids))
         attraction.save()
@@ -223,13 +223,12 @@ class DAL_Implementation(DAL_Abstract):
         delt=self.getAttraction(id).delete()
         return True
 
-    def edit_attraction(self, id, name, x, y, description, script, picturesURLS, videosURLS):
+    def edit_attraction(self, id, name, x, y, description, picturesURLS, videosURLS):
         attraction = self.get_attraction(id)
         attraction.name=name
         attraction.x=x
         attraction.y=y
         attraction.description=description
-        attraction.script=script
         if picturesURLS != 'null':
             attraction.picturesURLS=addPrefixUrl(add_media([readAndClear('Server/ManageSystem/fileImg')], 'image/jpeg', '.png'))
         if videosURLS != 'null':
