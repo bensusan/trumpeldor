@@ -25,7 +25,6 @@ document.getElementById("sideMenu").innerHTML = '<div class="sidenav">\n' +
     '  </div>\n' +
     '    <a href="/pick_path_delete">מחיקת מסלול</a>\n' +
     '  </div>\n' +
-    '  <a href="#services">סטטיסטיקות</a>\n' +
     '  <a href="/additional_info">מידע נוסף</a>\n' +
     '  <button class="dropdown-btn">משוב\n' +
     '    <i class="fa fa-caret-down"></i>\n' +
