@@ -20,10 +20,15 @@ class IntegrationTests(DALUnitTests):
     def test_attr_question_hint(self):
         self.dal.add_attraction('de', 1, 2, 'dsfre','fdfd', 'null', 'null')
         self.assertTrue(Attraction.objects.filter(name='de', x=1, y=2,
-                                                         description='dsfre', script='fdfd', picturesURLS=[], videosURLS=[]).exists())
+                                                         description='dsfre', picturesURLS=[], videosURLS=[]).exists())
 
-        attr = Attraction.objects.get(name='de', x=1, y=2, description='dsfre', script='script', picturesURLS='null',
+        attr = Attraction.objects.get(name='de', x=1, y=2, description='dsfre', picturesURLS='null',
                                       videosURLS='null')
+        AmericanQuestion.objects.create(attraction=attr, question='are you?',
+                                        answers=['yes', 'no'], indexOfCorrectAnswer=[1])
+        aquestion = AmericanQuestion.objects.get(attraction=attr, question='are you?',
+                                                 answers=['yes', 'no'], indexOfCorrectAnswer=[1])
+        self.assertEqual(aquestion, self.dal.get_american_question(attr.id, aquestion.id))
         self.dal.add_hint(attr.id, 'HT', 'some hint in text', "")
         self.assertTrue(
             Hint.objects.filter(attraction=attr, kind='HT', data='some hint in text', description="").exists())
